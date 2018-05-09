@@ -1,5 +1,6 @@
 package com.example.dell.diary;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -85,7 +86,9 @@ public class MainActivity extends AppCompatActivity {
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.search:
-                Toast.makeText(this, "搜索你的日记", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "搜索你的日记", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+                startActivity(intent);
                 break;
             case R.id.add:
                 Toast.makeText(this, "写新的日记", Toast.LENGTH_SHORT).show();

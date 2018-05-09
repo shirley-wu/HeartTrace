@@ -1,6 +1,7 @@
 package com.example.dell.diary;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -33,7 +34,7 @@ public class DiaryCardAdapter extends RecyclerView.Adapter<DiaryCardAdapter.View
             cardView = (CardView) view;
             diaryIcon = (ImageView) view.findViewById(R.id.diary_icon);
             diaryDate = (TextView)view.findViewById(R.id.diary_date);
-            diaryContent = (TextView)view.findViewById(R.id.diary_content);
+            diaryContent = (TextView)view.findViewById(R.id.diary_text);
             diaryWeekDay = (TextView)view.findViewById(R.id.diary_weekday);
         }
     }
@@ -49,6 +50,21 @@ public class DiaryCardAdapter extends RecyclerView.Adapter<DiaryCardAdapter.View
         }
         View view = LayoutInflater.from(mContext).inflate(R.layout.diarycard_item, parent, false);
         final ViewHolder holder = new ViewHolder(view);
+        holder.cardView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                int position = holder.getAdapterPosition();
+                DiaryCard diaryCard = mDiaryCardList.get(position);
+                Intent intent = new Intent(mContext,DiaryActivity.class);
+                intent.putExtra("diary_year",diaryCard.getYear());
+                intent.putExtra("diary_month",diaryCard.getMonth());
+                intent.putExtra("diary_day",diaryCard.getDay());
+                intent.putExtra("diary_weekday",diaryCard.getWeekDay());
+                intent.putExtra("diary_icon",diaryCard.getEmotionImageId());
+                intent.putExtra("diary_text",diaryCard.getContent());
+                mContext.startActivity(intent);
+            }
+        });
         return holder;
     }
 
