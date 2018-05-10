@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
         final EditText editText = (EditText) findViewById(R.id.edit_text);
 
+        Diarybook d = Diarybook.getDefault(getDataBaseHelper());
+
         Button button = (Button) findViewById(R.id.button_submit);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
