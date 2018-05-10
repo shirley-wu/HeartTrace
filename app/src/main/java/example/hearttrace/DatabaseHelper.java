@@ -12,6 +12,8 @@ import com.j256.ormlite.table.TableUtils;
 
 import java.sql.SQLException;
 
+import javax.net.ssl.SSLContext;
+
 /**
  * Created by wu-pc on 2018/5/9.
  * Copied from official example, and revised for my own purpose
@@ -31,7 +33,11 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private Dao<DiarySet, Integer> diarySetDao = null;
     private RuntimeExceptionDao<DiarySet, Integer> runtimeDiarySetDao = null;
 
-    private Dao<>
+    private Dao<Sentence, Integer> sentenceIntegerDao = null;
+    private RuntimeExceptionDao<Sentence, Integer> runtimeSentenceDao = null;
+
+    private Dao<Label, Integer> labelDao = null;
+    private RuntimeExceptionDao<Label, Integer> runtimeLabelDao = null;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
