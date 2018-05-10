@@ -11,6 +11,6 @@ import com.j256.ormlite.table.DatabaseTable;
 public class Diary extends Record {
 
     @DatabaseField(foreign = true)
-    DiarySet diarySet;
+    Diarybook diarybook;
 
 }

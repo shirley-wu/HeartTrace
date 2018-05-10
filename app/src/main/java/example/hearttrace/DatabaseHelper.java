@@ -30,8 +30,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private Dao<Diary, Integer> diaryDao = null;
     private RuntimeExceptionDao<Diary, Integer> runtimeDiaryDao = null;
 
-    private Dao<DiarySet, Integer> diarySetDao = null;
-    private RuntimeExceptionDao<DiarySet, Integer> runtimeDiarySetDao = null;
+    private Dao<Diarybook, Integer> diarybookDao = null;
+    private RuntimeExceptionDao<Diarybook, Integer> runtimeDiarybookDao = null;
 
     private Dao<Sentence, Integer> sentenceIntegerDao = null;
     private RuntimeExceptionDao<Sentence, Integer> runtimeSentenceDao = null;
@@ -52,6 +52,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         try {
             Log.i(DatabaseHelper.class.getName(), "onCreate");
             TableUtils.createTable(connectionSource, Diary.class);
+            TableUtils.createTable(connectionSource, Diarybook.class);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
             throw new RuntimeException(e);
@@ -68,6 +69,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         try {
             Log.i(DatabaseHelper.class.getName(), "onUpgrade");
             TableUtils.dropTable(connectionSource, Diary.class, true);
+            TableUtils.dropTable(connectionSource, Diarybook.class, true);
             // after we drop the old databases, we create the new ones
             onCreate(db, connectionSource);
         } catch (SQLException e) {
@@ -98,18 +100,18 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return runtimeDiaryDao;
     }
 
-    public Dao<DiarySet, Integer> getDiarySetDao() throws SQLException {
-        if (diarySetDao == null) {
-            diarySetDao = getDao(DiarySet.class);
+    public Dao<Diarybook, Integer> getDiarybookDao() throws SQLException {
+        if (diarybookDao == null) {
+            diarybookDao = getDao(Diarybook.class);
         }
-        return diarySetDao;
+        return diarybookDao;
     }
 
-    public RuntimeExceptionDao<DiarySet, Integer> getRuntimeExceptionDiarySetDao() {
-        if (runtimeDiarySetDao == null) {
-            runtimeDiarySetDao = getRuntimeExceptionDao(DiarySet.class);
+    public RuntimeExceptionDao<Diarybook, Integer> getRuntimeExceptionDiarybookDao() {
+        if (runtimeDiarybookDao == null) {
+            runtimeDiarybookDao = getRuntimeExceptionDao(Diarybook.class);
         }
-        return runtimeDiarySetDao;
+        return runtimeDiarybookDao;
     }
 
     /**
