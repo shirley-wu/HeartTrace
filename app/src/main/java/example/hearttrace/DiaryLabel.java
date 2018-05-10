@@ -12,9 +12,9 @@ import java.util.concurrent.Callable;
 public class DiaryLabel {
     @DatabaseField(id = true, generatedId = true)
     private int id;
-    @DatabaseField
+    @DatabaseField(foreign = true)
     private Diary diary;
-    @DatabaseField
+    @DatabaseField(foreign = true)
     private Label label;
     public DiaryLabel(){}
     public DiaryLabel(Diary diary, Label label){

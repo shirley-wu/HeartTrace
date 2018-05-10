@@ -31,6 +31,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private Dao<DiarySet, Integer> diarySetDao = null;
     private RuntimeExceptionDao<DiarySet, Integer> runtimeDiarySetDao = null;
 
+    private Dao<>
+
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -112,5 +114,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         super.close();
         diaryDao = null;
         runtimeDiaryDao = null;
+        diarySetDao = null;
+        runtimeDiarySetDao = null;
     }
 }

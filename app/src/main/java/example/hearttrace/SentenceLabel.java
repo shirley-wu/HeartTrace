@@ -10,9 +10,9 @@ import com.j256.ormlite.table.DatabaseTable;
 public class SentenceLabel {
     @DatabaseField(id = true, generatedId = true)
     private int id ;
-    @DatabaseField
+    @DatabaseField(foreign = true)
     private Sentence sentence;
-    @DatabaseField
+    @DatabaseField(foreign = true)
     private Label label;
     public SentenceLabel(){}
     public SentenceLabel(Sentence sentence, Label label){
