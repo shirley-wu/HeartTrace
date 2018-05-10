@@ -33,11 +33,13 @@ public abstract class Record {
     }
 
     public void setText(String text){
-        date = new Date();
         this.text = text;
+    }
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Log.d(TAG, "Record: "+ dateFormat.format(date));
+    public void setDate(){
+        if(date == null) {
+            date = new Date();
+        }
     }
 
     public Date getDate(){

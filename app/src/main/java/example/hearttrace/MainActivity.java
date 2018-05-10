@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
                     Diary diary = new Diary();
                     diary.setText(editText.getText().toString());
+                    diary.setDate();
 
                     diaryDao.create(diary);
                 } catch(SQLException e){

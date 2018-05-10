@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 /**
  * Created by wu-pc on 2018/5/10.
  */
-public class DiaryTest {
+public class DiaryInstrumentedTest {
 
     private DatabaseHelper databaseHelper;
     private Dao<Diary, Integer> dao;
@@ -49,6 +49,7 @@ public class DiaryTest {
         Diary diary = new Diary();
         List<Diary> diaryList;
         diary.setText(originText);
+        diary.setDate();
 
         // create
         dao.create(diary);
