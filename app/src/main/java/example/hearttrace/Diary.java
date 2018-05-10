@@ -1,5 +1,6 @@
 package example.hearttrace;
 
+import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 /**
@@ -8,5 +9,8 @@ import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "diary")
 public class Diary extends Record {
+
+    @DatabaseField(foreign = true)
+    DiarySet diarySet;
 
 }

@@ -22,11 +22,14 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     // name of the database file for your application -- change to something appropriate for your app
     private static final String DATABASE_NAME = "heartTrace.db";
     // any time you make changes to your database objects, you may have to increase the database version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     // the DAO object we use to access the Diary table
-    private Dao<Diary, Integer> simpleDao = null;
-    private RuntimeExceptionDao<Diary, Integer> simpleRuntimeDao = null;
+    private Dao<Diary, Integer> diaryDao = null;
+    private RuntimeExceptionDao<Diary, Integer> runtimeDiaryDao = null;
+
+    private Dao<DiarySet, Integer> diarySetDao = null;
+    private RuntimeExceptionDao<DiarySet, Integer> runtimeDiarySetDao = null;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -69,22 +72,36 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
      * Returns the Database Access Object (DAO) for our Diary class. It will create it or just give the cached
      * value.
      */
-    public Dao<Diary, Integer> getDao() throws SQLException {
-        if (simpleDao == null) {
-            simpleDao = getDao(Diary.class);
+    public Dao<Diary, Integer> getDiaryDao() throws SQLException {
+        if (diaryDao == null) {
+            diaryDao = getDao(Diary.class);
         }
-        return simpleDao;
+        return diaryDao;
     }
 
     /**
      * Returns the RuntimeExceptionDao (Database Access Object) version of a Dao for our Diary class. It will
      * create it or just give the cached value. RuntimeExceptionDao only through RuntimeExceptions.
      */
-    public RuntimeExceptionDao<Diary, Integer> getDiaryDao() {
-        if (simpleRuntimeDao == null) {
-            simpleRuntimeDao = getRuntimeExceptionDao(Diary.class);
+    public RuntimeExceptionDao<Diary, Integer> getRuntimeExceptionDiaryDao() {
+        if (runtimeDiaryDao == null) {
+            runtimeDiaryDao = getRuntimeExceptionDao(Diary.class);
         }
-        return simpleRuntimeDao;
+        return runtimeDiaryDao;
+    }
+
+    public Dao<DiarySet, Integer> getDiarySetDao() throws SQLException {
+        if (diarySetDao == null) {
+            diarySetDao = getDao(DiarySet.class);
+        }
+        return diarySetDao;
+    }
+
+    public RuntimeExceptionDao<DiarySet, Integer> getRuntimeExceptionDiarySetDao() {
+        if (runtimeDiarySetDao == null) {
+            runtimeDiarySetDao = getRuntimeExceptionDao(DiarySet.class);
+        }
+        return runtimeDiarySetDao;
     }
 
     /**
@@ -93,7 +110,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void close() {
         super.close();
-        simpleDao = null;
-        simpleRuntimeDao = null;
+        diaryDao = null;
+        runtimeDiaryDao = null;
     }
 }

@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try{
-                    Dao<Diary, Integer> diaryDao = getDataBaseHelper().getDao();
+                    Dao<Diary, Integer> diaryDao = getDataBaseHelper().getDiaryDao();
 
                     Diary diary = new Diary();
                     diary.setText(editText.getText().toString());
