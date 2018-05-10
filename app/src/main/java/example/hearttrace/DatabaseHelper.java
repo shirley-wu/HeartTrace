@@ -2,6 +2,7 @@ package example.hearttrace;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.provider.Telephony;
 import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
@@ -30,14 +31,26 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private Dao<Diary, Integer> diaryDao = null;
     private RuntimeExceptionDao<Diary, Integer> runtimeDiaryDao = null;
 
+    private Dao<DiaryLabel, Integer> diaryLabelDao = null;
+    private RuntimeExceptionDao<DiaryLabel, Integer> runtimeDiaryLabelDao = null;
+
     private Dao<Diarybook, Integer> diarybookDao = null;
     private RuntimeExceptionDao<Diarybook, Integer> runtimeDiarybookDao = null;
 
-    private Dao<Sentence, Integer> sentenceIntegerDao = null;
+    private Dao<Sentence, Integer> sentenceDao = null;
     private RuntimeExceptionDao<Sentence, Integer> runtimeSentenceDao = null;
 
     private Dao<Label, Integer> labelDao = null;
     private RuntimeExceptionDao<Label, Integer> runtimeLabelDao = null;
+
+    private Dao<Record, Integer> recordDao = null;
+    private RuntimeExceptionDao<Record, Integer>  runtimeRecordDao = null;
+
+    private Dao<Recordbook, Integer> recordbookDao = null;
+    private RuntimeExceptionDao<Recordbook, Integer> runtimeRecordbookDao = null;
+
+    private Dao<SentenceLabel, Integer> sentenceLabelDao = null;
+    private RuntimeExceptionDao<SentenceLabel, Integer> runtimeSentenceLabelDao = null;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -53,6 +66,12 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             Log.i(DatabaseHelper.class.getName(), "onCreate");
             TableUtils.createTable(connectionSource, Diary.class);
             TableUtils.createTable(connectionSource, Diarybook.class);
+            TableUtils.createTable(connectionSource, DiaryLabel.class);
+            TableUtils.createTable(connectionSource, Label.class);
+            TableUtils.createTable(connectionSource, Record.class);
+            TableUtils.createTable(connectionSource, Recordbook.class);
+            TableUtils.createTable(connectionSource, Sentence.class);
+            TableUtils.createTable(connectionSource, SentenceLabel.class);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
             throw new RuntimeException(e);
@@ -122,7 +141,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         super.close();
         diaryDao = null;
         runtimeDiaryDao = null;
-        diarySetDao = null;
-        runtimeDiarySetDao = null;
+        diarybookDao = null;
+        runtimeDiarybookDao = null;
     }
 }
