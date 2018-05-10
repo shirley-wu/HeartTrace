@@ -20,7 +20,7 @@ public class Diarybook extends Recordbook {
 
     private static final String default_name = "default";
 
-    public static Diarybook getDefault(DatabaseHelper databaseHelper){
+    /*public static Diarybook getDefault(DatabaseHelper databaseHelper){
         try{
             Dao<Diarybook, Integer> dao = databaseHelper.getDiarybookDao();
             List<Diarybook> listDiarySet = dao.queryBuilder().where().eq("name", default_name).query();
@@ -42,6 +42,6 @@ public class Diarybook extends Recordbook {
         } catch(SQLException e){
             return null;
         }
-    }
+    }*/
 
 }
