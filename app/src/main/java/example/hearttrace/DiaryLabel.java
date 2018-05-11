@@ -10,11 +10,17 @@ import java.util.concurrent.Callable;
  */
 @DatabaseTable(tableName = "tb_diary_label")
 public class DiaryLabel {
-    @DatabaseField(id = true, generatedId = true)
+    public static final String TAG = "tb_diary_label";
+
+    public static final String DIARY_TAG = "tb_diary";
+
+    public static final String LABEL_TAG = "tb_label";
+
+    @DatabaseField(id = true, generatedId = true, columnName = TAG)
     private int id;
-    @DatabaseField(foreign = true)
+    @DatabaseField(foreign = true, columnName = DIARY_TAG)
     private Diary diary;
-    @DatabaseField(foreign = true)
+    @DatabaseField(foreign = true, columnName = LABEL_TAG)
     private Label label;
     public DiaryLabel(){}
     public DiaryLabel(Diary diary, Label label){

@@ -1,5 +1,6 @@
 package example.hearttrace;
 
+import android.nfc.Tag;
 import android.util.Log;
 
 import com.j256.ormlite.field.DataType;
@@ -16,7 +17,7 @@ public abstract class Record {
 
     private final String TAG = "Record";
 
-    @DatabaseField(generatedId = true)
+    @DatabaseField(generatedId = true, columnName = TAG)
     protected Integer id;
 
     @DatabaseField

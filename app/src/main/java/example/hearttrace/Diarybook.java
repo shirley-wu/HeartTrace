@@ -20,6 +20,7 @@ public class Diarybook extends Recordbook {
 
     private static final String default_name = "default";
 
+
     /*public static Diarybook getDefault(DatabaseHelper databaseHelper){
         try{
             Dao<Diarybook, Integer> dao = databaseHelper.getDiarybookDao();
