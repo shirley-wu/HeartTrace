@@ -39,18 +39,24 @@ public class MainActivity extends AppCompatActivity {
                 Helper.insertDiary(diary);
                 Label label = new Label("happy");
                 Label label1 = new Label("sad");
+                Label label2 = new Label("normal");
                 Helper.insertDiaryLabel(new DiaryLabel(diary, label));
-                Helper.insertDiaryLabel(new DiaryLabel(diary, label1));
                 try {
-                    List<Diary> diaryHappy = Helper.lookupDiaryForLabel(label);
+                    List<Diary> diaryHappy = Helper.lookupDiaryForLabel(label1);
                     List<Label> labelList = Helper.getAllLabel();
                     List<Diary> diaryList = Helper.getAllDiary();
+                    for(Diary i :diaryHappy){
+                        Log.i(Diary.TAG, i.getDate()+i.getText());
+                    }
+                    Log.i(Diary.TAG, "=====================================");
                     for(Diary i : diaryList ){
                         Log.i(Diary.TAG, i.getDate()+i.getText());
                     }
+                    Log.i(Diary.TAG, "=====================================");
                     for(Label i : labelList){
                         Log.i(Label.TAG, i.getLabelname());
                     }
+                    Log.i(Label.TAG, "=====================================");
                     Helper.close();
                 } catch (SQLException e) {
                     Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
