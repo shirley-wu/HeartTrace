@@ -128,12 +128,13 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         }
         return labelDao;
     }
-    public void insertLabel(Label label) {
+    public boolean insertLabel(Label label) {
         try {
             Dao<Label, String> dao = getLabelDao();
             Log.i("label", "dao = " + dao + "  label " + label);
-            int returnValue = dao.create(label);
-            Log.i("label", "插入后返回值："+returnValue);
+            Dao.CreateOrUpdateStatus returnValue = dao.createOrUpdate(label);
+            Log.i("label", "插入后返回值：" + returnValue.isCreated());
+            return returnValue.isCreated();
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);

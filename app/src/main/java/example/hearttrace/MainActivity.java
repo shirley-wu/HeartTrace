@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
                 Label label = new Label("happy");
                 Label label1 = new Label("sad");
                 Label label2 = new Label("normal");
+                Log.i(Diary.TAG, "this is the hot point");
+                Helper.insertLabel(new Label("happy"));
                 Helper.insertDiaryLabel(new DiaryLabel(diary, label));
                 try {
                     List<Diary> diaryHappy = Helper.lookupDiaryForLabel(label1);
