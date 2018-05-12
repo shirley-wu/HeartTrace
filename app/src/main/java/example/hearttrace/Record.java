@@ -15,11 +15,6 @@ import java.util.Date;
 
 public abstract class Record {
 
-    private final String TAG = "Record";
-
-    @DatabaseField(generatedId = true, columnName = TAG)
-    protected Integer id;
-
     @DatabaseField
     protected String text;
 

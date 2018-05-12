@@ -16,7 +16,7 @@ public class DiaryLabel {
 
     public static final String LABEL_TAG = "tb_label";
 
-    @DatabaseField(id = true, generatedId = true, columnName = TAG)
+    @DatabaseField(generatedId = true, columnName = TAG)
     private int id;
     @DatabaseField(foreign = true, columnName = DIARY_TAG)
     private Diary diary;

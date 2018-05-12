@@ -8,7 +8,7 @@ import com.j256.ormlite.table.DatabaseTable;
  */
 @DatabaseTable(tableName = "tb_sentence_label")
 public class SentenceLabel {
-    @DatabaseField(id = true, generatedId = true)
+    @DatabaseField(generatedId = true)
     private int id ;
     @DatabaseField(foreign = true)
     private Sentence sentence;

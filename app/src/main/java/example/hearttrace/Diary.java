@@ -10,8 +10,10 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "Diary")
 public class Diary extends Record {
     public static final String TAG = "Diary";
+
     @DatabaseField(generatedId = true, columnName = "TAG")
     private int id;
+
     @DatabaseField(foreign = true)
     Diarybook diarybook;
 }

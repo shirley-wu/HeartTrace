@@ -9,8 +9,10 @@ import android.widget.EditText;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.RuntimeExceptionDao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,17 +32,17 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try{
-                    Dao<Diary, Integer> diaryDao = getDataBaseHelper().getDiaryDao();
-
-                    Diary diary = new Diary();
-                    diary.setText(editText.getText().toString());
-                    diary.setDate();
-
-                    diaryDao.create(diary);
-                } catch(SQLException e){
-                    Log.d(TAG, "onCreate: get dao error");
+                DatabaseHelper Helper = new DatabaseHelper(getApplicationContext());
+                RuntimeExceptionDao<Diary, Integer> diaryDao = Helper.getRuntimeExceptionDiaryDao();
+                Diary diary = new Diary();
+                diary.setText(editText.getText().toString());
+                diary.setDate();
+                diaryDao.create(diary);
+                List<Diary> diaryList = diaryDao.queryForAll();
+                for(Diary i : diaryList ){
+                    Log.i(Diary.TAG, i.getDate()+i.getText());
                 }
+                Helper.close();
             }
         });
     }
