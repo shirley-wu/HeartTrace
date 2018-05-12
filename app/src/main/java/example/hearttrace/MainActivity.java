@@ -33,20 +33,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DatabaseHelper Helper = new DatabaseHelper(getApplicationContext());
-                RuntimeExceptionDao<Diary, Integer> diaryDao = Helper.getRuntimeExceptionDiaryDao();
                 Diary diary = new Diary();
                 diary.setText(editText.getText().toString());
                 diary.setDate();
-                diaryDao.create(diary);
-                Diary diary1 = new Diary();
-                diary1.setDate();
-                diaryDao.create(diary1);
-                RuntimeExceptionDao<Label, Integer> labelDao = Helper.geRu
-                List<Diary> diaryList = diaryDao.queryForAll();
-                for(Diary i : diaryList ){
-                    Log.i(Diary.TAG, i.getDate()+i.getText());
+                Helper.insertDiary(diary);
+                Label label = new Label("happy");
+                Label label1 = new Label("sad");
+                Helper.insertDiaryLabel(new DiaryLabel(diary, label));
+                Helper.insertDiaryLabel(new DiaryLabel(diary, label1));
+                try {
+                    List<Diary> diaryHappy = Helper.lookupDiaryForLabel(label);
+                    List<Label> labelList = Helper.getAllLabel();
+                    List<Diary> diaryList = Helper.getAllDiary();
+                    for(Diary i : diaryList ){
+                        Log.i(Diary.TAG, i.getDate()+i.getText());
+                    }
+                    for(Label i : labelList){
+                        Log.i(Label.TAG, i.getLabelname());
+                    }
+                    Helper.close();
+                } catch (SQLException e) {
+                    Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
+                    throw new RuntimeException(e);
                 }
-                Helper.close();
             }
         });
     }

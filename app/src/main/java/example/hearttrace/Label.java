@@ -8,17 +8,12 @@ import com.j256.ormlite.table.DatabaseTable;
  */
 @DatabaseTable(tableName = "Label")
 public class Label {
-    private static final String TAG = "Label";
-    @DatabaseField(generatedId = true, columnName = TAG)
-    private int id;
-    @DatabaseField()
+    public static final String TAG = "label";
+    @DatabaseField(id = true, columnName = TAG)
     private String labelname;
     public Label(){}
     public Label(String labelname){
         this.labelname = labelname;
-    }
-    public int getId(){
-        return id;
     }
     public String getLabelname(){
         return labelname;

@@ -10,6 +10,7 @@ import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
+import com.j256.ormlite.stmt.query.In;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
@@ -26,7 +27,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     // name of the database file for your application -- change to something appropriate for your app
     private static final String DATABASE_NAME = "heartTrace.db";
     // any time you make changes to your database objects, you may have to increase the database version
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     // the DAO object we use to access the Diary table
     private Dao<Diary, Integer> diaryDao = null;
@@ -41,8 +42,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private Dao<Sentence, Integer> sentenceDao = null;
     private RuntimeExceptionDao<Sentence, Integer> runtimeSentenceDao = null;
 
-    private Dao<Label, Integer> labelDao = null;
-    private RuntimeExceptionDao<Label, Integer> runtimeLabelDao = null;
+    private Dao<Label, String> labelDao = null;
+    private RuntimeExceptionDao<Label, String> runtimeLabelDao = null;
 
     private Dao<Record, Integer> recordDao = null;
     private RuntimeExceptionDao<Record, Integer>  runtimeRecordDao = null;
@@ -67,13 +68,12 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         try {
             Log.i(DatabaseHelper.class.getName(), "onCreate");
             TableUtils.createTable(connectionSource, Diary.class);
-            TableUtils.createTable(connectionSource, Diarybook.class);
+            //TableUtils.createTable(connectionSource, Diarybook.class);
             TableUtils.createTable(connectionSource, DiaryLabel.class);
             TableUtils.createTable(connectionSource, Label.class);
-            TableUtils.createTable(connectionSource, Record.class);
-            TableUtils.createTable(connectionSource, Recordbook.class);
-            TableUtils.createTable(connectionSource, Sentence.class);
-            TableUtils.createTable(connectionSource, SentenceLabel.class);
+            //TableUtils.createTable(connectionSource, Recordbook.class);
+            //TableUtils.createTable(connectionSource, Sentence.class);
+            //TableUtils.createTable(connectionSource, SentenceLabel.class);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
             throw new RuntimeException(e);
@@ -122,7 +122,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             throw new RuntimeException(e);
         }
     }
-    public Dao<Label, Integer> getLabelDao() throws SQLException {
+    public Dao<Label, String> getLabelDao() throws SQLException {
         if (labelDao == null) {
             labelDao = getDao(Label.class);
         }
@@ -130,7 +130,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     }
     public void insertLabel(Label label) {
         try {
-            Dao<Label, Integer> dao = getLabelDao();
+            Dao<Label, String> dao = getLabelDao();
             Log.i("label", "dao = " + dao + "  label " + label);
             int returnValue = dao.create(label);
             Log.i("label", "插入后返回值："+returnValue);
@@ -156,15 +156,26 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             throw new RuntimeException(e);
         }
     }
-    public List<Label> getAllLable(){
+    public List<Label> getAllLabel(){
         try {
-            Dao<Label, Integer> dao = getLabelDao();
+            Dao<Label, String> dao = getLabelDao();
             return dao.queryForAll();
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
         }
     }
+
+    public List<Diary> getAllDiary(){
+        try {
+            Dao<Diary, Integer> dao = getDiaryDao();
+            return dao.queryForAll();
+        } catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
+
     public PreparedQuery<Diary> makePostsForLabelQuery(){
         try{
             Dao<DiaryLabel, Integer> diaryLabelDao = getDiaryLabelDao();
