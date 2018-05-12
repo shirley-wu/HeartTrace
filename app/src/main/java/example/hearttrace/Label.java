@@ -11,7 +11,7 @@ public class Label {
     private static final String TAG = "Label";
     @DatabaseField(generatedId = true, columnName = TAG)
     private int id;
-    @DatabaseField
+    @DatabaseField()
     private String labelname;
     public Label(){}
     public Label(String labelname){

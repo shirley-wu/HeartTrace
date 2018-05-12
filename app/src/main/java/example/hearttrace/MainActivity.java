@@ -38,6 +38,10 @@ public class MainActivity extends AppCompatActivity {
                 diary.setText(editText.getText().toString());
                 diary.setDate();
                 diaryDao.create(diary);
+                Diary diary1 = new Diary();
+                diary1.setDate();
+                diaryDao.create(diary1);
+                RuntimeExceptionDao<Label, Integer> labelDao = Helper.geRu
                 List<Diary> diaryList = diaryDao.queryForAll();
                 for(Diary i : diaryList ){
                     Log.i(Diary.TAG, i.getDate()+i.getText());
