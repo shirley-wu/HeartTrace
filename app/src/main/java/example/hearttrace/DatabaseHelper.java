@@ -68,12 +68,11 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         try {
             Log.i(DatabaseHelper.class.getName(), "onCreate");
             TableUtils.createTable(connectionSource, Diary.class);
-            //TableUtils.createTable(connectionSource, Diarybook.class);
             TableUtils.createTable(connectionSource, DiaryLabel.class);
             TableUtils.createTable(connectionSource, Label.class);
-            //TableUtils.createTable(connectionSource, Recordbook.class);
-            //TableUtils.createTable(connectionSource, Sentence.class);
-            //TableUtils.createTable(connectionSource, SentenceLabel.class);
+            TableUtils.createTable(connectionSource, Recordbook.class);
+            TableUtils.createTable(connectionSource, Sentence.class);
+            TableUtils.createTable(connectionSource, SentenceLabel.class);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
             throw new RuntimeException(e);
@@ -91,8 +90,11 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             Log.i(DatabaseHelper.class.getName(), "onUpgrade");
             TableUtils.dropTable(connectionSource, Diary.class, true);
             TableUtils.dropTable(connectionSource, Diarybook.class, true);
-            TableUtils.dropTable(connectionSource, Label.class, true);
             TableUtils.dropTable(connectionSource, DiaryLabel.class, true);
+            TableUtils.dropTable(connectionSource, Label.class, true);
+            TableUtils.dropTable(connectionSource, Recordbook.class, true);
+            TableUtils.dropTable(connectionSource, Sentence.class, true);
+            TableUtils.dropTable(connectionSource, SentenceLabel.class, true);
             // after we drop the old databases, we create the new ones
             onCreate(db, connectionSource);
         } catch (SQLException e) {
