@@ -31,12 +31,12 @@ public class Diary extends Record {
         return id;
     }
 
-    public getText()
+    public String getText()
     {
         return text;
     }
 
-    public setText(String text)
+    public void setText(String text)
     {
         this.text = text;
     }
