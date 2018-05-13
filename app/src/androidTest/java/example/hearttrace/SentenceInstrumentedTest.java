@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -53,7 +54,7 @@ public class SentenceInstrumentedTest {
         sentence.setDate();
 
         // create
-        dao.create(sentence);
+        databaseHelper.insertSentence(sentence);
 
         // query
         sentenceList = dao.queryBuilder().where().eq("text", originText).query();
@@ -61,7 +62,7 @@ public class SentenceInstrumentedTest {
         assertEquals(sentence.getDate(), sentenceList.get(0).getDate());
 
         // update
-        sentence.setText(updateText);
+        databaseHelper.updateSentence(sentence);
         dao.update(sentence);
         sentenceList = dao.queryBuilder().where().eq("text", originText).query();
         assertEquals(0, sentenceList.size()); // TODO: not safe: assumes that there is no such text
@@ -69,7 +70,7 @@ public class SentenceInstrumentedTest {
         assertEquals(sentence.getDate(), sentenceList.get(0).getDate()); // TODO: not safe: assumes that there is no such text
 
         // delete
-        dao.delete(sentence);
+        databaseHelper.deleteSentence(sentence);
         sentenceList = dao.queryBuilder().where().eq("text", updateText).query();
         assertEquals(0, sentenceList.size()); // TODO: not safe: assumes that there is no such text
     }
@@ -83,9 +84,11 @@ public class SentenceInstrumentedTest {
     @Test
     public void testGetSentenceByDate() throws SQLException {
         int num = 20;
+        List<Sentence> sentenceList = new ArrayList();
         for(int i = 1; i <= num; i++) {
             for(int j = 0; j < i; j++) {
                 Sentence sentence = new Sentence();
+                sentenceList.add(sentence);
                 sentence.setText(originText + j);
                 sentence.setDate(new Date(1998, 8, i));
                 dao.create(sentence);
@@ -95,6 +98,10 @@ public class SentenceInstrumentedTest {
         Date date;
         for(int i = 1; i <= num; i++) {
             assertEquals(i, databaseHelper.getSentenceByDate(new Date(1998, 8, i)).size());
+        }
+
+        for(final Sentence sentence : sentenceList) {
+            databaseHelper.deleteSentence(sentence);
         }
     }
 
