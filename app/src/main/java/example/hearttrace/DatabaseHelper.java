@@ -45,9 +45,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private Dao<Label, String> labelDao = null;
     private RuntimeExceptionDao<Label, String> runtimeLabelDao = null;
 
-    private Dao<Record, Integer> recordDao = null;
-    private RuntimeExceptionDao<Record, Integer>  runtimeRecordDao = null;
-
     private Dao<Recordbook, Integer> recordbookDao = null;
     private RuntimeExceptionDao<Recordbook, Integer> runtimeRecordbookDao = null;
 
@@ -118,9 +115,33 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     public void insertDiary(Diary diary) {
         try {
             Dao<Diary, Integer> dao = getDiaryDao();
-            Log.i("diary", "dao = " + dao + "  diary " + diary);
+            Log.i("diary", "dao = " + dao + " 插入 diary " + diary);
             int returnValue = dao.create(diary);
             Log.i("diary", "插入后返回值：" + returnValue);
+        } catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void updateDiary(Diary diary) {
+        try {
+            Dao<Diary, Integer> dao = getDiaryDao();
+            Log.i("diary", "dao = " + dao + " 更新 diary " + diary);
+            int returnValue = dao.update(diary);
+            Log.i("diary", "更新后返回值：" + returnValue);
+        } catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void deleteDiary(Diary diary) {
+        try {
+            Dao<Diary, Integer> dao = getDiaryDao();
+            Log.i("diary", "dao = " + dao + " 删除 diary " + diary);
+            int returnValue = dao.delete(diary);
+            Log.i("diary", "删除后返回值：" + returnValue);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);

@@ -54,4 +54,3 @@ public class Sentence {
         return date;
     }
 }
-}
