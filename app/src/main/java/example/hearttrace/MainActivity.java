@@ -42,13 +42,19 @@ public class MainActivity extends AppCompatActivity {
                 Label label2 = new Label("normal");
                 Log.i(Diary.TAG, "this is the hot point");
                 Helper.insertLabel(new Label("happy"));
-                Helper.insertDiaryLabel(new DiaryLabel(diary, label));
+                Helper.insertDiaryLabel(new DiaryLabel(diary, label1));
+                Helper.insertDiaryLabel(new DiaryLabel(diary, label1));
                 try {
+                    List<Label> labelNewDiary = Helper.lookupLabelForDiary(diary);
                     List<Diary> diaryHappy = Helper.lookupDiaryForLabel(label1);
                     List<Label> labelList = Helper.getAllLabel();
                     List<Diary> diaryList = Helper.getAllDiary();
                     for(Diary i :diaryHappy){
                         Log.i(Diary.TAG, i.getDate()+i.getText());
+                    }
+                    Log.i(Diary.TAG, "=====================================");
+                    for(Label i : labelNewDiary){
+                        Log.i(Label.TAG, i.getLabelname());
                     }
                     Log.i(Diary.TAG, "=====================================");
                     for(Diary i : diaryList ){
