@@ -1,13 +1,7 @@
 package example.hearttrace;
 
-import android.util.Log;
-
-import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-
-import java.sql.SQLException;
-import java.util.List;
 
 /**
  * Created by wu-pc on 2018/5/10.
@@ -20,29 +14,29 @@ public class Diarybook extends Recordbook {
 
     private static final String default_name = "default";
 
+    @DatabaseField(generatedId = true, columnName = TAG)
+    private int id;
+    @DatabaseField
+    private string diarybook_name;
 
-    /*public static Diarybook getDefault(DatabaseHelper databaseHelper){
-        try{
-            Dao<Diarybook, Integer> dao = databaseHelper.getDiarybookDao();
-            List<Diarybook> listDiarySet = dao.queryBuilder().where().eq("name", default_name).query();
+    public Diarybook(){};
+    public Diarybook(string diarybook_name)
+    {
+        this.diarybook_name = diarybook_name;
+    }
 
-            Diarybook diarybook;
-            if(listDiarySet.size() == 0){
-                diarybook = new Diarybook();
-                diarybook.setName(default_name);
-                dao.create(diarybook);
-                Log.d("Diarybook", "getDefault: " + diarybook.id);
-            }
-            else{
-                if(listDiarySet.size() > 1){
-                    Log.e(TAG, "getDefault: have " + listDiarySet.size() + " default book, error!!!!!");
-                }
-                diarybook = listDiarySet.get(0);
-            }
-            return diarybook;
-        } catch(SQLException e){
-            return null;
-        }
-    }*/
+    public int getId()
+    {
+        return id;
+    }
 
+    public string getDiarybook_name()
+    {
+        return diarybook_name;
+    }
+
+    public void setDiarybook_name(string diarybook_name)
+    {
+        this.diarybook_name = diarybook_name;
+    }
 }

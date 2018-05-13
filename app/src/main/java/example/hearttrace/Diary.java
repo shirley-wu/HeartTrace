@@ -11,9 +11,33 @@ import com.j256.ormlite.table.DatabaseTable;
 public class Diary extends Record {
     public static final String TAG = "Diary";
 
-    @DatabaseField(generatedId = true, columnName = "TAG")
+    @DatabaseField(generatedId = true, columnName = TAG)
     private int id;
 
     @DatabaseField(foreign = true)
-    Diarybook diarybook;
+    private Diarybook diarybook;
+
+    @DatabaseField
+    string text;
+
+    public Diary(){};
+    public Diary(string text)
+    {
+        this.text = text;
+    }
+
+    public int getId()
+    {
+        return id;
+    }
+
+    public getText()
+    {
+        return text;
+    }
+
+    public setText(string text)
+    {
+        this.text = text;
+    }
 }

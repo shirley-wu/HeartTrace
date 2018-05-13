@@ -118,7 +118,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             Dao<Diary, Integer> dao = getDiaryDao();
             Log.i("diary", "dao = " + dao + "  diary " + diary);
             int returnValue = dao.create(diary);
-            Log.i("diary", "插入后返回值："+returnValue);
+            Log.i("diary", "插入后返回值：" + returnValue);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
