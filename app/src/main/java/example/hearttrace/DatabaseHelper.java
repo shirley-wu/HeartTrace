@@ -17,12 +17,16 @@ import com.j256.ormlite.table.TableUtils;
 import java.sql.SQLException;
 import java.util.List;
 
+import java.util.Date;
+
 /**
  * Created by wu-pc on 2018/5/9.
  * Copied from official example, and revised for my own purpose
  */
 
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
+
+    final static private String TAG = "DatabaseHelper";
 
     // name of the database file for your application -- change to something appropriate for your app
     private static final String DATABASE_NAME = "heartTrace.db";
@@ -45,9 +49,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private Dao<Label, String> labelDao = null;
     private RuntimeExceptionDao<Label, String> runtimeLabelDao = null;
 
-    private Dao<Recordbook, Integer> recordbookDao = null;
-    private RuntimeExceptionDao<Recordbook, Integer> runtimeRecordbookDao = null;
-
     private Dao<SentenceLabel, Integer> sentenceLabelDao = null;
     private RuntimeExceptionDao<SentenceLabel, Integer> runtimeSentenceLabelDao = null;
     private PreparedQuery<Label> labelForDiaryQuery;
@@ -66,9 +67,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         try {
             Log.i(DatabaseHelper.class.getName(), "onCreate");
             TableUtils.createTable(connectionSource, Diary.class);
+            TableUtils.createTable(connectionSource, Diarybook.class);
             TableUtils.createTable(connectionSource, DiaryLabel.class);
             TableUtils.createTable(connectionSource, Label.class);
-            TableUtils.createTable(connectionSource, Recordbook.class);
             TableUtils.createTable(connectionSource, Sentence.class);
             TableUtils.createTable(connectionSource, SentenceLabel.class);
         } catch (SQLException e) {
@@ -90,7 +91,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.dropTable(connectionSource, Diarybook.class, true);
             TableUtils.dropTable(connectionSource, DiaryLabel.class, true);
             TableUtils.dropTable(connectionSource, Label.class, true);
-            TableUtils.dropTable(connectionSource, Recordbook.class, true);
             TableUtils.dropTable(connectionSource, Sentence.class, true);
             TableUtils.dropTable(connectionSource, SentenceLabel.class, true);
             // after we drop the old databases, we create the new ones
@@ -121,6 +121,18 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
+        }
+    }
+
+    public List<Diary> getDiaryByDate(Date date) {
+        try {
+            Dao<Diary, Integer> dao = getDiaryDao();
+            List<Diary> diaryList = dao.queryBuilder().where().eq("date", date).query();
+            return diaryList;
+        }
+        catch(SQLException e) {
+            Log.e(TAG, "getDiaryByDate: cannot query");
+            return null;
         }
     }
 
@@ -188,6 +200,18 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
+        }
+    }
+
+    public List<Sentence> getSentenceByDate(Date date) {
+        try {
+            Dao<Sentence, Integer> dao = getSentenceDao();
+            List<Sentence> diaryList = dao.queryBuilder().where().eq("date", date).query();
+            return diaryList;
+        }
+        catch(SQLException e) {
+            Log.e(TAG, "getDiaryByDate: cannot query");
+            return null;
         }
     }
 

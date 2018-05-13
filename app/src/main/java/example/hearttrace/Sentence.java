@@ -26,7 +26,7 @@ public class Sentence {
     @DatabaseField(dataType = DataType.DATE_STRING)
     protected Date date;
 
-    @DatabaseField(foreign = true, canBeNull = true)
+    @DatabaseField(foreign = true)
     private Diary diary;
 
     public Sentence(){
