@@ -9,7 +9,7 @@ import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "Diary")
 public class Diary extends Record {
-    public static final String TAG = "Diary";
+    public static final String TAG = "diary";
 
     @DatabaseField(generatedId = true, columnName = TAG)
     private int id;

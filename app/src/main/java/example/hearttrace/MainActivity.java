@@ -33,16 +33,43 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DatabaseHelper Helper = new DatabaseHelper(getApplicationContext());
-                RuntimeExceptionDao<Diary, Integer> diaryDao = Helper.getRuntimeExceptionDiaryDao();
                 Diary diary = new Diary();
                 diary.setText(editText.getText().toString());
                 diary.setDate();
-                diaryDao.create(diary);
-                List<Diary> diaryList = diaryDao.queryForAll();
-                for(Diary i : diaryList ){
-                    Log.i(Diary.TAG, i.getDate()+i.getText());
+                Helper.insertDiary(diary);
+                Label label = new Label("happy");
+                Label label1 = new Label("sad");
+                Label label2 = new Label("normal");
+                Log.i(Diary.TAG, "this is the hot point");
+                Helper.insertLabel(new Label("happy"));
+                Helper.insertDiaryLabel(new DiaryLabel(diary, label1));
+                Helper.insertDiaryLabel(new DiaryLabel(diary, label1));
+                try {
+                    List<Label> labelNewDiary = Helper.lookupLabelForDiary(diary);
+                    List<Diary> diaryHappy = Helper.lookupDiaryForLabel(label1);
+                    List<Label> labelList = Helper.getAllLabel();
+                    List<Diary> diaryList = Helper.getAllDiary();
+                    for(Diary i :diaryHappy){
+                        Log.i(Diary.TAG, i.getDate()+i.getText());
+                    }
+                    Log.i(Diary.TAG, "=====================================");
+                    for(Label i : labelNewDiary){
+                        Log.i(Label.TAG, i.getLabelname());
+                    }
+                    Log.i(Diary.TAG, "=====================================");
+                    for(Diary i : diaryList ){
+                        Log.i(Diary.TAG, i.getDate()+i.getText());
+                    }
+                    Log.i(Diary.TAG, "=====================================");
+                    for(Label i : labelList){
+                        Log.i(Label.TAG, i.getLabelname());
+                    }
+                    Log.i(Label.TAG, "=====================================");
+                    Helper.close();
+                } catch (SQLException e) {
+                    Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
+                    throw new RuntimeException(e);
                 }
-                Helper.close();
             }
         });
     }
