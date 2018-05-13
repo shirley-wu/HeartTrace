@@ -17,10 +17,10 @@ public class Diarybook extends Recordbook {
     @DatabaseField(generatedId = true, columnName = TAG)
     private int id;
     @DatabaseField
-    private string diarybook_name;
+    private String diarybook_name;
 
     public Diarybook(){};
-    public Diarybook(string diarybook_name)
+    public Diarybook(String diarybook_name)
     {
         this.diarybook_name = diarybook_name;
     }
@@ -30,12 +30,12 @@ public class Diarybook extends Recordbook {
         return id;
     }
 
-    public string getDiarybook_name()
+    public String getDiarybook_name()
     {
         return diarybook_name;
     }
 
-    public void setDiarybook_name(string diarybook_name)
+    public void setDiarybook_name(String diarybook_name)
     {
         this.diarybook_name = diarybook_name;
     }

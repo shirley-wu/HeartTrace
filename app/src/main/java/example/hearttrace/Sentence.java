@@ -21,10 +21,10 @@ public class Sentence extends Record {
     private Diary diary;
 
     @DatabaseField
-    string text;
+    String text;
 
     public Sentence(){};
-    public Sentence(string text)
+    public Sentence(String text)
     {
         this.text = text;
     }
@@ -34,7 +34,7 @@ public class Sentence extends Record {
         return id;
     }
 
-    public string getText()
+    public String getText()
     {
         return text;
     }
