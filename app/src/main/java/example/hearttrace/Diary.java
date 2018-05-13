@@ -1,7 +1,10 @@
 package example.hearttrace;
 
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+
+import java.util.Date;
 
 /**
  * Created by wu-pc on 2018/5/9.
@@ -20,25 +23,31 @@ public class Diary {
     @DatabaseField
     String text;
 
-    public Diary(){};
+    @DatabaseField(dataType = DataType.DATE_STRING)
+    protected Date date;
 
-    public Diary(String text)
-    {
+    public Diary(){
+    };
+
+    public Diary(String text){
         this.text = text;
     }
 
-    public int getId()
-    {
-        return id;
-    }
-
-    public String getText()
-    {
+    public String getText(){
         return text;
     }
 
-    public void setText(String text)
-    {
+    public void setText(String text){
         this.text = text;
+    }
+
+    public void setDate(){
+        if(date == null) {
+            date = new Date();
+        }
+    }
+
+    public Date getDate(){
+        return date;
     }
 }
