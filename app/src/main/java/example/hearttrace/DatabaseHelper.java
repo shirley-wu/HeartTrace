@@ -147,6 +147,49 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             throw new RuntimeException(e);
         }
     }
+    
+    public Dao<Sentence, Integer> getSentenceDao() throws SQLException {
+        if(sentenceDao == null) {
+            sentenceDao = getDao(Sentence.class);
+        }
+        return sentenceDao;
+    }
+
+    public void insertSentence(Sentence sentence) {
+        try {
+            Dao<Sentence, Integer> dao = getSentenceDao();
+            Log.i("sentence", "dao = " + dao + " 插入 sentence " + sentence);
+            int returnValue = dao.create(sentence);
+            Log.i("sentence", "插入后返回值：" + returnValue);
+        } catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void updateSentence(Sentence sentence) {
+        try {
+            Dao<Sentence, Integer> dao = getSentenceDao();
+            Log.i("sentence", "dao = " + dao + " 更新 sentence " + sentence);
+            int returnValue = dao.update(sentence);
+            Log.i("sentence", "更新后返回值：" + returnValue);
+        } catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void deleteSentence(Sentence sentence) {
+        try {
+            Dao<Sentence, Integer> dao = getSentenceDao();
+            Log.i("sentence", "dao = " + dao + " 删除 sentence " + sentence);
+            int returnValue = dao.delete(sentence);
+            Log.i("sentence", "删除后返回值：" + returnValue);
+        } catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
 
     public Dao<Label, String> getLabelDao() throws SQLException {
         if (labelDao == null) {

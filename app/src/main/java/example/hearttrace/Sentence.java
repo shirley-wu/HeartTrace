@@ -18,7 +18,7 @@ public class Sentence {
     private int id;
 
     @DatabaseField(foreign = true)
-    private Diarybook diarybook;
+    private Sentencebook sentencebook;
 
     @DatabaseField
     String text;
@@ -44,13 +44,21 @@ public class Sentence {
         this.text = text;
     }
 
+    public Date getDate(){
+        return date;
+    }
+
     public void setDate(){
         if(date == null) {
             date = new Date();
         }
     }
 
-    public Date getDate(){
-        return date;
+    public Sentencebook getSentencebook() {
+        return sentencebook;
+    }
+
+    public void setSentencebook(Sentencebook sentencebook) {
+        this.sentencebook = sentencebook;
     }
 }

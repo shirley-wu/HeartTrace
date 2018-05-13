@@ -41,7 +41,7 @@ public class DiaryInstrumentedTest {
 
     @Test
     public void testGetDao() {
-        assertEquals("diary", dao.getTableName());
+        assertEquals("Diary", dao.getTableName());
     }
 
     @Test

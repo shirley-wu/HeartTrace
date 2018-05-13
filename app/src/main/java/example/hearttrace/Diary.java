@@ -41,13 +41,21 @@ public class Diary {
         this.text = text;
     }
 
+    public Date getDate(){
+        return date;
+    }
+
     public void setDate(){
         if(date == null) {
             date = new Date();
         }
     }
 
-    public Date getDate(){
-        return date;
+    public Diarybook getDiarybook() {
+        return diarybook;
+    }
+
+    public void setDiarybook(Diarybook diarybook) {
+        this.diarybook = diarybook;
     }
 }
