@@ -10,14 +10,14 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "sentence_book")
 public class Sentencebook extends Recordbook {
 
-    private static final string TAG = "Sentencebook";
+    private static final String TAG = "Sentencebook";
 
-    private static final string default_name = "default";
+    private static final String default_name = "default";
 
     @DatabaseField(generatedId = true, columnName = TAG)
     private int id;
     @DatabaseField
-    private string sentencebook_name;
+    private String sentencebook_name;
 
     public Sentencebook(){};
     public Sentencebook(string sentencebook_name)
@@ -30,12 +30,12 @@ public class Sentencebook extends Recordbook {
         return id;
     }
 
-    public string getSentencebook_name()
+    public String getSentencebook_name()
     {
         return sentencebook_name;
     }
 
-    public void setSentencebook_name(string sentencebook_name)
+    public void setSentencebook_name(String sentencebook_name)
     {
         this.sentencebook_name = sentencebook_name;
     }
