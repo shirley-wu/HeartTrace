@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -71,6 +72,30 @@ public class SentenceInstrumentedTest {
         dao.delete(sentence);
         sentenceList = dao.queryBuilder().where().eq("text", updateText).query();
         assertEquals(0, sentenceList.size()); // TODO: not safe: assumes that there is no such text
+    }
+
+    @Test
+    public void testGetAllDiary() throws SQLException {
+        List<Diary> diaryList = databaseHelper.getAllDiary();
+        assertTrue(diaryList.size() >= 0);
+    }
+
+    @Test
+    public void testGetSentenceByDate() throws SQLException {
+        int num = 20;
+        for(int i = 1; i <= num; i++) {
+            for(int j = 0; j < i; j++) {
+                Sentence sentence = new Sentence();
+                sentence.setText(originText + j);
+                sentence.setDate(new Date(1998, 8, i));
+                dao.create(sentence);
+            }
+        }
+
+        Date date;
+        for(int i = 1; i <= num; i++) {
+            assertEquals(i, databaseHelper.getSentenceByDate(new Date(1998, 8, i)).size());
+        }
     }
 
 }
