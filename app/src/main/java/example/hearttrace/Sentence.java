@@ -29,7 +29,6 @@ public class Sentence {
     @DatabaseField(foreign = true, canBeNull = true)
     private Diary diary;
 
-<<<<<<< HEAD
     public Sentence(){
     };
 
@@ -38,24 +37,6 @@ public class Sentence {
     }
 
     public String getText(){
-=======
-    @DatabaseField
-    String text;
-
-    public Sentence(){};
-    public Sentence(String text)
-    {
-        this.text = text;
-    }
-
-    public int getId()
-    {
-        return id;
-    }
-
-    public String getText()
-    {
->>>>>>> 2d7a08f3c2b2e7baf9184fb3f316a488d7b92f38
         return text;
     }
 

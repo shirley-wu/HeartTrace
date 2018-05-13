@@ -23,21 +23,14 @@ public class Diary {
     @DatabaseField
     String text;
 
-<<<<<<< HEAD
     @DatabaseField(dataType = DataType.DATE_STRING)
     protected Date date;
 
     public Diary(){
     };
-=======
-    public Diary(){};
+
     public Diary(String text)
     {
-        this.text = text;
-    }
->>>>>>> 2d7a08f3c2b2e7baf9184fb3f316a488d7b92f38
-
-    public Diary(String text){
         this.text = text;
     }
 
@@ -45,12 +38,8 @@ public class Diary {
         return text;
     }
 
-<<<<<<< HEAD
-    public void setText(String text){
-=======
-    public setText(String text)
+    public void setText(String text)
     {
->>>>>>> 2d7a08f3c2b2e7baf9184fb3f316a488d7b92f38
         this.text = text;
     }
 
