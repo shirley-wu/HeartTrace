@@ -114,6 +114,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         }
         return diaryDao;
     }
+
     public void insertDiary(Diary diary) {
         try {
             Dao<Diary, Integer> dao = getDiaryDao();
@@ -125,12 +126,14 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             throw new RuntimeException(e);
         }
     }
+
     public Dao<Label, String> getLabelDao() throws SQLException {
         if (labelDao == null) {
             labelDao = getDao(Label.class);
         }
         return labelDao;
     }
+
     public boolean insertLabel(Label label) {
         try {
             Dao<Label, String> dao = getLabelDao();
@@ -143,12 +146,14 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             throw new RuntimeException(e);
         }
     }
+
     public Dao<DiaryLabel, Integer> getDiaryLabelDao() throws SQLException {
         if (diaryLabelDao == null) {
             diaryLabelDao = getDao(DiaryLabel.class);
         }
         return diaryLabelDao;
     }
+
     public void insertDiaryLabel(DiaryLabel diaryLabel) {
         try {
             Dao<DiaryLabel, Integer> dao = getDiaryLabelDao();
@@ -160,6 +165,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             throw new RuntimeException(e);
         }
     }
+
     public List<Label> getAllLabel(){
         try {
             Dao<Label, String> dao = getLabelDao();
@@ -199,6 +205,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             throw new RuntimeException(e);
         }
     }
+
     public List<Diary> lookupDiaryForLabel(Label label) throws SQLException {
         try {
             Dao<Diary, Integer> dao = getDiaryDao();

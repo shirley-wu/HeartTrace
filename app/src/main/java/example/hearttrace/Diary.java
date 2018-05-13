@@ -8,7 +8,7 @@ import com.j256.ormlite.table.DatabaseTable;
  */
 
 @DatabaseTable(tableName = "Diary")
-public class Diary extends Record {
+public class Diary {
     public static final String TAG = "diary";
 
     @DatabaseField(generatedId = true, columnName = TAG)
@@ -18,10 +18,11 @@ public class Diary extends Record {
     private Diarybook diarybook;
 
     @DatabaseField
-    string text;
+    String text;
 
     public Diary(){};
-    public Diary(string text)
+
+    public Diary(String text)
     {
         this.text = text;
     }
@@ -31,12 +32,12 @@ public class Diary extends Record {
         return id;
     }
 
-    public getText()
+    public String getText()
     {
         return text;
     }
 
-    public setText(string text)
+    public void setText(String text)
     {
         this.text = text;
     }

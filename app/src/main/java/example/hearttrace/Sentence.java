@@ -17,14 +17,14 @@ public class Sentence extends Record {
     @DatabaseField(foreign = true)
     private Sentencebook sentencebook;
 
-    @DatabaseField(foreign = true)
+    @DatabaseField(foreign = true, canBeNull = true)
     private Diary diary;
 
     @DatabaseField
-    string text;
+    String text;
 
     public Sentence(){};
-    public Sentence(string text)
+    public Sentence(String text)
     {
         this.text = text;
     }
@@ -34,12 +34,12 @@ public class Sentence extends Record {
         return id;
     }
 
-    public string getText()
+    public String getText()
     {
         return text;
     }
 
-    public string setText(string text)
+    public String setText(String text)
     {
         this.text = text;
     }
