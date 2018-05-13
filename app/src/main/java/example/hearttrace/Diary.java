@@ -18,10 +18,10 @@ public class Diary extends Record {
     private Diarybook diarybook;
 
     @DatabaseField
-    string text;
+    String text;
 
     public Diary(){};
-    public Diary(string text)
+    public Diary(String text)
     {
         this.text = text;
     }
@@ -36,7 +36,7 @@ public class Diary extends Record {
         return text;
     }
 
-    public setText(string text)
+    public setText(String text)
     {
         this.text = text;
     }
