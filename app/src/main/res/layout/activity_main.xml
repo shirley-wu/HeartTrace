@@ -23,19 +23,68 @@
 
         </android.support.design.widget.AppBarLayout>
 
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="90dp"
+            android:background="#1a1818"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="16dp"
-            android:src="@drawable/pen_white" />
+            android:layout_gravity="bottom|right"
+            android:padding="12dp">
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:backgroundTint = "#ffffff"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:src = "@drawable/add_black"
+                />
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/add_diary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/test"
+                android:layout_marginLeft="4dp"
+                app:backgroundTint = "#ffffff"
+                android:src = "@drawable/add_diary_black" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/add_bottle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/test"
+                android:layout_marginBottom="16dp"
+                app:backgroundTint = "#ffffff"
+                android:src = "@drawable/bottle" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/test"
+                android:layout_below="@id/test"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="8dp"
+                app:backgroundTint = "#ffffff"
+                android:src = "@drawable/add_black" />
+
+
+        </RelativeLayout>
+
     </android.support.design.widget.CoordinatorLayout>
 
     <android.support.design.widget.NavigationView

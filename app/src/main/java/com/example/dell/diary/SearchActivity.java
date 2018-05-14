@@ -8,6 +8,10 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.CheckedTextView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class SearchActivity extends AppCompatActivity {
@@ -20,6 +24,37 @@ public class SearchActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Search");
+        final CheckedTextView checkTag = (CheckedTextView)findViewById(R.id.check_tag);
+        final CheckedTextView checkTime = (CheckedTextView)findViewById(R.id.check_time);
+        final LinearLayout timeSelect = (LinearLayout)findViewById(R.id.time_select);
+        timeSelect.setVisibility(View.INVISIBLE);
+        checkTag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                // TODO Auto-generated method stub
+                CheckedTextView checkedTextView = (CheckedTextView)v;
+                checkedTextView.toggle();
+                if(checkTag.isChecked() == true){
+
+                }
+            }
+        });
+        checkTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                // TODO Auto-generated method stub
+                CheckedTextView checkedTextView = (CheckedTextView)v;
+                checkedTextView.toggle();
+                if(checkTime.isChecked() == true){
+                    timeSelect.setVisibility(View.VISIBLE);
+                }
+                else{
+                    timeSelect.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

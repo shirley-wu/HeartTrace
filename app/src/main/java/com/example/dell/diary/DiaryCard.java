@@ -1,10 +1,12 @@
 package com.example.dell.diary;
 
+import java.io.Serializable;
+
 /**
  * Created by dell on 2018/5/6.
  */
 
-public class DiaryCard {
+public class DiaryCard implements Serializable {
 
     private int year;
     private int month;

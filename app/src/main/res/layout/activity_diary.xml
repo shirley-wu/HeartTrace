@@ -71,4 +71,21 @@
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
+    <Button
+        android:id="@+id/pre_diary"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/arrow_left_orange"
+        android:layout_gravity="left|bottom"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="15dp"/>
+    <Button
+        android:id="@+id/next_diary"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/arrow_right_orange"
+        android:layout_gravity="right|bottom"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="15dp"/>
+
 </android.support.design.widget.CoordinatorLayout>
