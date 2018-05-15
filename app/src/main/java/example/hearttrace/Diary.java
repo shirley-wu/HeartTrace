@@ -26,8 +26,7 @@ public class Diary {
         this.text = text;
     }
 
-    public String getText()
-    {
+    public String getText(){
         return text;
     }
 
