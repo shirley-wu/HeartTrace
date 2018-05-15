@@ -40,9 +40,4 @@ public class Diary {
     {
         this.text = text;
     }
-
-    public void deleteDiary()
-    {
-        getDiaryDao().delete();
-    }
 }

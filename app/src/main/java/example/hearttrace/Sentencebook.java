@@ -17,12 +17,12 @@ public class Sentencebook {
     @DatabaseField(generatedId = true, columnName = TAG)
     private int id;
     @DatabaseField
-    private String sentencebook_name;
+    private String sentencebookName;
 
     public Sentencebook(){};
-    public Sentencebook(String sentencebook_name)
+    public Sentencebook(String sentencebookName)
     {
-        this.sentencebook_name = sentencebook_name;
+        this.sentencebookName = sentencebookName;
     }
 
     public int getId()
@@ -30,13 +30,13 @@ public class Sentencebook {
         return id;
     }
 
-    public String getSentencebook_name()
+    public String getSentencebookName()
     {
-        return sentencebook_name;
+        return sentencebookName;
     }
 
-    public void setSentencebook_name(String sentencebook_name)
+    public void setSentencebookName(String sentencebookName)
     {
-        this.sentencebook_name = sentencebook_name;
+        this.sentencebookName = sentencebookName;
     }
 }
