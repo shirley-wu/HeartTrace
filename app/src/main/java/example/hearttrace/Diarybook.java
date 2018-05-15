@@ -20,7 +20,7 @@ public class Diarybook {
     private String diarybookName;
 
     public Diarybook(){};
-    public Diarybook(String diarybookNname)
+    public Diarybook(String diarybookName)
     {
         this.diarybookName = diarybookName;
     }
