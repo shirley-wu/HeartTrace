@@ -16,6 +16,7 @@ public class Diarybook {
 
     @DatabaseField(generatedId = true, columnName = TAG)
     private int id;
+
     @DatabaseField
     private String diarybookName;
 

@@ -1,7 +1,12 @@
 package example.hearttrace;
 
+import android.util.Log;
+
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+
+import java.util.Date;
 
 /**
  * Created by wu-pc on 2018/5/9.
@@ -20,7 +25,12 @@ public class Diary {
     @DatabaseField
     String text;
 
-    public Diary(){};
+    @DatabaseField(dataType = DataType.DATE_STRING)
+    protected Date date;
+
+    public Diary(){
+    };
+
     public Diary(String text)
     {
         this.text = text;
@@ -33,5 +43,29 @@ public class Diary {
     public void setText(String text)
     {
         this.text = text;
+    }
+
+    public Date getDate(){
+        return date;
+    }
+
+    public void setDate(){
+        if(date == null) {
+            date = new Date();
+        }
+    }
+    
+    public void setDate(Date date){
+        // dangerous!!!!! for test only.
+        this.date = date;
+        Log.i(TAG, "setDate: dangerous call!");
+    }
+
+    public Diarybook getDiarybook() {
+        return diarybook;
+    }
+
+    public void setDiarybook(Diarybook diarybook) {
+        this.diarybook = diarybook;
     }
 }
