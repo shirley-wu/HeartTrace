@@ -45,12 +45,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private Dao<Label, String> labelDao = null;
     private RuntimeExceptionDao<Label, String> runtimeLabelDao = null;
 
-    private Dao<Record, Integer> recordDao = null;
-    private RuntimeExceptionDao<Record, Integer>  runtimeRecordDao = null;
-
-    private Dao<Recordbook, Integer> recordbookDao = null;
-    private RuntimeExceptionDao<Recordbook, Integer> runtimeRecordbookDao = null;
-
     private Dao<SentenceLabel, Integer> sentenceLabelDao = null;
     private RuntimeExceptionDao<SentenceLabel, Integer> runtimeSentenceLabelDao = null;
     private PreparedQuery<Label> labelForDiaryQuery;
@@ -71,7 +65,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, Diary.class);
             TableUtils.createTable(connectionSource, DiaryLabel.class);
             TableUtils.createTable(connectionSource, Label.class);
-            TableUtils.createTable(connectionSource, Recordbook.class);
             TableUtils.createTable(connectionSource, Sentence.class);
             TableUtils.createTable(connectionSource, SentenceLabel.class);
         } catch (SQLException e) {
@@ -93,7 +86,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.dropTable(connectionSource, Diarybook.class, true);
             TableUtils.dropTable(connectionSource, DiaryLabel.class, true);
             TableUtils.dropTable(connectionSource, Label.class, true);
-            TableUtils.dropTable(connectionSource, Recordbook.class, true);
             TableUtils.dropTable(connectionSource, Sentence.class, true);
             TableUtils.dropTable(connectionSource, SentenceLabel.class, true);
             // after we drop the old databases, we create the new ones

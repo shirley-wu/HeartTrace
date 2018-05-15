@@ -8,7 +8,7 @@ import com.j256.ormlite.table.DatabaseTable;
  */
 
 @DatabaseTable(tableName = "sentence_book")
-public class Sentencebook extends Recordbook {
+public class Sentencebook {
 
     private static final String TAG = "Sentencebook";
 
@@ -20,7 +20,7 @@ public class Sentencebook extends Recordbook {
     private String sentencebook_name;
 
     public Sentencebook(){};
-    public Sentencebook(string sentencebook_name)
+    public Sentencebook(String sentencebook_name)
     {
         this.sentencebook_name = sentencebook_name;
     }
