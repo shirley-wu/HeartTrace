@@ -355,6 +355,127 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         }
     }
 
+    //for the sentence
+    public Dao<Sentence, Integer> getSentenceDao() throws SQLException {
+        if (sentenceDao == null) {
+            sentenceDao = getDao(Sentence.class);
+        }
+        return sentenceDao;
+    }
+    public void insertSentence(Sentence sentence) {
+        try {
+            Dao<Sentence, Integer> dao = getSentenceDao();
+            Log.i("sentence", "dao = " + dao + "  sentence " + sentence);
+            int returnValue = dao.create(sentence);
+            Log.i("sentence", "插入后返回值：" + returnValue);
+        } catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public Dao<SentenceLabel, Integer> getSentenceLabelDao() throws SQLException {
+        if (sentenceLabelDao == null) {
+            sentenceLabelDao = getDao(SentenceLabel.class);
+        }
+        return sentenceLabelDao;
+    }
+    public void insertSentenceLabel(SentenceLabel sentenceLabel) {
+        try {
+            Dao<>
+            Log.i("db_diary_label", "dao = " + dao + "  db_diary_label " + diaryLabel);
+            int returnValue = dao.create(diaryLabel);
+            Log.i("db_diary_label", "插入后返回值："+returnValue);
+        } catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
+    public List<Label> getAllLabel(){
+        try {
+            Dao<Label, String> dao = getLabelDao();
+            return dao.queryForAll();
+        } catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Diary> getAllDiary(){
+        try {
+            Dao<Diary, Integer> dao = getDiaryDao();
+            return dao.queryForAll();
+        } catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    public PreparedQuery<Diary> makePostsForLabelQuery(){
+        try{
+            Dao<DiaryLabel, Integer> diaryLabelDao = getDiaryLabelDao();
+            Dao<Diary, Integer> diaryDao = getDiaryDao();
+            QueryBuilder<DiaryLabel, Integer> diaryLabelBuilder = diaryLabelDao.queryBuilder();
+            diaryLabelBuilder.selectColumns(DiaryLabel.DIARY_TAG);
+            SelectArg labelSelectArg = new SelectArg();
+            //设置条件语句（where label_id=?）
+            diaryLabelBuilder.where().eq(DiaryLabel.LABEL_TAG, labelSelectArg);
+            //创建外部查询日记表
+            QueryBuilder<Diary, Integer> postQb = diaryDao.queryBuilder();
+            //设置查询条件（where project_id in()）;
+            postQb.where().in(Diary.TAG, diaryLabelBuilder);
+            return postQb.prepare();
+        } catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
+    public List<Diary> lookupDiaryForLabel(Label label) throws SQLException {
+        try {
+            Dao<Diary, Integer> dao = getDiaryDao();
+            if (diaryForLabelQuery == null) {
+                diaryForLabelQuery = makePostsForLabelQuery();
+            }
+            diaryForLabelQuery.setArgumentHolderValue(0, label);
+            return dao.query(diaryForLabelQuery);
+        }catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    public PreparedQuery<Label> makePostsForDiaryQuery(){
+        try{
+            Dao<DiaryLabel, Integer> diaryLabelDao = getDiaryLabelDao();
+            Dao<Label, String> labelDao = getLabelDao();
+            QueryBuilder<DiaryLabel, Integer> diaryLabelBuilder = diaryLabelDao.queryBuilder();
+            diaryLabelBuilder.selectColumns(DiaryLabel.LABEL_TAG);
+            SelectArg diarySelectAry = new SelectArg();
+            diaryLabelBuilder.where().eq(DiaryLabel.DIARY_TAG, diarySelectAry);
+            QueryBuilder<Label, String> postQb = labelDao.queryBuilder();
+            postQb.where().in(Label.TAG, diaryLabelBuilder);
+            return postQb.prepare();
+        }catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Label> lookupLabelForDiary(Diary diary){
+        try{
+            Dao<Label, String> labelDao = getLabelDao();
+            if (labelForDiaryQuery == null) {
+                labelForDiaryQuery = makePostsForDiaryQuery();
+            }
+            labelForDiaryQuery.setArgumentHolderValue(0, diary);
+            return labelDao.query(labelForDiaryQuery);
+        }catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
+
     /**
      * Returns the RuntimeExceptionDao (Database Access Object) version of a Dao for our Diary class. It will
      * create it or just give the cached value. RuntimeExceptionDao only through RuntimeExceptions.
