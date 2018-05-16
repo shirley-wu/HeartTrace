@@ -1,5 +1,7 @@
 package example.hearttrace;
 
+import android.util.Log;
+
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -57,6 +59,12 @@ public class Diary {
         if(date == null) {
             date = new Date();
         }
+    }
+    
+    public void setDate(Date date){
+        // dangerous!!!!! for test only.
+        this.date = date;
+        Log.i(TAG, "setDate: dangerous call!");
     }
 
     public Diarybook getDiarybook() {

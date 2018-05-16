@@ -159,6 +159,16 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             throw new RuntimeException(e);
         }
     }
+
+    public List<Diary> getAllDiary(){
+        try {
+            Dao<Diary, Integer> dao = getDiaryDao();
+            return dao.queryForAll();
+        } catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
     
     public Dao<Sentence, Integer> getSentenceDao() throws SQLException {
         if(sentenceDao == null) {
@@ -215,6 +225,16 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         }
     }
 
+    public List<Sentence> getAllSentence(){
+        try {
+            Dao<Sentence, Integer> dao = getSentenceDao();
+            return dao.queryForAll();
+        } catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
+
     public Dao<Label, String> getLabelDao() throws SQLException {
         if (labelDao == null) {
             labelDao = getDao(Label.class);
@@ -257,16 +277,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     public List<Label> getAllLabel(){
         try {
             Dao<Label, String> dao = getLabelDao();
-            return dao.queryForAll();
-        } catch (SQLException e) {
-            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
-            throw new RuntimeException(e);
-        }
-    }
-
-    public List<Diary> getAllDiary(){
-        try {
-            Dao<Diary, Integer> dao = getDiaryDao();
             return dao.queryForAll();
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
