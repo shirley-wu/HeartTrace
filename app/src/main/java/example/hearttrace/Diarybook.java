@@ -21,23 +21,19 @@ public class Diarybook {
     private String diarybookName;
 
     public Diarybook(){};
-    public Diarybook(String diarybookName)
-    {
+    public Diarybook(String diarybookName){
         this.diarybookName = diarybookName;
     }
 
-    public int getId()
-    {
+    public int getId(){
         return id;
     }
 
-    public String getDiarybookName()
-    {
+    public String getDiarybookName(){
         return diarybookName;
     }
 
-    public void setDiarybookName(String diarybookName)
-    {
+    public void setDiarybookName(String diarybookName){
         this.diarybookName = diarybookName;
     }
 }
