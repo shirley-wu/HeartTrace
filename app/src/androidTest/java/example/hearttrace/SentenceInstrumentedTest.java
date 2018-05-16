@@ -4,7 +4,7 @@ import android.content.Context;
 import android.provider.Telephony;
 import android.support.test.InstrumentationRegistry;
 
-import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
 import org.junit.After;

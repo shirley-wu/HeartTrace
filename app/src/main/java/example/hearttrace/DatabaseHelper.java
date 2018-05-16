@@ -1,18 +1,17 @@
 package example.hearttrace;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
+import com.j256.ormlite.cipher.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
-import com.j256.ormlite.stmt.query.In;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import net.sqlcipher.database.SQLiteDatabase;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -31,7 +30,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     // name of the database file for your application -- change to something appropriate for your app
     private static final String DATABASE_NAME = "heartTrace.db";
     // any time you make changes to your database objects, you may have to increase the database version
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 1;
 
     // the DAO object we use to access the Diary table
     private Dao<Diary, Integer> diaryDao = null;
@@ -56,13 +55,13 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        SQLiteDatabase.loadLibs(context);
     }
 
     /**
      * This is called when the database is first created. Usually you should call createTable statements here to create
      * the tables that will store your data.
      */
-    @Override
     public void onCreate(SQLiteDatabase db, ConnectionSource connectionSource) {
         try {
             Log.i(DatabaseHelper.class.getName(), "onCreate");
@@ -83,7 +82,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
      * the various data to match the new version number.
      * Don't need it by now.
      */
-    @Override
     public void onUpgrade(SQLiteDatabase db, ConnectionSource connectionSource, int oldVersion, int newVersion) {
         try {
             Log.i(DatabaseHelper.class.getName(), "onUpgrade");
@@ -99,6 +97,10 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             Log.e(DatabaseHelper.class.getName(), "Can't drop databases", e);
             throw new RuntimeException(e);
         }
+    }
+
+    protected String getPassword() {
+        return "hello I'm password";
     }
 
     /**
@@ -169,7 +171,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             throw new RuntimeException(e);
         }
     }
-    
+
     public Dao<Sentence, Integer> getSentenceDao() throws SQLException {
         if(sentenceDao == null) {
             sentenceDao = getDao(Sentence.class);
