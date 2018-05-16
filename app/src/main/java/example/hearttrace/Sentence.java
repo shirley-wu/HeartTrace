@@ -1,14 +1,17 @@
 package example.hearttrace;
 
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+
+import java.util.Date;
 
 /**
  * Created by huang on 5/10/2018.
  */
 
 @DatabaseTable(tableName = "Sentence")
-public class Sentence extends Record {
+public class Sentence {
     public static final String TAG = "Sentence";
 
     @DatabaseField(generatedId = true, columnName = TAG)
@@ -17,30 +20,45 @@ public class Sentence extends Record {
     @DatabaseField(foreign = true)
     private Sentencebook sentencebook;
 
-    @DatabaseField(foreign = true)
-    private Diary diary;
-
     @DatabaseField
     String text;
 
-    public Sentence(){};
-    public Sentence(String text)
-    {
+    @DatabaseField(dataType = DataType.DATE_STRING)
+    protected Date date;
+
+    @DatabaseField(foreign = true)
+    private Diary diary;
+
+    public Sentence(){
+    };
+
+    public Sentence(String text){
         this.text = text;
     }
 
-    public int getId()
-    {
-        return id;
-    }
-
-    public String getText()
-    {
+    public String getText(){
         return text;
     }
 
-    public string setText(string text)
-    {
+    public void setText(String text){
         this.text = text;
+    }
+
+    public Date getDate(){
+        return date;
+    }
+
+    public void setDate(){
+        if(date == null) {
+            date = new Date();
+        }
+    }
+
+    public Sentencebook getSentencebook() {
+        return sentencebook;
+    }
+
+    public void setSentencebook(Sentencebook sentencebook) {
+        this.sentencebook = sentencebook;
     }
 }
