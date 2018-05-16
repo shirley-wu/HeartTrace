@@ -32,23 +32,20 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseHelper Helper = new DatabaseHelper(getApplicationContext());
+                DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
                 Diary diary = new Diary();
                 diary.setText(editText.getText().toString());
                 diary.setDate();
-                Helper.insertDiary(diary);
+                diary.insert(helper);
                 Label label = new Label("happy");
                 Label label1 = new Label("sad");
                 Label label2 = new Label("normal");
                 Log.i(Diary.TAG, "this is the hot point");
-                Helper.insertLabel(new Label("happy"));
-                Helper.insertDiaryLabel(new DiaryLabel(diary, label1));
-                Helper.insertDiaryLabel(new DiaryLabel(diary, label1));
                 try {
-                    List<Label> labelNewDiary = Helper.lookupLabelForDiary(diary);
-                    List<Diary> diaryHappy = Helper.lookupDiaryForLabel(label1);
-                    List<Label> labelList = Helper.getAllLabel();
-                    List<Diary> diaryList = Helper.getAllDiary();
+                    List<Label> labelNewDiary = Label.lookupForDiary(helper, diary);
+                    List<Diary> diaryHappy = Diary.lookupForLabel(helper,label1);
+                    List<Label> labelList = Label.getAllLabel(helper);
+                    List<Diary> diaryList = Diary.getAllDiary(helper);
                     for(Diary i :diaryHappy){
                         Log.i(Diary.TAG, i.getDate()+i.getText());
                     }
@@ -65,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.i(Label.TAG, i.getLabelname());
                     }
                     Log.i(Label.TAG, "=====================================");
-                    Helper.close();
+                    helper.close();
                 } catch (SQLException e) {
                     Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
                     throw new RuntimeException(e);
