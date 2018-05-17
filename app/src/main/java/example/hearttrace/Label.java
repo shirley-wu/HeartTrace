@@ -54,4 +54,21 @@ public class Label {
             throw new RuntimeException(e);
         }
     }
+
+    public static PreparedQuery<Label> makePostsForDiaryQuery(DatabaseHelper helper){
+        try{
+            Dao<DiaryLabel, Integer> diaryLabelDao = helper.getDiaryLabelDao();
+            Dao<Label, String> labelDao = helper.getLabelDao();
+            QueryBuilder<DiaryLabel, Integer> diaryLabelBuilder = diaryLabelDao.queryBuilder();
+            diaryLabelBuilder.selectColumns(DiaryLabel.LABEL_TAG);
+            SelectArg diarySelectAry = new SelectArg();
+            diaryLabelBuilder.where().eq(DiaryLabel.DIARY_TAG, diarySelectAry);
+            QueryBuilder<Label, String> postQb = labelDao.queryBuilder();
+            postQb.where().in(Label.TAG, diaryLabelBuilder);
+            return postQb.prepare();
+        }catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
 }

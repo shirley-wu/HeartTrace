@@ -27,11 +27,14 @@ public class SentenceLabel {
 
     @DatabaseField(foreign = true, columnName = LABEL_TAG)
     private Label label;
+
     public SentenceLabel(){}
+
     public SentenceLabel(Sentence sentence, Label label){
         this.sentence = sentence;
         this.label = label;
     }
+
     public int getId(){
         return id;
     }
@@ -60,21 +63,21 @@ public class SentenceLabel {
         }
     }
 
-    public static QueryBuilder<Sentence, Integer> querySentenceByLabel(DatabaseHelper helper){
+    public static QueryBuilder<Sentence, Integer> querySentenceByLabel(DatabaseHelper helper, Label label){
         try{
-            Dao<DiaryLabel, Integer> diaryLabelDao = helper.getDiaryLabelDao();
-            QueryBuilder<DiaryLabel, Integer> diaryLabelBuilder = diaryLabelDao.queryBuilder();
-            diaryLabelBuilder.selectColumns(DiaryLabel.DIARY_TAG);
+            Dao<SentenceLabel, Integer> sentenceLabelDao = helper.getSentenceLabelDao();
+            QueryBuilder<SentenceLabel, Integer> sentenceLabelBuilder = sentenceLabelDao.queryBuilder();
+            sentenceLabelBuilder.selectColumns(SentenceLabel.SENTENCE_TAG);
 
-            Dao<Diary, Integer> diaryDao = helper.getDiaryDao();
+            Dao<Sentence, Integer> sentenceDao = helper.getSentenceDao();
             SelectArg labelSelectArg = new SelectArg();
             //设置条件语句（where label_id=?）
-            diaryLabelBuilder.where().eq(DiaryLabel.LABEL_TAG, labelSelectArg);
+            sentenceLabelBuilder.where().eq(DiaryLabel.LABEL_TAG, labelSelectArg);
             //创建外部查询日记表
 
-            QueryBuilder<Diary, Integer> postQb = diaryDao.queryBuilder();
+            QueryBuilder<Sentence, Integer> postQb = sentenceDao.queryBuilder();
             //设置查询条件（where project_id in()）;
-            postQb.where().in(Diary.TAG, diaryLabelBuilder);
+            postQb.where().in(Diary.TAG, sentenceLabelBuilder);
             return postQb;
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
@@ -82,7 +85,7 @@ public class SentenceLabel {
         }
     }
 
-    public static QueryBuilder<Label, String> queryLabelByDiary(DatabaseHelper helper, Diary diary){
+    public static QueryBuilder<Label, String> queryLabelBySentence(DatabaseHelper helper, Sentence sentence){
         try{
             Dao<DiaryLabel, Integer> diaryLabelDao = helper.getDiaryLabelDao();
             QueryBuilder<DiaryLabel, Integer> diaryLabelBuilder = diaryLabelDao.queryBuilder();
@@ -102,5 +105,8 @@ public class SentenceLabel {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
         }
+
+        Dao<Diary, Integer> diaryDao = helper.getDiaryDao();
+        QueryBuilder<Diary, Integer> query = diaryDao.queryBuilder();
     }
 }
