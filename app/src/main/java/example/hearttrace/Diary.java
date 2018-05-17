@@ -284,7 +284,7 @@ public class Diary {
         buildWhere(qb.where(), begin, end);
         return qb.query();
     }
-    
+
     static List<Diary> search(DatabaseHelper helper, String text, Date begin, Date end, Label label) throws SQLException {
         QueryBuilder<Diary, Integer> qb = ;
         buildWhere(qb.where(), text);
