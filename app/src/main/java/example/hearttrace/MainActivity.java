@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     private final String TAG = "MainActivity";
 
-    private DatabaseHelper databaseHelper = null; // TODO: 级联删除！！！！！！ by wxq
+    private DatabaseHelper databaseHelper = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
