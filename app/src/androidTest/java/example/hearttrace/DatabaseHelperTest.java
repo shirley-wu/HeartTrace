@@ -35,7 +35,7 @@ public class DatabaseHelperTest {
 
     @Test
     public void testGetDatabaseHelper() {
-        // TODO: 这些测试不要放在这里。
+        // TODO: 这些测试不要放在这里。 by wxq
         Diary diary = new Diary();
         diary.setText("test1");
         diary.setDate();
@@ -48,7 +48,7 @@ public class DatabaseHelperTest {
             List<Label> labelNewDiary = Label.lookupForDiary(helper, diary);
             List<Diary> diaryHappy = Diary.lookupForLabel(helper,label1);
             List<Label> labelList = Label.getAllLabel(helper);
-            List<Diary> diaryList = Diary.getAllDiary(helper);
+            List<Diary> diaryList = Diary.getAll(helper);
             for(Diary i :diaryHappy){
                 Log.i(Diary.TAG, i.getDate()+i.getText());
             }

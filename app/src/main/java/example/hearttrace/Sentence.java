@@ -14,10 +14,24 @@ import java.util.List;
 
 /**
  * Created by huang on 5/10/2018.
+ * 接口：
+ *     getId getText setText getDate setDate
+ *     void insert(DatabaseHelper)
+ *     void update(DatabaseHelper)
+ *     void delete(DatabaseHelper)
+ *     void insertLabel(DatabaseHelper, Label)
+ *     void insertLabel(DatabaseHelper, List<Label>)
+ *     static List<Sentence> getByDate(DatabaseHelper)
+ *     static List<Sentence> getAll(DatabaseHelper)
+ *     TODO: not ok by wxq, SentenceLabel not provided by wxq
+ *     static List<Sentence> lookupForLabel(DatabaseHelper, Label)
+ *     static List<Diary> lookupForLabel(DatabaseHelper helper, List<Label> labelList)
+ *     static List<Diary> getDiaryByBook (DatabaseHelper helper, Diarybook diarybook)
+ *     static int countByDateLabel (DatabaseHelper helper, Date begin, Date end, Label label)
  */
 
 @DatabaseTable(tableName = "Sentence")
-public class Sentence {
+public class Sentence { // TODO: quite a lot to revise here. by wxq
     public static final String TAG = "Sentence";
 
     @DatabaseField(generatedId = true, columnName = TAG)
@@ -86,7 +100,19 @@ public class Sentence {
         }
     }
 
-    public void deleteSentence(DatabaseHelper helper) {
+    public void update(DatabaseHelper helper) {
+        try {
+            Dao<Sentence, Integer> dao = helper.getSentenceDao();
+            Log.i("sentence", "dao = " + dao + " 更新 sentence " + this);
+            int returnValue = dao.update(this);
+            Log.i("sentence", "更新后返回值：" + returnValue);
+        } catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void delete(DatabaseHelper helper) {
         try {
             Dao<Sentence, Integer> dao = helper.getSentenceDao();
             Log.i("sentence", "dao = " + dao + " 删除 sentence " + this);
@@ -98,8 +124,21 @@ public class Sentence {
         }
     }
 
+    public void insertLabel(DatabaseHelper helper, Label label) {
+        SentenceLabel sentenceLabel = new SentenceLabel();
+        sentenceLabel.setSentence(this);
+        sentenceLabel.setLabel(label);
+        sentenceLabel.insert(helper);
 
-    public static List<Sentence> getSentenceByDate(DatabaseHelper helper, Date date) {
+    }
+
+    public void insertLabel(DatabaseHelper helper, List<Label> labelList) {
+        for(final Label label : labelList) {
+            insertLabel(helper, label);
+        }
+    }
+
+    public static List<Sentence> getByDate(DatabaseHelper helper, Date date) {
         try {
             Dao<Sentence, Integer> dao = helper.getSentenceDao();
             List<Sentence> diaryList = dao.queryBuilder().where().eq("date", date).query();
@@ -111,22 +150,10 @@ public class Sentence {
         }
     }
 
-    public static List<Sentence> getAllSentence(DatabaseHelper helper){
+    public static List<Sentence> getAll(DatabaseHelper helper){
         try {
             Dao<Sentence, Integer> dao = helper.getSentenceDao();
             return dao.queryForAll();
-        } catch (SQLException e) {
-            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void updateSentence(DatabaseHelper helper) {
-        try {
-            Dao<Sentence, Integer> dao = helper.getSentenceDao();
-            Log.i("sentence", "dao = " + dao + " 更新 sentence " + this);
-            int returnValue = dao.update(this);
-            Log.i("sentence", "更新后返回值：" + returnValue);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);

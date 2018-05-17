@@ -22,7 +22,7 @@ import static org.junit.Assert.*;
  * Created by wu-pc on 2018/5/13.
  */
 public class SentenceInstrumentedTest {
-
+// TODO: change into Diary by wxq
     private DatabaseHelper databaseHelper;
     private Dao<Sentence, Integer> dao;
 
@@ -54,29 +54,29 @@ public class SentenceInstrumentedTest {
         sentence.setDate();
 
         // create
-        databaseHelper.insertSentence(sentence);
+        sentence.insert(databaseHelper);
 
         // query
         sentenceList = dao.queryBuilder().where().eq("text", originText).query();
-        assertEquals(1, sentenceList.size()); // TODO: not safe: assumes that there is no such text
+        assertEquals(1, sentenceList.size()); // TODO: not safe: assumes that there is no such text by wxq
         assertEquals(sentence.getDate(), sentenceList.get(0).getDate());
 
         // update
         sentence.setText(updateText);
-        databaseHelper.updateSentence(sentence);
+        sentence.update(databaseHelper);
         sentenceList = dao.queryBuilder().where().eq("text", updateText).query();
-        assertEquals(1, sentenceList.size()); // TODO: not safe: assumes that there is no such text
-        assertEquals(sentence.getDate(), sentenceList.get(0).getDate()); // TODO: not safe: assumes that there is no such text
+        assertEquals(1, sentenceList.size()); // TODO: not safe: assumes that there is no such text by wxq
+        assertEquals(sentence.getDate(), sentenceList.get(0).getDate()); // TODO: not safe: assumes that there is no such text by wxq
 
         // delete
-        databaseHelper.deleteSentence(sentence);
+        sentence.delete(databaseHelper);
         sentenceList = dao.queryBuilder().where().eq("text", updateText).query();
-        assertEquals(0, sentenceList.size()); // TODO: not safe: assumes that there is no such text
+        assertEquals(0, sentenceList.size()); // TODO: not safe: assumes that there is no such text by wxq
     }
 
     @Test
     public void testGetAllSentence() throws SQLException {
-        List<Sentence> diaryList = databaseHelper.getAllSentence();
+        List<Sentence> diaryList = Sentence.getAll(databaseHelper);
         assertTrue(diaryList.size() >= 0);
     }
 
@@ -96,11 +96,11 @@ public class SentenceInstrumentedTest {
 
         Date date;
         for(int i = 1; i <= num; i++) {
-            assertEquals(i, databaseHelper.getSentenceByDate(new Date(1998, 8, i)).size());
+            assertEquals(i, Sentence.getByDate(databaseHelper, new Date(1998, 8, i)).size());
         }
 
         for(final Sentence sentence : sentenceList) {
-            databaseHelper.deleteSentence(sentence);
+            sentence.delete(databaseHelper);
         }
     }
 

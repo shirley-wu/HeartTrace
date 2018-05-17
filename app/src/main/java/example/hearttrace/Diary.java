@@ -16,10 +16,24 @@ import java.util.List;
 
 /**
  * Created by wu-pc on 2018/5/9.
+ * 接口：
+ *     getId getText setText getDate setDate
+ *     void insert(DatabaseHelper)
+ *     void update(DatabaseHelper)
+ *     void delete(DatabaseHelper)
+ *     void insertLabel(DatabaseHelper, Label)
+ *     void insertLabel(DatabaseHelper, List<Label>)
+ *     static List<Diary> getByDate(DatabaseHelper)
+ *     static List<Diary> getAll(DatabaseHelper)
+ *     static List<Diary> lookupForLabel(DatabaseHelper, Label)
+ *     static List<Diary> lookupForLabel(DatabaseHelper helper, List<Label> labelList)
+ *     static List<Diary> getDiaryByBook (DatabaseHelper helper, Diarybook diarybook)
+ *     static int countByDateLabel (DatabaseHelper helper, Date begin, Date end, Label label)
+ *     TODO: need get Diary
  */
 
 @DatabaseTable(tableName = "Diary")
-public class Diary {
+public class Diary { // TODO: need delete label
     public static final String TAG = "diary";
 
     @DatabaseField(generatedId = true, columnName = TAG)
@@ -93,19 +107,7 @@ public class Diary {
         }
     }
 
-    public static List<Diary> getDiaryByDate(DatabaseHelper helper, Date date) {
-        try {
-            Dao<Diary, Integer> dao = helper.getDiaryDao();
-            List<Diary> diaryList = dao.queryBuilder().where().eq("date", date).query();
-            return diaryList;
-        }
-        catch(SQLException e) {
-            Log.e(TAG, "getDiaryByDate: cannot query");
-            return null;
-        }
-    }
-
-    public void updateDiary(DatabaseHelper helper) {
+    public void update(DatabaseHelper helper) {
         try {
             Dao<Diary, Integer> dao = helper.getDiaryDao();
             Log.i("diary", "dao = " + dao + " 更新 diary " + this);
@@ -117,7 +119,7 @@ public class Diary {
         }
     }
 
-    public void deleteDiary(DatabaseHelper helper) {
+    public void delete(DatabaseHelper helper) {
         try {
             Dao<Diary, Integer> dao = helper.getDiaryDao();
             Log.i("diary", "dao = " + dao + " 删除 diary " + this);
@@ -129,7 +131,32 @@ public class Diary {
         }
     }
 
-    public static List<Diary> getAllDiary(DatabaseHelper helper){
+    public void insertLabel(DatabaseHelper helper, Label label) {
+        DiaryLabel diaryLabel = new DiaryLabel();
+        diaryLabel.setDiary(this);
+        diaryLabel.setLabel(label);
+        diaryLabel.insert(helper);
+    }
+
+    public void insertLabel(DatabaseHelper helper, List<Label> labelList) {
+        for(final Label label : labelList) {
+            insertLabel(helper, label);
+        }
+    }
+
+    public static List<Diary> getByDate(DatabaseHelper helper, Date date) {
+        try {
+            Dao<Diary, Integer> dao = helper.getDiaryDao();
+            List<Diary> diaryList = dao.queryBuilder().where().eq("date", date).query();
+            return diaryList;
+        }
+        catch(SQLException e) {
+            Log.e(TAG, "getDiaryByDate: cannot query");
+            return null;
+        }
+    }
+
+    public static List<Diary> getAll(DatabaseHelper helper){
         try {
             Dao<Diary, Integer> dao = helper.getDiaryDao();
             return dao.queryForAll();
@@ -157,7 +184,7 @@ public class Diary {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
         }
-    }
+    } // TODO: what's the name? by wxq
 
     public static List<Diary> lookupForLabel(DatabaseHelper helper, Label label) throws SQLException {
         try {
@@ -202,7 +229,7 @@ public class Diary {
         }
     }
 
-    public int countByDateLabel (DatabaseHelper helper, Date begin, Date end, Label label) {
+    public static int countByDateLabel (DatabaseHelper helper, Date begin, Date end, Label label) {
         try {
             Dao<Diary, Integer> dao = helper.getDiaryDao();
             QueryBuilder<Diary, Integer> queryBuilder = makePostsForLabelQuery(helper);

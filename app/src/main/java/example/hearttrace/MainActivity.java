@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     private final String TAG = "MainActivity";
 
-    private DatabaseHelper databaseHelper = null;
+    private DatabaseHelper databaseHelper = null; // TODO: 级联删除！！！！！！ by wxq
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                     List<Label> labelNewDiary = Label.lookupForDiary(helper, diary);
                     List<Diary> diaryHappy = Diary.lookupForLabel(helper,label1);
                     List<Label> labelList = Label.getAllLabel(helper);
-                    List<Diary> diaryList = Diary.getAllDiary(helper);
+                    List<Diary> diaryList = Diary.getAll(helper);
                     for(Diary i :diaryHappy){
                         Log.i(Diary.TAG, i.getDate()+i.getText());
                     }
