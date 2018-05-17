@@ -36,5 +36,7 @@ public class Diarybook {
         this.diarybookName = diarybookName;
     }
 
+    //getAllDiary
 
+    //delete
 }

@@ -158,16 +158,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return diarybookDao;
     }
 
-    public List<Label> getAllLabel(){
-        try {
-            Dao<Label, String> dao = getLabelDao();
-            return dao.queryForAll();
-        } catch (SQLException e) {
-            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
-            throw new RuntimeException(e);
-        }
-    }
-
     /**
      * Returns the RuntimeExceptionDao (Database Access Object) version of a Dao for our Diary class. It will
      * create it or just give the cached value. RuntimeExceptionDao only through RuntimeExceptions.
