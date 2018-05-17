@@ -111,8 +111,8 @@ public class DiaryLabel {
             diaryLabelBuilder.where().eq(DiaryLabel.DIARY_TAG, selectArg);
             //创建外部查询日记表
 
-            Dao<Label, String> labelDao = helper.getLabelDao();
-            QueryBuilder<Label, String> labelQb = labelDao.queryBuilder();
+            Dao<Label, Integer> labelDao = helper.getLabelDao();
+            QueryBuilder<Label, Integer> labelQb = labelDao.queryBuilder();
             //设置查询条件（where project_id in()）;
             labelQb.where().in(Label.TAG, diaryLabelBuilder);
             return labelQb;

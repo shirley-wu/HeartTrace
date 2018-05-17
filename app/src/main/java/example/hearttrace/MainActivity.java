@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         final EditText editText = (EditText) findViewById(R.id.edit_text);
 
 
-        Button button = (Button) findViewById(R.id.button_submit);
+        /*Button button = (Button) findViewById(R.id.button_submit);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                     throw new RuntimeException(e);
                 }
             }
-        });
+        });*/
     }
 
     @Override

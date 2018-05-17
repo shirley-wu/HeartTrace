@@ -45,8 +45,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private Dao<Sentence, Integer> sentenceDao = null;
     private RuntimeExceptionDao<Sentence, Integer> runtimeSentenceDao = null;
 
-    private Dao<Label, String> labelDao = null;
-    private RuntimeExceptionDao<Label, String> runtimeLabelDao = null;
+    private Dao<Label, Integer> labelDao = null;
+    private RuntimeExceptionDao<Label, Integer> runtimeLabelDao = null;
 
     private Dao<SentenceLabel, Integer> sentenceLabelDao = null;
     private RuntimeExceptionDao<SentenceLabel, Integer> runtimeSentenceLabelDao = null;
@@ -149,17 +149,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         }
         return sentenceLabelDao;
     }
-
-    public List<Label> getAllLabel(){
-        try {
-            Dao<Label, String> dao = getLabelDao();
-            return dao.queryForAll();
-        } catch (SQLException e) {
-            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
-            throw new RuntimeException(e);
-        }
-    }
-
 
 
     /**

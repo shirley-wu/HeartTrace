@@ -19,6 +19,7 @@ import java.util.List;
 @DatabaseTable(tableName = "Label")
 public class Label {
     public static final String TAG = "label";
+
     @DatabaseField(generatedId = true, columnName = TAG)
     private Integer id;
 
