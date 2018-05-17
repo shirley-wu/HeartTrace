@@ -3,7 +3,7 @@ package example.hearttrace;
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 
-import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
 import org.junit.After;
@@ -25,8 +25,8 @@ public class DiaryInstrumentedTest {
     private DatabaseHelper databaseHelper;
     private Dao<Diary, Integer> dao;
 
-    private String originText = "Testing testing do not repeat testing testing 221341151";
-    private String updateText = "hlelleelelfjakdl;jag alknals";
+    private String originText = "Testing testing do not repeat testing testing 221341151" + (new Date()).getTime();
+    private String updateText = "hlelleelelfjakdl;jag alknals" + (new Date()).getTime();
 
     @Before
     public void setUp() throws SQLException {

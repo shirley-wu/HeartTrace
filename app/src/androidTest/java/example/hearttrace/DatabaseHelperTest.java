@@ -4,8 +4,7 @@ import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.util.Log;
 
-import com.j256.ormlite.android.apptools.OpenHelperManager;
-import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
 
 import org.junit.After;
 import org.junit.Before;

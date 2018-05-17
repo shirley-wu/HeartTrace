@@ -4,7 +4,7 @@ import android.content.Context;
 import android.provider.Telephony;
 import android.support.test.InstrumentationRegistry;
 
-import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
 import org.junit.After;
@@ -26,8 +26,8 @@ public class SentenceInstrumentedTest {
     private DatabaseHelper databaseHelper;
     private Dao<Sentence, Integer> dao;
 
-    private String originText = "Testing testing do not repeat testing testing dfankjvaiwbrpwcepwuvqwiovb";
-    private String updateText = "asevrnawbcpamuoiavwebvwaprbwavup";
+    private String originText = "Testing testing do not repeat testing testing dfankjvaipovbbpwbrpwcepwuvqwiovb" + (new Date()).getTime();
+    private String updateText = "asevrnawbcpamuoiavwebvwaprbwavup" + (new Date()).getTime();
 
     @Before
     public void setUp() throws SQLException {
@@ -62,11 +62,10 @@ public class SentenceInstrumentedTest {
         assertEquals(sentence.getDate(), sentenceList.get(0).getDate());
 
         // update
+        sentence.setText(updateText);
         databaseHelper.updateSentence(sentence);
-        dao.update(sentence);
-        sentenceList = dao.queryBuilder().where().eq("text", originText).query();
-        assertEquals(0, sentenceList.size()); // TODO: not safe: assumes that there is no such text
         sentenceList = dao.queryBuilder().where().eq("text", updateText).query();
+        assertEquals(1, sentenceList.size()); // TODO: not safe: assumes that there is no such text
         assertEquals(sentence.getDate(), sentenceList.get(0).getDate()); // TODO: not safe: assumes that there is no such text
 
         // delete
@@ -76,8 +75,8 @@ public class SentenceInstrumentedTest {
     }
 
     @Test
-    public void testGetAllDiary() throws SQLException {
-        List<Diary> diaryList = databaseHelper.getAllDiary();
+    public void testGetAllSentence() throws SQLException {
+        List<Sentence> diaryList = databaseHelper.getAllSentence();
         assertTrue(diaryList.size() >= 0);
     }
 
