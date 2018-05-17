@@ -82,7 +82,7 @@ public class Label {
     public static List<Label> lookupForDiary(DatabaseHelper helper, Diary diary){
         try{
             Dao<Label, Integer> labelDao = helper.getLabelDao();
-            PreparedQuery<Label> labelForDiaryQuery = makePostsForDiaryQuery(helper, diary).prepare();
+            PreparedQuery<Label> labelForDiaryQuery = makeQueryBuilderForDiaryQuery(helper, diary).prepare();
             return labelDao.query(labelForDiaryQuery);
         }catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
