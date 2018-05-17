@@ -17,25 +17,6 @@ import java.util.List;
 
 /**
  * Created by wu-pc on 2018/5/9.
- * 接口：
- *     getId getText setText getDate setDate
- *     void insert(DatabaseHelper)
- *     void update(DatabaseHelper)
- *     void delete(DatabaseHelper)
- *     void insertLabel(DatabaseHelper, Label)
- *     void insertLabel(DatabaseHelper, List<Label>)
- *     void deleteLabel(DatabaseHelper, Label)
- *     void deleteLabel(DatabaseHelper, List<Label>)
- *     static List<Diary> getByDate(DatabaseHelper)
- *     static List<Diary> getAll(DatabaseHelper)
- *     static List<Diary> getByLabel(DatabaseHelper, Label)
- *     static List<Diary> getByLabel(DatabaseHelper, List<Label>)
- *     static List<Diary> getByBook(DatabaseHelper, Diarybook)
- *     static int countByDateLabel(DatabaseHelper, Date, Date, Label)
- *     static List<Diary> search(String)
- *     static List<Diary> search(String, Label)
- *     static List<Diary> search(String, Date, Date)
- *     static List<Diary> search(String, Date, Date, Label)
  */
 
 @DatabaseTable(tableName = "Diary")
@@ -60,11 +41,6 @@ public class Diary {
     public Diary(String text)
     {
         this.text = text;
-    }
-
-    public int getId()
-    {
-        return id;
     }
 
     public String getText()
@@ -127,6 +103,13 @@ public class Diary {
 
     public void delete(DatabaseHelper helper) {
         try {
+            QueryBuilder<Label, Integer> qb = getLabelQueryBuilder(helper);
+            List<Label> labelList = qb.query();
+            for(final Label label : labelList) {
+                deleteLabel(helper, label);
+            }
+            Log.i(TAG, "delete: 删除标签对应" + labelList);
+
             Dao<Diary, Integer> dao = helper.getDiaryDao();
             Log.i("diary", "dao = " + dao + " 删除 diary " + this);
             int returnValue = dao.delete(this);
@@ -144,23 +127,11 @@ public class Diary {
         diaryLabel.insert(helper);
     }
 
-    public void insertLabel(DatabaseHelper helper, List<Label> labelList) {
-        for(final Label label : labelList) {
-            insertLabel(helper, label);
-        }
-    }
-
     public void deleteLabel(DatabaseHelper helper, Label label) {
         DiaryLabel diaryLabel = new DiaryLabel();
         diaryLabel.setDiary(this);
         diaryLabel.setLabel(label);
         diaryLabel.delete(helper);
-    }
-
-    public void deleteLabel(DatabaseHelper helper, List<Label> labelList) {
-        for(final Label label : labelList) {
-            insertLabel(helper, label);
-        }
     }
 
     public static List<Diary> getByDate(DatabaseHelper helper, Date date) {
@@ -187,7 +158,7 @@ public class Diary {
 
     public List<Label> getAllLabel(DatabaseHelper helper){
         try{
-            QueryBuilder<Label, Integer> labelDao = DiaryLabel.getQueryBuilder(helper, this);
+            QueryBuilder<Label, Integer> labelDao = getLabelQueryBuilder(helper);
             return labelDao.query();
         }catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
@@ -195,60 +166,43 @@ public class Diary {
         }
     }
 
-    public static List<Diary> getByLabel(DatabaseHelper helper, Label label) throws SQLException {
-        try {
-            Dao<Diary, Integer> dao = helper.getDiaryDao();
-            PreparedQuery<Diary> diaryForLabelQuery = DiaryLabel.getQueryBuilder(helper, this).prepare();
-            diaryForLabelQuery.setArgumentHolderValue(0, label);
-            return dao.query(diaryForLabelQuery);
-        }catch (SQLException e) {
-            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
-            throw new RuntimeException(e);
+    public static List<Diary> getByRestrict(DatabaseHelper helper, String text, Date begin, Date end, List<Label> labelList) throws SQLException {
+        QueryBuilder<Diary, Integer> qb;
+        if(labelList != null && labelList.size() > 0){
+            qb = getDiaryQueryBuilder(helper, labelList);
         }
+        else{
+            qb = helper.getDiaryDao().queryBuilder();
+        }
+        if(text != null){
+            buildWhere(qb.where(), text);
+        }
+        if(begin != null && end != null){
+            buildWhere(qb.where(), begin, end);
+        }
+        return qb.query();
     }
 
-    public static List<Diary> getByLabel(DatabaseHelper helper, List<Label> labelList) throws SQLException {
+    public static int countByDateLabel (DatabaseHelper helper, Date begin, Date end, List<Label> labelList) {
         try {
-            List<List<Diary>> diaryListsForAllLabel = null;
-            for(Label i : labelList){
-                diaryListsForAllLabel.add(lookupForLabel(helper, i));
-            }
-            for(int i = diaryListsForAllLabel.size()-2; i >= 0 ; i-- ){
-                for(Diary j :diaryListsForAllLabel.get(i)){
-                    if(!diaryListsForAllLabel.get(i+1).contains(j)){
-                        diaryListsForAllLabel.get(i).remove(j);
-                    }
-                }
-            }
-            return diaryListsForAllLabel.get(0);
-        }catch (SQLException e) {
-            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
-            throw new RuntimeException(e);
-        }
-    }
-
-    public static List<Diary> getByBook (DatabaseHelper helper, Diarybook diarybook){
-        try {
-            Dao<Diary, Integer> diaryDao = helper.getDiaryDao();
-            List<Diary> diaryList = diaryDao.queryBuilder().where().eq("diarybook", diarybook).query();
-            return diaryList;
-        }catch (SQLException e) {
-            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
-            throw new RuntimeException(e);
-        }
-    }
-
-    public static int countByDateLabel (DatabaseHelper helper, Date begin, Date end, Label label) {
-        try {
-            Dao<Diary, Integer> dao = helper.getDiaryDao();
-            QueryBuilder<Diary, Integer> queryBuilder = makePostsForLabelQuery(helper);
+            QueryBuilder<Diary, Integer> queryBuilder = helper.getDiaryDao().queryBuilder();
             queryBuilder.where().between("Date", begin, end);
-            return dao.query(queryBuilder.prepare()).size();
+            return queryBuilder.query().size();
         }
         catch(SQLException e) {
             Log.e(TAG, "countByDateLabel: cannot access database", e);
             return -1;
         }
+    }
+
+    private QueryBuilder<Label, Integer> getLabelQueryBuilder(DatabaseHelper helper) {
+        // TODO
+        return null;
+    }
+
+    private static QueryBuilder<Diary, Integer> getDiaryQueryBuilder(DatabaseHelper helper, List<Label> labelList) {
+        // TODO
+        return null;
     }
 
     private static void buildWhere(Where<Diary, Integer> where, String text) throws SQLException {
@@ -262,33 +216,5 @@ public class Diary {
     private static void buildWhere(Where<Diary, Integer> where, Date begin, Date end) throws SQLException {
         where.and();
         where.between("date", begin, end);
-    }
-
-    public static List<Diary> search(DatabaseHelper helper, String text) throws SQLException {
-        Dao<Diary, Integer> dao = helper.getDiaryDao();
-        QueryBuilder<Diary, Integer> qb = dao.queryBuilder();
-        buildWhere(qb.where(), text);
-        return qb.query();
-    }
-
-    static List<Diary> search(String text, Label label) throws SQLException {
-        QueryBuilder<Diary, Integer> qb = ;
-        buildWhere(text, qb.where());
-        return qb.query();
-    }
-
-    static List<Diary> search(DatabaseHelper helper, String text, Date begin, Date end) throws SQLException {
-        Dao<Diary, Integer> dao = helper.getDiaryDao();
-        QueryBuilder<Diary, Integer> qb = dao.queryBuilder();
-        buildWhere(qb.where(), text);
-        buildWhere(qb.where(), begin, end);
-        return qb.query();
-    }
-
-    static List<Diary> search(DatabaseHelper helper, String text, Date begin, Date end, Label label) throws SQLException {
-        QueryBuilder<Diary, Integer> qb = ;
-        buildWhere(qb.where(), text);
-        buildWhere(qb.where(), begin, end);
-        return qb.query();
     }
 }

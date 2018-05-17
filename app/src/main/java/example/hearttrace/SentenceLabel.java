@@ -63,6 +63,18 @@ public class SentenceLabel {
         }
     }
 
+    public void delete(DatabaseHelper helper) {
+        try {
+            Dao<SentenceLabel, Integer> dao = helper.getSentenceLabelDao();
+            Log.i("db_diary_label", "dao = " + dao + "  db_diary_label " + this);
+            int returnValue = dao.delete(this);
+            Log.i("db_diary_label", "删除后返回值："+returnValue);
+        } catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
+
     public static QueryBuilder<Sentence, Integer> querySentenceByLabel(DatabaseHelper helper, Label label){
         try{
             Dao<SentenceLabel, Integer> sentenceLabelDao = helper.getSentenceLabelDao();
