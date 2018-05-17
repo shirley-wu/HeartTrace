@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -86,6 +87,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this, "写新瓶子", Toast.LENGTH_SHORT).show();
+            }
+        });
+        Button enterBottle = (Button)findViewById(R.id.enter_bottle);
+        enterBottle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, BottlesActivity.class);
+                startActivity(intent);
             }
         });
         initDiaryCard();

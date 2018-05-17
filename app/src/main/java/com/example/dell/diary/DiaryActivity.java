@@ -64,7 +64,7 @@ public class DiaryActivity extends AppCompatActivity {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search_menu, menu);
+        getMenuInflater().inflate(R.menu.diary_menu, menu);
         return true;
     }
 
@@ -72,7 +72,7 @@ public class DiaryActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.edit:
-                Toast.makeText(this, "打开日历", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "编辑", Toast.LENGTH_SHORT).show();
                 break;
             case android.R.id.home:
                 finish();

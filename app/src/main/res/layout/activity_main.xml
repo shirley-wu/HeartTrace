@@ -81,10 +81,15 @@
                 android:layout_marginBottom="8dp"
                 app:backgroundTint = "#ffffff"
                 android:src = "@drawable/add_black" />
-
-
         </RelativeLayout>
-
+        <Button
+            android:id="@+id/enter_bottle"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:background="@drawable/bottle_heart"
+            android:layout_gravity="left|bottom"
+            android:layout_margin="10dp"
+            />
     </android.support.design.widget.CoordinatorLayout>
 
     <android.support.design.widget.NavigationView
@@ -92,7 +97,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:headerLayout="@layout/nav_header"
-        app:menu="@menu/nav_menu" />
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/nav_menu_main" />
 
 </android.support.v4.widget.DrawerLayout>

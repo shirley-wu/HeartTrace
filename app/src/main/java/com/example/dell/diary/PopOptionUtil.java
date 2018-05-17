@@ -29,7 +29,7 @@ public class PopOptionUtil {
         nextBt = (Button) popupView.findViewById(R.id.export);
         popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT, true);
-        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        //popupWindow.setBackgroundDrawable(new BitmapDrawable());
         popupView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
         popupWidth = popupView.getMeasuredWidth();
         popupHeight = popupView.getMeasuredHeight();

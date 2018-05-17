@@ -70,17 +70,35 @@
             android:orientation="vertical"
             android:padding="10dp">
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <TextView android:id="@+id/spinner_text"
+                <TextView
+                    android:id="@+id/date_display"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="起始时间">
-                </TextView>
-                <Spinner android:id="@+id/Spinner01"
+                    android:text="选择起始时间"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="14sp"
+                    android:textColor="#a17d56"
+                    android:clickable="true"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/date_display2"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                </Spinner>
+                    android:layout_height="wrap_content"
+                    android:text="选择结束时间"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="14sp"
+                    android:textColor="#a17d56"
+                    android:clickable="true"/>
+
             </LinearLayout>
 
         </LinearLayout>
