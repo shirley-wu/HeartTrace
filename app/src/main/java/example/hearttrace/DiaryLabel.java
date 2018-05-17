@@ -78,7 +78,7 @@ public class DiaryLabel {
         }
     }
 
-    public static QueryBuilder<Diary, Integer> queryDiaryByLabel(DatabaseHelper helper){
+    public static QueryBuilder<Diary, Integer> queryDiaryByLabel(DatabaseHelper helper, Label label){
         try{
             Dao<DiaryLabel, Integer> diaryLabelDao = helper.getDiaryLabelDao();
             QueryBuilder<DiaryLabel, Integer> diaryLabelBuilder = diaryLabelDao.queryBuilder();
