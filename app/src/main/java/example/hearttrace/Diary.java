@@ -8,6 +8,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
+import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.sql.SQLException;
@@ -27,11 +28,14 @@ import java.util.List;
  *     void deleteLabel(DatabaseHelper, List<Label>)
  *     static List<Diary> getByDate(DatabaseHelper)
  *     static List<Diary> getAll(DatabaseHelper)
- *     static List<Diary> lookupForLabel(DatabaseHelper, Label)
- *     static List<Diary> lookupForLabel(DatabaseHelper helper, List<Label> labelList)
- *     static List<Diary> getDiaryByBook (DatabaseHelper helper, Diarybook diarybook)
- *     static int countByDateLabel (DatabaseHelper helper, Date begin, Date end, Label label)
- *     TODO: need get Label
+ *     static List<Diary> getByLabel(DatabaseHelper, Label)
+ *     static List<Diary> getByLabel(DatabaseHelper, List<Label>)
+ *     static List<Diary> getByBook(DatabaseHelper, Diarybook)
+ *     static int countByDateLabel(DatabaseHelper, Date, Date, Label)
+ *     static List<Diary> search(String)
+ *     static List<Diary> search(String, Label)
+ *     static List<Diary> search(String, Date, Date)
+ *     static List<Diary> search(String, Date, Date, Label)
  */
 
 @DatabaseTable(tableName = "Diary")
@@ -183,20 +187,18 @@ public class Diary {
 
     public List<Label> getAllLabel(DatabaseHelper helper){
         try{
-            Dao<Label, String> labelDao = helper.getLabelDao();
-            PreparedQuery<Label> labelForDiaryQuery = DiaryLabel.queryLabelByDiary(helper, this).prepare();
-            labelForDiaryQuery.setArgumentHolderValue(0, this);
-            return labelDao.query(labelForDiaryQuery);
+            QueryBuilder<Label, Integer> labelDao = DiaryLabel.getQueryBuilder(helper, this);
+            return labelDao.query();
         }catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
         }
     }
 
-    public static List<Diary> lookupForLabel(DatabaseHelper helper, Label label) throws SQLException {
+    public static List<Diary> getByLabel(DatabaseHelper helper, Label label) throws SQLException {
         try {
             Dao<Diary, Integer> dao = helper.getDiaryDao();
-            PreparedQuery<Diary> diaryForLabelQuery = makePostsForLabelQuery(helper).prepare();
+            PreparedQuery<Diary> diaryForLabelQuery = DiaryLabel.getQueryBuilder(helper, this).prepare();
             diaryForLabelQuery.setArgumentHolderValue(0, label);
             return dao.query(diaryForLabelQuery);
         }catch (SQLException e) {
@@ -205,7 +207,7 @@ public class Diary {
         }
     }
 
-    public static List<Diary> lookupForLabel(DatabaseHelper helper, List<Label> labelList) throws SQLException {
+    public static List<Diary> getByLabel(DatabaseHelper helper, List<Label> labelList) throws SQLException {
         try {
             List<List<Diary>> diaryListsForAllLabel = null;
             for(Label i : labelList){
@@ -225,7 +227,7 @@ public class Diary {
         }
     }
 
-    public static List<Diary> getDiaryByBook (DatabaseHelper helper, Diarybook diarybook){
+    public static List<Diary> getByBook (DatabaseHelper helper, Diarybook diarybook){
         try {
             Dao<Diary, Integer> diaryDao = helper.getDiaryDao();
             List<Diary> diaryList = diaryDao.queryBuilder().where().eq("diarybook", diarybook).query();
@@ -247,5 +249,46 @@ public class Diary {
             Log.e(TAG, "countByDateLabel: cannot access database", e);
             return -1;
         }
+    }
+
+    private static void buildWhere(Where<Diary, Integer> where, String text) throws SQLException {
+        String[] keywordList = text.split(" ");
+        where.and();
+        for(final String keyword : keywordList) {
+            where.or().like("text", keyword);
+        }
+    }
+
+    private static void buildWhere(Where<Diary, Integer> where, Date begin, Date end) throws SQLException {
+        where.and();
+        where.between("date", begin, end);
+    }
+
+    public static List<Diary> search(DatabaseHelper helper, String text) throws SQLException {
+        Dao<Diary, Integer> dao = helper.getDiaryDao();
+        QueryBuilder<Diary, Integer> qb = dao.queryBuilder();
+        buildWhere(qb.where(), text);
+        return qb.query();
+    }
+
+    static List<Diary> search(String text, Label label) throws SQLException {
+        QueryBuilder<Diary, Integer> qb = ;
+        buildWhere(text, qb.where());
+        return qb.query();
+    }
+
+    static List<Diary> search(DatabaseHelper helper, String text, Date begin, Date end) throws SQLException {
+        Dao<Diary, Integer> dao = helper.getDiaryDao();
+        QueryBuilder<Diary, Integer> qb = dao.queryBuilder();
+        buildWhere(qb.where(), text);
+        buildWhere(qb.where(), begin, end);
+        return qb.query();
+    }
+    
+    static List<Diary> search(DatabaseHelper helper, String text, Date begin, Date end, Label label) throws SQLException {
+        QueryBuilder<Diary, Integer> qb = ;
+        buildWhere(qb.where(), text);
+        buildWhere(qb.where(), begin, end);
+        return qb.query();
     }
 }
