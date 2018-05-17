@@ -15,11 +15,17 @@ import java.sql.SQLException;
  */
 @DatabaseTable(tableName = "tb_sentence_label")
 public class SentenceLabel {
-    @DatabaseField(generatedId = true)
+    public static final String TAG = "tb_sentence_label";
+    public static final String SENTENCE_TAG = "tb_sentence";
+    public static final String LABEL_TAG = "tb_label";
+
+    @DatabaseField(generatedId = true, columnName = TAG)
     private int id ;
-    @DatabaseField(foreign = true)
+
+    @DatabaseField(foreign = true, columnName = SENTENCE_TAG)
     private Sentence sentence;
-    @DatabaseField(foreign = true)
+
+    @DatabaseField(foreign = true, columnName = LABEL_TAG)
     private Label label;
     public SentenceLabel(){}
     public SentenceLabel(Sentence sentence, Label label){
