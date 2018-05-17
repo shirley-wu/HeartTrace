@@ -1,11 +1,15 @@
 package example.hearttrace;
 
 import android.provider.ContactsContract;
+import android.provider.Telephony;
 import android.util.Log;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.stmt.PreparedQuery;
+import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.sql.SQLException;
@@ -128,6 +132,31 @@ public class Sentence {
             int returnValue = dao.update(this);
             Log.i("sentence", "更新后返回值：" + returnValue);
         } catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    private PreparedQuery<Sentence> makePostsForLabel(DatabaseHelper helper){
+        try{
+            QueryBuilder<SentenceLabel, Integer> sentenceLabelQueryBuilder = helper.getSentenceLabelDao().queryBuilder();
+            sentenceLabelQueryBuilder.selectColumns(Sentence.TAG);
+            SelectArg labelSelectArg = new SelectArg();
+            sentenceLabelQueryBuilder.where().eq(SentenceLabel.LABEL_TAG, labelSelectArg);
+            QueryBuilder<Sentence, Integer> postQb = helper.getSentenceDao().queryBuilder();
+            postQb.where().in(Sentence.TAG, sentenceLabelQueryBuilder);
+            return postQb.prepare();
+        } catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static List<Sentence> lookupForLabel(DatabaseHelper helper, Label label){
+        try{
+            Dao<Sentence, Integer> dao = helper.getSentenceDao();
+            PreparedQuery<Sentence> sentenceForLabelQuery = makePost
+        }catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
         }
