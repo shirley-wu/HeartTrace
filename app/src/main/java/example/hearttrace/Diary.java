@@ -23,17 +23,19 @@ import java.util.List;
  *     void delete(DatabaseHelper)
  *     void insertLabel(DatabaseHelper, Label)
  *     void insertLabel(DatabaseHelper, List<Label>)
+ *     void deleteLabel(DatabaseHelper, Label)
+ *     void deleteLabel(DatabaseHelper, List<Label>)
  *     static List<Diary> getByDate(DatabaseHelper)
  *     static List<Diary> getAll(DatabaseHelper)
  *     static List<Diary> lookupForLabel(DatabaseHelper, Label)
  *     static List<Diary> lookupForLabel(DatabaseHelper helper, List<Label> labelList)
  *     static List<Diary> getDiaryByBook (DatabaseHelper helper, Diarybook diarybook)
  *     static int countByDateLabel (DatabaseHelper helper, Date begin, Date end, Label label)
- *     TODO: need get Diary
+ *     TODO: need get Label
  */
 
 @DatabaseTable(tableName = "Diary")
-public class Diary { // TODO: need delete label
+public class Diary {
     public static final String TAG = "diary";
 
     @DatabaseField(generatedId = true, columnName = TAG)
@@ -144,6 +146,19 @@ public class Diary { // TODO: need delete label
         }
     }
 
+    public void deleteLabel(DatabaseHelper helper, Label label) {
+        DiaryLabel diaryLabel = new DiaryLabel();
+        diaryLabel.setDiary(this);
+        diaryLabel.setLabel(label);
+        diaryLabel.delete(helper);
+    }
+
+    public void deleteLabel(DatabaseHelper helper, List<Label> labelList) {
+        for(final Label label : labelList) {
+            insertLabel(helper, label);
+        }
+    }
+
     public static List<Diary> getByDate(DatabaseHelper helper, Date date) {
         try {
             Dao<Diary, Integer> dao = helper.getDiaryDao();
@@ -166,25 +181,17 @@ public class Diary { // TODO: need delete label
         }
     }
 
-    private static QueryBuilder<Diary, Integer> makePostsForLabelQuery(DatabaseHelper helper){
+    public List<Label> getAllLabel(DatabaseHelper helper){
         try{
-            Dao<DiaryLabel, Integer> diaryLabelDao = helper.getDiaryLabelDao();
-            Dao<Diary, Integer> diaryDao = helper.getDiaryDao();
-            QueryBuilder<DiaryLabel, Integer> diaryLabelBuilder = diaryLabelDao.queryBuilder();
-            diaryLabelBuilder.selectColumns(DiaryLabel.DIARY_TAG);
-            SelectArg labelSelectArg = new SelectArg();
-            //设置条件语句（where label_id=?）
-            diaryLabelBuilder.where().eq(DiaryLabel.LABEL_TAG, labelSelectArg);
-            //创建外部查询日记表
-            QueryBuilder<Diary, Integer> postQb = diaryDao.queryBuilder();
-            //设置查询条件（where project_id in()）;
-            postQb.where().in(Diary.TAG, diaryLabelBuilder);
-            return postQb;
-        } catch (SQLException e) {
+            Dao<Label, String> labelDao = helper.getLabelDao();
+            PreparedQuery<Label> labelForDiaryQuery = DiaryLabel.queryLabelByDiary(helper, this).prepare();
+            labelForDiaryQuery.setArgumentHolderValue(0, this);
+            return labelDao.query(labelForDiaryQuery);
+        }catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
         }
-    } // TODO: what's the name? by wxq
+    }
 
     public static List<Diary> lookupForLabel(DatabaseHelper helper, Label label) throws SQLException {
         try {

@@ -35,41 +35,7 @@ public class DatabaseHelperTest {
 
     @Test
     public void testGetDatabaseHelper() {
-        // TODO: 这些测试不要放在这里。 by wxq
-        Diary diary = new Diary();
-        diary.setText("test1");
-        diary.setDate();
-        diary.insert(helper);
-        Label label = new Label("happy");
-        Label label1 = new Label("sad");
-        Label label2 = new Label("normal");
-        Log.i(Diary.TAG, "this is the hot point");
-        try {
-            List<Label> labelNewDiary = Label.lookupForDiary(helper, diary);
-            List<Diary> diaryHappy = Diary.lookupForLabel(helper,label1);
-            List<Label> labelList = Label.getAllLabel(helper);
-            List<Diary> diaryList = Diary.getAll(helper);
-            for(Diary i :diaryHappy){
-                Log.i(Diary.TAG, i.getDate()+i.getText());
-            }
-            Log.i(Diary.TAG, "=====================================");
-            for(Label i : labelNewDiary){
-                Log.i(Label.TAG, i.getLabelname());
-            }
-            Log.i(Diary.TAG, "=====================================");
-            for(Diary i : diaryList ){
-                Log.i(Diary.TAG, i.getDate()+i.getText());
-            }
-            Log.i(Diary.TAG, "=====================================");
-            for(Label i : labelList){
-                Log.i(Label.TAG, i.getLabelname());
-            }
-            Log.i(Label.TAG, "=====================================");
-            helper.close();
-        } catch (SQLException e) {
-            Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
-            throw new RuntimeException(e);
-        }
+
     }
 
 }
