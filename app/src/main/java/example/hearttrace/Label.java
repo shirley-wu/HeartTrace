@@ -32,11 +32,11 @@ public class Label {
         this.labelname = labelname;
     }
 
-    public boolean insertLabel(DatabaseHelper helper, Label label) {
+    public boolean insertLabel(DatabaseHelper helper) {
         try {
             Dao<Label, String> dao = helper.getLabelDao();
-            Log.i("label", "dao = " + dao + "  label " + label);
-            Dao.CreateOrUpdateStatus returnValue = dao.createOrUpdate(label);
+            Log.i("label", "dao = " + dao + "  label " + this);
+            Dao.CreateOrUpdateStatus returnValue = dao.createOrUpdate(this); // TODO: cannot quite agree here. by wxq
             Log.i("label", "插入后返回值：" + returnValue.isCreated());
             return returnValue.isCreated();
         } catch (SQLException e) {
