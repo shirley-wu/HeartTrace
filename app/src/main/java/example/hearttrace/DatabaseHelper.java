@@ -123,13 +123,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
 
 
-
-
-
-
-
-
-
     public Dao<Label, String> getLabelDao() throws SQLException {
         if (labelDao == null) {
             labelDao = getDao(Label.class);

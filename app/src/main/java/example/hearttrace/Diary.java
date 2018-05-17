@@ -1,6 +1,5 @@
 package example.hearttrace;
 
-import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.j256.ormlite.dao.Dao;
@@ -9,7 +8,6 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
-import com.j256.ormlite.stmt.query.In;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.sql.SQLException;
@@ -141,7 +139,7 @@ public class Diary {
         }
     }
 
-    private static PreparedQuery<Diary> makePostsForLabelQuery(DatabaseHelper helper){
+    private static QueryBuilder<Diary, Integer> makePostsForLabelQuery(DatabaseHelper helper){
         try{
             Dao<DiaryLabel, Integer> diaryLabelDao = helper.getDiaryLabelDao();
             Dao<Diary, Integer> diaryDao = helper.getDiaryDao();
@@ -154,7 +152,7 @@ public class Diary {
             QueryBuilder<Diary, Integer> postQb = diaryDao.queryBuilder();
             //设置查询条件（where project_id in()）;
             postQb.where().in(Diary.TAG, diaryLabelBuilder);
-            return postQb.prepare();
+            return postQb;
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
@@ -164,7 +162,7 @@ public class Diary {
     public static List<Diary> lookupForLabel(DatabaseHelper helper, Label label) throws SQLException {
         try {
             Dao<Diary, Integer> dao = helper.getDiaryDao();
-            PreparedQuery<Diary> diaryForLabelQuery = makePostsForLabelQuery(helper);
+            PreparedQuery<Diary> diaryForLabelQuery = makePostsForLabelQuery(helper).prepare();
             diaryForLabelQuery.setArgumentHolderValue(0, label);
             return dao.query(diaryForLabelQuery);
         }catch (SQLException e) {
@@ -201,6 +199,19 @@ public class Diary {
         }catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
+        }
+    }
+
+    public int countByDateLabel (DatabaseHelper helper, Date begin, Date end, Label label) {
+        try {
+            Dao<Diary, Integer> dao = helper.getDiaryDao();
+            QueryBuilder<Diary, Integer> queryBuilder = makePostsForLabelQuery(helper);
+            queryBuilder.where().between("Date", begin, end);
+            return dao.query(queryBuilder.prepare()).size();
+        }
+        catch(SQLException e) {
+            Log.e(TAG, "countByDateLabel: cannot access database", e);
+            return -1;
         }
     }
 }

@@ -35,7 +35,7 @@ public class DatabaseHelperTest {
 
     @Test
     public void testGetDatabaseHelper() {
-        assertEquals("heartTrace.db", helper.getDatabaseName());
+        // TODO: 这些测试不要放在这里。
         Diary diary = new Diary();
         diary.setText("test1");
         diary.setDate();

@@ -53,7 +53,7 @@ public class DiaryInstrumentedTest {
         diary.setDate();
 
         // create
-        databaseHelper.insertDiary(diary);
+        diary.insert(databaseHelper);
 
         // query
         diaryList = dao.queryBuilder().where().eq("text", originText).query();
@@ -62,21 +62,21 @@ public class DiaryInstrumentedTest {
 
         // update
         diary.setText(updateText);
-        databaseHelper.updateDiary(diary);
+        diary.updateDiary(databaseHelper);
         diaryList = dao.queryBuilder().where().eq("text", originText).query();
         assertEquals(0, diaryList.size()); // TODO: not safe: assumes that there is no such text
         diaryList = dao.queryBuilder().where().eq("text", updateText).query();
         assertEquals(diary.getDate(), diaryList.get(0).getDate()); // TODO: not safe: assumes that there is no such text
 
         // delete
-        databaseHelper.deleteDiary(diary);
+        diary.deleteDiary(databaseHelper);
         diaryList = dao.queryBuilder().where().eq("text", updateText).query();
         assertEquals(0, diaryList.size()); // TODO: not safe: assumes that there is no such text
     }
 
     @Test
     public void testGetAllDiary() throws SQLException {
-        List<Diary> diaryList = databaseHelper.getAllDiary();
+        List<Diary> diaryList = Diary.getAllDiary(databaseHelper);
         assertTrue(diaryList.size() >= 0);
     }
 
@@ -96,11 +96,11 @@ public class DiaryInstrumentedTest {
 
         Date date;
         for(int i = 1; i <= num; i++) {
-            assertEquals(i, databaseHelper.getDiaryByDate(new Date(1998, 8, i)).size());
+            assertEquals(i, Diary.getDiaryByDate(databaseHelper, new Date(1998, 8, i)).size());
         }
 
         for(final Diary diary : diaryList) {
-            databaseHelper.deleteDiary(diary);
+            diary.deleteDiary(databaseHelper);
         }
     }
 
