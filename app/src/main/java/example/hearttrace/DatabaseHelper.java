@@ -7,16 +7,12 @@ import com.j256.ormlite.cipher.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.j256.ormlite.stmt.PreparedQuery;
-import com.j256.ormlite.stmt.QueryBuilder;
-import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import net.sqlcipher.database.SQLiteDatabase;
 
 import java.sql.SQLException;
 import java.util.List;
-
-import java.util.Date;
 
 /**
  * Created by wu-pc on 2018/5/9.

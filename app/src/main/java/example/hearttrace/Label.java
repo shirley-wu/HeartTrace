@@ -40,7 +40,7 @@ public class Label {
         this.labelname = labelname;
     }
 
-    public boolean insertLabel(DatabaseHelper helper) { // TODO: cannot agree with setting string as pk by wxq
+    public boolean insert(DatabaseHelper helper) { // TODO: cannot agree with setting string as pk by wxq
         try {
             Dao<Label, Integer> dao = helper.getLabelDao();
             Log.i("label", "dao = " + dao + "  label " + this);
