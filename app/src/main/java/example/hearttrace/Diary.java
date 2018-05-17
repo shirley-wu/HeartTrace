@@ -9,6 +9,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
+import com.j256.ormlite.stmt.query.In;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.sql.SQLException;
@@ -26,13 +27,13 @@ public class Diary {
     @DatabaseField(generatedId = true, columnName = TAG)
     private int id;
 
-    @DatabaseField(foreign = true)
+    @DatabaseField(foreign = true, columnName = "diarybook")
     private Diarybook diarybook;
 
     @DatabaseField
     String text;
 
-    @DatabaseField(dataType = DataType.DATE_STRING)
+    @DatabaseField(dataType = DataType.DATE_STRING, columnName = "date")
     protected Date date;
 
     public Diary(){
@@ -186,6 +187,17 @@ public class Diary {
                 }
             }
             return diaryListsForAllLabel.get(0);
+        }catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static List<Diary> getDiaryByBook (DatabaseHelper helper, Diarybook diarybook){
+        try {
+            Dao<Diary, Integer> diaryDao = helper.getDiaryDao();
+            List<Diary> diaryList = diaryDao.queryBuilder().where().eq("diarybook", diarybook).query();
+            return diaryList;
         }catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
