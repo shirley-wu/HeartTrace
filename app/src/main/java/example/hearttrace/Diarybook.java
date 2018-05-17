@@ -26,11 +26,6 @@ public class Diarybook {
         this.diarybookName = diarybookName;
     }
 
-    public int getId()
-    {
-        return id;
-    }
-
     public String getDiarybookName()
     {
         return diarybookName;
@@ -40,4 +35,6 @@ public class Diarybook {
     {
         this.diarybookName = diarybookName;
     }
+
+
 }
