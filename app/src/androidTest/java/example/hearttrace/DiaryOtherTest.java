@@ -115,4 +115,31 @@ public class DiaryOtherTest {
         labelList.add(label1);
         assertEquals(c1, Diary.countByDateLabel(databaseHelper, beginDate, endDate, labelList));
     }
+
+    @Test
+    public void testGetAllLabel() throws SQLException {
+        Diary diary = new Diary("hello");
+        diary.insert(databaseHelper);
+
+        List<Label> labels = new ArrayList();
+        labels.add(new Label("label1sadfvabe"));
+        labels.add(new Label("janvp"));
+        labels.add(new Label("fancevbotvptjvo"));
+
+        for(final Label label : labels) {
+            label.insert(databaseHelper);
+            diary.insertLabel(databaseHelper, label);
+        }
+
+        List<Label> labels2 = diary.getAllLabel(databaseHelper);
+        assertEquals(3, labels2.size());
+        for(final Label label : labels2) {
+            Log.d(TAG, "testGetAllLabel: label " + label.getLabelname());
+        }
+
+        for(final Label label : labels) {
+            label.delete(databaseHelper);
+        }
+        diary.delete(databaseHelper);
+    }
 }
