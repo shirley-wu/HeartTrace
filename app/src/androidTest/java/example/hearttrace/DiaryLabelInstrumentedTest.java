@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -45,8 +46,12 @@ public class DiaryLabelInstrumentedTest {
         Label label2 = new Label("normal");
         Log.i(Diary.TAG, "this is the hot point");
         try {
-            List<Label> labelNewDiary = Label.lookupForDiary(helper, diary);
-            List<Diary> diaryHappy = Diary.lookupForLabel(helper, label1);
+            List<Label> labelNewDiary = diary.getAllLabel(helper);
+
+            List<Label> tmp = new ArrayList();
+            tmp.add(label1);
+            List<Diary> diaryHappy = Diary.getByRestrict(helper, null, null, null, tmp);
+
             List<Label> labelList = Label.getAllLabel(helper);
             List<Diary> diaryList = Diary.getAll(helper);
             for (Diary i : diaryHappy) {

@@ -75,7 +75,7 @@ public class SentenceLabel {
         }
     }
 
-    public static QueryBuilder<Sentence, Integer> querySentenceByLabel(DatabaseHelper helper, Label label){
+    /*public static QueryBuilder<Sentence, Integer> querySentenceByLabel(DatabaseHelper helper, Label label){
         try{
             Dao<SentenceLabel, Integer> sentenceLabelDao = helper.getSentenceLabelDao();
             QueryBuilder<SentenceLabel, Integer> sentenceLabelBuilder = sentenceLabelDao.queryBuilder();
@@ -120,5 +120,5 @@ public class SentenceLabel {
 
         Dao<Diary, Integer> diaryDao = helper.getDiaryDao();
         QueryBuilder<Diary, Integer> query = diaryDao.queryBuilder();
-    }
+    }*/
 }

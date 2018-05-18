@@ -3,8 +3,10 @@ package example.hearttrace;
 import android.util.Log;
 
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
@@ -12,6 +14,7 @@ import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,10 +33,13 @@ public class Diary {
     private Diarybook diarybook;
 
     @DatabaseField
-    String text;
+    private String text;
 
     @DatabaseField(dataType = DataType.DATE_STRING, columnName = "date")
     protected Date date;
+
+    @ForeignCollectionField
+    private ForeignCollection<DiaryLabel> diaryLabels;
 
     public Diary(){
     };
@@ -101,10 +107,21 @@ public class Diary {
         }
     }
 
+    public void refresh(DatabaseHelper helper) {
+        try {
+            Dao<Diary, Integer> dao = helper.getDiaryDao();
+            Log.i("diary", "dao = " + dao + " 插入 diary " + this);
+            int returnValue = dao.refresh(this);
+            Log.i("diary", "插入后返回值：" + returnValue);
+        } catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
+
     public void delete(DatabaseHelper helper) {
         try {
-            QueryBuilder<Label, Integer> qb = getLabelQueryBuilder(helper);
-            List<Label> labelList = qb.query();
+            List<Label> labelList = getAllLabel(helper);
             for(final Label label : labelList) {
                 deleteLabel(helper, label);
             }
@@ -156,37 +173,47 @@ public class Diary {
         }
     }
 
-    public List<Label> getAllLabel(DatabaseHelper helper){
-        try{
-            QueryBuilder<Label, Integer> labelDao = getLabelQueryBuilder(helper);
-            return labelDao.query();
-        }catch (SQLException e) {
-            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
-            throw new RuntimeException(e);
+    public List<Label> getAllLabel(DatabaseHelper helper) throws SQLException {
+        refresh(helper);
+
+        List<Label> labelList = new ArrayList();
+        for (DiaryLabel diaryLabel : diaryLabels) {
+            labelList.add(diaryLabel.getLabel());
         }
+
+        return labelList;
     }
 
     public static List<Diary> getByRestrict(DatabaseHelper helper, String text, Date begin, Date end, List<Label> labelList) throws SQLException {
-        QueryBuilder<Diary, Integer> qb;
+        QueryBuilder<Diary, Integer> qb = helper.getDiaryDao().queryBuilder();
+
         if(labelList != null && labelList.size() > 0){
-            qb = getDiaryQueryBuilder(helper, labelList);
+            buildQuery(qb, helper, labelList);
         }
-        else{
-            qb = helper.getDiaryDao().queryBuilder();
-        }
+
+        int count = 0;
+        Where<Diary, Integer> where = qb.where();
         if(text != null){
-            buildWhere(qb.where(), text);
+            buildWhere(where, text);
+            count++;
         }
         if(begin != null && end != null){
-            buildWhere(qb.where(), begin, end);
+            buildWhere(where, begin, end);
+            count++;
         }
+        if(count > 1){
+            where.and(count);
+            Log.d(TAG, "getByRestrict: " + qb.prepareStatementString());
+        }
+
         return qb.query();
     }
 
     public static int countByDateLabel (DatabaseHelper helper, Date begin, Date end, List<Label> labelList) {
         try {
             QueryBuilder<Diary, Integer> queryBuilder = helper.getDiaryDao().queryBuilder();
-            queryBuilder.where().between("Date", begin, end);
+            buildQuery(queryBuilder, helper, labelList);
+            buildWhere(queryBuilder.where(), begin, end);
             return queryBuilder.query().size();
         }
         catch(SQLException e) {
@@ -195,26 +222,34 @@ public class Diary {
         }
     }
 
-    private QueryBuilder<Label, Integer> getLabelQueryBuilder(DatabaseHelper helper) {
-        // TODO
-        return null;
+    public static void buildQuery(QueryBuilder<Diary, Integer> qb, DatabaseHelper helper, List<Label> labelList) throws SQLException {
+        int size = labelList.size();
+        if (size == 0) {
+            throw new SQLException("Label list is empty, cannot construct");
+        }
+
+        for(int i = 0; i < size; i++) {
+            QueryBuilder<DiaryLabel, Integer> diaryLabelQb = helper.getDiaryLabelDao().queryBuilder();
+            diaryLabelQb.where().eq(DiaryLabel.LABEL_TAG, labelList.get(i));
+            diaryLabelQb.setAlias("query" + i);
+            qb.join(diaryLabelQb, QueryBuilder.JoinType.INNER, QueryBuilder.JoinWhereOperation.AND);
+        }
+
+        Log.d(TAG, "buildQuery: " + qb.prepareStatementString());
     }
 
-    private static QueryBuilder<Diary, Integer> getDiaryQueryBuilder(DatabaseHelper helper, List<Label> labelList) {
-        // TODO
-        return null;
-    }
-
-    private static void buildWhere(Where<Diary, Integer> where, String text) throws SQLException {
+    public static void buildWhere(Where<Diary, Integer> where, String text) throws SQLException {
         String[] keywordList = text.split(" ");
-        where.and();
-        for(final String keyword : keywordList) {
-            where.or().like("text", keyword);
+        int length = keywordList.length;
+        if (length > 0) {
+            for (int i = 0; i < length; i++) {
+                where.like("text", "%" + keywordList[i] + "%");
+            }
+            where.or(length);
         }
     }
 
-    private static void buildWhere(Where<Diary, Integer> where, Date begin, Date end) throws SQLException {
-        where.and();
+    public static void buildWhere(Where<Diary, Integer> where, Date begin, Date end) throws SQLException {
         where.between("date", begin, end);
     }
 }

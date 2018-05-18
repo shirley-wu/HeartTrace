@@ -78,7 +78,7 @@ public class DiaryLabel {
         }
     }
 
-    public static QueryBuilder<Diary, Integer> queryDiaryByLabel(DatabaseHelper helper, Label label){
+    /*public static QueryBuilder<Diary, Integer> queryDiaryByLabel(DatabaseHelper helper, Label label){
         try{
             Dao<DiaryLabel, Integer> diaryLabelDao = helper.getDiaryLabelDao();
             QueryBuilder<DiaryLabel, Integer> diaryLabelBuilder = diaryLabelDao.queryBuilder();
@@ -120,5 +120,5 @@ public class DiaryLabel {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
         }
-    }
+    }*/
 }

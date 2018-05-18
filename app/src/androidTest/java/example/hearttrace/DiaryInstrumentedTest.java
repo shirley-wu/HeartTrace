@@ -2,9 +2,12 @@ package example.hearttrace;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
+import android.util.Log;
 
 import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.Where;
 
 import org.junit.After;
 import org.junit.Before;
@@ -23,11 +26,13 @@ import static org.junit.Assert.*;
  */
 public class DiaryInstrumentedTest {
 
+    final static String TAG = "DiaryInstrumentedTest";
+
     private DatabaseHelper databaseHelper;
     private Dao<Diary, Integer> dao;
 
-    private String originText = "Testing testing do not repeat testing testing 221341151" + (new Date()).getTime();
-    private String updateText = "hlelleelelfjakdl;jag alknals" + (new Date()).getTime();
+    private String originText;
+    private String updateText;
 
     @Before
     public void setUp() throws SQLException {
@@ -48,6 +53,9 @@ public class DiaryInstrumentedTest {
 
     @Test
     public void testSaveAndGetDiary() throws SQLException {
+        originText = "Testing testing do not repeat testing testing 221341151" + (new Date()).getTime() + (new Random()).nextDouble();
+        updateText = "hlelleelelfjakdl;jag alknals" + (new Date()).getTime() + (new Random()).nextDouble();
+
         Diary diary = new Diary();
         List<Diary> diaryList;
         diary.setText(originText);
@@ -79,72 +87,6 @@ public class DiaryInstrumentedTest {
     public void testGetAllDiary() throws SQLException {
         List<Diary> diaryList = Diary.getAll(databaseHelper);
         assertTrue(diaryList.size() >= 0);
-    }
-
-    @Test
-    public void testGetDiaryByDate() throws SQLException {
-        int num = 20;
-        List<Diary> diaryList = new ArrayList();
-        for(int i = 1; i <= num; i++) {
-            for(int j = 0; j < i; j++) {
-                Diary diary = new Diary();
-                diaryList.add(diary);
-                diary.setText(originText + j);
-                diary.setDate(new Date(1998, 8, i));
-                dao.create(diary);
-            }
-        }
-
-        Date date;
-        for(int i = 1; i <= num; i++) {
-            assertEquals(i, Diary.getByDate(databaseHelper, new Date(1998, 8, i)).size());
-        }
-
-        for(final Diary diary : diaryList) {
-            diary.delete(databaseHelper);
-        }
-    }
-
-    // @Test
-    void testCountByDateLabel() throws SQLException {
-        Random random = new Random();
-
-        int num = 20;
-        List<Diary> diaryList = new ArrayList();
-
-        Label label1 = new Label();
-        label1.setLabelname("hi" + random.nextInt());
-        label1.insertLabel(databaseHelper);
-
-        Label label2 = new Label();
-        label2.setLabelname("hi2" + random.nextInt());
-        label2.insertLabel(databaseHelper);
-
-        int c1 = 0;
-
-        int begin = 5, end = 15;
-
-        for(int i = 1; i <= num; i++) {
-            for(int j = 0; j < i; j++) {
-                Diary diary = new Diary();
-                diaryList.add(diary);
-                diary.setText(originText + j);
-                diary.setDate(new Date(1998, 8, i));
-                dao.create(diary);
-                if(i % 3 == 0) {
-                    diary.insertLabel(databaseHelper, label1);
-                    if(begin <= i && i <= end){
-                        c1++;
-                    }
-                }
-                if(random.nextInt() % 2 == 0) {
-                    diary.insertLabel(databaseHelper, label2);
-                }
-            }
-        }
-
-        Date beginDate = new Date(1998, 8, begin), endDate = new Date(1998, 8, end);
-        assertEquals(c1, Diary.countByDateLabel(databaseHelper, beginDate, endDate, label1));
     }
 
 }

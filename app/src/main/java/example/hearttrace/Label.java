@@ -53,6 +53,17 @@ public class Label {
         }
     }
 
+    public void delete(DatabaseHelper helper) {
+        try {
+            Dao<Label, Integer> dao = helper.getLabelDao();
+            Log.i("label", "dao = " + dao + "  label " + this);
+            dao.delete(this);
+        } catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
+
     public static List<Label> getAllLabel(DatabaseHelper helper){
         try {
             Dao<Label, Integer> dao = helper.getLabelDao();
