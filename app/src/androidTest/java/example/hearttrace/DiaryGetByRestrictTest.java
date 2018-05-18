@@ -227,7 +227,7 @@ public class DiaryGetByRestrictTest extends InstrumentationTestCase {
         List<Diary> list;
 
         labelList.add(labels.get(1));
-        list = Diary.getByRestrict(databaseHelper, "Lisa",
+        list = Diary.getByRestrict(databaseHelper, "this",
                 new Date(2016, 1, 8),
                 new Date(2016, 1, 27),
                 labelList);

@@ -187,25 +187,20 @@ public class Diary {
     public static List<Diary> getByRestrict(DatabaseHelper helper, String text, Date begin, Date end, List<Label> labelList) throws SQLException {
         QueryBuilder<Diary, Integer> qb = helper.getDiaryDao().queryBuilder();
 
-        if(labelList != null && labelList.size() > 0){
+        Boolean status1 = (text != null);
+        Boolean status2 = (begin != null && end != null);
+        if(status1 || status2){
+            Where<Diary, Integer> where = qb.where();
+            if (status1) buildWhere(where, text);
+            if (status2) buildWhere(where, begin, end);
+            if (status1 && status2) where.and(2);
+        }
+
+        if(labelList != null && labelList.size() > 0) {
             buildQuery(qb, helper, labelList);
         }
 
-        int count = 0;
-        Where<Diary, Integer> where = qb.where();
-        if(text != null){
-            buildWhere(where, text);
-            count++;
-        }
-        if(begin != null && end != null){
-            buildWhere(where, begin, end);
-            count++;
-        }
-        if(count > 1){
-            where.and(count);
-            Log.d(TAG, "getByRestrict: " + qb.prepareStatementString());
-        }
-
+        Log.d(TAG, "getByRestrict: " + qb.prepareStatementString());
         return qb.query();
     }
 
