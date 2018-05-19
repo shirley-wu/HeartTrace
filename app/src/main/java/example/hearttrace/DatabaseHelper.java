@@ -51,6 +51,10 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private Dao<SentenceLabel, Integer> sentenceLabelDao = null;
     private RuntimeExceptionDao<SentenceLabel, Integer> runtimeSentenceLabelDao = null;
+
+    private Dao<SearchHistory, Integer> searchHistoryDao = null;
+    private RuntimeExceptionDao<SearchHistory, Integer> runtimeSearchHistoryDao = null;
+
     private PreparedQuery<Label> labelForDiaryQuery;
     private PreparedQuery<Diary> diaryForLabelQuery;
 
@@ -73,6 +77,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, Sentence.class);
             TableUtils.createTable(connectionSource, SentenceLabel.class);
             TableUtils.createTable(connectionSource, Sentencebook.class);
+            tableUtils.createTable(connectionSource, SearchHistory.class);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
             throw new RuntimeException(e);
@@ -95,6 +100,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.dropTable(connectionSource, Sentence.class, true);
             TableUtils.dropTable(connectionSource, SentenceLabel.class, true);
             TableUtils.dropTable(connectionSource, Sentencebook.class, true);
+            TableUtils.dropTable(connectionSource, SearchHistory.class, true);
             // after we drop the old databases, we create the new ones
             onCreate(db, connectionSource);
         } catch (SQLException e) {
@@ -158,6 +164,12 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return diarybookDao;
     }
 
+    public Dao<SearchHistory, Integer> getSearchHistoryDao() throws SQLException {
+        if (searchHistoryDao == null) {
+            searchHistoryDao = getDao(SearchHistory.class);
+        }
+        return searchHistoryDao;
+    }
     /**
      * Returns the RuntimeExceptionDao (Database Access Object) version of a Dao for our Diary class. It will
      * create it or just give the cached value. RuntimeExceptionDao only through RuntimeExceptions.
@@ -209,6 +221,13 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             runtimeSentenceLabelDao = getRuntimeExceptionDao(SentenceLabel.class);
         }
         return runtimeSentenceLabelDao;
+    }
+
+    public RuntimeExceptionDao<SearchHistory, Integer> getRuntimeExceptionSearchHistoryDao() throws SQLException {
+        if (runtimeSearchHistoryDao == null) {
+            runtimeSearchHistoryDao = getRuntimeExceptionDao(SearchHistory.class);
+        }
+        return runtimeSearchHistoryDao;
     }
     /**
      * Close the database connections and clear any cached DAOs.
