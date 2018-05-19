@@ -72,7 +72,8 @@ public class DiaryActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.edit:
-                Toast.makeText(this, "编辑", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(DiaryActivity.this, DiaryWriteActivity.class);
+                startActivity(intent);
                 break;
             case android.R.id.home:
                 finish();

@@ -33,5 +33,25 @@ dependencies {
     compile 'com.android.support:cardview-v7:24.2.1'
     compile '，com.github.bumptech.glide:glide:3.7.0'
     compile 'com.google.android.gms:play-services-appindexing:8.4.0'
+    compile 'com.prolificinteractive:material-calendarview:1.4.0'
+    compile 'org.adw.library:discrete-seekbar:1.0.1'
+    compile'com.contrarywind:Android-PickerView:3.2.5'
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+    compile 'com.borax12.materialdaterangepicker:library:1.9'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> 6ba45de86a92f09f940b3b76747f69869af5486c
 
 }

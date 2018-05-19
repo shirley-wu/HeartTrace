@@ -186,7 +186,8 @@ public class SearchActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.calender:
-                Toast.makeText(this, "打开日历", Toast.LENGTH_SHORT).show();
+                Intent intentCalendar = new Intent(SearchActivity.this, CalendarActivity.class);
+                startActivity(intentCalendar);
                 break;
             case android.R.id.home:
                 finish();

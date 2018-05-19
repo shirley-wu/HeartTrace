@@ -50,8 +50,14 @@ public class MainActivity extends AppCompatActivity {
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
-                //
-                mDrawerLayout.closeDrawers();
+                switch (item.getItemId()){
+                    case R.id.statistics:
+                        Intent intent = new Intent(MainActivity.this,StatisticsActivity.class);
+                        startActivity(intent);
+                        break;
+                    default:
+                        mDrawerLayout.closeDrawers();
+                }
                 return true;
             }
         });
@@ -142,7 +148,8 @@ public class MainActivity extends AppCompatActivity {
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.calendar:
-                Toast.makeText(this, "打开日历", Toast.LENGTH_SHORT).show();
+                Intent intentCalendar = new Intent(MainActivity.this, CalendarActivity.class);
+                startActivity(intentCalendar);
                 break;
             case R.id.search:
                 //Toast.makeText(this, "搜索你的日记", Toast.LENGTH_SHORT).show();
