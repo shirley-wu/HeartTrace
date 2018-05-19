@@ -30,13 +30,7 @@ public class Diarybook {
         this.diarybookName = diarybookName;
     }
 
-<<<<<<< HEAD
-    public String getDiarybookName()
-    {
-=======
-    public String getDiarybookName()
-    {
->>>>>>> db-class
+    public String getDiarybookName() {
         return diarybookName;
     }
 
