@@ -5,12 +5,9 @@ import android.util.Log;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DataType;
+import com.j256.ormlite.stmt.DeleteBuilder;
+
 import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.field.ForeignCollectionField;
-import com.j256.ormlite.stmt.PreparedQuery;
-import com.j256.ormlite.stmt.QueryBuilder;
-import com.j256.ormlite.stmt.SelectArg;
-import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.sql.SQLException;
@@ -66,7 +63,7 @@ public class Diarybook {
             Dao<Diary, Integer> dao = helper.getDiaryDao();
             DeleteBuilder<Diary, Integer> deleteBuilder = dao.deleteBuilder();
 
-            deleteBuilder.where().eq("Diarybook", diarybookName);
+            deleteBuilder.where().eq("Diarybook", this);
             deleteBuilder.delete();
         }catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
