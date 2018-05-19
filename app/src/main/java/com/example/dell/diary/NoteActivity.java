@@ -31,7 +31,7 @@ public class NoteActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.delete:
-                container=(CoordinatorLayout) findViewById(R.id.coordinatorLayout);
+                container=(CoordinatorLayout) findViewById(R.id.note_coordinatorLayout);
                 Snackbar.make(container, "确认删除？",Snackbar.LENGTH_SHORT).setAction("Undo",new View.OnClickListener(){
                     @Override
                     public void onClick(View v){

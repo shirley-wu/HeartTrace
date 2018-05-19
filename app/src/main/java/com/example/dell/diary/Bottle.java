@@ -25,9 +25,10 @@ public class Bottle {
         this.imageId = imageId;
         this.bottleName = bottleName;
     }
-    public Bottle(String bottleName,int imageId) {
+    public Bottle(String bottleName,String reademe, int imageId) {
         this.imageId = imageId;
         this.bottleName = bottleName;
+        this.readme = reademe;
     }
 
     public int getYear() {
