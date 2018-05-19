@@ -4,7 +4,7 @@ import android.content.Context;
 import android.provider.Telephony;
 import android.support.test.InstrumentationRegistry;
 
-import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
 import org.junit.After;
@@ -22,12 +22,12 @@ import static org.junit.Assert.*;
  * Created by wu-pc on 2018/5/13.
  */
 public class SentenceInstrumentedTest {
-
+// TODO: change into Diary by wxq
     private DatabaseHelper databaseHelper;
     private Dao<Sentence, Integer> dao;
 
-    private String originText = "Testing testing do not repeat testing testing dfankjvaiwbrpwcepwuvqwiovb";
-    private String updateText = "asevrnawbcpamuoiavwebvwaprbwavup";
+    private String originText = "Testing testing do not repeat testing testing dfankjvaipovbbpwbrpwcepwuvqwiovb" + (new Date()).getTime();
+    private String updateText = "asevrnawbcpamuoiavwebvwaprbwavup" + (new Date()).getTime();
 
     @Before
     public void setUp() throws SQLException {
@@ -54,30 +54,29 @@ public class SentenceInstrumentedTest {
         sentence.setDate();
 
         // create
-        databaseHelper.insertSentence(sentence);
+        sentence.insert(databaseHelper);
 
         // query
         sentenceList = dao.queryBuilder().where().eq("text", originText).query();
-        assertEquals(1, sentenceList.size()); // TODO: not safe: assumes that there is no such text
+        assertEquals(1, sentenceList.size()); // TODO: not safe: assumes that there is no such text by wxq
         assertEquals(sentence.getDate(), sentenceList.get(0).getDate());
 
         // update
-        databaseHelper.updateSentence(sentence);
-        dao.update(sentence);
-        sentenceList = dao.queryBuilder().where().eq("text", originText).query();
-        assertEquals(0, sentenceList.size()); // TODO: not safe: assumes that there is no such text
+        sentence.setText(updateText);
+        sentence.update(databaseHelper);
         sentenceList = dao.queryBuilder().where().eq("text", updateText).query();
-        assertEquals(sentence.getDate(), sentenceList.get(0).getDate()); // TODO: not safe: assumes that there is no such text
+        assertEquals(1, sentenceList.size()); // TODO: not safe: assumes that there is no such text by wxq
+        assertEquals(sentence.getDate(), sentenceList.get(0).getDate()); // TODO: not safe: assumes that there is no such text by wxq
 
         // delete
-        databaseHelper.deleteSentence(sentence);
+        sentence.delete(databaseHelper);
         sentenceList = dao.queryBuilder().where().eq("text", updateText).query();
-        assertEquals(0, sentenceList.size()); // TODO: not safe: assumes that there is no such text
+        assertEquals(0, sentenceList.size()); // TODO: not safe: assumes that there is no such text by wxq
     }
 
     @Test
-    public void testGetAllDiary() throws SQLException {
-        List<Diary> diaryList = databaseHelper.getAllDiary();
+    public void testGetAllSentence() throws SQLException {
+        List<Sentence> diaryList = Sentence.getAll(databaseHelper);
         assertTrue(diaryList.size() >= 0);
     }
 
@@ -97,11 +96,11 @@ public class SentenceInstrumentedTest {
 
         Date date;
         for(int i = 1; i <= num; i++) {
-            assertEquals(i, databaseHelper.getSentenceByDate(new Date(1998, 8, i)).size());
+            assertEquals(i, Sentence.getByDate(databaseHelper, new Date(1998, 8, i)).size());
         }
 
         for(final Sentence sentence : sentenceList) {
-            databaseHelper.deleteSentence(sentence);
+            sentence.delete(databaseHelper);
         }
     }
 

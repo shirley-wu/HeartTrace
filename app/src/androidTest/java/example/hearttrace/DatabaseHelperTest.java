@@ -2,15 +2,16 @@ package example.hearttrace;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
+import android.util.Log;
 
-import com.j256.ormlite.android.apptools.OpenHelperManager;
-import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -19,12 +20,12 @@ import static org.junit.Assert.*;
  */
 public class DatabaseHelperTest {
 
-    private DatabaseHelper databaseHelper;
+    private DatabaseHelper helper;
 
     @Before
     public void setUp() {
         Context appContext = InstrumentationRegistry.getTargetContext();
-        databaseHelper = OpenHelperManager.getHelper(appContext, DatabaseHelper.class);
+        helper = OpenHelperManager.getHelper(appContext, DatabaseHelper.class);
     }
 
     @After
@@ -34,7 +35,7 @@ public class DatabaseHelperTest {
 
     @Test
     public void testGetDatabaseHelper() {
-        assertEquals("heartTrace.db", databaseHelper.getDatabaseName());
+
     }
 
 }
