@@ -71,54 +71,10 @@ public class DiaryLabel {
             Dao<DiaryLabel, Integer> dao = helper.getDiaryLabelDao();
             Log.i("db_diary_label", "dao = " + dao + "  db_diary_label " + this);
             int returnValue = dao.delete(this);
-            Log.i("db_diary_label", "插入后返回值："+returnValue);
+            Log.i("db_diary_label", "删除后返回值："+returnValue);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
         }
     }
-
-    /*public static QueryBuilder<Diary, Integer> queryDiaryByLabel(DatabaseHelper helper, Label label){
-        try{
-            Dao<DiaryLabel, Integer> diaryLabelDao = helper.getDiaryLabelDao();
-            QueryBuilder<DiaryLabel, Integer> diaryLabelBuilder = diaryLabelDao.queryBuilder();
-            diaryLabelBuilder.selectColumns(DiaryLabel.DIARY_TAG);
-
-            Dao<Diary, Integer> diaryDao = helper.getDiaryDao();
-            SelectArg labelSelectArg = new SelectArg();
-            //设置条件语句（where label_id=?）
-            diaryLabelBuilder.where().eq(DiaryLabel.LABEL_TAG, labelSelectArg);
-            //创建外部查询日记表
-
-            QueryBuilder<Diary, Integer> postQb = diaryDao.queryBuilder();
-            //设置查询条件（where project_id in()）;
-            postQb.where().in(Diary.TAG, diaryLabelBuilder);
-            return postQb;
-        } catch (SQLException e) {
-            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
-            throw new RuntimeException(e);
-        }
-    }
-
-    public static QueryBuilder<Label, String> queryLabelByDiary(DatabaseHelper helper, Diary diary){
-        try{
-            Dao<DiaryLabel, Integer> diaryLabelDao = helper.getDiaryLabelDao();
-            QueryBuilder<DiaryLabel, Integer> diaryLabelBuilder = diaryLabelDao.queryBuilder();
-
-            diaryLabelBuilder.selectColumns(DiaryLabel.LABEL_TAG);
-            SelectArg selectArg = new SelectArg();
-            //设置条件语句（where label_id=?）
-            diaryLabelBuilder.where().eq(DiaryLabel.DIARY_TAG, selectArg);
-            //创建外部查询日记表
-
-            Dao<Label, Integer> labelDao = helper.getLabelDao();
-            QueryBuilder<Label, Integer> labelQb = labelDao.queryBuilder();
-            //设置查询条件（where project_id in()）;
-            labelQb.where().in(Label.TAG, diaryLabelBuilder);
-            return labelQb;
-        } catch (SQLException e) {
-            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
-            throw new RuntimeException(e);
-        }
-    }*/
 }

@@ -7,6 +7,7 @@ import android.util.Log;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
@@ -105,11 +106,9 @@ public class Sentence {
 
     public void delete(DatabaseHelper helper) {
         try {
-            List<Label> labelList = getAllLabel(helper);
-            for(final Label label : labelList) {
-                deleteLabel(helper, label);
-            }
-            Log.i(TAG, "delete: 删除标签对应" + labelList);
+            DeleteBuilder<SentenceLabel, Integer> deleteBuilder = helper.getSentenceLabelDao().deleteBuilder();
+            deleteBuilder.where().eq(SentenceLabel.SENTENCE_TAG, this);
+            deleteBuilder.delete();
 
             Dao<Sentence, Integer> dao = helper.getSentenceDao();
             Log.i("Sentence", "dao = " + dao + " 删除 Sentence " + this);

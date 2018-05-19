@@ -7,6 +7,7 @@ import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
+import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
@@ -104,11 +105,9 @@ public class Diary {
 
     public void delete(DatabaseHelper helper) {
         try {
-            List<Label> labelList = getAllLabel(helper);
-            for(final Label label : labelList) {
-                deleteLabel(helper, label);
-            }
-            Log.i(TAG, "delete: 删除标签对应" + labelList);
+            DeleteBuilder<DiaryLabel, Integer> deleteBuilder = helper.getDiaryLabelDao().deleteBuilder();
+            deleteBuilder.where().eq(DiaryLabel.DIARY_TAG, this);
+            deleteBuilder.delete();
 
             Dao<Diary, Integer> dao = helper.getDiaryDao();
             Log.i("diary", "dao = " + dao + " 删除 diary " + this);

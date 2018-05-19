@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
@@ -55,6 +56,14 @@ public class Label {
 
     public void delete(DatabaseHelper helper) {
         try {
+            DeleteBuilder<DiaryLabel, Integer> deleteBuilder1 = helper.getDiaryLabelDao().deleteBuilder();
+            deleteBuilder1.where().eq(DiaryLabel.LABEL_TAG, this);
+            deleteBuilder1.delete();
+
+            DeleteBuilder<SentenceLabel, Integer> deleteBuilder2 = helper.getSentenceLabelDao().deleteBuilder();
+            deleteBuilder2.where().eq(SentenceLabel.LABEL_TAG, this);
+            deleteBuilder2.delete();
+
             Dao<Label, Integer> dao = helper.getLabelDao();
             Log.i("label", "dao = " + dao + "  label " + this);
             dao.delete(this);

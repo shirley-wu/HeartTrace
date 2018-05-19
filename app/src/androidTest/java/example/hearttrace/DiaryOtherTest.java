@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.QueryBuilder;
 
 import org.junit.After;
 import org.junit.Before;
@@ -137,9 +138,15 @@ public class DiaryOtherTest {
             Log.d(TAG, "testGetAllLabel: label " + label.getLabelname());
         }
 
+        diary.delete(databaseHelper);
+        QueryBuilder<DiaryLabel, Integer> diaryLabelQb = databaseHelper.getDiaryLabelDao().queryBuilder();
+        diaryLabelQb.where().eq(DiaryLabel.DIARY_TAG, diary);
+        Log.d(TAG, "testGetAllLabel: " + diaryLabelQb.prepareStatementString());
+        List<DiaryLabel> diaryLabelList = diaryLabelQb.query();
+        assertEquals(0, diaryLabelList.size());
+
         for(final Label label : labels) {
             label.delete(databaseHelper);
         }
-        diary.delete(databaseHelper);
     }
 }
