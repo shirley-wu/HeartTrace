@@ -1,5 +1,7 @@
 package example.hearttrace;
 
+import android.util.Log;
+
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
@@ -45,7 +47,7 @@ public class Diarybook {
             List<Diary> subDiaryList = dao.queryBuilder().where().eq("Diarybook", diarybookName).query();
 
             return subDiaryList;
-        }catch (SQLexception e) {
+        }catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
         }
@@ -55,8 +57,9 @@ public class Diarybook {
         try {
             Dao<Diary, Integer> dao = helper.getDiaryDao();
 
-            dao.deleteBuilder().where().eq("Diarybook", diarybookName).delete();
-        }catch (SQLexception e) {
+            // dao.deleteBuilder().where().eq("Diarybook", diarybookName).delete();
+            // TODO: Cannot compile
+        }catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
         }

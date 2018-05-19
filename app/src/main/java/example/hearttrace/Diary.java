@@ -102,17 +102,6 @@ public class Diary {
         }
     }
 
-    public void refresh(DatabaseHelper helper) {
-        try {
-            Dao<Diary, Integer> dao = helper.getDiaryDao();
-            Log.i("diary", "dao = " + dao + " 更新 diary " + this);
-            dao.refresh(this);
-        } catch (SQLException e) {
-            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
-            throw new RuntimeException(e);
-        }
-    }
-
     public void delete(DatabaseHelper helper) {
         try {
             List<Label> labelList = getAllLabel(helper);
