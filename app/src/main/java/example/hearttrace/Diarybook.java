@@ -64,14 +64,13 @@ public class Diarybook {
     public void deteleSubDiary(DatabaseHelper helper) {
         try {
             Dao<Diary, Integer> dao = helper.getDiaryDao();
+            DeleteBuilder<Diary, Integer> deleteBuilder = dao.deleteBuilder();
 
-            // dao.deleteBuilder().where().eq("Diarybook", diarybookName).delete();
-            // TODO: Cannot compile
+            deleteBuilder.where().eq("Diarybook", diarybookName);
+            deleteBuilder.delete();
         }catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
         }
     }
-
-
 }
