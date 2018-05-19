@@ -22,7 +22,7 @@ import java.util.List;
  */
 
 @DatabaseTable(tableName = "Sentence")
-public class Sentence { // TODO: quite a lot to revise here. by wxq
+public class Sentence {
     public static final String TAG = "Sentence";
 
     @DatabaseField(generatedId = true, columnName = TAG)
