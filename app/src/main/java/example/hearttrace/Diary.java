@@ -48,8 +48,7 @@ public class Diary {
         return id;
     }
 
-    public String getText()
-    {
+    public String getText() {
         return text;
     }
 

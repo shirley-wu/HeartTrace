@@ -190,6 +190,13 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return runtimeSentencebookDao;
     }
 
+    public RuntimeExceptionDao<Label, Integer> getRuntimeExceptionLabelDao() {
+        if (runtimeLabelDao == null) {
+            runtimeLabelDao = getRuntimeExceptionDao(Label.class);
+        }
+        return runtimeLabelDao;
+    }
+
     public RuntimeExceptionDao<DiaryLabel, Integer> getRuntimeExceptionDiaryLabelDao() {
         if (runtimeDiaryLabelDao == null) {
             runtimeDiaryLabelDao = getRuntimeExceptionDao(DiaryLabel.class);
@@ -213,12 +220,5 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         runtimeDiaryDao = null;
         diarybookDao = null;
         runtimeDiarybookDao = null;
-    }
-
-    public RuntimeExceptionDao<Label, Integer> getRuntimeExceptionLabelDao() {
-        if (runtimeLabelDao == null) {
-            runtimeLabelDao = getRuntimeExceptionDao(Label.class);
-        }
-        return runtimeLabelDao;
     }
 }

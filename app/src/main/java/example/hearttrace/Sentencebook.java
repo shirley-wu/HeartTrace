@@ -1,7 +1,12 @@
 package example.hearttrace;
 
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+
+import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Created by chen on 2018/5/13.
@@ -25,18 +30,37 @@ public class Sentencebook {
         this.sentencebookName = sentencebookName;
     }
 
-    public int getId()
-    {
-        return id;
-    }
-
     public String getSentencebookName()
     {
         return sentencebookName;
     }
 
-    public void setSentencebookName(String sentencebookName)
-    {
+    public void setSentencebookName(String sentencebookName) {
         this.sentencebookName = sentencebookName;
+    }
+
+    public List<Sentence> getAllSubSentence(DatabaseHelper helper) {
+        try {
+            Dao<Sentence, Integer> dao = helper.getSentenceDao();
+
+            List<Sentence> subSentenceList = dao.queryBuilder().where().eq("Sentencebook", sentencebookName).query();
+
+            return subSentenceList;
+        }catch (SQLexception e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void deteleSubSentence(DatabaseHelper helper) {
+        try {
+            Dao<Sentence, Integer> dao = helper.getSentenceDao();
+
+            dao.deleteBuilder().where().eq("Sentencebook", sentencebookName).delete();
+            }
+        }catch (SQLexception e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
     }
 }
