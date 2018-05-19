@@ -12,7 +12,7 @@ import java.util.List;
  * Created by chen on 2018/5/13.
  */
 
-@DatabaseTable(tableName = "sentence_book")
+@DatabaseTable(tableName = "sentencebook")
 public class Sentencebook {
 
     private static final String TAG = "Sentencebook";

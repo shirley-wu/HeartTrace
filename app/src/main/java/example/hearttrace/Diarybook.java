@@ -1,18 +1,26 @@
 package example.hearttrace;
 
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
+import com.j256.ormlite.stmt.PreparedQuery;
+import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.SelectArg;
+import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by wu-pc on 2018/5/10.
  */
 
-@DatabaseTable(tableName = "diary_book")
+@DatabaseTable(tableName = "diarybook")
 public class Diarybook {
 
     private static final String TAG = "Diarybook";
@@ -22,7 +30,7 @@ public class Diarybook {
     @DatabaseField(generatedId = true, columnName = TAG)
     private int id;
 
-    @DatabaseField
+    @DatabaseField(columnName = "diarybookname")
     private String diarybookName;
 
     public Diarybook(){};
@@ -61,4 +69,6 @@ public class Diarybook {
             throw new RuntimeException(e);
         }
     }
+
+
 }
