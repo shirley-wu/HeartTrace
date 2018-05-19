@@ -42,18 +42,15 @@ public class Diary {
     public Diary(){
     };
 
-    public Diary(String text)
-    {
+    public Diary(String text){
         this.text = text;
     }
 
-    public String getText()
-    {
+    public String getText() {
         return text;
     }
 
-    public void setText(String text)
-    {
+    public void setText(String text){
         this.text = text;
     }
 
@@ -73,11 +70,11 @@ public class Diary {
         Log.i(TAG, "setDate: dangerous call!");
     }
 
-    public Diarybook getDiarybook() {
+    public Diarybook getDiarybook(){
         return diarybook;
     }
 
-    public void setDiarybook(Diarybook diarybook) {
+    public void setDiarybook(Diarybook diarybook){
         this.diarybook = diarybook;
     }
 

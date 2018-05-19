@@ -46,6 +46,13 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private Dao<SentenceLabel, Integer> sentenceLabelDao = null;
     private RuntimeExceptionDao<SentenceLabel, Integer> runtimeSentenceLabelDao = null;
+
+    private Dao<Sentencebook, Integer> SentencebookDao = null;
+    private RuntimeExceptionDao<Sentencebook, Integer> runtimeSentncebookDao = null;
+
+    private Dao<SearchHistory, Integer> searchHistoryDao = null;
+    private RuntimeExceptionDao<SearchHistory, Integer> runtimeSearchHistoryDao = null;
+
     private PreparedQuery<Label> labelForDiaryQuery;
     private PreparedQuery<Diary> diaryForLabelQuery;
 
@@ -67,6 +74,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, Label.class);
             TableUtils.createTable(connectionSource, Sentence.class);
             TableUtils.createTable(connectionSource, SentenceLabel.class);
+            TableUtils.createTable(connectionSource, Sentencebook.class);
+            tableUtils.createTable(connectionSource, SearchHistory.class);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
             throw new RuntimeException(e);
@@ -87,6 +96,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.dropTable(connectionSource, Label.class, true);
             TableUtils.dropTable(connectionSource, Sentence.class, true);
             TableUtils.dropTable(connectionSource, SentenceLabel.class, true);
+            TableUtils.dropTable(connectionSource, Sentencebook.class, true);
+            TableUtils.dropTable(connectionSource, SearchHistory.class, true);
             // after we drop the old databases, we create the new ones
             onCreate(db, connectionSource);
         } catch (SQLException e) {
@@ -117,15 +128,12 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return sentenceDao;
     }
 
-
-
     public Dao<Label, Integer> getLabelDao() throws SQLException {
         if (labelDao == null) {
             labelDao = getDao(Label.class);
         }
         return labelDao;
     }
-
 
     public Dao<DiaryLabel, Integer> getDiaryLabelDao() throws SQLException {
         if (diaryLabelDao == null) {
@@ -134,10 +142,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return diaryLabelDao;
     }
 
-
-
     //for the sentence
-
 
     public Dao<SentenceLabel, Integer> getSentenceLabelDao() throws SQLException {
         if (sentenceLabelDao == null) {
@@ -146,6 +151,26 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return sentenceLabelDao;
     }
 
+    public Dao<Sentencebook, Integer> getSentencebookDao() throws SQLException {
+        if (sentencebookDao == null) {
+            sentencebookDao = getDao(Sentencebook.class);
+        }
+        return sentencebookDao;
+    }
+
+    public Dao<Diarybook, Integer> getDiarybookDao() throws SQLException {
+        if (diarybookDao == null) {
+            diarybookDao = getDao(Diarybook.class);
+        }
+        return diarybookDao;
+    }
+
+    public Dao<SearchHistory, Integer> getSearchHistoryDao() throws SQLException {
+        if (searchHistoryDao == null) {
+            searchHistoryDao = getDao(SearchHistory.class);
+        }
+        return searchHistoryDao;
+    }
 
     /**
      * Returns the RuntimeExceptionDao (Database Access Object) version of a Dao for our Diary class. It will
@@ -158,13 +183,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return runtimeDiaryDao;
     }
 
-    public Dao<Diarybook, Integer> getDiarybookDao() throws SQLException {
-        if (diarybookDao == null) {
-            diarybookDao = getDao(Diarybook.class);
-        }
-        return diarybookDao;
-    }
-
     public RuntimeExceptionDao<Diarybook, Integer> getRuntimeExceptionDiarybookDao() {
         if (runtimeDiarybookDao == null) {
             runtimeDiarybookDao = getRuntimeExceptionDao(Diarybook.class);
@@ -172,6 +190,47 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return runtimeDiarybookDao;
     }
 
+    public RuntimeExceptionDao<Sentence, Integer> getRuntimeExceptionSentenceDao() {
+        if (runtimeDiaryDao == null) {
+            runtimeSentenceDao = getRuntimeExceptionDao(Sentence.class);
+        }
+        return runtimeSentenceDao;
+    }
+
+    public RuntimeExceptionDao<Sentencebook, Integer> getRuntimeExceptionSentencebookDao() {
+        if (runtimeSentencebookDao == null) {
+            runtimeSentencebookDao = getRuntimeExceptionDao(Sentencebook.class);
+        }
+        return runtimeSentencebookDao;
+    }
+
+    public RuntimeExceptionDao<Label, Integer> getRuntimeExceptionLabelDao() {
+        if (runtimeLabelDao == null) {
+            runtimeLabelDao = getRuntimeExceptionDao(Label.class);
+        }
+        return runtimeLabelDao;
+    }
+
+    public RuntimeExceptionDao<DiaryLabel, Integer> getRuntimeExceptionDiaryLabelDao() {
+        if (runtimeDiaryLabelDao == null) {
+            runtimeDiaryLabelDao = getRuntimeExceptionDao(DiaryLabel.class);
+        }
+        return runtimeDiaryLabelDao;
+    }
+
+    public RuntimeExceptionDao<SentenceLabel, Integer> getRuntimeExceptionSentenceLabelDao() {
+        if (runtimeSentenceLabelDao == null) {
+            runtimeSentenceLabelDao = getRuntimeExceptionDao(SentenceLabel.class);
+        }
+        return runtimeSentenceLabelDao;
+    }
+
+    public RuntimeExceptionDao<SearchHistory, Integer> getRuntimeExceptionSearchHistoryDao() throws SQLException {
+        if (runtimeSearchHistoryDao == null) {
+            runtimeSearchHistoryDao = getRuntimeExceptionDao(SearchHistory.class);
+        }
+        return runtimeSearchHistoryDao;
+    }
     /**
      * Close the database connections and clear any cached DAOs.
      */
