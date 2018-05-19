@@ -48,8 +48,17 @@ public class Diary {
         this.text = text;
     }
 
+<<<<<<< HEAD
     public String getText()
     {
+=======
+    public int getId()
+    {
+        return id;
+    }
+
+    public String getText() {
+>>>>>>> db-class
         return text;
     }
 
