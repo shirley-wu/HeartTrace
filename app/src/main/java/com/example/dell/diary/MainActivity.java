@@ -21,6 +21,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.R.attr.id;
+
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
@@ -44,14 +46,16 @@ public class MainActivity extends AppCompatActivity {
             actionBar.setHomeAsUpIndicator(R.drawable.menu_white);
         }
         navView.setCheckedItem(R.id.nav_user);
-        navView.setItemIconTintList(null);
+        //navView.setItemIconTintList(null);
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
+                //
                 mDrawerLayout.closeDrawers();
                 return true;
             }
         });
+
         FloatingActionButton test = (FloatingActionButton) findViewById(R.id.test);
         test.setVisibility(View.INVISIBLE);
         final FloatingActionButton addDiary = (FloatingActionButton) findViewById(R.id.add_diary);
@@ -148,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.add:
                 Toast.makeText(this, "写新的日记", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.settings:
+            case R.id.main_setting:
                 Toast.makeText(this, "设置", Toast.LENGTH_SHORT).show();
                 break;
             default:

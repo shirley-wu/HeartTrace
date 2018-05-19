@@ -66,13 +66,13 @@ public class BottlesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bottles);
         Toolbar toolbar = (Toolbar) findViewById(R.id.bottles_toolbar);
         setSupportActionBar(toolbar);
         mDrawLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         NavigationView navView =(NavigationView) findViewById(R.id.nav_view);
         ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null){
+        if(actionBar != null){        setContentView(R.layout.activity_bottles);
+
             actionBar.setDisplayHomeAsUpEnabled(true);
             //actionBar.setHomeAsUpIndicator(R.drawable.menu_white);
         }
