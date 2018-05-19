@@ -13,6 +13,7 @@ import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -37,9 +38,6 @@ public class Diary {
 
     @DatabaseField(dataType = DataType.DATE_STRING, columnName = "date")
     protected Date date;
-
-    @ForeignCollectionField
-    private ForeignCollection<DiaryLabel> diaryLabels;
 
     public Diary(){
     };
@@ -110,9 +108,8 @@ public class Diary {
     public void refresh(DatabaseHelper helper) {
         try {
             Dao<Diary, Integer> dao = helper.getDiaryDao();
-            Log.i("diary", "dao = " + dao + " 插入 diary " + this);
-            int returnValue = dao.refresh(this);
-            Log.i("diary", "插入后返回值：" + returnValue);
+            Log.i("diary", "dao = " + dao + " 更新 diary " + this);
+            dao.refresh(this);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
@@ -174,14 +171,13 @@ public class Diary {
     }
 
     public List<Label> getAllLabel(DatabaseHelper helper) throws SQLException {
-        refresh(helper);
+        QueryBuilder<DiaryLabel, Integer> qb = helper.getDiaryLabelDao().queryBuilder();
+        qb.where().eq(DiaryLabel.DIARY_TAG, this);
 
-        List<Label> labelList = new ArrayList();
-        for (DiaryLabel diaryLabel : diaryLabels) {
-            labelList.add(diaryLabel.getLabel());
-        }
+        QueryBuilder<Label, Integer> labelQb = helper.getLabelDao().queryBuilder();
+        labelQb.join(qb);
 
-        return labelList;
+        return labelQb.query();
     }
 
     public static List<Diary> getByRestrict(DatabaseHelper helper, String text, Date begin, Date end, List<Label> labelList) throws SQLException {
@@ -204,12 +200,12 @@ public class Diary {
         return qb.query();
     }
 
-    public static int countByDateLabel (DatabaseHelper helper, Date begin, Date end, List<Label> labelList) {
+    public static long countByDateLabel (DatabaseHelper helper, Date begin, Date end, List<Label> labelList) {
         try {
             QueryBuilder<Diary, Integer> queryBuilder = helper.getDiaryDao().queryBuilder();
             buildQuery(queryBuilder, helper, labelList);
             buildWhere(queryBuilder.where(), begin, end);
-            return queryBuilder.query().size();
+            return queryBuilder.countOf();
         }
         catch(SQLException e) {
             Log.e(TAG, "countByDateLabel: cannot access database", e);
