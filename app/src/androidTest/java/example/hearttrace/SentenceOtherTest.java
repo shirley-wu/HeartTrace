@@ -23,12 +23,12 @@ import static org.junit.Assert.assertEquals;
  * Created by wu-pc on 2018/5/19.
  */
 
-public class DiaryOtherTest {
+public class SentenceOtherTest {
 
-    private static final String TAG = "DiaryGetByRestrictTest";
+    private static final String TAG = "SentenceGetByRestrictTest";
 
     private DatabaseHelper databaseHelper;
-    private Dao<Diary, Integer> dao;
+    private Dao<Sentence, Integer> dao;
 
     private String originText;
     private String updateText;
@@ -38,7 +38,7 @@ public class DiaryOtherTest {
         Log.d(TAG, "setUp");
         Context appContext = InstrumentationRegistry.getTargetContext();
         databaseHelper = OpenHelperManager.getHelper(appContext, DatabaseHelper.class);
-        dao = databaseHelper.getDiaryDao();
+        dao = databaseHelper.getSentenceDao();
     }
 
     @After
@@ -49,26 +49,26 @@ public class DiaryOtherTest {
 
 
     @Test
-    public void testGetDiaryByDate() throws SQLException {
+    public void testGetSentenceByDate() throws SQLException {
         int num = 20;
-        List<Diary> diaryList = new ArrayList();
+        List<Sentence> sentenceList = new ArrayList();
         for(int i = 1; i <= num; i++) {
             for(int j = 0; j < i; j++) {
-                Diary diary = new Diary();
-                diaryList.add(diary);
-                diary.setText(originText + j);
-                diary.setDate(new Date(1998, 8, i));
-                dao.create(diary);
+                Sentence sentence = new Sentence();
+                sentenceList.add(sentence);
+                sentence.setText(originText + j);
+                sentence.setDate(new Date(1998, 8, i));
+                dao.create(sentence);
             }
         }
 
         Date date;
         for(int i = 1; i <= num; i++) {
-            assertEquals(i, Diary.getByDate(databaseHelper, new Date(1998, 8, i)).size());
+            assertEquals(i, Sentence.getByDate(databaseHelper, new Date(1998, 8, i)).size());
         }
 
-        for(final Diary diary : diaryList) {
-            diary.delete(databaseHelper);
+        for(final Sentence sentence : sentenceList) {
+            sentence.delete(databaseHelper);
         }
     }
 
@@ -77,7 +77,7 @@ public class DiaryOtherTest {
         Random random = new Random();
 
         int num = 20;
-        List<Diary> diaryList = new ArrayList();
+        List<Sentence> sentenceList = new ArrayList();
 
         Label label1 = new Label();
         label1.setLabelname("hi" + random.nextInt());
@@ -93,19 +93,19 @@ public class DiaryOtherTest {
 
         for(int i = 1; i <= num; i++) {
             for(int j = 0; j < i; j++) {
-                Diary diary = new Diary();
-                diaryList.add(diary);
-                diary.setText(originText + j);
-                diary.setDate(new Date(1998, 8, i));
-                dao.create(diary);
+                Sentence sentence = new Sentence();
+                sentenceList.add(sentence);
+                sentence.setText(originText + j);
+                sentence.setDate(new Date(1998, 8, i));
+                dao.create(sentence);
                 if(i % 3 == 0) {
-                    diary.insertLabel(databaseHelper, label1);
+                    sentence.insertLabel(databaseHelper, label1);
                     if(begin <= i && i <= end){
                         c1++;
                     }
                 }
                 if(random.nextInt() % 2 == 0) {
-                    diary.insertLabel(databaseHelper, label2);
+                    sentence.insertLabel(databaseHelper, label2);
                 }
             }
         }
@@ -113,13 +113,13 @@ public class DiaryOtherTest {
         Date beginDate = new Date(1998, 8, begin), endDate = new Date(1998, 8, end);
         List<Label> labelList = new ArrayList();
         labelList.add(label1);
-        assertEquals(c1, Diary.countByDateLabel(databaseHelper, beginDate, endDate, labelList));
+        assertEquals(c1, Sentence.countByDateLabel(databaseHelper, beginDate, endDate, labelList));
     }
 
     @Test
     public void testGetAllLabel() throws SQLException {
-        Diary diary = new Diary("hello");
-        diary.insert(databaseHelper);
+        Sentence sentence = new Sentence("hello");
+        sentence.insert(databaseHelper);
 
         List<Label> labels = new ArrayList();
         labels.add(new Label("label1sadfvabe"));
@@ -128,10 +128,10 @@ public class DiaryOtherTest {
 
         for(final Label label : labels) {
             label.insert(databaseHelper);
-            diary.insertLabel(databaseHelper, label);
+            sentence.insertLabel(databaseHelper, label);
         }
 
-        List<Label> labels2 = diary.getAllLabel(databaseHelper);
+        List<Label> labels2 = sentence.getAllLabel(databaseHelper);
         assertEquals(3, labels2.size());
         for(final Label label : labels2) {
             Log.d(TAG, "testGetAllLabel: label " + label.getLabelname());
@@ -140,6 +140,6 @@ public class DiaryOtherTest {
         for(final Label label : labels) {
             label.delete(databaseHelper);
         }
-        diary.delete(databaseHelper);
+        sentence.delete(databaseHelper);
     }
 }

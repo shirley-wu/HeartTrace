@@ -22,7 +22,7 @@ import java.util.List;
  */
 
 @DatabaseTable(tableName = "Sentence")
-public class Sentence { // TODO: quite a lot to revise here. by wxq
+public class Sentence {
     public static final String TAG = "Sentence";
 
     @DatabaseField(generatedId = true, columnName = TAG)
@@ -157,51 +157,42 @@ public class Sentence { // TODO: quite a lot to revise here. by wxq
         }
     }
 
-    public List<Label> getAllLabel(DatabaseHelper helper){
-        try{
-            QueryBuilder<Label, Integer> qb = helper.getLabelDao().queryBuilder();
-            buildLabelWhere(qb.where(), helper);
-            return qb.query();
-        }catch (SQLException e) {
-            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
-            throw new RuntimeException(e);
-        }
+    public List<Label> getAllLabel(DatabaseHelper helper) throws SQLException {
+        QueryBuilder<SentenceLabel, Integer> qb = helper.getSentenceLabelDao().queryBuilder();
+        qb.where().eq(SentenceLabel.SENTENCE_TAG, this);
+
+        QueryBuilder<Label, Integer> labelQb = helper.getLabelDao().queryBuilder();
+        labelQb.join(qb);
+
+        return labelQb.query();
     }
 
     public static List<Sentence> getByRestrict(DatabaseHelper helper, String text, Date begin, Date end, List<Label> labelList) throws SQLException {
         QueryBuilder<Sentence, Integer> qb = helper.getSentenceDao().queryBuilder();
-        Boolean started = false;
 
-        if(labelList != null && labelList.size() > 0){
-            if(started){
-                qb.where().and();
-            } else{
-                started = true;
-            }
-            buildWhere(qb.where(), helper, labelList);
+        Boolean status1 = (text != null);
+        Boolean status2 = (begin != null && end != null);
+        if(status1 || status2){
+            Where<Sentence, Integer> where = qb.where();
+            if (status1) buildWhere(where, text);
+            if (status2) buildWhere(where, begin, end);
+            if (status1 && status2) where.and(2);
         }
-        if(text != null){
-            if(started){
-                qb.where().and();
-            } else{
-                started = true;
-            }
-            buildWhere(qb.where(), text);
+
+        if(labelList != null && labelList.size() > 0) {
+            buildQuery(qb, helper, labelList);
         }
-        if(begin != null && end != null){
-            if(started){
-                qb.where().and();
-            }
-            buildWhere(qb.where(), begin, end);
-        }
+
+        Log.d(TAG, "getByRestrict: " + qb.prepareStatementString());
         return qb.query();
     }
 
-    public static int countByDateLabel (DatabaseHelper helper, Date begin, Date end, List<Label> labelList) {
+    public static long countByDateLabel (DatabaseHelper helper, Date begin, Date end, List<Label> labelList) {
         try {
             QueryBuilder<Sentence, Integer> queryBuilder = helper.getSentenceDao().queryBuilder();
+            buildQuery(queryBuilder, helper, labelList);
             buildWhere(queryBuilder.where(), begin, end);
-            return queryBuilder.query().size();
+            return queryBuilder.countOf();
         }
         catch(SQLException e) {
             Log.e(TAG, "countByDateLabel: cannot access database", e);
@@ -209,50 +200,34 @@ public class Sentence { // TODO: quite a lot to revise here. by wxq
         }
     }
 
-    private void buildLabelWhere(Where<Label, Integer> where, DatabaseHelper helper) {
-        try{
-            QueryBuilder<SentenceLabel, Integer> sentenceLabelBuilder = helper.getSentenceLabelDao().queryBuilder();
-            sentenceLabelBuilder.selectColumns(SentenceLabel.LABEL_TAG);
-            sentenceLabelBuilder.where().eq(SentenceLabel.SENTENCE_TAG, this);
-
-            where.in(Label.TAG, sentenceLabelBuilder);
-        } catch (SQLException e) {
-            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
-            throw new RuntimeException(e);
+    public static void buildQuery(QueryBuilder<Sentence, Integer> qb, DatabaseHelper helper, List<Label> labelList) throws SQLException {
+        int size = labelList.size();
+        if (size == 0) {
+            throw new SQLException("Label list is empty, cannot construct");
         }
+
+        for(int i = 0; i < size; i++) {
+            QueryBuilder<SentenceLabel, Integer> sentenceLabelQb = helper.getSentenceLabelDao().queryBuilder();
+            sentenceLabelQb.where().eq(DiaryLabel.LABEL_TAG, labelList.get(i));
+            sentenceLabelQb.setAlias("query" + i);
+            qb.join(sentenceLabelQb, QueryBuilder.JoinType.INNER, QueryBuilder.JoinWhereOperation.AND);
+        }
+
+        Log.d(TAG, "buildQuery: " + qb.prepareStatementString());
     }
 
-    private static void buildWhere(Where<Sentence, Integer> where, DatabaseHelper helper, List<Label> labelList) {
-        try{
-            QueryBuilder<SentenceLabel, Integer> sentenceLabelBuilder = helper.getSentenceLabelDao().queryBuilder();
-            sentenceLabelBuilder.selectColumns(SentenceLabel.SENTENCE_TAG);
-
-            Where<SentenceLabel, Integer> SentenceLabelWhere = sentenceLabelBuilder.where();
-            for(int i = 0; i < labelList.size(); i++) {
-                if(i != 0){
-                    SentenceLabelWhere.and();
-                }
-                sentenceLabelBuilder.where().eq(SentenceLabel.LABEL_TAG, labelList.get(i)).and();
-            }
-
-            where.in(Sentence.TAG, sentenceLabelBuilder);
-        } catch (SQLException e) {
-            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
-            throw new RuntimeException(e);
-        }
-    }
-
-    private static void buildWhere(Where<Sentence, Integer> where, String text) throws SQLException {
+    public static void buildWhere(Where<Sentence, Integer> where, String text) throws SQLException {
         String[] keywordList = text.split(" ");
-        for(int i = 0; i < keywordList.length; i++) {
-            if(i != 0) {
-                where.or();
+        int length = keywordList.length;
+        if (length > 0) {
+            for (int i = 0; i < length; i++) {
+                where.like("text", "%" + keywordList[i] + "%");
             }
-            where.like("text", "%" + keywordList[i] + "%");
+            where.or(length);
         }
     }
 
-    private static void buildWhere(Where<Sentence, Integer> where, Date begin, Date end) throws SQLException {
+    public static void buildWhere(Where<Sentence, Integer> where, Date begin, Date end) throws SQLException {
         where.between("date", begin, end);
     }
 }

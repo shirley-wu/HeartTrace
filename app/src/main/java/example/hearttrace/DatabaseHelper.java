@@ -47,8 +47,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private Dao<SentenceLabel, Integer> sentenceLabelDao = null;
     private RuntimeExceptionDao<SentenceLabel, Integer> runtimeSentenceLabelDao = null;
 
-    private Dao<Sentencebook, Integer> SentencebookDao = null;
-    private RuntimeExceptionDao<Sentencebook, Integer> runtimeSentncebookDao = null;
+    private Dao<Sentencebook, Integer> sentencebookDao = null;
+    private RuntimeExceptionDao<Sentencebook, Integer> runtimeSentencebookDao = null;
 
     private Dao<SearchHistory, Integer> searchHistoryDao = null;
     private RuntimeExceptionDao<SearchHistory, Integer> runtimeSearchHistoryDao = null;
@@ -75,7 +75,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, Sentence.class);
             TableUtils.createTable(connectionSource, SentenceLabel.class);
             TableUtils.createTable(connectionSource, Sentencebook.class);
-            tableUtils.createTable(connectionSource, SearchHistory.class);
+            TableUtils.createTable(connectionSource, SearchHistory.class);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
             throw new RuntimeException(e);
