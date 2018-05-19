@@ -68,7 +68,8 @@ public class BottlefrontActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(BottlefrontActivity.this, "新建一个瓶子", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(BottlefrontActivity.this, TicketEditActivity.class);
+                startActivity(intent);
             }
         });
 
