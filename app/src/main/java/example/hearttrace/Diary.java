@@ -165,7 +165,8 @@ public class Diary {
         return labelQb.query();
     }
 
-    public static List<Diary> getByRestrict(DatabaseHelper helper, String text, Date begin, Date end, List<Label> labelList) throws SQLException {
+    public static List<Diary> getByRestrict(DatabaseHelper helper, String text, Date begin,
+                                            Date end, List<Label> labelList) throws SQLException {
         QueryBuilder<Diary, Integer> qb = helper.getDiaryDao().queryBuilder();
 
         Boolean status1 = (text != null);

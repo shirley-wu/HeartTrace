@@ -3,18 +3,23 @@ package example.hearttrace;
 import android.util.Log;
 
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DataType;
+import com.j256.ormlite.stmt.DeleteBuilder;
+
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by wu-pc on 2018/5/10.
  */
 
-@DatabaseTable(tableName = "diary_book")
+@DatabaseTable(tableName = "diarybook")
 public class Diarybook {
 
     private static final String TAG = "Diarybook";
@@ -24,7 +29,7 @@ public class Diarybook {
     @DatabaseField(generatedId = true, columnName = TAG)
     private int id;
 
-    @DatabaseField
+    @DatabaseField(columnName = "diarybookname")
     private String diarybookName;
 
     public Diarybook(){};
@@ -56,9 +61,10 @@ public class Diarybook {
     public void deteleSubDiary(DatabaseHelper helper) {
         try {
             Dao<Diary, Integer> dao = helper.getDiaryDao();
+            DeleteBuilder<Diary, Integer> deleteBuilder = dao.deleteBuilder();
 
-            // dao.deleteBuilder().where().eq("Diarybook", diarybookName).delete();
-            // TODO: Cannot compile
+            deleteBuilder.where().eq("Diarybook", this);
+            deleteBuilder.delete();
         }catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
