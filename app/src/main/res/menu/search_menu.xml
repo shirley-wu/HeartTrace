@@ -2,9 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/calender"
-        android:icon="@drawable/calendar_white"
-        android:title="日历"
+        android:id="@+id/action_search"
+        android:title="搜索"
+        app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="always"/>
-
 </menu>

@@ -88,15 +88,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //Toast.makeText(MainActivity.this, "写新日记", Toast.LENGTH_SHORT).show();
-                diaryCardList.add(0,new DiaryCard(2018,5,14,"周一",R.drawable.happy_black,"一篇新日记"));
-                adapter.notifyItemInserted(0);
-                recyclerView.scrollToPosition(0);
+                //diaryCardList.add(0,new DiaryCard(2018,5,14,"周一",R.drawable.happy_black,"一篇新日记"));
+                //adapter.notifyItemInserted(0);
+                //recyclerView.scrollToPosition(0);
+                Intent intent = new Intent(MainActivity.this, DiaryWriteActivity.class);
+                startActivity(intent);
             }
         });
         addBottle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "写新瓶子", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(MainActivity.this, "写新瓶子", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, TicketEditActivity.class);
+                startActivity(intent);
             }
         });
         Button enterBottle = (Button)findViewById(R.id.enter_bottle);

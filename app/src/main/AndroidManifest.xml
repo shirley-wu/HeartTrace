@@ -19,13 +19,11 @@
         </activity>
         <activity android:name=".StatisticsActivity" />
         <activity android:name=".DiaryActivity" />
-        <activity android:name=".SearchActivity" />
+        <activity android:name=".SearchActivity"/>
         <activity android:name=".BottleWriteActivity" />
         <activity android:name=".CalendarActivity" />
         <activity android:name=".DiaryWriteActivity" />
         <activity android:name=".TicketEditActivity" />
-
-
 
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
@@ -37,7 +35,8 @@
 
         <activity android:name=".BottlefrontActivity" />
         <activity android:name=".NoteActivity" />
-        <activity android:name=".BottlesActivity"/>
+        <activity android:name=".BottlesActivity" />
+        <activity android:name=".SearchResultActivity"/>
     </application>
 
 </manifest>
