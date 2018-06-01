@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,6 +69,20 @@ public class NoteActivity extends AppCompatActivity {
         noteDate.setText(date);
         noteWeekday.setText(weekday);
         noteContent.setText(text);
+        Button preNote = (Button)findViewById(R.id.pre_note);
+        Button nextNote = (Button)findViewById(R.id.next_note);
+        preNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(NoteActivity.this, "上一张纸条",Toast.LENGTH_SHORT).show();
+            }
+        });
+        nextNote.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Toast.makeText(NoteActivity.this , "下一张纸条",Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
     }
