@@ -24,6 +24,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.dell.db.DatabaseHelper;
+import com.example.dell.db.Sentence;
+
+
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -68,6 +72,9 @@ public class BottlefrontActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Sentence sencetence = new Sentence ("我有一个梦想");
+                sencetence.setDate();
+                DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
                 Intent intent = new Intent(BottlefrontActivity.this, TicketEditActivity.class);
                 startActivity(intent);
             }

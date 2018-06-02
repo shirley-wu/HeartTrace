@@ -1,5 +1,4 @@
 package com.example.dell.diary;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -23,6 +22,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.dell.db.DatabaseHelper;
+import com.example.dell.db.Sentencebook;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,6 +100,9 @@ public class BottlesActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+
                 final EditText inputBottleName = new EditText(BottlesActivity.this);
                 inputBottleName.setId(R.id.edit_In_BottleName);
                 inputBottleName.setHint("请输入瓶子的名字");
@@ -114,6 +119,8 @@ public class BottlesActivity extends AppCompatActivity {
                                 String inputName = inputBottleName.getText().toString();
                                 String inputDescribe = inputBottleDescribe.getText().toString();
                                 Bottle bottle = new Bottle(inputName, inputDescribe, R.drawable.bottle_pink1);
+                                Sentencebook sentencebook = new Sentencebook(inputName);
+                               /* sentencebook.insert(helper);*/
                                 adapter.addBottle(bottleList.size(), bottle);
                             }
                         });
