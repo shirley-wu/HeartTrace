@@ -35,6 +35,9 @@ dependencies {
     implementation 'com.contrarywind:Android-PickerView:3.2.5'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
     implementation 'com.borax12.materialdaterangepicker:library:1.9'
+//    db
+    implementation 'com.j256.ormlite:ormlite-core:5.1'
+    implementation 'net.zetetic:android-database-sqlcipher:3.5.4'
 
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
