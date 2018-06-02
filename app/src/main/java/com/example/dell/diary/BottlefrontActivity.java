@@ -64,7 +64,7 @@ public class BottlefrontActivity extends AppCompatActivity {
         collapsingToolbar.setTitle(bottleName);
         Glide.with(this).load(bottleImageId).into(bottleImageView);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.bottle_add_fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.note_add_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
