@@ -145,10 +145,11 @@ public class Diary {
         }
     }
 
-    public static List<Diary> getAll(DatabaseHelper helper){
+    public static List<Diary> getAll(DatabaseHelper helper, Boolean ascending){
         try {
             Dao<Diary, Integer> dao = helper.getDiaryDao();
-            return dao.queryForAll();
+            dao.queryBuilder().orderBy("date", ascending);
+            return dao.queryBuilder().query();
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
@@ -166,7 +167,7 @@ public class Diary {
     }
 
     public static List<Diary> getByRestrict(DatabaseHelper helper, String text, Date begin,
-                                            Date end, List<Label> labelList) throws SQLException {
+                                            Date end, List<Label> labelList, Boolean ascending) throws SQLException {
         QueryBuilder<Diary, Integer> qb = helper.getDiaryDao().queryBuilder();
 
         Boolean status1 = (text != null);
@@ -181,6 +182,8 @@ public class Diary {
         if(labelList != null && labelList.size() > 0) {
             buildQuery(qb, helper, labelList);
         }
+
+        qb.orderBy("date", ascending);
 
         Log.d(TAG, "getByRestrict: " + qb.prepareStatementString());
         return qb.query();
