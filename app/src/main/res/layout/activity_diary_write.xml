@@ -9,6 +9,6 @@
 
     <include layout="@layout/diary_write_content"/>
 
-    <include layout="@layout/setting_bottom_sheet"/>
+    <include layout="@layout/font_setting_bottom_sheet"/>
 
 </android.support.design.widget.CoordinatorLayout>
