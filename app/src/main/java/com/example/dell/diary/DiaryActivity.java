@@ -78,6 +78,8 @@ public class DiaryActivity extends AppCompatActivity {
             case android.R.id.home:
                 finish();
                 return true;
+            case R.id.delete:
+                Toast.makeText(DiaryActivity.this, "删除这一篇日记",Toast.LENGTH_SHORT).show();
             default:
         }
         return true;
