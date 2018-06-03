@@ -37,6 +37,47 @@
         <activity android:name=".NoteActivity" />
         <activity android:name=".BottlesActivity" />
         <activity android:name=".SearchResultActivity"/>
+
+        <!-- Note: the followings are added for authentication (stub). If anything unpredicted happens tell us. -->
+        <service
+            android:name="com.example.dell.auth.AuthenticatorService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/authenticator" />
+        </service>
+
+        <!-- Note: the followings are added for synchronization. If anything unpredicted happens tell us. -->
+        <provider
+            android:name="com.example.dell.sync.provider.StubProvider"
+            android:authorities="com.example.android.datasync.provider"
+            android:exported="false"
+            android:syncable="true" />
+
+        <service
+            android:name="com.example.dell.sync.SyncService"
+            android:exported="true"
+            android:process=":sync">
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter"/>
+            </intent-filter>
+            <meta-data android:name="android.content.SyncAdapter"
+                android:resource="@xml/syncadapter" />
+        </service>
+
     </application>
+
+    <!--Note: the following pemissions are added for synchronization. -->
+    <uses-permission
+        android:name="android.permission.INTERNET"/>
+    <uses-permission
+        android:name="android.permission.READ_SYNC_SETTINGS"/>
+    <uses-permission
+        android:name="android.permission.WRITE_SYNC_SETTINGS"/>
+    <uses-permission
+        android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
 
 </manifest>
