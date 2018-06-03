@@ -34,11 +34,12 @@ public class SyncTest {
         ContentResolver.setIsSyncable(mAccount, AUTHORITY, 1);
     }
 
-    @Test
+    // @Test
     public void testPeriodSync() throws InterruptedException {
         ContentResolver.addPeriodicSync(
                 mAccount, AUTHORITY,
                 Bundle.EMPTY, 1); // 1 seconds period
+        // However, the minimum interval is 900s.
         Log.d(TAG, "testPeriodSync: begin to sleep");
         Thread.sleep(5500);
         Log.d(TAG, "testPeriodSync: sleep end");
@@ -46,7 +47,10 @@ public class SyncTest {
 
     @Test
     public void testRequestSync() throws InterruptedException {
-        ContentResolver.requestSync(mAccount, AUTHORITY, Bundle.EMPTY);
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
+        bundle.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+        ContentResolver.requestSync(mAccount, AUTHORITY, bundle);
         Log.d(TAG, "testRequestSync: begin to sleep");
         Thread.sleep(500);
         Log.d(TAG, "testRequestSync: sleep end");

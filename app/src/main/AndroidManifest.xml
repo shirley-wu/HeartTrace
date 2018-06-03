@@ -53,7 +53,7 @@
         <!-- Note: the followings are added for synchronization. If anything unpredicted happens tell us. -->
         <provider
             android:name="com.example.dell.sync.provider.StubProvider"
-            android:authorities="com.example.android.datasync.provider"
+            android:authorities="com.example.dell.sync.provider"
             android:exported="false"
             android:syncable="true" />
 
