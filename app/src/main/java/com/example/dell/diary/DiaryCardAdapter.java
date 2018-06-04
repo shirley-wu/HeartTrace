@@ -44,7 +44,6 @@ public class DiaryCardAdapter extends RecyclerView.Adapter<DiaryCardAdapter.View
 
         public ViewHolder(View view) {
             super(view);
-            //cardView = (CardView) view;
             timeLineView = view;
             //diaryIcon = (ImageView) view.findViewById(R.id.diary_icon);
             diaryDay = (TextView)view.findViewById(R.id.diary_day);

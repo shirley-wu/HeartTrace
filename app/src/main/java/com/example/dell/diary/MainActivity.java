@@ -35,10 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     public List<Diary> diaryList = new ArrayList<>();
-    //public List<Diary> diaryList;
-    //public List<Diary> diaryListReverse = new ArrayList<>();
     private DiaryCardAdapter adapter;
-    int flag = 0;
     private FloatingActionButton add;
     private RecyclerView recyclerView;
 
@@ -85,15 +82,13 @@ public class MainActivity extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(flag == 0) {
+                if(addDiary.getVisibility() == View.INVISIBLE) {
                     addDiary.setVisibility(View.VISIBLE);
                     addBottle.setVisibility(View.VISIBLE);
-                    flag = 1;
                 }
                 else{
                     addDiary.setVisibility(View.INVISIBLE);
                     addBottle.setVisibility(View.INVISIBLE);
-                    flag = 0;
                 }
             }
         });
@@ -101,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //Toast.makeText(MainActivity.this, "写新日记", Toast.LENGTH_SHORT).show();
-                //diaryCardList.add(0,new DiaryCard(2018,5,14,"周一",R.drawable.happy_black,"一篇新日记"));
                 DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
                 Diary newDiary = new Diary("日记内容");
                 Random r = new Random();
@@ -198,7 +192,6 @@ public class MainActivity extends AppCompatActivity {
         final FloatingActionButton addBottle = (FloatingActionButton) findViewById(R.id.add_bottle);
         addDiary.setVisibility(View.INVISIBLE);
         addBottle.setVisibility(View.INVISIBLE);
-        flag = 0;
     }
 
     @Override
