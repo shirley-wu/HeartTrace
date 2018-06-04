@@ -94,11 +94,12 @@ public class BottlesActivity extends AppCompatActivity {
         adapter = new BottleAdapter(bottleList);
         recyclerView.setAdapter(adapter);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.add_bottle_fab);
+        FloatingActionButton fab =  findViewById(R.id.add_bottle_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final EditText inputBottleName = new EditText(BottlesActivity.this);
+                inputBottleName.setId(R.id.edit_In_BottleName);
                 inputBottleName.setHint("请输入瓶子的名字");
                 inputBottleName.setFocusable(true);
                 final EditText inputBottleDescribe = new EditText(BottlesActivity.this);

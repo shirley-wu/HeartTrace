@@ -146,11 +146,10 @@ public class Diary implements Serializable {
         }
     }
 
-    public static List<Diary> getAll(DatabaseHelper helper, Boolean ascending){
+    public static List<Diary> getAll(DatabaseHelper helper){
         try {
             Dao<Diary, Integer> dao = helper.getDiaryDao();
-            dao.queryBuilder().orderBy("date", ascending);
-            return dao.queryBuilder().query();
+            return dao.queryForAll();
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
@@ -168,7 +167,7 @@ public class Diary implements Serializable {
     }
 
     public static List<Diary> getByRestrict(DatabaseHelper helper, String text, Date begin,
-                                            Date end, List<Label> labelList, Boolean ascending) throws SQLException {
+                                            Date end, List<Label> labelList) throws SQLException {
         QueryBuilder<Diary, Integer> qb = helper.getDiaryDao().queryBuilder();
 
         Boolean status1 = (text != null);
@@ -183,8 +182,6 @@ public class Diary implements Serializable {
         if(labelList != null && labelList.size() > 0) {
             buildQuery(qb, helper, labelList);
         }
-
-        qb.orderBy("date", ascending);
 
         Log.d(TAG, "getByRestrict: " + qb.prepareStatementString());
         return qb.query();

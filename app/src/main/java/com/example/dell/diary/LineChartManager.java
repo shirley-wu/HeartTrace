@@ -225,9 +225,11 @@ public class LineChartManager {
      *
      * @param str
      */
-    public void setDescription(String str) {
+    public void setDescription(String str,int color) {
         Description description = new Description();
         description.setText(str);
+        description.setTextSize(12f);
+        description.setTextColor(color);
         lineChart.setDescription(description);
         lineChart.invalidate();
     }

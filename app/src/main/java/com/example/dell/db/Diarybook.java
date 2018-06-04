@@ -58,7 +58,7 @@ public class Diarybook {
         }
     }
 
-    public void deleteSubDiary(DatabaseHelper helper) {
+    public void deteleSubDiary(DatabaseHelper helper) {
         try {
             Dao<Diary, Integer> dao = helper.getDiaryDao();
             DeleteBuilder<Diary, Integer> deleteBuilder = dao.deleteBuilder();
@@ -66,48 +66,6 @@ public class Diarybook {
             deleteBuilder.where().eq("Diarybook", this);
             deleteBuilder.delete();
         }catch (SQLException e) {
-            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void insert(DatabaseHelper helper) {
-        try {
-            Dao<Diarybook, Integer> dao = helper.getDiarybookDao();
-            Log.i("diarybook", "dao = " + dao + " 插入 diarybook " + this);
-            int returnValue = dao.create(this);
-            Log.i("diarybook", "插入后返回值：" + returnValue);
-        } catch (SQLException e) {
-            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void update(DatabaseHelper helper) {
-        try {
-            Dao<Diarybook, Integer> dao = helper.getDiarybookDao();
-            Log.i("diarybook", "dao = " + dao + " 更新 diarybook " + this);
-            int returnValue = dao.update(this);
-            Log.i("diarybook", "更新后返回值：" + returnValue);
-        } catch (SQLException e) {
-            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void delete(DatabaseHelper helper) {
-        try {
-            Dao<Diary, Integer> subdao = helper.getDiaryDao();
-            DeleteBuilder<Diary, Integer> deleteBuilder = subdao.deleteBuilder();
-
-            deleteBuilder.where().eq("Diarybook", this);
-            deleteBuilder.delete();
-
-            Dao<Diarybook, Integer> dao = helper.getDiarybookDao();
-            Log.i("diarybook", "dao = " + dao + " 删除 diarybook " + this);
-            int returnValue = dao.delete(this);
-            Log.i("diarybook", "删除后返回值：" + returnValue);
-        } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
         }

@@ -146,11 +146,10 @@ public class Sentence {
         }
     }
 
-    public static List<Sentence> getAll(DatabaseHelper helper, Boolean ascending){
+    public static List<Sentence> getAll(DatabaseHelper helper){
         try {
             Dao<Sentence, Integer> dao = helper.getSentenceDao();
-            dao.queryBuilder().orderBy("date", ascending);
-            return dao.queryBuilder().query();
+            return dao.queryForAll();
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
@@ -167,7 +166,7 @@ public class Sentence {
         return labelQb.query();
     }
 
-    public static List<Sentence> getByRestrict(DatabaseHelper helper, String text, Date begin, Date end, List<Label> labelList, Boolean ascending) throws SQLException {
+    public static List<Sentence> getByRestrict(DatabaseHelper helper, String text, Date begin, Date end, List<Label> labelList) throws SQLException {
         QueryBuilder<Sentence, Integer> qb = helper.getSentenceDao().queryBuilder();
 
         Boolean status1 = (text != null);
@@ -182,8 +181,6 @@ public class Sentence {
         if(labelList != null && labelList.size() > 0) {
             buildQuery(qb, helper, labelList);
         }
-
-        qb.orderBy("date", ascending);
 
         Log.d(TAG, "getByRestrict: " + qb.prepareStatementString());
         return qb.query();
