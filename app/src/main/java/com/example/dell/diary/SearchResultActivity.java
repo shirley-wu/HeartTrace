@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.dell.db.DatabaseHelper;
 import com.example.dell.db.Diary;
 import com.example.dell.db.SearchHistory;
+import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -86,11 +87,30 @@ public class SearchResultActivity extends AppCompatActivity {
 
         diaryList.clear();
         DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+        Intent intent = getIntent();
+        String searchText = intent.getStringExtra("search_text");
+        //diaryList = Diary.getByRestrict(helper,searchText,null,null,null);
         diaryList = Diary.getAll(helper);
         if(diaryList == null){
             diaryList = new ArrayList<>();
         }
         Collections.reverse(diaryList);
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(databaseHelper != null){
+            OpenHelperManager.releaseHelper();
+            databaseHelper = null;
+        }
+    }
+
+    private DatabaseHelper getDataBaseHelper(){
+        if(databaseHelper == null){
+            databaseHelper = OpenHelperManager.getHelper(SearchResultActivity.this, DatabaseHelper.class);
+        }
+        return databaseHelper;
     }
 }
 
