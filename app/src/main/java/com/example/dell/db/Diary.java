@@ -146,7 +146,8 @@ public class Diary implements Serializable {
         }
     }
 
-    public static List<Diary> getAll(DatabaseHelper helper){
+    //测试github的功能
+    public static List<Diary> getAll(DatabaseHelper helper, Boolean ascending){
         try {
             Dao<Diary, Integer> dao = helper.getDiaryDao();
             return dao.queryForAll();
