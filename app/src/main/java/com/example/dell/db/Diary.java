@@ -1,4 +1,4 @@
-package com.example.dell.db;
+﻿package com.example.dell.db;
 
 import android.util.Log;
 
@@ -146,7 +146,6 @@ public class Diary implements Serializable {
         }
     }
 
-    //测试github的功能
     public static List<Diary> getAll(DatabaseHelper helper, Boolean ascending){
         try {
             Dao<Diary, Integer> dao = helper.getDiaryDao();
