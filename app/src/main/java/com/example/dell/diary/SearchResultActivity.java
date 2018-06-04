@@ -95,6 +95,7 @@ public class SearchResultActivity extends AppCompatActivity {
             diaryList = new ArrayList<>();
         }
         Collections.reverse(diaryList);
+        //我在测试github
     }
 
     @Override
