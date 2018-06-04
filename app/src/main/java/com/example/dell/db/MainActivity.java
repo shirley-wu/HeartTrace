@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.dell.diary.R;
 import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
@@ -24,9 +23,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
+        //setContentView(example.hearttrace.R.layout.activity_main);
 
-//        final EditText editText = (EditText) findViewById(R.id.edit_text);
+        //final EditText editText = (EditText) findViewById(example.hearttrace.R.id.edit_text);
 
 
         /*Button button = (Button) findViewById(R.id.button_submit);
@@ -52,13 +51,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                     Log.i(Diary.TAG, "=====================================");
                     for(Label i : labelNewDiary){
-                    Log.i(Diary.TAG, "=======================
                         Log.i(Label.TAG, i.getLabelname());
                     }
                     Log.i(Diary.TAG, "=====================================");
                     for(Diary i : diaryList ){
                         Log.i(Diary.TAG, i.getDate()+i.getText());
-                    }==============");
+                    }
+                    Log.i(Diary.TAG, "=====================================");
                     for(Label i : labelList){
                         Log.i(Label.TAG, i.getLabelname());
                     }
