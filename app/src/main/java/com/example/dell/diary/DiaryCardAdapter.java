@@ -16,7 +16,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.dell.db.DatabaseHelper;
+import com.example.dell.db.Diary;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -24,13 +28,15 @@ import java.util.List;
  */
 
 public class DiaryCardAdapter extends RecyclerView.Adapter<DiaryCardAdapter.ViewHolder> {
-    private List<DiaryCard> mDiaryCardList;
+//    private List<DiaryCard> mDiaryCardList;
+    private List<Diary>mDiaryCardList;
     private Context mContext;
+    public List<String> weekList = new ArrayList<>(Arrays.asList("周日","周一","周二","周三"," 周四","周五","周六"));
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         //CardView cardView;
         View timeLineView;
-        ImageView diaryIcon;
+        //ImageView diaryIcon;
         TextView diaryDay;
         TextView diaryYearMonth;
         TextView diaryContent;
@@ -40,7 +46,7 @@ public class DiaryCardAdapter extends RecyclerView.Adapter<DiaryCardAdapter.View
             super(view);
             //cardView = (CardView) view;
             timeLineView = view;
-            diaryIcon = (ImageView) view.findViewById(R.id.diary_icon);
+            //diaryIcon = (ImageView) view.findViewById(R.id.diary_icon);
             diaryDay = (TextView)view.findViewById(R.id.diary_day);
             diaryYearMonth = (TextView)view.findViewById(R.id.diary_year_month);
             diaryContent = (TextView)view.findViewById(R.id.diary_text);
@@ -48,7 +54,7 @@ public class DiaryCardAdapter extends RecyclerView.Adapter<DiaryCardAdapter.View
         }
     }
 
-    public DiaryCardAdapter(List<DiaryCard> diaryCardList) {
+    public DiaryCardAdapter(List<Diary> diaryCardList) {
         mDiaryCardList = diaryCardList;
     }
 
@@ -64,14 +70,8 @@ public class DiaryCardAdapter extends RecyclerView.Adapter<DiaryCardAdapter.View
             @Override
             public void onClick(View v){
                 int position = holder.getAdapterPosition();
-                DiaryCard diaryCard = mDiaryCardList.get(position);
+                Diary diaryCard = mDiaryCardList.get(position);
                 Intent intent = new Intent(mContext,DiaryActivity.class);
-                //intent.putExtra("diary_year",diaryCard.getYear());
-                //intent.putExtra("diary_month",diaryCard.getMonth());
-                //intent.putExtra("diary_day",diaryCard.getDay());
-                //intent.putExtra("diary_weekday",diaryCard.getWeekDay());
-                //intent.putExtra("diary_icon",diaryCard.getEmotionImageId());
-                //intent.putExtra("diary_text",diaryCard.getContent());
                 intent.putExtra("diary_list",diaryCard);
                 mContext.startActivity(intent);
             }
@@ -87,9 +87,11 @@ public class DiaryCardAdapter extends RecyclerView.Adapter<DiaryCardAdapter.View
 
                 dialog.setPositiveButton("确认",new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog, int which){
+                        DatabaseHelper helper = new DatabaseHelper(mContext);
                         int position = holder.getAdapterPosition();
-                        DiaryCard diaryCard = mDiaryCardList.get(position);
+                        Diary diaryCard = mDiaryCardList.get(position);
                         mDiaryCardList.remove(diaryCard);
+                        diaryCard.delete(helper);
                         notifyItemRemoved(position);
                     }
                 });
@@ -111,7 +113,7 @@ public class DiaryCardAdapter extends RecyclerView.Adapter<DiaryCardAdapter.View
             @Override
             public boolean onLongClick(View v){
                 int position = holder.getAdapterPosition();
-                DiaryCard diaryCard = mDiaryCardList.get(position);
+                Diary diaryCard = mDiaryCardList.get(position);
                 mPop.show(view);
                 return true;
             }
@@ -121,13 +123,13 @@ public class DiaryCardAdapter extends RecyclerView.Adapter<DiaryCardAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        DiaryCard diaryCard = mDiaryCardList.get(position);
-        holder.diaryContent.setText(diaryCard.getContent());
-        holder.diaryWeekDay.setText(diaryCard.getWeekDay());
-        String yearMonth = diaryCard.getYear()+"."+diaryCard.getMonth();
-        holder.diaryYearMonth.setText(yearMonth);
-        holder.diaryDay.setText(String.valueOf(diaryCard.getDay()));
-        Glide.with(mContext).load(diaryCard.getEmotionImageId()).into(holder.diaryIcon);
+         Diary diaryCard = mDiaryCardList.get(position);
+         holder.diaryContent.setText(diaryCard.getText());
+         holder.diaryWeekDay.setText(weekList.get(diaryCard.getDate().getDay()));
+         String yearMonth = (diaryCard.getDate().getYear())+"."+ (diaryCard.getDate().getMonth());
+         holder.diaryYearMonth.setText(yearMonth);
+         holder.diaryDay.setText(String.valueOf(diaryCard.getDate().getDate()));
+        //Glide.with(mContext).load(diaryCard.getEmotionImageId()).into(holder.diaryIcon);
     }
 
     @Override

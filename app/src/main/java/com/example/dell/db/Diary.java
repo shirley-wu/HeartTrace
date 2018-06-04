@@ -15,6 +15,7 @@ import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,7 +26,7 @@ import java.util.List;
  */
 
 @DatabaseTable(tableName = "Diary")
-public class Diary {
+public class Diary implements Serializable {
     public static final String TAG = "diary";
 
     @DatabaseField(generatedId = true, columnName = TAG)
