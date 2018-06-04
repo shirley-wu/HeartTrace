@@ -24,9 +24,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+<<<<<<< HEAD
 //        setContentView(R.layout.activity_main);
 
 //        final EditText editText = (EditText) findViewById(R.id.edit_text);
+=======
+        //setContentView(example.hearttrace.R.layout.activity_main);
+
+        //final EditText editText = (EditText) findViewById(example.hearttrace.R.id.edit_text);
+>>>>>>> 25603cd606487c2c59b1b4cc4a470b68e39da03d
 
 
         /*Button button = (Button) findViewById(R.id.button_submit);
