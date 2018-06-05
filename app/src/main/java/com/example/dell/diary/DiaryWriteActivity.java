@@ -56,6 +56,9 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.dell.db.DatabaseHelper;
+import com.example.dell.db.Diary;
+
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
 
 import java.io.ByteArrayInputStream;
@@ -233,6 +236,15 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 }
                 break;
             case R.id.confirm:
+                Log.i("test", diary_write.getText().toString());
+                DatabaseHelper helper = new DatabaseHelper(DiaryWriteActivity.this);
+                Diary diary = new Diary(diary_write.getText().toString());
+                diary.setDate();
+                diary.insert(helper);
+                List<Diary> diaryList = Diary.getAll(helper,true);
+                for(Diary i : diaryList){
+                    Log.i("test", i.getText());
+                }
                 Toast.makeText(DiaryWriteActivity.this, diary_write.getText(), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.font_setting:
