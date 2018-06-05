@@ -12,30 +12,40 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.dell.db.DatabaseHelper;
+import com.example.dell.db.Diary;
+import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import static android.R.attr.id;
 
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
-    public List<DiaryCard> diaryCardList = new ArrayList<>();
+    public List<Diary> diaryList = new ArrayList<>();
     private DiaryCardAdapter adapter;
-    int flag = 0;
     private FloatingActionButton add;
     private RecyclerView recyclerView;
+
+    private DatabaseHelper databaseHelper = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -72,15 +82,13 @@ public class MainActivity extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(flag == 0) {
+                if(addDiary.getVisibility() == View.INVISIBLE) {
                     addDiary.setVisibility(View.VISIBLE);
                     addBottle.setVisibility(View.VISIBLE);
-                    flag = 1;
                 }
                 else{
                     addDiary.setVisibility(View.INVISIBLE);
                     addBottle.setVisibility(View.INVISIBLE);
-                    flag = 0;
                 }
             }
         });
@@ -88,11 +96,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //Toast.makeText(MainActivity.this, "写新日记", Toast.LENGTH_SHORT).show();
-                //diaryCardList.add(0,new DiaryCard(2018,5,14,"周一",R.drawable.happy_black,"一篇新日记"));
-                //adapter.notifyItemInserted(0);
-                //recyclerView.scrollToPosition(0);
-                Intent intent = new Intent(MainActivity.this, DiaryWriteActivity.class);
-                startActivity(intent);
+                DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+                Diary newDiary = new Diary("日记内容");
+                Random r = new Random();
+                int randDay = r.nextInt(29)+1;
+                newDiary.setDate(new Date(2018,6,randDay));
+                diaryList.add(0,newDiary);
+                newDiary.insert(helper);
+                adapter.notifyItemInserted(0);
+                recyclerView.scrollToPosition(0);
+                //Intent intent = new Intent(MainActivity.this, DiaryWriteActivity.class);
+                //startActivity(intent);
             }
         });
         addBottle.setOnClickListener(new View.OnClickListener() {
@@ -115,29 +129,30 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new DiaryCardAdapter(diaryCardList);
+        adapter = new DiaryCardAdapter(diaryList);
         recyclerView.setAdapter(adapter);
-    }
-
-    protected void onResume(){
-        super.onResume();
-        final FloatingActionButton addDiary = (FloatingActionButton) findViewById(R.id.add_diary);
-        final FloatingActionButton addBottle = (FloatingActionButton) findViewById(R.id.add_bottle);
-        addDiary.setVisibility(View.INVISIBLE);
-        addBottle.setVisibility(View.INVISIBLE);
-        flag = 0;
     }
 
     private void initDiaryCard(){
 
-        diaryCardList.clear();
-        DiaryCard diaryCard1 = new DiaryCard(2018,5,5,"周六",R.drawable.happy_black,"哈哈哈哈哈哈哈哈哈哈！！！");
-        diaryCardList.add(0,diaryCard1);
-        DiaryCard diaryCard2 = new DiaryCard(2018,5,6,"周日",R.drawable.normal_black,"　　也许事情总是不一定能如人意的。可是，我总是在想，只要给我一段美好的回忆也就够了。哪怕只有一天，一个晚上，也就应该知足了。\n" +
-                "　　很多愿望，我想要的，上苍都给了我，很快或者很慢地，我都一一地接到了。而我对青春的美的渴望，虽然好象一直没有得到，可是走着走着，回过头一看，好象又都已经过去了。有几次，当时并没能马上感觉到，可是，也很有几次，我心里猛然醒悟：原来，这就是青春！");
-        diaryCardList.add(0,diaryCard2);
-        DiaryCard diaryCard3 = new DiaryCard(2018,5,7,"周一",R.drawable.sad_black,"(ಥ﹏ಥ)");
-        diaryCardList.add(0,diaryCard3);
+          diaryList.clear();
+          DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+          diaryList = Diary.getAll(helper);
+          if(diaryList == null){
+              diaryList = new ArrayList<>();
+          }
+          else{
+//              Log.i("123",String.valueOf(diaryList.size()));
+//              int number = diaryList.size();
+//              for(int i=0;i<number;i++){
+//                  diaryList.get(i).delete(helper);
+//                  diaryList.remove(i);
+//                  Log.i("234",String.valueOf(diaryList.size()));
+//              }
+//              Log.i("456",String.valueOf(diaryList.size()));
+          }
+        Collections.reverse(diaryList);
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -169,5 +184,29 @@ public class MainActivity extends AppCompatActivity {
             default:
         }
         return true;
+    }
+
+    protected void onResume(){
+        super.onResume();
+        final FloatingActionButton addDiary = (FloatingActionButton) findViewById(R.id.add_diary);
+        final FloatingActionButton addBottle = (FloatingActionButton) findViewById(R.id.add_bottle);
+        addDiary.setVisibility(View.INVISIBLE);
+        addBottle.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(databaseHelper != null){
+            OpenHelperManager.releaseHelper();
+            databaseHelper = null;
+        }
+    }
+
+    private DatabaseHelper getDataBaseHelper(){
+        if(databaseHelper == null){
+            databaseHelper = OpenHelperManager.getHelper(MainActivity.this, DatabaseHelper.class);
+        }
+        return databaseHelper;
     }
 }

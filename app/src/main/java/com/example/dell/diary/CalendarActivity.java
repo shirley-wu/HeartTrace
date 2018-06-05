@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.bigkoo.pickerview.TimePickerView;
 
 
+import com.example.dell.db.Diary;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
@@ -39,7 +40,7 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
     private MaterialCalendarView calendarView;
     private ImageView calendar_picture;
     private RecyclerView recyclerView;
-    public List<DiaryCard> diaryCardList = new ArrayList<>();
+    public List<Diary> diaryCardList = new ArrayList<>();
     private com.example.dell.diary.DiaryCardAdapter adapter;
     private TextView toolbarTitle;
     private ImageButton selectDate;
@@ -118,19 +119,9 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
     private void initDiaryCard(){
 
         diaryCardList.clear();
-        DiaryCard diaryCard1 = new DiaryCard(2018,5,5,"周六",R.drawable.happy_black,"哈哈哈哈哈哈哈哈哈哈！！！");
-        diaryCardList.add(0,diaryCard1);
-        DiaryCard diaryCard2 = new DiaryCard(2018,5,6,"周日",R.drawable.normal_black,"　　也许事情总是不一定能如人意的。可是，我总是在想，只要给我一段美好的回忆也就够了。哪怕只有一天，一个晚上，也就应该知足了。\n" +
-                "　　很多愿望，我想要的，上苍都给了我，很快或者很慢地，我都一一地接到了。而我对青春的美的渴望，虽然好象一直没有得到，可是走着走着，回过头一看，好象又都已经过去了。有几次，当时并没能马上感觉到，可是，也很有几次，我心里猛然醒悟：原来，这就是青春！");
-        diaryCardList.add(0,diaryCard2);
-        DiaryCard diaryCard3 = new DiaryCard(2018,5,7,"周一",R.drawable.sad_black,"(ಥ﹏ಥ)");
-        diaryCardList.add(0,diaryCard3);
-        DiaryCard diaryCard4 = new DiaryCard(2018,5,9,"周三",R.drawable.happy_black,"康鑫好帅！");
-        diaryCardList.add(0,diaryCard4);
-        DiaryCard diaryCard5 = new DiaryCard(2018,5,10,"周四",R.drawable.sad_black,"学姐好美！");
-        diaryCardList.add(0,diaryCard5);
-        DiaryCard diaryCard6 = new DiaryCard(2018,5,12,"周六",R.drawable.sad_black,"小哥哥没我可爱hhh");
-        diaryCardList.add(0,diaryCard6);
+        Diary diary1 = new Diary("我是一篇日记。");
+        diary1.setDate(new Date(2018,6,2));
+        diaryCardList.add(0,diary1);
     }
 
     public void onClick(View view) {

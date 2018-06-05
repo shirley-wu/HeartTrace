@@ -13,11 +13,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.example.dell.db.Diary;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class DiaryActivity extends AppCompatActivity {
 
+    public List<String> weekList = new ArrayList<>(Arrays.asList("周日","周一","周二","周三"," 周四","周五","周六"));
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +37,7 @@ public class DiaryActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
         Intent intent = getIntent();
-        DiaryCard diaryCard = (DiaryCard) intent.getSerializableExtra("diary_list");
+        Diary diary = (Diary) intent.getSerializableExtra("diary_list");
         //int year = intent.getIntExtra("diary_year",2018);
         //int month = intent.getIntExtra("diary_month",1);
         //int day = intent.getIntExtra("diary_day",1);
@@ -42,12 +48,12 @@ public class DiaryActivity extends AppCompatActivity {
         TextView diaryDate = (TextView)findViewById(R.id.diary_content_date);
         TextView diaryWeekday = (TextView)findViewById(R.id.diary_content_weekday);
         TextView diaryContent = (TextView)findViewById(R.id.diary_content_text);
-        ImageView diaryIcon = (ImageView)findViewById(R.id.diary_content_icon);
-        String date = diaryCard.getYear()+"."+diaryCard.getMonth()+"."+diaryCard.getDay();
+        //ImageView diaryIcon = (ImageView)findViewById(R.id.diary_content_icon);
+        String date = diary.getDate().getYear()+"."+diary.getDate().getMonth()+"."+diary.getDate().getDate();
         diaryDate.setText(date);
-        diaryWeekday.setText(diaryCard.getWeekDay());
-        diaryContent.setText(diaryCard.getContent());
-        Glide.with(this).load(diaryCard.getEmotionImageId()).into(diaryIcon);
+        diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
+        diaryContent.setText(diary.getText());
+        //Glide.with(this).load(diaryCard.getEmotionImageId()).into(diaryIcon);
 
         preDiary.setOnClickListener(new View.OnClickListener() {
             @Override

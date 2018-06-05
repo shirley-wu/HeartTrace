@@ -2,10 +2,14 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/HeartTrace.iml" filepath="$PROJECT_DIR$/HeartTrace.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Diary.iml" filepath="$PROJECT_DIR$/Diary.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/diary.iml" filepath="$PROJECT_DIR$/diary.iml" />
       <module fileurl="file://D:/Users/wu-pc/repos/HeartTrace/diary.iml" filepath="D:/Users/wu-pc/repos/HeartTrace/diary.iml" />
+=======
+
+>>>>>>> 60fb69ea1e8e07d2e14e581b09006f4b6256f1f1
     </modules>
   </component>
 </project>

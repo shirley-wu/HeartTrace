@@ -2,15 +2,33 @@ package com.example.dell.diary;
 
 import android.app.SearchManager;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.dell.db.DatabaseHelper;
+import com.example.dell.db.Diary;
+import com.example.dell.db.SearchHistory;
+import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class SearchResultActivity extends AppCompatActivity {
+
+    public List<Diary> diaryList = new ArrayList<>();
+    private SearchResultAdapter adapter;
+    private RecyclerView recyclerView;
+
+    private DatabaseHelper databaseHelper = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +41,6 @@ public class SearchResultActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
         actionBar.setTitle("");
-        Intent intent = getIntent();
-        String queryText = intent.getStringExtra("search_text");
-        final TextView searchText = (TextView)findViewById(R.id.search_text);
-        searchText.setText(queryText);
 
         final SearchView searchView = (SearchView)findViewById(R.id.search_view);
         //设置我们的SearchView
@@ -48,7 +62,7 @@ public class SearchResultActivity extends AppCompatActivity {
                 //String seachText = searchView.getQuery().toString();
                 //intent.putExtra("search_text",seachText);
                 //startActivity(intent);
-                searchText.setText(query);
+                //searchText.setText(query);
                 return true;
             }
 
@@ -61,6 +75,45 @@ public class SearchResultActivity extends AppCompatActivity {
                 return true;
             }
         });
+        initSearchResult();
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new SearchResultAdapter(diaryList);
+        recyclerView.setAdapter(adapter);
+    }
 
+    private void initSearchResult(){
+
+        diaryList.clear();
+        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+        Intent intent = getIntent();
+        String searchText = intent.getStringExtra("search_text");
+        //diaryList = Diary.getByRestrict(helper,searchText,null,null,null);
+        diaryList = Diary.getAll(helper);
+        if(diaryList == null){
+            diaryList = new ArrayList<>();
+        }
+        Collections.reverse(diaryList);
+        //我在测试github
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(databaseHelper != null){
+            OpenHelperManager.releaseHelper();
+            databaseHelper = null;
+        }
+    }
+
+    private DatabaseHelper getDataBaseHelper(){
+        if(databaseHelper == null){
+            databaseHelper = OpenHelperManager.getHelper(SearchResultActivity.this, DatabaseHelper.class);
+        }
+        return databaseHelper;
     }
 }
+
+
+
