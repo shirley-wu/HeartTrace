@@ -1,4 +1,4 @@
-﻿package com.example.dell.db;
+package com.example.dell.db;
 
 import android.util.Log;
 
@@ -64,7 +64,7 @@ public class Diary {
             date = new Date();
         }
     }
-    
+
     public void setDate(Date date){
         // dangerous!!!!! for test only.
         this.date = date;

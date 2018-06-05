@@ -90,7 +90,7 @@ public class SearchResultActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String searchText = intent.getStringExtra("search_text");
         //diaryList = Diary.getByRestrict(helper,searchText,null,null,null);
-        diaryList = Diary.getAll(helper);
+        diaryList = Diary.getAll(helper,false);
         if(diaryList == null){
             diaryList = new ArrayList<>();
         }
