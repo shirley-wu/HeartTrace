@@ -8,6 +8,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Created by chen on 5/19/2018.
@@ -21,7 +22,7 @@ public class SearchHistory {
     private int id;
 
     @DatabaseField(unique = true)
-    String entry;
+    private String entry;
 
     public SearchHistory() {
     };
@@ -32,6 +33,18 @@ public class SearchHistory {
 
     public String getEntry() {
         return this.entry;
+    }
+
+    public static List<SearchHistory> getAll(DatabaseHelper helper)
+    {
+        try {
+            Dao<SearchHistory, Integer> dao = helper.getSearchHistoryDao();
+
+            return dao.queryForAll();
+        } catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
     }
 
     public void deleteEntry(DatabaseHelper helper) {
