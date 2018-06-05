@@ -3,14 +3,18 @@ package com.example.dell.sync;
 import android.util.Log;
 
 import com.example.dell.db.Diary;
+import com.example.dell.db.Sentence;
 import com.example.dell.server.ServerAccessor;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,7 +25,7 @@ public class SyncServerAccessor {
 
     final static private String TAG = "SyncServerAccessor";
 
-    public Object getEntries(Class c) {
+    public List getEntries(Class c) {
         URL url;
         try{
             url = new URL(ServerAccessor.SERVER_IP + "/sync");
@@ -36,107 +40,109 @@ public class SyncServerAccessor {
             conn.setRequestMethod("GET");
             conn.setRequestProperty("className", c.getName());
 
-            if(conn.getResponseCode() != 200) return null;
+            int responseCode = conn.getResponseCode();
+            if(responseCode != 200) {
+                Log.d(TAG, "getEntries: response code" + responseCode);
+                return null;
+            }
 
-            is = conn.getInputStream(); //获取输入流
+            InputStream is = conn.getInputStream();
             InputStreamReader isr = new InputStreamReader(is);
             BufferedReader bufferReader = new BufferedReader(isr);
+
+            String resultData = "";
             String inputLine  = "";
             while((inputLine = bufferReader.readLine()) != null){
                 resultData += inputLine + "\n";
             }
-            System.out.println("get方法取回内容："+resultData);
-            showRes("get方法取回内容：" + resultData);
 
-            return null;
+            List list = new ArrayList();
+
+            // TODO: unparse result data; but how to?
+            // Object o = c.newInstance();
+
+            return list;
         } catch(IOException e) {
             Log.e(TAG, "start: ", e);
             return null;
         }
     }
 
-    public List<String> getEntries() {
-        Log.d(TAG, "getEntries: " + className);
-
-        DefaultHttpClient httpClient = new DefaultHttpClient();
-        String url = "https://api.parse.com/1/classes/tvshows";
-
-        HttpGet httpGet = new HttpGet(url);
-        for (Header header : getAppParseComHeaders()) {
-            httpGet.addHeader(header);
+    public boolean putEntries(List entries, Class c) {
+        URL url;
+        try{
+            url = new URL(ServerAccessor.SERVER_IP + "/sync");
         }
-        httpGet.addHeader("X-Parse-Session-Token", auth); // taken from https://parse.com/questions/how-long-before-the-sessiontoken-expires
+        catch (MalformedURLException e) {
+            Log.e(TAG, "start: server ip is wrong");
+            return false;
+        }
 
-        try {
-            HttpResponse response = httpClient.execute(httpGet);
+        try{
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("className", c.getName());
 
-            String responseString = EntityUtils.toString(response.getEntity());
-            Log.d("udini", "getShows> Response= " + responseString);
+            // TODO: parse entries
 
-            if (response.getStatusLine().getStatusCode() != HttpURLConnection.HTTP_OK) {
-                ParseComServer.ParseComError error = new Gson().fromJson(responseString, ParseComServer.ParseComError.class);
-                throw new Exception("Error retrieving tv shows ["+error.code+"] - " + error.error);
+            // Post请求的url，与get不同的是不需要带参数
+            URL postUrl = new URL("http://www.xxxxxxx.com");
+            // 打开连接
+            HttpURLConnection connection = (HttpURLConnection) postUrl.openConnection();
+            // 设置是否向connection输出，因为这个是post请求，参数要放在
+            // http正文内，因此需要设为true
+            connection.setDoOutput(true);
+            // Read from the connection. Default is true.
+            connection.setDoInput(true);
+            // 默认是 GET方式
+            connection.setRequestMethod("POST");
+            // Post 请求不能使用缓存
+            connection.setUseCaches(false);
+            //设置本次连接是否自动重定向
+            connection.setInstanceFollowRedirects(true);
+            // 配置本次连接的Content-type，配置为application/x-www-form-urlencoded的
+            // 意思是正文是urlencoded编码过的form参数
+            connection.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+            // 连接，从postUrl.openConnection()至此的配置必须要在connect之前完成，
+            // 要注意的是connection.getOutputStream会隐含的进行connect。
+            connection.connect();
+            DataOutputStream out = new DataOutputStream(connection
+                    .getOutputStream());
+            // 正文，正文内容其实跟get的URL中 '? '后的参数字符串一致
+            String content = "字段名=" + URLEncoder.encode("字符串值", "编码");
+            // DataOutputStream.writeBytes将字符串中的16位的unicode字符以8位的字符形式写到流里面
+            out.writeBytes(content);
+            //流用完记得关
+            out.flush();
+            out.close();
+            //获取响应
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String line;
+            while ((line = reader.readLine()) != null){
+                System.out.println(line);
+            }
+            reader.close();
+
+            int responseCode = conn.getResponseCode();
+            if(responseCode != 200) {
+                Log.d(TAG, "getEntries: response code" + responseCode);
+                return false;
             }
 
-            TvShows shows = new Gson().fromJson(responseString, TvShows.class);
-            return shows.results;
+            InputStream is = conn.getInputStream();
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader bufferReader = new BufferedReader(isr);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return new ArrayList<TvShow>();
-    }
-
-    public void putShow(String authtoken, String userId, TvShow showToAdd) throws Exception {
-
-        Log.d("udinic", "putShow ["+showToAdd.name+"]");
-
-        DefaultHttpClient httpClient = new DefaultHttpClient();
-        String url = "https://api.parse.com/1/classes/tvshows";
-
-        HttpPost httpPost = new HttpPost(url);
-
-        for (Header header : getAppParseComHeaders()) {
-            httpPost.addHeader(header);
-        }
-        httpPost.addHeader("X-Parse-Session-Token", authtoken); // taken from https://parse.com/questions/how-long-before-the-sessiontoken-expires
-        httpPost.addHeader("Content-Type", "application/json");
-
-        JSONObject tvShow = new JSONObject();
-        tvShow.put("name", showToAdd.name);
-        tvShow.put("year", showToAdd.year);
-
-        // Creating ACL JSON object for the current user
-        JSONObject acl = new JSONObject();
-        JSONObject aclEveryone = new JSONObject();
-        JSONObject aclMe = new JSONObject();
-        aclMe.put("read", true);
-        aclMe.put("write", true);
-        acl.put(userId, aclMe);
-        acl.put("*", aclEveryone);
-        tvShow.put("ACL", acl);
-
-        String request = tvShow.toString();
-        Log.d("udinic", "Request = " + request);
-        httpPost.setEntity(new StringEntity(request,"UTF-8"));
-
-        try {
-            HttpResponse response = httpClient.execute(httpPost);
-            String responseString = EntityUtils.toString(response.getEntity());
-            if (response.getStatusLine().getStatusCode() != 201) {
-                ParseComServer.ParseComError error = new Gson().fromJson(responseString, ParseComServer.ParseComError.class);
-                throw new Exception("Error posting tv shows ["+error.code+"] - " + error.error);
-            } else {
-//                Log.d("udini", "Response string = " + responseString);
+            String resultData = "";
+            String inputLine  = "";
+            while((inputLine = bufferReader.readLine()) != null){
+                resultData += inputLine + "\n";
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
+            return new ArrayList();
+        } catch(IOException e) {
+            Log.e(TAG, "start: ", e);
+            return null;
         }
-    }
-
-    private class TvShows implements Serializable {
-        List<TvShow> results;
     }
 }
