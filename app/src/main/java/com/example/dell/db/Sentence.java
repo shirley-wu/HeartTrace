@@ -14,6 +14,7 @@ import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
@@ -23,7 +24,7 @@ import java.util.List;
  */
 
 @DatabaseTable(tableName = "Sentence")
-public class Sentence {
+public class Sentence implements Serializable {
     public static final String TAG = "Sentence";
 
     @DatabaseField(generatedId = true, columnName = TAG)
@@ -148,9 +149,9 @@ public class Sentence {
 
     public static List<Sentence> getAll(DatabaseHelper helper, Boolean ascending){
         try {
-            Dao<Sentence, Integer> dao = helper.getSentenceDao();
-            dao.queryBuilder().orderBy("date", ascending);
-            return dao.queryBuilder().query();
+            QueryBuilder<Sentence, Integer> qb = helper.getSentenceDao().queryBuilder();
+            qb.orderBy("date",ascending);
+            return qb.query();
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
