@@ -11,8 +11,12 @@ import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
+
+import sun.net.www.http.HttpClient;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,48 +31,23 @@ public class MainActivity extends AppCompatActivity {
 
         final EditText editText = (EditText) findViewById(R.id.edit_text);
 
-
-        /*Button button = (Button) findViewById(R.id.button_submit);
+        Button button = (Button) findViewById(R.id.button_submit);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-                Diary diary = new Diary();
-                diary.setText(editText.getText().toString());
-                diary.setDate();
-                diary.insert(helper);
-                Label label = new Label("happy");
-                Label label1 = new Label("sad");
-                Label label2 = new Label("normal");
-                Log.i(Diary.TAG, "this is the hot point");
+                String text = editText.getText().toString();
                 try {
-                    List<Label> labelNewDiary = Label.lookupForDiary(helper, diary);
-                    List<Diary> diaryHappy = Diary.lookupForLabel(helper,label1);
-                    List<Label> labelList = Label.getAllLabel(helper);
-                    List<Diary> diaryList = Diary.getAll(helper);
-                    for(Diary i :diaryHappy){
-                        Log.i(Diary.TAG, i.getDate()+i.getText());
-                    }
-                    Log.i(Diary.TAG, "=====================================");
-                    for(Label i : labelNewDiary){
-                        Log.i(Label.TAG, i.getLabelname());
-                    }
-                    Log.i(Diary.TAG, "=====================================");
-                    for(Diary i : diaryList ){
-                        Log.i(Diary.TAG, i.getDate()+i.getText());
-                    }
-                    Log.i(Diary.TAG, "=====================================");
-                    for(Label i : labelList){
-                        Log.i(Label.TAG, i.getLabelname());
-                    }
-                    Log.i(Label.TAG, "=====================================");
-                    helper.close();
-                } catch (SQLException e) {
-                    Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
-                    throw new RuntimeException(e);
+                    URL url = new URL("http://localhost:8080");
+                    CloseableHttpClient httpclient = HttpClients.createDefault();
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("GET");
+
+                }catch (Exception e) {
+                    Log.d("zz", e.toString());
                 }
             }
-        });*/
+        });
     }
 
     @Override
