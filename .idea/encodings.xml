@@ -2,6 +2,9 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/db/Diary.java" charset="UTF-8" />
+<<<<<<< HEAD
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/DiaryCardAdapter.java" charset="UTF-8" />
+=======
+>>>>>>> 8c1561d12a9ea945b1cc132f2ee4517c9a8c9c16
   </component>
 </project>

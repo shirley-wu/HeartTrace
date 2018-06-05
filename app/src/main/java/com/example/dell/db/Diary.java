@@ -149,9 +149,9 @@ public class Diary implements Serializable
 
     public static List<Diary> getAll(DatabaseHelper helper, Boolean ascending){
         try {
-            Dao<Diary, Integer> dao = helper.getDiaryDao();
-            dao.queryBuilder().orderBy("date", ascending);
-            return dao.queryBuilder().query();
+            QueryBuilder<Diary, Integer> qb = helper.getDiaryDao().queryBuilder();
+            qb.orderBy("date",ascending);
+            return qb.query();
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
