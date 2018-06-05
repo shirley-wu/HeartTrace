@@ -37,8 +37,10 @@ import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextWatcher;
+import android.text.style.AlignmentSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.ImageSpan;
+import android.text.style.LeadingMarginSpan;
 import android.text.style.StyleSpan;
 import android.text.style.TypefaceSpan;
 import android.text.style.UnderlineSpan;
@@ -74,10 +76,16 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
     private EditText diary_write;
     private LinearLayout edit_layout;
+    private ImageButton confirm;
     private int start=0;
     private int count=0;
     private int font_color=8;
     private int font_type=1;
+    private int style=0;
+    private boolean is_retract=false;
+    private boolean is_center=false;
+    private boolean is_left=false;
+    private boolean is_right=false;
     private boolean is_underline=false;
     private boolean is_bold=false;
     private boolean is_italic=false;
@@ -91,7 +99,13 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private ImageButton font_dark_blue;
     private ImageButton font_grey;
     private ImageButton font_black;
-    private Button set_font1;
+    private TextView set_font1;
+    private TextView set_font2;
+    private TextView set_font3;
+    private ImageButton set_retract;
+    private ImageButton set_center;
+    private ImageButton set_left;
+    private ImageButton set_right;
     private TextView font_padding1;
     private TextView font_padding2;
     private TextView font_padding3;
@@ -120,6 +134,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     {
         diary_write = (EditText) findViewById(R.id.diaryWrite);
         edit_layout = (LinearLayout) findViewById(R.id.edit_layout);
+        confirm = (ImageButton) findViewById(R.id.confirm);
         font_set = (ImageButton) findViewById(R.id.font_setting);
         font_setting_bottom_sheet =  BottomSheetBehavior.from(findViewById(R.id.fontSettingBottomSheetLayout));
         font_red = (ImageButton) findViewById(R.id.font_red);
@@ -130,9 +145,13 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         font_dark_blue = (ImageButton) findViewById(R.id.font_dark_blue);
         font_grey = (ImageButton) findViewById(R.id.font_grey);
         font_black = (ImageButton) findViewById(R.id.font_black);
-        set_font1 = (Button) findViewById(R.id.font1);
-
-
+        set_font1 = (TextView) findViewById(R.id.font1);
+        set_font2 = (TextView) findViewById(R.id.font2);
+        set_font3 = (TextView) findViewById(R.id.font3);
+        set_retract = (ImageButton) findViewById(R.id.set_retract);
+        set_center = (ImageButton) findViewById(R.id.set_center);
+        set_left = (ImageButton) findViewById(R.id.set_left);
+        set_right = (ImageButton) findViewById(R.id.set_right);
         font_padding1 = (TextView) findViewById(R.id.font_padding1);
         font_padding2 = (TextView) findViewById(R.id.font_padding2);
         font_padding3 = (TextView) findViewById(R.id.font_padding3);
@@ -169,6 +188,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
         });
         edit_layout.setOnClickListener(this);
+        confirm.setOnClickListener(this);
         font_set.setOnClickListener(this);
         font_red.setOnClickListener(this);
         font_orange.setOnClickListener(this);
@@ -179,8 +199,12 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         font_grey.setOnClickListener(this);
         font_black.setOnClickListener(this);
         set_font1.setOnClickListener(this);
-
-
+        set_font2.setOnClickListener(this);
+        set_font3.setOnClickListener(this);
+        set_retract.setOnClickListener(this);
+        set_center.setOnClickListener(this);
+        set_left.setOnClickListener(this);
+        set_right.setOnClickListener(this);
         font_padding1.setOnClickListener(this);
         font_padding2.setOnClickListener(this);
         font_padding3.setOnClickListener(this);
@@ -207,6 +231,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     diary_write.requestFocus();
                     imm.showSoftInput(diary_write,0);
                 }
+                break;
+            case R.id.confirm:
+                Toast.makeText(DiaryWriteActivity.this, diary_write.getText(), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.font_setting:
                 font_setting_bottom_sheet.setState(BottomSheetBehavior.STATE_EXPANDED);
@@ -239,8 +266,26 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 font_type = 1;
                 break;
             case R.id.font2:
+                font_type = 2;
                 break;
             case R.id.font3:
+                font_type = 3;
+                break;
+            case R.id.set_retract:
+                is_retract=!is_retract;
+                style=1;
+                break;
+            case R.id.set_center:
+                is_center=!is_center;
+                style=2;
+                break;
+            case R.id.set_left:
+                is_left=!is_left;
+                style=3;
+                break;
+            case R.id.set_right:
+                is_right=!is_right;
+                style=4;
                 break;
             case R.id.font_padding1:
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -335,7 +380,48 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             case 1:
                 editable.setSpan(new TypefaceSpan("serif"), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 break;
+            case 2:
+                editable.setSpan(new TypefaceSpan("serif"), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                break;
+            case 3:
+                editable.setSpan(new TypefaceSpan("sans-serif"), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                break;
         }
+
+        switch (style)
+        {
+            case 1: //缩进
+                if(is_retract)
+                {
+                    editable.append(" ")
+                            .append(editable.toString())
+                            .append(editable.toString())
+                            .append(editable.toString());
+                    editable.setSpan(new LeadingMarginSpan.Standard(10, 0), 0, count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+                else
+                {
+                    editable.append(" ")
+                            .append(editable.toString())
+                            .append(editable.toString())
+                            .append(editable.toString());
+                    editable.setSpan(new LeadingMarginSpan.Standard(0, 0), 0, count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+                break;
+            case 2:
+                if(is_center) editable.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), 0, count, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                else editable.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), 0, count, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                break;
+            case 3:
+                editable.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), 0, count, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                break;
+            case 4:
+                if(is_right)  editable.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_OPPOSITE), 0, count, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                else editable.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), 0, count, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                break;
+
+        }
+
         if(is_underline)
             editable.setSpan(new UnderlineSpan(), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         if(is_bold)
