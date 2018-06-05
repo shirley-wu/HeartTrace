@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.dell.db.DatabaseHelper;
+import com.example.dell.db.Sentence;
 
 import java.util.List;
 
@@ -22,29 +24,28 @@ import java.util.List;
  */
 
 public class NoteAdapter extends RecyclerView.Adapter <NoteAdapter.ViewHolder> {
-    private List<Note> mNoteList;
-
+    private List<Sentence> mSentenceList;
     private Context mContext;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
-        ImageView noteIcon;
-        TextView noteDate;
-        TextView noteContent;
-        TextView noteWeekDay;
+        //ImageView noteIcon;
+        TextView sentenceDate;
+        TextView sentenceContent;
+        //TextView noteWeekDay;
 
         public ViewHolder(View view) {
             super(view);
             cardView = (CardView) view;
-            noteIcon = (ImageView) view.findViewById(R.id.note_icon);
-            noteDate = (TextView)view.findViewById(R.id.note_date);
-            noteContent = (TextView)view.findViewById(R.id.note_text);
-            noteWeekDay = (TextView)view.findViewById(R.id.note_weekday);
+           /* noteIcon = (ImageView) view.findViewById(R.id.note_icon);*/
+            sentenceDate = (TextView)view.findViewById(R.id.note_date);
+            sentenceContent = (TextView)view.findViewById(R.id.note_text);
+          /*  noteWeekDay = (TextView)view.findViewById(R.id.note_weekday);*/
         }
     }
 
-    public NoteAdapter(List<Note> noteList) {
-        mNoteList = noteList;
+    public NoteAdapter(List<Sentence> sentenceList) {
+        mSentenceList = sentenceList;
     }
 
     @Override
@@ -60,11 +61,11 @@ public class NoteAdapter extends RecyclerView.Adapter <NoteAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
-                Note note = mNoteList.get(position);
+                Sentence sentence = mSentenceList.get(position);
                 Intent intent = new Intent(mContext, NoteActivity.class);
-                intent.putExtra(NoteActivity.NOTE_DATE, note.getDate());
-                intent.putExtra(NoteActivity.NOTE_WEAKDAY, note.getWeekDay());
-                intent.putExtra(NoteActivity.NOTE_CONTENT, note.getContent());
+                intent.putExtra(NoteActivity.NOTE_DATE, sentence.getDate());
+               // intent.putExtra(NoteActivity.NOTE_WEAKDAY, note.getWeekDay());
+                intent.putExtra(NoteActivity.NOTE_CONTENT, sentence.getText());
                 mContext.startActivity(intent);
             }
         });
@@ -80,15 +81,17 @@ public class NoteAdapter extends RecyclerView.Adapter <NoteAdapter.ViewHolder> {
 
                 dialog.setPositiveButton("确认",new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog, int which){
+                        DatabaseHelper helper = new DatabaseHelper(mContext);
                         int position = holder.getAdapterPosition();
-                        Note note = mNoteList.get(position);
-                        mNoteList.remove(note);
-                        notifyItemRemoved(position);
+                       Sentence sentence = mSentenceList.get(position);
+                       sentence.delete(helper);
+                       /* mSentenceList.remove(note);
+                        notifyItemRemoved(position);*/
                     }
                 });
                 dialog.setNegativeButton("取消",new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog, int which){
-
+                        dialog.cancel();
                     }
                 });
                 dialog.show();
@@ -112,14 +115,14 @@ public class NoteAdapter extends RecyclerView.Adapter <NoteAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Note note = mNoteList.get(position);
-        holder.noteDate.setText(note.getDate());
-        holder.noteWeekDay.setText(note.getWeekDay());
-        holder.noteContent.setText(note.getContent());
+        Sentence sentence = mSentenceList.get(position);
+        holder.sentenceDate.setText(sentence.getDate().toString());
+     //   holder.noteWeekDay.setText(note.getWeekDay());
+        holder.sentenceContent.setText(sentence.getText());
     }
 
     @Override
     public int getItemCount() {
-        return mNoteList.size();
+        return mSentenceList.size();
     }
 }
