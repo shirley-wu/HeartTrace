@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -63,7 +64,7 @@ public class SearchActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
+            //actionBar.setDisplayHomeAsUpEnabled(true);
         }
         actionBar.setTitle("");
 
@@ -127,7 +128,7 @@ public class SearchActivity extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         final SearchView searchView = (SearchView)findViewById(R.id.search_view);
         //设置我们的SearchView
-        searchView.setIconifiedByDefault(true);//设置展开后图标的样式,这里只有两种,一种图标在搜索框外,一种在搜索框内
+        searchView.setIconifiedByDefault(false);//设置展开后图标的样式,这里只有两种,一种图标在搜索框外,一种在搜索框内
         searchView.onActionViewExpanded();// 写上此句后searchView初始是可以点击输入的状态，如果不写，那么就需要点击下放大镜，才能出现输入框,也就是设置为ToolBar的ActionView，默认展开
         searchView.setIconified(false);//输入框内icon不显示
         searchView.requestFocus();//输入焦点
@@ -137,16 +138,30 @@ public class SearchActivity extends AppCompatActivity {
 
         //searchView.setFocusable(false);//禁止弹出输入法，在某些情况下有需要
         //searchView.clearFocus();//禁止弹出输入法，在某些情况下有需要
+        EditText seachTextView = (EditText) searchView.findViewById(R.id.search_src_text);
+        seachTextView.setTextColor(getResources().getColor(R.color.black));
+        seachTextView.setHintTextColor(getResources().getColor(R.color.lightgray));
+        seachTextView.setTextSize(17);
+//        int imgId = searchView.getContext().getResources().getIdentifier("android:id/search_mag_icon",null,null);
+//获取ImageView
+        ImageView searchButton = (ImageView)searchView.findViewById(R.id.search_mag_icon);
+//设置图片
+        searchButton.setImageResource(R.drawable.search_gray);
+        ImageView closeButton = (ImageView)searchView.findViewById(R.id.search_close_btn);
+//设置图片
+        closeButton.setImageResource(R.drawable.close_gray);
+
+////不使用默认
+//        searchView.setIconifiedByDefault(false);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
             public boolean onQueryTextSubmit(String query) {
                 //Toast.makeText(SearchActivity.this, "begin search", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(SearchActivity.this, SearchResultActivity.class);
-                //String seachText = searchView.getQuery().toString();
                 intent.putExtra("search_text",query);
                 if(checkTime.isChecked() == true){
-                    startDate = new Date(mYear,mMonth,mDay);
-                    endDate = new Date(mYear2,mMonth2,mDay2);
+                    startDate = new Date(mYear,mMonth+1,mDay);
+                    endDate = new Date(mYear2,mMonth2+1,mDay2);
                     intent.putExtra("start_date",startDate);
                     intent.putExtra("end_date",endDate);
                 }
@@ -227,21 +242,21 @@ public class SearchActivity extends AppCompatActivity {
         }
     };
 
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search_menu, menu);
-        return true;
-    }
-
-//    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-            default:
-        }
-        return true;
-    }
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.search_menu, menu);
+//        return true;
+//    }
+//
+////    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case android.R.id.home:
+//                finish();
+//                return true;
+//            default:
+//        }
+//        return true;
+//    }
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
