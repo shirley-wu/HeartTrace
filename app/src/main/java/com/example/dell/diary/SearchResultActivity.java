@@ -10,6 +10,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +22,7 @@ import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 public class SearchResultActivity extends AppCompatActivity {
@@ -27,11 +30,13 @@ public class SearchResultActivity extends AppCompatActivity {
     public List<Diary> diaryList = new ArrayList<>();
     private SearchResultAdapter adapter;
     private RecyclerView recyclerView;
-
+    private SearchView searchView;
     private DatabaseHelper databaseHelper = null;
+    private Date startDate;
+    private Date endDate;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_search);
@@ -41,9 +46,8 @@ public class SearchResultActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
         actionBar.setTitle("");
-
-        final SearchView searchView = (SearchView)findViewById(R.id.search_view);
         //设置我们的SearchView
+        searchView = findViewById(R.id.search_view);
         searchView.setIconifiedByDefault(true);//设置展开后图标的样式,这里只有两种,一种图标在搜索框外,一种在搜索框内
         searchView.onActionViewExpanded();// 写上此句后searchView初始是可以点击输入的状态，如果不写，那么就需要点击下放大镜，才能出现输入框,也就是设置为ToolBar的ActionView，默认展开
         searchView.setIconified(false);//输入框内icon不显示
@@ -57,12 +61,25 @@ public class SearchResultActivity extends AppCompatActivity {
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
             public boolean onQueryTextSubmit(String query) {
-                //Toast.makeText(SearchResultActivity.this, "begin search", Toast.LENGTH_SHORT).show();
-                //Intent intent = new Intent(SearchActivity.this, SearchResultActivity.class);
-                //String seachText = searchView.getQuery().toString();
-                //intent.putExtra("search_text",seachText);
-                //startActivity(intent);
-                //searchText.setText(query);
+                diaryList.clear();
+                DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+                try{
+                    diaryList.clear();
+                    if(startDate.getYear() == 1900){
+                        diaryList.addAll(Diary.getByRestrict(helper,query,null,null,null,false));
+                    }
+                    else{
+                        diaryList.addAll(Diary.getByRestrict(helper,query,startDate,endDate,null,false));
+                    }
+
+                    //adapter = new SearchResultAdapter(diaryList);
+                    adapter.notifyDataSetChanged();
+                    recyclerView.setAdapter(adapter);}
+                catch (Exception e){}
+                if(diaryList.size() == 0){
+                    Toast.makeText(SearchResultActivity.this,"没有搜索到相关日记",Toast.LENGTH_LONG).show();
+                }
+                searchView.clearFocus();
                 return true;
             }
 
@@ -70,7 +87,7 @@ public class SearchResultActivity extends AppCompatActivity {
                 if (newText != null && newText.length() > 0) {
                     //currentSearchTip = newText;
                     //showSearchTip(newText);
-                    Toast.makeText(SearchResultActivity.this, newText, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SearchResultActivity.this, newText, Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }
@@ -84,18 +101,44 @@ public class SearchResultActivity extends AppCompatActivity {
     }
 
     private void initSearchResult(){
-
         diaryList.clear();
         DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
         Intent intent = getIntent();
         String searchText = intent.getStringExtra("search_text");
+        startDate = (Date)intent.getSerializableExtra("start_date");
+        endDate = (Date)intent.getSerializableExtra("end_start");
+        searchView.setQuery(searchText,false);
+        searchView.clearFocus();
         //diaryList = Diary.getByRestrict(helper,searchText,null,null,null);
-        diaryList = Diary.getAll(helper);
-        if(diaryList == null){
-            diaryList = new ArrayList<>();
+        try{
+            //if(startDate.getYear() == 1900){
+                diaryList = Diary.getByRestrict(helper,searchText,null,null,null,false);
+            //}
+            //else{
+                //diaryList = Diary.getByRestrict(helper,searchText,startDate,endDate,null,false);
+            //diaryList = Diary.getByRestrict(helper,searchText,new Date(2018,6,2),new Date(2018,6,3),null,false);
+            //}
         }
-        Collections.reverse(diaryList);
-        //我在测试github
+        catch (Exception e){}
+        if(diaryList.size() == 0){
+           Toast.makeText(SearchResultActivity.this,"没有搜索到相关日记",Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search_menu, menu);
+        return true;
+    }
+
+    //    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+        }
+        return true;
     }
 
     @Override

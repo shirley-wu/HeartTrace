@@ -41,6 +41,8 @@ public class SearchActivity extends AppCompatActivity {
     private int mYear2;
     private int mMonth2;
     private int mDay2;
+    private Date startDate;
+    private Date endDate;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -48,8 +50,6 @@ public class SearchActivity extends AppCompatActivity {
     private GoogleApiClient client;
     TextView dateDisplayStart;
     TextView dateDisplayEnd;
-    //Button dateChooseStart;
-    //Button dateChooseEnd;
     DatePickerDialog datePickerDialog1;
     DatePickerDialog datePickerDialog2;
     final int DATE_DIALOG = 1;
@@ -66,38 +66,6 @@ public class SearchActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
         actionBar.setTitle("");
-        final SearchView searchView = (SearchView)findViewById(R.id.search_view);
-        //设置我们的SearchView
-        searchView.setIconifiedByDefault(true);//设置展开后图标的样式,这里只有两种,一种图标在搜索框外,一种在搜索框内
-        searchView.onActionViewExpanded();// 写上此句后searchView初始是可以点击输入的状态，如果不写，那么就需要点击下放大镜，才能出现输入框,也就是设置为ToolBar的ActionView，默认展开
-        searchView.setIconified(false);//输入框内icon不显示
-        searchView.requestFocus();//输入焦点
-        //searchView.setSubmitButtonEnabled(true);//添加提交按钮，监听在OnQueryTextListener的onQueryTextSubmit响应
-        //searchView.setFocusable(true);//将控件设置成可获取焦点状态,默认是无法获取焦点的,只有设置成true,才能获取控件的点击事件
-        //searchView.requestFocusFromTouch();//模拟焦点点击事件
-
-        //searchView.setFocusable(false);//禁止弹出输入法，在某些情况下有需要
-        //searchView.clearFocus();//禁止弹出输入法，在某些情况下有需要
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
-            public boolean onQueryTextSubmit(String query) {
-                //Toast.makeText(SearchActivity.this, "begin search", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(SearchActivity.this, SearchResultActivity.class);
-                //String seachText = searchView.getQuery().toString();
-                intent.putExtra("search_text",query);
-                startActivity(intent);
-                return true;
-            }
-
-            public boolean onQueryTextChange(String newText) {
-                if (newText != null && newText.length() > 0) {
-                    //currentSearchTip = newText;
-                    //showSearchTip(newText);
-                    Toast.makeText(SearchActivity.this, newText, Toast.LENGTH_SHORT).show();
-                }
-                return true;
-            }
-        });
 
         final CheckedTextView checkTag = (CheckedTextView) findViewById(R.id.check_tag);
         final CheckedTextView checkTime = (CheckedTextView) findViewById(R.id.check_time);
@@ -157,6 +125,51 @@ public class SearchActivity extends AppCompatActivity {
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
+        final SearchView searchView = (SearchView)findViewById(R.id.search_view);
+        //设置我们的SearchView
+        searchView.setIconifiedByDefault(true);//设置展开后图标的样式,这里只有两种,一种图标在搜索框外,一种在搜索框内
+        searchView.onActionViewExpanded();// 写上此句后searchView初始是可以点击输入的状态，如果不写，那么就需要点击下放大镜，才能出现输入框,也就是设置为ToolBar的ActionView，默认展开
+        searchView.setIconified(false);//输入框内icon不显示
+        searchView.requestFocus();//输入焦点
+        //searchView.setSubmitButtonEnabled(true);//添加提交按钮，监听在OnQueryTextListener的onQueryTextSubmit响应
+        //searchView.setFocusable(true);//将控件设置成可获取焦点状态,默认是无法获取焦点的,只有设置成true,才能获取控件的点击事件
+        //searchView.requestFocusFromTouch();//模拟焦点点击事件
+
+        //searchView.setFocusable(false);//禁止弹出输入法，在某些情况下有需要
+        //searchView.clearFocus();//禁止弹出输入法，在某些情况下有需要
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
+            public boolean onQueryTextSubmit(String query) {
+                //Toast.makeText(SearchActivity.this, "begin search", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(SearchActivity.this, SearchResultActivity.class);
+                //String seachText = searchView.getQuery().toString();
+                intent.putExtra("search_text",query);
+                if(checkTime.isChecked() == true){
+                    startDate = new Date(mYear,mMonth,mDay);
+                    endDate = new Date(mYear2,mMonth2,mDay2);
+                    intent.putExtra("start_date",startDate);
+                    intent.putExtra("end_date",endDate);
+                }
+                else{
+                    startDate = new Date(1900,1,1);
+                    endDate = new Date(1900,1,1);
+                    intent.putExtra("start_date",startDate);
+                    intent.putExtra("end_date",endDate);
+                }
+                startActivity(intent);
+                return true;
+            }
+
+            public boolean onQueryTextChange(String newText) {
+                if (newText != null && newText.length() > 0) {
+                    //currentSearchTip = newText;
+                    //showSearchTip(newText);
+                    //Toast.makeText(SearchActivity.this, newText, Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+        });
+
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
@@ -214,24 +227,11 @@ public class SearchActivity extends AppCompatActivity {
         }
     };
 
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.search_menu, menu);
-//        SearchManager searchManager =
-//                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-//        SearchView searchView =
-//                (SearchView) menu.findItem(R.id.action_search).getActionView();
-//        searchView.setSearchableInfo(
-//                searchManager.getSearchableInfo(getComponentName()));
-//       // MenuItem searchItem = menu.findItem(R.id.action_search);
-//        //SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-//        //searchView.setIconifiedByDefault(false);
-//        //searchView.setIconified(false);
-//        //searchView.setQueryHint("输入关键词...");
-//        //searchView.setLayoutParams(new LinearLayout.LayoutParams(0, 0));
-//
-//        return true;
-//    }
-//
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search_menu, menu);
+        return true;
+    }
+
 //    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

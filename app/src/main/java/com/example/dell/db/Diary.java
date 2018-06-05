@@ -1,4 +1,4 @@
-﻿package com.example.dell.db;
+package com.example.dell.db;
 
 import android.util.Log;
 
@@ -15,6 +15,7 @@ import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,7 +26,7 @@ import java.util.List;
  */
 
 @DatabaseTable(tableName = "Diary")
-public class Diary {
+public class Diary implements Serializable {
     public static final String TAG = "diary";
 
     @DatabaseField(generatedId = true, columnName = TAG)
@@ -147,9 +148,12 @@ public class Diary {
 
     public static List<Diary> getAll(DatabaseHelper helper, Boolean ascending){
         try {
-            Dao<Diary, Integer> dao = helper.getDiaryDao();
-            dao.queryBuilder().orderBy("date", ascending);
-            return dao.queryBuilder().query();
+            //Dao<Diary, Integer> dao = helper.getDiaryDao();
+            //dao.queryBuilder().orderBy("date", ascending);
+            //return dao.queryBuilder().query();
+            QueryBuilder<Diary, Integer> qb = helper.getDiaryDao().queryBuilder();
+            qb.orderBy("date",ascending);
+            return qb.query();
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
