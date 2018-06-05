@@ -9,6 +9,13 @@ import android.content.SyncResult;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.dell.db.DatabaseHelper;
+import com.example.dell.db.Diary;
+import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
+
+import java.sql.SQLException;
+import java.util.List;
+
 /**
  * Created by wu-pc on 2018/6/3.
  * Handle the transfer of data between a server and an
@@ -22,6 +29,8 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     // Define a variable to contain a content resolver instance
     ContentResolver mContentResolver;
 
+    DatabaseHelper helper;
+
     /**
      * Set up the sync adapter
      */
@@ -32,6 +41,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
          * from the incoming Context
          */
         mContentResolver = context.getContentResolver();
+        helper = OpenHelperManager.getHelper(context, DatabaseHelper.class);
     }
 
     /**
@@ -52,7 +62,51 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     }
 
     public void onPerformSync(Account account, Bundle extras, String authority, ContentProviderClient provider, SyncResult syncResult) {
-        Log.d(TAG, "onPerformSync");
+        Log.d(TAG, "onPerformSync: begin");
+
+        try{
+            DiarySync();
+            SentenceSync();
+            DiarybookSync();
+            SentencebookSync();
+            SentenceLabelSync();
+            LabelSync();
+            DiaryLabelSync();
+            SentenceLabelSync();
+        }
+        catch(SQLException e) {
+            Log.d(TAG, "onPerformSync: error");
+        }
+
+        Log.d(TAG, "onPerformSync: end");
+    }
+
+    public void DiarySync() throws SQLException {
+
+    }
+
+    public void SentenceSync() throws SQLException {
+
+    }
+
+    public void DiarybookSync() throws SQLException {
+
+    }
+
+    public void SentencebookSync() throws SQLException {
+
+    }
+
+    public void LabelSync() throws SQLException {
+
+    }
+
+    public void DiaryLabelSync() throws SQLException {
+
+    }
+
+    public void SentenceLabelSync() throws SQLException {
+
     }
 
 }
