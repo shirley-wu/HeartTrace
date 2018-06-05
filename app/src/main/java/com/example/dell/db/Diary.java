@@ -1,4 +1,4 @@
-﻿package com.example.dell.db;
+package com.example.dell.db;
 
 import android.util.Log;
 
