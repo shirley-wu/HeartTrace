@@ -31,6 +31,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
 import android.text.Layout;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -79,6 +80,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
     private EditText diary_write;
     private LinearLayout edit_layout;
+    private DiscreteSeekBar set_size;
     private ImageButton confirm;
     private int start=0;
     private int count=0;
@@ -130,13 +132,13 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         getView();
         setOnListener();
         init();
-
     }
 
     public void getView()
     {
         diary_write = (EditText) findViewById(R.id.diaryWrite);
         edit_layout = (LinearLayout) findViewById(R.id.edit_layout);
+        set_size = (DiscreteSeekBar) findViewById(R.id.set_size);
         confirm = (ImageButton) findViewById(R.id.confirm);
         font_set = (ImageButton) findViewById(R.id.font_setting);
         font_setting_bottom_sheet =  BottomSheetBehavior.from(findViewById(R.id.fontSettingBottomSheetLayout));
@@ -191,6 +193,20 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
         });
         edit_layout.setOnClickListener(this);
+        set_size.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
+            @Override
+            public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
+                diary_write.setTextSize(4*set_size.getProgress());
+            }
+
+            @Override
+            public void onStartTrackingTouch(DiscreteSeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(DiscreteSeekBar seekBar) {
+            }
+        });
         confirm.setOnClickListener(this);
         font_set.setOnClickListener(this);
         font_red.setOnClickListener(this);
@@ -223,7 +239,11 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
     public void init()
     {
-        edit_layout.setClickable(true);
+        set_font1.setBackgroundColor(Color.GRAY);
+        font_padding1.setBackgroundColor(Color.GRAY);
+        line_spacing1.setBackgroundColor(Color.GRAY);
+        set_right.setBackgroundColor(Color.GRAY);
+        diary_write.setTextSize(20);
     }
 
     public void onClick(View view) {
@@ -236,7 +256,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 }
                 break;
             case R.id.confirm:
-                Log.i("test", diary_write.getText().toString());
+                Log.i("test", Html.toHtml(diary_write.getText()));
                 DatabaseHelper helper = new DatabaseHelper(DiaryWriteActivity.this);
                 Diary diary = new Diary(diary_write.getText().toString());
                 diary.setDate();
@@ -245,7 +265,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 for(Diary i : diaryList){
                     Log.i("test", i.getText());
                 }
-                Toast.makeText(DiaryWriteActivity.this, diary_write.getText(), Toast.LENGTH_SHORT).show();
+                CharSequence charSequence = Html.fromHtml(Html.toHtml(diary_write.getText()));
+                Toast.makeText(DiaryWriteActivity.this,charSequence,Toast.LENGTH_SHORT).show();
                 break;
             case R.id.font_setting:
                 font_setting_bottom_sheet.setState(BottomSheetBehavior.STATE_EXPANDED);
@@ -275,52 +296,95 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 font_color = 8;
                 break;
             case R.id.font1:
+                set_font1.setBackgroundColor(Color.GRAY);
+                set_font2.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                set_font3.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 font_type = 1;
                 break;
             case R.id.font2:
+                set_font2.setBackgroundColor(Color.GRAY);
+                set_font1.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                set_font3.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 font_type = 2;
                 break;
             case R.id.font3:
+                set_font3.setBackgroundColor(Color.GRAY);
+                set_font1.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                set_font2.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 font_type = 3;
                 break;
             case R.id.set_retract:
                 is_retract=!is_retract;
+                if(is_retract)
+                    set_retract.setBackgroundColor(Color.GRAY);
+                else
+                    set_retract.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 style=1;
                 break;
             case R.id.set_center:
-                is_center=!is_center;
+                Editable editable_align_center = diary_write.getText();
+                editable_align_center.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), 0, count, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                set_center.setBackgroundColor(Color.GRAY);
+                set_right.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                set_left.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 style=2;
                 break;
             case R.id.set_left:
-                is_left=!is_left;
+                Editable editable_align_left = diary_write.getText();
+                editable_align_left.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), 0, count, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                set_left.setBackgroundColor(Color.GRAY);
+                set_right.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                set_center.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 style=3;
                 break;
             case R.id.set_right:
-                is_right=!is_right;
+                Editable editable_align_right = diary_write.getText();
+                editable_align_right.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_OPPOSITE), 0, count, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                set_right.setBackgroundColor(Color.GRAY);
+                set_left.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                set_center.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 style=4;
                 break;
             case R.id.font_padding1:
+                font_padding1.setBackgroundColor(Color.GRAY);
+                font_padding2.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                font_padding3.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     diary_write.setLetterSpacing(0);
                 }
                 break;
             case R.id.font_padding2:
+                font_padding2.setBackgroundColor(Color.GRAY);
+                font_padding1.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                font_padding3.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     diary_write.setLetterSpacing((float) 0.2);
                 }
                 break;
             case R.id.font_padding3:
+                font_padding3.setBackgroundColor(Color.GRAY);
+                font_padding1.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                font_padding2.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     diary_write.setLetterSpacing((float) 0.5);
                 }
                 break;
             case R.id.line_spacing1:
+                line_spacing1.setBackgroundColor(Color.GRAY);
+                line_spacing2.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                line_spacing3.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 diary_write.setLineSpacing(0,1);
                 break;
             case R.id.line_spacing2:
+                line_spacing2.setBackgroundColor(Color.GRAY);
+                line_spacing1.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                line_spacing3.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 diary_write.setLineSpacing(5,1);
                 break;
             case R.id.line_spacing3:
+                line_spacing3.setBackgroundColor(Color.GRAY);
+                line_spacing1.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                line_spacing2.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 diary_write.setLineSpacing(10,1);
                 break;
             case R.id.clear_span:
@@ -329,12 +393,24 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.underline:
                 is_underline=!is_underline;
+                if(is_underline)
+                    set_underline.setBackgroundColor(Color.GRAY);
+                else
+                    set_underline.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 break;
             case R.id.bold:
                 is_bold=!is_bold;
+                if(is_bold)
+                    set_bold.setBackgroundColor(Color.GRAY);
+                else
+                    set_bold.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 break;
             case R.id.italic:
                 is_italic=!is_italic;
+                if(is_italic)
+                    set_italic.setBackgroundColor(Color.GRAY);
+                else
+                    set_italic.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 break;
             case R.id.insert_image:
                 openAlbum();
@@ -420,18 +496,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     editable.setSpan(new LeadingMarginSpan.Standard(0, 0), 0, count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
                 break;
-            case 2:
-                if(is_center) editable.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), 0, count, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                else editable.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), 0, count, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                break;
-            case 3:
-                editable.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), 0, count, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                break;
-            case 4:
-                if(is_right)  editable.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_OPPOSITE), 0, count, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                else editable.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), 0, count, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                break;
-
         }
 
         if(is_underline)

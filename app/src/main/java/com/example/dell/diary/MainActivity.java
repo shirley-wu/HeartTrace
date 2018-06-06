@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
     private DiaryCardAdapter adapter;
     private FloatingActionButton add;
     private RecyclerView recyclerView;
-
     private DatabaseHelper databaseHelper = null;
 
     @Override
@@ -179,7 +178,8 @@ public class MainActivity extends AppCompatActivity {
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 break;
-            case R.id.calendar:
+            case R.id.open_calendar:
+                Toast.makeText(MainActivity.this,"test",Toast.LENGTH_SHORT).show();
                 Intent intentCalendar = new Intent(MainActivity.this, CalendarActivity.class);
                 startActivity(intentCalendar);
                 break;
