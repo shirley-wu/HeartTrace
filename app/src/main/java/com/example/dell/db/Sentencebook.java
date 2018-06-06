@@ -114,7 +114,6 @@ public class Sentencebook {
     public static List<Sentencebook> getAll(DatabaseHelper helper, Boolean ascending){
         try {
             QueryBuilder<Sentencebook, Integer> qb = helper.getSentencebookDao().queryBuilder();
-            qb.orderBy("date",ascending);
             return qb.query();
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
