@@ -25,6 +25,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.dell.db.DatabaseHelper;
+import com.example.dell.db.Diarybook;
 import com.example.dell.db.Sentencebook;
 
 import java.util.ArrayList;
@@ -131,10 +132,12 @@ public class BottlesActivity extends AppCompatActivity {
 
 
     }
-    public void initSententcebookList(){
+    public void initSententcebookList() {
         sentencebookList.clear();
-      /* DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-        sentencebookList= Sentencebook.(helper)；*/
+        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+        sentencebookList = Sentencebook.getAll(helper);
+    /*    Diarybook.class
+    }*/
     }
 
 }
