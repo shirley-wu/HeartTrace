@@ -10,7 +10,7 @@ import org.junit.Test;
  * Created by wu-pc on 2018/6/6.
  */
 
-public class AccessorSimpleTest extends InstrumentationTestCase {
+public class AccessorMockTest extends InstrumentationTestCase {
     // TODO: this dummy class has no use at all... plan to test using http://www.mock-server.com/.
 
     @Test
