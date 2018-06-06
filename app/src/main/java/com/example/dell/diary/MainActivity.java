@@ -96,17 +96,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //Toast.makeText(MainActivity.this, "写新日记", Toast.LENGTH_SHORT).show();
-                DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-                Diary newDiary = new Diary("日记内容");
-                Random r = new Random();
-                int randDay = r.nextInt(29)+1;
-                newDiary.setDate(new Date(2018,6,randDay));
-                diaryList.add(0,newDiary);
-                newDiary.insert(helper);
-                adapter.notifyItemInserted(0);
-                recyclerView.scrollToPosition(0);
-                //Intent intent = new Intent(MainActivity.this, DiaryWriteActivity.class);
-                //startActivity(intent);
+//                DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+//                Diary newDiary = new Diary("日记内容");
+//                Random r = new Random();
+//                int randDay = r.nextInt(29)+1;
+//                newDiary.setDate(new Date(2018,6,randDay));
+//                diaryList.add(0,newDiary);
+//                newDiary.insert(helper);
+//                adapter.notifyItemInserted(0);
+//                recyclerView.scrollToPosition(0);
+                Intent intent = new Intent(MainActivity.this, DiaryWriteActivity.class);
+                startActivity(intent);
             }
         });
         addBottle.setOnClickListener(new View.OnClickListener() {
@@ -205,6 +205,10 @@ public class MainActivity extends AppCompatActivity {
         final FloatingActionButton addBottle = (FloatingActionButton) findViewById(R.id.add_bottle);
         addDiary.setVisibility(View.INVISIBLE);
         addBottle.setVisibility(View.INVISIBLE);
+        diaryList.clear();
+        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+        diaryList.addAll(Diary.getAll(helper,false));
+        adapter.notifyDataSetChanged();
     }
 
     @Override
