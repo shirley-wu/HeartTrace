@@ -1,5 +1,6 @@
 package com.example.dell.sync;
 
+import android.accounts.NetworkErrorException;
 import android.util.Log;
 
 import com.example.dell.db.Diary;
@@ -36,8 +37,15 @@ public class SyncServerAccessor {
             return null;
         }
 
+        HttpURLConnection conn = null;
+        InputStream is = null;
+        InputStreamReader isr = null;
+        BufferedReader bufferedReader = null;
+
+        List list = null;
+
         try{
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setDoInput(true);
             conn.setRequestProperty("className", c.getName());
@@ -45,30 +53,60 @@ public class SyncServerAccessor {
             conn.connect();
             int responseCode = conn.getResponseCode();
             if(responseCode != 200) {
-                Log.d(TAG, "getEntries: response code" + responseCode);
-                return null;
+                throw new NetworkErrorException("get response code" + responseCode);
             }
 
-            InputStream is = conn.getInputStream();
-            InputStreamReader isr = new InputStreamReader(is);
-            BufferedReader bufferReader = new BufferedReader(isr);
+            is = conn.getInputStream();
+            isr = new InputStreamReader(is);
+            bufferedReader = new BufferedReader(isr);
 
             String resultData = "";
             String inputLine  = "";
-            while((inputLine = bufferReader.readLine()) != null){
+            while((inputLine = bufferedReader.readLine()) != null){
                 resultData += inputLine + "\n";
             }
 
-            List list = new ArrayList();
-
-            // TODO: unparse result data; but how to?
+            // TODO: unparse result data into list; but how to?
             // Object o = c.newInstance();
 
-            return list;
-        } catch(IOException e) {
-            Log.e(TAG, "error: ", e);
-            return null;
         }
+        catch(IOException e) {
+            Log.e(TAG, "getEntries: ", e);
+        }
+        catch (NetworkErrorException e) {
+            Log.e(TAG, "getEntries: ", e);
+        }
+        finally {
+            if(bufferedReader != null) {
+                try{
+                    bufferedReader.close();
+                }
+                catch (IOException e) {
+                    Log.d(TAG, "getEntries: when closing bufferedReader", e);
+                }
+            }
+            if(isr != null) {
+                try{
+                    isr.close();
+                }
+                catch (IOException e) {
+                    Log.d(TAG, "getEntries: when closing isr", e);
+                }
+            }
+            if(is != null) {
+                try{
+                    is.close();
+                }
+                catch (IOException e) {
+                    Log.d(TAG, "getEntries: when closing is", e);
+                }
+            }
+            if(conn != null) {
+                conn.disconnect();
+            }
+        }
+
+        return list;
     }
 
     public boolean putEntries(List entries, Class c) {
@@ -81,8 +119,12 @@ public class SyncServerAccessor {
             return false;
         }
 
+        HttpURLConnection conn = null;
+        DataOutputStream out = null;
+        boolean success = false;
+
         try{
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setDoOutput(true);
             conn.setDoInput(true);
@@ -90,24 +132,42 @@ public class SyncServerAccessor {
             conn.setRequestProperty("className", c.getName());
 
             String sendData = "";
-            // TODO: parse entries
+            // TODO: parse entries into sendData
 
             conn.connect();
-            DataOutputStream out = new DataOutputStream(conn.getOutputStream());
+            out = new DataOutputStream(conn.getOutputStream());
             out.writeBytes(sendData);
             out.flush();
             out.close();
+            out = null;
 
             int responseCode = conn.getResponseCode();
             if(responseCode != 200) {
-                Log.d(TAG, "putEntries: response code" + responseCode);
-                return false;
+                throw new NetworkErrorException("put response code" + responseCode);
+            } else {
+                success = true;
             }
-
-            return true;
-        } catch(IOException e) {
-            Log.e(TAG, "error: ", e);
-            return false;
         }
+        catch(IOException e) {
+            Log.e(TAG, "putEntries: ", e);
+        }
+        catch (NetworkErrorException e) {
+            Log.e(TAG, "putEntries: ", e);
+        }
+        finally {
+            if (out != null) {
+                try{
+                    out.close();
+                }
+                catch (IOException e) {
+                    Log.e(TAG, "putEntries: when closing out", e);
+                }
+            }
+            if (conn != null) {
+                conn.disconnect();
+            }
+        }
+
+        return success;
     }
 }

@@ -6,6 +6,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.test.InstrumentationRegistry;
+import android.test.InstrumentationTestCase;
 import android.util.Log;
 
 import org.junit.Before;
@@ -17,7 +18,7 @@ import static android.content.Context.ACCOUNT_SERVICE;
  * Created by wu-pc on 2018/6/3.
  */
 
-public class SyncTest {
+public class SyncTest extends InstrumentationTestCase {
 
     private static final String TAG = "SyncTest";
 
