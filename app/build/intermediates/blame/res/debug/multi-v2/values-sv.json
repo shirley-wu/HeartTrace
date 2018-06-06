@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\values-sv\\values-sv.xml",
+            "outputFile": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\values-sv\\values-sv.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\values-sv\\values-sv.xml",
+                    "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\values-sv\\values-sv.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\d5d693b50368619a1ecbe4bd883a4018\\res\\values-sv\\values.xml",
+                    "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\06fef741ffd7503cc3f53761c53344f5\\res\\values-sv\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -38,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-10.0.0.aar\\fc8e9307f95d5bbc52971a2eca4a77e1\\res\\values-sv\\values.xml",
+                    "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-10.0.0.aar\\3667c34f25c26a9fb1e18ee4d354b603\\res\\values-sv\\values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -57,10 +57,10 @@
             ]
         },
         {
-            "outputFile": "D:\\diary\\diary\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sv\\values-sv.xml",
+            "outputFile": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sv\\values-sv.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\values-sv\\values-sv.xml",
+                    "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\values-sv\\values-sv.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -77,7 +77,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\d5d693b50368619a1ecbe4bd883a4018\\res\\values-sv\\values.xml",
+                    "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\06fef741ffd7503cc3f53761c53344f5\\res\\values-sv\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -94,7 +94,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-10.0.0.aar\\fc8e9307f95d5bbc52971a2eca4a77e1\\res\\values-sv\\values.xml",
+                    "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-10.0.0.aar\\3667c34f25c26a9fb1e18ee4d354b603\\res\\values-sv\\values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",

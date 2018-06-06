@@ -137,10 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
           diaryList.clear();
           DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-<<<<<<< HEAD
-=======
           //diaryList = Diary.getAll(helper,false);
->>>>>>> a65b974ae944f898f3ac8543759e5d4b29af1be8
           diaryList = Diary.getAll(helper,false);
           if(diaryList == null){
               diaryList = new ArrayList<>();
