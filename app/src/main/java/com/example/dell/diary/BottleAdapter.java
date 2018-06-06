@@ -59,10 +59,10 @@ public class BottleAdapter extends RecyclerView.Adapter<BottleAdapter.ViewHolder
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
                 Sentencebook sentencebook = mSentencebookList.get(position);
-                /*Intent intent = new Intent(mContext,BottlefrontActivity.class);
-                intent.putExtra(BottlefrontActivity.BOTTLE_NAME, bottle.getBottleName());
-                intent.putExtra(BottlefrontActivity.BOTTLE_IMAGE_ID, bottle.getImageId());
-                mContext.startActivity(intent);*/
+                Intent intent = new Intent(mContext,BottlefrontActivity.class);
+                intent.putExtra(BottlefrontActivity.BOTTLE_NAME, sentencebook.getSentencebookName());
+               /* intent.putExtra(BottlefrontActivity.BOTTLE_IMAGE_ID, bottle.getImageId());*/
+                mContext.startActivity(intent);
             }
         });
 
@@ -110,12 +110,13 @@ public class BottleAdapter extends RecyclerView.Adapter<BottleAdapter.ViewHolder
         Sentencebook sentencebook = mSentencebookList.get(position);
         holder.bottleName.setText(sentencebook.getSentencebookName());
 
-       // Glide.with(mContext).load(sentencebook.getImageId()).into(holder.bottleIcon);
+       // Glide.with(mContext).load(sentencebook.getImageId()).into(holder.bottleIcon);*/
     }
-   public void addSentencebook(Sentencebook sentencebook){
-       DatabaseHelper helper = new DatabaseHelper(mContext);
-       sentencebook.insert(helper);
-       /*notifyItemInserted(position);*/
+   public void addSentencebook(int position ,Sentencebook sentencebook){
+       /*DatabaseHelper helper = new DatabaseHelper(mContext);
+       sentencebook.insert(helper);*/
+       mSentencebookList.add(position, sentencebook);
+       notifyItemInserted(position);
     }
     public void deleteBottle(int position){
         mSentencebookList.remove(position);

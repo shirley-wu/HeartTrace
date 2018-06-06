@@ -1,20 +1,20 @@
 #Internal package file, do not edit.
-#Tue Jun 05 21:54:12 GMT+08:00 2018
+#Tue Jun 05 22:40:30 GMT+08:00 2018
 4.path=classes.dex
 8.set=ASSET
 6.path=fonts/font1.ttf
 0.baseType=DIRECTORY
 10.path=fonts/font2.ttf
 5.baseType=DIRECTORY
-1.base=D\:\\diary\\diary\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\50
+1.base=D\:\\diary\\diary\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\90
 8.path=fonts/Roboto-Medium.ttf
 12.path=lib/armeabi-v7a/libsqlcipher.so
-3.base=D\:\\diary\\diary\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\54
+3.base=D\:\\diary\\diary\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\91
 4.set=DEX
-5.base=D\:\\diary\\diary\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\52
-7.base=D\:\\diary\\diary\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\55
+5.base=D\:\\diary\\diary\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\93
+7.base=D\:\\diary\\diary\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\88
 11.base=D\:\\diary\\diary\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
-9.base=D\:\\diary\\diary\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\53
+9.base=D\:\\diary\\diary\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\89
 1.baseType=DIRECTORY
 11.set=NATIVE_RESOURCE
 0.set=NATIVE_RESOURCE
@@ -35,7 +35,7 @@
 6.set=ASSET
 2.base=D\:\\diary\\diary\\app\\build\\intermediates\\assets\\debug
 11.baseType=DIRECTORY
-4.base=D\:\\diary\\diary\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\51
+4.base=D\:\\diary\\diary\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\92
 3.baseType=DIRECTORY
 6.base=D\:\\diary\\diary\\app\\build\\intermediates\\assets\\debug
 10.base=D\:\\diary\\diary\\app\\build\\intermediates\\assets\\debug

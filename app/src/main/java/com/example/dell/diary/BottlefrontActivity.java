@@ -58,8 +58,8 @@ public class BottlefrontActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bottlefront);
         Intent intent = getIntent();
-        String bottleName = intent.getStringExtra(BOTTLE_NAME);
-        int bottleImageId  = intent.getIntExtra(BOTTLE_IMAGE_ID, 0);
+        String SentencebookName = intent.getStringExtra(BOTTLE_NAME);
+       // int bottleImageId  = intent.getIntExtra(BOTTLE_IMAGE_ID, 0);
         Toolbar toolbar = (Toolbar) findViewById(R.id.bottle_front_toolbar);
         CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         ImageView bottleImageView = (ImageView) findViewById(R.id.bottle_image_view);
@@ -68,8 +68,8 @@ public class BottlefrontActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        collapsingToolbar.setTitle(bottleName);
-        Glide.with(this).load(bottleImageId).into(bottleImageView);
+        collapsingToolbar.setTitle(SentencebookName);
+      //  Glide.with(this).load(bottleImageId).into(bottleImageView);
        //悬浮按钮添加纸条
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.note_add_fab);
         fab.setOnClickListener(new View.OnClickListener() {

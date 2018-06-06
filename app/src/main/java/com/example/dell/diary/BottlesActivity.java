@@ -122,7 +122,7 @@ public class BottlesActivity extends AppCompatActivity {
                                 String inputName = inputBottleName.getText().toString();
                                 String inputDescribe = inputBottleDescribe.getText().toString();
                                 Sentencebook sentencebook = new Sentencebook(inputName);
-                                adapter.addSentencebook(sentencebook);
+                                adapter.addSentencebook(sentencebookList.size(),sentencebook);
                             }
                         });
                 builder.show();
@@ -133,8 +133,8 @@ public class BottlesActivity extends AppCompatActivity {
     }
     public void initSententcebookList(){
         sentencebookList.clear();
-       /* DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-        sentencebookList= Sentencebook.getAllSubSentence(helper);*/
+      /* DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+        sentencebookList= Sentencebook.(helper)；*/
     }
 
 }
