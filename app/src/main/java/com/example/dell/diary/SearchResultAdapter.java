@@ -37,7 +37,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
             super(view);
             searchResultView = view;;
             diaryContent = (TextView)view.findViewById(R.id.diary_search_text);
-            diaryDate = (TextView)view.findViewById(R.id.diary_search_text);
+            diaryDate = (TextView)view.findViewById(R.id.diary_search_date);
         }
     }
 

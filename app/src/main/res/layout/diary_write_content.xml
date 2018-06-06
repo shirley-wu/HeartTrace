@@ -84,6 +84,14 @@
             android:background="@android:color/transparent"
             android:src="@drawable/keyboard" />
 
+        <ImageButton
+            android:id="@+id/confirm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:src="@drawable/confirm" />
+
     </LinearLayout>
 
 
