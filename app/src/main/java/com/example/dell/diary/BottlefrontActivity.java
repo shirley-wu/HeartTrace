@@ -1,6 +1,8 @@
 package com.example.dell.diary;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -25,6 +27,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.dell.db.DatabaseHelper;
+import com.example.dell.db.Sentence;
+import com.example.dell.db.Sentencebook;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +40,11 @@ public class BottlefrontActivity extends AppCompatActivity {
     public static final String BOTTLE_NAME = "bottle_name";
     public static final String BOTTLE_IMAGE_ID = "bottle_image_id";
 
-
     private Note[] notes = {new Note(2018, 2,4,"星期日","我发现了一个秘密"), new Note(2018, 5,15,"星期一","我做了一个梦"),  new Note(2018, 3,20,"星期三","不知如何是好")};
-    private List<Note> noteList = new ArrayList<>();
+
+    private DatabaseHelper databaseHelper = null;
+    private List<Sentence> sentenceList = new ArrayList<>();
+    private NoteAdapter adapter;
 
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.bottletoolbar, menu);
@@ -45,7 +52,7 @@ public class BottlefrontActivity extends AppCompatActivity {
     }
 
 
-    private NoteAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,30 +70,40 @@ public class BottlefrontActivity extends AppCompatActivity {
         }
         collapsingToolbar.setTitle(bottleName);
         Glide.with(this).load(bottleImageId).into(bottleImageView);
-
+       //悬浮按钮添加纸条
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.note_add_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(BottlefrontActivity.this, TicketEditActivity.class);
-                startActivity(intent);
+               /* Intent intent = new Intent(BottlefrontActivity.this, TicketEditActivity.class);
+                startActivity(intent);*/
+                DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+                Sentence sentence = new Sentence();
+                sentence.setText("123");
+                sentence.setDate();
+                sentence.insert(helper);
+                sentence.update(helper);
+                helper.close();
             }
         });
 
-
-        initNotes();
+        initSententceList();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_note_view);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new NoteAdapter(noteList);
+        adapter = new NoteAdapter(sentenceList);
         recyclerView.setAdapter(adapter);
+
     }
-    public void initNotes(){
-        noteList.clear();
-        for( int i = 0; i<2; i++){
-            noteList.add(notes[i]);
-        }
+
+    //初始化sentenceList
+    public void initSententceList(){
+        sentenceList.clear();
+        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+        sentenceList= Sentence.getAll(helper,false);
     }
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

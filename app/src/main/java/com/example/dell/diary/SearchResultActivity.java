@@ -121,6 +121,12 @@ public class SearchResultActivity extends AppCompatActivity {
         DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
         Intent intent = getIntent();
         String searchText = intent.getStringExtra("search_text");
+<<<<<<< HEAD
+        //diaryList = Diary.getByRestrict(helper,searchText,null,null,null);
+        diaryList = Diary.getAll(helper,false);
+        if(diaryList == null){
+            diaryList = new ArrayList<>();
+=======
         startDate = (Date)intent.getSerializableExtra("start_date");
         endDate = (Date)intent.getSerializableExtra("end_date");
         Log.i("start_year",String.valueOf(startDate.getYear())+startDate.getMonth()+startDate.getDate());
@@ -154,6 +160,7 @@ public class SearchResultActivity extends AppCompatActivity {
                 finish();
                 return true;
             default:
+>>>>>>> a65b974ae944f898f3ac8543759e5d4b29af1be8
         }
         return true;
     }
