@@ -28,9 +28,26 @@ public class SyncServerAccessor {
     final static private String TAG = "SyncServerAccessor";
 
     public List getEntries(Class c) {
+        String resultData = getResponseData(ServerAccessor.SERVER_IP + "/sync", c);
+
+        if(resultData == null) {
+            // error
+            return null;
+        }
+
+        List list = new ArrayList();
+
+        // TODO: unparse
+
+        return list;
+    }
+
+    public String getResponseData(String urlString, Class c) {
+        // return the data of sync get response only when response code == 200;
+        // null representing error, "" representing no data
         URL url;
         try{
-            url = new URL(ServerAccessor.SERVER_IP + "/sync");
+            url = new URL(urlString);
         }
         catch (MalformedURLException e) {
             Log.e(TAG, "start: server ip is wrong");
@@ -42,7 +59,7 @@ public class SyncServerAccessor {
         InputStreamReader isr = null;
         BufferedReader bufferedReader = null;
 
-        List list = null;
+        String resultData = null;
 
         try{
             conn = (HttpURLConnection) url.openConnection();
@@ -60,15 +77,11 @@ public class SyncServerAccessor {
             isr = new InputStreamReader(is);
             bufferedReader = new BufferedReader(isr);
 
-            String resultData = "";
+            resultData = "";
             String inputLine  = "";
             while((inputLine = bufferedReader.readLine()) != null){
                 resultData += inputLine + "\n";
             }
-
-            // TODO: unparse result data into list; but how to?
-            // Object o = c.newInstance();
-
         }
         catch(IOException e) {
             Log.e(TAG, "getEntries: ", e);
@@ -106,22 +119,34 @@ public class SyncServerAccessor {
             }
         }
 
-        return list;
+        return resultData;
     }
 
     public boolean putEntries(List entries, Class c) {
+        String sendData = "";
+
+        // TODO: parse
+
+        Integer responseCode = putResponseCode(ServerAccessor.SERVER_IP + "/sync", sendData, c);
+        return (responseCode != null && responseCode == 200);
+    }
+
+    public Integer putResponseCode(String urlString, String sendData, Class c) {
+        // return the response code of put request
+        // null representing error
         URL url;
         try{
-            url = new URL(ServerAccessor.SERVER_IP + "/sync");
+            url = new URL(urlString);
         }
         catch (MalformedURLException e) {
             Log.e(TAG, "start: server ip is wrong");
-            return false;
+            return null;
         }
 
         HttpURLConnection conn = null;
         DataOutputStream out = null;
-        boolean success = false;
+
+        Integer responseCode = null;
 
         try{
             conn = (HttpURLConnection) url.openConnection();
@@ -131,9 +156,6 @@ public class SyncServerAccessor {
             conn.setUseCaches(false);
             conn.setRequestProperty("className", c.getName());
 
-            String sendData = "";
-            // TODO: parse entries into sendData
-
             conn.connect();
             out = new DataOutputStream(conn.getOutputStream());
             out.writeBytes(sendData);
@@ -141,17 +163,9 @@ public class SyncServerAccessor {
             out.close();
             out = null;
 
-            int responseCode = conn.getResponseCode();
-            if(responseCode != 200) {
-                throw new NetworkErrorException("put response code" + responseCode);
-            } else {
-                success = true;
-            }
+            responseCode = conn.getResponseCode();
         }
         catch(IOException e) {
-            Log.e(TAG, "putEntries: ", e);
-        }
-        catch (NetworkErrorException e) {
             Log.e(TAG, "putEntries: ", e);
         }
         finally {
@@ -168,6 +182,6 @@ public class SyncServerAccessor {
             }
         }
 
-        return success;
+        return responseCode;
     }
 }
