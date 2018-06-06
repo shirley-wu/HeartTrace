@@ -117,7 +117,6 @@ public class Diarybook {
     public static List<Diarybook> getAll(DatabaseHelper helper, Boolean ascending){
         try {
             QueryBuilder<Diarybook, Integer> qb = helper.getDiarybookDao().queryBuilder();
-            qb.orderBy("date",ascending);
             return qb.query();
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
