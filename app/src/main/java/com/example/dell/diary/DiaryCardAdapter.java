@@ -72,6 +72,7 @@ public class DiaryCardAdapter extends RecyclerView.Adapter<DiaryCardAdapter.View
                 Diary diaryCard = mDiaryCardList.get(position);
                 Intent intent = new Intent(mContext,DiaryActivity.class);
                 intent.putExtra("diary_list",diaryCard);
+                intent.putExtra("diary_index",mDiaryCardList.size()-1-mDiaryCardList.indexOf(diaryCard));
                 mContext.startActivity(intent);
             }
         });

@@ -31,8 +31,13 @@
         <activity android:name="com.example.dell.diary.DiaryActivity" />
         <activity android:name="com.example.dell.diary.SearchActivity" />
         <activity android:name="com.example.dell.diary.BottleWriteActivity" />
-        <activity android:name="com.example.dell.diary.CalendarActivity" />
-        <activity android:name="com.example.dell.diary.DiaryWriteActivity" />
+        <activity
+            android:name="com.example.dell.diary.CalendarActivity"
+            android:label="Calendar"
+            android:theme="@style/calendar" />
+        <activity
+            android:name="com.example.dell.diary.DiaryWriteActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name="com.example.dell.diary.TicketEditActivity" />
 
         <!--
