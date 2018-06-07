@@ -28,12 +28,12 @@
         "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-mdpi-v4\\abc_menu_hardkey_panel_mtrl_mult.9.png"
     },
     {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\common_google_signin_btn_text_dark_disabled.9.png",
-        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\804675d155822fed03815a35f51c6f24\\res\\drawable-mdpi-v4\\common_google_signin_btn_text_dark_disabled.9.png"
-    },
-    {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png",
         "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-mdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\common_google_signin_btn_text_dark_disabled.9.png",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\804675d155822fed03815a35f51c6f24\\res\\drawable-mdpi-v4\\common_google_signin_btn_text_dark_disabled.9.png"
     },
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\common_google_signin_btn_icon_light_pressed.9.png",

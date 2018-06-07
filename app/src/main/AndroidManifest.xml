@@ -25,7 +25,7 @@
             android:label="Calendar"
             android:theme="@style/calendar"/>
         <activity android:name=".DiaryWriteActivity"
-        android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".TicketEditActivity" />
 
         <!--
@@ -39,7 +39,7 @@
         <activity android:name=".BottlefrontActivity" />
         <activity android:name=".NoteActivity" />
         <activity android:name=".BottlesActivity" />
-        <activity android:name=".SearchResultActivity" />
+        <activity android:name=".SearchResultActivity"/>
         <activity android:name=".LabelManageActivity"></activity>
     </application>
 

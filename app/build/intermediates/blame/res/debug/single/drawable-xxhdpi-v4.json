@@ -104,32 +104,32 @@
         "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\arrow_right_orange.png"
     },
     {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png",
-        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png"
-    },
-    {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bottle_star.png",
         "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\bottle_star.png"
+    },
+    {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png"
     },
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\add_white.png",
         "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\add_white.png"
     },
     {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\favorite_pink.png",
-        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\favorite_pink.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_textfield_search_activated_mtrl_alpha.9.png",
-        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_textfield_search_activated_mtrl_alpha.9.png"
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\edit_white.png",
+        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\edit_white.png"
     },
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\diary_bg.jpg",
         "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\diary_bg.jpg"
     },
     {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\edit_white.png",
-        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\edit_white.png"
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_textfield_search_activated_mtrl_alpha.9.png",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_textfield_search_activated_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\favorite_pink.png",
+        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\favorite_pink.png"
     },
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\search_gray.png",
@@ -148,12 +148,12 @@
         "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\setting_white.png"
     },
     {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_light_normal.9.png",
-        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\804675d155822fed03815a35f51c6f24\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_light_normal.9.png"
-    },
-    {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\menu_white.png",
         "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\menu_white.png"
+    },
+    {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_light_normal.9.png",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\804675d155822fed03815a35f51c6f24\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_light_normal.9.png"
     },
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\keyboard.png",
