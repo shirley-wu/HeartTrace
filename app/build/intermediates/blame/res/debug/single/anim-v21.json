@@ -1,5 +1,13 @@
 [
     {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\anim-v21\\design_bottom_sheet_slide_out.xml",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\0c6943b93afa73d4ac8eec228f0511b1\\res\\anim-v21\\design_bottom_sheet_slide_out.xml"
+    },
+    {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\anim-v21\\design_bottom_sheet_slide_in.xml",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\0c6943b93afa73d4ac8eec228f0511b1\\res\\anim-v21\\design_bottom_sheet_slide_in.xml"
+    },
+    {
         "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\anim-v21\\design_bottom_sheet_slide_out.xml",
         "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\1e693f60716bdb3599e2680538c7696b\\res\\anim-v21\\design_bottom_sheet_slide_out.xml"
     },

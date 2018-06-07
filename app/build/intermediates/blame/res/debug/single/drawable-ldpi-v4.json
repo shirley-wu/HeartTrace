@@ -2,5 +2,9 @@
     {
         "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\ic_launcher_background.png",
         "source": "D:\\diary\\diary\\app\\build\\generated\\res\\pngs\\debug\\drawable-ldpi\\ic_launcher_background.png"
+    },
+    {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\ic_launcher_background.png",
+        "source": "D:\\HeartTrace\\app\\build\\generated\\res\\pngs\\debug\\drawable-ldpi\\ic_launcher_background.png"
     }
 ]

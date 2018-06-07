@@ -1,5 +1,9 @@
 [
     {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\avd_hide_password.xml",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\0c6943b93afa73d4ac8eec228f0511b1\\res\\drawable-v21\\avd_hide_password.xml"
+    },
+    {
         "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\avd_show_password.xml",
         "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\1e693f60716bdb3599e2680538c7696b\\res\\drawable-v21\\avd_show_password.xml"
     },
@@ -8,8 +12,24 @@
         "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-v21\\abc_btn_colored_material.xml"
     },
     {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\design_password_eye.xml",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\0c6943b93afa73d4ac8eec228f0511b1\\res\\drawable-v21\\design_password_eye.xml"
+    },
+    {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\abc_action_bar_item_background_material.xml",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-v21\\abc_action_bar_item_background_material.xml"
+    },
+    {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\design_bottom_navigation_item_background.xml",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\0c6943b93afa73d4ac8eec228f0511b1\\res\\drawable-v21\\design_bottom_navigation_item_background.xml"
+    },
+    {
         "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\notification_action_background.xml",
         "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\5844d80b1e46e5c457c250ada913a0f2\\res\\drawable-v21\\notification_action_background.xml"
+    },
+    {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\abc_btn_colored_material.xml",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-v21\\abc_btn_colored_material.xml"
     },
     {
         "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\design_bottom_navigation_item_background.xml",
@@ -18,6 +38,14 @@
     {
         "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\abc_action_bar_item_background_material.xml",
         "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-v21\\abc_action_bar_item_background_material.xml"
+    },
+    {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\abc_edit_text_material.xml",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-v21\\abc_edit_text_material.xml"
+    },
+    {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\avd_show_password.xml",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\0c6943b93afa73d4ac8eec228f0511b1\\res\\drawable-v21\\avd_show_password.xml"
     },
     {
         "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\mdtp_material_button_selected.xml",
@@ -32,8 +60,20 @@
         "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-v21\\abc_edit_text_material.xml"
     },
     {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\notification_action_background.xml",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\f36ccedfbae95fa261dd3fe486c8feb9\\res\\drawable-v21\\notification_action_background.xml"
+    },
+    {
         "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\avd_hide_password.xml",
         "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\1e693f60716bdb3599e2680538c7696b\\res\\drawable-v21\\avd_hide_password.xml"
+    },
+    {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\mdtp_material_button_selected.xml",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\6d89cc69de304e5270dd5b8eb93c2535\\res\\drawable-v21\\mdtp_material_button_selected.xml"
+    },
+    {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\mdtp_material_button_background.xml",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\6d89cc69de304e5270dd5b8eb93c2535\\res\\drawable-v21\\mdtp_material_button_background.xml"
     },
     {
         "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\design_password_eye.xml",

@@ -2,29 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-<<<<<<< HEAD
-<<<<<<< HEAD
-      <module fileurl="file://$PROJECT_DIR$/Diary.iml" filepath="$PROJECT_DIR$/Diary.iml" />
-      <module fileurl="file://D:\HeartTrace\Diary.iml" filepath="D:\HeartTrace\Diary.iml" />
-=======
-<<<<<<< HEAD
->>>>>>> 52205d733e276fc95247f8598e45946fea8e74e3
-=======
-      <module fileurl="file://D:\Users\wu-pc\repos\HeartTrace\Diary.iml" filepath="D:\Users\wu-pc\repos\HeartTrace\Diary.iml" />
       <module fileurl="file://$PROJECT_DIR$/HeartTrace.iml" filepath="$PROJECT_DIR$/HeartTrace.iml" />
->>>>>>> master
-      <module fileurl="file://D:\Android\Project\Diary\HeartTrace.iml" filepath="D:\Android\Project\Diary\HeartTrace.iml" />
-<<<<<<< HEAD
-=======
->>>>>>> 75080575c7a3bb5defbfbe37313ec244035012e2
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/diary.iml" filepath="$PROJECT_DIR$/diary.iml" />
-=======
-      <module fileurl="file://D:\HeartTrace\Diary.iml" filepath="D:\HeartTrace\Diary.iml" />
-      <module fileurl="file://$PROJECT_DIR$/HeartTrace.iml" filepath="$PROJECT_DIR$/HeartTrace.iml" />
->>>>>>> 52205d733e276fc95247f8598e45946fea8e74e3
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
->>>>>>> a65b974ae944f898f3ac8543759e5d4b29af1be8
     </modules>
   </component>
 </project>

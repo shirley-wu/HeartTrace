@@ -271,26 +271,45 @@
                 android:orientation="horizontal"
                 android:paddingTop="15dp">
 
-                <Button
+                <TextView
                     android:id="@+id/font1"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="match_parent"
-                    android:text="使用" />
+                    android:clickable="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="monospace"
+                    android:textColor="#000000"
+                    android:textSize="16dp" />
 
-                <Button
+                <TextView
                     android:id="@+id/font2"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="match_parent"
-                    android:text="使用" />
+                    android:clickable="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="serif"
+                    android:textColor="#000000"
+                    android:textSize="16dp" />
 
-                <Button
+                <TextView
                     android:id="@+id/font3"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="match_parent"
-                    android:text="使用" />
+                    android:clickable="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="sans-serif"
+                    android:textColor="#000000"
+                    android:textSize="16dp" />
+
 
             </LinearLayout>
 
@@ -387,6 +406,70 @@
 
             </LinearLayout>
 
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="15dp">
+
+                <ImageButton
+                    android:id="@+id/set_retract"
+                    android:src="@drawable/retract"
+                    android:background="@android:color/transparent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
+
+                <ImageButton
+                    android:id="@+id/set_center"
+                    android:src="@drawable/center"
+                    android:background="@android:color/transparent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
+
+                <ImageButton
+                    android:id="@+id/set_left"
+                    android:src="@drawable/left"
+                    android:background="@android:color/transparent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
+
+                <ImageButton
+                    android:id="@+id/set_right"
+                    android:src="@drawable/right"
+                    android:background="@android:color/transparent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
+
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -432,3 +515,5 @@
     </ScrollView>
 
 </LinearLayout>
+
+
