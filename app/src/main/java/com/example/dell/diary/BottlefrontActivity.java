@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,11 +37,9 @@ import java.util.List;
 
 public class BottlefrontActivity extends AppCompatActivity {
     private CoordinatorLayout container;
-
+    private static String TAG = "123";
     public static final String BOTTLE_NAME = "bottle_name";
     public static final String BOTTLE_IMAGE_ID = "bottle_image_id";
-
-    private Note[] notes = {new Note(2018, 2,4,"星期日","我发现了一个秘密"), new Note(2018, 5,15,"星期一","我做了一个梦"),  new Note(2018, 3,20,"星期三","不知如何是好")};
 
     private DatabaseHelper databaseHelper = null;
     private List<Sentence> sentenceList = new ArrayList<>();
@@ -58,8 +57,8 @@ public class BottlefrontActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bottlefront);
         Intent intent = getIntent();
-        String bottleName = intent.getStringExtra(BOTTLE_NAME);
-        int bottleImageId  = intent.getIntExtra(BOTTLE_IMAGE_ID, 0);
+        String SentencebookName = intent.getStringExtra(BOTTLE_NAME);
+       // int bottleImageId  = intent.getIntExtra(BOTTLE_IMAGE_ID, 0);
         Toolbar toolbar = (Toolbar) findViewById(R.id.bottle_front_toolbar);
         CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         ImageView bottleImageView = (ImageView) findViewById(R.id.bottle_image_view);
@@ -68,8 +67,8 @@ public class BottlefrontActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        collapsingToolbar.setTitle(bottleName);
-        Glide.with(this).load(bottleImageId).into(bottleImageView);
+        collapsingToolbar.setTitle(SentencebookName);
+      //  Glide.with(this).load(bottleImageId).into(bottleImageView);
        //悬浮按钮添加纸条
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.note_add_fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -82,8 +81,9 @@ public class BottlefrontActivity extends AppCompatActivity {
                 sentence.setText("123");
                 sentence.setDate();
                 sentence.insert(helper);
-                sentence.update(helper);
-                helper.close();
+                sentenceList = Sentence.getAll(helper, false);
+               /* Log.d(TAG, "onClick: correct");*/
+                adapter.update(sentenceList);
             }
         });
 

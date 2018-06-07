@@ -121,6 +121,7 @@ public class SearchResultActivity extends AppCompatActivity {
         DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
         Intent intent = getIntent();
         String searchText = intent.getStringExtra("search_text");
+
         startDate = (Date)intent.getSerializableExtra("start_date");
         endDate = (Date)intent.getSerializableExtra("end_date");
         Log.i("start_year",String.valueOf(startDate.getYear())+startDate.getMonth()+startDate.getDate());
