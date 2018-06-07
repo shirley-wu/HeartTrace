@@ -1,10 +1,5 @@
 [
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png"
-    },
-    {
-<<<<<<< HEAD
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_list_divider_mtrl_alpha.9.png",
         "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_list_divider_mtrl_alpha.9.png"
     },
@@ -13,16 +8,24 @@
         "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\frame_cat.9.png"
     },
     {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\setting_white.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\setting_white.png"
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png"
     },
     {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_star_half_black_36dp.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_ic_star_half_black_36dp.png"
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_menu_hardkey_panel_mtrl_mult.9.png",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_menu_hardkey_panel_mtrl_mult.9.png"
     },
     {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\clear_span.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\clear_span.png"
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_text_dark_normal.9.png",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\804675d155822fed03815a35f51c6f24\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_text_dark_normal.9.png"
+    },
+    {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\face_insert.png",
+        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\face_insert.png"
+    },
+    {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\get_image.png",
+        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\get_image.png"
     },
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\calendar_bg.jpg",
@@ -33,16 +36,12 @@
         "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_list_selector_disabled_holo_dark.9.png"
     },
     {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bottle_pink1.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\bottle_pink1.png"
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\ic_edit.png",
+        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\ic_edit.png"
     },
     {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_text_dark_normal.9.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\d5d693b50368619a1ecbe4bd883a4018\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_text_dark_normal.9.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\ic_settings.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\ic_settings.png"
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\background4.jpg",
+        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\background4.jpg"
     },
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png",
@@ -53,28 +52,36 @@
         "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_text_select_handle_right_mtrl_light.png"
     },
     {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_text_light_disabled.9.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\d5d693b50368619a1ecbe4bd883a4018\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_text_light_disabled.9.png"
-    },
-    {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\frame_white2.9.png",
         "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\frame_white2.9.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_star_black_36dp.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_ic_star_black_36dp.png"
     },
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_btn_radio_to_on_mtrl_015.png",
         "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_btn_radio_to_on_mtrl_015.png"
     },
     {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\background7.jpg",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\background7.jpg"
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_btn_radio_to_on_mtrl_000.png",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_btn_radio_to_on_mtrl_000.png"
+    },
+    {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\add_diary_black.png",
+        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\add_diary_black.png"
+    },
+    {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\add2_black.png",
+        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\add2_black.png"
     },
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_list_longpressed_holo.9.png",
         "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_list_longpressed_holo.9.png"
+    },
+    {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bottle_gray1.png",
+        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\bottle_gray1.png"
+    },
+    {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\setting.png",
+        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\setting.png"
     },
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\background5.jpg",
@@ -85,12 +92,8 @@
         "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\804675d155822fed03815a35f51c6f24\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_text_dark_pressed.9.png"
     },
     {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_list_pressed_holo_dark.9.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_list_pressed_holo_dark.9.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_dark_disabled.9.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\d5d693b50368619a1ecbe4bd883a4018\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_dark_disabled.9.png"
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\background2.jpg",
+        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\background2.jpg"
     },
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_text_dark_disabled.9.png",
@@ -113,12 +116,12 @@
         "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\add_white.png"
     },
     {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_textfield_search_activated_mtrl_alpha.9.png",
-        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_textfield_search_activated_mtrl_alpha.9.png"
-    },
-    {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\favorite_pink.png",
         "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\favorite_pink.png"
+    },
+    {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_textfield_search_activated_mtrl_alpha.9.png",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_textfield_search_activated_mtrl_alpha.9.png"
     },
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\diary_bg.jpg",
@@ -141,585 +144,6 @@
         "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\804675d155822fed03815a35f51c6f24\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_dark_pressed.9.png"
     },
     {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\italic.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\italic.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_text_select_handle_middle_mtrl_dark.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_text_select_handle_middle_mtrl_dark.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_list_selector_disabled_holo_light.9.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_list_selector_disabled_holo_light.9.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\background3.jpg",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\background3.jpg"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\statistics_black.png",
-        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\statistics_black.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_light_disabled.9.png",
-        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\804675d155822fed03815a35f51c6f24\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_light_disabled.9.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\background1.jpg",
-        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\background1.jpg"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\drop_down.png",
-        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\drop_down.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\more.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\more.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bottle_pink1.png",
-        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\bottle_pink1.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_list_pressed_holo_light.9.png",
-        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_list_pressed_holo_light.9.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_star_half_black_16dp.png",
-        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_ic_star_half_black_16dp.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\calendar_bg.jpg",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\calendar_bg.jpg"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\normal_black.png",
-        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\normal_black.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bottle_star.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\bottle_star.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\ic_settings.png",
-        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\ic_settings.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png",
-        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\keyboard.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\keyboard.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\cycle_white.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\cycle_white.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png",
-        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\frame_black_s.png",
-        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\frame_black_s.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png",
-        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_light_normal.9.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\d5d693b50368619a1ecbe4bd883a4018\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_light_normal.9.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_btn_radio_to_on_mtrl_015.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_btn_radio_to_on_mtrl_015.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png",
-        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\add_bottle.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\add_bottle.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\frame_white2.9.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\frame_white2.9.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\arrow_left_orange.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\arrow_left_orange.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\drop_down.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\drop_down.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_light_pressed.9.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\d5d693b50368619a1ecbe4bd883a4018\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_light_pressed.9.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_dark_pressed.9.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\d5d693b50368619a1ecbe4bd883a4018\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_dark_pressed.9.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png",
-        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_dark_normal.9.png",
-        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\804675d155822fed03815a35f51c6f24\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_dark_normal.9.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_btn_radio_to_on_mtrl_000.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_btn_radio_to_on_mtrl_000.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_list_selector_disabled_holo_dark.9.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_list_selector_disabled_holo_dark.9.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\frame_white.9.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\frame_white.9.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_005.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_005.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\design_ic_visibility_off.png",
-        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\0c6943b93afa73d4ac8eec228f0511b1\\res\\drawable-xxhdpi-v4\\design_ic_visibility_off.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_star_black_48dp.png",
-        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_ic_star_black_48dp.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\help.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\help.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bottle_bg.jpg",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\bottle_bg.jpg"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\source.png",
-        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\source.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_star_black_16dp.png",
-        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_ic_star_black_16dp.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bottle.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\bottle.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\background7.jpg",
-        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\background7.jpg"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_text_select_handle_left_mtrl_light.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_text_select_handle_left_mtrl_light.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\search_white.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\search_white.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_text_light_pressed.9.png",
-        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\804675d155822fed03815a35f51c6f24\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_text_light_pressed.9.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\panda.jpg",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\panda.jpg"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\ic_launcher_background.png",
-        "source": "D:\\diary\\diary\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxhdpi\\ic_launcher_background.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\design_ic_visibility.png",
-        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\0c6943b93afa73d4ac8eec228f0511b1\\res\\drawable-xxhdpi-v4\\design_ic_visibility.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\add_diary_black.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\add_diary_black.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\confirm.png",
-        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\confirm.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_005.png",
-        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_005.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\pen_white.png",
-        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\pen_white.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\write.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\write.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_btn_check_to_on_mtrl_000.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_btn_check_to_on_mtrl_000.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\ic_edit.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\ic_edit.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_text_select_handle_right_mtrl_dark.png",
-        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_text_select_handle_right_mtrl_dark.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bold.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\bold.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_star_half_black_48dp.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_ic_star_half_black_48dp.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\retract.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\retract.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_btn_check_to_on_mtrl_015.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_btn_check_to_on_mtrl_015.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bottle_pink2.png",
-        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\bottle_pink2.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_dark_disabled.9.png",
-        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\804675d155822fed03815a35f51c6f24\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_dark_disabled.9.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bottle.png",
-        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\bottle.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_menu_share_mtrl_alpha.png",
-        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_ic_menu_share_mtrl_alpha.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_text_select_handle_left_mtrl_light.png",
-        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_text_select_handle_left_mtrl_light.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_star_half_black_48dp.png",
-        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_ic_star_half_black_48dp.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\add_black.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\add_black.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\underline.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\underline.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bottle_heart.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\bottle_heart.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\menu_white.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\menu_white.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\frame_black_1.png",
-        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\frame_black_1.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\background5.jpg",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\background5.jpg"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_popup_background_mtrl_mult.9.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_popup_background_mtrl_mult.9.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_text_select_handle_left_mtrl_dark.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_text_select_handle_left_mtrl_dark.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_textfield_default_mtrl_alpha.9.png",
-        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_textfield_default_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\background6.jpg",
-        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\background6.jpg"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\design_ic_visibility_off.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\1e693f60716bdb3599e2680538c7696b\\res\\drawable-xxhdpi-v4\\design_ic_visibility_off.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\statistics_black.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\statistics_black.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_textfield_default_mtrl_alpha.9.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_textfield_default_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png",
-        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_menu_hardkey_panel_mtrl_mult.9.png",
-        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_menu_hardkey_panel_mtrl_mult.9.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_text_dark_normal.9.png",
-        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\804675d155822fed03815a35f51c6f24\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_text_dark_normal.9.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\face_insert.png",
-        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\face_insert.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\get_image.png",
-        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\get_image.png"
-=======
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_menu_hardkey_panel_mtrl_mult.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_menu_hardkey_panel_mtrl_mult.9.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\calendar_bg.jpg",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\calendar_bg.jpg"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\design_ic_visibility_off.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\a738c3699867a98b793e4919817fe0f6\\res\\drawable-xxhdpi-v4\\design_ic_visibility_off.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\add2_black.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\add2_black.png"
->>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\face_insert.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\face_insert.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_list_longpressed_holo.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_list_longpressed_holo.9.png"
-    },
-    {
-<<<<<<< HEAD
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\pink_background.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\pink_background.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\design_ic_visibility.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\1e693f60716bdb3599e2680538c7696b\\res\\drawable-xxhdpi-v4\\design_ic_visibility.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_text_dark_disabled.9.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\d5d693b50368619a1ecbe4bd883a4018\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_text_dark_disabled.9.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\ic_edit.png",
-        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\ic_edit.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\background4.jpg",
-        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\background4.jpg"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png"
-=======
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\background3.jpg",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\background3.jpg"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\keyboard.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\keyboard.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_btn_check_to_on_mtrl_000.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_btn_check_to_on_mtrl_000.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\arrow_left_orange.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\arrow_left_orange.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bottle_star.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\bottle_star.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bottle_gray1.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\bottle_gray1.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png"
->>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\pen_white.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\pen_white.png"
-    },
-    {
-<<<<<<< HEAD
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_btn_radio_to_on_mtrl_000.png",
-        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_btn_radio_to_on_mtrl_000.png"
-=======
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\search_gray.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\search_gray.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_switch_track_mtrl_alpha.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_switch_track_mtrl_alpha.9.png"
->>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\frame_black_s.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\frame_black_s.png"
-    },
-    {
-<<<<<<< HEAD
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\add_diary_black.png",
-        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\add_diary_black.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\add2_black.png",
-        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\add2_black.png"
-=======
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_btn_check_to_on_mtrl_015.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_btn_check_to_on_mtrl_015.png"
->>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\background2.jpg",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\background2.jpg"
-    },
-    {
-<<<<<<< HEAD
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bottle_gray1.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\bottle_gray1.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bottle_gray1.png",
-        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\bottle_gray1.png"
-    },
-    {
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\setting.png",
-        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\setting.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\happy_black.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\happy_black.png"
-=======
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\setting_white.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\setting_white.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\diary_bg.jpg",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\diary_bg.jpg"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\background5.jpg",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\background5.jpg"
->>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_star_black_36dp.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_ic_star_black_36dp.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\design_ic_visibility.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\a738c3699867a98b793e4919817fe0f6\\res\\drawable-xxhdpi-v4\\design_ic_visibility.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_btn_radio_to_on_mtrl_015.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_btn_radio_to_on_mtrl_015.png"
-    },
-    {
-<<<<<<< HEAD
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\background2.jpg",
-        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\background2.jpg"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_spinner_mtrl_am_alpha.9.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_spinner_mtrl_am_alpha.9.png"
-=======
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png"
->>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\search_background.xml",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\search_background.xml"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\line_spacing1.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\line_spacing1.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bottle_pink1.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\bottle_pink1.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\ic_settings.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\ic_settings.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_text_select_handle_right_mtrl_dark.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_text_select_handle_right_mtrl_dark.png"
-    },
-    {
-<<<<<<< HEAD
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\user_blue.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\user_blue.png"
-=======
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_star_half_black_48dp.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_ic_star_half_black_48dp.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\background7.jpg",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\background7.jpg"
->>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_light_disabled.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\06fef741ffd7503cc3f53761c53344f5\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_light_disabled.9.png"
-    },
-    {
-<<<<<<< HEAD
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\setting_white.png",
         "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\setting_white.png"
     },
@@ -734,141 +158,88 @@
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\keyboard.png",
         "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\keyboard.png"
-=======
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_menu_share_mtrl_alpha.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_ic_menu_share_mtrl_alpha.png"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_popup_background_mtrl_mult.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_popup_background_mtrl_mult.9.png"
->>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\statistics_black.png",
+        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\statistics_black.png"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\favorite_pink.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\favorite_pink.png"
-    },
-    {
-<<<<<<< HEAD
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_btn_check_to_on_mtrl_015.png",
         "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_btn_check_to_on_mtrl_015.png"
     },
     {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_textfield_search_activated_mtrl_alpha.9.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_textfield_search_activated_mtrl_alpha.9.png"
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_light_disabled.9.png",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\804675d155822fed03815a35f51c6f24\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_light_disabled.9.png"
+    },
+    {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\background1.jpg",
+        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\background1.jpg"
     },
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\happy_black.png",
         "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\happy_black.png"
-=======
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\frame_black_1.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\frame_black_1.png"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_text_select_handle_left_mtrl_light.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_text_select_handle_left_mtrl_light.png"
->>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\drop_down.png",
+        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\drop_down.png"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\add_black.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\add_black.png"
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bottle_pink1.png",
+        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\bottle_pink1.png"
     },
     {
-<<<<<<< HEAD
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_list_pressed_holo_light.9.png",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_list_pressed_holo_light.9.png"
+    },
+    {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_star_half_black_16dp.png",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_ic_star_half_black_16dp.png"
+    },
+    {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\label_white.png",
         "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\label_white.png"
-=======
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\add_bottle.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\add_bottle.png"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\line_spacing3.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\line_spacing3.png"
->>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\normal_black.png",
+        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\normal_black.png"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\left.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\left.png"
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\ic_settings.png",
+        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\ic_settings.png"
     },
     {
-<<<<<<< HEAD
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bottle_pink2.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\bottle_pink2.png"
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png"
     },
     {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\line_spacing3.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\line_spacing3.png"
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png"
     },
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\user_blue.png",
         "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\user_blue.png"
-=======
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\arrow_right_orange.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\arrow_right_orange.png"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png"
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\frame_black_s.png",
+        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\frame_black_s.png"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_list_pressed_holo_light.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_list_pressed_holo_light.9.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\search_white.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\search_white.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_dark_normal.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\06fef741ffd7503cc3f53761c53344f5\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_dark_normal.9.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\right.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\right.png"
->>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_text_dark_pressed.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\06fef741ffd7503cc3f53761c53344f5\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_text_dark_pressed.9.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\sad_black.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\sad_black.png"
-    },
-    {
-<<<<<<< HEAD
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_text_select_handle_right_mtrl_light.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_text_select_handle_right_mtrl_light.png"
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png"
     },
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bottle_heart.png",
         "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\bottle_heart.png"
     },
     {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png"
+    },
+    {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png",
         "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png"
-=======
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\calendar_grey.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\calendar_grey.png"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\close_gray.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\close_gray.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\label_white.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\label_white.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\get_image.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\get_image.png"
->>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bottle_pink2.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\bottle_pink2.png"
-    },
-    {
-<<<<<<< HEAD
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_text_select_handle_middle_mtrl_light.png",
         "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_text_select_handle_middle_mtrl_light.png"
     },
@@ -883,117 +254,42 @@
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png",
         "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png"
-=======
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\confirm.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\confirm.png"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\calendar_white.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\calendar_white.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bottle_bg.jpg",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\bottle_bg.jpg"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\background4.jpg",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\background4.jpg"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\background1.jpg",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\background1.jpg"
->>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_star_half_black_36dp.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_ic_star_half_black_36dp.png"
-    },
-    {
-<<<<<<< HEAD
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\setting_grey.png",
         "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\setting_grey.png"
+    },
+    {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png"
     },
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_text_light_disabled.9.png",
         "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\804675d155822fed03815a35f51c6f24\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_text_light_disabled.9.png"
     },
     {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_star_half_black_16dp.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_ic_star_half_black_16dp.png"
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_dark_normal.9.png",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\804675d155822fed03815a35f51c6f24\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_dark_normal.9.png"
     },
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\calendar_grey.png",
         "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\calendar_grey.png"
-=======
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\edit_white.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\edit_white.png"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\happy_black.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\happy_black.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_list_selector_disabled_holo_dark.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_list_selector_disabled_holo_dark.9.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\ic_launcher_background.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxhdpi\\ic_launcher_background.png"
->>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\retract.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\retract.png"
-    },
-    {
-<<<<<<< HEAD
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\source.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\source.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png"
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\design_ic_visibility_off.png",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\0c6943b93afa73d4ac8eec228f0511b1\\res\\drawable-xxhdpi-v4\\design_ic_visibility_off.png"
     },
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png",
         "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png"
     },
     {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_list_longpressed_holo.9.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_list_longpressed_holo.9.png"
-=======
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_textfield_search_activated_mtrl_alpha.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_textfield_search_activated_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_star_black_48dp.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_ic_star_black_48dp.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_dark_disabled.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\06fef741ffd7503cc3f53761c53344f5\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_dark_disabled.9.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\source.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\source.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_list_divider_mtrl_alpha.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_list_divider_mtrl_alpha.9.png"
->>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_spinner_mtrl_am_alpha.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_spinner_mtrl_am_alpha.9.png"
-    },
-    {
-<<<<<<< HEAD
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\background8.jpg",
         "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\background8.jpg"
+    },
+    {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_star_black_48dp.png",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_ic_star_black_48dp.png"
     },
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png",
@@ -1006,183 +302,86 @@
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\write.png",
         "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\write.png"
-=======
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\cycle_white.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\cycle_white.png"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\font_setting.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\font_setting.png"
->>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\source.png",
+        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\source.png"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\clear_span.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\clear_span.png"
-    },
-    {
-<<<<<<< HEAD
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_list_focused_holo.9.png",
         "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_list_focused_holo.9.png"
     },
     {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\frame_black_1.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\frame_black_1.png"
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_star_black_16dp.png",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_ic_star_black_16dp.png"
     },
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_popup_background_mtrl_mult.9.png",
         "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_popup_background_mtrl_mult.9.png"
-=======
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_list_pressed_holo_dark.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_list_pressed_holo_dark.9.png"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png"
->>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\background7.jpg",
+        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\background7.jpg"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\underline.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\underline.png"
-    },
-    {
-<<<<<<< HEAD
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\close_gray.png",
         "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\close_gray.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png"
-=======
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\background8.jpg",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\background8.jpg"
->>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\more.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\more.png"
-    },
-    {
-<<<<<<< HEAD
-        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\search_white.png",
-        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\search_white.png"
     },
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_scrubber_primary_mtrl_alpha.9.png",
         "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_scrubber_primary_mtrl_alpha.9.png"
     },
     {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\search_white.png",
+        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\search_white.png"
+    },
+    {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_text_light_pressed.9.png",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\804675d155822fed03815a35f51c6f24\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_text_light_pressed.9.png"
+    },
+    {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\ic_launcher_background.png",
         "source": "D:\\HeartTrace\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxhdpi\\ic_launcher_background.png"
-=======
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_005.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_005.png"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_textfield_default_mtrl_alpha.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_textfield_default_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_text_light_pressed.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\06fef741ffd7503cc3f53761c53344f5\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_text_light_pressed.9.png"
->>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png"
-    },
-    {
-<<<<<<< HEAD
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\cycle_white.png",
         "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\cycle_white.png"
     },
     {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_dark_normal.9.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\d5d693b50368619a1ecbe4bd883a4018\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_dark_normal.9.png"
-=======
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bottle.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\bottle.png"
->>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_light_normal.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\06fef741ffd7503cc3f53761c53344f5\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_light_normal.9.png"
-    },
-    {
-<<<<<<< HEAD
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\arrow_left_orange.png",
         "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\arrow_left_orange.png"
-=======
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\write.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\write.png"
->>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png"
-    },
-    {
-<<<<<<< HEAD
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_btn_check_to_on_mtrl_000.png",
         "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_btn_check_to_on_mtrl_000.png"
-=======
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_text_select_handle_left_mtrl_dark.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_text_select_handle_left_mtrl_dark.png"
->>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\summer.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\summer.png"
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\design_ic_visibility.png",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\0c6943b93afa73d4ac8eec228f0511b1\\res\\drawable-xxhdpi-v4\\design_ic_visibility.png"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\drop_down.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\drop_down.png"
-    },
-    {
-<<<<<<< HEAD
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\frame_white.9.png",
         "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\frame_white.9.png"
-=======
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png"
->>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\setting.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\setting.png"
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\confirm.png",
+        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\confirm.png"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_text_select_handle_middle_mtrl_light.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_text_select_handle_middle_mtrl_light.png"
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_005.png",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_005.png"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_text_dark_normal.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\06fef741ffd7503cc3f53761c53344f5\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_text_dark_normal.9.png"
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\pen_white.png",
+        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\pen_white.png"
     },
     {
-<<<<<<< HEAD
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\sad_black.png",
         "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\sad_black.png"
-=======
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bold.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\bold.png"
->>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_text_light_normal.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\06fef741ffd7503cc3f53761c53344f5\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_text_light_normal.9.png"
-    },
-    {
-<<<<<<< HEAD
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png"
     },
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_star_half_black_36dp.png",
         "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_ic_star_half_black_36dp.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\face_insert.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\face_insert.png"
     },
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\more.png",
@@ -1191,6 +390,10 @@
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bottle_bg.jpg",
         "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\bottle_bg.jpg"
+    },
+    {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_text_select_handle_right_mtrl_dark.png",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_text_select_handle_right_mtrl_dark.png"
     },
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\calendar_white.png",
@@ -1207,41 +410,8 @@
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_text_select_handle_left_mtrl_dark.png",
         "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_text_select_handle_left_mtrl_dark.png"
-=======
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_list_focused_holo.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_list_focused_holo.9.png"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_text_select_handle_right_mtrl_light.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_text_select_handle_right_mtrl_light.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\setting_grey.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\setting_grey.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\panda.jpg",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\panda.jpg"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\help.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\help.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\frame_white.9.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\frame_white.9.png"
->>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_scrubber_primary_mtrl_alpha.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_scrubber_primary_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\add_white.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\add_white.png"
-    },
-    {
-<<<<<<< HEAD
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_text_light_normal.9.png",
         "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\804675d155822fed03815a35f51c6f24\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_text_light_normal.9.png"
     },
@@ -1254,31 +424,26 @@
         "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png"
     },
     {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bottle_pink2.png",
+        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\bottle_pink2.png"
+    },
+    {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_text_select_handle_middle_mtrl_dark.png",
         "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_text_select_handle_middle_mtrl_dark.png"
-=======
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_text_dark_disabled.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\06fef741ffd7503cc3f53761c53344f5\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_text_dark_disabled.9.png"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\background6.jpg",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\background6.jpg"
->>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_dark_disabled.9.png",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\804675d155822fed03815a35f51c6f24\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_dark_disabled.9.png"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png"
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bottle.png",
+        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\bottle.png"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\add_diary_black.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\add_diary_black.png"
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_menu_share_mtrl_alpha.png",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_ic_menu_share_mtrl_alpha.png"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\italic.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\italic.png"
-    },
-    {
-<<<<<<< HEAD
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\add_black.png",
         "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\add_black.png"
     },
@@ -1287,45 +452,32 @@
         "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_list_selector_disabled_holo_light.9.png"
     },
     {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\add_white.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\add_white.png"
-    },
-    {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\panda.jpg",
         "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\panda.jpg"
     },
     {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_text_light_pressed.9.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\d5d693b50368619a1ecbe4bd883a4018\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_text_light_pressed.9.png"
-=======
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\center.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\center.png"
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_text_select_handle_left_mtrl_light.png",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_text_select_handle_left_mtrl_light.png"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\user_blue.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\user_blue.png"
->>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_star_half_black_48dp.png",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_ic_star_half_black_48dp.png"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\ic_edit.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\ic_edit.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\statistics_black.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\statistics_black.png"
-    },
-    {
-<<<<<<< HEAD
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_list_divider_mtrl_alpha.9.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_list_divider_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png"
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\frame_black_1.png",
+        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\frame_black_1.png"
     },
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_light_pressed.9.png",
         "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\804675d155822fed03815a35f51c6f24\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_light_pressed.9.png"
+    },
+    {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_textfield_default_mtrl_alpha.9.png",
+        "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_textfield_default_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\background6.jpg",
+        "source": "D:\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\background6.jpg"
     },
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_switch_track_mtrl_alpha.9.png",
@@ -1342,77 +494,5 @@
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png",
         "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\drawable-xxhdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png"
-=======
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bottle_heart.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\bottle_heart.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_star_black_16dp.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_ic_star_black_16dp.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\frame_white2.9.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\frame_white2.9.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\line_spacing2.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\line_spacing2.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_dark_pressed.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\06fef741ffd7503cc3f53761c53344f5\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_dark_pressed.9.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_btn_switch_to_on_mtrl_00001.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_btn_switch_to_on_mtrl_00001.9.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_light_pressed.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\06fef741ffd7503cc3f53761c53344f5\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_light_pressed.9.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\pink_background.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\pink_background.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_text_light_disabled.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\06fef741ffd7503cc3f53761c53344f5\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_text_light_disabled.9.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_star_half_black_16dp.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_ic_star_half_black_16dp.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\frame_cat.9.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\frame_cat.9.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_text_select_handle_middle_mtrl_dark.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_text_select_handle_middle_mtrl_dark.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\menu_white.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\menu_white.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_list_selector_disabled_holo_light.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_list_selector_disabled_holo_light.9.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_btn_radio_to_on_mtrl_000.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_btn_radio_to_on_mtrl_000.png"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\normal_black.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\normal_black.png"
->>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
     }
 ]

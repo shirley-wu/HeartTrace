@@ -1,46 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\values-v22\\values-v22.xml",
-            "map": [
-                {
-                    "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\values-v22\\values-v22.xml",
-                    "from": {
-                        "startLines": "2,3,4,9",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,130,217,553",
-                        "endLines": "2,3,8,13",
-                        "endColumns": "74,86,12,12",
-                        "endOffsets": "125,212,548,896"
-                    }
-                }
-            ]
-        },
-        {
-<<<<<<< HEAD
             "outputFile": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\values-v22\\values-v22.xml",
             "map": [
                 {
                     "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cc94b9b63321ca1a91f4b2077dd3c8f9\\res\\values-v22\\values-v22.xml",
-                    "from": {
-                        "startLines": "2,3,4,9",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,130,217,553",
-                        "endLines": "2,3,8,13",
-                        "endColumns": "74,86,12,12",
-                        "endOffsets": "125,212,548,896"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\values-v22\\values-v22.xml",
-=======
-            "outputFile": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v22\\values-v22.xml",
->>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
-            "map": [
-                {
-                    "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\values-v22\\values-v22.xml",
                     "from": {
                         "startLines": "2,3,4,9",
                         "startColumns": "4,4,4,4",

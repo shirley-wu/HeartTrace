@@ -1,23 +1,10 @@
 [
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\layout-land\\range_date_picker_dialog.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\ce074d0e028c72a68c1a23cee88f8ae6\\res\\layout-land\\range_date_picker_dialog.xml"
-    },
-    {
-<<<<<<< HEAD
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout-land\\range_date_picker_dialog.xml",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\9def73248980b48ce25fbfaf0db5769c\\res\\layout-land\\range_date_picker_dialog.xml"
-    },
-    {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\layout-land\\range_time_picker_dialog.xml",
         "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\6d89cc69de304e5270dd5b8eb93c2535\\res\\layout-land\\range_time_picker_dialog.xml"
     },
     {
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\layout-land\\range_date_picker_dialog.xml",
         "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\6d89cc69de304e5270dd5b8eb93c2535\\res\\layout-land\\range_date_picker_dialog.xml"
-=======
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\layout-land\\range_time_picker_dialog.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\ce074d0e028c72a68c1a23cee88f8ae6\\res\\layout-land\\range_time_picker_dialog.xml"
->>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
     }
 ]

@@ -1,58 +1,10 @@
 {
     "logs": [
         {
-<<<<<<< HEAD
             "outputFile": "D:\\HeartTrace\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-w820dp-v13\\values-w820dp-v13.xml",
             "map": [
                 {
                     "source": "D:\\HeartTrace\\app\\src\\main\\res\\values-w820dp\\dimens.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "4",
-                        "startOffsets": "295",
-                        "endColumns": "57",
-                        "endOffsets": "348"
-                    },
-                    "to": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "57",
-                        "endOffsets": "108"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "D:\\diary\\diary\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-w820dp-v13\\values-w820dp-v13.xml",
-=======
-            "outputFile": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-w820dp-v13\\values-w820dp-v13.xml",
->>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
-            "map": [
-                {
-                    "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\values-w820dp\\dimens.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "4",
-                        "startOffsets": "295",
-                        "endColumns": "57",
-                        "endOffsets": "348"
-                    },
-                    "to": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "57",
-                        "endOffsets": "108"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\values-w820dp-v13\\values-w820dp-v13.xml",
-            "map": [
-                {
-                    "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\values-w820dp\\dimens.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "4",
