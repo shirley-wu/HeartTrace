@@ -273,7 +273,16 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         diary = (Diary) intent.getSerializableExtra("diary_list");
         diaryList.clear();
         DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-        diaryList = Diary.getAll(helper,true);
+        String originType = intent.getStringExtra("diary_origin");
+        if(originType.equals("diary")){
+            diaryList = Diary.getAll(helper,true);
+        }
+        else if(originType.equals("search")) {
+            // Get the Bundle Object
+            Bundle bundleObject = intent.getExtras();
+            // Get ArrayList Bundle
+            diaryList = (ArrayList<Diary>) bundleObject.getSerializable("search_list");
+        }
         index = intent.getIntExtra("diary_index",diaryList.size());
         if(diary == null){
             preDiary.setVisibility(View.INVISIBLE);

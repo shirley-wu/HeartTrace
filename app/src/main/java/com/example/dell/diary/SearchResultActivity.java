@@ -30,7 +30,7 @@ import java.util.List;
 
 public class SearchResultActivity extends AppCompatActivity {
 
-    public List<Diary> diaryList = new ArrayList<>();
+    public ArrayList<Diary> diaryList = new ArrayList<>();
     private SearchResultAdapter adapter;
     private RecyclerView recyclerView;
     private SearchView searchView;
@@ -124,16 +124,16 @@ public class SearchResultActivity extends AppCompatActivity {
 
         startDate = (Date)intent.getSerializableExtra("start_date");
         endDate = (Date)intent.getSerializableExtra("end_date");
-        Log.i("start_year",String.valueOf(startDate.getYear())+startDate.getMonth()+startDate.getDate());
-        Log.i("end_year",String.valueOf(endDate.getYear())+endDate.getMonth()+endDate.getDate());
+//        Log.i("start_year",String.valueOf(startDate.getYear())+startDate.getMonth()+startDate.getDate());
+//        Log.i("end_year",String.valueOf(endDate.getYear())+endDate.getMonth()+endDate.getDate());
         searchView.setQuery(searchText,false);
         searchView.clearFocus();
         try{
-            if(startDate.getYear() == 1900){
-                diaryList = Diary.getByRestrict(helper,searchText,null,null,null,false);
+            if(startDate == null){
+                diaryList = (ArrayList<Diary>) Diary.getByRestrict(helper,searchText,null,null,null,false);
             }
             else{
-                diaryList = Diary.getByRestrict(helper,searchText,startDate,endDate,null,false);
+                diaryList = (ArrayList<Diary>) Diary.getByRestrict(helper,searchText,startDate,endDate,null,false);
             //diaryList = Diary.getByRestrict(helper,searchText,new Date(2018,6,1),new Date(2018,6,2),null,false);
             }
         }

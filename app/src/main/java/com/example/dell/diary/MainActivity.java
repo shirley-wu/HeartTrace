@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
 //                adapter.notifyItemInserted(0);
 //                recyclerView.scrollToPosition(0);
                 Intent intent = new Intent(MainActivity.this, DiaryWriteActivity.class);
+                intent.putExtra("diary_origin","diary");
                 startActivity(intent);
             }
         });

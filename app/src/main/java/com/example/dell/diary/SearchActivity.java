@@ -96,17 +96,12 @@ public class SearchActivity extends AppCompatActivity {
                 }
             }
         });
-        Calendar c = Calendar.getInstance();
-        mYear = c.get(Calendar.YEAR);
-        mMonth = c.get(Calendar.MONTH);
-        mDay = c.get(Calendar.DAY_OF_MONTH);
-        mYear2 = c.get(Calendar.YEAR);
-        mMonth2 = c.get(Calendar.MONTH);
-        mDay2 = c.get(Calendar.DAY_OF_MONTH);
+        Date d = new Date();
+        mYear2 = mYear = d.getYear() + 1900;
+        mMonth2 = mMonth = d.getMonth();
+        mDay2 = mDay = d.getDate();
         dateDisplayStart = (TextView)findViewById(R.id.date_display);
         dateDisplayEnd = (TextView)findViewById(R.id.date_display2);
-        //dateChooseStart = (Button)findViewById(R.id.date_choose);
-        //dateChooseEnd = (Button)findViewById(R.id.date_choose2);
         datePickerDialog1 = new DatePickerDialog(this, dateListener, mYear, mMonth, mDay);
         datePickerDialog2 = new DatePickerDialog(this, dateListener2, mYear2, mMonth2, mDay2);
 
@@ -166,10 +161,10 @@ public class SearchActivity extends AppCompatActivity {
                     intent.putExtra("end_date",endDate);
                 }
                 else{
-                    startDate = new Date(1900,1,1);
-                    endDate = new Date(1900,1,1);
-                    intent.putExtra("start_date",startDate);
-                    intent.putExtra("end_date",endDate);
+//                    startDate = new Date(1900,1,1);
+//                    endDate = new Date(1900,1,1);
+//                    intent.putExtra("start_date",startDate);
+//                    intent.putExtra("end_date",endDate);
                 }
                 startActivity(intent);
                 return true;
@@ -219,9 +214,7 @@ public class SearchActivity extends AppCompatActivity {
             mYear = year;
             mMonth = monthOfYear;
             mDay = dayOfMonth;
-            Calendar c2 = Calendar.getInstance();
-            c2.set(mYear,mMonth,mDay);
-            datePickerDialog2.getDatePicker().setMinDate(c2.getTime().getTime());
+            datePickerDialog2.getDatePicker().setMinDate(new Date(mYear-1900,mMonth,mDay).getTime());
             display();
         }
     };
@@ -234,10 +227,7 @@ public class SearchActivity extends AppCompatActivity {
             mYear2 = year;
             mMonth2 = monthOfYear;
             mDay2 = dayOfMonth;
-            Calendar c1 = Calendar.getInstance();
-            c1.set(mYear2,mMonth2,mDay2);
-            //Toast.makeText(SearchActivity.this, ""+ mDay2,Toast.LENGTH_SHORT ).show();
-            datePickerDialog1.getDatePicker().setMaxDate(c1.getTime().getTime());
+            datePickerDialog1.getDatePicker().setMaxDate(new Date(mYear2-1900,mMonth2,mDay2).getTime());
             display2();
         }
     };
