@@ -19,7 +19,7 @@
         </activity>
         <activity android:name=".StatisticsActivity" />
         <activity android:name=".DiaryActivity" />
-        <activity android:name=".SearchActivity"/>
+        <activity android:name=".SearchActivity" />
         <activity android:name=".BottleWriteActivity" />
         <activity android:name=".CalendarActivity"
             android:label="Calendar"
@@ -39,7 +39,8 @@
         <activity android:name=".BottlefrontActivity" />
         <activity android:name=".NoteActivity" />
         <activity android:name=".BottlesActivity" />
-        <activity android:name=".SearchResultActivity"/>
+        <activity android:name=".SearchResultActivity" />
+        <activity android:name=".LabelManageActivity"></activity>
     </application>
 
 </manifest>

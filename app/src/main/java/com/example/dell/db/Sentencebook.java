@@ -7,6 +7,7 @@ import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.stmt.DeleteBuilder;
 
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.sql.SQLException;
@@ -104,6 +105,16 @@ public class Sentencebook {
             Log.i("sentencebook", "dao = " + dao + " 删除 sentencebook " + this);
             int returnValue = dao.delete(this);
             Log.i("sentencebook", "删除后返回值：" + returnValue);
+        } catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static List<Sentencebook> getAll(DatabaseHelper helper, Boolean ascending){
+        try {
+            QueryBuilder<Sentencebook, Integer> qb = helper.getSentencebookDao().queryBuilder();
+            return qb.query();
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);

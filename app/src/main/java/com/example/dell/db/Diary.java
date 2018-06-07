@@ -66,7 +66,7 @@ public class Diary implements Serializable
             date = new Date();
         }
     }
-    
+
     public void setDate(Date date){
         // dangerous!!!!! for test only.
         this.date = date;

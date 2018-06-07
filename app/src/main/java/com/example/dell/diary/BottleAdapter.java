@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.dell.db.DatabaseHelper;
+import com.example.dell.db.Sentencebook;
 
 import java.util.List;
 
@@ -23,9 +25,9 @@ import java.util.List;
 
 public class BottleAdapter extends RecyclerView.Adapter<BottleAdapter.ViewHolder> {
 
-    private List<Bottle> mBottleList;
-
+    private List<Sentencebook> mSentencebookList;
     private Context mContext;
+
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
@@ -40,8 +42,8 @@ public class BottleAdapter extends RecyclerView.Adapter<BottleAdapter.ViewHolder
         }
     }
 
-    public BottleAdapter(List<Bottle> bottleList) {
-        mBottleList = bottleList;
+    public BottleAdapter(List<Sentencebook> SentencebookList) {
+        mSentencebookList = SentencebookList;
     }
 
     @Override
@@ -56,11 +58,11 @@ public class BottleAdapter extends RecyclerView.Adapter<BottleAdapter.ViewHolder
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
-                Bottle bottle = mBottleList.get(position);
-                Intent intent = new Intent(mContext,BottlefrontActivity.class);
+                Sentencebook sentencebook = mSentencebookList.get(position);
+                /*Intent intent = new Intent(mContext,BottlefrontActivity.class);
                 intent.putExtra(BottlefrontActivity.BOTTLE_NAME, bottle.getBottleName());
                 intent.putExtra(BottlefrontActivity.BOTTLE_IMAGE_ID, bottle.getImageId());
-                mContext.startActivity(intent);
+                mContext.startActivity(intent);*/
             }
         });
 
@@ -105,23 +107,24 @@ public class BottleAdapter extends RecyclerView.Adapter<BottleAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Bottle bottle = mBottleList.get(position);
-        holder.bottleName.setText(bottle.getBottleName());
+        Sentencebook sentencebook = mSentencebookList.get(position);
+        holder.bottleName.setText(sentencebook.getSentencebookName());
 
-        Glide.with(mContext).load(bottle.getImageId()).into(holder.bottleIcon);
+       // Glide.with(mContext).load(sentencebook.getImageId()).into(holder.bottleIcon);
     }
-    public void addBottle(int position, Bottle bottle){
-        mBottleList.add(position, bottle);
-        notifyItemInserted(position);
+   public void addSentencebook(Sentencebook sentencebook){
+       DatabaseHelper helper = new DatabaseHelper(mContext);
+       sentencebook.insert(helper);
+       /*notifyItemInserted(position);*/
     }
     public void deleteBottle(int position){
-        mBottleList.remove(position);
+        mSentencebookList.remove(position);
         notifyItemRemoved(position);
         notifyDataSetChanged();
     }
     @Override
     public int getItemCount() {
-        return mBottleList.size();
+        return mSentencebookList.size();
     }
 }
 
