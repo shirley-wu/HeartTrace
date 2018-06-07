@@ -58,7 +58,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
                 int position = holder.getAdapterPosition();
                 Diary diary = mDiaryList.get(position);
                 Intent intent = new Intent(mContext,DiaryActivity.class);
-               // intent.putExtra("diary_list",diary);
+                intent.putExtra("diary_list",diary);
                 mContext.startActivity(intent);
             }
         });

@@ -90,7 +90,7 @@ public class SearchResultActivity extends AppCompatActivity {
 
                     //adapter = new SearchResultAdapter(diaryList);
                     adapter.notifyDataSetChanged();
-                    recyclerView.setAdapter(adapter);}
+                    }
                 catch (Exception e){}
                 if(diaryList.size() == 0){
                     Toast.makeText(SearchResultActivity.this,"没有搜索到相关日记",Toast.LENGTH_LONG).show();

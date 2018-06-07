@@ -2818,6 +2818,10 @@
         <item name="dsb_indicatorElevation">4dp</item>
         <item name="dsb_mirrorForRtl">true</item>
     </style>
+    <style name="calendar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    </style>
     <style name="custom_dialog2" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>
         <!-- Dialog的windowFrame框为无 -->
