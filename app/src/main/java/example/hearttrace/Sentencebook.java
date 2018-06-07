@@ -3,10 +3,10 @@ package example.hearttrace;
 import android.util.Log;
 
 import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.stmt.DeleteBuilder;
 
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.sql.SQLException;
@@ -25,7 +25,8 @@ public class Sentencebook {
 
     @DatabaseField(generatedId = true, columnName = TAG)
     private int id;
-    @DatabaseField
+
+    @DatabaseField(unique = true, columnName = "sentencebookName")
     private String sentencebookName;
 
     public Sentencebook(){};
@@ -41,6 +42,18 @@ public class Sentencebook {
 
     public void setSentencebookName(String sentencebookName) {
         this.sentencebookName = sentencebookName;
+    }
+
+    public static Sentencebook getByName(DatabaseHelper helper,String sentencebookName) {
+        try {
+            Dao<Sentencebook, Integer> dao = helper.getSentencebookDao();
+            Sentencebook bookByName = dao.queryBuilder().where().eq("sentencebookName", sentencebookName).queryForFirst();
+            return bookByName;
+        }
+        catch(SQLException e) {
+            Log.e(TAG, "getByName: cannot query");
+            return null;
+        }
     }
 
     public List<Sentence> getAllSubSentence(DatabaseHelper helper) {
