@@ -21,8 +21,11 @@
         <activity android:name=".DiaryActivity" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".BottleWriteActivity" />
-        <activity android:name=".CalendarActivity" />
-        <activity android:name=".DiaryWriteActivity" />
+        <activity android:name=".CalendarActivity"
+            android:label="Calendar"
+            android:theme="@style/calendar"/>
+        <activity android:name=".DiaryWriteActivity"
+        android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".TicketEditActivity" />
 
         <!--

@@ -141,19 +141,19 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
                         toolbarTitle.setText(FORMATTER.format(date));
                     }
                 });
-                       pvTime.setOutSideCancelable(true)//点击屏幕，点在控件外部范围时，是否取消显示
+                pvTime.setOutSideCancelable(true)//点击屏幕，点在控件外部范围时，是否取消显示
                         .isCyclic(true)//是否循环滚动
                         .setLineSpacingMultiplier((float) 2.5)
                         .setLabel("", "", "", "", "", "")//默认设置为年月日时分秒
                         .build()
-                               .show();
+                        .show();
 
 
                 break;
         }
     }
 
-   private void initLayoutManager() {
+    private void initLayoutManager() {
         if (layoutManager == null) {
             RecyclerView.LayoutManager layout = recyclerView.getLayoutManager();
             if (layout != null && layout instanceof LinearLayoutManager) {
@@ -192,7 +192,7 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
         if(calendar_mode==false && isGetTop()==true) {
             calendarView.state().edit().setCalendarDisplayMode(CalendarMode.MONTHS).commit();
             calendar_mode=true;
-       }
+        }
     }
 
     private void onScrollUp() {       //上滑时要执行的代码
@@ -203,9 +203,5 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
         }
 
     }
-
-
-
-
 
 }
