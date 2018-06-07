@@ -122,7 +122,8 @@ public class BottlesActivity extends AppCompatActivity {
                                 String inputName = inputBottleName.getText().toString();
                                 String inputDescribe = inputBottleDescribe.getText().toString();
                                 Sentencebook sentencebook = new Sentencebook(inputName);
-                                adapter.addSentencebook(sentencebook);
+                                //adapter.addSentencebook(sentencebook);
+
                             }
                         });
                 builder.show();

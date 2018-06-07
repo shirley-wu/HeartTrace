@@ -1,5 +1,6 @@
 [
     {
+<<<<<<< HEAD
         "merged": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\anim-v21\\design_bottom_sheet_slide_out.xml",
         "source": "C:\\Users\\康鑫\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\0c6943b93afa73d4ac8eec228f0511b1\\res\\anim-v21\\design_bottom_sheet_slide_out.xml"
     },
@@ -10,9 +11,13 @@
     {
         "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\anim-v21\\design_bottom_sheet_slide_out.xml",
         "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\1e693f60716bdb3599e2680538c7696b\\res\\anim-v21\\design_bottom_sheet_slide_out.xml"
+=======
+        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\anim-v21\\design_bottom_sheet_slide_in.xml",
+        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\a738c3699867a98b793e4919817fe0f6\\res\\anim-v21\\design_bottom_sheet_slide_in.xml"
+>>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
     },
     {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\anim-v21\\design_bottom_sheet_slide_in.xml",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\1e693f60716bdb3599e2680538c7696b\\res\\anim-v21\\design_bottom_sheet_slide_in.xml"
+        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\anim-v21\\design_bottom_sheet_slide_out.xml",
+        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\a738c3699867a98b793e4919817fe0f6\\res\\anim-v21\\design_bottom_sheet_slide_out.xml"
     }
 ]

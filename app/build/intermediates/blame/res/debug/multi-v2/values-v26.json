@@ -1,6 +1,7 @@
 {
     "logs": [
         {
+<<<<<<< HEAD
             "outputFile": "D:\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\values-v26\\values-v26.xml",
             "map": [
                 {
@@ -45,9 +46,12 @@
         },
         {
             "outputFile": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\values-v26\\values-v26.xml",
+=======
+            "outputFile": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\values-v26\\values-v26.xml",
+>>>>>>> 9c20f5c7964e37caa55a6d9dd4b2913a98034f85
             "map": [
                 {
-                    "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\values-v26\\values-v26.xml",
+                    "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\values-v26\\values-v26.xml",
                     "from": {
                         "startLines": "2,3,4,8,12,16",
                         "startColumns": "4,4,4,4,4,4",
@@ -66,7 +70,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\1e693f60716bdb3599e2680538c7696b\\res\\values-v26\\values-v26.xml",
+                    "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\a738c3699867a98b793e4919817fe0f6\\res\\values-v26\\values-v26.xml",
                     "from": {
                         "startLines": "2,6",
                         "startColumns": "4,4",
@@ -87,10 +91,10 @@
             ]
         },
         {
-            "outputFile": "D:\\diary\\diary\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v26\\values-v26.xml",
+            "outputFile": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v26\\values-v26.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\values-v26\\values-v26.xml",
+                    "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\values-v26\\values-v26.xml",
                     "from": {
                         "startLines": "2,3,4,8,12,16",
                         "startColumns": "4,4,4,4,4,4",
@@ -109,7 +113,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\1e693f60716bdb3599e2680538c7696b\\res\\values-v26\\values-v26.xml",
+                    "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\a738c3699867a98b793e4919817fe0f6\\res\\values-v26\\values-v26.xml",
                     "from": {
                         "startLines": "2,6",
                         "startColumns": "4,4",

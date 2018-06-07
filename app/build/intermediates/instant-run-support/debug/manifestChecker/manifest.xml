@@ -47,6 +47,7 @@
         <activity android:name="com.example.dell.diary.NoteActivity" />
         <activity android:name="com.example.dell.diary.BottlesActivity" />
         <activity android:name="com.example.dell.diary.SearchResultActivity" />
+        <activity android:name="com.example.dell.diary.LabelManageActivity" />
 
         <meta-data
             android:name="android.support.VERSION"
