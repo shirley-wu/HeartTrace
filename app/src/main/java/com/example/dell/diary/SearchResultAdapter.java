@@ -57,7 +57,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
             public void onClick(View v){
                 int position = holder.getAdapterPosition();
                 Diary diary = mDiaryList.get(position);
-                Intent intent = new Intent(mContext,DiaryActivity.class);
+                Intent intent = new Intent(mContext,DiaryWriteActivity.class);
                 intent.putExtra("diary_list",diary);
                 intent.putExtra("diary_index",mDiaryList.size()-1-mDiaryList.indexOf(diary));
                 mContext.startActivity(intent);

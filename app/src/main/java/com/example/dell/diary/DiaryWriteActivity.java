@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
@@ -28,8 +29,11 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.Html;
 import android.text.Layout;
@@ -46,6 +50,8 @@ import android.text.style.StyleSpan;
 import android.text.style.TypefaceSpan;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -70,6 +76,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -77,8 +84,16 @@ import java.util.UUID;
 public class DiaryWriteActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final int CHOOSE_PHOTO = 2;
-
+    Diary diary;
+    List<Diary> diaryList = new ArrayList<>();
+    int index;
+    Button preDiary;
+    Button nextDiary;
+    ActionBar actionBar;
     private EditText diary_write;
+    private ImageButton more_setting;
+    private ImageButton keyboard;
+    private ImageButton face_expression;
     private LinearLayout edit_layout;
     private DiscreteSeekBar set_size;
     private ImageButton confirm;
@@ -136,7 +151,12 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
     public void getView()
     {
+        preDiary = (Button)findViewById(R.id.pre_diary);
+        nextDiary = (Button)findViewById(R.id.next_diary);
         diary_write = (EditText) findViewById(R.id.diaryWrite);
+        more_setting = (ImageButton) findViewById(R.id.more_setting);
+        keyboard = (ImageButton) findViewById(R.id.keyboard);
+        face_expression = (ImageButton) findViewById(R.id.face_insert);
         edit_layout = (LinearLayout) findViewById(R.id.edit_layout);
         set_size = (DiscreteSeekBar) findViewById(R.id.set_size);
         confirm = (ImageButton) findViewById(R.id.confirm);
@@ -235,83 +255,233 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         set_bold.setOnClickListener(this);
         set_italic.setOnClickListener(this);
         insert_image.setOnClickListener(this);
+        preDiary.setOnClickListener(this);
+        nextDiary.setOnClickListener(this);
+
     }
 
     public void init()
     {
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar_diary_content);
+        setSupportActionBar(toolbar);
+        actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
+        Intent intent = getIntent();
+        diary = (Diary) intent.getSerializableExtra("diary_list");
+        diaryList.clear();
+        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+        diaryList = Diary.getAll(helper,true);
+        index = intent.getIntExtra("diary_index",diaryList.size());
+        if(diary == null){
+            preDiary.setVisibility(View.INVISIBLE);
+            nextDiary.setVisibility(View.INVISIBLE);
+            actionBar.hide();
+        }
+        else {
+            diary_write.setText(diary.getText());
+            diary_write.setEnabled(false);
+            more_setting.setVisibility(View.INVISIBLE);
+            font_set.setVisibility(View.INVISIBLE);
+            face_expression.setVisibility(View.INVISIBLE);
+            insert_image.setVisibility(View.INVISIBLE);
+            keyboard.setVisibility(View.INVISIBLE);
+            confirm.setVisibility(View.INVISIBLE);
+        }
+
+        /*
         set_font1.setBackgroundColor(Color.GRAY);
         font_padding1.setBackgroundColor(Color.GRAY);
         line_spacing1.setBackgroundColor(Color.GRAY);
         set_right.setBackgroundColor(Color.GRAY);
-        diary_write.setTextSize(20);
+        diary_write.setTextSize(20);*/
     }
 
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.pre_diary:
+                if(index == 0){
+                    Toast.makeText(DiaryWriteActivity.this, "没有更早的日记了哦",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    index = index -1;
+                    diary = diaryList.get(index);
+                    //String date = diary.getDate().getYear()+"."+diary.getDate().getMonth()+"."+diary.getDate().getDate();
+                    //diaryDate.setText(date);
+                    //diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
+                    diary_write.setText(diary.getText());
+                }
+                break;
+            case R.id.next_diary:
+                if(index == diaryList.size()-1){
+                    Toast.makeText(DiaryWriteActivity.this, "这已经是最新的日记啦",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    index = index + 1;
+                    diary = diaryList.get(index);
+                    //String date = diary.getDate().getYear()+"."+diary.getDate().getMonth()+"."+diary.getDate().getDate();
+                    //diaryDate.setText(date);
+                    //diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
+                    diary_write.setText(diary.getText());
+                }
             case R.id.edit_layout:
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                if (imm != null) {
-                    diary_write.requestFocus();
-                    imm.showSoftInput(diary_write,0);
+                if(confirm.getVisibility()==View.VISIBLE){
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    if (imm != null) {
+                        diary_write.requestFocus();
+                        imm.showSoftInput(diary_write,0);
+                    }
                 }
                 break;
             case R.id.confirm:
                 Log.i("test", Html.toHtml(diary_write.getText()));
                 DatabaseHelper helper = new DatabaseHelper(DiaryWriteActivity.this);
-                Diary diary = new Diary(diary_write.getText().toString());
-                diary.setDate();
-                diary.insert(helper);
-                List<Diary> diaryList = Diary.getAll(helper,true);
-                for(Diary i : diaryList){
-                    Log.i("test", i.getText());
+                if(index == diaryList.size()){
+                    Log.i("1234",index+"");
+                    diary = new Diary(diary_write.getText().toString());
+                    Date date = new Date();
+                    date.setYear(date.getYear()+1900);
+                    date.setMonth(date.getMonth()+1);
+                    diary.setDate(date);
+                    diary.insert(helper);
+                    diaryList.add(diary);
                 }
+                else{
+                    Log.i("2345",index+"");
+                    diary.setText(diary_write.getText().toString());
+                    diary.update(helper);
+                    diaryList.remove(index);
+                    diaryList.add(index,diary);
+                }
+//                List<Diary> diaryList = Diary.getAll(helper,true);
+//                for(Diary i : diaryList){
+//                    Log.i("test", i.getText());
+//                }
                 CharSequence charSequence = Html.fromHtml(Html.toHtml(diary_write.getText()));
-                Toast.makeText(DiaryWriteActivity.this,charSequence,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(DiaryWriteActivity.this,charSequence,Toast.LENGTH_SHORT).show();
+                diary_write.setEnabled(false);
+                more_setting.setVisibility(View.INVISIBLE);
+                font_set.setVisibility(View.INVISIBLE);
+                face_expression.setVisibility(View.INVISIBLE);
+                insert_image.setVisibility(View.INVISIBLE);
+                keyboard.setVisibility(View.INVISIBLE);
+                confirm.setVisibility(View.INVISIBLE);
+                preDiary.setVisibility(View.VISIBLE);
+                nextDiary.setVisibility(View.VISIBLE);
+                actionBar.show();
                 break;
             case R.id.font_setting:
                 font_setting_bottom_sheet.setState(BottomSheetBehavior.STATE_EXPANDED);
                 break;
             case R.id.font_red:
-                font_color = 1;
+                if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
+                {
+                    Editable editable = diary_write.getText();
+                    editable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.darkred)), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+                else
+                   font_color = 1;
                 break;
             case R.id.font_orange:
-                font_color = 2;
+                if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
+                {
+                    Editable editable = diary_write.getText();
+                    editable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.darkorange)), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+                else
+                    font_color = 2;
                 break;
             case R.id.font_pink:
-                font_color = 3;
+                if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
+                {
+                    Editable editable = diary_write.getText();
+                    editable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.pink)), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+                else
+                    font_color = 3;
                 break;
             case R.id.font_green:
-                font_color = 4;
+                if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
+                {
+                    Editable editable = diary_write.getText();
+                    editable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.darkgreen)), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+                else
+                    font_color = 4;
                 break;
             case R.id.font_blue:
-                font_color = 5;
+                if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
+                {
+                    Editable editable = diary_write.getText();
+                    editable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.deepskyblue)), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+                else
+                    font_color = 5;
                 break;
             case R.id.font_dark_blue:
-                font_color = 6;
+                if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
+                {
+                    Editable editable = diary_write.getText();
+                    editable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.steelblue)), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+                else
+                    font_color = 6;
                 break;
             case R.id.font_grey:
-                font_color = 7;
+                if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
+                {
+                    Editable editable = diary_write.getText();
+                    editable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.dimgrey)), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+                else
+                    font_color = 7;
                 break;
             case R.id.font_black:
-                font_color = 8;
+                if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
+                {
+                    Editable editable = diary_write.getText();
+                    editable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.black)), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+                else
+                    font_color = 8;
                 break;
             case R.id.font1:
                 set_font1.setBackgroundColor(Color.GRAY);
                 set_font2.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 set_font3.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                font_type = 1;
+                if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
+                {
+                    Editable editable = diary_write.getText();
+                    editable.setSpan(new TypefaceSpan("monospace"), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+                else
+                    font_type = 1;
                 break;
             case R.id.font2:
                 set_font2.setBackgroundColor(Color.GRAY);
                 set_font1.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 set_font3.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                font_type = 2;
+                if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
+                {
+                    Editable editable = diary_write.getText();
+                    editable.setSpan(new TypefaceSpan("serif"), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+                else
+                    font_type = 2;
                 break;
             case R.id.font3:
                 set_font3.setBackgroundColor(Color.GRAY);
                 set_font1.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 set_font2.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                font_type = 3;
+                if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
+                {
+                    Editable editable = diary_write.getText();
+                    editable.setSpan(new TypefaceSpan("sans-serif"), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+                else
+                    font_type = 3;
                 break;
             case R.id.set_retract:
                 is_retract=!is_retract;
@@ -393,24 +563,70 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.underline:
                 is_underline=!is_underline;
-                if(is_underline)
+                if(is_underline) {
+                    if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
+                    {
+                        Editable editable = diary_write.getText();
+                        editable.setSpan(new UnderlineSpan(), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    }
                     set_underline.setBackgroundColor(Color.GRAY);
-                else
+                }
+                else {
+                    if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
+                    {
+                        Editable editable = diary_write.getText();
+                        for (Object o : editable.getSpans(diary_write.getSelectionStart(), diary_write.getSelectionEnd(), UnderlineSpan.class)) {
+                            editable.removeSpan(o);
+                        }
+                    }
                     set_underline.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                }
                 break;
             case R.id.bold:
                 is_bold=!is_bold;
-                if(is_bold)
+                if(is_bold){
+                    if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
+                    {
+                        Editable editable = diary_write.getText();
+                        editable.setSpan(new StyleSpan(Typeface.BOLD), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    }
                     set_bold.setBackgroundColor(Color.GRAY);
-                else
+                }
+                else {
+                    if (diary_write.getSelectionStart() != diary_write.getSelectionEnd()) {
+                        Editable editable = diary_write.getText();
+                        StyleSpan[] selectedSpans = editable.getSpans(diary_write.getSelectionStart(), diary_write.getSelectionEnd(), StyleSpan.class);
+                        for (StyleSpan style : selectedSpans) {
+                            if (style.getStyle() == Typeface.BOLD) {
+                                editable.removeSpan(style);
+                            }
+                        }
+                    }
                     set_bold.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                }
                 break;
             case R.id.italic:
                 is_italic=!is_italic;
-                if(is_italic)
+                if(is_italic) {
+                    if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
+                    {
+                        Editable editable = diary_write.getText();
+                        editable.setSpan(new StyleSpan(Typeface.ITALIC), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    }
                     set_italic.setBackgroundColor(Color.GRAY);
-                else
-                    set_italic.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                }
+                else {
+                    if (diary_write.getSelectionStart() != diary_write.getSelectionEnd()) {
+                        Editable editable = diary_write.getText();
+                        StyleSpan[] selectedSpans = editable.getSpans(diary_write.getSelectionStart(), diary_write.getSelectionEnd(), StyleSpan.class);
+                        for (StyleSpan style : selectedSpans) {
+                            if (style.getStyle() == Typeface.ITALIC) {
+                                editable.removeSpan(style);
+                            }
+                        }
+                        set_italic.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                    }
+                }
                 break;
             case R.id.insert_image:
                 openAlbum();
@@ -466,7 +682,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         switch (font_type)
         {
             case 1:
-                editable.setSpan(new TypefaceSpan("serif"), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                editable.setSpan(new TypefaceSpan("monospace"), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 break;
             case 2:
                 editable.setSpan(new TypefaceSpan("serif"), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -506,6 +722,59 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             editable.setSpan(new StyleSpan(Typeface.ITALIC), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
 
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.diary_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.label_manage:
+                Intent intent1 = new Intent(DiaryWriteActivity.this, LabelManageActivity.class);
+                intent1.putExtra("diary",diary);
+                startActivity(intent1);
+                break;
+            case R.id.edit:
+                diary_write.setEnabled(true);
+                more_setting.setVisibility(View.VISIBLE);
+                font_set.setVisibility(View.VISIBLE);
+                face_expression.setVisibility(View.VISIBLE);
+                insert_image.setVisibility(View.VISIBLE);
+                keyboard.setVisibility(View.VISIBLE);
+                confirm.setVisibility(View.VISIBLE);
+                preDiary.setVisibility(View.INVISIBLE);
+                nextDiary.setVisibility(View.INVISIBLE);
+                actionBar.hide();
+                break;
+            case android.R.id.home:
+                finish();
+                return true;
+            case R.id.delete:
+                //Toast.makeText(DiaryActivity.this, "删除这一篇日记",Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder dialog = new AlertDialog.Builder(DiaryWriteActivity.this);
+                dialog.setTitle("提示");
+                dialog.setMessage("你确定要删除你的日记吗？");
+                dialog.setCancelable(true);
+
+                dialog.setPositiveButton("确认",new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialog, int which){
+                        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+                        diary.delete(helper);
+                        finish();
+                    }
+                });
+                dialog.setNegativeButton("取消",new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialog, int which){
+
+                    }
+                });
+                dialog.show();
+                break;
+            default:
+        }
+        return true;
+    }
 
     private void openAlbum(){
         Intent intent = new Intent("android.intent.action.GET_CONTENT");

@@ -148,9 +148,9 @@ ADDED from D:\Android\Project\Diary\app\src\main\AndroidManifest.xml:24:9-26:46
 	android:name
 		ADDED from D:\Android\Project\Diary\app\src\main\AndroidManifest.xml:24:19-51
 activity#com.example.dell.diary.DiaryWriteActivity
-ADDED from D:\Android\Project\Diary\app\src\main\AndroidManifest.xml:27:9-28:53
+ADDED from D:\Android\Project\Diary\app\src\main\AndroidManifest.xml:27:9-28:69
 	android:windowSoftInputMode
-		ADDED from D:\Android\Project\Diary\app\src\main\AndroidManifest.xml:28:9-51
+		ADDED from D:\Android\Project\Diary\app\src\main\AndroidManifest.xml:28:13-67
 	android:name
 		ADDED from D:\Android\Project\Diary\app\src\main\AndroidManifest.xml:27:19-53
 activity#com.example.dell.diary.TicketEditActivity
@@ -178,7 +178,7 @@ ADDED from D:\Android\Project\Diary\app\src\main\AndroidManifest.xml:41:9-53
 	android:name
 		ADDED from D:\Android\Project\Diary\app\src\main\AndroidManifest.xml:41:19-50
 activity#com.example.dell.diary.SearchResultActivity
-ADDED from D:\Android\Project\Diary\app\src\main\AndroidManifest.xml:42:9-58
+ADDED from D:\Android\Project\Diary\app\src\main\AndroidManifest.xml:42:9-57
 	android:name
 		ADDED from D:\Android\Project\Diary\app\src\main\AndroidManifest.xml:42:19-55
 activity#com.example.dell.diary.LabelManageActivity

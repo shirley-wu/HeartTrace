@@ -85,6 +85,8 @@ public class NoteAdapter extends RecyclerView.Adapter <NoteAdapter.ViewHolder> {
                         int position = holder.getAdapterPosition();
                        Sentence sentence = mSentenceList.get(position);
                        sentence.delete(helper);
+                       mSentenceList = Sentence.getAll(helper,false);
+                       notifyDataSetChanged();
                        /* mSentenceList.remove(note);
                         notifyItemRemoved(position);*/
                     }
@@ -112,6 +114,12 @@ public class NoteAdapter extends RecyclerView.Adapter <NoteAdapter.ViewHolder> {
         });
         return holder;
     }
+
+    public void update(List<Sentence> sentencebookList){
+        mSentenceList = sentencebookList;
+        notifyDataSetChanged();
+    }
+
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {

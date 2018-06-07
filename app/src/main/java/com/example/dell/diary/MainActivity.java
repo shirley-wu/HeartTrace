@@ -136,7 +136,9 @@ public class MainActivity extends AppCompatActivity {
 
           diaryList.clear();
           DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+
           //diaryList = Diary.getAll(helper,false);
+
           diaryList = Diary.getAll(helper,false);
           if(diaryList == null){
               diaryList = new ArrayList<>();

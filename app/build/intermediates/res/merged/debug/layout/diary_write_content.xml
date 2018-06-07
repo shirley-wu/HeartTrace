@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_diary_content"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/edit_layout"
@@ -14,7 +33,8 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:clickable="true"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -39,11 +59,28 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/pre_diary"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/arrow_left_orange"
+        android:layout_gravity="left|bottom"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="15dp"/>
+    <Button
+        android:id="@+id/next_diary"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/arrow_right_orange"
+        android:layout_gravity="right|bottom"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="15dp"/>
+
     <LinearLayout
         android:id="@+id/settings_column"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
         android:orientation="horizontal">
 
         <ImageButton
@@ -95,5 +132,5 @@
             android:src="@drawable/confirm" />
 
     </LinearLayout>
-
+    </android.support.design.widget.CoordinatorLayout>
 </RelativeLayout>
