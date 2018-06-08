@@ -25,18 +25,18 @@ import java.util.List;
 
 @DatabaseTable(tableName = "Sentence")
 public class Sentence implements Serializable {
-    public static final String TAG = "Sentence";
+    protected static final String TAG = "Sentence";
 
     @DatabaseField(generatedId = true, columnName = TAG)
     private int id;
 
-    @DatabaseField(foreign = true, columnName = Sentencebook.TAG)
+    @DatabaseField(foreign = true, columnName = Sentencebook.TAG, canBeNull = false)
     private Sentencebook sentencebook;
 
     @DatabaseField
     String text;
 
-    @DatabaseField(dataType = DataType.DATE_STRING, columnName = "date")
+    @DatabaseField(dataType = DataType.DATE_STRING, columnName = "date", canBeNull = false)
     protected Date date;
 
     public Sentence(){

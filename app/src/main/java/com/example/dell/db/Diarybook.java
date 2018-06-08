@@ -23,14 +23,14 @@ import java.util.List;
 @DatabaseTable(tableName = "diarybook")
 public class Diarybook {
 
-    private static final String TAG = "Diarybook";
+    protected static final String TAG = "Diarybook";
 
     private static final String default_name = "default";
 
     @DatabaseField(generatedId = true, columnName = TAG)
     private int id;
 
-    @DatabaseField(columnName = "diarybookname")
+    @DatabaseField(unique = true, columnName = "diarybookname", canBeNull = false)
     private String diarybookName;
 
     public Diarybook(){};
@@ -50,7 +50,7 @@ public class Diarybook {
         try {
             Dao<Diary, Integer> dao = helper.getDiaryDao();
 
-            List<Diary> subDiaryList = dao.queryBuilder().where().eq("Diarybook", diarybookName).query();
+            List<Diary> subDiaryList = dao.queryBuilder().where().eq(Diarybook.TAG, this).query();
 
             return subDiaryList;
         }catch (SQLException e) {
@@ -64,7 +64,7 @@ public class Diarybook {
             Dao<Diary, Integer> dao = helper.getDiaryDao();
             DeleteBuilder<Diary, Integer> deleteBuilder = dao.deleteBuilder();
 
-            deleteBuilder.where().eq("Diarybook", this);
+            deleteBuilder.where().eq(Diarybook.TAG, this);
             deleteBuilder.delete();
         }catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
@@ -101,7 +101,7 @@ public class Diarybook {
             Dao<Diary, Integer> subdao = helper.getDiaryDao();
             DeleteBuilder<Diary, Integer> deleteBuilder = subdao.deleteBuilder();
 
-            deleteBuilder.where().eq("Diarybook", this);
+            deleteBuilder.where().eq(Diarybook.TAG, this);
             deleteBuilder.delete();
 
             Dao<Diarybook, Integer> dao = helper.getDiarybookDao();
@@ -121,6 +121,18 @@ public class Diarybook {
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
+        }
+    }
+
+    public static Diarybook getByName(DatabaseHelper helper,String bookName) {
+        try {
+            Dao<Diarybook, Integer> dao = helper.getDiarybookDao();
+            Diarybook bookByName = dao.queryBuilder().where().eq("diarybookname", bookName).queryForFirst();
+            return bookByName;
+        }
+        catch(SQLException e) {
+            Log.e(TAG, "getByName: cannot query");
+            return null;
         }
     }
 }
