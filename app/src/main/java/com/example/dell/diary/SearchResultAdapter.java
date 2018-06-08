@@ -3,6 +3,7 @@ package com.example.dell.diary;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,7 +24,7 @@ import java.util.List;
  */
 
 public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapter.ViewHolder>{
-    private List<Diary> mDiaryList;
+    private ArrayList<Diary> mDiaryList;
     private Context mContext;
     public List<String> weekList = new ArrayList<>(Arrays.asList("周日","周一","周二","周三"," 周四","周五","周六"));
 
@@ -41,7 +42,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         }
     }
 
-    public SearchResultAdapter(List<Diary> diaryList) {
+    public SearchResultAdapter(ArrayList<Diary> diaryList) {
         mDiaryList = diaryList;
     }
 
@@ -57,8 +58,15 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
             public void onClick(View v){
                 int position = holder.getAdapterPosition();
                 Diary diary = mDiaryList.get(position);
-                Intent intent = new Intent(mContext,DiaryActivity.class);
+                Intent intent = new Intent(mContext,DiaryWriteActivity.class);
                 intent.putExtra("diary_list",diary);
+                intent.putExtra("diary_index",mDiaryList.size()-1-mDiaryList.indexOf(diary));
+                intent.putExtra("diary_origin","search");
+                // Create a Bundle and Put Bundle in to it
+                Bundle bundleObject = new Bundle();
+                bundleObject.putSerializable("search_list", mDiaryList);
+// Put Bundle in to Intent and call start Activity
+                intent.putExtras(bundleObject);
                 mContext.startActivity(intent);
             }
         });
@@ -70,7 +78,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
     public void onBindViewHolder(SearchResultAdapter.ViewHolder holder, int position) {
         Diary diary = mDiaryList.get(position);
         holder.diaryContent.setText(diary.getText());
-        String date = (diary.getDate().getYear())+"年"+ (diary.getDate().getMonth()) + "月" + diary.getDate().getDate() + "日 " + weekList.get(diary.getDate().getDay());
+        String date = (diary.getDate().getYear()+1900)+"年"+ (diary.getDate().getMonth()+1) + "月" + diary.getDate().getDate() + "日 " + weekList.get(diary.getDate().getDay());
         holder.diaryDate.setText(date);
         //Glide.with(mContext).load(diaryCard.getEmotionImageId()).into(holder.diaryIcon);
     }

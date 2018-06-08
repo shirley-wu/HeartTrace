@@ -1,11 +1,14 @@
 package com.example.dell.diary;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Image;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -56,8 +59,8 @@ public class DiaryActivity extends AppCompatActivity {
         //Glide.with(this).load(diaryCard.getEmotionImageId()).into(diaryIcon);
         diaryList.clear();
         DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-        diaryList.addAll(Diary.getAll(helper,false));
-        index = diaryList.indexOf(diary);
+        diaryList = Diary.getAll(helper,true);
+        index = intent.getIntExtra("diary_index",0);
         preDiary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,7 +118,26 @@ public class DiaryActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.delete:
-                Toast.makeText(DiaryActivity.this, "删除这一篇日记",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(DiaryActivity.this, "删除这一篇日记",Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder dialog = new AlertDialog.Builder(DiaryActivity.this);
+                dialog.setTitle("提示");
+                dialog.setMessage("你确定要删除你的日记吗？");
+                dialog.setCancelable(true);
+
+                dialog.setPositiveButton("确认",new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialog, int which){
+                        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+                        diary.delete(helper);
+                        finish();
+                    }
+                });
+                dialog.setNegativeButton("取消",new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialog, int which){
+
+                    }
+                });
+                dialog.show();
+                break;
             default:
         }
         return true;
