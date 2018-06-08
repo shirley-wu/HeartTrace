@@ -1,4 +1,0 @@
-#Fri Jun 08 18:08:52 CST 2018
-base.0=D\:\\Users\\wu-pc\\repos\\HeartTrace\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
-path.0=classes.dex
-renamed.0=classes.dex
