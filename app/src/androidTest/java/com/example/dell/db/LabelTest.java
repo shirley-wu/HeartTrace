@@ -15,6 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Created by huang on 5/17/2018.
@@ -71,5 +72,29 @@ public class LabelTest extends InstrumentationTestCase {
         assertEquals(0, sentence.getAllLabel(databaseHelper).size());
 
         sentence.delete(databaseHelper);
+    }
+
+    @Test
+    public void getDiaryLabel() {
+        Diary diary = null;
+        Label label = null;
+        try{
+            diary = new Diary("agoisdhadfagg");
+            label = new Label("dahlavakggsd");
+            diary.insert(databaseHelper);
+            label.insert(databaseHelper);
+            diary.insertLabel(databaseHelper, label);
+            List<DiaryLabel> l2 = databaseHelper.getDiaryLabelDao().queryForAll();
+            for (DiaryLabel dl : l2) {
+                Log.d("test", "onClick: dl, diary" + dl.getDiary());
+            }
+        }
+        catch(Exception e) {
+            Log.e("test", "onClick: ", e);
+        }
+        finally {
+            diary.delete(databaseHelper);
+            label.delete(databaseHelper);
+        }
     }
 }
