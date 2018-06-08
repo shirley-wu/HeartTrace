@@ -123,4 +123,16 @@ public class Diarybook {
             throw new RuntimeException(e);
         }
     }
+
+    public static Diarybook getByName(DatabaseHelper helper,String bookName) {
+        try {
+            Dao<Diarybook, Integer> dao = helper.getDiarybookDao();
+            Diarybook bookByName = dao.queryBuilder().where().eq("sentencebookName", bookName).queryForFirst();
+            return bookByName;
+        }
+        catch(SQLException e) {
+            Log.e(TAG, "getByName: cannot query");
+            return null;
+        }
+    }
 }

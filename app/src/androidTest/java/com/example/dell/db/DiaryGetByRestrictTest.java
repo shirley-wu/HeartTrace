@@ -41,6 +41,7 @@ public class DiaryGetByRestrictTest extends InstrumentationTestCase {
     private List<Diary> diaryShirly = new ArrayList();
     private List<Diary> diaryLisa = new ArrayList();
     private List<Diary> diaryMmp = new ArrayList();
+    private Diarybook diarybook;
 
     @Before
     public void setUp() throws SQLException {
@@ -56,12 +57,16 @@ public class DiaryGetByRestrictTest extends InstrumentationTestCase {
             label.insert(databaseHelper);
         }
 
+        diarybook = new Diarybook("hi");
+        diarybook.insert(databaseHelper);
+
         String text;
 
         text = "hello, this is Shirley";
         for(int i = 1; i <= 30; i++) {
             Diary diary = new Diary(text);
             diary.setDate(new Date(2016, 1, i));
+            diary.setDiarybook(diarybook);
             diary.insert(databaseHelper);
             diary.insertLabel(databaseHelper, labels.get(0));
             diaryShirly.add(diary);
@@ -71,6 +76,7 @@ public class DiaryGetByRestrictTest extends InstrumentationTestCase {
         for(int i = 1; i <= 29; i++) {
             Diary diary = new Diary(text);
             diary.setDate(new Date(2016, 1, i));
+            diary.setDiarybook(diarybook);
             diary.insert(databaseHelper);
             diaryLisa.add(diary);
             diary.insertLabel(databaseHelper, labels.get(1));
@@ -80,6 +86,7 @@ public class DiaryGetByRestrictTest extends InstrumentationTestCase {
         for(int i = 1; i <= 28; i++) {
             Diary diary = new Diary(text);
             diary.setDate(new Date(2015, 1, i));
+            diary.setDiarybook(diarybook);
             diary.insert(databaseHelper);
             diaryLisa.add(diary);
             diary.insertLabel(databaseHelper, labels.get(0));
@@ -251,5 +258,10 @@ public class DiaryGetByRestrictTest extends InstrumentationTestCase {
                 labelList, false);
         assertEquals(27 - 8 + 1, list.size());
         assertEquals(new Date(2016, 1, 27).getTime(), list.get(0).getDate().getTime());
+    }
+
+    @Test
+    public void testDiarybook() {
+        assertEquals("hi", diaryLisa.get(0).getDiarybook().getDiarybookName());
     }
 }

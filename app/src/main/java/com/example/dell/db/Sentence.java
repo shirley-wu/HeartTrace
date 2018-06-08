@@ -30,13 +30,13 @@ public class Sentence implements Serializable {
     @DatabaseField(generatedId = true, columnName = TAG)
     private int id;
 
-    @DatabaseField(foreign = true, columnName = Sentencebook.TAG)
+    @DatabaseField(foreign = true, columnName = Sentencebook.TAG, canBeNull = false)
     private Sentencebook sentencebook;
 
     @DatabaseField
     String text;
 
-    @DatabaseField(dataType = DataType.DATE_STRING, columnName = "date")
+    @DatabaseField(dataType = DataType.DATE_STRING, columnName = "date", canBeNull = false)
     protected Date date;
 
     public Sentence(){
