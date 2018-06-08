@@ -29,22 +29,24 @@ public class SentenceOtherTest {
     private static final String TAG = "SentenceGetByRestrictTest";
 
     private DatabaseHelper databaseHelper;
-    private Dao<Sentence, Integer> dao;
 
     private String originText;
     private String updateText;
+
+    Sentencebook sentencebook = new Sentencebook("jkbivdtcvnn");
 
     @Before
     public void setUp() throws SQLException {
         Log.d(TAG, "setUp");
         Context appContext = InstrumentationRegistry.getTargetContext();
         databaseHelper = OpenHelperManager.getHelper(appContext, DatabaseHelper.class);
-        dao = databaseHelper.getSentenceDao();
+        sentencebook.insert(databaseHelper);
     }
 
     @After
     public void tearDown() {
         Log.d(TAG, "tearDown");
+        sentencebook.delete(databaseHelper);
         OpenHelperManager.releaseHelper();
     }
 
@@ -59,7 +61,8 @@ public class SentenceOtherTest {
                 sentenceList.add(sentence);
                 sentence.setText(originText + j);
                 sentence.setDate(new Date(1998, 8, i));
-                dao.create(sentence);
+                sentence.setSentencebook(sentencebook);
+                sentence.insert(databaseHelper);
             }
         }
 
@@ -98,7 +101,8 @@ public class SentenceOtherTest {
                 sentenceList.add(sentence);
                 sentence.setText(originText + j);
                 sentence.setDate(new Date(1998, 8, i));
-                dao.create(sentence);
+                sentence.setSentencebook(sentencebook);
+                sentence.insert(databaseHelper);
                 if(i % 3 == 0) {
                     sentence.insertLabel(databaseHelper, label1);
                     if(begin <= i && i <= end){
@@ -120,6 +124,8 @@ public class SentenceOtherTest {
     @Test
     public void testGetAllLabel() throws SQLException {
         Sentence sentence = new Sentence("hello");
+        sentence.setDate();
+        sentence.setSentencebook(sentencebook);
         sentence.insert(databaseHelper);
 
         List<Label> labels = new ArrayList();
@@ -139,10 +145,10 @@ public class SentenceOtherTest {
         }
 
         sentence.delete(databaseHelper);
-        QueryBuilder<SentenceLabel, Integer> qb = databaseHelper.getSentenceLabelDao().queryBuilder();
-        qb.where().eq(SentenceLabel.SENTENCE_TAG, sentence);
-        Log.d(TAG, "testGetAllLabel: " + qb.prepareStatementString());
-        List<SentenceLabel> sentenceLabelList = qb.query();
+        QueryBuilder<SentenceLabel, Integer> sentenceLabelQb = databaseHelper.getSentenceLabelDao().queryBuilder();
+        sentenceLabelQb.where().eq(SentenceLabel.SENTENCE_TAG, sentence);
+        Log.d(TAG, "testGetAllLabel: " + sentenceLabelQb.prepareStatementString());
+        List<SentenceLabel> sentenceLabelList = sentenceLabelQb.query();
         assertEquals(0, sentenceLabelList.size());
 
         for(final Label label : labels) {
