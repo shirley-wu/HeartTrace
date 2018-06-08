@@ -350,10 +350,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 if(index == diaryList.size()){
                     Log.i("1234",index+"");
                     diary = new Diary(diary_write.getText().toString());
-                    Date date = new Date();
-                    date.setYear(date.getYear()+1900);
-                    date.setMonth(date.getMonth()+1);
-                    diary.setDate(date);
+                    diary.setDate(new Date());
                     diary.insert(helper);
                     diaryList.add(diary);
                 }

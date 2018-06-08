@@ -127,7 +127,7 @@ public class DiaryCardAdapter extends RecyclerView.Adapter<DiaryCardAdapter.View
          Diary diaryCard = mDiaryCardList.get(position);
          holder.diaryContent.setText(diaryCard.getText());
          holder.diaryWeekDay.setText(weekList.get(diaryCard.getDate().getDay()));
-         String yearMonth = (diaryCard.getDate().getYear())+"."+ (diaryCard.getDate().getMonth());
+         String yearMonth = (diaryCard.getDate().getYear()+1900)+"."+ (diaryCard.getDate().getMonth()+1);
          holder.diaryYearMonth.setText(yearMonth);
          holder.diaryDay.setText(String.valueOf(diaryCard.getDate().getDate()));
         //Glide.with(mContext).load(diaryCard.getEmotionImageId()).into(holder.diaryIcon);

@@ -78,7 +78,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
     public void onBindViewHolder(SearchResultAdapter.ViewHolder holder, int position) {
         Diary diary = mDiaryList.get(position);
         holder.diaryContent.setText(diary.getText());
-        String date = (diary.getDate().getYear())+"年"+ (diary.getDate().getMonth()) + "月" + diary.getDate().getDate() + "日 " + weekList.get(diary.getDate().getDay());
+        String date = (diary.getDate().getYear()+1900)+"年"+ (diary.getDate().getMonth()+1) + "月" + diary.getDate().getDate() + "日 " + weekList.get(diary.getDate().getDay());
         holder.diaryDate.setText(date);
         //Glide.with(mContext).load(diaryCard.getEmotionImageId()).into(holder.diaryIcon);
     }
