@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.dell.db.DatabaseHelper;
+import com.example.dell.db.Sentence;
 
 import java.util.List;
 
@@ -22,29 +24,30 @@ import java.util.List;
  */
 
 public class NoteAdapter extends RecyclerView.Adapter <NoteAdapter.ViewHolder> {
-    private List<Note> mNoteList;
-
+    private List<Sentence> mSentenceList;
     private Context mContext;
+    private String sentencebookName;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
-        ImageView noteIcon;
-        TextView noteDate;
-        TextView noteContent;
-        TextView noteWeekDay;
+        //ImageView noteIcon;
+        TextView sentenceDate;
+        TextView sentenceContent;
+        //TextView noteWeekDay;
 
         public ViewHolder(View view) {
             super(view);
             cardView = (CardView) view;
-            noteIcon = (ImageView) view.findViewById(R.id.note_icon);
-            noteDate = (TextView)view.findViewById(R.id.note_date);
-            noteContent = (TextView)view.findViewById(R.id.note_text);
-            noteWeekDay = (TextView)view.findViewById(R.id.note_weekday);
+           /* noteIcon = (ImageView) view.findViewById(R.id.note_icon);*/
+            sentenceDate = (TextView)view.findViewById(R.id.note_date);
+            sentenceContent = (TextView)view.findViewById(R.id.note_text);
+          /*  noteWeekDay = (TextView)view.findViewById(R.id.note_weekday);*/
         }
     }
 
-    public NoteAdapter(List<Note> noteList) {
-        mNoteList = noteList;
+    public NoteAdapter(List<Sentence> sentenceList, String sentencebookName) {
+        this.sentencebookName = sentencebookName;
+        mSentenceList = sentenceList;
     }
 
     @Override
@@ -53,22 +56,25 @@ public class NoteAdapter extends RecyclerView.Adapter <NoteAdapter.ViewHolder> {
         if (mContext == null) {
             mContext = parent.getContext();
         }
+
+        //点击查看纸条的详情界面
         View view = LayoutInflater.from(mContext).inflate(R.layout.note_item, parent, false);
         final ViewHolder holder = new ViewHolder(view);
-        final PopOptionUtil mPop;
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
-                Note note = mNoteList.get(position);
-                Intent intent = new Intent(mContext, NoteActivity.class);
-                intent.putExtra(NoteActivity.NOTE_DATE, note.getDate());
-                intent.putExtra(NoteActivity.NOTE_WEAKDAY, note.getWeekDay());
-                intent.putExtra(NoteActivity.NOTE_CONTENT, note.getContent());
+                Sentence sentence = mSentenceList.get(position);
+                Intent intent = new Intent(mContext, TicketEditActivity.class);
+                intent.putExtra(TicketEditActivity.SENTENCE_THIS, sentence);
+                intent.putExtra(TicketEditActivity.NOTE_EDITABLE, "false");
+                intent.putExtra(TicketEditActivity.NOTE_NEW, "false");
                 mContext.startActivity(intent);
             }
         });
 
+        //长按纸条
+        final PopOptionUtil mPop;
         mPop = new PopOptionUtil(mContext);
         mPop.setOnPopClickEvent(new PopClickEvent() {
             @Override
@@ -80,15 +86,19 @@ public class NoteAdapter extends RecyclerView.Adapter <NoteAdapter.ViewHolder> {
 
                 dialog.setPositiveButton("确认",new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog, int which){
+                        DatabaseHelper helper = new DatabaseHelper(mContext);
                         int position = holder.getAdapterPosition();
-                        Note note = mNoteList.get(position);
-                        mNoteList.remove(note);
-                        notifyItemRemoved(position);
+                       Sentence sentence = mSentenceList.get(position);
+                       sentence.delete(helper);
+                       mSentenceList = Sentence.getAll(helper,false);
+                       notifyDataSetChanged();
+                       /* mSentenceList.remove(note);
+                        notifyItemRemoved(position);*/
                     }
                 });
                 dialog.setNegativeButton("取消",new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog, int which){
-
+                        dialog.cancel();
                     }
                 });
                 dialog.show();
@@ -110,16 +120,22 @@ public class NoteAdapter extends RecyclerView.Adapter <NoteAdapter.ViewHolder> {
         return holder;
     }
 
+    public void update(List<Sentence> sentencebookList){
+        mSentenceList = sentencebookList;
+        notifyDataSetChanged();
+    }
+
+
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Note note = mNoteList.get(position);
-        holder.noteDate.setText(note.getDate());
-        holder.noteWeekDay.setText(note.getWeekDay());
-        holder.noteContent.setText(note.getContent());
+        Sentence sentence = mSentenceList.get(position);
+        holder.sentenceDate.setText(sentence.getDate().toString());
+     //   holder.noteWeekDay.setText(note.getWeekDay());
+        holder.sentenceContent.setText(sentence.getText());
     }
 
     @Override
     public int getItemCount() {
-        return mNoteList.size();
+        return mSentenceList.size();
     }
 }

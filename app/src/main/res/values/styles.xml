@@ -24,4 +24,9 @@
         <item name="contentInsetStartWithNavigation">0dp</item>
     </style>
 
+    <style name="calendar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    </style>
+
 </resources>

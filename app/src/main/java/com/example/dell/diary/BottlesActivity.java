@@ -24,14 +24,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.dell.db.DatabaseHelper;
+import com.example.dell.db.Diarybook;
+import com.example.dell.db.Sentencebook;
+import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class BottlesActivity extends AppCompatActivity {
     private DrawerLayout mDrawLayout;
     private CoordinatorLayout container;
-    private final List<Bottle> bottleList = new ArrayList<>();
-
+    private DatabaseHelper databaseHelper = null;
+    private  List<Sentencebook> sentencebookList =  new ArrayList<>();
+    private String TAG = "233";
     private BottleAdapter adapter;
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -54,7 +60,6 @@ public class BottlesActivity extends AppCompatActivity {
                         Toast.makeText(BottlesActivity.this, "成功拯救一个瓶子",Toast.LENGTH_SHORT).show();
                     }
                 }).show();
-
                 break;
             case R.id.settings:
                 Toast.makeText(this, "You clicked settings", Toast.LENGTH_SHORT).show();
@@ -86,19 +91,23 @@ public class BottlesActivity extends AppCompatActivity {
                 return true;
             }
         });
-
-
+        //初始化日记本
+        initSententcebookList();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_bottle_view);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new BottleAdapter(bottleList);
+        adapter = new BottleAdapter(sentencebookList);
         recyclerView.setAdapter(adapter);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.add_bottle_fab);
+
+
+        FloatingActionButton fab =  findViewById(R.id.add_bottle_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 final EditText inputBottleName = new EditText(BottlesActivity.this);
+                inputBottleName.setId(R.id.edit_In_BottleName);
                 inputBottleName.setHint("请输入瓶子的名字");
                 inputBottleName.setFocusable(true);
                 final EditText inputBottleDescribe = new EditText(BottlesActivity.this);
@@ -112,8 +121,15 @@ public class BottlesActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 String inputName = inputBottleName.getText().toString();
                                 String inputDescribe = inputBottleDescribe.getText().toString();
-                                Bottle bottle = new Bottle(inputName, inputDescribe, R.drawable.bottle_pink1);
-                                adapter.addBottle(bottleList.size(), bottle);
+                                Sentencebook sentencebook = new Sentencebook(inputName);
+
+                                DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+                                sentencebook.insert(helper);
+                                sentencebookList = Sentencebook.getAll(helper,false);
+                                adapter.update(sentencebookList);
+
+                                /* adapter.addSentencebook(sentencebookList.size(),sentencebook);*/
+                                //adapter.addSentencebook(sentencebook);
                             }
                         });
                 builder.show();
@@ -121,6 +137,32 @@ public class BottlesActivity extends AppCompatActivity {
         });
 
 
+
+
     }
 
+
+    public void initSententcebookList() {
+        sentencebookList.clear();
+        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+        sentencebookList = Sentencebook.getAll(helper,false);
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(databaseHelper != null){
+            OpenHelperManager.releaseHelper();
+            databaseHelper = null;
+        }
+    }
+
+    private DatabaseHelper getDataBaseHelper(){
+        if(databaseHelper == null){
+            databaseHelper = OpenHelperManager.getHelper(BottlesActivity.this, DatabaseHelper.class);
+        }
+        return databaseHelper;
+    }
 }
+
+

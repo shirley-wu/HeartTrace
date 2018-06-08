@@ -19,10 +19,13 @@
         </activity>
         <activity android:name=".StatisticsActivity" />
         <activity android:name=".DiaryActivity" />
-        <activity android:name=".SearchActivity"/>
+        <activity android:name=".SearchActivity" />
         <activity android:name=".BottleWriteActivity" />
-        <activity android:name=".CalendarActivity" />
-        <activity android:name=".DiaryWriteActivity" />
+        <activity android:name=".CalendarActivity"
+            android:label="Calendar"
+            android:theme="@style/calendar"/>
+        <activity android:name=".DiaryWriteActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".TicketEditActivity" />
 
         <!--
@@ -37,6 +40,8 @@
         <activity android:name=".NoteActivity" />
         <activity android:name=".BottlesActivity" />
         <activity android:name=".SearchResultActivity"/>
+
+        <activity android:name=".LabelManageActivity"></activity>
 
         <!-- Note: the followings are added for authentication (stub). If anything unpredicted happens tell us. -->
         <service
@@ -67,7 +72,6 @@
             <meta-data android:name="android.content.SyncAdapter"
                 android:resource="@xml/syncadapter" />
         </service>
-
     </application>
 
     <!--Note: the following pemissions are added for synchronization. -->

@@ -1,0 +1,34 @@
+{
+    "logs": [
+        {
+            "outputFile": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\values-en\\values-en.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\Android-PickerView-3.2.5.aar\\b2f3a57176fba6009bad54159d6af9d3\\res\\values-en\\values-en.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,108,144,182,222,260,300,351",
+                        "endColumns": "52,35,37,39,37,39,50,36",
+                        "endOffsets": "103,139,177,217,255,295,346,383"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-en\\values-en.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\Android-PickerView-3.2.5.aar\\b2f3a57176fba6009bad54159d6af9d3\\res\\values-en\\values-en.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,108,144,182,222,260,300,351",
+                        "endColumns": "52,35,37,39,37,39,50,36",
+                        "endOffsets": "103,139,177,217,255,295,346,383"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -26,7 +26,8 @@ import java.util.List;
  */
 
 @DatabaseTable(tableName = "Diary")
-public class Diary implements Serializable {
+public class Diary implements Serializable
+{
     public static final String TAG = "diary";
 
     @DatabaseField(generatedId = true, columnName = TAG)
@@ -65,7 +66,7 @@ public class Diary implements Serializable {
             date = new Date();
         }
     }
-    
+
     public void setDate(Date date){
         // dangerous!!!!! for test only.
         this.date = date;

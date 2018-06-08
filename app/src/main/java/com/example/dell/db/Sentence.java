@@ -30,8 +30,8 @@ public class Sentence implements Serializable {
     @DatabaseField(generatedId = true, columnName = TAG)
     private int id;
 
-    @DatabaseField(foreign = true, columnName = "sentencebook")
-    private Sentencebook Sentencebook;
+    @DatabaseField(foreign = true, columnName = Sentencebook.TAG)
+    private Sentencebook sentencebook;
 
     @DatabaseField
     String text;
@@ -73,18 +73,24 @@ public class Sentence implements Serializable {
         Log.i(TAG, "setDate: dangerous call!");
     }
 
-    public Sentencebook getSentencebook() {
-        return Sentencebook;
+   public Sentencebook getSentencebook() {
+        return sentencebook;
     }
 
-    public void setSentencebook(Sentencebook Sentencebook) {
-        this.Sentencebook = Sentencebook;
+    public void setSentencebook(Sentencebook sentencebook) {
+        this.sentencebook = sentencebook;
     }
 
     public void insert(DatabaseHelper helper) {
         try {
             Dao<Sentence, Integer> dao = helper.getSentenceDao();
             Log.i("Sentence", "dao = " + dao + " 插入 Sentence " + this);
+            Log.d(TAG, "insert: text = " + getText());
+            if(getSentencebook() == null) {
+                Log.d(TAG, "insert: sentencebook = null");
+            } else {
+                Log.d(TAG, "insert: sentencebook name = " + getSentencebook().getSentencebookName());
+            }
             int returnValue = dao.create(this);
             Log.i("Sentence", "插入后返回值：" + returnValue);
         } catch (SQLException e) {
