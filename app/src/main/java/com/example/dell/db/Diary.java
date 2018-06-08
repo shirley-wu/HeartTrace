@@ -42,6 +42,16 @@ public class Diary implements Serializable
     @DatabaseField(dataType = DataType.DATE_STRING, columnName = "date")
     protected Date date;
 
+    private int tag_id;
+
+    public void  setid(int id){
+        this.tag_id = id;
+    }
+
+    public int getid(){
+        return this.tag_id;
+    }
+
     public Diary(){
     };
 

@@ -3,6 +3,7 @@ package com.example.dell.diary;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
@@ -53,7 +54,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsListView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -65,6 +70,7 @@ import android.widget.Toast;
 
 import com.example.dell.db.DatabaseHelper;
 import com.example.dell.db.Diary;
+import com.example.dell.db.Label;
 
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
 
@@ -75,21 +81,36 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.UUID;
 
 public class DiaryWriteActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final int CHOOSE_PHOTO = 2;
+    private final int ICON_LIST_DIALOG = 1;
+    int tagId = 0;
+    public String label_name = "happy";
+    private int[] imgIds = {R.drawable.happy_black,
+            R.drawable.normal_black, R.drawable.sad_black};
     Diary diary;
     List<Diary> diaryList = new ArrayList<>();
+    List<Label> labelList = new ArrayList<>();
+    List<Label> label_this = new ArrayList<>();
     int index;
     Button preDiary;
     Button nextDiary;
     ActionBar actionBar;
+    TextView diaryDate;
+    TextView diaryWeekday;
+    ImageView diaryIcon;
     private EditText diary_write;
     private ImageButton more_setting;
     private ImageButton keyboard;
@@ -137,7 +158,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private ImageButton set_bold;
     private ImageButton set_italic;
     private ImageButton insert_image;
+
     private SpannableStringBuilder spannableString = new SpannableStringBuilder();
+    public List<String> weekList = new ArrayList<>(Arrays.asList("周四","周五","周六","周日"," 周一","周二","周三"));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -263,19 +286,23 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     public void init()
     {
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar_diary_content);
+        diaryDate = (TextView)findViewById(R.id.diary_content_date);
+        diaryWeekday = (TextView)findViewById(R.id.diary_content_weekday);
+        diaryIcon = (ImageView) findViewById(R.id.diary_content_icon);
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
         Intent intent = getIntent();
         diary = (Diary) intent.getSerializableExtra("diary_list");
         diaryList.clear();
+
         DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
         String originType = intent.getStringExtra("diary_origin");
         if(originType.equals("diary")){
             diaryList = Diary.getAll(helper,true);
+            //labelList = Label.getAllLabel(helper);
         }
         else if(originType.equals("search")) {
             // Get the Bundle Object
@@ -285,12 +312,31 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         }
         index = intent.getIntExtra("diary_index",diaryList.size());
         if(diary == null){
+            Date date = new Date();
+            date.setYear(date.getYear()+1900);
+            date.setMonth(date.getMonth()+1);
+            String today = (date.getYear())+"."+(date.getMonth())+"."+date.getDate();
+            diaryDate.setText(today);
+            diaryWeekday.setText(weekList.get(date.getDay()));
+            diaryIcon.setImageDrawable(setTag(tagId));
+            //Toast.makeText(DiaryWriteActivity.this, today,Toast.LENGTH_SHORT).show();
             preDiary.setVisibility(View.INVISIBLE);
             nextDiary.setVisibility(View.INVISIBLE);
             actionBar.hide();
         }
         else {
             diary_write.setText(diary.getText());
+            /*
+            try {
+                curr_tag = diary.getAllLabel(helper).get(0).getLabelname();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }*/
+            diaryIcon.setImageDrawable(setTag(diary.getid()));
+
+            String date = (diary.getDate().getYear())+"."+(diary.getDate().getMonth())+"."+diary.getDate().getDate();
+            diaryDate.setText(date);
+            diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
             diary_write.setEnabled(false);
             more_setting.setVisibility(View.INVISIBLE);
             font_set.setVisibility(View.INVISIBLE);
@@ -317,6 +363,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 else{
                     index = index -1;
                     diary = diaryList.get(index);
+                    String date = (diary.getDate().getYear())+"."+(diary.getDate().getMonth())+"."+diary.getDate().getDate();
+                    diaryDate.setText(date);
+                    diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
+                    diaryIcon.setImageDrawable(setTag(diary.getid()));
                     //String date = diary.getDate().getYear()+"."+diary.getDate().getMonth()+"."+diary.getDate().getDate();
                     //diaryDate.setText(date);
                     //diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
@@ -330,6 +380,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 else{
                     index = index + 1;
                     diary = diaryList.get(index);
+                    String date = (diary.getDate().getYear())+"."+(diary.getDate().getMonth())+"."+diary.getDate().getDate();
+                    diaryDate.setText(date);
+                    diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
+                    diaryIcon.setImageDrawable(setTag(diary.getid()));
                     //String date = diary.getDate().getYear()+"."+diary.getDate().getMonth()+"."+diary.getDate().getDate();
                     //diaryDate.setText(date);
                     //diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
@@ -391,7 +445,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     editable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.darkred)), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
                 else
-                   font_color = 1;
+                    font_color = 1;
                 break;
             case R.id.font_orange:
                 if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
@@ -740,9 +794,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.label_manage:
-                Intent intent1 = new Intent(DiaryWriteActivity.this, LabelManageActivity.class);
-                intent1.putExtra("diary",diary);
-                startActivity(intent1);
+                showDialog(ICON_LIST_DIALOG);
                 break;
             case R.id.edit:
                 diary_write.setEnabled(true);
@@ -956,6 +1008,132 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             //picture.setImageBitmap(bitmap);
         } else {
             Toast.makeText(this, "failed to get image", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    protected Dialog onCreateDialog(int id) {
+        Dialog dialog = null;
+        switch(id) {
+            case ICON_LIST_DIALOG:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setIcon(R.drawable.mood);
+                builder.setTitle("今天心情如何？");
+                BaseAdapter adapter = new ListItemAdapter();
+                DialogInterface.OnClickListener listener =
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int which) {
+                                tagId = which;
+                                if(tagId == 0) label_name = "happy";
+                                else if(tagId == 1) label_name = "normal";
+                                else if(tagId == 2) label_name = "sad";
+                                else label_name = "happy";
+
+                                DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+                                diary = diaryList.get(index);
+                                diary.setid(tagId);
+                                Label label = new Label(label_name);
+                                label.insert(helper);
+                                diary.insertLabel(helper, label);
+                                diary.update(helper);
+                                diaryList.remove(index);
+                                diaryList.add(index,diary);
+
+
+                                diaryIcon.setImageDrawable(setTag(diary.getid()));
+
+                                try {
+                                    label_this = diary.getAllLabel(helper);
+                                } catch (SQLException e) {
+                                    e.printStackTrace();
+                                }
+                                Log.i("diary", "标签succ");
+                                if(label_this != null && label_this.size() !=0)
+                                {Log.i("diary", "标签null");
+                                 Log.i("diary", "标签"+label_this.get(0).getLabelname() );}
+
+                                else Log.i("diary", "标签fail" );
+
+
+                            }
+                        };
+                builder.setAdapter(adapter, listener);
+                dialog = builder.create();
+                break;
+        }
+        return dialog;
+    }
+
+    class ListItemAdapter extends BaseAdapter {
+
+        @Override
+        public int getCount() {
+            return imgIds.length;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position,
+                            View contentView, ViewGroup parent) {
+            TextView textView =
+                    new TextView(DiaryWriteActivity.this);
+            //获得array.xml中的数组资源getStringArray返回的是一个String数组
+            String text = getResources().getStringArray(R.array.mood)[position];
+            textView.setText(text);
+            //设置字体大小
+            textView.setTextSize(20);
+            AbsListView.LayoutParams layoutParams = new AbsListView.LayoutParams(
+                    WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+            textView.setLayoutParams(layoutParams);
+            //设置水平方向上居中
+            textView.setGravity(android.view.Gravity.CENTER_VERTICAL);
+            textView.setMinHeight(65);
+            //设置文字颜色
+            textView.setTextColor(Color.BLACK);
+            //设置图标在文字的左边
+            textView.setCompoundDrawablesWithIntrinsicBounds(imgIds[position], 0, 0, 0);
+            //设置textView的左上右下的padding大小
+            textView.setPadding(30, 10, 30, 10);
+            //设置文字和图标之间的padding大小
+            textView.setCompoundDrawablePadding(25);
+            return textView;
+        }
+    }
+
+    public Drawable setTag(int id){
+        switch(id)
+        {
+            case 0:
+                return (getResources().getDrawable(R.drawable.happy_black));
+            case 1:
+                return (getResources().getDrawable(R.drawable.normal_black));
+            case 2:
+                return (getResources().getDrawable(R.drawable.sad_black));
+            default:
+                return (getResources().getDrawable(R.drawable.normal_black));
+        }
+    }
+
+    public Drawable setTags(String id){
+        switch(id)
+        {
+            case "happy":
+                return (getResources().getDrawable(R.drawable.happy_black));
+            case "normal":
+                return (getResources().getDrawable(R.drawable.normal_black));
+            case "sad":
+                return (getResources().getDrawable(R.drawable.sad_black));
+            default:
+                return (getResources().getDrawable(R.drawable.normal_black));
         }
     }
 
