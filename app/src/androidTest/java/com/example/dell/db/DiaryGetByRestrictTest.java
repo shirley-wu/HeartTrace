@@ -109,6 +109,7 @@ public class DiaryGetByRestrictTest extends InstrumentationTestCase {
         for(final Diary diary : diaryMmp) {
             diary.delete(databaseHelper);
         }
+        diarybook.delete(databaseHelper);
         OpenHelperManager.releaseHelper();
     }
 

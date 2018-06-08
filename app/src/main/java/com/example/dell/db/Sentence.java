@@ -25,7 +25,7 @@ import java.util.List;
 
 @DatabaseTable(tableName = "Sentence")
 public class Sentence implements Serializable {
-    public static final String TAG = "Sentence";
+    protected static final String TAG = "Sentence";
 
     @DatabaseField(generatedId = true, columnName = TAG)
     private int id;

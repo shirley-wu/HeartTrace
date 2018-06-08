@@ -21,14 +21,14 @@ import java.util.List;
 @DatabaseTable(tableName = "sentencebook")
 public class Sentencebook implements Serializable {
 
-    public static final String TAG = "Sentencebook";
+    protected static final String TAG = "Sentencebook";
 
     private static final String default_name = "default";
 
     @DatabaseField(generatedId = true, columnName = TAG)
     private int id;
 
-    @DatabaseField(unique = true, columnName = "sentencebookName")
+    @DatabaseField(unique = true, columnName = "sentencebookName", canBeNull = false)
     private String sentencebookName;
 
     public Sentencebook(){};
@@ -98,7 +98,7 @@ public class Sentencebook implements Serializable {
             Dao<Sentence, Integer> subdao = helper.getSentenceDao();
             DeleteBuilder<Sentence, Integer> deleteBuilder = subdao.deleteBuilder();
 
-            deleteBuilder.where().eq("Sentencebook", this);
+            deleteBuilder.where().eq(Sentencebook.TAG, this);
             deleteBuilder.delete();
 
             Dao<Sentencebook, Integer> dao = helper.getSentencebookDao();
