@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\values-en\\values-en.xml",
+            "outputFile": "D:\\Users\\wu-pc\\repos\\HeartTrace\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-en\\values-en.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\Android-PickerView-3.2.5.aar\\b2f3a57176fba6009bad54159d6af9d3\\res\\values-en\\values-en.xml",
+                    "source": "C:\\Users\\wu-pc\\.gradle\\caches\\transforms-1\\files-1.1\\Android-PickerView-3.2.5.aar\\11efe74bd87609b368a4136e285cc959\\res\\values-en\\values-en.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -16,10 +16,10 @@
             ]
         },
         {
-            "outputFile": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-en\\values-en.xml",
+            "outputFile": "D:\\Users\\wu-pc\\repos\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\values-en\\values-en.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\Android-PickerView-3.2.5.aar\\b2f3a57176fba6009bad54159d6af9d3\\res\\values-en\\values-en.xml",
+                    "source": "C:\\Users\\wu-pc\\.gradle\\caches\\transforms-1\\files-1.1\\Android-PickerView-3.2.5.aar\\11efe74bd87609b368a4136e285cc959\\res\\values-en\\values-en.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
