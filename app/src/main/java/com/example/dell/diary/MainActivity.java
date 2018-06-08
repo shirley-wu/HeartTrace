@@ -210,8 +210,11 @@ public class MainActivity extends AppCompatActivity {
         addBottle.setVisibility(View.INVISIBLE);
         diaryList.clear();
         DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-        diaryList.addAll(Diary.getAll(helper,false));
-        adapter.notifyDataSetChanged();
+        diaryList = Diary.getAll(helper,false);
+        adapter = new DiaryCardAdapter(diaryList);
+        recyclerView.setAdapter(adapter);
+//        diaryList.addAll(Diary.getAll(helper,false));
+//        adapter.notifyDataSetChanged();
     }
 
     @Override

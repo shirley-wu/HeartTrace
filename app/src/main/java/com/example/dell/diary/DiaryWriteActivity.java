@@ -77,6 +77,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -90,7 +91,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     Button preDiary;
     Button nextDiary;
     ActionBar actionBar;
+    private TextView diary_write_date;
+    private TextView diary_write_weekday;
     private EditText diary_write;
+    private LinearLayout date_layout;
     private ImageButton more_setting;
     private ImageButton keyboard;
     private ImageButton face_expression;
@@ -138,6 +142,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private ImageButton set_italic;
     private ImageButton insert_image;
     private SpannableStringBuilder spannableString = new SpannableStringBuilder();
+    private List<String> weekList = new ArrayList<>(Arrays.asList("周日","周一","周二","周三"," 周四","周五","周六"));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,7 +158,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     {
         preDiary = (Button)findViewById(R.id.pre_diary);
         nextDiary = (Button)findViewById(R.id.next_diary);
+        diary_write_date = (TextView)findViewById(R.id.diary_write_date);
+        diary_write_weekday = (TextView)findViewById(R.id.diary_write_weekday);
         diary_write = (EditText) findViewById(R.id.diaryWrite);
+        date_layout = (LinearLayout)findViewById(R.id.date_layout);
         more_setting = (ImageButton) findViewById(R.id.more_setting);
         keyboard = (ImageButton) findViewById(R.id.keyboard);
         face_expression = (ImageButton) findViewById(R.id.face_insert);
@@ -287,10 +295,13 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         if(diary == null){
             preDiary.setVisibility(View.INVISIBLE);
             nextDiary.setVisibility(View.INVISIBLE);
+            date_layout.setVisibility(View.GONE);
             actionBar.hide();
         }
         else {
             diary_write.setText(diary.getText());
+            diary_write_date.setText((diary.getDate().getYear()+1900)+"年"+ (diary.getDate().getMonth()+1) + "月" + diary.getDate().getDate() + "日 " );
+            diary_write_weekday.setText(weekList.get(diary.getDate().getDay()));
             diary_write.setEnabled(false);
             more_setting.setVisibility(View.INVISIBLE);
             font_set.setVisibility(View.INVISIBLE);
@@ -348,14 +359,14 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 Log.i("test", Html.toHtml(diary_write.getText()));
                 DatabaseHelper helper = new DatabaseHelper(DiaryWriteActivity.this);
                 if(index == diaryList.size()){
-                    Log.i("1234",index+"");
                     diary = new Diary(diary_write.getText().toString());
                     diary.setDate(new Date());
+                    diary_write_date.setText((diary.getDate().getYear()+1900)+"年"+ (diary.getDate().getMonth()+1) + "月" + diary.getDate().getDate() + "日 ");
+                    diary_write_weekday.setText(weekList.get(diary.getDate().getDay()));
                     diary.insert(helper);
                     diaryList.add(diary);
                 }
                 else{
-                    Log.i("2345",index+"");
                     diary.setText(diary_write.getText().toString());
                     diary.update(helper);
                     diaryList.remove(index);
@@ -376,6 +387,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 confirm.setVisibility(View.INVISIBLE);
                 preDiary.setVisibility(View.VISIBLE);
                 nextDiary.setVisibility(View.VISIBLE);
+                date_layout.setVisibility(View.VISIBLE);
                 actionBar.show();
                 break;
             case R.id.font_setting:
@@ -751,6 +763,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 confirm.setVisibility(View.VISIBLE);
                 preDiary.setVisibility(View.INVISIBLE);
                 nextDiary.setVisibility(View.INVISIBLE);
+                date_layout.setVisibility(View.GONE);
                 actionBar.hide();
                 break;
             case android.R.id.home:
