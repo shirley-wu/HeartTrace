@@ -2,19 +2,15 @@ package com.example.dell.db;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
-import android.util.Log;
 
 import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.stmt.QueryBuilder;
-import com.j256.ormlite.stmt.Where;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -31,6 +27,8 @@ public class DiaryInstrumentedTest {
     private DatabaseHelper databaseHelper;
     private Dao<Diary, Integer> dao;
 
+    private Diarybook diarybook = new Diarybook("fajskdlav");
+
     private String originText;
     private String updateText;
 
@@ -39,10 +37,12 @@ public class DiaryInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
         databaseHelper = OpenHelperManager.getHelper(appContext, DatabaseHelper.class);
         dao = databaseHelper.getDiaryDao();
+        diarybook.insert(databaseHelper);
     }
 
     @After
     public void tearDown() {
+        diarybook.delete(databaseHelper);
         OpenHelperManager.releaseHelper();
     }
 
@@ -60,6 +60,7 @@ public class DiaryInstrumentedTest {
         List<Diary> diaryList;
         diary.setText(originText);
         diary.setDate();
+        diary.setDiarybook(diarybook);
 
         // create
         diary.insert(databaseHelper);
@@ -95,6 +96,7 @@ public class DiaryInstrumentedTest {
 
         Diary diary = new Diary(text);
         diary.setDate(new Date(4000, 1, 1));
+        diary.setDiarybook(diarybook);
         diary.insert(databaseHelper);
 
         List<Diary> diaryList = Diary.getAll(databaseHelper, false);
@@ -110,6 +112,7 @@ public class DiaryInstrumentedTest {
 
         Diary diary = new Diary(text);
         diary.setDate(new Date(1000, 1, 1));
+        diary.setDiarybook(diarybook);
         diary.insert(databaseHelper);
 
         List<Diary> diaryList = Diary.getAll(databaseHelper, true);

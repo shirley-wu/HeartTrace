@@ -29,22 +29,24 @@ public class DiaryOtherTest {
     private static final String TAG = "DiaryGetByRestrictTest";
 
     private DatabaseHelper databaseHelper;
-    private Dao<Diary, Integer> dao;
 
     private String originText;
     private String updateText;
+
+    Diarybook diarybook = new Diarybook("jkbivdtcvnn");
 
     @Before
     public void setUp() throws SQLException {
         Log.d(TAG, "setUp");
         Context appContext = InstrumentationRegistry.getTargetContext();
         databaseHelper = OpenHelperManager.getHelper(appContext, DatabaseHelper.class);
-        dao = databaseHelper.getDiaryDao();
+        diarybook.insert(databaseHelper);
     }
 
     @After
     public void tearDown() {
         Log.d(TAG, "tearDown");
+        diarybook.delete(databaseHelper);
         OpenHelperManager.releaseHelper();
     }
 
@@ -59,7 +61,8 @@ public class DiaryOtherTest {
                 diaryList.add(diary);
                 diary.setText(originText + j);
                 diary.setDate(new Date(1998, 8, i));
-                dao.create(diary);
+                diary.setDiarybook(diarybook);
+                diary.insert(databaseHelper);
             }
         }
 
@@ -98,7 +101,8 @@ public class DiaryOtherTest {
                 diaryList.add(diary);
                 diary.setText(originText + j);
                 diary.setDate(new Date(1998, 8, i));
-                dao.create(diary);
+                diary.setDiarybook(diarybook);
+                diary.insert(databaseHelper);
                 if(i % 3 == 0) {
                     diary.insertLabel(databaseHelper, label1);
                     if(begin <= i && i <= end){
@@ -120,6 +124,8 @@ public class DiaryOtherTest {
     @Test
     public void testGetAllLabel() throws SQLException {
         Diary diary = new Diary("hello");
+        diary.setDate();
+        diary.setDiarybook(diarybook);
         diary.insert(databaseHelper);
 
         List<Label> labels = new ArrayList();
