@@ -97,13 +97,13 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
         Date d = new Date();
-        mYear2 = mYear = d.getYear() + 1900;
+        mYear2 = mYear = d.getYear();
         mMonth2 = mMonth = d.getMonth();
         mDay2 = mDay = d.getDate();
         dateDisplayStart = (TextView)findViewById(R.id.date_display);
         dateDisplayEnd = (TextView)findViewById(R.id.date_display2);
-        datePickerDialog1 = new DatePickerDialog(this, dateListener, mYear, mMonth, mDay);
-        datePickerDialog2 = new DatePickerDialog(this, dateListener2, mYear2, mMonth2, mDay2);
+        datePickerDialog1 = new DatePickerDialog(this, dateListener, mYear+1900, mMonth, mDay);
+        datePickerDialog2 = new DatePickerDialog(this, dateListener2, mYear2+1900, mMonth2, mDay2);
 
         dateDisplayStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,8 +155,8 @@ public class SearchActivity extends AppCompatActivity {
                 Intent intent = new Intent(SearchActivity.this, SearchResultActivity.class);
                 intent.putExtra("search_text",query);
                 if(checkTime.isChecked() == true){
-                    startDate = new Date(mYear,mMonth+1,mDay);
-                    endDate = new Date(mYear2,mMonth2+1,mDay2);
+                    startDate = new Date(mYear,mMonth,mDay);
+                    endDate = new Date(mYear2,mMonth2,mDay2);
                     intent.putExtra("start_date",startDate);
                     intent.putExtra("end_date",endDate);
                 }
@@ -200,10 +200,10 @@ public class SearchActivity extends AppCompatActivity {
      * 设置日期
      */
     public void display() {
-        dateDisplayStart.setText("起始时间："+mYear+"年"+String.valueOf(mMonth+1)+"月"+mDay+"日");
+        dateDisplayStart.setText("起始时间："+(mYear+1900)+"年"+(mMonth+1)+"月"+mDay+"日");
     }
     public void display2() {
-        dateDisplayEnd.setText("结束时间："+mYear2+"年"+String.valueOf(mMonth2+1)+"月"+mDay2+"日");
+        dateDisplayEnd.setText("结束时间："+ (mYear2+1900)+"年"+ (mMonth2+1)+"月"+mDay2+"日");
     }
 
     private DatePickerDialog.OnDateSetListener dateListener = new DatePickerDialog.OnDateSetListener() {
@@ -211,10 +211,10 @@ public class SearchActivity extends AppCompatActivity {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {
-            mYear = year;
+            mYear = year-1900;
             mMonth = monthOfYear;
             mDay = dayOfMonth;
-            datePickerDialog2.getDatePicker().setMinDate(new Date(mYear-1900,mMonth,mDay).getTime());
+            datePickerDialog2.getDatePicker().setMinDate(new Date(mYear,mMonth,mDay).getTime());
             display();
         }
     };
@@ -224,10 +224,10 @@ public class SearchActivity extends AppCompatActivity {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {
-            mYear2 = year;
+            mYear2 = year-1900;
             mMonth2 = monthOfYear;
             mDay2 = dayOfMonth;
-            datePickerDialog1.getDatePicker().setMaxDate(new Date(mYear2-1900,mMonth2,mDay2).getTime());
+            datePickerDialog1.getDatePicker().setMaxDate(new Date(mYear2,mMonth2,mDay2).getTime());
             display2();
         }
     };

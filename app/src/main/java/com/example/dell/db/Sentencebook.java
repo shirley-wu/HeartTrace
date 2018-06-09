@@ -10,6 +10,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -18,15 +19,16 @@ import java.util.List;
  */
 
 @DatabaseTable(tableName = "sentencebook")
-public class Sentencebook {
+public class Sentencebook implements Serializable {
 
-    private static final String TAG = "Sentencebook";
+    protected static final String TAG = "Sentencebook";
 
     private static final String default_name = "default";
 
     @DatabaseField(generatedId = true, columnName = TAG)
     private int id;
-    @DatabaseField
+
+    @DatabaseField(unique = true, columnName = "sentencebookName", canBeNull = false)
     private String sentencebookName;
 
     public Sentencebook(){};
@@ -47,9 +49,7 @@ public class Sentencebook {
     public List<Sentence> getAllSubSentence(DatabaseHelper helper) {
         try {
             Dao<Sentence, Integer> dao = helper.getSentenceDao();
-
-            List<Sentence> subSentenceList = dao.queryBuilder().where().eq("Sentencebook", sentencebookName).query();
-
+            List<Sentence> subSentenceList = dao.queryBuilder().where().eq(Sentencebook.TAG, this).query();
             return subSentenceList;
         }catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
@@ -62,7 +62,7 @@ public class Sentencebook {
             Dao<Sentence, Integer> dao = helper.getSentenceDao();
             DeleteBuilder<Sentence, Integer> deleteBuilder = dao.deleteBuilder();
 
-            deleteBuilder.where().eq("Sentencebook", this);
+            deleteBuilder.where().eq(Sentencebook.TAG, this);
             deleteBuilder.delete();
         }catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
@@ -98,7 +98,7 @@ public class Sentencebook {
             Dao<Sentence, Integer> subdao = helper.getSentenceDao();
             DeleteBuilder<Sentence, Integer> deleteBuilder = subdao.deleteBuilder();
 
-            deleteBuilder.where().eq("Sentencebook", this);
+            deleteBuilder.where().eq(Sentencebook.TAG, this);
             deleteBuilder.delete();
 
             Dao<Sentencebook, Integer> dao = helper.getSentencebookDao();
@@ -118,6 +118,18 @@ public class Sentencebook {
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
+        }
+    }
+
+    public static Sentencebook getByName(DatabaseHelper helper,String sentencebookName) {
+        try {
+            Dao<Sentencebook, Integer> dao = helper.getSentencebookDao();
+            Sentencebook bookByName = dao.queryBuilder().where().eq("sentencebookName", sentencebookName).queryForFirst();
+            return bookByName;
+        }
+        catch(SQLException e) {
+            Log.e(TAG, "getByName: cannot query");
+            return null;
         }
     }
 }
