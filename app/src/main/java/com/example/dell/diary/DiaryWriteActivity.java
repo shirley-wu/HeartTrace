@@ -332,9 +332,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         index = intent.getIntExtra("diary_index",diaryList.size());
         if(diary == null){
             Date date = new Date();
-            date.setYear(date.getYear()+1900);
-            date.setMonth(date.getMonth()+1);
-            String today = (date.getYear())+"."+(date.getMonth())+"."+date.getDate();
+            String today = (date.getYear()+1900)+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日";
             diaryDate.setText(today);
             diaryWeekday.setText(weekList.get(date.getDay()));
             diaryIcon.setImageDrawable(setTag(tagId));
@@ -369,7 +367,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     }
             }
 
-            String date = (diary.getDate().getYear())+"."+(diary.getDate().getMonth())+"."+diary.getDate().getDate();
+            String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
             diaryDate.setText(date);
             diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
             diary_write.setEnabled(false);
@@ -457,19 +455,15 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 }
                 break;
             case R.id.confirm:
-                Log.i("test", Html.toHtml(diary_write.getText()));
+                //Log.i("test", Html.toHtml(diary_write.getText()));
                 if(index == diaryList.size()){
-                    Log.i("1234",index+"");
                     diary = new Diary(diary_write.getText().toString());
                     Date date = new Date();
-                    date.setYear(date.getYear()+1900);
-                    date.setMonth(date.getMonth()+1);
                     diary.setDate(date);
                     diary.insert(helper);
                     diaryList.add(diary);
                 }
                 else{
-                    Log.i("2345",index+"");
                     diary.setText(diary_write.getText().toString());
                     diary.update(helper);
                     diaryList.remove(index);
@@ -1087,7 +1081,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                                 else label_name = "happy";
 
                                 DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-                                diary = diaryList.get(index);
+                                //diary = diaryList.get(index);
                                 diary.setid(tagId);
 
                                 Label label = Label.getByName(helper,label_name);
