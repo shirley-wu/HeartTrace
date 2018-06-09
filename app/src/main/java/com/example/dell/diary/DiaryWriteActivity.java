@@ -320,7 +320,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             diaryDate.setText(today);
             diaryWeekday.setText(weekList.get(date.getDay()));
             diaryIcon.setImageDrawable(setTag(tagId));
-            //Toast.makeText(DiaryWriteActivity.this, today,Toast.LENGTH_SHORT).show();
             preDiary.setVisibility(View.INVISIBLE);
             nextDiary.setVisibility(View.INVISIBLE);
             actionBar.hide();
@@ -358,6 +357,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     }
 
     public void onClick(View view) {
+        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
         switch (view.getId()) {
             case R.id.pre_diary:
                 if(index == 0){
@@ -369,11 +369,14 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     String date = (diary.getDate().getYear())+"."+(diary.getDate().getMonth())+"."+diary.getDate().getDate();
                     diaryDate.setText(date);
                     diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
-                    diaryIcon.setImageDrawable(setTag(diary.getid()));
-                    //String date = diary.getDate().getYear()+"."+diary.getDate().getMonth()+"."+diary.getDate().getDate();
-                    //diaryDate.setText(date);
-                    //diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
                     diary_write.setText(diary.getText());
+                    try {
+                        label_this = diary.getAllLabel(helper);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    if(label_this  != null && label_this.size() != 0 && label_this.get(0).getLabelname() != null)
+                        diaryIcon.setImageDrawable(setTags(label_this.get(0).getLabelname()));
                 }
                 break;
             case R.id.next_diary:
@@ -386,11 +389,14 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     String date = (diary.getDate().getYear())+"."+(diary.getDate().getMonth())+"."+diary.getDate().getDate();
                     diaryDate.setText(date);
                     diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
-                    diaryIcon.setImageDrawable(setTag(diary.getid()));
-                    //String date = diary.getDate().getYear()+"."+diary.getDate().getMonth()+"."+diary.getDate().getDate();
-                    //diaryDate.setText(date);
-                    //diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
                     diary_write.setText(diary.getText());
+                    try {
+                        label_this = diary.getAllLabel(helper);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    if(label_this  != null && label_this.size() != 0 && label_this.get(0).getLabelname() != null)
+                        diaryIcon.setImageDrawable(setTags(label_this.get(0).getLabelname()));
                 }
             case R.id.edit_layout:
                 if(confirm.getVisibility()==View.VISIBLE){
@@ -403,7 +409,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.confirm:
                 Log.i("test", Html.toHtml(diary_write.getText()));
-                DatabaseHelper helper = new DatabaseHelper(DiaryWriteActivity.this);
                 if(index == diaryList.size()){
                     Log.i("1234",index+"");
                     diary = new Diary(diary_write.getText().toString());
@@ -1043,8 +1048,15 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                                 }
                                 diary.insertLabel(helper, label);
                                 diaryIcon.setImageDrawable(setTag(diary.getid()));
-
-
+/*                                try {
+                                    label_this = diary.getAllLabel(helper);
+                                } catch (SQLException e) {
+                                    e.printStackTrace();
+                                }
+                                if(label_this  != null && label_this.size() != 0 && label_this.get(0).getLabelname() != null)
+                                    diaryIcon.setImageDrawable(setTags(label_this.get(0).getLabelname()));
+                                else diaryIcon.setImageDrawable(setTags("happy"));
+*/
                             }
                         };
                 builder.setAdapter(adapter, listener);
