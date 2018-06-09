@@ -24,32 +24,102 @@
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/diary_content_date"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="7"
+                            android:layout_gravity="center"
+                            />
+                        <TextView
+                            android:id="@+id/diary_content_weekday"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="4"
+                            android:layout_gravity="center"
+                            />
+                       <RelativeLayout
+                           android:layout_width="0dp"
+                           android:layout_weight="9"
+                           android:layout_height="wrap_content">
+                           <ImageView
+                               android:id="@+id/diary_content_icon"
+                               android:layout_width="25dp"
+                               android:layout_height="25dp"
+                               android:layout_gravity="center"
+                               android:layout_marginRight="20dp"
+                               android:clickable="true"
+                               android:scaleType="centerCrop"/>
+                           <ImageView
+                               android:id="@+id/diary_content_icon1"
+                               android:layout_width="25dp"
+                               android:layout_height="25dp"
+                               android:layout_gravity="center"
+                               android:layout_marginRight="20dp"
+                               android:visibility="invisible"
+                               android:scaleType="centerCrop"/>
+                           <ImageView
+                               android:id="@+id/diary_content_icon2"
+                               android:layout_width="25dp"
+                               android:layout_height="25dp"
+                               android:layout_gravity="center"
+                               android:layout_marginRight="20dp"
+                               android:visibility="invisible"
+                               android:scaleType="centerCrop"/>
+                           <ImageView
+                               android:id="@+id/diary_content_icon3"
+                               android:layout_width="25dp"
+                               android:layout_height="25dp"
+                               android:layout_gravity="center"
+                               android:layout_marginRight="20dp"
+                               android:visibility="invisible"
+                               android:scaleType="centerCrop"/>
+                           <ImageView
+                               android:id="@+id/diary_content_icon4"
+                               android:layout_width="25dp"
+                               android:layout_height="25dp"
+                               android:layout_gravity="center"
+                               android:layout_marginRight="20dp"
+                               android:visibility="invisible"
+                               android:scaleType="centerCrop"/>
+
+                       </RelativeLayout>
+                    </LinearLayout>
+
+                 </LinearLayout>
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/edit_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="25dp"
         android:layout_marginBottom="50dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:clickable="true"
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <LinearLayout
-            android:id="@+id/date_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/diary_write_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-        <TextView
-            android:id="@+id/diary_write_weekday"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        </LinearLayout>
 
         <ScrollView
             android:layout_width="match_parent"
