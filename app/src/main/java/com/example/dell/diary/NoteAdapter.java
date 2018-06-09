@@ -26,6 +26,7 @@ import java.util.List;
 public class NoteAdapter extends RecyclerView.Adapter <NoteAdapter.ViewHolder> {
     private List<Sentence> mSentenceList;
     private Context mContext;
+    private String sentencebookName;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
@@ -44,7 +45,8 @@ public class NoteAdapter extends RecyclerView.Adapter <NoteAdapter.ViewHolder> {
         }
     }
 
-    public NoteAdapter(List<Sentence> sentenceList) {
+    public NoteAdapter(List<Sentence> sentenceList, String sentencebookName) {
+        this.sentencebookName = sentencebookName;
         mSentenceList = sentenceList;
     }
 
@@ -54,22 +56,25 @@ public class NoteAdapter extends RecyclerView.Adapter <NoteAdapter.ViewHolder> {
         if (mContext == null) {
             mContext = parent.getContext();
         }
+
+        //点击查看纸条的详情界面
         View view = LayoutInflater.from(mContext).inflate(R.layout.note_item, parent, false);
         final ViewHolder holder = new ViewHolder(view);
-        final PopOptionUtil mPop;
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
                 Sentence sentence = mSentenceList.get(position);
-                Intent intent = new Intent(mContext, NoteActivity.class);
-                intent.putExtra(NoteActivity.NOTE_DATE, sentence.getDate());
-               // intent.putExtra(NoteActivity.NOTE_WEAKDAY, note.getWeekDay());
-                intent.putExtra(NoteActivity.NOTE_CONTENT, sentence.getText());
+                Intent intent = new Intent(mContext, TicketEditActivity.class);
+                intent.putExtra(TicketEditActivity.SENTENCE_THIS, sentence);
+                intent.putExtra(TicketEditActivity.NOTE_EDITABLE, "false");
+                intent.putExtra(TicketEditActivity.NOTE_NEW, "false");
                 mContext.startActivity(intent);
             }
         });
 
+        //长按纸条
+        final PopOptionUtil mPop;
         mPop = new PopOptionUtil(mContext);
         mPop.setOnPopClickEvent(new PopClickEvent() {
             @Override

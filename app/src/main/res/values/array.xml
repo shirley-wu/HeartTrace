@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="mood">
+        <item>今天挺开心的2333</item>
+        <item>还行吧，一般般</item>
+        <item>好难过啊55</item>
+    </string-array>
+</resources>

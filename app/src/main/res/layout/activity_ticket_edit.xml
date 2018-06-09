@@ -26,7 +26,7 @@
             android:layout_marginBottom="10dp">
 
             <EditText
-                android:id="@+id/ticket_edit"
+                android:id="@+id/ticket_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
@@ -45,6 +45,16 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="35dp"
         android:src="@drawable/confirm"
+        android:background="@android:color/transparent"
+        app:backgroundTint="#4682B4"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/ticket_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="35dp"
+        android:src="@drawable/pen_white"
         android:background="@android:color/transparent"
         app:backgroundTint="#4682B4"/>
 

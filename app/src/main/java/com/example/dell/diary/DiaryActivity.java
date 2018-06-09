@@ -1,7 +1,9 @@
 package com.example.dell.diary;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.Image;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -12,6 +14,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.AbsListView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,12 +33,17 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DiaryActivity extends AppCompatActivity {
+    private final int ICON_LIST_DIALOG = 1;
     Diary diary;
     List<Diary> diaryList = new ArrayList<>();
     int index;
+    int tagId;
+    String label_name;
     TextView diaryDate;
     TextView diaryWeekday;
     TextView diaryContent;
+    private int[] imgIds = {R.drawable.happy_black,
+            R.drawable.normal_black, R.drawable.sad_black};
 
     public List<String> weekList = new ArrayList<>(Arrays.asList("周日","周一","周二","周三"," 周四","周五","周六"));
     @Override
@@ -105,9 +116,7 @@ public class DiaryActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.label_manage:
-                Intent intent1 = new Intent(DiaryActivity.this, LabelManageActivity.class);
-                intent1.putExtra("diary",diary);
-                startActivity(intent1);
+                showDialog(ICON_LIST_DIALOG);
                 break;
             case R.id.edit:
                 Intent intent2 = new Intent(DiaryActivity.this, DiaryWriteActivity.class);
@@ -142,4 +151,8 @@ public class DiaryActivity extends AppCompatActivity {
         }
         return true;
     }
+
+
+
+
 }

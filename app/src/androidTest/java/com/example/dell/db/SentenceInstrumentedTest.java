@@ -1,21 +1,16 @@
 package com.example.dell.db;
 
 import android.content.Context;
-import android.provider.Telephony;
 import android.support.test.InstrumentationRegistry;
-import android.util.Log;
 
 import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.stmt.QueryBuilder;
-import com.j256.ormlite.stmt.Where;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -32,6 +27,8 @@ public class SentenceInstrumentedTest {
     private DatabaseHelper databaseHelper;
     private Dao<Sentence, Integer> dao;
 
+    private Sentencebook sentencebook = new Sentencebook("fajskdlav");
+
     private String originText;
     private String updateText;
 
@@ -40,10 +37,12 @@ public class SentenceInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
         databaseHelper = OpenHelperManager.getHelper(appContext, DatabaseHelper.class);
         dao = databaseHelper.getSentenceDao();
+        sentencebook.insert(databaseHelper);
     }
 
     @After
     public void tearDown() {
+        sentencebook.delete(databaseHelper);
         OpenHelperManager.releaseHelper();
     }
 
@@ -61,6 +60,7 @@ public class SentenceInstrumentedTest {
         List<Sentence> sentenceList;
         sentence.setText(originText);
         sentence.setDate();
+        sentence.setSentencebook(sentencebook);
 
         // create
         sentence.insert(databaseHelper);
@@ -91,31 +91,33 @@ public class SentenceInstrumentedTest {
     }
 
     @Test
-    public void testGetAllSentenceAscending() throws SQLException {
+    public void testGetAllDescendingSentence() throws SQLException {
         String text = "akkljdvfavba";
 
         Sentence sentence = new Sentence(text);
-        sentence.setDate(new Date(1000, 1, 1));
+        sentence.setDate(new Date(4000, 1, 1));
+        sentence.setSentencebook(sentencebook);
         sentence.insert(databaseHelper);
 
-        List<Sentence> sentences = Sentence.getAll(databaseHelper, true);
-        assertTrue(sentences.size() > 0);
-        assertEquals(sentence.getDate(), sentences.get(0).getDate());
+        List<Sentence> sentenceList = Sentence.getAll(databaseHelper, false);
+        assertTrue(sentenceList.size() > 0);
+        assertEquals(sentence.getDate(), sentenceList.get(0).getDate());
 
         sentence.delete(databaseHelper);
     }
 
     @Test
-    public void testGetAllSentenceDescending() throws SQLException {
+    public void testGetAllAscendingSentence() throws SQLException {
         String text = "akkljdvfavba";
 
         Sentence sentence = new Sentence(text);
-        sentence.setDate(new Date(4000, 1, 1));
+        sentence.setDate(new Date(1000, 1, 1));
+        sentence.setSentencebook(sentencebook);
         sentence.insert(databaseHelper);
 
-        List<Sentence> sentences = Sentence.getAll(databaseHelper, false);
-        assertTrue(sentences.size() > 0);
-        assertEquals(sentence.getDate(), sentences.get(0).getDate());
+        List<Sentence> sentenceList = Sentence.getAll(databaseHelper, true);
+        assertTrue(sentenceList.size() > 0);
+        assertEquals(sentenceList.get(0).getDate(), sentence.getDate());
 
         sentence.delete(databaseHelper);
     }

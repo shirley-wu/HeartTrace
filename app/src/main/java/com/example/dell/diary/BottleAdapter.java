@@ -64,14 +64,12 @@ public class BottleAdapter extends RecyclerView.Adapter<BottleAdapter.ViewHolder
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
-               /* Sentencebook sentencebook = mSentencebookList.get(position);*/
+                Sentencebook sentencebook = mSentencebookList.get(position);
                 Intent intent = new Intent(mContext,BottlefrontActivity.class);
-//               intent.putExtra(BottlefrontActivity.BOTTLE_NAME, sentencebook.getSentencebookName());
-               /* intent.putExtra(BottlefrontActivity.BOTTLE_IMAGE_ID, bottle.getImageId());*/
+                intent.putExtra(BottlefrontActivity.BOTTLE_NAME, sentencebook.getSentencebookName());
                 mContext.startActivity(intent);
             }
         });
-
        //常按操作
         final PopOptionUtil mPop;
         mPop = new PopOptionUtil(mContext);
@@ -154,8 +152,6 @@ public class BottleAdapter extends RecyclerView.Adapter<BottleAdapter.ViewHolder
     public int getItemCount() {
         return mSentencebookList.size();
     }
-
-
 
 }
 

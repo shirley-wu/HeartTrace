@@ -29,6 +29,9 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.dell.db.DatabaseHelper;
+import com.example.dell.db.Diary;
+import com.example.dell.db.DiaryLabel;
+import com.example.dell.db.Label;
 import com.example.dell.db.Sentence;
 import com.example.dell.db.Sentencebook;
 
@@ -50,14 +53,32 @@ public class BottlefrontActivity extends AppCompatActivity {
         return true;
     }
 
+   @Override
+   protected  void onResume(){
+        super.onResume();
+       DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+       CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+       String sentencebookname = collapsingToolbar.getTitle().toString();
+       Sentencebook sentencebook = Sentencebook.getByName(helper, sentencebookname);
+       sentenceList = sentencebook.getAllSubSentence(helper);
+       adapter.update(sentenceList);
+   }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        switch (requestCode){
+            case 1:
 
+        }
+
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bottlefront);
         Intent intent = getIntent();
-        String SentencebookName = intent.getStringExtra(BOTTLE_NAME);
+        final String sentencebookName = intent.getStringExtra(BOTTLE_NAME);
        // int bottleImageId  = intent.getIntExtra(BOTTLE_IMAGE_ID, 0);
         Toolbar toolbar = (Toolbar) findViewById(R.id.bottle_front_toolbar);
         CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
@@ -67,40 +88,62 @@ public class BottlefrontActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        collapsingToolbar.setTitle(SentencebookName);
+        collapsingToolbar.setTitle(sentencebookName);
       //  Glide.with(this).load(bottleImageId).into(bottleImageView);
        //悬浮按钮添加纸条
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.note_add_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               /* Intent intent = new Intent(BottlefrontActivity.this, TicketEditActivity.class);
-                startActivity(intent);*/
                 DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+                CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+                String sentencebookname = collapsingToolbar.getTitle().toString();
+                Sentencebook sentencebook = Sentencebook.getByName(helper,sentencebookname);
                 Sentence sentence = new Sentence();
+                sentence.setSentencebook(sentencebook);
+                Intent intent = new Intent(BottlefrontActivity.this, TicketEditActivity.class);
+                intent.putExtra(TicketEditActivity.NOTE_EDITABLE, "true");
+                intent.putExtra(TicketEditActivity.NOTE_NEW, "true");
+                intent.putExtra(TicketEditActivity.SENTENCE_THIS, sentence);
+                startActivity(intent);
+
+                /*Sentence sentence = new Sentence();
                 sentence.setText("123");
-                sentence.setDate();
-                sentence.insert(helper);
-                sentenceList = Sentence.getAll(helper, false);
-               /* Log.d(TAG, "onClick: correct");*/
-                adapter.update(sentenceList);
+                sentence.setDate();*/
+               /* Log.d(TAG, sentencebookname);*/
+               /* Sentencebook sentencebook = Sentencebook.getByName(helper, sentencebookname);
+                if(sentencebook == null){
+                    Log.d(TAG, "onClick: no sentencebook");
+                }
+                *//*sentence.setSentencebook(sentencebook);
+                sentence.insert(helper);*//*
+                sentenceList = sentencebook.getAllSubSentence(helper);
+                 Log.d(TAG, "onClick: correct");
+                int a =0;
+                a = sentenceList.size();
+                if(a == 0) Log.d(TAG, "onClick: 没有");
+                adapter.update(sentenceList);*/
             }
         });
 
-        initSententceList();
+         //根据sentencebookName 获取sentencebook对象
+        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+        Sentencebook sentencebook = Sentencebook.getByName(helper, sentencebookName);
+        initSententceList(sentencebook);
+
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_note_view);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new NoteAdapter(sentenceList);
+        adapter = new NoteAdapter(sentenceList, sentencebookName);
         recyclerView.setAdapter(adapter);
 
     }
 
     //初始化sentenceList
-    public void initSententceList(){
+    public void initSententceList(Sentencebook sentencebook ){
         sentenceList.clear();
         DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-        sentenceList= Sentence.getAll(helper,false);
+        sentenceList= sentencebook.getAllSubSentence(helper);
     }
 
 
@@ -110,14 +153,30 @@ public class BottlefrontActivity extends AppCompatActivity {
             case android.R.id.home:
                 finish();
                 return true;
-            case R.id.delete:
-                container=(CoordinatorLayout) findViewById(R.id.bottlefront_coordinatorLayout);
-                Snackbar.make(container, "确认删除？",Snackbar.LENGTH_SHORT).setAction("Undo",new View.OnClickListener(){
-                    @Override
-                    public void onClick(View v){
-                        Toast.makeText(BottlefrontActivity.this, "成功拯救一个瓶子",Toast.LENGTH_SHORT).show();
+            case R.id.rename:
+                final EditText renameBottleName = new EditText(BottlefrontActivity.this);
+                renameBottleName.setId(R.id.edit_In_BottleName);
+                renameBottleName.setHint("请输入瓶子的名字");
+                renameBottleName.setFocusable(true);
+                AlertDialog.Builder builder = new AlertDialog.Builder(BottlefrontActivity.this);
+                builder.setTitle("修改瓶子的名字##")
+                        .setView(renameBottleName)                //设置一个控件（其他控件同理）
+                        .setNegativeButton("取消", null);
+                builder.setPositiveButton("保存", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        String rename = renameBottleName.getText().toString();
+                        CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+                        String oldname = collapsingToolbar.getTitle().toString();
+                        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+                        Sentencebook sententcebook = Sentencebook.getByName(helper, oldname);
+                        sententcebook.setSentencebookName(rename);
+                        sententcebook.update(helper);
+                        collapsingToolbar.setTitle(rename);
+                        /* adapter.addSentencebook(sentencebookList.size(),sentencebook);*/
+                        //adapter.addSentencebook(sentencebook);
                     }
-                }).show();
+                });
+                builder.show();
 
                 break;
             case R.id.settings:

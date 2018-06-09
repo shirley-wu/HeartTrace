@@ -99,4 +99,16 @@ public class Label {
             throw new RuntimeException(e);
         }
     }
+
+    public static Label getByName(DatabaseHelper helper, String name) {
+        try {
+            Dao<Label, Integer> dao = helper.getLabelDao();
+            Label label = dao.queryBuilder().where().eq("labelname", name).queryForFirst();
+            return label;
+        }
+        catch(SQLException e) {
+            Log.e(TAG, "getByName: cannot query");
+            return null;
+        }
+    }
 }
