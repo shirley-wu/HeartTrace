@@ -33,7 +33,7 @@ public class Diary implements Serializable
     @DatabaseField(generatedId = true, columnName = TAG)
     private int id;
 
-    @DatabaseField(foreign = true, columnName = Diarybook.TAG, canBeNull = false)
+    @DatabaseField(foreign = true, columnName = Diarybook.TAG)//, canBeNull = false)
     private Diarybook diarybook;
 
     @DatabaseField

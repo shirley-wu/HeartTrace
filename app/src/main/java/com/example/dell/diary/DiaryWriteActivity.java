@@ -100,6 +100,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     public String label_name = "happy";
     private int[] imgIds = {R.drawable.happy_black,
             R.drawable.normal_black, R.drawable.sad_black};
+    private String tag= null;
     Diary diary;
     List<Diary> diaryList = new ArrayList<>();
     List<Label> labelList = new ArrayList<>();
@@ -108,11 +109,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     Button preDiary;
     Button nextDiary;
     ActionBar actionBar;
-    private TextView diary_write_date;
-    private TextView diary_write_weekday;
-    private ImageView diaryIcon;
+    TextView diaryDate;
+    TextView diaryWeekday;
+    ImageView diaryIcon;
     private EditText diary_write;
-    private LinearLayout date_layout;
     private ImageButton more_setting;
     private ImageButton keyboard;
     private ImageButton face_expression;
@@ -161,8 +161,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private ImageButton insert_image;
 
     private SpannableStringBuilder spannableString = new SpannableStringBuilder();
-    private List<String> weekList = new ArrayList<>(Arrays.asList("周日","周一","周二","周三"," 周四","周五","周六"));
-
+    public List<String> weekList = new ArrayList<>(Arrays.asList("周四","周五","周六","周日"," 周一","周二","周三"));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,10 +177,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     {
         preDiary = (Button)findViewById(R.id.pre_diary);
         nextDiary = (Button)findViewById(R.id.next_diary);
-        diary_write_date = (TextView)findViewById(R.id.diary_write_date);
-        diary_write_weekday = (TextView)findViewById(R.id.diary_write_weekday);
         diary_write = (EditText) findViewById(R.id.diaryWrite);
-        date_layout = (LinearLayout)findViewById(R.id.date_layout);
         more_setting = (ImageButton) findViewById(R.id.more_setting);
         keyboard = (ImageButton) findViewById(R.id.keyboard);
         face_expression = (ImageButton) findViewById(R.id.face_insert);
@@ -291,8 +287,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     public void init()
     {
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar_diary_content);
-        diary_write_date = (TextView)findViewById(R.id.diary_content_date);
-        diary_write_weekday = (TextView)findViewById(R.id.diary_content_weekday);
+        diaryDate = (TextView)findViewById(R.id.diary_content_date);
+        diaryWeekday = (TextView)findViewById(R.id.diary_content_weekday);
         diaryIcon = (ImageView) findViewById(R.id.diary_content_icon);
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
@@ -321,29 +317,29 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             date.setYear(date.getYear()+1900);
             date.setMonth(date.getMonth()+1);
             String today = (date.getYear())+"."+(date.getMonth())+"."+date.getDate();
-            diary_write_date.setText(today);
-            diary_write_weekday.setText(weekList.get(date.getDay()));
+            diaryDate.setText(today);
+            diaryWeekday.setText(weekList.get(date.getDay()));
             diaryIcon.setImageDrawable(setTag(tagId));
             //Toast.makeText(DiaryWriteActivity.this, today,Toast.LENGTH_SHORT).show();
             preDiary.setVisibility(View.INVISIBLE);
             nextDiary.setVisibility(View.INVISIBLE);
-            date_layout.setVisibility(View.GONE);
             actionBar.hide();
         }
         else {
             diary_write.setText(diary.getText());
-
-            /*
+            label_this = null;
             try {
-                curr_tag = diary.getAllLabel(helper).get(0).getLabelname();
+                label_this = diary.getAllLabel(helper);
             } catch (SQLException e) {
                 e.printStackTrace();
-            }*/
-            diaryIcon.setImageDrawable(setTag(diary.getid()));
+            }
+            if(label_this  == null || label_this.size() == 0 || label_this.get(0).getLabelname() == null) tag = "happy";
+            else tag = label_this.get(0).getLabelname();
+            diaryIcon.setImageDrawable(setTags(tag));
 
-
-            diary_write_date.setText((diary.getDate().getYear()+1900)+"年"+ (diary.getDate().getMonth()+1) + "月" + diary.getDate().getDate() + "日 " );
-            diary_write_weekday.setText(weekList.get(diary.getDate().getDay()));
+            String date = (diary.getDate().getYear())+"."+(diary.getDate().getMonth())+"."+diary.getDate().getDate();
+            diaryDate.setText(date);
+            diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
             diary_write.setEnabled(false);
             more_setting.setVisibility(View.INVISIBLE);
             font_set.setVisibility(View.INVISIBLE);
@@ -371,8 +367,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     index = index -1;
                     diary = diaryList.get(index);
                     String date = (diary.getDate().getYear())+"."+(diary.getDate().getMonth())+"."+diary.getDate().getDate();
-                    diary_write_date.setText(date);
-                    diary_write_weekday.setText(weekList.get(diary.getDate().getDay()));
+                    diaryDate.setText(date);
+                    diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
                     diaryIcon.setImageDrawable(setTag(diary.getid()));
                     //String date = diary.getDate().getYear()+"."+diary.getDate().getMonth()+"."+diary.getDate().getDate();
                     //diaryDate.setText(date);
@@ -388,8 +384,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     index = index + 1;
                     diary = diaryList.get(index);
                     String date = (diary.getDate().getYear())+"."+(diary.getDate().getMonth())+"."+diary.getDate().getDate();
-                    diary_write_date.setText(date);
-                    diary_write_weekday.setText(weekList.get(diary.getDate().getDay()));
+                    diaryDate.setText(date);
+                    diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
                     diaryIcon.setImageDrawable(setTag(diary.getid()));
                     //String date = diary.getDate().getYear()+"."+diary.getDate().getMonth()+"."+diary.getDate().getDate();
                     //diaryDate.setText(date);
@@ -409,14 +405,17 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 Log.i("test", Html.toHtml(diary_write.getText()));
                 DatabaseHelper helper = new DatabaseHelper(DiaryWriteActivity.this);
                 if(index == diaryList.size()){
+                    Log.i("1234",index+"");
                     diary = new Diary(diary_write.getText().toString());
-                    diary.setDate(new Date());
-                    diary_write_date.setText((diary.getDate().getYear()+1900)+"年"+ (diary.getDate().getMonth()+1) + "月" + diary.getDate().getDate() + "日 ");
-                    diary_write_weekday.setText(weekList.get(diary.getDate().getDay()));
+                    Date date = new Date();
+                    date.setYear(date.getYear()+1900);
+                    date.setMonth(date.getMonth()+1);
+                    diary.setDate(date);
                     diary.insert(helper);
                     diaryList.add(diary);
                 }
                 else{
+                    Log.i("2345",index+"");
                     diary.setText(diary_write.getText().toString());
                     diary.update(helper);
                     diaryList.remove(index);
@@ -437,7 +436,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 confirm.setVisibility(View.INVISIBLE);
                 preDiary.setVisibility(View.VISIBLE);
                 nextDiary.setVisibility(View.VISIBLE);
-                date_layout.setVisibility(View.VISIBLE);
                 actionBar.show();
                 break;
             case R.id.font_setting:
@@ -811,7 +809,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 confirm.setVisibility(View.VISIBLE);
                 preDiary.setVisibility(View.INVISIBLE);
                 nextDiary.setVisibility(View.INVISIBLE);
-                date_layout.setVisibility(View.GONE);
                 actionBar.hide();
                 break;
             case android.R.id.home:
@@ -1038,27 +1035,14 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                                 DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
                                 diary = diaryList.get(index);
                                 diary.setid(tagId);
-                                Label label = new Label(label_name);
-                                label.insert(helper);
-                                diary.insertLabel(helper, label);
-                                diary.update(helper);
-                                diaryList.remove(index);
-                                diaryList.add(index,diary);
 
-
-                                diaryIcon.setImageDrawable(setTag(diary.getid()));
-
-                                try {
-                                    label_this = diary.getAllLabel(helper);
-                                } catch (SQLException e) {
-                                    e.printStackTrace();
+                                Label label = Label.getByName(helper,label_name);
+                                if(label == null) {
+                                    label = new Label(label_name);
+                                    label.insert(helper);
                                 }
-                                Log.i("diary", "标签succ");
-                                if(label_this != null && label_this.size() !=0)
-                                {Log.i("diary", "标签null");
-                                 Log.i("diary", "标签"+label_this.get(0).getLabelname() );}
-
-                                else Log.i("diary", "标签fail" );
+                                diary.insertLabel(helper, label);
+                                diaryIcon.setImageDrawable(setTag(diary.getid()));
 
 
                             }
@@ -1142,5 +1126,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 return (getResources().getDrawable(R.drawable.normal_black));
         }
     }
+
+
 
 }
