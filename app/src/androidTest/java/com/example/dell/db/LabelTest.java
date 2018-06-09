@@ -24,21 +24,25 @@ import java.util.List;
 public class LabelTest extends InstrumentationTestCase {
     private static final String TAG = "test";
 
-
     private DatabaseHelper databaseHelper;
-    private Dao<Label, Integer> dao;
+
+    private Diarybook diarybook = new Diarybook("agbap");
+    private Sentencebook sentencebook = new Sentencebook("javbaove");
 
     @Before
     public void setUp() throws SQLException {
         Log.d(TAG, "setUp");
         Context appContext = InstrumentationRegistry.getTargetContext();
         databaseHelper = OpenHelperManager.getHelper(appContext, DatabaseHelper.class);
-        dao = databaseHelper.getLabelDao();
+        diarybook.insert(databaseHelper);
+        sentencebook.insert(databaseHelper);
     }
 
     @After
     public void tearDown() {
         Log.d(TAG, "tearDown");
+        diarybook.delete(databaseHelper);
+        sentencebook.delete(databaseHelper);
         OpenHelperManager.releaseHelper();
     }
 
@@ -48,6 +52,8 @@ public class LabelTest extends InstrumentationTestCase {
         label.insert(databaseHelper);
 
         Diary diary = new Diary("hhh");
+        diary.setDate();
+        diary.setDiarybook(diarybook);
         diary.insert(databaseHelper);
         diary.insertLabel(databaseHelper, label);
 
@@ -64,6 +70,8 @@ public class LabelTest extends InstrumentationTestCase {
         label.insert(databaseHelper);
 
         Sentence sentence = new Sentence("hhh");
+        sentence.setDate();
+        sentence.setSentencebook(sentencebook);
         sentence.insert(databaseHelper);
         sentence.insertLabel(databaseHelper, label);
 

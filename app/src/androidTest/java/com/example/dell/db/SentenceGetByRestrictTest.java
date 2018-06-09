@@ -23,6 +23,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 /**
  * Created by huang on 5/17/2018.
  */
@@ -38,6 +41,7 @@ public class SentenceGetByRestrictTest extends InstrumentationTestCase {
     private List<Sentence> sentenceShirly = new ArrayList();
     private List<Sentence> sentenceLisa = new ArrayList();
     private List<Sentence> sentenceMmp = new ArrayList();
+    private Sentencebook sentencebook;
 
     @Before
     public void setUp() throws SQLException {
@@ -53,12 +57,16 @@ public class SentenceGetByRestrictTest extends InstrumentationTestCase {
             label.insert(databaseHelper);
         }
 
+        sentencebook = new Sentencebook("hi");
+        sentencebook.insert(databaseHelper);
+
         String text;
 
         text = "hello, this is Shirley";
         for(int i = 1; i <= 30; i++) {
             Sentence sentence = new Sentence(text);
             sentence.setDate(new Date(2016, 1, i));
+            sentence.setSentencebook(sentencebook);
             sentence.insert(databaseHelper);
             sentence.insertLabel(databaseHelper, labels.get(0));
             sentenceShirly.add(sentence);
@@ -68,6 +76,7 @@ public class SentenceGetByRestrictTest extends InstrumentationTestCase {
         for(int i = 1; i <= 29; i++) {
             Sentence sentence = new Sentence(text);
             sentence.setDate(new Date(2016, 1, i));
+            sentence.setSentencebook(sentencebook);
             sentence.insert(databaseHelper);
             sentenceLisa.add(sentence);
             sentence.insertLabel(databaseHelper, labels.get(1));
@@ -77,6 +86,7 @@ public class SentenceGetByRestrictTest extends InstrumentationTestCase {
         for(int i = 1; i <= 28; i++) {
             Sentence sentence = new Sentence(text);
             sentence.setDate(new Date(2015, 1, i));
+            sentence.setSentencebook(sentencebook);
             sentence.insert(databaseHelper);
             sentenceLisa.add(sentence);
             sentence.insertLabel(databaseHelper, labels.get(0));
@@ -99,6 +109,7 @@ public class SentenceGetByRestrictTest extends InstrumentationTestCase {
         for(final Sentence sentence : sentenceMmp) {
             sentence.delete(databaseHelper);
         }
+        sentencebook.delete(databaseHelper);
         OpenHelperManager.releaseHelper();
     }
 
@@ -248,5 +259,10 @@ public class SentenceGetByRestrictTest extends InstrumentationTestCase {
                 labelList, false);
         assertEquals(27 - 8 + 1, list.size());
         assertEquals(new Date(2016, 1, 27).getTime(), list.get(0).getDate().getTime());
+    }
+
+    @Test
+    public void testSentencebook() {
+        assertEquals("hi", sentenceLisa.get(0).getSentencebook().getSentencebookName());
     }
 }
