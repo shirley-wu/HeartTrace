@@ -389,7 +389,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 else{
                     index = index -1;
                     diary = diaryList.get(index);
-                    String date = (diary.getDate().getYear())+"."+(diary.getDate().getMonth())+"."+diary.getDate().getDate();
+                    String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
                     diaryDate.setText(date);
                     diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
                     diary_write.setText(diary.getText());
@@ -403,7 +403,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 else{
                     index = index + 1;
                     diary = diaryList.get(index);
-                    String date = (diary.getDate().getYear())+"."+(diary.getDate().getMonth())+"."+diary.getDate().getDate();
+                    String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
                     diaryDate.setText(date);
                     diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
                     diary_write.setText(diary.getText());
@@ -1139,6 +1139,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     }
 
     public void getLabelsOfDiary(Diary diary, DatabaseHelper helper ){
+        diaryIcon.setImageDrawable(getResources().getDrawable(R.drawable.nothing));
+        for(int i = 0; i<=3; i++){
+            imageItems.get(i).setImageDrawable(getResources().getDrawable(R.drawable.nothing));
+        }
         label_this = null;
         try {
             label_this = diary.getAllLabel(helper);
@@ -1146,7 +1150,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             e.printStackTrace();
         }
         if(label_this  == null || label_this.size() == 0 || label_this.get(0).getLabelname() == null){
-            tag = "happy"; diaryIcon.setImageDrawable(setTags(tag));
+            tag = "happy";
         }
         else{
             int length = label_this.size();
