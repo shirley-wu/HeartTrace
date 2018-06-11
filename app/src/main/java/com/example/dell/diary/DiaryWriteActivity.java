@@ -170,7 +170,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private ObjectAnimator objAnimatorX;
 
     private SpannableStringBuilder spannableString = new SpannableStringBuilder();
-    public List<String> weekList = new ArrayList<>(Arrays.asList("周日"," 周一","周二","周三","周四","周五","周六"));
+    public List<String> weekList = new ArrayList<>(Arrays.asList("周日","周一","周二","周三"," 周四","周五","周六"));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -335,38 +335,14 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             String today = (date.getYear()+1900)+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日";
             diaryDate.setText(today);
             diaryWeekday.setText(weekList.get(date.getDay()));
-            diaryIcon.setImageDrawable(setTag(tagId));
+            //diaryIcon.setImageDrawable(setTag(tagId));
             preDiary.setVisibility(View.INVISIBLE);
             nextDiary.setVisibility(View.INVISIBLE);
             actionBar.hide();
         }
         else {
             diary_write.setText(diary.getText());
-            label_this = null;
-            try {
-                label_this = diary.getAllLabel(helper);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            if(label_this  == null || label_this.size() == 0 || label_this.get(0).getLabelname() == null){
-                tag = "happy"; diaryIcon.setImageDrawable(setTags(tag));
-            }
-            else{
-                int length = label_this.size();
-                tag = label_this.get(0).getLabelname();
-                diaryIcon.setImageDrawable(setTags(tag));
-                if(length >= 2 && length <=5)
-                    for(int i = 1; i< length; i++){
-                        tag = label_this.get(i).getLabelname();
-                        imageItems.get(i-1).setImageDrawable(setTags(tag));
-                    }
-                else if(length >=6)
-                    for(int i = 1; i< 5; i++){
-                        tag = label_this.get(i).getLabelname();
-                        imageItems.get(i-1).setImageDrawable(setTags(tag));
-                    }
-            }
-
+            getLabelsOfDiary(diary,helper);
             String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
             diaryDate.setText(date);
             diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
@@ -393,7 +369,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         switch (view.getId()) {
             case R.id.diary_content_icon:
                 for(int i=0;i<imageItems.size();i++) {
-                    int radius = 100;
+                    int radius = 90;
                     float distanceX = (float) (flag * radius * (i + 1));
                     objAnimatorX = ObjectAnimator.ofFloat(imageItems.get(i), "x", imageItems.get(i).getX(), imageItems.get(i).getX() + distanceX);
                     objAnimatorX.setDuration(120);
@@ -417,13 +393,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     diaryDate.setText(date);
                     diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
                     diary_write.setText(diary.getText());
-                    try {
-                        label_this = diary.getAllLabel(helper);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                    if(label_this  != null && label_this.size() != 0 && label_this.get(0).getLabelname() != null)
-                        diaryIcon.setImageDrawable(setTags(label_this.get(0).getLabelname()));
+                    getLabelsOfDiary(diary,helper);
                 }
                 break;
             case R.id.next_diary:
@@ -437,13 +407,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     diaryDate.setText(date);
                     diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
                     diary_write.setText(diary.getText());
-                    try {
-                        label_this = diary.getAllLabel(helper);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                    if(label_this  != null && label_this.size() != 0 && label_this.get(0).getLabelname() != null)
-                        diaryIcon.setImageDrawable(setTags(label_this.get(0).getLabelname()));
+                    getLabelsOfDiary(diary,helper);
                 }
             case R.id.edit_layout:
                 if(confirm.getVisibility()==View.VISIBLE){
@@ -1090,31 +1054,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                                     label.insert(helper);
                                 }
                                 diary.insertLabel(helper, label);
-
-                                label_this = null;
-                                try {
-                                    label_this = diary.getAllLabel(helper);
-                                } catch (SQLException e) {
-                                    e.printStackTrace();
-                                }
-                                if(label_this  == null || label_this.size() == 0 || label_this.get(0).getLabelname() == null){
-                                    tag = "happy"; diaryIcon.setImageDrawable(setTags(tag));
-                                }
-                                else{
-                                    int length = label_this.size();
-                                    tag = label_this.get(0).getLabelname();
-                                    diaryIcon.setImageDrawable(setTags(tag));
-                                    if(length >= 2 && length <=5)
-                                        for(int i = 1; i< length; i++){
-                                            tag = label_this.get(i).getLabelname();
-                                            imageItems.get(i-1).setImageDrawable(setTags(tag));
-                                        }
-                                    else if(length >=6)
-                                        for(int i = 1; i< 5; i++){
-                                            tag = label_this.get(i).getLabelname();
-                                            imageItems.get(i-1).setImageDrawable(setTags(tag));
-                                        }
-                                }
+                                getLabelsOfDiary(diary,helper);
 
                             }
                         };
@@ -1198,6 +1138,36 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
+    public void getLabelsOfDiary(Diary diary, DatabaseHelper helper ){
+        diaryIcon.setImageDrawable(getResources().getDrawable(R.drawable.nothing));
+        for(int i = 0; i<=3; i++){
+            imageItems.get(i).setImageDrawable(getResources().getDrawable(R.drawable.nothing));
+        }
+        label_this = null;
+        try {
+            label_this = diary.getAllLabel(helper);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if(label_this  == null || label_this.size() == 0 || label_this.get(0).getLabelname() == null){
+            tag = "happy";
+        }
+        else{
+            int length = label_this.size();
+            tag = label_this.get(length - 1).getLabelname();
+            diaryIcon.setImageDrawable(setTags(tag));
+            if(length >= 2 && length <=5)
+                for(int i = 0; i<= length-2; i++){
+                    tag = label_this.get(i).getLabelname();
+                    imageItems.get(length - 2 - i).setImageDrawable(setTags(tag));
+                }
+            else if(length >=6)
+                for(int i = 0; i<=3; i++){
+                    tag = label_this.get(length - 2 - i).getLabelname();
+                    imageItems.get(i).setImageDrawable(setTags(tag));
+                }
+        }
 
+    }
 
 }
