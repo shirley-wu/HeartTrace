@@ -170,7 +170,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private ObjectAnimator objAnimatorX;
 
     private SpannableStringBuilder spannableString = new SpannableStringBuilder();
-    public List<String> weekList = new ArrayList<>(Arrays.asList("周四","周五","周六","周日"," 周一","周二","周三"));
+    public List<String> weekList = new ArrayList<>(Arrays.asList("周日"," 周一","周二","周三","周四","周五","周六"));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -413,7 +413,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 else{
                     index = index -1;
                     diary = diaryList.get(index);
-                    String date = (diary.getDate().getYear())+"."+(diary.getDate().getMonth())+"."+diary.getDate().getDate();
+                    String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
                     diaryDate.setText(date);
                     diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
                     diary_write.setText(diary.getText());
@@ -433,7 +433,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 else{
                     index = index + 1;
                     diary = diaryList.get(index);
-                    String date = (diary.getDate().getYear())+"."+(diary.getDate().getMonth())+"."+diary.getDate().getDate();
+                    String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
                     diaryDate.setText(date);
                     diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
                     diary_write.setText(diary.getText());
