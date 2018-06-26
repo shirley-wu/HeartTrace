@@ -15,6 +15,9 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.borax12.materialdaterangepicker.date.DatePickerDialog;
+import com.example.dell.db.DatabaseHelper;
+import com.example.dell.db.Diary;
+import com.example.dell.db.Label;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.MarkerView;
@@ -22,9 +25,14 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class StatisticsActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
@@ -33,6 +41,19 @@ public class StatisticsActivity extends AppCompatActivity implements DatePickerD
     private Button chooseDate;
     private ImageButton help;
     private String end;
+    private String startYear;
+    private String startMonth;
+    private String startDay;
+    private String endYear;
+    private String endMonth;
+    private String endDay;
+    private Date startDate;
+    private Date endDate;
+    private long oneDayLength = 24 * 60 * 60 * 1000;
+    private long dayNumber = 7;
+    private int thisDayScore = 0;
+    List<Diary> currentAllDiary = new ArrayList<>();
+    List<Label> labelThisDiary = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +70,25 @@ public class StatisticsActivity extends AppCompatActivity implements DatePickerD
         ;
         WeekAgo.set(Calendar.DATE, WeekAgo.get(Calendar.DATE) - 6);
         String init_range = "        您当前选择的日期范围:   " + WeekAgo.get(Calendar.YEAR) + "/" + (WeekAgo.get(Calendar.MONTH) + 1) + "/" + (WeekAgo.get(Calendar.DAY_OF_MONTH)) + " 至 " + now.get(Calendar.YEAR) + "/" + (now.get(Calendar.MONTH) + 1) + "/" + now.get(Calendar.DAY_OF_MONTH);
+
+        startYear = String.valueOf(WeekAgo.get(Calendar.YEAR));
+        if(WeekAgo.get(Calendar.MONTH) < 9)  startMonth = "0" + (WeekAgo.get(Calendar.MONTH) + 1);
+        else startMonth = String.valueOf(WeekAgo.get(Calendar.MONTH) + 1);
+        if(WeekAgo.get(Calendar.DAY_OF_MONTH) < 10) startDay = "0" + WeekAgo.get(Calendar.DAY_OF_MONTH);
+        else startDay = String.valueOf(WeekAgo.get(Calendar.DAY_OF_MONTH));
+
+        endYear = String.valueOf(now.get(Calendar.YEAR));
+        if(now.get(Calendar.MONTH) < 9)  endMonth = "0" + (now.get(Calendar.MONTH) + 1);
+        else endMonth = String.valueOf(now.get(Calendar.MONTH) + 1);
+        if(now.get(Calendar.DAY_OF_MONTH) < 10) endDay = "0" + now.get(Calendar.DAY_OF_MONTH);
+        else endDay = String.valueOf(now.get(Calendar.DAY_OF_MONTH));
+
+        String startDateString = startYear + "-" + startMonth + "-" + startDay;
+        String endDateString = endYear + "-" + endMonth + "-" + endDay;
+        startDate = stringToDate(startDateString);
+        endDate = stringToDate(endDateString);
+
+
         end = (now.get(Calendar.MONTH) + 1) + "/" + now.get(Calendar.DAY_OF_MONTH);
         dateTextView.setText(init_range);
 
@@ -116,6 +156,26 @@ public class StatisticsActivity extends AppCompatActivity implements DatePickerD
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth, int yearEnd, int monthOfYearEnd, int dayOfMonthEnd) {
         String date = "        您当前选择的日期范围:   " + year + "/" + (++monthOfYear) + "/" + dayOfMonth + " 至 " + yearEnd + "/" + (++monthOfYearEnd) + "/" + dayOfMonthEnd;
+
+        startYear = String.valueOf(year);
+        if(monthOfYear < 10)  startMonth = "0" + monthOfYear;
+        else startMonth = String.valueOf(monthOfYear);
+        if(dayOfMonth < 10) startDay = "0" + dayOfMonth;
+        else startDay = String.valueOf(dayOfMonth);
+
+        endYear = String.valueOf(yearEnd);
+        if(monthOfYearEnd < 10)  endMonth = "0" + monthOfYearEnd;
+        else endMonth = String.valueOf(monthOfYearEnd);
+        if(dayOfMonthEnd < 10) endDay = "0" + dayOfMonthEnd;
+        else endDay = String.valueOf(dayOfMonthEnd);
+
+        String startDateString = startYear + "-" + startMonth + "-" + startDay;
+        String endDateString = endYear + "-" + endMonth + "-" + endDay;
+        startDate = stringToDate(startDateString);
+        endDate = stringToDate(endDateString);
+
+        dayNumber = (endDate.getTime() - startDate.getTime())/oneDayLength + 1;
+
         end = monthOfYearEnd + "/" + dayOfMonthEnd;
         dateTextView.setText(date);
         showChart();
@@ -124,17 +184,48 @@ public class StatisticsActivity extends AppCompatActivity implements DatePickerD
     private void showChart() {
         LineChart lineChart1 = (LineChart) findViewById(R.id.line_chart1);
         LineChartManager lineChartManager1 = new LineChartManager(lineChart1);
+        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
 
         //设置x轴的数据
         ArrayList<Float> xValues = new ArrayList<>();
-        for (int i = 1; i <= 7; i++) {
+        for (int i = 1; i <= dayNumber; i++) {
             xValues.add((float) i);
         }
 
         //设置y轴的数据()
         List<Float> yValues = new ArrayList<>();
-        for (int j = 1; j <= 7; j++) {
-            yValues.add((float) (Math.random() * 8));
+        for (int j = 0; j < dayNumber; j++) {
+            Date currentDate = new Date(startDate.getTime() + (long)j * oneDayLength);
+            currentAllDiary = Diary.getByDate(helper,currentDate); //数据库有日记但取不出来
+            if(currentAllDiary == null || currentAllDiary.size() == 0 || currentAllDiary.get(0) == null) //size一直为0
+            {
+                yValues.add((float) 0);
+                continue;
+            }
+            thisDayScore = 0;
+            for(Diary thisDiary : currentAllDiary){
+                labelThisDiary = null;
+                try {
+                    labelThisDiary = thisDiary.getAllLabel(helper);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                if(labelThisDiary  == null || labelThisDiary.size() == 0 || labelThisDiary.get(0).getLabelname() == null)
+                    continue;
+                for(Label thisLabel : labelThisDiary){
+                    switch (thisLabel.getLabelname()){
+                        case "happy":
+                            thisDayScore += 2;
+                            break;
+                        case "normal":
+                            thisDayScore += 1;
+                            break;
+                        case "sad":
+                            break;
+                    }
+                }
+            }
+            yValues.add((float) thisDayScore);
         }
 
         String name = "情绪曲线";
@@ -186,6 +277,18 @@ public class StatisticsActivity extends AppCompatActivity implements DatePickerD
             BackgroudAlpha((float) 1);
         }
     }
+
+    public static Date stringToDate(String dateStr) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+        Date date = null;
+        try {
+            date = format.parse(dateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
+
 
 
 }

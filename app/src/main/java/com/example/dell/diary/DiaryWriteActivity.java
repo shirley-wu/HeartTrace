@@ -432,10 +432,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     diaryList.remove(index);
                     diaryList.add(index,diary);
                 }
-//                List<Diary> diaryList = Diary.getAll(helper,true);
-//                for(Diary i : diaryList){
-//                    Log.i("test", i.getText());
-//                }
+/*                List<Diary> diaryList = Diary.getAll(helper,true);
+                for(Diary i : diaryList){
+                    Log.i("test", i.getText());
+                } */
                 CharSequence charSequence = Html.fromHtml(Html.toHtml(diary_write.getText()));
                 //Toast.makeText(DiaryWriteActivity.this,charSequence,Toast.LENGTH_SHORT).show();
                 diary_write.setEnabled(false);
