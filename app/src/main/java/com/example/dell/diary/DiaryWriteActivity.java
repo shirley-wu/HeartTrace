@@ -296,7 +296,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         preDiary.setOnClickListener(this);
         nextDiary.setOnClickListener(this);
         diaryIcon.setOnClickListener(this);
-
     }
 
     public void init()
@@ -663,7 +662,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             case R.id.bold:
                 is_bold=!is_bold;
                 if(is_bold){
-                    if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
+                    if (diary_write.getSelectionStart() != diary_write.getSelectionEnd())
                     {
                         Editable editable = diary_write.getText();
                         editable.setSpan(new StyleSpan(Typeface.BOLD), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -671,7 +670,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     set_bold.setBackgroundColor(Color.GRAY);
                 }
                 else {
-                    if (diary_write.getSelectionStart() != diary_write.getSelectionEnd()) {
+                    if (diary_write.getSelectionStart() != diary_write.getSelectionEnd())
+                    {
                         Editable editable = diary_write.getText();
                         StyleSpan[] selectedSpans = editable.getSpans(diary_write.getSelectionStart(), diary_write.getSelectionEnd(), StyleSpan.class);
                         for (StyleSpan style : selectedSpans) {
@@ -694,7 +694,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     set_italic.setBackgroundColor(Color.GRAY);
                 }
                 else {
-                    if (diary_write.getSelectionStart() != diary_write.getSelectionEnd()) {
+                    if (diary_write.getSelectionStart() != diary_write.getSelectionEnd())
+                    {
                         Editable editable = diary_write.getText();
                         StyleSpan[] selectedSpans = editable.getSpans(diary_write.getSelectionStart(), diary_write.getSelectionEnd(), StyleSpan.class);
                         for (StyleSpan style : selectedSpans) {
@@ -702,8 +703,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                                 editable.removeSpan(style);
                             }
                         }
-                        set_italic.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                     }
+                    set_italic.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 }
                 break;
             case R.id.insert_image:
@@ -791,13 +792,14 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 }
                 break;
         }
-
         if(is_underline)
             editable.setSpan(new UnderlineSpan(), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        if(is_bold)
+        if(is_bold){
             editable.setSpan(new StyleSpan(Typeface.BOLD), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        if(is_italic)
+        }
+        if(is_italic) {
             editable.setSpan(new StyleSpan(Typeface.ITALIC), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -1046,7 +1048,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
                                 DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
                                 //diary = diaryList.get(index);
-                                diary.setid(tagId);
+                                //diary.setid(tagId);
 
                                 Label label = Label.getByName(helper,label_name);
                                 if(label == null) {
