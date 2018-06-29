@@ -14,6 +14,7 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -56,11 +57,14 @@ public class DiaryOtherTest {
         Diary diary = new Diary();
 
         diary.setText(originText);
-        diary.setDate(new Date(1998 - 1900, 3, 31, 23, 59));
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(1998, 3 - 1, 31, 23, 59);
+        diary.setDate(calendar.getTime());
         diary.setDiarybook(diarybook);
         diary.insert(databaseHelper);
 
-        List<Diary> dL = Diary.getByDate(databaseHelper, 1998 - 1900, 3, 31);
+        List<Diary> dL = Diary.getByDate(databaseHelper, 1998, 3, 31);
         for(Diary d : dL) {
             Log.d(TAG, "testGetDiaryByDate: end of month diary " + d.getDate().toString());
         }
