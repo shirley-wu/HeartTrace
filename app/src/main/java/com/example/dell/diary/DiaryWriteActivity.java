@@ -353,14 +353,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             keyboard.setVisibility(View.INVISIBLE);
             confirm.setVisibility(View.INVISIBLE);
         }
-
-
-        /*
-        set_font1.setBackgroundColor(Color.GRAY);
-        font_padding1.setBackgroundColor(Color.GRAY);
-        line_spacing1.setBackgroundColor(Color.GRAY);
-        set_right.setBackgroundColor(Color.GRAY);
-        diary_write.setTextSize(20);*/
     }
 
     public void onClick(View view) {

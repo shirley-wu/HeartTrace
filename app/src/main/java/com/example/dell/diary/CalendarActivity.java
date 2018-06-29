@@ -58,6 +58,7 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
         calendarView = (MaterialCalendarView) findViewById(R.id.calendar);
         toolbarTitle = (TextView) findViewById(R.id.toolbarTitle);
         selectDate = (ImageButton) findViewById(R.id.selectDate);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         calendar_picture.setOnClickListener(this);
         selectDate.setOnClickListener(this);
 
@@ -78,6 +79,26 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
                 CalendarDay selected_date = calendarView.getSelectedDate();
+
+                diaryList.clear();
+                DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+                diaryList = Diary.getByDate(helper,118,6,29);
+                if(diaryList == null){
+                    diaryList = new ArrayList<>();
+                }
+
+                if(diaryList.size() == 0)
+                {
+                    Log.i("test", "null");
+                }
+
+                for(Diary i : diaryList){
+                    Log.i("test", i.getText());
+                }
+
+                adapter = new com.example.dell.diary.DiaryCardAdapter(diaryList);
+                recyclerView.setAdapter(adapter);
+
                 toolbarTitle.setText(FORMATTER.format(selected_date.getDate()));
                 Toast.makeText(CalendarActivity.this, FORMATTER.format(selected_date.getDate()), Toast.LENGTH_SHORT).show();
             }
@@ -86,7 +107,6 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initRecyclerView() {
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         adapter = new com.example.dell.diary.DiaryCardAdapter(diaryList);
@@ -97,21 +117,12 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
         diaryList.clear();
         DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
 
-        diaryList = Diary.getAll(helper,false);
+        diaryList = Diary.getAll(helper,false);//getbydate
         if(diaryList == null){
             diaryList = new ArrayList<>();
         }
     }
 
-    private void updataDiaryList(){
-        diaryList.clear();
-        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-
-        diaryList = Diary.getAll(helper,false);
-        if(diaryList == null){
-            diaryList = new ArrayList<>();
-        }
-    }
     public void onClick(View view){
         switch(view.getId()){
             case R.id.calendar_picture:
