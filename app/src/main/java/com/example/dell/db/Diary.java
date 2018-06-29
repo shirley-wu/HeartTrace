@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -70,7 +71,7 @@ public class Diary implements Serializable
     public void setDate(Date date){
         // dangerous!!!!! for test only.
         this.date = date;
-        Log.i(TAG, "setDate: dangerous call!");
+        Log.i(TAG, "setDate: dangerous call!, set into " + date.toString());
     }
 
     public Diarybook getDiarybook(){
@@ -135,10 +136,15 @@ public class Diary implements Serializable
         diaryLabel.delete(helper);
     }
 
-    public static List<Diary> getByDate(DatabaseHelper helper, Date date) {
+    public static List<Diary> getByDate(DatabaseHelper helper, int year, int month, int day) {
         try {
-            Dao<Diary, Integer> dao = helper.getDiaryDao();
-            List<Diary> diaryList = dao.queryBuilder().where().eq("date", date).query();
+            Date begin = new Date(year, month, day);
+            Date end   = new Date(new Date(year, month, day+1).getTime() - 1);
+
+            QueryBuilder<Diary, Integer> qb = helper.getDiaryDao().queryBuilder();
+            Where<Diary, Integer> where = qb.where();
+            buildWhere(where, begin, end);
+            List<Diary> diaryList = qb.query();
             return diaryList;
         }
         catch(SQLException e) {
