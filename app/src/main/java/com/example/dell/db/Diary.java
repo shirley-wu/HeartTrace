@@ -139,16 +139,16 @@ public class Diary implements Serializable
     public static List<Diary> getByDate(DatabaseHelper helper, int year, int month, int day) {
         try {
             Calendar calendar = Calendar.getInstance();
-            calendar.set(year, month, day);
+            calendar.set(year, month - 1, day);
 
-            calendar.set(Calendar.HOUR, 0);
+            calendar.set(Calendar.HOUR_OF_DAY, 0);
             calendar.set(Calendar.MINUTE, 0);
             calendar.set(Calendar.SECOND, 0);
             calendar.set(Calendar.MILLISECOND, 0);
             Date begin = calendar.getTime();
             Log.d(TAG, "getByDate: begin " + begin);
 
-            calendar.set(Calendar.HOUR, 23);
+            calendar.set(Calendar.HOUR_OF_DAY, 23);
             calendar.set(Calendar.MINUTE, 59);
             calendar.set(Calendar.SECOND, 59);
             calendar.set(Calendar.MILLISECOND, 999);

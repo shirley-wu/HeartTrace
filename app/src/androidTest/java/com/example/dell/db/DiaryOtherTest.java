@@ -59,7 +59,7 @@ public class DiaryOtherTest {
         diary.setText(originText);
 
         Calendar calendar = Calendar.getInstance();
-        calendar.set(1998, 3, 31, 23, 59);
+        calendar.set(1998, 3 - 1, 31, 23, 59);
         diary.setDate(calendar.getTime());
         diary.setDiarybook(diarybook);
         diary.insert(databaseHelper);

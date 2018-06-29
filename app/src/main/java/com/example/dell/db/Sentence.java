@@ -1,13 +1,12 @@
 package com.example.dell.db;
 
-import android.provider.ContactsContract;
-import android.provider.Telephony;
-import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
@@ -15,27 +14,31 @@ import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 /**
- * Created by huang on 5/10/2018.
+ * Created by wu-pc on 2018/5/9.
  */
 
 @DatabaseTable(tableName = "Sentence")
-public class Sentence implements Serializable {
-    protected static final String TAG = "Sentence";
+public class Sentence implements Serializable
+{
+    protected static final String TAG = "sentence";
 
     @DatabaseField(generatedId = true, columnName = TAG)
     private int id;
 
-    @DatabaseField(foreign = true, columnName = Sentencebook.TAG, canBeNull = false)
+    @DatabaseField(foreign = true, columnName = Sentencebook.TAG)// , canBeNull = false)
     private Sentencebook sentencebook;
 
     @DatabaseField
-    String text;
+    private String text;
 
     @DatabaseField(dataType = DataType.DATE_STRING, columnName = "date", canBeNull = false)
     protected Date date;
@@ -43,18 +46,15 @@ public class Sentence implements Serializable {
     public Sentence(){
     };
 
-    public Sentence(String text)
-    {
+    public Sentence(String text){
         this.text = text;
     }
 
-    public String getText()
-    {
+    public String getText() {
         return text;
     }
 
-    public void setText(String text)
-    {
+    public void setText(String text){
         this.text = text;
     }
 
@@ -74,26 +74,20 @@ public class Sentence implements Serializable {
         Log.i(TAG, "setDate: dangerous call!, set into " + date.toString());
     }
 
-   public Sentencebook getSentencebook() {
+    public Sentencebook getSentencebook(){
         return sentencebook;
     }
 
-    public void setSentencebook(Sentencebook sentencebook) {
+    public void setSentencebook(Sentencebook sentencebook){
         this.sentencebook = sentencebook;
     }
 
     public void insert(DatabaseHelper helper) {
         try {
             Dao<Sentence, Integer> dao = helper.getSentenceDao();
-            Log.i("Sentence", "dao = " + dao + " 插入 Sentence " + this);
-            Log.d(TAG, "insert: text = " + getText());
-            if(getSentencebook() == null) {
-                Log.d(TAG, "insert: sentencebook = null");
-            } else {
-                Log.d(TAG, "insert: sentencebook name = " + getSentencebook().getSentencebookName());
-            }
+            Log.i("sentence", "dao = " + dao + " 插入 sentence " + this);
             int returnValue = dao.create(this);
-            Log.i("Sentence", "插入后返回值：" + returnValue);
+            Log.i("sentence", "插入后返回值：" + returnValue);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
@@ -103,9 +97,9 @@ public class Sentence implements Serializable {
     public void update(DatabaseHelper helper) {
         try {
             Dao<Sentence, Integer> dao = helper.getSentenceDao();
-            Log.i("Sentence", "dao = " + dao + " 更新 Sentence " + this);
+            Log.i("sentence", "dao = " + dao + " 更新 sentence " + this);
             int returnValue = dao.update(this);
-            Log.i("Sentence", "更新后返回值：" + returnValue);
+            Log.i("sentence", "更新后返回值：" + returnValue);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
@@ -119,9 +113,9 @@ public class Sentence implements Serializable {
             deleteBuilder.delete();
 
             Dao<Sentence, Integer> dao = helper.getSentenceDao();
-            Log.i("Sentence", "dao = " + dao + " 删除 Sentence " + this);
+            Log.i("sentence", "dao = " + dao + " 删除 sentence " + this);
             int returnValue = dao.delete(this);
-            Log.i("Sentence", "删除后返回值：" + returnValue);
+            Log.i("sentence", "删除后返回值：" + returnValue);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
@@ -129,24 +123,37 @@ public class Sentence implements Serializable {
     }
 
     public void insertLabel(DatabaseHelper helper, Label label) {
-        SentenceLabel SentenceLabel = new SentenceLabel();
-        SentenceLabel.setSentence(this);
-        SentenceLabel.setLabel(label);
-        SentenceLabel.insert(helper);
+        SentenceLabel sentenceLabel = new SentenceLabel();
+        sentenceLabel.setSentence(this);
+        sentenceLabel.setLabel(label);
+        sentenceLabel.insert(helper);
     }
 
     public void deleteLabel(DatabaseHelper helper, Label label) {
-        SentenceLabel SentenceLabel = new SentenceLabel();
-        SentenceLabel.setSentence(this);
-        SentenceLabel.setLabel(label);
-        SentenceLabel.delete(helper);
+        SentenceLabel sentenceLabel = new SentenceLabel();
+        sentenceLabel.setSentence(this);
+        sentenceLabel.setLabel(label);
+        sentenceLabel.delete(helper);
     }
 
     public static List<Sentence> getByDate(DatabaseHelper helper, int year, int month, int day) {
-        try{
-            year = year - 1900;
-            Date begin = new Date(year, month, day);
-            Date end   = new Date(new Date(year, month, day+1).getTime() - 1);
+        try {
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(year, month - 1, day);
+
+            calendar.set(Calendar.HOUR_OF_DAY, 0);
+            calendar.set(Calendar.MINUTE, 0);
+            calendar.set(Calendar.SECOND, 0);
+            calendar.set(Calendar.MILLISECOND, 0);
+            Date begin = calendar.getTime();
+            Log.d(TAG, "getByDate: begin " + begin);
+
+            calendar.set(Calendar.HOUR_OF_DAY, 23);
+            calendar.set(Calendar.MINUTE, 59);
+            calendar.set(Calendar.SECOND, 59);
+            calendar.set(Calendar.MILLISECOND, 999);
+            Date end = calendar.getTime();
+            Log.d(TAG, "getByDate: end "   + end);
 
             QueryBuilder<Sentence, Integer> qb = helper.getSentenceDao().queryBuilder();
             Where<Sentence, Integer> where = qb.where();
@@ -181,7 +188,8 @@ public class Sentence implements Serializable {
         return labelQb.query();
     }
 
-    public static List<Sentence> getByRestrict(DatabaseHelper helper, String text, Date begin, Date end, List<Label> labelList, Boolean ascending) throws SQLException {
+    public static List<Sentence> getByRestrict(DatabaseHelper helper, String text, Date begin,
+                                            Date end, List<Label> labelList, Boolean ascending) throws SQLException {
         QueryBuilder<Sentence, Integer> qb = helper.getSentenceDao().queryBuilder();
 
         Boolean status1 = (text != null);
@@ -224,7 +232,7 @@ public class Sentence implements Serializable {
 
         for(int i = 0; i < size; i++) {
             QueryBuilder<SentenceLabel, Integer> sentenceLabelQb = helper.getSentenceLabelDao().queryBuilder();
-            sentenceLabelQb.where().eq(DiaryLabel.LABEL_TAG, labelList.get(i));
+            sentenceLabelQb.where().eq(SentenceLabel.LABEL_TAG, labelList.get(i));
             sentenceLabelQb.setAlias("query" + i);
             qb.join(sentenceLabelQb, QueryBuilder.JoinType.INNER, QueryBuilder.JoinWhereOperation.AND);
         }
