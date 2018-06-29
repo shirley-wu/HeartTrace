@@ -138,9 +138,22 @@ public class Diary implements Serializable
 
     public static List<Diary> getByDate(DatabaseHelper helper, int year, int month, int day) {
         try {
-            year = year - 1900;
-            Date begin = new Date(year, month, day);
-            Date end   = new Date(new Date(year, month, day+1).getTime() - 1);
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(year, month, day);
+
+            calendar.set(Calendar.HOUR, 0);
+            calendar.set(Calendar.MINUTE, 0);
+            calendar.set(Calendar.SECOND, 0);
+            calendar.set(Calendar.MILLISECOND, 0);
+            Date begin = calendar.getTime();
+            Log.d(TAG, "getByDate: begin " + begin);
+
+            calendar.set(Calendar.HOUR, 23);
+            calendar.set(Calendar.MINUTE, 59);
+            calendar.set(Calendar.SECOND, 59);
+            calendar.set(Calendar.MILLISECOND, 999);
+            Date end = calendar.getTime();
+            Log.d(TAG, "getByDate: end "   + end);
 
             QueryBuilder<Diary, Integer> qb = helper.getDiaryDao().queryBuilder();
             Where<Diary, Integer> where = qb.where();
