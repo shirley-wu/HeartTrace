@@ -82,7 +82,7 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
 
                 diaryList.clear();
                 DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-                diaryList = Diary.getByDate(helper,selected_date.getYear() - 1900,selected_date.getMonth() + 1,selected_date.getDay());
+                diaryList = Diary.getByDate(helper,selected_date.getYear(),selected_date.getMonth() + 1,selected_date.getDay());
                 if(diaryList == null){
                     diaryList = new ArrayList<>();
                 }
