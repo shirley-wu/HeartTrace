@@ -52,28 +52,21 @@ public class SentenceOtherTest {
 
 
     @Test
-    public void testGetSentenceByDate() throws SQLException {
-        int num = 20;
-        List<Sentence> sentenceList = new ArrayList();
-        for(int i = 1; i <= num; i++) {
-            for(int j = 0; j < i; j++) {
-                Sentence sentence = new Sentence();
-                sentenceList.add(sentence);
-                sentence.setText(originText + j);
-                sentence.setDate(new Date(1998, 8, i));
-                sentence.setSentencebook(sentencebook);
-                sentence.insert(databaseHelper);
-            }
-        }
+    public void testGetSentenceByDateEndOfMonth() throws SQLException {
+        Sentence sentence = new Sentence();
 
-        Date date;
-        for(int i = 1; i <= num; i++) {
-            assertEquals(i, Sentence.getByDate(databaseHelper, new Date(1998, 8, i)).size());
-        }
+        sentence.setText(originText);
+        sentence.setDate(new Date(1998 - 1900, 3, 31, 23, 59));
+        sentence.setSentencebook(sentencebook);
+        sentence.insert(databaseHelper);
 
-        for(final Sentence sentence : sentenceList) {
-            sentence.delete(databaseHelper);
+        List<Sentence> dL = Sentence.getByDate(databaseHelper, 1998 - 1900, 3, 31);
+        for(Sentence d : dL) {
+            Log.d(TAG, "testGetSentenceByDate: end of month sentence " + d.getDate().toString());
         }
+        assertEquals(1, dL.size());
+
+        sentence.delete(databaseHelper);
     }
 
     @Test

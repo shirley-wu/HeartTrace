@@ -70,7 +70,7 @@ public class Sentence implements Serializable {
     public void setDate(Date date){
         // dangerous!!!!! for test only.
         this.date = date;
-        Log.i(TAG, "setDate: dangerous call!");
+        Log.i(TAG, "setDate: dangerous call!, set into " + date.toString());
     }
 
    public Sentencebook getSentencebook() {
@@ -141,11 +141,16 @@ public class Sentence implements Serializable {
         SentenceLabel.delete(helper);
     }
 
-    public static List<Sentence> getByDate(DatabaseHelper helper, Date date) {
-        try {
-            Dao<Sentence, Integer> dao = helper.getSentenceDao();
-            List<Sentence> SentenceList = dao.queryBuilder().where().eq("date", date).query();
-            return SentenceList;
+    public static List<Sentence> getByDate(DatabaseHelper helper, int year, int month, int day) {
+        try{
+            Date begin = new Date(year, month, day);
+            Date end   = new Date(new Date(year, month, day+1).getTime() - 1);
+
+            QueryBuilder<Sentence, Integer> qb = helper.getSentenceDao().queryBuilder();
+            Where<Sentence, Integer> where = qb.where();
+            buildWhere(where, begin, end);
+            List<Sentence> sentenceList = qb.query();
+            return sentenceList;
         }
         catch(SQLException e) {
             Log.e(TAG, "getSentenceByDate: cannot query");
