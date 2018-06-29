@@ -138,6 +138,7 @@ public class Diary implements Serializable
 
     public static List<Diary> getByDate(DatabaseHelper helper, int year, int month, int day) {
         try {
+            year = year - 1900;
             Date begin = new Date(year, month, day);
             Date end   = new Date(new Date(year, month, day+1).getTime() - 1);
 

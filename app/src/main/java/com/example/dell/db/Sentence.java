@@ -2,6 +2,7 @@ package com.example.dell.db;
 
 import android.provider.ContactsContract;
 import android.provider.Telephony;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.j256.ormlite.dao.Dao;
@@ -143,6 +144,7 @@ public class Sentence implements Serializable {
 
     public static List<Sentence> getByDate(DatabaseHelper helper, int year, int month, int day) {
         try{
+            year = year - 1900;
             Date begin = new Date(year, month, day);
             Date end   = new Date(new Date(year, month, day+1).getTime() - 1);
 

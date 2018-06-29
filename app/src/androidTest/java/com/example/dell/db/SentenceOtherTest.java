@@ -60,7 +60,7 @@ public class SentenceOtherTest {
         sentence.setSentencebook(sentencebook);
         sentence.insert(databaseHelper);
 
-        List<Sentence> dL = Sentence.getByDate(databaseHelper, 1998 - 1900, 3, 31);
+        List<Sentence> dL = Sentence.getByDate(databaseHelper, 1998, 3, 31);
         for(Sentence d : dL) {
             Log.d(TAG, "testGetSentenceByDate: end of month sentence " + d.getDate().toString());
         }

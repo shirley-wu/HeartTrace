@@ -60,7 +60,7 @@ public class DiaryOtherTest {
         diary.setDiarybook(diarybook);
         diary.insert(databaseHelper);
 
-        List<Diary> dL = Diary.getByDate(databaseHelper, 1998 - 1900, 3, 31);
+        List<Diary> dL = Diary.getByDate(databaseHelper, 1998, 3, 31);
         for(Diary d : dL) {
             Log.d(TAG, "testGetDiaryByDate: end of month diary " + d.getDate().toString());
         }
