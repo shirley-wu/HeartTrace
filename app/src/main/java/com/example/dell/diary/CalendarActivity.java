@@ -12,9 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bigkoo.pickerview.TimePickerView;
-
-
+import com.bigkoo.pickerview.builder.TimePickerBuilder;
+import com.bigkoo.pickerview.listener.OnTimeSelectListener;
+import com.bigkoo.pickerview.view.TimePickerView;
+import com.example.dell.db.DatabaseHelper;
 import com.example.dell.db.Diary;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
@@ -30,7 +31,6 @@ import java.util.List;
 
 import static com.example.dell.diary.R.styleable.RecyclerView;
 
-
 public class CalendarActivity extends AppCompatActivity implements View.OnClickListener{
 
     private static final DateFormat FORMATTER = SimpleDateFormat.getDateInstance();
@@ -40,7 +40,7 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
     private MaterialCalendarView calendarView;
     private ImageView calendar_picture;
     private RecyclerView recyclerView;
-    public List<Diary> diaryCardList = new ArrayList<>();
+    public List<Diary> diaryList = new ArrayList<>();
     private com.example.dell.diary.DiaryCardAdapter adapter;
     private TextView toolbarTitle;
     private ImageButton selectDate;
@@ -58,33 +58,12 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
         calendarView = (MaterialCalendarView) findViewById(R.id.calendar);
         toolbarTitle = (TextView) findViewById(R.id.toolbarTitle);
         selectDate = (ImageButton) findViewById(R.id.selectDate);
-
         calendar_picture.setOnClickListener(this);
         selectDate.setOnClickListener(this);
 
         initdata();
-        initDiaryCard();
-
+        initDiaryList();
         initRecyclerView();
-
-/*      recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            int mScrollThreshold;
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                boolean isSignificantDelta = Math.abs(dy) > mScrollThreshold;
-                if (isSignificantDelta) {
-                    if (dy > 0) {
-                        onScrollUp();
-                    } else {
-                        onScrollDown();
-                    }
-                }
-            }
-            public void setScrollThreshold(int scrollThreshold) {
-                mScrollThreshold = scrollThreshold;
-            }
-        });*/
 
     }
 
@@ -92,7 +71,7 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
     {
         calendarView.setTopbarVisible(false);
         calendarView.setShowOtherDates(MaterialCalendarView.SHOW_ALL);
-        calendarView.state().edit().setFirstDayOfWeek(Calendar.MONDAY).commit();
+        calendarView.state().edit().setFirstDayOfWeek(Calendar.SUNDAY).commit();
         calendarView.setSelectedDate(new Date());
         calendarView.setSelectionColor(getResources().getColor(R.color.colorBase));
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
@@ -104,104 +83,59 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
             }
         });
         toolbarTitle.setText(FORMATTER.format(new Date()));
-
-
     }
 
     private void initRecyclerView() {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new com.example.dell.diary.DiaryCardAdapter(diaryCardList);
+        adapter = new com.example.dell.diary.DiaryCardAdapter(diaryList);
         recyclerView.setAdapter(adapter);
     }
 
-    private void initDiaryCard(){
+    private void initDiaryList(){
+        diaryList.clear();
+        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
 
-        diaryCardList.clear();
-        Diary diary1 = new Diary("我是一篇日记。");
-        diary1.setDate(new Date(2018,6,2));
-        diaryCardList.add(0,diary1);
+        diaryList = Diary.getAll(helper,false);
+        if(diaryList == null){
+            diaryList = new ArrayList<>();
+        }
     }
 
-    public void onClick(View view) {
-        switch(view.getId()) {
+    private void updataDiaryList(){
+        diaryList.clear();
+        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+
+        diaryList = Diary.getAll(helper,false);
+        if(diaryList == null){
+            diaryList = new ArrayList<>();
+        }
+    }
+    public void onClick(View view){
+        switch(view.getId()){
             case R.id.calendar_picture:
                 calendarView.setSelectedDate(new Date());
                 calendarView.setCurrentDate(new Date());
                 toolbarTitle.setText(FORMATTER.format(new Date()));
                 break;
             case R.id.selectDate:
-                Toast.makeText(CalendarActivity.this, "succeed", Toast.LENGTH_SHORT).show();
-                TimePickerView.Builder pvTime = new TimePickerView.Builder(CalendarActivity.this, new TimePickerView.OnTimeSelectListener() {
+                TimePickerView pvTime = new TimePickerBuilder(CalendarActivity.this, new OnTimeSelectListener() {
                     @Override
                     public void onTimeSelect(Date date, View v) {
                         calendarView.setSelectedDate(date);
                         calendarView.setCurrentDate(date);
                         toolbarTitle.setText(FORMATTER.format(date));
                     }
-                });
-                pvTime.setOutSideCancelable(true)//点击屏幕，点在控件外部范围时，是否取消显示
+                })
+                        .setOutSideCancelable(true)//点击屏幕，点在控件外部范围时，是否取消显示
                         .isCyclic(true)//是否循环滚动
-                        .setLineSpacingMultiplier((float) 2.5)
-                        .setLabel("", "", "", "", "", "")//默认设置为年月日时分秒
-                        .build()
-                        .show();
-
-
+                        .setLineSpacingMultiplier((float)2.5)
+                        .setLabel("","","","","","")//默认设置为年月日时分秒
+                        .build();
+                pvTime.show();
                 break;
         }
-    }
-
-    private void initLayoutManager() {
-        if (layoutManager == null) {
-            RecyclerView.LayoutManager layout = recyclerView.getLayoutManager();
-            if (layout != null && layout instanceof LinearLayoutManager) {
-                layoutManager = (LinearLayoutManager) layout;
-            }
-        }
-    }
-
-    public boolean isGetTop() {
-        initLayoutManager();
-        if (layoutManager != null) {
-            if (layoutManager.getItemCount() == 0) {
-                return true;
-            } else if (layoutManager.findFirstVisibleItemPosition() == 0 && recyclerView.getChildAt(0).getTop() >= recyclerView.getPaddingTop()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean isGetBottom() {
-        initLayoutManager();
-        if (layoutManager != null) {
-            int count = layoutManager.getItemCount();
-            if (count == 0) {
-                return true;
-            } else if (layoutManager.findLastCompletelyVisibleItemPosition() == count - 1) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void onScrollDown() {     //下滑时要执行的代码
-        //Toast.makeText(CalendarActivity.this, "down", Toast.LENGTH_SHORT).show();
-        if(calendar_mode==false && isGetTop()==true) {
-            calendarView.state().edit().setCalendarDisplayMode(CalendarMode.MONTHS).commit();
-            calendar_mode=true;
-        }
-    }
-
-    private void onScrollUp() {       //上滑时要执行的代码
-        //Toast.makeText(CalendarActivity.this, "up", Toast.LENGTH_SHORT).show();
-        if(calendar_mode==true) {
-            calendarView.state().edit().setCalendarDisplayMode(CalendarMode.WEEKS).commit();
-            calendar_mode=false;
-        }
-
     }
 
 }
