@@ -1,5 +1,9 @@
 [
     {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\menu\\note_edit_toolbar.xml",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\menu\\note_edit_toolbar.xml"
+    },
+    {
         "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\menu\\notetoolbar.xml",
         "source": "D:\\diary\\diary\\app\\src\\main\\res\\menu\\notetoolbar.xml"
     },

@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://D:/Android/Project/Diary/HeartTrace.iml" filepath="D:/Android/Project/Diary/HeartTrace.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-<<<<<<< HEAD
-      <module fileurl="file://$PROJECT_DIR$/Diary.iml" filepath="$PROJECT_DIR$/Diary.iml" />
-=======
-      <module fileurl="file://D:\Android\Project\Diary\app\app.iml" filepath="D:\Android\Project\Diary\app\app.iml" />
->>>>>>> 3f5d8ff7bf8c8995576c87a8bd0d791559a68990
+      <module fileurl="file://$PROJECT_DIR$/diary.iml" filepath="$PROJECT_DIR$/diary.iml" />
     </modules>
   </component>
 </project>

@@ -1,0 +1,4 @@
+#Sat Jun 09 23:31:37 GMT+08:00 2018
+base.0=D\:\\diary\\diary\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\22
+path.0=classes.dex
+renamed.0=classes.dex

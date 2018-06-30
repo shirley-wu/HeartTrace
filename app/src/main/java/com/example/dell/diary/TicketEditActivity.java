@@ -1,12 +1,21 @@
 package com.example.dell.diary;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.dell.db.DatabaseHelper;
 import com.example.dell.db.Sentence;
@@ -28,11 +37,67 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
     private Sentence sentence;
     private String note_new;
 
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.note_edit_toolbar, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                //mDrawLayout.openDrawer(GravityCompat.START);
+                finish();
+                break;
+            case R.id.note_delete:
+                Log.d(TAG, "onOptionsItemSelected: click");
+                AlertDialog.Builder dialog = new AlertDialog.Builder(TicketEditActivity.this);
+                dialog.setTitle("提示");
+                dialog.setMessage("你确定要删除你的纸条吗？");
+                dialog.setCancelable(true);
+                dialog.setPositiveButton("确认",new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialog, int which){
+                        Log.d(TAG, "onOptionsItemSelected: build");
+                        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+                        Log.d(TAG, "onOptionsItemSelected: build1");
+                        Log.d(TAG, "onOptionsItemSelected: build2");
+                        sentence.delete(helper);
+                        finish();
+                    }
+                });
+                dialog.setNegativeButton("取消",new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialog, int which){
+                        dialog.cancel();
+                    }
+                });
+                dialog.show();
+
+                break;
+            case R.id.note_label:
+                break;
+            default:
+        }
+        return true;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate: correct");
         setContentView(R.layout.activity_ticket_edit);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.note_edit_toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null){
+
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            //actionBar.setHomeAsUpIndicator(R.drawable.menu_white);
+        }
+        actionBar.setTitle("Little Note");
+
         Intent intent = getIntent();
         note_editable = intent.getStringExtra(NOTE_EDITABLE);
         sentence = (Sentence) intent.getSerializableExtra(SENTENCE_THIS);

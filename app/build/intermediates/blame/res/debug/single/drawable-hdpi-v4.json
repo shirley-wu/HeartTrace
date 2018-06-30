@@ -300,6 +300,10 @@
         "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\d9fec99b72a8411ad2bb40a82a9bdb86\\res\\drawable-hdpi-v4\\abc_ic_star_half_black_48dp.png"
     },
     {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\mood.png",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-hdpi\\mood.png"
+    },
+    {
         "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_ic_menu_share_mtrl_alpha.png",
         "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\d9fec99b72a8411ad2bb40a82a9bdb86\\res\\drawable-hdpi-v4\\abc_ic_menu_share_mtrl_alpha.png"
     },

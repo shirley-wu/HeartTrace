@@ -83,7 +83,6 @@ public class NoteAdapter extends RecyclerView.Adapter <NoteAdapter.ViewHolder> {
                 dialog.setTitle("提示");
                 dialog.setMessage("你确定要删除你的纸条吗？");
                 dialog.setCancelable(true);
-
                 dialog.setPositiveButton("确认",new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog, int which){
                         DatabaseHelper helper = new DatabaseHelper(mContext);
