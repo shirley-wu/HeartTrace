@@ -31,6 +31,9 @@ public class Sentencebook implements Serializable {
     @DatabaseField(unique = true, columnName = "sentencebookName", canBeNull = false)
     private String sentencebookName;
 
+    @DatabaseField
+    private String description;
+
     public Sentencebook(){};
     public Sentencebook(String sentencebookName)
     {
@@ -40,6 +43,14 @@ public class Sentencebook implements Serializable {
     public String getSentencebookName()
     {
         return sentencebookName;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public void setSentencebookName(String sentencebookName) {
