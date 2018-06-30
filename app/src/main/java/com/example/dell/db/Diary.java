@@ -3,21 +3,15 @@ package com.example.dell.db;
 import android.util.Log;
 
 import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.stmt.DeleteBuilder;
-import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
-import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.table.DatabaseTable;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -38,20 +32,16 @@ public class Diary implements Serializable
     private Diarybook diarybook;
 
     @DatabaseField
+    private String htmlText;
+
+    @DatabaseField
     private String text;
 
     @DatabaseField(dataType = DataType.DATE_STRING, columnName = "date", canBeNull = false)
     protected Date date;
-
-    private int tag_id;
-
-    public void  setid(int id){
-        this.tag_id = id;
-    }
-
-    public int getid(){
-        return this.tag_id;
-    }
+    
+    @DatabaseField
+    private boolean like;
 
     public Diary(){
     };
@@ -78,10 +68,26 @@ public class Diary implements Serializable
         }
     }
 
+    public void setHtmlText(String htmlText) {
+        this.htmlText = htmlText;
+    }
+
+    public String getHtmlText() {
+        return htmlText;
+    }
+
     public void setDate(Date date){
         // dangerous!!!!! for test only.
         this.date = date;
         Log.i(TAG, "setDate: dangerous call!, set into " + date.toString());
+    }
+
+    public boolean getLike() {
+        return like;
+    }
+
+    public void setLike(boolean like) {
+        this.like = like;
     }
 
     public Diarybook getDiarybook(){
@@ -180,6 +186,19 @@ public class Diary implements Serializable
     public static List<Diary> getAll(DatabaseHelper helper, Boolean ascending){
         try {
             QueryBuilder<Diary, Integer> qb = helper.getDiaryDao().queryBuilder();
+            qb.orderBy("date",ascending);
+            return qb.query();
+        } catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static List<Diary> getAllLike(DatabaseHelper helper, Boolean ascending){
+        try {
+            QueryBuilder<Diary, Integer> qb = helper.getDiaryDao().queryBuilder();
+            Where<Diary, Integer> where = qb.where();
+            where.eq("like", true);
             qb.orderBy("date",ascending);
             return qb.query();
         } catch (SQLException e) {

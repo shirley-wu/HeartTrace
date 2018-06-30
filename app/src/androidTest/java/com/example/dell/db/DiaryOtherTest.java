@@ -181,4 +181,27 @@ public class DiaryOtherTest {
             label.delete(databaseHelper);
         }
     }
+
+    @Test
+    public void testGetLike() {
+        List<Diary> diaryList = new ArrayList();
+
+        for(int i = 0; i < 10; i++) {
+            Diary diary = new Diary();
+            diary.setDate();
+            diary.setDiarybook(diarybook);
+            diary.setText("hello " + i);
+            diary.setLike(i % 2 == 0);
+            diaryList.add(diary);
+            diary.insert(databaseHelper);
+        }
+
+        List<Diary> l = Diary.getAllLike(databaseHelper, false);
+        assertEquals(5, l.size());
+        assertEquals("hello 8", l.get(0).getText());
+
+        for(final Diary d : diaryList) {
+            d.delete(databaseHelper);
+        }
+    }
 }
