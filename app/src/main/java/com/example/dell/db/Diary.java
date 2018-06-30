@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -80,7 +81,7 @@ public class Diary implements Serializable
     public void setDate(Date date){
         // dangerous!!!!! for test only.
         this.date = date;
-        Log.i(TAG, "setDate: dangerous call!");
+        Log.i(TAG, "setDate: dangerous call!, set into " + date.toString());
     }
 
     public Diarybook getDiarybook(){
@@ -145,10 +146,29 @@ public class Diary implements Serializable
         diaryLabel.delete(helper);
     }
 
-    public static List<Diary> getByDate(DatabaseHelper helper, Date date) {
+    public static List<Diary> getByDate(DatabaseHelper helper, int year, int month, int day) {
         try {
-            Dao<Diary, Integer> dao = helper.getDiaryDao();
-            List<Diary> diaryList = dao.queryBuilder().where().eq("date", date).query();
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(year, month - 1, day);
+
+            calendar.set(Calendar.HOUR_OF_DAY, 0);
+            calendar.set(Calendar.MINUTE, 0);
+            calendar.set(Calendar.SECOND, 0);
+            calendar.set(Calendar.MILLISECOND, 0);
+            Date begin = calendar.getTime();
+            Log.d(TAG, "getByDate: begin " + begin);
+
+            calendar.set(Calendar.HOUR_OF_DAY, 23);
+            calendar.set(Calendar.MINUTE, 59);
+            calendar.set(Calendar.SECOND, 59);
+            calendar.set(Calendar.MILLISECOND, 999);
+            Date end = calendar.getTime();
+            Log.d(TAG, "getByDate: end "   + end);
+
+            QueryBuilder<Diary, Integer> qb = helper.getDiaryDao().queryBuilder();
+            Where<Diary, Integer> where = qb.where();
+            buildWhere(where, begin, end);
+            List<Diary> diaryList = qb.query();
             return diaryList;
         }
         catch(SQLException e) {

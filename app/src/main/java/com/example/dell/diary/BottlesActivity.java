@@ -3,6 +3,7 @@ package com.example.dell.diary;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -20,12 +21,18 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.AbsListView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dell.db.DatabaseHelper;
 import com.example.dell.db.Diarybook;
+import com.example.dell.db.Label;
 import com.example.dell.db.Sentencebook;
 import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
 
@@ -39,6 +46,10 @@ public class BottlesActivity extends AppCompatActivity {
     private  List<Sentencebook> sentencebookList =  new ArrayList<>();
     private String TAG = "233";
     private BottleAdapter adapter;
+    private final int ICON_LIST_DIALOG = 1;
+    private String label_name = "travel";
+    private int[] imgIds = {R.drawable.travel,
+            R.drawable.study, R.drawable.work};
 
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.bottlestoolbar, menu);
@@ -162,6 +173,87 @@ public class BottlesActivity extends AppCompatActivity {
             databaseHelper = OpenHelperManager.getHelper(BottlesActivity.this, DatabaseHelper.class);
         }
         return databaseHelper;
+    }
+
+    protected Dialog onCreateDialog(int id) {
+        Dialog dialog = null;
+        switch(id) {
+            case ICON_LIST_DIALOG:
+                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
+                builder.setIcon(R.drawable.mood);
+                builder.setTitle("贴个标签？");
+                BaseAdapter adapter = new BottlesActivity.ListItemAdapter();
+                DialogInterface.OnClickListener listener =
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int which) {
+                                if(which == 0) label_name = "travel";
+                                else if(which == 1) label_name = "study";
+                                else if(which == 2) label_name = "work";
+                                else label_name = "travel";
+
+                                DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+
+                                Label label = Label.getByName(helper,label_name);
+                                if(label == null) {
+                                    label = new Label(label_name);
+                                    label.insert(helper);
+                                }
+                                //sentencebookList.insertLabel(helper, label);
+                                //getLabelsOfDiary(diary,helper);
+
+                            }
+                        };
+                builder.setAdapter(adapter, listener);
+                dialog = builder.create();
+                break;
+        }
+        return dialog;
+    }
+
+    class ListItemAdapter extends BaseAdapter {
+
+        @Override
+        public int getCount() {
+            return imgIds.length;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position,
+                            View contentView, ViewGroup parent) {
+            TextView textView =
+                    new TextView(BottlesActivity.this);
+            //获得array.xml中的数组资源getStringArray返回的是一个String数组
+            String text = getResources().getStringArray(R.array.mood)[position];
+            textView.setText(text);
+            //设置字体大小
+            textView.setTextSize(20);
+            AbsListView.LayoutParams layoutParams = new AbsListView.LayoutParams(
+                    WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+            textView.setLayoutParams(layoutParams);
+            //设置水平方向上居中
+            textView.setGravity(android.view.Gravity.CENTER_VERTICAL);
+            textView.setMinHeight(65);
+            //设置文字颜色
+            textView.setTextColor(Color.BLACK);
+            //设置图标在文字的左边
+            textView.setCompoundDrawablesWithIntrinsicBounds(imgIds[position], 0, 0, 0);
+            //设置textView的左上右下的padding大小
+            textView.setPadding(30, 10, 30, 10);
+            //设置文字和图标之间的padding大小
+            textView.setCompoundDrawablePadding(25);
+            return textView;
+        }
     }
 }
 
