@@ -61,8 +61,8 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="110dp"
+            android:layout_height="500dp"
+            android:layout_gravity="bottom"
             android:background="#ffffff"
             app:layout_behavior="@string/calendar_scrolling_behavior"/>
 
@@ -73,7 +73,6 @@
             android:layout_marginLeft="20sp"
             android:layout_marginRight="20sp"
             />
-
 
     </android.support.design.widget.CoordinatorLayout>
 

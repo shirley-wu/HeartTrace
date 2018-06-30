@@ -87,15 +87,6 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
                     diaryList = new ArrayList<>();
                 }
 
-                if(diaryList.size() == 0)
-                {
-                    Log.i("test", "null");
-                }
-
-                for(Diary i : diaryList){
-                    Log.i("test", i.getText());
-                }
-
                 adapter = new com.example.dell.diary.DiaryCardAdapter(diaryList);
                 recyclerView.setAdapter(adapter);
 
@@ -117,7 +108,14 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
         diaryList.clear();
         DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
 
-        diaryList = Diary.getAll(helper,false);//getbydate
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH)+1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        Log.i("date",year + " "+month + " "+ day);
+        diaryList = Diary.getByDate(helper,year,month,day);
+        //diaryList = Diary.getAll(helper,false);//getbydate
         if(diaryList == null){
             diaryList = new ArrayList<>();
         }
@@ -129,6 +127,21 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
                 calendarView.setSelectedDate(new Date());
                 calendarView.setCurrentDate(new Date());
                 toolbarTitle.setText(FORMATTER.format(new Date()));
+
+                Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH)+1;
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                diaryList.clear();
+                DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+                diaryList = Diary.getByDate(helper,year,month,day);
+                if(diaryList == null){
+                    diaryList = new ArrayList<>();
+                }
+
+                adapter = new com.example.dell.diary.DiaryCardAdapter(diaryList);
+                recyclerView.setAdapter(adapter);
                 break;
             case R.id.selectDate:
                 TimePickerView pvTime = new TimePickerBuilder(CalendarActivity.this, new OnTimeSelectListener() {
