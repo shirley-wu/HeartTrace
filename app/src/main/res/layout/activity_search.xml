@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:imeOptions="actionSearch"
                 android:background="@drawable/search_background"
-                app:defaultQueryHint="输入关键词或标签..." />
+                app:defaultQueryHint="输入关键词..." />
 
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableLeft="?android:attr/listChoiceIndicatorMultiple"
-            android:text="仅对标签搜索"
+            android:text="在指定标签范围内搜索（还没写好"
             android:gravity="center"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"

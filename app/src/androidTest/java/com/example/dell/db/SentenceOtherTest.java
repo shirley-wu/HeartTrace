@@ -14,6 +14,7 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -52,23 +53,48 @@ public class SentenceOtherTest {
 
 
     @Test
+    public void testGetSentenceByDateEndOfMonth() throws SQLException {
+        Sentence sentence = new Sentence();
+
+        sentence.setText(originText);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(1998, 3 - 1, 31, 23, 59);
+        sentence.setDate(calendar.getTime());
+        sentence.setSentencebook(sentencebook);
+        sentence.insert(databaseHelper);
+
+        List<Sentence> dL = Sentence.getByDate(databaseHelper, 1998, 3, 31);
+        for(Sentence d : dL) {
+            Log.d(TAG, "testGetSentenceByDate: end of month sentence " + d.getDate().toString());
+        }
+        assertEquals(1, dL.size());
+
+        sentence.delete(databaseHelper);
+    }
+
+    @Test
     public void testGetSentenceByDate() throws SQLException {
-        int num = 20;
+        int num = 24;
         List<Sentence> sentenceList = new ArrayList();
         for(int i = 1; i <= num; i++) {
             for(int j = 0; j < i; j++) {
                 Sentence sentence = new Sentence();
                 sentenceList.add(sentence);
                 sentence.setText(originText + j);
-                sentence.setDate(new Date(1998, 8, i));
+                sentence.setDate(new Date(1998, 8, i, j, 0));
                 sentence.setSentencebook(sentencebook);
                 sentence.insert(databaseHelper);
             }
         }
 
-        Date date;
+        List<Sentence> dL;
         for(int i = 1; i <= num; i++) {
-            assertEquals(i, Sentence.getByDate(databaseHelper, new Date(1998, 8, i)).size());
+            dL = Sentence.getByDate(databaseHelper, 1998, 8, i);
+            for(Sentence d : dL) {
+                Log.d(TAG, "testGetSentenceByDate: " + i + " sentence " + d.getDate().toString());
+            }
+            assertEquals(i, dL.size());
         }
 
         for(final Sentence sentence : sentenceList) {

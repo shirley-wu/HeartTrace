@@ -81,7 +81,7 @@ public class SearchResultActivity extends AppCompatActivity {
                 DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
                 try{
                     diaryList.clear();
-                    if(startDate.getYear() == 1900){
+                    if(startDate == null){
                         diaryList.addAll(Diary.getByRestrict(helper,query,null,null,null,false));
                     }
                     else{

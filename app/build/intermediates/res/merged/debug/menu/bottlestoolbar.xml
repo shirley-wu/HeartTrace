@@ -6,7 +6,7 @@
         android:icon="@drawable/ic_settings"
         android:title="Settings"
         app:showAsAction="always"/>
-        />
+
     <item
         android:id="@+id/rename"
         android:title="Rename"

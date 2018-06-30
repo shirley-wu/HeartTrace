@@ -170,7 +170,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private ObjectAnimator objAnimatorX;
 
     private SpannableStringBuilder spannableString = new SpannableStringBuilder();
-    public List<String> weekList = new ArrayList<>(Arrays.asList("周四","周五","周六","周日"," 周一","周二","周三"));
+    public List<String> weekList = new ArrayList<>(Arrays.asList("周日","周一","周二","周三"," 周四","周五","周六"));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -296,7 +296,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         preDiary.setOnClickListener(this);
         nextDiary.setOnClickListener(this);
         diaryIcon.setOnClickListener(this);
-
     }
 
     public void init()
@@ -335,38 +334,14 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             String today = (date.getYear()+1900)+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日";
             diaryDate.setText(today);
             diaryWeekday.setText(weekList.get(date.getDay()));
-            diaryIcon.setImageDrawable(setTag(tagId));
+            //diaryIcon.setImageDrawable(setTag(tagId));
             preDiary.setVisibility(View.INVISIBLE);
             nextDiary.setVisibility(View.INVISIBLE);
             actionBar.hide();
         }
         else {
             diary_write.setText(diary.getText());
-            label_this = null;
-            try {
-                label_this = diary.getAllLabel(helper);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            if(label_this  == null || label_this.size() == 0 || label_this.get(0).getLabelname() == null){
-                tag = "happy"; diaryIcon.setImageDrawable(setTags(tag));
-            }
-            else{
-                int length = label_this.size();
-                tag = label_this.get(0).getLabelname();
-                diaryIcon.setImageDrawable(setTags(tag));
-                if(length >= 2 && length <=5)
-                    for(int i = 1; i< length; i++){
-                        tag = label_this.get(i).getLabelname();
-                        imageItems.get(i-1).setImageDrawable(setTags(tag));
-                    }
-                else if(length >=6)
-                    for(int i = 1; i< 5; i++){
-                        tag = label_this.get(i).getLabelname();
-                        imageItems.get(i-1).setImageDrawable(setTags(tag));
-                    }
-            }
-
+            getLabelsOfDiary(diary,helper);
             String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
             diaryDate.setText(date);
             diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
@@ -378,14 +353,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             keyboard.setVisibility(View.INVISIBLE);
             confirm.setVisibility(View.INVISIBLE);
         }
-
-
-        /*
-        set_font1.setBackgroundColor(Color.GRAY);
-        font_padding1.setBackgroundColor(Color.GRAY);
-        line_spacing1.setBackgroundColor(Color.GRAY);
-        set_right.setBackgroundColor(Color.GRAY);
-        diary_write.setTextSize(20);*/
     }
 
     public void onClick(View view) {
@@ -393,7 +360,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         switch (view.getId()) {
             case R.id.diary_content_icon:
                 for(int i=0;i<imageItems.size();i++) {
-                    int radius = 100;
+                    int radius = 90;
                     float distanceX = (float) (flag * radius * (i + 1));
                     objAnimatorX = ObjectAnimator.ofFloat(imageItems.get(i), "x", imageItems.get(i).getX(), imageItems.get(i).getX() + distanceX);
                     objAnimatorX.setDuration(120);
@@ -413,17 +380,11 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 else{
                     index = index -1;
                     diary = diaryList.get(index);
-                    String date = (diary.getDate().getYear())+"."+(diary.getDate().getMonth())+"."+diary.getDate().getDate();
+                    String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
                     diaryDate.setText(date);
                     diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
                     diary_write.setText(diary.getText());
-                    try {
-                        label_this = diary.getAllLabel(helper);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                    if(label_this  != null && label_this.size() != 0 && label_this.get(0).getLabelname() != null)
-                        diaryIcon.setImageDrawable(setTags(label_this.get(0).getLabelname()));
+                    getLabelsOfDiary(diary,helper);
                 }
                 break;
             case R.id.next_diary:
@@ -433,17 +394,11 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 else{
                     index = index + 1;
                     diary = diaryList.get(index);
-                    String date = (diary.getDate().getYear())+"."+(diary.getDate().getMonth())+"."+diary.getDate().getDate();
+                    String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
                     diaryDate.setText(date);
                     diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
                     diary_write.setText(diary.getText());
-                    try {
-                        label_this = diary.getAllLabel(helper);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                    if(label_this  != null && label_this.size() != 0 && label_this.get(0).getLabelname() != null)
-                        diaryIcon.setImageDrawable(setTags(label_this.get(0).getLabelname()));
+                    getLabelsOfDiary(diary,helper);
                 }
             case R.id.edit_layout:
                 if(confirm.getVisibility()==View.VISIBLE){
@@ -469,10 +424,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     diaryList.remove(index);
                     diaryList.add(index,diary);
                 }
-//                List<Diary> diaryList = Diary.getAll(helper,true);
-//                for(Diary i : diaryList){
-//                    Log.i("test", i.getText());
-//                }
+/*                List<Diary> diaryList = Diary.getAll(helper,true);
+                for(Diary i : diaryList){
+                    Log.i("test", i.getText());
+                } */
                 CharSequence charSequence = Html.fromHtml(Html.toHtml(diary_write.getText()));
                 //Toast.makeText(DiaryWriteActivity.this,charSequence,Toast.LENGTH_SHORT).show();
                 diary_write.setEnabled(false);
@@ -699,7 +654,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             case R.id.bold:
                 is_bold=!is_bold;
                 if(is_bold){
-                    if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
+                    if (diary_write.getSelectionStart() != diary_write.getSelectionEnd())
                     {
                         Editable editable = diary_write.getText();
                         editable.setSpan(new StyleSpan(Typeface.BOLD), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -707,7 +662,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     set_bold.setBackgroundColor(Color.GRAY);
                 }
                 else {
-                    if (diary_write.getSelectionStart() != diary_write.getSelectionEnd()) {
+                    if (diary_write.getSelectionStart() != diary_write.getSelectionEnd())
+                    {
                         Editable editable = diary_write.getText();
                         StyleSpan[] selectedSpans = editable.getSpans(diary_write.getSelectionStart(), diary_write.getSelectionEnd(), StyleSpan.class);
                         for (StyleSpan style : selectedSpans) {
@@ -730,7 +686,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     set_italic.setBackgroundColor(Color.GRAY);
                 }
                 else {
-                    if (diary_write.getSelectionStart() != diary_write.getSelectionEnd()) {
+                    if (diary_write.getSelectionStart() != diary_write.getSelectionEnd())
+                    {
                         Editable editable = diary_write.getText();
                         StyleSpan[] selectedSpans = editable.getSpans(diary_write.getSelectionStart(), diary_write.getSelectionEnd(), StyleSpan.class);
                         for (StyleSpan style : selectedSpans) {
@@ -738,8 +695,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                                 editable.removeSpan(style);
                             }
                         }
-                        set_italic.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                     }
+                    set_italic.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 }
                 break;
             case R.id.insert_image:
@@ -827,13 +784,14 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 }
                 break;
         }
-
         if(is_underline)
             editable.setSpan(new UnderlineSpan(), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        if(is_bold)
+        if(is_bold){
             editable.setSpan(new StyleSpan(Typeface.BOLD), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        if(is_italic)
+        }
+        if(is_italic) {
             editable.setSpan(new StyleSpan(Typeface.ITALIC), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -1082,7 +1040,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
                                 DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
                                 //diary = diaryList.get(index);
-                                diary.setid(tagId);
+                                //diary.setid(tagId);
 
                                 Label label = Label.getByName(helper,label_name);
                                 if(label == null) {
@@ -1090,31 +1048,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                                     label.insert(helper);
                                 }
                                 diary.insertLabel(helper, label);
-
-                                label_this = null;
-                                try {
-                                    label_this = diary.getAllLabel(helper);
-                                } catch (SQLException e) {
-                                    e.printStackTrace();
-                                }
-                                if(label_this  == null || label_this.size() == 0 || label_this.get(0).getLabelname() == null){
-                                    tag = "happy"; diaryIcon.setImageDrawable(setTags(tag));
-                                }
-                                else{
-                                    int length = label_this.size();
-                                    tag = label_this.get(0).getLabelname();
-                                    diaryIcon.setImageDrawable(setTags(tag));
-                                    if(length >= 2 && length <=5)
-                                        for(int i = 1; i< length; i++){
-                                            tag = label_this.get(i).getLabelname();
-                                            imageItems.get(i-1).setImageDrawable(setTags(tag));
-                                        }
-                                    else if(length >=6)
-                                        for(int i = 1; i< 5; i++){
-                                            tag = label_this.get(i).getLabelname();
-                                            imageItems.get(i-1).setImageDrawable(setTags(tag));
-                                        }
-                                }
+                                getLabelsOfDiary(diary,helper);
 
                             }
                         };
@@ -1198,6 +1132,36 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
+    public void getLabelsOfDiary(Diary diary, DatabaseHelper helper ){
+        diaryIcon.setImageDrawable(getResources().getDrawable(R.drawable.nothing));
+        for(int i = 0; i<=3; i++){
+            imageItems.get(i).setImageDrawable(getResources().getDrawable(R.drawable.nothing));
+        }
+        label_this = null;
+        try {
+            label_this = diary.getAllLabel(helper);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if(label_this  == null || label_this.size() == 0 || label_this.get(0).getLabelname() == null){
+            tag = "happy";
+        }
+        else{
+            int length = label_this.size();
+            tag = label_this.get(length - 1).getLabelname();
+            diaryIcon.setImageDrawable(setTags(tag));
+            if(length >= 2 && length <=5)
+                for(int i = 0; i<= length-2; i++){
+                    tag = label_this.get(i).getLabelname();
+                    imageItems.get(length - 2 - i).setImageDrawable(setTags(tag));
+                }
+            else if(length >=6)
+                for(int i = 0; i<=3; i++){
+                    tag = label_this.get(length - 2 - i).getLabelname();
+                    imageItems.get(i).setImageDrawable(setTags(tag));
+                }
+        }
 
+    }
 
 }
