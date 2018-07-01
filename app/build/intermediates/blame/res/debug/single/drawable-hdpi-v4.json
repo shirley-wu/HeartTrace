@@ -192,10 +192,6 @@
         "source": "C:\\Users\\kx63\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\66b8a8a8e53ceebd56165cd79675352a\\res\\drawable-hdpi-v4\\abc_list_pressed_holo_dark.9.png"
     },
     {
-        "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\nothing.jpg",
-        "source": "D:\\Files\\HeartTrace\\app\\src\\main\\res\\drawable-hdpi\\nothing.jpg"
-    },
-    {
         "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\common_google_signin_btn_text_dark_disabled.9.png",
         "source": "C:\\Users\\kx63\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\3fe95719bbb3a7d8ccf952426b6f6fce\\res\\drawable-hdpi-v4\\common_google_signin_btn_text_dark_disabled.9.png"
     },

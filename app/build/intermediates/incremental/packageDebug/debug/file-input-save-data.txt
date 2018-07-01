@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Sun Jul 01 21:50:22 CST 2018
+#Sun Jul 01 22:44:18 CST 2018
 7.path=lib/armeabi/libsqlcipher.so
 2.base=D\:\\Files\\HeartTrace\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
 5.set=ASSET

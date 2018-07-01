@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true"
+    android:background="@android:color/white"
     android:orientation="vertical">
 
     <android.support.design.widget.CoordinatorLayout
@@ -38,7 +39,8 @@
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
                     <TextView
                         android:id="@+id/sentence_date"
                         android:layout_width="0dp"
@@ -64,6 +66,7 @@
                             android:layout_gravity="center"
                             android:layout_marginRight="20dp"
                             android:clickable="true"
+                            android:longClickable="true"
                             android:scaleType="centerCrop"/>
                         <ImageView
                             android:id="@+id/sentence_content_icon1"
@@ -72,6 +75,7 @@
                             android:layout_gravity="center"
                             android:layout_marginRight="20dp"
                             android:visibility="invisible"
+                            android:longClickable="true"
                             android:scaleType="centerCrop"/>
                         <ImageView
                             android:id="@+id/sentence_content_icon2"
@@ -80,6 +84,7 @@
                             android:layout_gravity="center"
                             android:layout_marginRight="20dp"
                             android:visibility="invisible"
+                            android:longClickable="true"
                             android:scaleType="centerCrop"/>
                         <ImageView
                             android:id="@+id/sentence_content_icon3"
@@ -88,6 +93,7 @@
                             android:layout_gravity="center"
                             android:layout_marginRight="20dp"
                             android:visibility="invisible"
+                            android:longClickable="true"
                             android:scaleType="centerCrop"/>
                         <ImageView
                             android:id="@+id/sentence_content_icon4"
@@ -96,6 +102,7 @@
                             android:layout_gravity="center"
                             android:layout_marginRight="20dp"
                             android:visibility="invisible"
+                            android:longClickable="true"
                             android:scaleType="centerCrop"/>
                     </RelativeLayout>
                 </LinearLayout>

@@ -100,6 +100,10 @@
         "source": "C:\\Users\\kx63\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\66b8a8a8e53ceebd56165cd79675352a\\res\\drawable-xxhdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png"
     },
     {
+        "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\entertainment.png",
+        "source": "D:\\Files\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\entertainment.png"
+    },
+    {
         "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_text_dark_disabled.9.png",
         "source": "C:\\Users\\kx63\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\3fe95719bbb3a7d8ccf952426b6f6fce\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_text_dark_disabled.9.png"
     },
@@ -156,6 +160,10 @@
         "source": "C:\\Users\\kx63\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\66b8a8a8e53ceebd56165cd79675352a\\res\\drawable-xxhdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png"
     },
     {
+        "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\love.png",
+        "source": "D:\\Files\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\love.png"
+    },
+    {
         "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png",
         "source": "C:\\Users\\kx63\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\66b8a8a8e53ceebd56165cd79675352a\\res\\drawable-xxhdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png"
     },
@@ -182,6 +190,10 @@
     {
         "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\face_insert.png",
         "source": "D:\\Files\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\face_insert.png"
+    },
+    {
+        "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\happy.png",
+        "source": "D:\\Files\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\happy.png"
     },
     {
         "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png",
@@ -214,6 +226,10 @@
     {
         "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bottle_pink1.png",
         "source": "D:\\Files\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\bottle_pink1.png"
+    },
+    {
+        "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\shocked.png",
+        "source": "D:\\Files\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\shocked.png"
     },
     {
         "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_list_pressed_holo_dark.9.png",
@@ -298,6 +314,10 @@
     {
         "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_text_dark_pressed.9.png",
         "source": "C:\\Users\\kx63\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\3fe95719bbb3a7d8ccf952426b6f6fce\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_text_dark_pressed.9.png"
+    },
+    {
+        "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\foolish.png",
+        "source": "D:\\Files\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\foolish.png"
     },
     {
         "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\design_ic_visibility.png",
@@ -456,6 +476,14 @@
         "source": "C:\\Users\\kx63\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\3fe95719bbb3a7d8ccf952426b6f6fce\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_text_light_disabled.9.png"
     },
     {
+        "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\sad.png",
+        "source": "D:\\Files\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\sad.png"
+    },
+    {
+        "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\normal.png",
+        "source": "D:\\Files\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\normal.png"
+    },
+    {
         "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\panda.jpg",
         "source": "D:\\Files\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\panda.jpg"
     },
@@ -506,6 +534,10 @@
     {
         "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\close_gray.png",
         "source": "D:\\Files\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\close_gray.png"
+    },
+    {
+        "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\embarrassed.png",
+        "source": "D:\\Files\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\embarrassed.png"
     },
     {
         "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_star_half_black_48dp.png",
