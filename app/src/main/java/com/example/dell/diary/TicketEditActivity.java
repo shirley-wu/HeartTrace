@@ -1,5 +1,6 @@
 package com.example.dell.diary;
 
+
 import android.animation.ObjectAnimator;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -21,9 +22,13 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 import com.example.dell.db.DatabaseHelper;
 import com.example.dell.db.Diary;
@@ -44,6 +49,7 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
     public static final String NOTE_EDITABLE = "note_editable";
     public static final String NOTE_NEW = "true";
     private static final String TAG = "TicketEditActivity";
+    public static final String POSITION = "Position";
     private String sentence_name = "travel";
     private String tag= null;
     private boolean ifExisted;
@@ -63,6 +69,8 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
     private ImageView sentenceIcon4;
     private FloatingActionButton ticket_confirm;
     private FloatingActionButton ticket_edit;
+    private Button note_previous;
+    private Button note_next;
     private EditText editText ;
     private String note_editable = "true";
     private Sentence sentence;
@@ -70,13 +78,27 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
     private int flag = 1;
     private int labelSize;
     private String note_new;
+    private int position;
     public List<String> weekList = new ArrayList<>(Arrays.asList("周日","周一","周二","周三"," 周四","周五","周六"));
+    private DatabaseHelper databaseHelper= null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate: correct");
         setContentView(R.layout.activity_ticket_edit);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_sentence_content);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null){
+
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            //actionBar.setHomeAsUpIndicator(R.drawable.menu_white);
+        }
+        actionBar.setTitle("Little Note");
+
         Intent intent = getIntent();
         note_editable = intent.getStringExtra(NOTE_EDITABLE);
         sentence = (Sentence) intent.getSerializableExtra(SENTENCE_THIS);
@@ -86,12 +108,21 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
         ticket_edit = (FloatingActionButton) findViewById(R.id.ticket_edit);
         ticket_confirm.setOnClickListener(this);
         ticket_edit.setOnClickListener(this);
+
+        position = intent.getIntExtra(POSITION,1);
+
+        note_next = findViewById(R.id.ticket_previous);
+        note_previous = findViewById(R.id.ticket_next);
+        note_next.setOnClickListener(this);
+        note_previous.setOnClickListener(this);
+
         sentenceIcon = (ImageView) findViewById(R.id.sentence_content_icon);
         sentenceIcon1 = (ImageView) findViewById(R.id.sentence_content_icon1);
         sentenceIcon2 = (ImageView) findViewById(R.id.sentence_content_icon2);
         sentenceIcon3 = (ImageView) findViewById(R.id.sentence_content_icon3);
         sentenceIcon4 = (ImageView) findViewById(R.id.sentence_content_icon4);
         sentenceIcon.setOnClickListener(this);
+
         sentenceIcon.setOnLongClickListener(this);
         sentenceIcon1.setOnLongClickListener(this);
         sentenceIcon2.setOnLongClickListener(this);
@@ -116,6 +147,9 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+        sentenceList = sentence.getSentencebook().getAllSubSentence(helper);
+
+
         if(note_editable.equals("false") ){
             editText.setText(sentence.getText());
             getLabelsOfSentence(sentence,helper);
@@ -124,6 +158,9 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
             sentenceWeekday.setText(weekList.get(sentence.getDate().getDay()));
 
             ticket_confirm.setVisibility(View.INVISIBLE);
+            note_next.setVisibility(View.VISIBLE);
+            note_previous.setVisibility(View.VISIBLE);
+
             editText.setEnabled(false);
             actionBar.show();
         }
@@ -132,8 +169,9 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
             String today = (date.getYear()+1900)+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日";
             sentenceDate.setText(today);
             sentenceWeekday.setText(weekList.get(date.getDay()));
-
             ticket_edit.setVisibility(View.INVISIBLE);
+            note_next.setVisibility(View.INVISIBLE);
+            note_previous.setVisibility(View.INVISIBLE);
             editText.setEnabled(true);
             editText.setText(sentence.getText());
             actionBar.hide();
@@ -147,6 +185,8 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
                 actionBar.show();
                 ticket_edit.setVisibility(View.VISIBLE);
                 ticket_confirm.setVisibility(View.INVISIBLE);
+                note_next.setVisibility(View.VISIBLE);
+                note_previous.setVisibility(View.VISIBLE);
                 editText.setEnabled(false);
                 //添加新的纸条
                 if(note_new.equals("true")) {
@@ -170,6 +210,10 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
                 actionBar.hide();
                 ticket_edit.setVisibility(View.INVISIBLE);
                 ticket_confirm.setVisibility(View.VISIBLE);
+                note_next.setVisibility(View.INVISIBLE);
+                note_previous.setVisibility(View.INVISIBLE);
+
+
                 editText.setEnabled(true);
                 break;
             case R.id.sentence_content_icon:
@@ -184,6 +228,26 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
                     else if(flag == -1) imageItems.get(i).setVisibility(View.INVISIBLE);
                 }
                 flag = -flag;
+                break;
+            case R.id.ticket_next:
+                if(position >= sentenceList.size()-1){
+                    Toast.makeText(this, "已经是最新的一张纸条拉", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                Intent intent_next= new Intent();
+                intent_next.putExtra("result",position);
+                setResult(1, intent_next);
+                finish();
+                break;
+            case R.id.ticket_previous:
+                if(position == 0){
+                    Toast.makeText(this, "已经是最后一张纸条拉", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                Intent intent_pre= new Intent();
+                intent_pre.putExtra("result",position);
+                setResult(-1, intent_pre);
+                finish();
                 break;
 
         }

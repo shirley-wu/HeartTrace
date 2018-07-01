@@ -22,6 +22,7 @@ public class SentencebookTest extends InstrumentationTestCase {
     @Before
     public void setUp() throws Exception {
         super.setUp();
+        sentencebook.setDescription("hihihihi");
         sentencebook.insert(helper);
         sentence.setDate();
         sentence.setSentencebook(sentencebook);
@@ -43,6 +44,7 @@ public class SentencebookTest extends InstrumentationTestCase {
         assertEquals(null, b);
         b = Sentencebook.getByName(helper, sentencebook.getSentencebookName());
         assertEquals(sentencebook.getSentencebookName(), b.getSentencebookName());
+        assertEquals(sentencebook.getDescription(), b.getDescription());
     }
     
     @Test

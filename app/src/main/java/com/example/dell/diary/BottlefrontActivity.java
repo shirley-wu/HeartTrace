@@ -1,5 +1,6 @@
 package com.example.dell.diary;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -35,6 +37,8 @@ import com.example.dell.db.Label;
 import com.example.dell.db.Sentence;
 import com.example.dell.db.Sentencebook;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +48,8 @@ public class BottlefrontActivity extends AppCompatActivity {
     public static final String BOTTLE_NAME = "bottle_name";
     public static final String BOTTLE_IMAGE_ID = "bottle_image_id";
 
+    private Sentencebook sentencebook_this;
+    private String read_me_text = null;
     private DatabaseHelper databaseHelper = null;
     private List<Sentence> sentenceList = new ArrayList<>();
     private NoteAdapter adapter;
@@ -69,9 +75,33 @@ public class BottlefrontActivity extends AppCompatActivity {
     {
         switch (requestCode){
             case 1:
-
+                if(resultCode == 1){
+                    int return_position = data.getIntExtra("result",0);
+                    if(return_position < sentenceList.size() ) {
+                        int new_positon = return_position + 1;
+                        Sentence sentence = sentenceList.get(new_positon);
+                        Intent intent = new Intent(BottlefrontActivity.this, TicketEditActivity.class);
+                        intent.putExtra(TicketEditActivity.POSITION, new_positon);
+                        intent.putExtra(TicketEditActivity.SENTENCE_THIS, sentence);
+                        intent.putExtra(TicketEditActivity.NOTE_EDITABLE, "false");
+                        intent.putExtra(TicketEditActivity.NOTE_NEW, "false");
+                        startActivityForResult(intent, 1);
+                    }
+                }
+                if(resultCode == -1){
+                    int return_positon1 = data.getIntExtra("result",0);
+                    if(return_positon1>=0){
+                        int new_positon1 = return_positon1 - 1;
+                        Sentence sentence = sentenceList.get(new_positon1);
+                        Intent intent = new Intent(BottlefrontActivity.this, TicketEditActivity.class);
+                        intent.putExtra(TicketEditActivity.POSITION, new_positon1);
+                        intent.putExtra(TicketEditActivity.SENTENCE_THIS, sentence);
+                        intent.putExtra(TicketEditActivity.NOTE_EDITABLE, "false");
+                        intent.putExtra(TicketEditActivity.NOTE_NEW, "false");
+                        startActivityForResult(intent, 1);
+                    }
+                }
         }
-
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,17 +109,20 @@ public class BottlefrontActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bottlefront);
         Intent intent = getIntent();
         final String sentencebookName = intent.getStringExtra(BOTTLE_NAME);
-       // int bottleImageId  = intent.getIntExtra(BOTTLE_IMAGE_ID, 0);
         Toolbar toolbar = (Toolbar) findViewById(R.id.bottle_front_toolbar);
         CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         ImageView bottleImageView = (ImageView) findViewById(R.id.bottle_image_view);
+
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
         collapsingToolbar.setTitle(sentencebookName);
-      //  Glide.with(this).load(bottleImageId).into(bottleImageView);
+        //  Glide.with(this).load(bottleImageId).into(bottleImageView);
+
+
+
        //悬浮按钮添加纸条
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.note_add_fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -126,12 +159,46 @@ public class BottlefrontActivity extends AppCompatActivity {
             }
         });
 
-         //根据sentencebookName 获取sentencebook对象
-        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-        Sentencebook sentencebook = Sentencebook.getByName(helper, sentencebookName);
-        initSententceList(sentencebook);
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_note_view);
+
+
+        //根据sentencebookName 获取sentencebook对象
+        databaseHelper = new DatabaseHelper(getApplicationContext());
+        sentencebook_this = Sentencebook.getByName(databaseHelper, sentencebookName);
+        initSententceList(sentencebook_this);
+
+
+
+        Button edit_read_me = findViewById(R.id.bottle_readme_botton);
+        edit_read_me.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final EditText inputBottleDescribe = new EditText(BottlefrontActivity.this);
+                inputBottleDescribe.setHint("请输入瓶子的描述");
+                inputBottleDescribe.setFocusable(true);
+                AlertDialog.Builder builder = new AlertDialog.Builder(BottlefrontActivity.this);
+                builder.setTitle("read me ##")
+                        .setView(inputBottleDescribe)                //设置一个控件（其他控件同理）
+                        .setNegativeButton("取消", null);
+                builder.setPositiveButton("保存", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        read_me_text = inputBottleDescribe.getText().toString();
+                        TextView read_me = findViewById(R.id.bottle_readme_text);
+                        read_me.setText(read_me_text);
+                        sentencebook_this.setDescription(read_me_text);
+                        sentencebook_this.update(databaseHelper);
+                    }
+                });
+                builder.show();
+
+            }
+        });
+        TextView read_me = findViewById(R.id.bottle_readme_text);
+        read_me_text = sentencebook_this.getDescription();
+        read_me.setText(read_me_text);
+
+
+        RecyclerView recyclerView = findViewById(R.id.recycler_note_view);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
         adapter = new NoteAdapter(sentenceList, sentencebookName);

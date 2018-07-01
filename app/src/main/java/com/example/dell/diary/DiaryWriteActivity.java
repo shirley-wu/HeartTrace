@@ -94,6 +94,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DiaryWriteActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
 
@@ -335,7 +337,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             actionBar.hide();
         }
         else {
-            diary_write.setText(diary.getText());
+            //Log.i("show",diary.getHtmlText());
+            diary_write.setText(Html.fromHtml(diary.getHtmlText()));
+            getImage(diary.getText());
             getLabelsOfDiary(diary,helper);
             String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
             diaryDate.setText(date);
@@ -364,7 +368,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 }
                 flag = -flag;
                 break;
-
             case R.id.pre_diary:
                 if(index == 0){
                     Toast.makeText(DiaryWriteActivity.this, "没有更早的日记了哦",Toast.LENGTH_SHORT).show();
@@ -375,9 +378,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
                     diaryDate.setText(date);
                     diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
-                    diary_write.setText(diary.getText());
+                    diary_write.setText(Html.fromHtml(diary.getHtmlText()));
                     getLabelsOfDiary(diary,helper);
                 }
+                getImage(diary.getText());
                 break;
             case R.id.next_diary:
                 if(index == diaryList.size()-1){
@@ -389,9 +393,11 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
                     diaryDate.setText(date);
                     diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
-                    diary_write.setText(diary.getText());
+                    diary_write.setText(Html.fromHtml(diary.getHtmlText()));
                     getLabelsOfDiary(diary,helper);
                 }
+                getImage(diary.getText());
+                break;
             case R.id.edit_layout:
                 if(confirm.getVisibility()==View.VISIBLE){
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -402,9 +408,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 }
                 break;
             case R.id.confirm:
-                //Log.i("test", Html.toHtml(diary_write.getText()));
                 if(index == diaryList.size()){
-                    diary = new Diary(diary_write.getText().toString());
+                    diary = new Diary();
+                    diary.setText(diary_write.getText().toString());
+                    diary.setHtmlText(Html.toHtml(diary_write.getText()));
                     Date date = new Date();
                     diary.setDate(date);
                     diary.insert(helper);
@@ -412,6 +419,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 }
                 else{
                     diary.setText(diary_write.getText().toString());
+                    diary.setHtmlText(Html.toHtml(diary_write.getText()));
                     diary.update(helper);
                     diaryList.remove(index);
                     diaryList.add(index,diary);
@@ -420,7 +428,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 for(Diary i : diaryList){
                     Log.i("test", i.getText());
                 } */
-                CharSequence charSequence = Html.fromHtml(Html.toHtml(diary_write.getText()));
+                //CharSequence charSequence = Html.fromHtml(Html.toHtml(diary_write.getText()));
                 //Toast.makeText(DiaryWriteActivity.this,charSequence,Toast.LENGTH_SHORT).show();
                 diary_write.setEnabled(false);
                 font_set.setVisibility(View.INVISIBLE);
@@ -861,21 +869,20 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         Uri uri = data.getData();
         Bitmap bitmap = null;
         try {
-            bitmap = getBitmapFormUri(DiaryWriteActivity.this,uri);
+            bitmap = getBitmapFromUri(DiaryWriteActivity.this,uri);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        saveBitmap(DiaryWriteActivity.this,bitmap);
-        SpannableString mSpan = new SpannableString("1");
-        int insert_position = diary_write.getSelectionStart();
-        mSpan.setSpan(new ImageSpan(bitmap) , mSpan.length() - 1, mSpan.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        String imagePath = saveBitmap(DiaryWriteActivity.this,bitmap);
+        SpannableString imageSpan = new SpannableString(imagePath);
+        imageSpan.setSpan(new ImageSpan(bitmap) , 0, imageSpan.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         Editable editable = diary_write.getText();
-        editable.insert(insert_position, mSpan);
+        editable.insert(diary_write.getSelectionStart(), imageSpan);
         diary_write.setText(editable);
         diary_write.append("\n");
     }
 
-    public static Bitmap getBitmapFormUri(Activity ac, Uri uri) throws FileNotFoundException, IOException {
+    public static Bitmap getBitmapFromUri(Activity ac, Uri uri) throws FileNotFoundException, IOException {
         InputStream input = ac.getContentResolver().openInputStream(uri);
         BitmapFactory.Options onlyBoundsOptions = new BitmapFactory.Options();
         onlyBoundsOptions.inJustDecodeBounds = true;
@@ -927,11 +934,11 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         return bitmap;
     }
 
-    private static final String SD_PATH = "/sdcard/HeartTrace/pic/";
+    private static final String SD_PATH = Environment.getExternalStorageDirectory().getPath() + "/HeartTrace/pic/";
     private static final String IN_PATH = "/HeartTrace/pic/";
 
     private static String generateFileName() {
-        SimpleDateFormat time_format=new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        SimpleDateFormat time_format=new SimpleDateFormat("yyyyMMddHHmmss");
         String date=time_format.format(new Date());
         return "image_"+date;
     }
@@ -991,6 +998,25 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             //picture.setImageBitmap(bitmap);
         } else {
             Toast.makeText(this, "failed to get image", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void getImage(String text)
+    {
+        Pattern pattern = Pattern.compile( Environment.getExternalStorageDirectory().getPath()+"/HeartTrace/pic/image_[0-9]{14}\\.jpg");
+        Matcher matcher = pattern.matcher(text);
+        if(matcher.find()) {
+            Bitmap bitmap = BitmapFactory.decodeFile(matcher.group());
+            SpannableString imageSpan = new SpannableString(matcher.group());
+            imageSpan.setSpan(new ImageSpan(bitmap) , 0, imageSpan.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            Editable editable = diary_write.getText();
+            Pattern pattern1 = Pattern.compile("￼");
+            Matcher matcher1 = pattern1.matcher(diary_write.getText());
+            if(matcher1.find()) {
+                editable.delete(matcher1.start(),matcher1.end());
+                editable.insert(matcher1.start(), imageSpan);
+            }
+            diary_write.setText(editable);
         }
     }
 
