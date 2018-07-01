@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.dell.db.DatabaseHelper;
 import com.example.dell.db.Sentence;
+import com.example.dell.db.Sentencebook;
 
 import java.util.List;
 
@@ -27,6 +29,7 @@ public class NoteAdapter extends RecyclerView.Adapter <NoteAdapter.ViewHolder> {
     private List<Sentence> mSentenceList;
     private Context mContext;
     private String sentencebookName;
+    private static final String TAG = "notelist";
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
@@ -89,10 +92,9 @@ public class NoteAdapter extends RecyclerView.Adapter <NoteAdapter.ViewHolder> {
                         int position = holder.getAdapterPosition();
                        Sentence sentence = mSentenceList.get(position);
                        sentence.delete(helper);
-                       mSentenceList = Sentence.getAll(helper,false);
+                       Sentencebook sentencebook = Sentencebook.getByName(helper, sentencebookName);
+                       mSentenceList = sentencebook.getAllSubSentence(helper);
                        notifyDataSetChanged();
-                       /* mSentenceList.remove(note);
-                        notifyItemRemoved(position);*/
                     }
                 });
                 dialog.setNegativeButton("取消",new DialogInterface.OnClickListener(){
@@ -101,7 +103,6 @@ public class NoteAdapter extends RecyclerView.Adapter <NoteAdapter.ViewHolder> {
                     }
                 });
                 dialog.show();
-                //Toast.makeText(mContext,"删除:"+ position,Toast.LENGTH_SHORT).show();
             }
 
             @Override
