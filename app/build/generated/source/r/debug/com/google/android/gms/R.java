@@ -114,12 +114,12 @@ public final class R {
         public static final int radio = 0x7f0e00ad;
         public static final int rfc822 = 0x7f0e0084;
         public static final int standard = 0x7f0e0032;
-        public static final int test = 0x7f0e00e0;
+        public static final int test = 0x7f0e00e1;
         public static final int text = 0x7f0e0013;
         public static final int text1 = 0x7f0e0061;
         public static final int text2 = 0x7f0e0014;
         public static final int thing_proto = 0x7f0e0062;
-        public static final int toolbar = 0x7f0e00de;
+        public static final int toolbar = 0x7f0e00df;
         public static final int url = 0x7f0e0085;
         public static final int wide = 0x7f0e008d;
         public static final int wrap_content = 0x7f0e0048;
