@@ -88,7 +88,6 @@ public class StatisticsActivity extends AppCompatActivity implements DatePickerD
         startDate = stringToDate(startDateString);
         endDate = stringToDate(endDateString);
 
-
         end = (now.get(Calendar.MONTH) + 1) + "/" + now.get(Calendar.DAY_OF_MONTH);
         dateTextView.setText(init_range);
 
@@ -175,6 +174,7 @@ public class StatisticsActivity extends AppCompatActivity implements DatePickerD
         endDate = stringToDate(endDateString);
 
         dayNumber = (endDate.getTime() - startDate.getTime())/oneDayLength + 1;
+        Log.i("daynumber", ""+dayNumber);
 
         end = monthOfYearEnd + "/" + dayOfMonthEnd;
         dateTextView.setText(date);
@@ -196,14 +196,17 @@ public class StatisticsActivity extends AppCompatActivity implements DatePickerD
         List<Float> yValues = new ArrayList<>();
         for (int j = 0; j < dayNumber; j++) {
             Date currentDate = new Date(startDate.getTime() + (long)j * oneDayLength);
-            currentAllDiary = Diary.getByDate(helper,currentDate.getYear(),currentDate.getMonth() + 1,currentDate.getDay()); //数据库有日记但取不出来
+            currentAllDiary = Diary.getByDate(helper,currentDate.getYear() + 1900,currentDate.getMonth() + 1,currentDate.getDate());
+            //Log.i("date",currentDate.getYear() +""+ currentDate.getMonth() +""+ currentDate.getDate());
             if(currentAllDiary == null || currentAllDiary.size() == 0 || currentAllDiary.get(0) == null) //size一直为0
             {
+                Log.i("size",""+currentAllDiary.size());
                 yValues.add((float) 0);
                 continue;
             }
             thisDayScore = 0;
             for(Diary thisDiary : currentAllDiary){
+                Log.i("text",thisDiary.getText());
                 labelThisDiary = null;
                 try {
                     labelThisDiary = thisDiary.getAllLabel(helper);
@@ -225,6 +228,7 @@ public class StatisticsActivity extends AppCompatActivity implements DatePickerD
                     }
                 }
             }
+            if(thisDayScore > 10) thisDayScore = 10;
             yValues.add((float) thisDayScore);
         }
 
@@ -237,7 +241,7 @@ public class StatisticsActivity extends AppCompatActivity implements DatePickerD
         //创建多条折线的图表
 
         lineChartManager1.showLineChart(xValues, yValues, name, color);
-        lineChartManager1.setXAxis(7, 1, 7);
+        lineChartManager1.setXAxis(dayNumber, 1, (int)dayNumber);
         lineChartManager1.setYAxis(10, 0, 5);
         lineChartManager1.setDescription(end, color_d);
         legend.setFormSize(20f);
