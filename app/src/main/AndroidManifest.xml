@@ -31,7 +31,11 @@
         <activity android:name=".DiaryWriteActivity"
             android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".TicketEditActivity"
+<<<<<<< HEAD
             android:windowSoftInputMode="adjustResize|stateHidden"/>
+=======
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+>>>>>>> 06de64397834b37895ed6f064133f5dfaeb498f7
 
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for

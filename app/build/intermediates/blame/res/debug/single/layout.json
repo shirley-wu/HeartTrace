@@ -1,0 +1,418 @@
+[
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_action.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\5844d80b1e46e5c457c250ada913a0f2\\res\\layout\\notification_action.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_header.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\1e693f60716bdb3599e2680538c7696b\\res\\layout\\design_navigation_item_header.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_view_list_nav_layout.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\diary_write_content.xml",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\layout\\diary_write_content.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_up_container.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\layout\\abc_action_bar_up_container.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_icon.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\layout\\abc_list_menu_item_icon.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\mdtp_done_button.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\9def73248980b48ce25fbfaf0db5769c\\res\\layout\\mdtp_done_button.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_title_material.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\layout\\abc_alert_dialog_title_material.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_tab_text.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\1e693f60716bdb3599e2680538c7696b\\res\\layout\\design_layout_tab_text.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_action_tombstone.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\5844d80b1e46e5c457c250ada913a0f2\\res\\layout\\notification_action_tombstone.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\calendar_content.xml",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\layout\\calendar_content.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_menu.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\1e693f60716bdb3599e2680538c7696b\\res\\layout\\design_navigation_menu.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\include_pickerview_topbar.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\Android-PickerView-4.1.3.aar\\13b7e9cbaf0be84787dc9cf72bf3746f\\res\\layout\\include_pickerview_topbar.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\range_time_picker_dialog.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\9def73248980b48ce25fbfaf0db5769c\\res\\layout\\range_time_picker_dialog.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_big_media_narrow.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\c84d2c0825c22791bff9e34049aee0b2\\res\\layout\\notification_template_big_media_narrow.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_custom_big.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\5844d80b1e46e5c457c250ada913a0f2\\res\\layout\\notification_template_custom_big.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\nav_header_main.xml",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\layout\\nav_header_main.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\timeline_item.xml",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\layout\\timeline_item.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_search.xml",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\layout\\activity_search.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\mdtp_date_picker_header_view.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\9def73248980b48ce25fbfaf0db5769c\\res\\layout\\mdtp_date_picker_header_view.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_diary_write.xml",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\layout\\activity_diary_write.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\layout_pop.xml",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\layout\\layout_pop.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_menu_item.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\1e693f60716bdb3599e2680538c7696b\\res\\layout\\design_navigation_menu_item.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_dropdown_item_icons_2line.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_big_media.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\c84d2c0825c22791bff9e34049aee0b2\\res\\layout\\notification_template_big_media.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_multichoice_material.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\layout\\select_dialog_multichoice_material.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple_overlay_action_mode.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\layout_basepickerview.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\Android-PickerView-4.1.3.aar\\13b7e9cbaf0be84787dc9cf72bf3746f\\res\\layout\\layout_basepickerview.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\support_simple_spinner_dropdown_item.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\layout\\support_simple_spinner_dropdown_item.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_diary.xml",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\layout\\activity_diary.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_layout.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\layout\\abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_expanded_menu_layout.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\layout\\abc_expanded_menu_layout.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_snackbar.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\1e693f60716bdb3599e2680538c7696b\\res\\layout\\design_layout_snackbar.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\mdtp_date_picker_selected_date.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\9def73248980b48ce25fbfaf0db5769c\\res\\layout\\mdtp_date_picker_selected_date.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\mdtp_date_picker_view_animator.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\9def73248980b48ce25fbfaf0db5769c\\res\\layout\\mdtp_date_picker_view_animator.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_bottom_navigation_item.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\1e693f60716bdb3599e2680538c7696b\\res\\layout\\design_bottom_navigation_item.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_lines_media.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\c84d2c0825c22791bff9e34049aee0b2\\res\\layout\\notification_template_lines_media.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_big_media_custom.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\c84d2c0825c22791bff9e34049aee0b2\\res\\layout\\notification_template_big_media_custom.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\new_bottle.xml",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\layout\\new_bottle.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_material.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\layout\\abc_alert_dialog_material.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view_list_item.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\layout\\abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_item_layout.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\layout\\abc_popup_menu_item_layout.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_item_layout.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\layout\\abc_action_menu_item_layout.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\c84d2c0825c22791bff9e34049aee0b2\\res\\layout\\notification_template_media.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\item_chart.xml",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\layout\\item_chart.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_ticket_edit.xml",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\layout\\activity_ticket_edit.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\tooltip.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\layout\\tooltip.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_item_material.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\layout\\select_dialog_item_material.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_tab_icon.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\1e693f60716bdb3599e2680538c7696b\\res\\layout\\design_layout_tab_icon.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_dialog_title_material.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\layout\\abc_dialog_title_material.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_statistics.xml",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\layout\\activity_statistics.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\mdtp_year_label_text_view.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\9def73248980b48ce25fbfaf0db5769c\\res\\layout\\mdtp_year_label_text_view.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_chronometer.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\5844d80b1e46e5c457c250ada913a0f2\\res\\layout\\notification_template_part_chronometer.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\mdtp_date_picker_view_animator_end.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\9def73248980b48ce25fbfaf0db5769c\\res\\layout\\mdtp_date_picker_view_animator_end.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\diarycard_item.xml",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\layout\\diarycard_item.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_icon_group.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\5844d80b1e46e5c457c250ada913a0f2\\res\\layout\\notification_template_icon_group.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_text_input_password_icon.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\1e693f60716bdb3599e2680538c7696b\\res\\layout\\design_text_input_password_icon.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\search_result_item.xml",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\layout\\search_result_item.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_toolbar.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\layout\\abc_screen_toolbar.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_time.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\5844d80b1e46e5c457c250ada913a0f2\\res\\layout\\notification_template_part_time.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\layout\\abc_screen_simple.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\note_item.xml",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\layout\\note_item.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\pickerview_time.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\Android-PickerView-4.1.3.aar\\13b7e9cbaf0be84787dc9cf72bf3746f\\res\\layout\\pickerview_time.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\1e693f60716bdb3599e2680538c7696b\\res\\layout\\design_navigation_item.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\nav_header_bottle.xml",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\layout\\nav_header_bottle.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_snackbar_include.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\1e693f60716bdb3599e2680538c7696b\\res\\layout\\design_layout_snackbar_include.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_singlechoice_material.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\layout\\select_dialog_singlechoice_material.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_label_manage.xml",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\layout\\activity_label_manage.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_bottom_sheet_dialog.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\1e693f60716bdb3599e2680538c7696b\\res\\layout\\design_bottom_sheet_dialog.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_calendar.xml",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\layout\\activity_calendar.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\font_setting_bottom_sheet.xml",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\layout\\font_setting_bottom_sheet.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\range_date_picker_dialog.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\9def73248980b48ce25fbfaf0db5769c\\res\\layout\\range_date_picker_dialog.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_separator.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\1e693f60716bdb3599e2680538c7696b\\res\\layout\\design_navigation_item_separator.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_bottle_write.xml",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\layout\\activity_bottle_write.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_header_item_layout.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\layout\\abc_popup_menu_header_item_layout.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_note.xml",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\layout\\activity_note.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media_custom.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\c84d2c0825c22791bff9e34049aee0b2\\res\\layout\\notification_template_media_custom.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_main.xml",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_radio.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\layout\\abc_list_menu_item_radio.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\pop1.xml",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\layout\\pop1.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_title_item.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\layout\\abc_action_bar_title_item.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_media_cancel_action.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\c84d2c0825c22791bff9e34049aee0b2\\res\\layout\\notification_media_cancel_action.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_big_media_narrow_custom.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\c84d2c0825c22791bff9e34049aee0b2\\res\\layout\\notification_template_big_media_narrow_custom.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\mdtp_time_header_label.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\9def73248980b48ce25fbfaf0db5769c\\res\\layout\\mdtp_time_header_label.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_media_action.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\c84d2c0825c22791bff9e34049aee0b2\\res\\layout\\notification_media_action.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_bottles.xml",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\layout\\activity_bottles.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\layout\\abc_activity_chooser_view.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\bottle_item.xml",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\layout\\bottle_item.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_view.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\layout\\abc_search_view.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_search_result.xml",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\layout\\activity_search_result.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_subheader.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\1e693f60716bdb3599e2680538c7696b\\res\\layout\\design_navigation_item_subheader.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\pickerview_options.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\Android-PickerView-4.1.3.aar\\13b7e9cbaf0be84787dc9cf72bf3746f\\res\\layout\\pickerview_options.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_content_include.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\layout\\abc_screen_content_include.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_layout.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\layout\\abc_list_menu_item_layout.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_bottlefront.xml",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\layout\\activity_bottlefront.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_bar.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\layout\\abc_action_mode_bar.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_menu_item_action_area.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\1e693f60716bdb3599e2680538c7696b\\res\\layout\\design_menu_item_action_area.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_checkbox.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\layout\\abc_list_menu_item_checkbox.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\mdtp_time_header_label_end.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\9def73248980b48ce25fbfaf0db5769c\\res\\layout\\mdtp_time_header_label_end.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_button_bar_material.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\help_tips.xml",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\layout\\help_tips.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\mdtp_date_picker_selected_date_end.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\9def73248980b48ce25fbfaf0db5769c\\res\\layout\\mdtp_date_picker_selected_date_end.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_select_dialog_material.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\layout\\abc_select_dialog_material.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_close_item_material.xml",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\layout\\abc_action_mode_close_item_material.xml"
+    }
+]
