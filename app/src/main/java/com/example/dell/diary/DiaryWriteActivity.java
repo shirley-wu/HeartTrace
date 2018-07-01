@@ -53,6 +53,7 @@ import android.text.style.StyleSpan;
 import android.text.style.TypefaceSpan;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -101,8 +102,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     int tagId = 0;
     public String label_name = "happy";
     private int flag = 1;
-    private int[] imgIds = {R.drawable.happy_black,
-            R.drawable.normal_black, R.drawable.sad_black};
+    private boolean labelProperty;
+    private int[] imgIds = {R.drawable.happy, R.drawable.normal, R.drawable.sad,
+                            R.drawable.embarrassed, R.drawable.shocked, R.drawable.foolish,
+                            R.drawable.travel, R.drawable.work, R.drawable.study, R.drawable.entertainment, R.drawable.love};
     private String tag= null;
     Diary diary;
     List<Diary> diaryList = new ArrayList<>();
@@ -1026,26 +1029,63 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             case ICON_LIST_DIALOG:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setIcon(R.drawable.mood);
-                builder.setTitle("今天心情如何？");
+                builder.setTitle("给日记贴个标签吧!");
                 BaseAdapter adapter = new ListItemAdapter();
                 DialogInterface.OnClickListener listener =
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int which) {
+                                labelProperty = false;
                                 tagId = which;
-                                if(tagId == 0) label_name = "happy";
-                                else if(tagId == 1) label_name = "normal";
-                                else if(tagId == 2) label_name = "sad";
-                                else label_name = "happy";
-
+                                if(tagId >= 0 && tagId <= 5) labelProperty = true;
+                                switch (tagId){
+                                    case 0: label_name = "happy";break;
+                                    case 1: label_name = "normal";break;
+                                    case 2: label_name = "sad";break;
+                                    case 3: label_name = "embarrassed";break;
+                                    case 4: label_name = "shocked";break;
+                                    case 5: label_name = "foolish";break;
+                                    case 6: label_name = "travel";break;
+                                    case 7: label_name = "work";break;
+                                    case 8: label_name = "study";break;
+                                    case 9: label_name = "entertainment";break;
+                                    case 10: label_name = "love";break;
+                                }
                                 DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-                                //diary = diaryList.get(index);
-                                //diary.setid(tagId);
 
                                 Label label = Label.getByName(helper,label_name);
                                 if(label == null) {
                                     label = new Label(label_name);
                                     label.insert(helper);
+                                }
+                                if(labelProperty){
+                                    label_this = null;
+                                    try {
+                                        label_this = diary.getAllLabel(helper);
+                                    } catch (SQLException e) {
+                                        e.printStackTrace();
+                                    }
+                                    if(label_this != null && label_this.size()!= 0 && label_this.get(0).getLabelname() != null)
+                                    {
+                                        Log.i("labeltest", "labels exist!!");
+                                        for(Label i:label_this)
+                                        {
+                                            Log.i("labeltest", i.getLabelname());
+                                            if(isMoodLabel(i.getLabelname()))
+                                            {
+                                                diary.deleteLabel(helper, i);
+                                                Log.i("labeltest", "delete " + i.getLabelname());
+                                            }
+                                        }
+                                    }
+                                    try {
+                                        label_this = diary.getAllLabel(helper);
+                                    } catch (SQLException e) {
+                                        e.printStackTrace();
+                                    }
+                                    for(Label i:label_this){
+                                        Log.i("labeltest", "exist " + i.getLabelname());
+                                    }
                                 }
                                 diary.insertLabel(helper, label);
                                 getLabelsOfDiary(diary,helper);
@@ -1085,52 +1125,69 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             String text = getResources().getStringArray(R.array.mood)[position];
             textView.setText(text);
             //设置字体大小
-            textView.setTextSize(20);
+            textView.setTextSize(25);
             AbsListView.LayoutParams layoutParams = new AbsListView.LayoutParams(
                     WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
             textView.setLayoutParams(layoutParams);
             //设置水平方向上居中
-            textView.setGravity(android.view.Gravity.CENTER_VERTICAL);
-            textView.setMinHeight(65);
+            textView.setGravity(Gravity.CENTER_VERTICAL);
+            textView.setMinHeight(70);
             //设置文字颜色
             textView.setTextColor(Color.BLACK);
             //设置图标在文字的左边
             textView.setCompoundDrawablesWithIntrinsicBounds(imgIds[position], 0, 0, 0);
             //设置textView的左上右下的padding大小
-            textView.setPadding(30, 10, 30, 10);
+            textView.setPadding(80, 10, 20, 15);
             //设置文字和图标之间的padding大小
-            textView.setCompoundDrawablePadding(25);
+            textView.setCompoundDrawablePadding(30);
             return textView;
         }
     }
 
-    public Drawable setTag(int id){
-        switch(id)
-        {
-            case 0:
-                return (getResources().getDrawable(R.drawable.happy_black));
-            case 1:
-                return (getResources().getDrawable(R.drawable.normal_black));
-            case 2:
-                return (getResources().getDrawable(R.drawable.sad_black));
-            default:
-                return (getResources().getDrawable(R.drawable.normal_black));
-        }
-    }
 
     public Drawable setTags(String id){
         switch(id)
         {
             case "happy":
-                return (getResources().getDrawable(R.drawable.happy_black));
+                return (getResources().getDrawable(R.drawable.happy));
             case "normal":
-                return (getResources().getDrawable(R.drawable.normal_black));
+                return (getResources().getDrawable(R.drawable.normal));
             case "sad":
-                return (getResources().getDrawable(R.drawable.sad_black));
+                return (getResources().getDrawable(R.drawable.sad));
+            case "embarrassed":
+                return (getResources().getDrawable(R.drawable.embarrassed));
+            case "shocked":
+                return (getResources().getDrawable(R.drawable.shocked));
+            case "foolish":
+                return (getResources().getDrawable(R.drawable.foolish));
+            case "travel":
+                return (getResources().getDrawable(R.drawable.travel));
+            case "work":
+                return (getResources().getDrawable(R.drawable.work));
+            case "study":
+                return (getResources().getDrawable(R.drawable.study));
+            case "entertainment":
+                return (getResources().getDrawable(R.drawable.entertainment));
+            case "love":
+                return (getResources().getDrawable(R.drawable.love));
             default:
-                return (getResources().getDrawable(R.drawable.normal_black));
+                return (getResources().getDrawable(R.drawable.normal));
         }
     }
+
+    public boolean isMoodLabel(String id){
+        switch(id)
+        {
+            case "happy": return true;
+            case "normal": return true;
+            case "sad": return true;
+            case "embarrassed": return true;
+            case "shocked": return true;
+            case "foolish": return true;
+            default: return false;
+        }
+    }
+
 
     public void getLabelsOfDiary(Diary diary, DatabaseHelper helper ){
         diaryIcon.setImageDrawable(getResources().getDrawable(R.drawable.nothing));
