@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 
 import android.widget.ImageView;
@@ -66,6 +67,8 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
 
     private FloatingActionButton ticket_confirm;
     private FloatingActionButton ticket_edit;
+    private Button note_previous;
+    private Button note_next;
     private EditText editText ;
     private String note_editable = "true";
     private Sentence sentence;
@@ -73,48 +76,8 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
     private int flag = 1;
     private String note_new;
     public List<String> weekList = new ArrayList<>(Arrays.asList("周日","周一","周二","周三"," 周四","周五","周六"));
+    private DatabaseHelper databaseHelper= null;
 
-
-/*
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                //mDrawLayout.openDrawer(GravityCompat.START);
-                finish();
-                break;
-            case R.id.note_delete:
-                Log.d(TAG, "onOptionsItemSelected: click");
-                AlertDialog.Builder dialog = new AlertDialog.Builder(TicketEditActivity.this);
-                dialog.setTitle("提示");
-                dialog.setMessage("你确定要删除你的纸条吗？");
-                dialog.setCancelable(true);
-                dialog.setPositiveButton("确认",new DialogInterface.OnClickListener(){
-                    public void onClick(DialogInterface dialog, int which){
-                        Log.d(TAG, "onOptionsItemSelected: build");
-                        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-                        Log.d(TAG, "onOptionsItemSelected: build1");
-                        Log.d(TAG, "onOptionsItemSelected: build2");
-                        sentence.delete(helper);
-                        finish();
-                    }
-                });
-                dialog.setNegativeButton("取消",new DialogInterface.OnClickListener(){
-                    public void onClick(DialogInterface dialog, int which){
-                        dialog.cancel();
-                    }
-                });
-                dialog.show();
-
-                break;
-            case R.id.note_label:
-                break;
-            default:
-        }
-        return true;
-    }
-*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,13 +105,19 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
         ticket_confirm.setOnClickListener(this);
         ticket_edit.setOnClickListener(this);
 
+
+
+        note_next = findViewById(R.id.ticket_previous);
+        note_previous = findViewById(R.id.ticket_next);
+        note_next.setOnClickListener(this);
+        note_previous.setOnClickListener(this);
+
         sentenceIcon = (ImageView) findViewById(R.id.sentence_content_icon);
         sentenceIcon1 = (ImageView) findViewById(R.id.sentence_content_icon1);
         sentenceIcon2 = (ImageView) findViewById(R.id.sentence_content_icon2);
         sentenceIcon3 = (ImageView) findViewById(R.id.sentence_content_icon3);
         sentenceIcon4 = (ImageView) findViewById(R.id.sentence_content_icon4);
         sentenceIcon.setOnClickListener(this);
-
         Init();
     }
 
@@ -167,6 +136,9 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+        sentenceList = sentence.getSentencebook().getAllSubSentence(helper);
+
+
         if(note_editable.equals("false") ){
             editText.setText(sentence.getText());
             getLabelsOfSentence(sentence,helper);
@@ -175,6 +147,9 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
             sentenceWeekday.setText(weekList.get(sentence.getDate().getDay()));
 
             ticket_confirm.setVisibility(View.INVISIBLE);
+            note_next.setVisibility(View.VISIBLE);
+            note_previous.setVisibility(View.VISIBLE);
+
             editText.setEnabled(false);
             actionBar.show();
         }
@@ -183,8 +158,9 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
             String today = (date.getYear()+1900)+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日";
             sentenceDate.setText(today);
             sentenceWeekday.setText(weekList.get(date.getDay()));
-
             ticket_edit.setVisibility(View.INVISIBLE);
+            note_next.setVisibility(View.INVISIBLE);
+            note_next.setVisibility(View.INVISIBLE);
             editText.setEnabled(true);
             editText.setText(sentence.getText());
             actionBar.hide();
@@ -198,6 +174,8 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
                 actionBar.show();
                 ticket_edit.setVisibility(View.VISIBLE);
                 ticket_confirm.setVisibility(View.INVISIBLE);
+                note_next.setVisibility(View.VISIBLE);
+                note_previous.setVisibility(View.VISIBLE);
                 editText.setEnabled(false);
                 //添加新的纸条
                 if(note_new.equals("true")) {
@@ -221,6 +199,10 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
                 actionBar.hide();
                 ticket_edit.setVisibility(View.INVISIBLE);
                 ticket_confirm.setVisibility(View.VISIBLE);
+                note_next.setVisibility(View.INVISIBLE);
+                note_previous.setVisibility(View.INVISIBLE);
+
+
                 editText.setEnabled(true);
                 break;
             case R.id.sentence_content_icon:
@@ -235,6 +217,10 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
                     else if(flag == -1) imageItems.get(i).setVisibility(View.INVISIBLE);
                 }
                 flag = -flag;
+                break;
+            case R.id.ticket_next:
+                break;
+            case R.id.ticket_previous:
                 break;
 
         }

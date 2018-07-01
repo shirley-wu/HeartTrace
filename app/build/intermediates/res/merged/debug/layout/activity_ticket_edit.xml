@@ -139,27 +139,58 @@
 
         </LinearLayout>
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/ticket_confirm"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:layout_marginBottom="20dp"
-            android:layout_marginRight="15dp"
-            android:src="@drawable/confirm_white"
-            android:background="@android:color/transparent"
-            app:backgroundTint="#4682B4"/>
+            android:layout_gravity="bottom"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/ticket_previous"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|left"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="15dp"
+                android:text = "previous"
+                android:textColor="#FF8933"
+                android:background="@android:color/transparent"
+                />
+            <Button
+                android:id="@+id/ticket_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|left"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="15dp"
+                android:text = "next"
+                android:textColor="#FF8933"
+                android:background="@android:color/transparent"
+                />
+
+        </LinearLayout>
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/ticket_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:layout_marginBottom="20dp"
-            android:layout_marginRight="15dp"
-            android:src="@drawable/pen_white"
-            android:background="@android:color/transparent"
-            app:backgroundTint="#4682B4"/>
+                android:id="@+id/ticket_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                android:layout_marginBottom="20dp"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/confirm_white"
+                android:background="@android:color/transparent"
+                app:backgroundTint="#4682B4"/>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/ticket_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                android:layout_marginBottom="20dp"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/pen_white"
+                android:background="@android:color/transparent"
+                app:backgroundTint="#4682B4"/>
+
     </android.support.design.widget.CoordinatorLayout>
 
 </RelativeLayout>

@@ -41,7 +41,7 @@
             android:id="@+id/recycler_bottle_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background = "@drawable/bottle_gray1"
+            android:background = "@drawable/bottles_many"
             app:layout_behavior ="@string/appbar_scrolling_view_behavior"/>
 
     </android.support.design.widget.CoordinatorLayout>

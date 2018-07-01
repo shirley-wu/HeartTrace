@@ -9,9 +9,6 @@
     <option name="TOOL_WINDOW_LOG_LEVEL" value="debug" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/TicketEditActivity.java" line="116" mnemonic="8" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="5c013cc4-1a5b-4782-ad9f-c4dc7c8195a3" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" />
@@ -23,24 +20,110 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/NoteAdapter$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/NoteAdapter$1.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/NoteAdapter$2$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/NoteAdapter$2$1.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/NoteAdapter$2$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/NoteAdapter$2$2.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/NoteAdapter$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/NoteAdapter$2.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/NoteAdapter$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/NoteAdapter$3.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/compat/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/compat/R.java" />
+      <change beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/coreui/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/coreui/R.java" />
+      <change beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/coreutils/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/coreutils/R.java" />
+      <change beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/design/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/design/R.java" />
+      <change beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/fragment/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/fragment/R.java" />
+      <change beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/graphics/drawable/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/graphics/drawable/R.java" />
+      <change beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/graphics/drawable/animated/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/graphics/drawable/animated/R.java" />
+      <change beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/mediacompat/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/mediacompat/R.java" />
+      <change beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/transition/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/transition/R.java" />
+      <change beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v4/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v4/R.java" />
+      <change beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java" />
+      <change beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/recyclerview/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/recyclerview/R.java" />
+      <change beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/bigkoo/pickerview/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/bigkoo/pickerview/R.java" />
+      <change beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/borax12/materialdaterangepicker/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/borax12/materialdaterangepicker/R.java" />
+      <change beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/example/dell/diary/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/example/dell/diary/R.java" />
+      <change beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/R.java" />
+      <change beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/prolificinteractive/materialcalendarview/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/prolificinteractive/materialcalendarview/R.java" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/drawable-xxhdpi-v4.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/drawable-xxhdpi-v4.json" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/layout.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/layout.json" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/compat/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/compat/R$drawable.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/compat/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/compat/R$id.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/coreui/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/coreui/R$drawable.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/coreui/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/coreui/R$id.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/coreutils/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/coreutils/R$drawable.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/coreutils/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/coreutils/R$id.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/design/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/design/R$drawable.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/design/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/design/R$id.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/fragment/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/fragment/R$drawable.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/fragment/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/fragment/R$id.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/graphics/drawable/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/graphics/drawable/R$drawable.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/graphics/drawable/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/graphics/drawable/R$id.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/graphics/drawable/animated/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/graphics/drawable/animated/R$drawable.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/graphics/drawable/animated/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/graphics/drawable/animated/R$id.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/mediacompat/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/mediacompat/R$drawable.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/mediacompat/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/mediacompat/R$id.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/transition/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/transition/R$drawable.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/transition/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/transition/R$id.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v4/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v4/R$drawable.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v4/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v4/R$id.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$drawable.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$id.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/recyclerview/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/recyclerview/R$drawable.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/recyclerview/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/recyclerview/R$id.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/bigkoo/pickerview/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/bigkoo/pickerview/R$drawable.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/bigkoo/pickerview/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/bigkoo/pickerview/R$id.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/borax12/materialdaterangepicker/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/borax12/materialdaterangepicker/R$drawable.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/borax12/materialdaterangepicker/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/borax12/materialdaterangepicker/R$id.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/BottleAdapter$ViewHolder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/BottleAdapter$ViewHolder.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/BottlefrontActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/BottlefrontActivity.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/BottlesActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/BottlesActivity.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/CalendarActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/CalendarActivity.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/DiaryActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/DiaryActivity.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/DiaryCardAdapter$ViewHolder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/DiaryCardAdapter$ViewHolder.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/DiaryWriteActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/DiaryWriteActivity.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/MainActivity$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/MainActivity$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/MainActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/MainActivity.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/NewBottleDialog.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/NewBottleDialog.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/NoteActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/NoteActivity.class" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/NoteAdapter$ViewHolder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/NoteAdapter$ViewHolder.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/NoteAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/NoteAdapter.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/PopOptionUtil.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/PopOptionUtil.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/R$drawable.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/R$id.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/R$integer.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/R$integer.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/R$layout.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/R$menu.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/R$menu.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/R$mipmap.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/R$mipmap.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/R$string.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/R$style.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/R$style.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/R$styleable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/R$styleable.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/SearchActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/SearchActivity.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/SearchResultActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/SearchResultActivity.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/SearchResultAdapter$ViewHolder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/SearchResultAdapter$ViewHolder.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/StatisticsActivity$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/StatisticsActivity$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/StatisticsActivity$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/StatisticsActivity$2.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/StatisticsActivity$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/StatisticsActivity$3.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/StatisticsActivity$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/StatisticsActivity$4.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/StatisticsActivity$popupwindowdismisslistener.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/StatisticsActivity$popupwindowdismisslistener.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/StatisticsActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/StatisticsActivity.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/TicketEditActivity$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/TicketEditActivity$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/TicketEditActivity$ListItemAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/TicketEditActivity$ListItemAdapter.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/TicketEditActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/TicketEditActivity.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/R$drawable.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/prolificinteractive/materialcalendarview/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/prolificinteractive/materialcalendarview/R$drawable.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/southernbox/nestedcalendar/behavior/CalendarBehavior$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/southernbox/nestedcalendar/behavior/CalendarBehavior$1.class" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/southernbox/nestedcalendar/behavior/CalendarBehavior.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/southernbox/nestedcalendar/behavior/CalendarBehavior.class" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/debug/dex-renamer-state.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/debug/dex-renamer-state.txt" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/debug/file-input-save-data.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/debug/file-input-save-data.txt" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/debug/zip-cache/kMRpulaiF94v8++B5pOBQurwdkU=" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/debug/zip-cache/kMRpulaiF94v8++B5pOBQurwdkU=" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/manifests/full/debug/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/manifests/full/debug/AndroidManifest.xml" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/resources-debug.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/resources-debug.ap_" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/activity_bottles.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/activity_bottles.xml" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/activity_ticket_edit.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/activity_ticket_edit.xml" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/bottle_item.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/bottle_item.xml" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/symbol-table-with-package/debug/package-aware-r.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/res/symbol-table-with-package/debug/package-aware-r.txt" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/debug/0/classes.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/debug/0/classes.dex" />
       <change beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/NoteAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/NoteAdapter.java" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/TicketEditActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/TicketEditActivity.java" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_bottles.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_bottles.xml" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_ticket_edit.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_ticket_edit.xml" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/bottle_item.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/bottle_item.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/classes/" />
@@ -93,12 +176,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="BottlesActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/BottlesActivity.java">
+      <file leaf-file-name="TicketEditActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/TicketEditActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="529">
-              <caret line="135" column="48" lean-forward="false" selection-start-line="135" selection-start-column="32" selection-end-line="135" selection-end-column="48" />
-              <folding />
+            <state relative-caret-position="330">
+              <caret line="182" column="30" lean-forward="true" selection-start-line="182" selection-start-column="30" selection-end-line="182" selection-end-column="30" />
+              <folding>
+                <element signature="e#10136#11194#0" expanded="true" />
+                <element signature="e#11193#11194#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NoteAdapter.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/NoteAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="368">
+              <caret line="75" column="18" lean-forward="false" selection-start-line="75" selection-start-column="18" selection-end-line="75" selection-end-column="18" />
+              <folding>
+                <element signature="e#2179#2833#0" expanded="true" />
+                <element signature="e#2832#2833#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -113,21 +212,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DatabaseHelper.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/db/DatabaseHelper.java">
+      <file leaf-file-name="Sentencebook.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/db/Sentencebook.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
-              <caret line="37" column="56" lean-forward="false" selection-start-line="37" selection-start-column="56" selection-end-line="37" selection-end-column="56" />
+            <state relative-caret-position="184">
+              <caret line="20" column="42" lean-forward="false" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Sentencebook.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/db/Sentencebook.java">
+      <file leaf-file-name="Sentence.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/db/Sentence.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2">
-              <caret line="20" column="42" lean-forward="false" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
+            <state relative-caret-position="201">
+              <caret line="29" column="13" lean-forward="false" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -136,38 +235,44 @@
       <file leaf-file-name="BottlefrontActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/BottlefrontActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="964">
-              <caret line="172" column="30" lean-forward="false" selection-start-line="172" selection-start-column="30" selection-end-line="172" selection-end-column="30" />
+            <state relative-caret-position="-92">
+              <caret line="53" column="29" lean-forward="false" selection-start-line="53" selection-start-column="29" selection-end-line="53" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BottlesActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/BottlesActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="368">
+              <caret line="133" column="100" lean-forward="false" selection-start-line="133" selection-start-column="32" selection-end-line="133" selection-end-column="100" />
               <folding>
-                <element signature="e#3809#5573#0" expanded="true" />
-                <element signature="e#5572#5573#0" expanded="true" />
-                <element signature="e#5942#7146#0" expanded="true" />
-                <element signature="e#6575#7087#0" expanded="true" />
-                <element signature="e#7086#7087#0" expanded="true" />
-                <element signature="e#7145#7146#0" expanded="true" />
+                <element signature="e#5196#6043#0" expanded="true" />
+                <element signature="e#6042#6043#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NoteAdapter.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/NoteAdapter.java">
+      <file leaf-file-name="activity_ticket_edit.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_ticket_edit.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="460">
-              <caret line="106" column="0" lean-forward="true" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
-              <folding>
-                <element signature="e#2150#2743#0" expanded="true" />
-                <element signature="e#2742#2743#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="411">
+              <caret line="158" column="44" lean-forward="false" selection-start-line="158" selection-start-column="33" selection-end-line="158" selection-end-column="44" />
+              <folding />
             </state>
+          </provider>
+          <provider editor-type-id="android-designer2">
+            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="activity_bottlefront.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_bottlefront.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="68" column="21" lean-forward="false" selection-start-line="68" selection-start-column="9" selection-end-line="68" selection-end-column="21" />
+            <state relative-caret-position="1771">
+              <caret line="77" column="37" lean-forward="false" selection-start-line="77" selection-start-column="37" selection-end-line="77" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -179,37 +284,11 @@
       <file leaf-file-name="activity_bottles.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_bottles.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="44" column="12" lean-forward="false" selection-start-line="44" selection-start-column="12" selection-end-line="44" selection-end-column="12" />
+            <state relative-caret-position="267">
+              <caret line="46" column="53" lean-forward="false" selection-start-line="46" selection-start-column="53" selection-end-line="46" selection-end-column="53" />
               <folding>
                 <element signature="e#1885#1925#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="bottle_item.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/bottle_item.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="note_item.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/note_item.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-219">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
           <provider editor-type-id="android-designer2">
@@ -2092,15 +2171,16 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/app/src/main/res/menu/note_edit_toolbar.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/TicketEditActivity.java" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_ticket_edit.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/db/Diary.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/db/DatabaseHelper.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/BottlesActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/BottlefrontActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_bottlefront.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/bottle_item.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_bottles.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_ticket_edit.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/TicketEditActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/NoteAdapter.java" />
       </list>
     </option>
@@ -2211,6 +2291,15 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="res" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="diary" type="b2602c69:ProjectViewProjectNode" />
+              <item name="diary" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="res" type="462c0819:PsiDirectoryNode" />
+              <item name="drawable-xxhdpi" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="diary" type="b2602c69:ProjectViewProjectNode" />
@@ -2455,7 +2544,7 @@
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27306867" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20976394" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3714609" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2512,94 +2601,13 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/BottlesActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="34" column="54" lean-forward="false" selection-start-line="34" selection-start-column="37" selection-end-line="34" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/BottleAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="30" column="13" lean-forward="false" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/bottletoolbar.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/bottlestoolbar.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="10" column="8" lean-forward="false" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_ticket_edit.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="2" column="50" lean-forward="false" selection-start-line="2" selection-start-column="50" selection-end-line="2" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/note_edit_toolbar.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="10" column="36" lean-forward="false" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_bottles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="3" column="55" lean-forward="false" selection-start-line="2" selection-start-column="3" selection-end-line="3" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_bottlefront.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/TicketEditActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="667">
           <caret line="40" column="25" lean-forward="false" selection-start-line="40" selection-start-column="25" selection-end-line="40" selection-end-column="25" />
           <folding>
-            <element signature="imports" expanded="false" />
+            <element signature="e#10136#11194#0" expanded="true" />
+            <element signature="e#11193#11194#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2641,7 +2649,8 @@
         <state relative-caret-position="667">
           <caret line="40" column="25" lean-forward="false" selection-start-line="40" selection-start-column="25" selection-end-line="40" selection-end-column="25" />
           <folding>
-            <element signature="imports" expanded="false" />
+            <element signature="e#10136#11194#0" expanded="true" />
+            <element signature="e#11193#11194#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2807,33 +2816,12 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/TicketEditActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1978">
-          <caret line="123" column="0" lean-forward="false" selection-start-line="123" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/9af397debca402a857da4cbed293d6d7/res/values-v26/values-v26.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
           <caret line="12" column="4" lean-forward="false" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_ticket_edit.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="12" column="20" lean-forward="false" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
@@ -2884,26 +2872,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/db/Sentencebook.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2">
-          <caret line="20" column="42" lean-forward="false" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/db/DatabaseHelper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="363">
           <caret line="37" column="56" lean-forward="false" selection-start-line="37" selection-start-column="56" selection-end-line="37" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/BottlesActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
-          <caret line="135" column="48" lean-forward="false" selection-start-line="135" selection-start-column="32" selection-end-line="135" selection-end-column="48" />
           <folding />
         </state>
       </provider>
@@ -2919,10 +2891,116 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/bottles_many.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/bottle_item.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="552">
+          <caret line="24" column="49" lean-forward="false" selection-start-line="24" selection-start-column="49" selection-end-line="24" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/frame_black_1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/get_image.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/frame_white2.9.png">
+      <provider selected="true" editor-type-id="ninepatcheditor">
+        <state />
+      </provider>
+      <provider editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/frame_white.9.png">
+      <provider selected="true" editor-type-id="ninepatcheditor">
+        <state />
+      </provider>
+      <provider editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/frame_cat.9.png">
+      <provider selected="true" editor-type-id="ninepatcheditor">
+        <state />
+      </provider>
+      <provider editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/frame_black_s.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_bottles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="46" column="53" lean-forward="false" selection-start-line="46" selection-start-column="53" selection-end-line="46" selection-end-column="53" />
+          <folding>
+            <element signature="e#1885#1925#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_bottlefront.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1771">
+          <caret line="77" column="37" lean-forward="false" selection-start-line="77" selection-start-column="37" selection-end-line="77" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/db/Sentence.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="29" column="13" lean-forward="false" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/db/Sentencebook.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="20" column="42" lean-forward="false" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/BottlesActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="133" column="100" lean-forward="false" selection-start-line="133" selection-start-column="32" selection-end-line="133" selection-end-column="100" />
+          <folding>
+            <element signature="e#5196#6043#0" expanded="true" />
+            <element signature="e#6042#6043#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_ticket_edit.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="411">
+          <caret line="158" column="44" lean-forward="false" selection-start-line="158" selection-start-column="33" selection-end-line="158" selection-end-column="44" />
           <folding />
         </state>
       </provider>
@@ -2938,52 +3016,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_bottlefront.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/TicketEditActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="68" column="21" lean-forward="false" selection-start-line="68" selection-start-column="9" selection-end-line="68" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_bottles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="44" column="12" lean-forward="false" selection-start-line="44" selection-start-column="12" selection-end-line="44" selection-end-column="12" />
+        <state relative-caret-position="330">
+          <caret line="182" column="30" lean-forward="true" selection-start-line="182" selection-start-column="30" selection-end-line="182" selection-end-column="30" />
           <folding>
-            <element signature="e#1885#1925#0" expanded="true" />
+            <element signature="e#10136#11194#0" expanded="true" />
+            <element signature="e#11193#11194#0" expanded="true" />
           </folding>
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/BottlefrontActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="964">
-          <caret line="172" column="30" lean-forward="false" selection-start-line="172" selection-start-column="30" selection-end-line="172" selection-end-column="30" />
-          <folding>
-            <element signature="e#3809#5573#0" expanded="true" />
-            <element signature="e#5572#5573#0" expanded="true" />
-            <element signature="e#5942#7146#0" expanded="true" />
-            <element signature="e#6575#7087#0" expanded="true" />
-            <element signature="e#7086#7087#0" expanded="true" />
-            <element signature="e#7145#7146#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-92">
+          <caret line="53" column="29" lean-forward="false" selection-start-line="53" selection-start-column="29" selection-end-line="53" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/NoteAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="106" column="0" lean-forward="true" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
+        <state relative-caret-position="368">
+          <caret line="75" column="18" lean-forward="false" selection-start-line="75" selection-start-column="18" selection-end-line="75" selection-end-column="18" />
           <folding>
-            <element signature="e#2150#2743#0" expanded="true" />
-            <element signature="e#2742#2743#0" expanded="true" />
+            <element signature="e#2179#2833#0" expanded="true" />
+            <element signature="e#2832#2833#0" expanded="true" />
           </folding>
         </state>
       </provider>

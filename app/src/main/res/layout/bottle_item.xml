@@ -22,6 +22,7 @@ app:cardCornerRadius="8dp">
             android:layout_height="25dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="5dp"
+            android:src = "@drawable/bottle_gray1"
             android:scaleType="centerCrop"/>
 
 </LinearLayout>

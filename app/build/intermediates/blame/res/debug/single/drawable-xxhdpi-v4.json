@@ -1,11 +1,11 @@
 [
     {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_textfield_default_mtrl_alpha.9.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_textfield_default_mtrl_alpha.9.png"
-    },
-    {
         "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png",
         "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_textfield_default_mtrl_alpha.9.png",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_textfield_default_mtrl_alpha.9.png"
     },
     {
         "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\setting_white.png",
@@ -24,12 +24,12 @@
         "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\background6.jpg"
     },
     {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\pink_background.png",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\pink_background.png"
-    },
-    {
         "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\design_ic_visibility.png",
         "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\1e693f60716bdb3599e2680538c7696b\\res\\drawable-xxhdpi-v4\\design_ic_visibility.png"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\pink_background.png",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\pink_background.png"
     },
     {
         "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_text_dark_disabled.9.png",
@@ -84,12 +84,12 @@
         "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\happy_black.png"
     },
     {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_list_pressed_holo_dark.9.png",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_list_pressed_holo_dark.9.png"
-    },
-    {
         "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_dark_disabled.9.png",
         "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\d5d693b50368619a1ecbe4bd883a4018\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_dark_disabled.9.png"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_list_pressed_holo_dark.9.png",
+        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\drawable-xxhdpi-v4\\abc_list_pressed_holo_dark.9.png"
     },
     {
         "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\sad_black.png",
@@ -366,6 +366,10 @@
     {
         "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\panda.jpg",
         "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\panda.jpg"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bottles_many.jpg",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-xxhdpi\\bottles_many.jpg"
     },
     {
         "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\calendar_white.png",
