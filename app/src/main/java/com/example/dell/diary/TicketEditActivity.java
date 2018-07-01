@@ -3,6 +3,7 @@ package com.example.dell.diary;
 
 import android.animation.ObjectAnimator;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -19,12 +20,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -75,6 +78,7 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
     private String note_editable = "true";
     private Sentence sentence;
     private ObjectAnimator objAnimatorX;
+    private LinearLayout ticketEditLayout;
     private int flag = 1;
     private String note_new;
     private int position;
@@ -108,6 +112,8 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
         ticket_confirm.setOnClickListener(this);
         ticket_edit.setOnClickListener(this);
 
+        ticketEditLayout = (LinearLayout) findViewById(R.id.ticket_edit_layout);
+        ticketEditLayout.setOnClickListener(this);
 
         position = intent.getIntExtra(POSITION,1);
 
@@ -139,9 +145,7 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
         sentenceList = sentence.getSentencebook().getAllSubSentence(helper);
-
 
         if(note_editable.equals("false") ){
             editText.setText(sentence.getText());
@@ -174,6 +178,15 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View view) {
         switch(view.getId()) {
+            case R.id.ticket_edit_layout:
+                if(ticket_confirm.getVisibility()==View.VISIBLE){
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    if (imm != null) {
+                        editText.requestFocus();
+                        imm.showSoftInput(editText,0);
+                    }
+                }
+                break;
             case R.id.ticket_confirm:
                 actionBar.show();
                 ticket_edit.setVisibility(View.VISIBLE);
@@ -206,8 +219,8 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
                 note_next.setVisibility(View.INVISIBLE);
                 note_previous.setVisibility(View.INVISIBLE);
 
-
                 editText.setEnabled(true);
+                editText.setSelection(editText.getText().length());
                 break;
             case R.id.sentence_content_icon:
                 for(int i=0;i<imageItems.size();i++) {

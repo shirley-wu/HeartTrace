@@ -1,18 +1,18 @@
 [
     {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_action_tombstone.xml",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\5844d80b1e46e5c457c250ada913a0f2\\res\\layout-v21\\notification_action_tombstone.xml"
+        "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_template_icon_group.xml",
+        "source": "C:\\Users\\kx63\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\807a412a5665bf98707fe5d13b917b0c\\res\\layout-v21\\notification_template_icon_group.xml"
     },
     {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_template_custom_big.xml",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\5844d80b1e46e5c457c250ada913a0f2\\res\\layout-v21\\notification_template_custom_big.xml"
+        "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_action.xml",
+        "source": "C:\\Users\\kx63\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\807a412a5665bf98707fe5d13b917b0c\\res\\layout-v21\\notification_action.xml"
     },
     {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_template_icon_group.xml",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\5844d80b1e46e5c457c250ada913a0f2\\res\\layout-v21\\notification_template_icon_group.xml"
+        "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_action_tombstone.xml",
+        "source": "C:\\Users\\kx63\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\807a412a5665bf98707fe5d13b917b0c\\res\\layout-v21\\notification_action_tombstone.xml"
     },
     {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_action.xml",
-        "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\5844d80b1e46e5c457c250ada913a0f2\\res\\layout-v21\\notification_action.xml"
+        "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_template_custom_big.xml",
+        "source": "C:\\Users\\kx63\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\807a412a5665bf98707fe5d13b917b0c\\res\\layout-v21\\notification_template_custom_big.xml"
     }
 ]

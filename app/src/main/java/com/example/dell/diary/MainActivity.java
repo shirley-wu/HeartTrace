@@ -1,6 +1,7 @@
 package com.example.dell.diary;
 
 import android.content.Intent;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -28,6 +29,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static android.R.attr.id;
 
@@ -153,6 +156,16 @@ public class MainActivity extends AppCompatActivity {
 //                  Log.i("234",String.valueOf(diaryList.size()));
 //              }
 //              Log.i("456",String.valueOf(diaryList.size()));
+          }
+          for(Diary i : diaryList){
+              Pattern pattern = Pattern.compile( Environment.getExternalStorageDirectory().getPath()+"/HeartTrace/pic/image_[0-9]{14}\\.jpg");
+              Matcher matcher = pattern.matcher(i.getText());
+              if(matcher.find()) {
+                  StringBuilder sb=new StringBuilder(i.getText());
+                  sb.delete(matcher.start(),matcher.end());
+                  sb.insert(matcher.start(),"/image/");
+                  i.setText(sb.toString());
+              }
           }
         //Collections.reverse(diaryList);
 //        for(int i = 1;i<4;i++){
