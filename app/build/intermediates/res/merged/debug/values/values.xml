@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2" xmlns:ns2="http://schemas.android.com/tools">
     <string-array name="mood">
-        <item>今天挺开心的2333</item>
-        <item>还行吧，一般般</item>
-        <item>好难过啊55</item>
+        <item>开心</item>
+        <item>一般</item>
+        <item>难过</item>
+        <item>尴尬</item>
+        <item>震惊</item>
+        <item>呆滞</item>
+        <item>旅游</item>
+        <item>工作</item>
+        <item>学习</item>
+        <item>娱乐</item>
+        <item>约会</item>
+    </string-array>
+    <string-array name="property">
+        <item>旅游</item>
+        <item>工作</item>
+        <item>学习</item>
+        <item>娱乐</item>
+        <item>约会</item>
     </string-array>
     <attr format="boolean" name="barrierAllowsGoneWidgets"/>
     <attr format="enum" name="barrierDirection">

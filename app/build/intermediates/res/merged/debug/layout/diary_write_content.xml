@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true"
+    android:background="@android:color/white"
     android:orientation="vertical">
 
     <android.support.design.widget.CoordinatorLayout
@@ -37,7 +38,8 @@
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
                     <TextView
                         android:id="@+id/diary_content_date"
                         android:layout_width="0dp"
@@ -63,6 +65,7 @@
                             android:layout_gravity="center"
                             android:layout_marginRight="20dp"
                             android:clickable="true"
+                            android:longClickable="true"
                             android:scaleType="centerCrop"/>
                         <ImageView
                             android:id="@+id/diary_content_icon1"
@@ -71,6 +74,7 @@
                             android:layout_gravity="center"
                             android:layout_marginRight="20dp"
                             android:visibility="invisible"
+                            android:longClickable="true"
                             android:scaleType="centerCrop"/>
                         <ImageView
                             android:id="@+id/diary_content_icon2"
@@ -79,6 +83,7 @@
                             android:layout_gravity="center"
                             android:layout_marginRight="20dp"
                             android:visibility="invisible"
+                            android:longClickable="true"
                             android:scaleType="centerCrop"/>
                         <ImageView
                             android:id="@+id/diary_content_icon3"
@@ -87,6 +92,7 @@
                             android:layout_gravity="center"
                             android:layout_marginRight="20dp"
                             android:visibility="invisible"
+                            android:longClickable="true"
                             android:scaleType="centerCrop"/>
                         <ImageView
                             android:id="@+id/diary_content_icon4"
@@ -95,6 +101,7 @@
                             android:layout_gravity="center"
                             android:layout_marginRight="20dp"
                             android:visibility="invisible"
+                            android:longClickable="true"
                             android:scaleType="centerCrop"/>
 
                     </RelativeLayout>
@@ -163,13 +170,6 @@
             android:orientation="horizontal"
             android:layout_marginBottom="20dp">
 
-            <ImageButton
-                android:id="@+id/more_setting"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:src="@drawable/more" />
 
             <ImageButton
                 android:id="@+id/font_setting"
@@ -177,15 +177,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
+                android:gravity="center_vertical|center_horizontal"
                 android:src="@drawable/font_setting" />
-
-            <ImageButton
-                android:id="@+id/face_insert"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:src="@drawable/face_insert" />
 
             <ImageButton
                 android:id="@+id/insert_image"
@@ -193,15 +186,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
+                android:gravity="center_vertical|center_horizontal"
                 android:src="@drawable/get_image" />
-
-            <ImageButton
-                android:id="@+id/keyboard"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:src="@drawable/keyboard" />
 
             <ImageButton
                 android:id="@+id/confirm"
@@ -209,6 +195,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
+                android:gravity="center_vertical|center_horizontal"
                 android:src="@drawable/confirm" />
 
         </LinearLayout>

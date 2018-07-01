@@ -1,20 +1,29 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\values-v16\\values-v16.xml",
+            "outputFile": "C:\\Users\\pc\\Desktop\\soul\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\values-v16\\values-v16.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\5844d80b1e46e5c457c250ada913a0f2\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fed31cfa17fbbafbfcca7f6a6718c5b1\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
                         "startOffsets": "55",
-                        "endColumns": "65",
-                        "endOffsets": "116"
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "223"
+                    },
+                    "to": {
+                        "startLines": "4",
+                        "startColumns": "4",
+                        "startOffsets": "219",
+                        "endLines": "7",
+                        "endColumns": "12",
+                        "endOffsets": "387"
                     }
                 },
                 {
-                    "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\9def73248980b48ce25fbfaf0db5769c\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\141f7e1df2eefaa24d2365fe0be51194\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2,3,6,9",
                         "startColumns": "4,4,4,4",
@@ -33,41 +42,41 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\82391f640998316ae0dfffe9c5f444e7\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
                         "startOffsets": "55",
-                        "endLines": "5",
-                        "endColumns": "12",
-                        "endOffsets": "223"
-                    },
-                    "to": {
-                        "startLines": "4",
-                        "startColumns": "4",
-                        "startOffsets": "219",
-                        "endLines": "7",
-                        "endColumns": "12",
-                        "endOffsets": "387"
+                        "endColumns": "65",
+                        "endOffsets": "116"
                     }
                 }
             ]
         },
         {
-            "outputFile": "D:\\diary\\diary\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
+            "outputFile": "C:\\Users\\pc\\Desktop\\soul\\HeartTrace\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\5844d80b1e46e5c457c250ada913a0f2\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fed31cfa17fbbafbfcca7f6a6718c5b1\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
                         "startOffsets": "55",
-                        "endColumns": "65",
-                        "endOffsets": "116"
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "223"
+                    },
+                    "to": {
+                        "startLines": "4",
+                        "startColumns": "4",
+                        "startOffsets": "219",
+                        "endLines": "7",
+                        "endColumns": "12",
+                        "endOffsets": "387"
                     }
                 },
                 {
-                    "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\9def73248980b48ce25fbfaf0db5769c\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\141f7e1df2eefaa24d2365fe0be51194\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2,3,6,9",
                         "startColumns": "4,4,4,4",
@@ -86,22 +95,13 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\82391f640998316ae0dfffe9c5f444e7\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
                         "startOffsets": "55",
-                        "endLines": "5",
-                        "endColumns": "12",
-                        "endOffsets": "223"
-                    },
-                    "to": {
-                        "startLines": "4",
-                        "startColumns": "4",
-                        "startOffsets": "219",
-                        "endLines": "7",
-                        "endColumns": "12",
-                        "endOffsets": "387"
+                        "endColumns": "65",
+                        "endOffsets": "116"
                     }
                 }
             ]

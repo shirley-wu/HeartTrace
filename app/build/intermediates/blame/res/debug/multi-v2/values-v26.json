@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\values-v26\\values-v26.xml",
+            "outputFile": "C:\\Users\\pc\\Desktop\\soul\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\values-v26\\values-v26.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\values-v26\\values-v26.xml",
+                    "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fed31cfa17fbbafbfcca7f6a6718c5b1\\res\\values-v26\\values-v26.xml",
                     "from": {
                         "startLines": "2,3,4,8,12,16",
                         "startColumns": "4,4,4,4,4,4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\1e693f60716bdb3599e2680538c7696b\\res\\values-v26\\values-v26.xml",
+                    "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\5e58f681b73f3ca982af46d4ab4f61a5\\res\\values-v26\\values-v26.xml",
                     "from": {
                         "startLines": "2,6",
                         "startColumns": "4,4",
@@ -44,10 +44,10 @@
             ]
         },
         {
-            "outputFile": "D:\\diary\\diary\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v26\\values-v26.xml",
+            "outputFile": "C:\\Users\\pc\\Desktop\\soul\\HeartTrace\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v26\\values-v26.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9af397debca402a857da4cbed293d6d7\\res\\values-v26\\values-v26.xml",
+                    "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fed31cfa17fbbafbfcca7f6a6718c5b1\\res\\values-v26\\values-v26.xml",
                     "from": {
                         "startLines": "2,3,4,8,12,16",
                         "startColumns": "4,4,4,4,4,4",
@@ -66,7 +66,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\1e693f60716bdb3599e2680538c7696b\\res\\values-v26\\values-v26.xml",
+                    "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\5e58f681b73f3ca982af46d4ab4f61a5\\res\\values-v26\\values-v26.xml",
                     "from": {
                         "startLines": "2,6",
                         "startColumns": "4,4",
