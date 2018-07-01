@@ -218,12 +218,22 @@ public class StatisticsActivity extends AppCompatActivity implements DatePickerD
                 for(Label thisLabel : labelThisDiary){
                     switch (thisLabel.getLabelname()){
                         case "happy":
-                            thisDayScore += 2;
+                            thisDayScore = 9;
                             break;
                         case "normal":
-                            thisDayScore += 1;
+                            thisDayScore = 5;
                             break;
                         case "sad":
+                            thisDayScore = 1;
+                            break;
+                        case "embarrassed":
+                            thisDayScore = 4;
+                            break;
+                        case "shocked":
+                            thisDayScore = 7;
+                            break;
+                        case "foolish":
+                            thisDayScore = 3;
                             break;
                     }
                 }

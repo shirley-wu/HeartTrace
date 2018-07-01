@@ -130,10 +130,18 @@ public class Sentence implements Serializable
     }
 
     public void deleteLabel(DatabaseHelper helper, Label label) {
-        SentenceLabel sentenceLabel = new SentenceLabel();
-        sentenceLabel.setSentence(this);
-        sentenceLabel.setLabel(label);
-        sentenceLabel.delete(helper);
+        try {
+            QueryBuilder<SentenceLabel, Integer> qb = helper.getSentenceLabelDao().queryBuilder();
+            Where<SentenceLabel, Integer> where = qb.where();
+            where.eq(SentenceLabel.SENTENCE_TAG, this).and().eq(SentenceLabel.LABEL_TAG, label);
+            List<SentenceLabel> l = qb.query();
+            for (SentenceLabel dl : l) {
+                dl.delete(helper);
+            }
+        }
+        catch(SQLException e) {
+            Log.e(TAG, "deleteLabel: ", e);
+        }
     }
 
     public static List<Sentence> getByDate(DatabaseHelper helper, int year, int month, int day) {

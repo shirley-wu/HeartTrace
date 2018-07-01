@@ -412,19 +412,15 @@
                 android:orientation="horizontal"
                 android:paddingTop="15dp">
 
-                <ImageButton
-                    android:id="@+id/set_retract"
-                    android:src="@drawable/retract"
-                    android:background="@android:color/transparent"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                <TextView
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="5dp"
                     android:gravity="center_vertical|center_horizontal"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:text="对齐"/>
 
                 <ImageButton
                     android:id="@+id/set_center"
@@ -476,13 +472,15 @@
                 android:orientation="horizontal"
                 android:paddingTop="15dp">
 
-                <ImageButton
-                    android:id="@+id/clear_span"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                <TextView
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/clear_span"/>
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:textColor="#000000"
+                    android:textSize="20dp"
+                    android:text="样式"/>
 
                 <ImageButton
                     android:id="@+id/underline"

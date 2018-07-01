@@ -13,4 +13,12 @@
         <item>娱乐</item>
         <item>约会</item>
     </string-array>
+
+    <string-array name="property">
+        <item>旅游</item>
+        <item>工作</item>
+        <item>学习</item>
+        <item>娱乐</item>
+        <item>约会</item>
+    </string-array>
 </resources>

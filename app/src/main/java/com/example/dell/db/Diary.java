@@ -140,10 +140,18 @@ public class Diary implements Serializable
     }
 
     public void deleteLabel(DatabaseHelper helper, Label label) {
-        DiaryLabel diaryLabel = new DiaryLabel();
-        diaryLabel.setDiary(this);
-        diaryLabel.setLabel(label);
-        diaryLabel.delete(helper);
+        try {
+            QueryBuilder<DiaryLabel, Integer> qb = helper.getDiaryLabelDao().queryBuilder();
+            Where<DiaryLabel, Integer> where = qb.where();
+            where.eq(DiaryLabel.DIARY_TAG, this).and().eq(DiaryLabel.LABEL_TAG, label);
+            List<DiaryLabel> l = qb.query();
+            for (DiaryLabel dl : l) {
+                dl.delete(helper);
+            }
+        }
+        catch(SQLException e) {
+            Log.e(TAG, "deleteLabel: ", e);
+        }
     }
 
     public static List<Diary> getByDate(DatabaseHelper helper, int year, int month, int day) {

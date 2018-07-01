@@ -95,7 +95,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.UUID;
 
-public class DiaryWriteActivity extends AppCompatActivity implements View.OnClickListener {
+public class DiaryWriteActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
 
     public static final int CHOOSE_PHOTO = 2;
     private final int ICON_LIST_DIALOG = 1;
@@ -103,6 +103,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     public String label_name = "happy";
     private int flag = 1;
     private boolean labelProperty;
+    private boolean isExisted;
+    private int labelSize;
     private int[] imgIds = {R.drawable.happy, R.drawable.normal, R.drawable.sad,
                             R.drawable.embarrassed, R.drawable.shocked, R.drawable.foolish,
                             R.drawable.travel, R.drawable.work, R.drawable.study, R.drawable.entertainment, R.drawable.love};
@@ -124,9 +126,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private ImageView diaryIcon3;
     private ImageView diaryIcon4;
     private EditText diary_write;
-    private ImageButton more_setting;
-    private ImageButton keyboard;
-    private ImageButton face_expression;
     private LinearLayout edit_layout;
     private DiscreteSeekBar set_size;
     private ImageButton confirm;
@@ -136,9 +135,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private int font_type=1;
     private int style=0;
     private boolean is_retract=false;
-    private boolean is_center=false;
-    private boolean is_left=false;
-    private boolean is_right=false;
     private boolean is_underline=false;
     private boolean is_bold=false;
     private boolean is_italic=false;
@@ -155,7 +151,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private TextView set_font1;
     private TextView set_font2;
     private TextView set_font3;
-    private ImageButton set_retract;
     private ImageButton set_center;
     private ImageButton set_left;
     private ImageButton set_right;
@@ -165,7 +160,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private ImageButton line_spacing1;
     private ImageButton line_spacing2;
     private ImageButton line_spacing3;
-    private ImageButton clear_span;
     private ImageButton set_underline;
     private ImageButton set_bold;
     private ImageButton set_italic;
@@ -190,9 +184,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         preDiary = (Button)findViewById(R.id.pre_diary);
         nextDiary = (Button)findViewById(R.id.next_diary);
         diary_write = (EditText) findViewById(R.id.diaryWrite);
-        more_setting = (ImageButton) findViewById(R.id.more_setting);
-        keyboard = (ImageButton) findViewById(R.id.keyboard);
-        face_expression = (ImageButton) findViewById(R.id.face_insert);
         edit_layout = (LinearLayout) findViewById(R.id.edit_layout);
         set_size = (DiscreteSeekBar) findViewById(R.id.set_size);
         confirm = (ImageButton) findViewById(R.id.confirm);
@@ -209,7 +200,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         set_font1 = (TextView) findViewById(R.id.font1);
         set_font2 = (TextView) findViewById(R.id.font2);
         set_font3 = (TextView) findViewById(R.id.font3);
-        set_retract = (ImageButton) findViewById(R.id.set_retract);
         set_center = (ImageButton) findViewById(R.id.set_center);
         set_left = (ImageButton) findViewById(R.id.set_left);
         set_right = (ImageButton) findViewById(R.id.set_right);
@@ -219,7 +209,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         line_spacing1 = (ImageButton) findViewById(R.id.line_spacing1);
         line_spacing2 = (ImageButton) findViewById(R.id.line_spacing2);
         line_spacing3 = (ImageButton) findViewById(R.id.line_spacing3);
-        clear_span = (ImageButton) findViewById(R.id.clear_span);
         set_underline = (ImageButton) findViewById(R.id.underline);
         set_bold = (ImageButton) findViewById(R.id.bold);
         set_italic = (ImageButton) findViewById(R.id.italic);
@@ -281,7 +270,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         set_font1.setOnClickListener(this);
         set_font2.setOnClickListener(this);
         set_font3.setOnClickListener(this);
-        set_retract.setOnClickListener(this);
         set_center.setOnClickListener(this);
         set_left.setOnClickListener(this);
         set_right.setOnClickListener(this);
@@ -291,7 +279,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         line_spacing1.setOnClickListener(this);
         line_spacing2.setOnClickListener(this);
         line_spacing3.setOnClickListener(this);
-        clear_span.setOnClickListener(this);
         set_underline.setOnClickListener(this);
         set_bold.setOnClickListener(this);
         set_italic.setOnClickListener(this);
@@ -299,6 +286,11 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         preDiary.setOnClickListener(this);
         nextDiary.setOnClickListener(this);
         diaryIcon.setOnClickListener(this);
+        diaryIcon1.setOnLongClickListener(this);
+        diaryIcon1.setOnLongClickListener(this);
+        diaryIcon2.setOnLongClickListener(this);
+        diaryIcon3.setOnLongClickListener(this);
+        diaryIcon4.setOnLongClickListener(this);
     }
 
     public void init()
@@ -349,11 +341,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             diaryDate.setText(date);
             diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
             diary_write.setEnabled(false);
-            more_setting.setVisibility(View.INVISIBLE);
             font_set.setVisibility(View.INVISIBLE);
-            face_expression.setVisibility(View.INVISIBLE);
             insert_image.setVisibility(View.INVISIBLE);
-            keyboard.setVisibility(View.INVISIBLE);
             confirm.setVisibility(View.INVISIBLE);
         }
     }
@@ -434,11 +423,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 CharSequence charSequence = Html.fromHtml(Html.toHtml(diary_write.getText()));
                 //Toast.makeText(DiaryWriteActivity.this,charSequence,Toast.LENGTH_SHORT).show();
                 diary_write.setEnabled(false);
-                more_setting.setVisibility(View.INVISIBLE);
                 font_set.setVisibility(View.INVISIBLE);
-                face_expression.setVisibility(View.INVISIBLE);
                 insert_image.setVisibility(View.INVISIBLE);
-                keyboard.setVisibility(View.INVISIBLE);
                 confirm.setVisibility(View.INVISIBLE);
                 preDiary.setVisibility(View.VISIBLE);
                 nextDiary.setVisibility(View.VISIBLE);
@@ -555,14 +541,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 else
                     font_type = 3;
                 break;
-            case R.id.set_retract:
-                is_retract=!is_retract;
-                if(is_retract)
-                    set_retract.setBackgroundColor(Color.GRAY);
-                else
-                    set_retract.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                style=1;
-                break;
             case R.id.set_center:
                 Editable editable_align_center = diary_write.getText();
                 editable_align_center.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), 0, count, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -628,10 +606,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 line_spacing1.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 line_spacing2.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 diary_write.setLineSpacing(10,1);
-                break;
-            case R.id.clear_span:
-                //Editable editable = diary_write.getEditableText();
-                //editable.clearSpans();
                 break;
             case R.id.underline:
                 is_underline=!is_underline;
@@ -810,11 +784,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.edit:
                 diary_write.setEnabled(true);
-                more_setting.setVisibility(View.VISIBLE);
                 font_set.setVisibility(View.VISIBLE);
-                face_expression.setVisibility(View.VISIBLE);
                 insert_image.setVisibility(View.VISIBLE);
-                keyboard.setVisibility(View.VISIBLE);
                 confirm.setVisibility(View.VISIBLE);
                 preDiary.setVisibility(View.INVISIBLE);
                 nextDiary.setVisibility(View.INVISIBLE);
@@ -1036,9 +1007,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                             @Override
                             public void onClick(DialogInterface dialogInterface, int which) {
                                 labelProperty = false;
-                                tagId = which;
-                                if(tagId >= 0 && tagId <= 5) labelProperty = true;
-                                switch (tagId){
+                                isExisted = false;
+                                if(which >= 0 && which <= 5) labelProperty = true;
+                                switch (which){
                                     case 0: label_name = "happy";break;
                                     case 1: label_name = "normal";break;
                                     case 2: label_name = "sad";break;
@@ -1058,36 +1029,32 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                                     label = new Label(label_name);
                                     label.insert(helper);
                                 }
-                                if(labelProperty){
-                                    label_this = null;
-                                    try {
-                                        label_this = diary.getAllLabel(helper);
-                                    } catch (SQLException e) {
-                                        e.printStackTrace();
-                                    }
-                                    if(label_this != null && label_this.size()!= 0 && label_this.get(0).getLabelname() != null)
-                                    {
-                                        Log.i("labeltest", "labels exist!!");
+
+                                label_this = null;
+                                try {
+                                    label_this = diary.getAllLabel(helper);
+                                } catch (SQLException e) {
+                                    e.printStackTrace();
+                                }
+
+                                if(label_this != null && label_this.size()!= 0 && label_this.get(0).getLabelname() != null)
+                                {
+                                    if(labelProperty){
                                         for(Label i:label_this)
                                         {
-                                            Log.i("labeltest", i.getLabelname());
                                             if(isMoodLabel(i.getLabelname()))
-                                            {
                                                 diary.deleteLabel(helper, i);
-                                                Log.i("labeltest", "delete " + i.getLabelname());
-                                            }
                                         }
                                     }
-                                    try {
-                                        label_this = diary.getAllLabel(helper);
-                                    } catch (SQLException e) {
-                                        e.printStackTrace();
-                                    }
-                                    for(Label i:label_this){
-                                        Log.i("labeltest", "exist " + i.getLabelname());
+                                    else{
+                                        for(Label i:label_this)
+                                        {
+                                            if(i.getLabelname().equals(label_name))
+                                                isExisted = true;
+                                        }
                                     }
                                 }
-                                diary.insertLabel(helper, label);
+                                if(!isExisted) diary.insertLabel(helper, label);
                                 getLabelsOfDiary(diary,helper);
 
                             }
@@ -1097,6 +1064,128 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 break;
         }
         return dialog;
+    }
+
+    @Override
+    public boolean onLongClick(View view) {
+        final DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+
+        label_this = null;
+        try {
+            label_this = diary.getAllLabel(helper);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if(label_this != null && label_this.size()!= 0 && label_this.get(0).getLabelname() != null)
+        {
+            labelSize = label_this.size();
+            switch (view.getId()) {
+                case R.id.diary_content_icon:
+                    if(labelSize >= 1) {
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                        dialog.setTitle("提示");
+                        dialog.setMessage("你确定要删除此标签吗？");
+                        dialog.setCancelable(true);
+
+                        dialog.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                diary.deleteLabel(helper, label_this.get(labelSize - 1));
+                                getLabelsOfDiary(diary, helper);
+                            }
+                        });
+                        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        });
+                        dialog.show();
+                    }
+                    break;
+                case R.id.diary_content_icon1:
+                    if(labelSize >= 2){
+                        AlertDialog.Builder dialog1 = new AlertDialog.Builder(this);
+                        dialog1.setTitle("提示");
+                        dialog1.setMessage("你确定要删除此标签吗？");
+                        dialog1.setCancelable(true);
+
+                        dialog1.setPositiveButton("确认",new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog, int which){
+                                diary.deleteLabel(helper, label_this.get(labelSize - 2));
+                                getLabelsOfDiary(diary,helper);
+                            }
+                        });
+                        dialog1.setNegativeButton("取消",new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog, int which){
+                            }
+                        });
+                        dialog1.show();
+                    }
+                    break;
+                case R.id.diary_content_icon2:
+                    if(labelSize >= 3){
+                        AlertDialog.Builder dialog2 = new AlertDialog.Builder(this);
+                        dialog2.setTitle("提示");
+                        dialog2.setMessage("你确定要删除此标签吗？");
+                        dialog2.setCancelable(true);
+
+                        dialog2.setPositiveButton("确认",new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog, int which){
+                                diary.deleteLabel(helper, label_this.get(labelSize - 3));
+                                getLabelsOfDiary(diary,helper);
+                            }
+                        });
+                        dialog2.setNegativeButton("取消",new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog, int which){
+                            }
+                        });
+                        dialog2.show();
+                    }
+                    break;
+                case R.id.diary_content_icon3:
+                    if(labelSize >= 4){
+                        AlertDialog.Builder dialog3 = new AlertDialog.Builder(this);
+                        dialog3.setTitle("提示");
+                        dialog3.setMessage("你确定要删除此标签吗？");
+                        dialog3.setCancelable(true);
+
+                        dialog3.setPositiveButton("确认",new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog, int which){
+                                diary.deleteLabel(helper, label_this.get(labelSize - 4));
+                                getLabelsOfDiary(diary,helper);
+                            }
+                        });
+                        dialog3.setNegativeButton("取消",new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog, int which){
+                            }
+                        });
+                        dialog3.show();
+                    }
+                    break;
+                case R.id.diary_content_icon4:
+                    if(labelSize >= 5){
+                        AlertDialog.Builder dialog4 = new AlertDialog.Builder(this);
+                        dialog4.setTitle("提示");
+                        dialog4.setMessage("你确定要删除此标签吗？");
+                        dialog4.setCancelable(true);
+
+                        dialog4.setPositiveButton("确认",new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog, int which){
+                                diary.deleteLabel(helper, label_this.get(labelSize - 5));
+                                getLabelsOfDiary(diary,helper);
+                            }
+                        });
+                        dialog4.setNegativeButton("取消",new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog, int which){
+                            }
+                        });
+                        dialog4.show();
+                    }
+                    break;
+
+            }
+        }
+
+        return false;
     }
 
     class ListItemAdapter extends BaseAdapter {
@@ -1190,9 +1279,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
 
     public void getLabelsOfDiary(Diary diary, DatabaseHelper helper ){
-        diaryIcon.setImageDrawable(getResources().getDrawable(R.drawable.nothing));
+        diaryIcon.setImageDrawable(getResources().getDrawable(R.color.white));
         for(int i = 0; i<=3; i++){
-            imageItems.get(i).setImageDrawable(getResources().getDrawable(R.drawable.nothing));
+            imageItems.get(i).setImageDrawable(getResources().getDrawable(R.color.white));
         }
         label_this = null;
         try {
@@ -1203,17 +1292,17 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         if(label_this  == null || label_this.size() == 0 || label_this.get(0).getLabelname() == null){
             tag = "happy";
         }
-        else{
+        else {
             int length = label_this.size();
             tag = label_this.get(length - 1).getLabelname();
             diaryIcon.setImageDrawable(setTags(tag));
-            if(length >= 2 && length <=5)
-                for(int i = 0; i<= length-2; i++){
+            if (length >= 2 && length <= 5)
+                for (int i = 0; i <= length - 2; i++) {
                     tag = label_this.get(i).getLabelname();
                     imageItems.get(length - 2 - i).setImageDrawable(setTags(tag));
                 }
-            else if(length >=6)
-                for(int i = 0; i<=3; i++){
+            else if (length >= 6)
+                for (int i = 0; i <= 3; i++) {
                     tag = label_this.get(length - 2 - i).getLabelname();
                     imageItems.get(i).setImageDrawable(setTags(tag));
                 }
