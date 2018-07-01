@@ -178,6 +178,19 @@ public class Sentence implements Serializable
         }
     }
 
+    public static List<Diary> getAllLike(DatabaseHelper helper, Boolean ascending){
+        try {
+            QueryBuilder<Diary, Integer> qb = helper.getDiaryDao().queryBuilder();
+            Where<Diary, Integer> where = qb.where();
+            where.eq("like", true);
+            qb.orderBy("date",ascending);
+            return qb.query();
+        } catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
+
     public List<Label> getAllLabel(DatabaseHelper helper) throws SQLException {
         QueryBuilder<SentenceLabel, Integer> qb = helper.getSentenceLabelDao().queryBuilder();
         qb.where().eq(SentenceLabel.SENTENCE_TAG, this);
