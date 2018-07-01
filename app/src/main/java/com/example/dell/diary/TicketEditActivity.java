@@ -26,6 +26,7 @@ import android.widget.EditText;
 
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.dell.db.DatabaseHelper;
@@ -47,6 +48,7 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
     public static final String NOTE_EDITABLE = "note_editable";
     public static final String NOTE_NEW = "true";
     private static final String TAG = "TicketEditActivity";
+    public static final String POSITION = "Position";
     private String sentence_name = "travel";
     private String tag= null;
     private List<ImageView> imageItems = new ArrayList<ImageView>(3);
@@ -75,6 +77,7 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
     private ObjectAnimator objAnimatorX;
     private int flag = 1;
     private String note_new;
+    private int position;
     public List<String> weekList = new ArrayList<>(Arrays.asList("周日","周一","周二","周三"," 周四","周五","周六"));
     private DatabaseHelper databaseHelper= null;
 
@@ -106,6 +109,7 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
         ticket_edit.setOnClickListener(this);
 
 
+        position = intent.getIntExtra(POSITION,1);
 
         note_next = findViewById(R.id.ticket_previous);
         note_previous = findViewById(R.id.ticket_next);
@@ -160,7 +164,7 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
             sentenceWeekday.setText(weekList.get(date.getDay()));
             ticket_edit.setVisibility(View.INVISIBLE);
             note_next.setVisibility(View.INVISIBLE);
-            note_next.setVisibility(View.INVISIBLE);
+            note_previous.setVisibility(View.INVISIBLE);
             editText.setEnabled(true);
             editText.setText(sentence.getText());
             actionBar.hide();
@@ -219,8 +223,24 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
                 flag = -flag;
                 break;
             case R.id.ticket_next:
+                if(position >= sentenceList.size()-1){
+                    Toast.makeText(this, "已经是最新的一张纸条拉", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                Intent intent_next= new Intent();
+                intent_next.putExtra("result",position);
+                setResult(1, intent_next);
+                finish();
                 break;
             case R.id.ticket_previous:
+                if(position == 0){
+                    Toast.makeText(this, "已经是最后一张纸条拉", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                Intent intent_pre= new Intent();
+                intent_pre.putExtra("result",position);
+                setResult(-1, intent_pre);
+                finish();
                 break;
 
         }

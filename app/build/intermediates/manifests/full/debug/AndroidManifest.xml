@@ -38,7 +38,9 @@
         <activity
             android:name="com.example.dell.diary.DiaryWriteActivity"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity android:name="com.example.dell.diary.TicketEditActivity" />
+        <activity
+            android:name="com.example.dell.diary.TicketEditActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
 
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for

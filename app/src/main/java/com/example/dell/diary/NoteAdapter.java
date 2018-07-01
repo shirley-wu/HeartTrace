@@ -54,6 +54,7 @@ public class NoteAdapter extends RecyclerView.Adapter <NoteAdapter.ViewHolder> {
         mSentenceList = sentenceList;
     }
 
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -70,11 +71,12 @@ public class NoteAdapter extends RecyclerView.Adapter <NoteAdapter.ViewHolder> {
                 int position = holder.getAdapterPosition();
                 Sentence sentence = mSentenceList.get(position);
                 Intent intent = new Intent(mContext, TicketEditActivity.class);
+                intent.putExtra(TicketEditActivity.POSITION, position);
                 intent.putExtra(TicketEditActivity.SENTENCE_THIS, sentence);
                 intent.putExtra(TicketEditActivity.NOTE_EDITABLE, "false");
                 intent.putExtra(TicketEditActivity.NOTE_NEW, "false");
-                /*Activity activity = (Activity) mContext;*/
-                mContext.startActivity(intent);
+                Activity activity = (Activity) mContext;
+                activity.startActivityForResult(intent,1);
             }
         });
 

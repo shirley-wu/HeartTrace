@@ -1,5 +1,6 @@
 package com.example.dell.diary;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -74,9 +75,33 @@ public class BottlefrontActivity extends AppCompatActivity {
     {
         switch (requestCode){
             case 1:
-
+                if(resultCode == 1){
+                    int return_position = data.getIntExtra("result",0);
+                    if(return_position < sentenceList.size() ) {
+                        int new_positon = return_position + 1;
+                        Sentence sentence = sentenceList.get(new_positon);
+                        Intent intent = new Intent(BottlefrontActivity.this, TicketEditActivity.class);
+                        intent.putExtra(TicketEditActivity.POSITION, new_positon);
+                        intent.putExtra(TicketEditActivity.SENTENCE_THIS, sentence);
+                        intent.putExtra(TicketEditActivity.NOTE_EDITABLE, "false");
+                        intent.putExtra(TicketEditActivity.NOTE_NEW, "false");
+                        startActivityForResult(intent, 1);
+                    }
+                }
+                if(resultCode == -1){
+                    int return_positon1 = data.getIntExtra("result",0);
+                    if(return_positon1>=0){
+                        int new_positon1 = return_positon1 - 1;
+                        Sentence sentence = sentenceList.get(new_positon1);
+                        Intent intent = new Intent(BottlefrontActivity.this, TicketEditActivity.class);
+                        intent.putExtra(TicketEditActivity.POSITION, new_positon1);
+                        intent.putExtra(TicketEditActivity.SENTENCE_THIS, sentence);
+                        intent.putExtra(TicketEditActivity.NOTE_EDITABLE, "false");
+                        intent.putExtra(TicketEditActivity.NOTE_NEW, "false");
+                        startActivityForResult(intent, 1);
+                    }
+                }
         }
-
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
