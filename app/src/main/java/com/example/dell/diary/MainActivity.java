@@ -137,12 +137,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initDiaryCard(){
-
           diaryList.clear();
           DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-
           //diaryList = Diary.getAll(helper,false);
-
           diaryList = Diary.getAll(helper,false);
           if(diaryList == null){
               diaryList = new ArrayList<>();
@@ -156,16 +153,6 @@ public class MainActivity extends AppCompatActivity {
 //                  Log.i("234",String.valueOf(diaryList.size()));
 //              }
 //              Log.i("456",String.valueOf(diaryList.size()));
-          }
-          for(Diary i : diaryList){
-              Pattern pattern = Pattern.compile( Environment.getExternalStorageDirectory().getPath()+"/HeartTrace/pic/image_[0-9]{14}\\.jpg");
-              Matcher matcher = pattern.matcher(i.getText());
-              if(matcher.find()) {
-                  StringBuilder sb=new StringBuilder(i.getText());
-                  sb.delete(matcher.start(),matcher.end());
-                  sb.insert(matcher.start(),"/image/");
-                  i.setText(sb.toString());
-              }
           }
         //Collections.reverse(diaryList);
 //        for(int i = 1;i<4;i++){

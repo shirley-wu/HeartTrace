@@ -5,9 +5,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +24,8 @@ import com.example.dell.db.Diary;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by dell on 2018/5/7.
@@ -125,6 +129,16 @@ public class DiaryCardAdapter extends RecyclerView.Adapter<DiaryCardAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
          Diary diaryCard = mDiaryCardList.get(position);
+        Pattern pattern = Pattern.compile( Environment.getExternalStorageDirectory().getPath()+"/HeartTrace/pic/image_[0-9]{14}\\.jpg");
+        Matcher matcher = pattern.matcher(diaryCard.getText());
+        while(matcher.find()) {
+            StringBuilder sb=new StringBuilder(diaryCard.getText());
+            sb.delete(matcher.start(),matcher.end());
+            sb.insert(matcher.start(),"/image/");
+            diaryCard.setText(sb.toString());
+            matcher = pattern.matcher(diaryCard.getText());
+        }
+        Log.i("text",diaryCard.getText());
          holder.diaryContent.setText(diaryCard.getText());
          holder.diaryWeekDay.setText(weekList.get(diaryCard.getDate().getDay()));
          String yearMonth = (diaryCard.getDate().getYear()+1900)+"."+ (diaryCard.getDate().getMonth()+1);

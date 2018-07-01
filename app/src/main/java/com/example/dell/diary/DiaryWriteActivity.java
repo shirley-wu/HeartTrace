@@ -783,7 +783,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     }
 
     public static Bitmap compressImage(Bitmap image) {
-
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         image.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
         int options = 100;
