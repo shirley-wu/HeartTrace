@@ -67,7 +67,7 @@ public class StatisticsActivity extends AppCompatActivity implements DatePickerD
 
         Calendar now = Calendar.getInstance();
         Calendar WeekAgo = Calendar.getInstance();
-        ;
+
         WeekAgo.set(Calendar.DATE, WeekAgo.get(Calendar.DATE) - 6);
         String init_range = "        您当前选择的日期范围:   " + WeekAgo.get(Calendar.YEAR) + "/" + (WeekAgo.get(Calendar.MONTH) + 1) + "/" + (WeekAgo.get(Calendar.DAY_OF_MONTH)) + " 至 " + now.get(Calendar.YEAR) + "/" + (now.get(Calendar.MONTH) + 1) + "/" + now.get(Calendar.DAY_OF_MONTH);
 
@@ -288,7 +288,5 @@ public class StatisticsActivity extends AppCompatActivity implements DatePickerD
         }
         return date;
     }
-
-
 
 }
