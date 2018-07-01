@@ -39,7 +39,7 @@ public class PopOptionUtil {
         initEvent();
         int[] location = new int[2];
         view.getLocationOnScreen(location);
-        popupWindow.showAtLocation(view, Gravity.NO_GRAVITY, (location[0] + view.getWidth() / 2) - popupWidth / 2 + popupWidth/2,
+        popupWindow.showAtLocation(view, Gravity.NO_GRAVITY, (location[0] + view.getWidth() / 2) + popupWidth/2,
                 location[1] - popupHeight + popupHeight);
 
     }
@@ -57,13 +57,13 @@ public class PopOptionUtil {
                     popupWindow.dismiss();
                 }
             });
-            nextBt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mEvent.onNextClick();
-                    popupWindow.dismiss();
-                }
-            });
+//            nextBt.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    mEvent.onNextClick();
+//                    popupWindow.dismiss();
+//                }
+//            });
 
         }
     }

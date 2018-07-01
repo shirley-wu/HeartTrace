@@ -72,6 +72,7 @@ public class SearchActivity extends AppCompatActivity {
         final CheckedTextView checkTime = (CheckedTextView) findViewById(R.id.check_time);
         final LinearLayout timeSelect = (LinearLayout) findViewById(R.id.time_select);
         timeSelect.setVisibility(View.INVISIBLE);
+        checkTag.setVisibility(View.GONE);
         checkTag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

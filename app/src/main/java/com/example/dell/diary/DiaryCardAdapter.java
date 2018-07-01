@@ -105,10 +105,10 @@ public class DiaryCardAdapter extends RecyclerView.Adapter<DiaryCardAdapter.View
                 //Toast.makeText(mContext,"删除:"+ position,Toast.LENGTH_SHORT).show();
             }
 
-            @Override
-            public void onNextClick() {
-                Toast.makeText(mContext,"导出",Toast.LENGTH_SHORT).show();
-            }
+//            @Override
+//            public void onNextClick() {
+//                Toast.makeText(mContext,"导出",Toast.LENGTH_SHORT).show();
+//            }
         });
         holder.timeLineView.setOnLongClickListener(new View.OnLongClickListener(){
             @Override

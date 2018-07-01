@@ -6,5 +6,5 @@ package com.example.dell.diary;
 
 public interface PopClickEvent {
     public void onPreClick();
-    public void onNextClick();
+    //public void onNextClick();
 }

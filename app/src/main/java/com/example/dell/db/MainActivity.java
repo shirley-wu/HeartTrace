@@ -16,14 +16,14 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final String TAG = "MainActivity";
+    private final String TAG = "TimeLineActivity";
 
     private DatabaseHelper databaseHelper = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(example.hearttrace.R.layout.activity_main);
+        //setContentView(example.hearttrace.R.layout.activity_time_line);
 
         //final EditText editText = (EditText) findViewById(example.hearttrace.R.id.edit_text);
 

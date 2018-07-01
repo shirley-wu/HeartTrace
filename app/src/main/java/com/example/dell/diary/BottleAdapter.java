@@ -100,10 +100,10 @@ public class BottleAdapter extends RecyclerView.Adapter<BottleAdapter.ViewHolder
                 //Toast.makeText(mContext,"删除:"+ position,Toast.LENGTH_SHORT).show();
             }
 
-            @Override
-            public void onNextClick() {
-                Toast.makeText(mContext,"导出",Toast.LENGTH_SHORT).show();
-            }
+//            @Override
+//            public void onNextClick() {
+//                Toast.makeText(mContext,"导出",Toast.LENGTH_SHORT).show();
+//            }
         });
         holder.cardView.setOnLongClickListener(new View.OnLongClickListener(){
             @Override

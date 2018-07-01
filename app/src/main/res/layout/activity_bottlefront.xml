@@ -8,6 +8,7 @@
     android:focusable="true"
     android:clickable="true"
     android:focusableInTouchMode="true"
+    android:fitsSystemWindows="true"
      >
 
     <android.support.design.widget.AppBarLayout
