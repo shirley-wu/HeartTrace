@@ -10,8 +10,8 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="ChangeListManager">
-<<<<<<< HEAD
-<<<<<<< HEAD
+
+
     <list default="true" id="5c013cc4-1a5b-4782-ad9f-c4dc7c8195a3" name="Default" comment="">
       <change beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/CollectActivity.java" />
       <change beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_collect.xml" />
@@ -126,10 +126,7 @@
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dell/db/Diary.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dell/db/Diary.java" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/MainActivity.java" />
     </list>
-=======
-    <list default="true" id="55da90a9-7110-44ff-b7e4-cae3c589af79" name="Default" comment="" />
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
-=======
+
     <list default="true" id="55da90a9-7110-44ff-b7e4-cae3c589af79" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterPath="" />
@@ -742,7 +739,7 @@
     </system>
   </component>
   <component name="FileEditorManager">
-<<<<<<< HEAD
+
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file leaf-file-name="CollectActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/CollectActivity.java">
@@ -752,7 +749,7 @@
               <folding>
                 <element signature="e#1661#1904#0" expanded="true" />
                 <element signature="e#1903#1904#0" expanded="true" />
-=======
+
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="DiaryWriteActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/DiaryWriteActivity.java">
@@ -772,46 +769,43 @@
             <state relative-caret-position="171">
               <caret line="222" column="0" lean-forward="false" selection-start-line="222" selection-start-column="0" selection-end-line="222" selection-end-column="0" />
               <folding>
-<<<<<<< HEAD
+
                 <element signature="imports" expanded="true" />
                 <element signature="e#7983#9145#0" expanded="true" />
                 <element signature="e#9144#9145#0" expanded="true" />
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
-=======
+
                 <element signature="e#1662#1663#0" expanded="true" />
                 <element signature="e#1689#1690#0" expanded="true" />
->>>>>>> 2d3e74dbb240ce625e5c410d160e9dce3698e1f5
+
               </folding>
             </state>
           </provider>
         </entry>
-      </file>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
       <file leaf-file-name="PopClickEvent.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/PopClickEvent.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="138">
               <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-=======
+
       <file leaf-file-name="CalendarActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/CalendarActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="295">
               <caret line="92" column="80" lean-forward="false" selection-start-line="92" selection-start-column="80" selection-end-line="92" selection-end-column="80" />
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
+
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
+
       <file leaf-file-name="PopOptionUtil.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/PopOptionUtil.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="161">
               <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-=======
+
       <file leaf-file-name="Label.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/db/Label.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -827,13 +821,13 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="574">
               <caret line="163" column="0" lean-forward="false" selection-start-line="163" selection-start-column="0" selection-end-line="163" selection-end-column="0" />
->>>>>>> 2d3e74dbb240ce625e5c410d160e9dce3698e1f5
+
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
+
       <file leaf-file-name="CollectAdapter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/CollectAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -848,60 +842,59 @@
                 <element signature="e#4975#4976#0" expanded="true" />
                 <element signature="e#5018#5019#0" expanded="true" />
               </folding>
-=======
+
       <file leaf-file-name="TimeLineActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/TimeLineActivity.java">
-=======
+
       <file leaf-file-name="StatisticsActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/StatisticsActivity.java">
->>>>>>> 2d3e74dbb240ce625e5c410d160e9dce3698e1f5
+
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="147">
               <caret line="198" column="35" lean-forward="false" selection-start-line="198" selection-start-column="35" selection-end-line="198" selection-end-column="35" />
               <folding />
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
+
             </state>
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="575">
               <caret line="69" column="30" lean-forward="false" selection-start-line="69" selection-start-column="30" selection-end-line="69" selection-end-column="30" />
-=======
+
       <file leaf-file-name="Diary.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/db/Diary.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-4774">
               <caret line="57" column="19" lean-forward="false" selection-start-line="57" selection-start-column="19" selection-end-line="57" selection-end-column="19" />
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
-=======
+
+
       <file leaf-file-name="DatabaseHelper.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/db/DatabaseHelper.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="551">
               <caret line="41" column="42" lean-forward="false" selection-start-line="41" selection-start-column="42" selection-end-line="41" selection-end-column="42" />
->>>>>>> 2d3e74dbb240ce625e5c410d160e9dce3698e1f5
+
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
+
       <file leaf-file-name="diarycard_item.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/diarycard_item.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
-=======
+
       <file leaf-file-name="DiaryCardAdapter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/DiaryCardAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
+
             <state relative-caret-position="-1998">
               <caret line="33" column="46" lean-forward="false" selection-start-line="33" selection-start-column="46" selection-end-line="33" selection-end-column="46" />
               <folding>
@@ -914,12 +907,11 @@
                 <element signature="e#4551#4862#0" expanded="true" />
                 <element signature="e#4861#4862#0" expanded="true" />
               </folding>
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
-=======
+
             <state relative-caret-position="228">
               <caret line="37" column="46" lean-forward="false" selection-start-line="37" selection-start-column="46" selection-end-line="37" selection-end-column="46" />
               <folding />
->>>>>>> 2d3e74dbb240ce625e5c410d160e9dce3698e1f5
+
             </state>
           </provider>
           <provider editor-type-id="android-designer2">
@@ -927,7 +919,7 @@
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
+
       <file leaf-file-name="activity_collect.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_collect.xml">
           <provider selected="true" editor-type-id="text-editor">
@@ -937,7 +929,7 @@
             </state>
           </provider>
           <provider editor-type-id="android-designer2">
-=======
+
       <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
@@ -947,20 +939,20 @@
             </state>
           </provider>
           <provider editor-type-id="android-manifest">
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
+
             <state />
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
+
       <file leaf-file-name="BottleAdapter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/BottleAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="474">
               <caret line="153" column="5" lean-forward="false" selection-start-line="32" selection-start-column="3" selection-end-line="153" selection-end-column="5" />
-              <folding>
+
                 <element signature="imports" expanded="true" />
-=======
+
       <file leaf-file-name="diary_write_content.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/diary_write_content.xml">
           <provider editor-type-id="android-designer2">
@@ -970,20 +962,19 @@
             <state relative-caret-position="437">
               <caret line="23" column="17" lean-forward="false" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
               <folding>
-<<<<<<< HEAD
+
                 <element signature="e#1815#1855#0" expanded="true" />
                 <element signature="e#6540#6580#0" expanded="true" />
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
-=======
+
+
                 <marker date="1530500056000" expanded="true" signature="12563:12570" ph="..." />
->>>>>>> 2d3e74dbb240ce625e5c410d160e9dce3698e1f5
+
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
       <file leaf-file-name="BottlesActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/BottlesActivity.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -995,22 +986,7 @@
               </folding>
             </state>
           </provider>
-=======
-      <file leaf-file-name="activity_ticket_edit.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_ticket_edit.xml">
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="9" column="35" lean-forward="false" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-=======
->>>>>>> 2d3e74dbb240ce625e5c410d160e9dce3698e1f5
+
       <file leaf-file-name="activity_bottles.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_bottles.xml">
           <provider editor-type-id="android-designer2">
@@ -1026,7 +1002,7 @@
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
+
       <file leaf-file-name="activity_bottlefront.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_bottlefront.xml">
           <provider editor-type-id="android-designer2">
@@ -1038,11 +1014,7 @@
               <folding />
             </state>
           </provider>
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
-        </entry>
-      </file>
-=======
->>>>>>> 2d3e74dbb240ce625e5c410d160e9dce3698e1f5
+
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -2802,14 +2774,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/app/src/main/res/menu/note_edit_toolbar.xml" />
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <option value="$PROJECT_DIR$/app/build.gradle" />
-=======
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/db/DatabaseHelper.java" />
-=======
->>>>>>> 2d3e74dbb240ce625e5c410d160e9dce3698e1f5
+
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/BottlesActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_bottlefront.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/bottle_item.xml" />
@@ -2820,7 +2785,7 @@
         <option value="$PROJECT_DIR$/.idea/misc.xml" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/TicketEditActivity.java" />
-<<<<<<< HEAD
+
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/nav_menu_collect.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_collect.xml" />
@@ -2828,7 +2793,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/CollectItemAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/CollectAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/CollectActivity.java" />
-=======
+
         <option value="$PROJECT_DIR$/app/src/main/res/layout/font_setting_bottom_sheet.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/DiaryCardAdapter.java" />
@@ -2836,15 +2801,7 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_ticket_edit.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/diary_write_content.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/DiaryWriteActivity.java" />
-<<<<<<< HEAD
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
-=======
-        <option value="$PROJECT_DIR$/local.properties" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/db/DatabaseHelper.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/db/Diary.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/StatisticsActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/CalendarActivity.java" />
->>>>>>> 2d3e74dbb240ce625e5c410d160e9dce3698e1f5
+
       </list>
     </option>
   </component>
@@ -2875,7 +2832,6 @@
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
-<<<<<<< HEAD
           <expand>
             <path>
               <item name="diary" type="b2602c69:ProjectViewProjectNode" />
@@ -2976,7 +2932,6 @@
             </path>
           </expand>
           <select />
-=======
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="HeartTrace" />
@@ -3143,7 +3098,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -3513,59 +3467,42 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-<<<<<<< HEAD
-<<<<<<< HEAD
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
-    <layout>
+
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5442177" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.013605442" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-=======
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="0" />
-=======
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
->>>>>>> 2d3e74dbb240ce625e5c410d160e9dce3698e1f5
-    <editor active="true" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.32993197" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4909297" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32884097" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5030257" order="7" side_tool="true" content_ui="tabs" />
-<<<<<<< HEAD
+
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1973262" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.75396824" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7256236" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32879817" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-<<<<<<< HEAD
+
       <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.61791384" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-=======
+
       <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28379887" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
-=======
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32879817" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.75396824" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32879817" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28436658" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
->>>>>>> 2d3e74dbb240ce625e5c410d160e9dce3698e1f5
+
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-<<<<<<< HEAD
-<<<<<<< HEAD
+
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20976394" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5600907" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-=======
+
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2090909" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
-=======
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20845272" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
->>>>>>> 2d3e74dbb240ce625e5c410d160e9dce3698e1f5
+
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -3625,8 +3562,7 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     <entry file="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/9af397debca402a857da4cbed293d6d7/res/values-v26/values-v26.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
@@ -3635,12 +3571,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+
+
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-=======
+
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/LineChartManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-4673">
@@ -3652,44 +3587,39 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-519">
           <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
+
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/settings.gradle">
-=======
+
+
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/NoteActivity.java">
->>>>>>> 2d3e74dbb240ce625e5c410d160e9dce3698e1f5
+
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-        <state relative-caret-position="0">
+
+
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-=======
+
         <state relative-caret-position="-1094">
           <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-<<<<<<< HEAD
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
-          <folding />
-=======
->>>>>>> 2d3e74dbb240ce625e5c410d160e9dce3698e1f5
+
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/app.iml">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-        <state relative-caret-position="0">
+
+
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-=======
+
         <state relative-caret-position="-1219">
           <caret line="63" column="0" lean-forward="true" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
-<<<<<<< HEAD
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
+
           <folding />
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
+
     <entry file="file://$PROJECT_DIR$/gradle.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="322">
@@ -3758,24 +3688,10 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_bottlefront.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1771">
+
           <caret line="77" column="37" lean-forward="false" selection-start-line="77" selection-start-column="37" selection-end-line="77" selection-end-column="37" />
           <folding />
-=======
->>>>>>> 2d3e74dbb240ce625e5c410d160e9dce3698e1f5
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_ticket_edit.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="158" column="44" lean-forward="false" selection-start-line="158" selection-start-column="33" selection-end-line="158" selection-end-column="44" />
-=======
+
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/PopClickEvent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="138">
@@ -3819,13 +3735,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-<<<<<<< HEAD
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
+
           <folding />
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
+
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/DiaryWriteActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="322">
@@ -3834,21 +3749,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/db/Sentence.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
+
           <caret line="29" column="13" lean-forward="false" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
           <folding />
-=======
->>>>>>> 2d3e74dbb240ce625e5c410d160e9dce3698e1f5
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/db/Sentencebook.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="20" column="42" lean-forward="false" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
-=======
+
     <entry file="file://$PROJECT_DIR$/app/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -3863,16 +3767,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
+
           <caret line="7" column="27" lean-forward="false" selection-start-line="7" selection-start-column="27" selection-end-line="7" selection-end-column="27" />
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
-          <folding />
-        </state>
-      </provider>
-    </entry>
-<<<<<<< HEAD
+
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/NoteAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="644">
@@ -3914,11 +3811,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_bottles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="556">
+
           <caret line="55" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-=======
+
     <entry file="file://$PROJECT_DIR$/build/android-profile/profile-2018-07-01-22-04-47-042.json" />
     <entry file="file://$PROJECT_DIR$/app/proguard-rules.pro">
       <provider selected="true" editor-type-id="text-editor">
@@ -3945,12 +3840,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-24">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
-          <folding />
-        </state>
-      </provider>
-    </entry>
-<<<<<<< HEAD
+
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/db/Diary.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1541">
@@ -3959,34 +3849,27 @@
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/bottlestoolbar.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
+
+
           <caret line="10" column="8" lean-forward="false" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
-          <folding />
-=======
+
     <entry file="file://$PROJECT_DIR$/Diary.iml">
-=======
-    <entry file="file://$PROJECT_DIR$/diary.iml">
->>>>>>> 2d3e74dbb240ce625e5c410d160e9dce3698e1f5
+
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
+
     <entry file="file://$PROJECT_DIR$/gradle.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="322">
-          <caret line="14" column="29" lean-forward="false" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
+
         </state>
       </provider>
     </entry>
-=======
->>>>>>> 2d3e74dbb240ce625e5c410d160e9dce3698e1f5
+
     <entry file="file://$PROJECT_DIR$/gradlew">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3105">
@@ -4001,9 +3884,9 @@
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
+
     <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/diary_menu.xml">
-=======
+
     <entry file="file://$PROJECT_DIR$/HeartTrace.iml" />
     <entry file="file://$PROJECT_DIR$/LICENSE">
       <provider selected="true" editor-type-id="text-editor">
@@ -4012,9 +3895,7 @@
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
-    <entry file="file://$PROJECT_DIR$/local.properties">
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
+
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -4024,13 +3905,9 @@
         <state />
       </provider>
     </entry>
-<<<<<<< HEAD
+
     <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/nav_menu_collect.xml">
-=======
-=======
->>>>>>> 2d3e74dbb240ce625e5c410d160e9dce3698e1f5
-    <entry file="file://$PROJECT_DIR$/README.md">
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
+
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -4040,19 +3917,16 @@
         <state />
       </provider>
     </entry>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/nav_menu_main.xml">
-=======
-    <entry file="file://$PROJECT_DIR$/settings.gradle">
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
+
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
-<<<<<<< HEAD
+
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
@@ -4073,10 +3947,7 @@
         <state relative-caret-position="552">
           <caret line="24" column="49" lean-forward="false" selection-start-line="24" selection-start-column="49" selection-end-line="24" selection-end-column="49" />
           <folding />
-=======
-    </entry>
-=======
->>>>>>> 2d3e74dbb240ce625e5c410d160e9dce3698e1f5
+
     <entry file="file://$PROJECT_DIR$/.idea/runConfigurations.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -4109,40 +3980,26 @@
         <state />
       </provider>
     </entry>
-<<<<<<< HEAD
+
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_pop.xml">
-=======
-    <entry file="file://$PROJECT_DIR$/.idea/codeStyles/Project.xml">
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
+
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
+
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_chart.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-=======
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/LabelManageActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/misc.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="26" column="14" lean-forward="false" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
-        </state>
-      </provider>
-    </entry>
-<<<<<<< HEAD
+
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/nav_header_bottle.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-138">
@@ -4180,7 +4037,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-272">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-=======
+
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-6798">
@@ -4228,33 +4085,18 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-        <state relative-caret-position="138">
-          <caret line="9" column="35" lean-forward="false" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
-          <folding />
+
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
+
     <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/toolbar.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-=======
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2621">
-          <caret line="156" column="41" lean-forward="false" selection-start-line="156" selection-start-column="41" selection-end-line="156" selection-end-column="41" />
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
+
           <folding />
-=======
-        <state relative-caret-position="190">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding>
-            <marker date="1530500056000" expanded="true" signature="9251:9258" ph="..." />
-          </folding>
->>>>>>> 2d3e74dbb240ce625e5c410d160e9dce3698e1f5
+
         </state>
       </provider>
     </entry>
@@ -4263,36 +4105,31 @@
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-<<<<<<< HEAD
+
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/sentence_menu.xml">
-=======
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
+
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-<<<<<<< HEAD
+
           <folding />
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
+
     <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/search_menu.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-=======
+
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/db/Diary.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-4774">
           <caret line="57" column="19" lean-forward="false" selection-start-line="57" selection-start-column="19" selection-end-line="57" selection-end-column="19" />
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
+
           <folding />
-=======
-          <folding>
-            <marker date="1530500056000" expanded="true" signature="2723:2788" ph="..." />
-          </folding>
->>>>>>> 2d3e74dbb240ce625e5c410d160e9dce3698e1f5
+
         </state>
       </provider>
       <provider editor-type-id="android-designer2">
@@ -4301,8 +4138,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         <state relative-caret-position="483">
           <caret line="156" column="5" lean-forward="false" selection-start-line="152" selection-start-column="2" selection-end-line="156" selection-end-column="5" />
           <folding>
@@ -4335,70 +4171,35 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-=======
+
         <state relative-caret-position="276">
           <caret line="29" column="69" lean-forward="false" selection-start-line="29" selection-start-column="69" selection-end-line="29" selection-end-column="69" />
           <folding>
             <element signature="e#1576#1615#0" expanded="true" />
           </folding>
-=======
-        <state relative-caret-position="570">
-          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding />
->>>>>>> 2d3e74dbb240ce625e5c410d160e9dce3698e1f5
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_bottles.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1530500056000" expanded="true" signature="1921:1963" ph="..." />
-          </folding>
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
+
         </state>
       </provider>
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
     </entry>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_collect.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="422">
           <caret line="47" column="29" lean-forward="false" selection-start-line="47" selection-start-column="29" selection-end-line="47" selection-end-column="29" />
           <folding />
-=======
+
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/DiaryCardAdapter.java">
-=======
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/diary_write_content.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
->>>>>>> 2d3e74dbb240ce625e5c410d160e9dce3698e1f5
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="23" column="17" lean-forward="false" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
-          <folding>
-            <marker date="1530500056000" expanded="true" signature="12563:12570" ph="..." />
-          </folding>
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
+
         </state>
       </provider>
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
     </entry>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/CollectAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-215">
@@ -4411,54 +4212,34 @@
             <element signature="e#2230#2231#0" expanded="true" />
             <element signature="e#4975#4976#0" expanded="true" />
             <element signature="e#5018#5019#0" expanded="true" />
-=======
+
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/diary_write_content.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-=======
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/TimeLineActivity.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/DiaryWriteActivity.java">
->>>>>>> 2d3e74dbb240ce625e5c410d160e9dce3698e1f5
+
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="8531">
           <caret line="558" column="14" lean-forward="false" selection-start-line="558" selection-start-column="14" selection-end-line="558" selection-end-column="14" />
           <folding>
-<<<<<<< HEAD
+
             <element signature="e#1815#1855#0" expanded="true" />
             <element signature="e#6540#6580#0" expanded="true" />
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
-=======
-            <marker date="1530500054000" expanded="true" signature="72603:72609" ph="{...}" />
->>>>>>> 2d3e74dbb240ce625e5c410d160e9dce3698e1f5
+
           </folding>
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="575">
           <caret line="69" column="30" lean-forward="false" selection-start-line="69" selection-start-column="30" selection-end-line="69" selection-end-column="30" />
-=======
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/TimeLineActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-251">
-          <caret line="26" column="13" lean-forward="false" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
-=======
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/DiaryCardAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="37" column="46" lean-forward="false" selection-start-line="37" selection-start-column="46" selection-end-line="37" selection-end-column="46" />
->>>>>>> 2d3e74dbb240ce625e5c410d160e9dce3698e1f5
-          <folding />
+
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/CollectActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="598">
@@ -4474,34 +4255,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="138">
           <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-=======
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/CalendarActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="92" column="80" lean-forward="false" selection-start-line="92" selection-start-column="80" selection-end-line="92" selection-end-column="80" />
->>>>>>> 892c0db3308739e450c6cfb49c468fee55fd3a70
-=======
-    <entry file="file://$PROJECT_DIR$/settings.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
->>>>>>> 2d3e74dbb240ce625e5c410d160e9dce3698e1f5
+
           <folding />
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/PopOptionUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="161">
           <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
           <folding />
-=======
+
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/DiaryWriteActivity.java">
-=======
-    <entry file="file://$PROJECT_DIR$/gradle.properties">
->>>>>>> 2d3e74dbb240ce625e5c410d160e9dce3698e1f5
+
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
           <caret line="12" column="63" lean-forward="true" selection-start-line="12" selection-start-column="63" selection-end-line="12" selection-end-column="63" />
