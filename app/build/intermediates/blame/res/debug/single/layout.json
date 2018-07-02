@@ -84,6 +84,10 @@
         "source": "D:\\diary\\diary\\app\\src\\main\\res\\layout\\activity_diary_write.xml"
     },
     {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_collect.xml",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\layout\\activity_collect.xml"
+    },
+    {
         "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\layout_pop.xml",
         "source": "D:\\diary\\diary\\app\\src\\main\\res\\layout\\layout_pop.xml"
     },

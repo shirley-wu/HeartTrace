@@ -21,12 +21,15 @@
         <activity android:name=".DiaryActivity" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".BottleWriteActivity" />
-        <activity android:name=".CalendarActivity"
+        <activity
+            android:name=".CalendarActivity"
             android:label="Calendar"
-            android:theme="@style/calendar"/>
-        <activity android:name=".DiaryWriteActivity"
-            android:windowSoftInputMode="adjustResize|stateHidden"/>
-        <activity android:name=".TicketEditActivity"
+            android:theme="@style/calendar" />
+        <activity
+            android:name=".DiaryWriteActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".TicketEditActivity"
             android:windowSoftInputMode="adjustResize|stateHidden" />
 
         <!--
@@ -40,8 +43,9 @@
         <activity android:name=".BottlefrontActivity" />
         <activity android:name=".NoteActivity" />
         <activity android:name=".BottlesActivity" />
-        <activity android:name=".SearchResultActivity"/>
-        <activity android:name=".LabelManageActivity"></activity>
+        <activity android:name=".SearchResultActivity" />
+        <activity android:name=".LabelManageActivity" />
+        <activity android:name=".CollectActivity"></activity>
     </application>
 
 </manifest>

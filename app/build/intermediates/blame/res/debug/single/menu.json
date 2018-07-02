@@ -38,5 +38,9 @@
     {
         "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\menu\\bottlestoolbar.xml",
         "source": "D:\\diary\\diary\\app\\src\\main\\res\\menu\\bottlestoolbar.xml"
+    },
+    {
+        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\menu\\nav_menu_collect.xml",
+        "source": "D:\\diary\\diary\\app\\src\\main\\res\\menu\\nav_menu_collect.xml"
     }
 ]

@@ -64,6 +64,10 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent = new Intent(MainActivity.this,StatisticsActivity.class);
                         startActivity(intent);
                         break;
+                    case R.id.favorite:
+                        Intent intent_to_favorite = new Intent (MainActivity.this, CollectActivity.class);
+                        startActivity(intent_to_favorite);
+                        break;
                     default:
                         mDrawerLayout.closeDrawers();
                 }

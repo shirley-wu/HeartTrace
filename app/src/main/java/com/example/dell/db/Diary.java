@@ -200,7 +200,7 @@ public class Diary implements Serializable
             QueryBuilder<Diary, Integer> qb = helper.getDiaryDao().queryBuilder();
             Where<Diary, Integer> where = qb.where();
             where.eq("like", true);
-            qb.orderBy("date",ascending);
+            qb.orderBy("date", ascending);
             return qb.query();
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
