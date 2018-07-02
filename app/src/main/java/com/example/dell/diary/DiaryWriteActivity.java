@@ -220,6 +220,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             public boolean onNavigationItemSelected(MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.favorite:
+                        Toast.makeText(DiaryWriteActivity.this, "暂不支持查看收藏T^T", Toast.LENGTH_SHORT).show();
                         mDrawerLayout.closeDrawers();
                         break;
                     case R.id.statistics:
@@ -973,7 +974,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 }
                 break;
             case R.id.insert_image:
-                openAlbum();
+                //openAlbum();
+                Toast.makeText(this, "插入图片出了点小问题，帅气的kx小哥哥正在努力解决中￣ω￣=", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
