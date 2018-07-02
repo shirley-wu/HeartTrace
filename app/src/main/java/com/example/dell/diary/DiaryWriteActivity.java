@@ -281,7 +281,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                                float velocityY) {
             // TODO Auto-generated method stub
             DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-            if(confirm.getVisibility() == View.INVISIBLE){
+            if(confirm.getVisibility() == View.INVISIBLE && emptyImage.getVisibility() == View.INVISIBLE){
                 //Toast.makeText(DiaryWriteActivity.this, "onFling", Toast.LENGTH_LONG).show();
                 if (e1.getX() - e2.getX() > FLING_MIN_DISTANCE
                         && Math.abs(velocityX) > FLING_MIN_VELOCITY) {

@@ -76,8 +76,8 @@
       <file leaf-file-name="DiaryWriteActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/DiaryWriteActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-6927">
-              <caret line="677" column="16" lean-forward="false" selection-start-line="677" selection-start-column="12" selection-end-line="677" selection-end-column="16" />
+            <state relative-caret-position="220">
+              <caret line="283" column="59" lean-forward="false" selection-start-line="283" selection-start-column="59" selection-end-line="283" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#7983#9145#0" expanded="true" />
@@ -236,7 +236,12 @@
       <find>calend</find>
       <find>toast</find>
       <find>case</find>
+      <find>index = index</find>
     </findStrings>
+  </component>
+  <component name="GenerateSignedApkSettings">
+    <option name="KEY_STORE_PATH" value="D:\SE\key\HeartTrace.jks" />
+    <option name="KEY_ALIAS" value="HeartTrace-alpha" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -2215,6 +2220,11 @@
     <property name="android.profiler.active" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1530455104741" />
     <property name="sync.plugin.last.upgrade.timestamp" value="1530453350565" />
+    <property name="ExportApk.ApkPath" value="D:\Android\Project\Diary\app" />
+    <property name="ExportApk.Flavors" value="" />
+    <property name="ExportApk.BuildType" value="release" />
+    <property name="ExportApk.SignV1" value="true" />
+    <property name="ExportApk.SignV2" value="true" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -2300,7 +2310,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1530496309977" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1530497349718" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2348,7 +2358,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1530496309977" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1530497349719" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2531,7 +2541,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1530496309979" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1530497349720" />
       </method>
     </configuration>
     <list size="1">
@@ -3067,8 +3077,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/DiaryWriteActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6927">
-          <caret line="677" column="16" lean-forward="false" selection-start-line="677" selection-start-column="12" selection-end-line="677" selection-end-column="16" />
+        <state relative-caret-position="220">
+          <caret line="283" column="59" lean-forward="false" selection-start-line="283" selection-start-column="59" selection-end-line="283" selection-end-column="59" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#7983#9145#0" expanded="true" />
