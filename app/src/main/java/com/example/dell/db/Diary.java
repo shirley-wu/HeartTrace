@@ -43,6 +43,21 @@ public class Diary implements Serializable
     @DatabaseField
     private boolean like = false;
 
+    @DatabaseField
+    private float letterSpacing = (float)0.2;
+
+    @DatabaseField
+    private int lineSpacingMultiplier = 0;
+
+    @DatabaseField
+    private int lineSpacingExtra = 1;
+
+    @DatabaseField
+    private float textSize = (float) 20;
+
+    @DatabaseField
+    private int textAlignment = 0;
+
 
     public Diary(){
     };
@@ -89,6 +104,46 @@ public class Diary implements Serializable
 
     public void setLike(boolean like) {
         this.like = like;
+    }
+
+    public float getLetterSpacing() {
+        return letterSpacing;
+    }
+
+    public void setLetterSpacing(float letterSpacing) {
+        this.letterSpacing = letterSpacing;
+    }
+
+    public int getLineSpacingMultiplier() {
+        return lineSpacingMultiplier;
+    }
+
+    public void setLineSpacingMultiplier(int lineSpacingMultiplier) {
+        this.lineSpacingMultiplier = lineSpacingMultiplier;
+    }
+
+    public int getLineSpacingExtra() {
+        return lineSpacingExtra;
+    }
+
+    public void setLineSpacingExtra(int lineSpacingExtra) {
+        this.lineSpacingExtra = lineSpacingExtra;
+    }
+
+    public int getTextAlignment() {
+        return textAlignment;
+    }
+
+    public void setTextAlignment(int textAlignment) {
+        this.textAlignment = textAlignment;
+    }
+
+    public float getTextSize() {
+        return textSize;
+    }
+
+    public void setTextSize(float textSize) {
+        this.textSize = textSize;
     }
 
     public Diarybook getDiarybook(){
@@ -161,7 +216,7 @@ public class Diary implements Serializable
         }
     }
 
-    public static List<Diary> getByDate(DatabaseHelper helper, int year, int month, int day) {
+    public static List<Diary> getByDate(DatabaseHelper helper, int year, int month, int day, boolean ascending) {
         try {
             Calendar calendar = Calendar.getInstance();
             calendar.set(year, month - 1, day);
@@ -183,6 +238,7 @@ public class Diary implements Serializable
             QueryBuilder<Diary, Integer> qb = helper.getDiaryDao().queryBuilder();
             Where<Diary, Integer> where = qb.where();
             buildWhere(where, begin, end);
+            qb.orderBy("date",ascending);
             List<Diary> diaryList = qb.query();
             return diaryList;
         }

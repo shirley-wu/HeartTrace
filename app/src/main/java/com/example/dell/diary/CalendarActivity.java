@@ -82,7 +82,7 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
 
                 diaryList.clear();
                 DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-                diaryList = Diary.getByDate(helper,selected_date.getYear(),selected_date.getMonth() + 1,selected_date.getDay());
+                diaryList = Diary.getByDate(helper,selected_date.getYear(),selected_date.getMonth() + 1,selected_date.getDay(), false);
                 if(diaryList == null){
                     diaryList = new ArrayList<>();
                 }
@@ -114,7 +114,7 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         Log.i("date",year + " "+month + " "+ day);
-        diaryList = Diary.getByDate(helper,year,month,day);
+        diaryList = Diary.getByDate(helper,year,month,day, false);
         //diaryList = Diary.getAll(helper,false);//getbydate
         if(diaryList == null){
             diaryList = new ArrayList<>();
@@ -135,7 +135,7 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
 
                 diaryList.clear();
                 DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-                diaryList = Diary.getByDate(helper,year,month,day);
+                diaryList = Diary.getByDate(helper,year,month,day, false);
                 if(diaryList == null){
                     diaryList = new ArrayList<>();
                 }

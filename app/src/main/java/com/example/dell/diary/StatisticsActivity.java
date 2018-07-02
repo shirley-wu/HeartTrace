@@ -196,7 +196,7 @@ public class StatisticsActivity extends AppCompatActivity implements DatePickerD
         List<Float> yValues = new ArrayList<>();
         for (int j = 0; j < dayNumber; j++) {
             Date currentDate = new Date(startDate.getTime() + (long)j * oneDayLength);
-            currentAllDiary = Diary.getByDate(helper,currentDate.getYear() + 1900,currentDate.getMonth() + 1,currentDate.getDate());
+            currentAllDiary = Diary.getByDate(helper,currentDate.getYear() + 1900,currentDate.getMonth() + 1,currentDate.getDate(), false);
             //Log.i("date",currentDate.getYear() +""+ currentDate.getMonth() +""+ currentDate.getDate());
             if(currentAllDiary == null || currentAllDiary.size() == 0 || currentAllDiary.get(0) == null) //size一直为0
             {
