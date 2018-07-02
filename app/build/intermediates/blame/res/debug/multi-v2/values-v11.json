@@ -4,7 +4,7 @@
             "outputFile": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v11\\values-v11.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\kx63\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\66b8a8a8e53ceebd56165cd79675352a\\res\\values-v11\\values-v11.xml",
+                    "source": "C:\\Users\\kx63\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\99d5ebae6d73078d0a8d8db18c4fa710\\res\\values-v11\\values-v11.xml",
                     "from": {
                         "startLines": "2,8,14,20,26,32,38,39,43,47,48,52,56,57,61,66,71,76,78,80,81,82,136,191",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -20,7 +20,7 @@
             "outputFile": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\values-v11\\values-v11.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\kx63\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\66b8a8a8e53ceebd56165cd79675352a\\res\\values-v11\\values-v11.xml",
+                    "source": "C:\\Users\\kx63\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\99d5ebae6d73078d0a8d8db18c4fa710\\res\\values-v11\\values-v11.xml",
                     "from": {
                         "startLines": "2,8,14,20,26,32,38,39,43,47,48,52,56,57,61,66,71,76,78,80,81,82,136,191",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

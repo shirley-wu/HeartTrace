@@ -298,6 +298,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                         diaryDate.setText(date);
                         diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
                         diary_write.setText(Html.fromHtml(diary.getHtmlText()));
+                        getImage(diary.getText());
+                        setTextFormmat(diary);
                         getLabelsOfDiary(diary,helper);
                     }
                     getImage(diary.getText());
@@ -318,6 +320,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                         diaryDate.setText(date);
                         diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
                         diary_write.setText(Html.fromHtml(diary.getHtmlText()));
+                        getImage(diary.getText());
+                        setTextFormmat(diary);
                         getLabelsOfDiary(diary,helper);
                     }
                     getImage(diary.getText());
@@ -538,6 +542,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             floatingButtons.setVisibility(View.INVISIBLE);
             emptyImage.setVisibility(View.INVISIBLE);
 
+            initTextFormmat();
         }
         else if(diaryList.size() == 0){
             emptyImage.setVisibility(View.VISIBLE);
@@ -560,6 +565,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             Log.i("show",diary.getHtmlText());
             diary_write.setText(Html.fromHtml(diary.getHtmlText()));
             getImage(diary.getText());
+            setTextFormmat(diary);
             getLabelsOfDiary(diary,helper);
             String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
             diaryDate.setText(date);
@@ -577,7 +583,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             edit.setVisibility(View.INVISIBLE);
 
             diary_write.setSelection(diary_write.getText().length());
-
         }
 //
 
@@ -629,6 +634,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
             floatingButtons.setVisibility(View.INVISIBLE);
             emptyImage.setVisibility(View.INVISIBLE);
+
+            initTextFormmat();
         }
         else if(diaryList.size() == 0){
             emptyImage.setVisibility(View.VISIBLE);
@@ -650,6 +657,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             Log.i("show",diary.getHtmlText());
             diary_write.setText(Html.fromHtml(diary.getHtmlText()));
             getImage(diary.getText());
+            setTextFormmat(diary);
             getLabelsOfDiary(diary,helper);
             String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
             diaryDate.setText(date);
@@ -667,7 +675,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             edit.setVisibility(View.INVISIBLE);
 
             diary_write.setSelection(diary_write.getText().length());
-
         }
 //
     }
@@ -675,15 +682,19 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private void initTextFormmat()
     {
         diary_write.setTextSize(20);
+        diary_write.setLineSpacing(0,1);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             diary_write.setLetterSpacing((float) 0.2);
         }
-        diary_write.setLineSpacing(0,1);
     }
 
     private void setTextFormmat(Diary diary)
     {
-        //diary_write.setTextSize(diary);
+        diary_write.setTextSize(diary.getTextSize());
+        diary_write.setLineSpacing(diary.getLineSpacingExtra(),diary.getLineSpacingMultiplier());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            diary_write.setLetterSpacing(diary.getLetterSpacing());
+        }
     }
 
     public void onClick(View view) {
@@ -780,6 +791,19 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     diary.setText(diary_write.getText().toString());
                     htmlText = colorSpanAdjust(Html.toHtml(diary_write.getText()));
                     diary.setHtmlText(htmlText);
+                    diary.setTextSize(diary_write.getTextSize());
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        diary.setLetterSpacing(diary_write.getLetterSpacing());
+                    }
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        diary.setLineSpacingMultiplier((int)diary_write.getLineSpacingMultiplier());
+                    }
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        diary.setLineSpacingExtra((int)diary_write.getLineSpacingExtra());
+                    }
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        Log.i("fommat",diary_write.getTextSize()+" "+diary_write.getLetterSpacing()+" "+(int)diary_write.getLineSpacingMultiplier()+" "+(int)diary_write.getLineSpacingExtra());
+                    }
                     Date date = new Date();
                     diary.setDate(date);
                     diary.insert(helper);
@@ -791,6 +815,16 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     diary.setText(diary_write.getText().toString());
                     htmlText = colorSpanAdjust(Html.toHtml(diary_write.getText()));
                     diary.setHtmlText(htmlText);
+                    diary.setTextSize(diary_write.getTextSize());
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        diary.setLetterSpacing(diary_write.getLetterSpacing());
+                    }
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        diary.setLineSpacingMultiplier((int)diary_write.getLineSpacingMultiplier());
+                    }
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        diary.setLineSpacingExtra((int)diary_write.getLineSpacingExtra());
+                    }
                     diary.update(helper);
                     diaryList.remove(index);
                     diaryList.add(index,diary);
