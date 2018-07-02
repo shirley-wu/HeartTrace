@@ -182,7 +182,6 @@ public class MainActivity extends AppCompatActivity {
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.open_calendar:
-                Toast.makeText(MainActivity.this,"test",Toast.LENGTH_SHORT).show();
                 Intent intentCalendar = new Intent(MainActivity.this, CalendarActivity.class);
                 startActivity(intentCalendar);
                 break;

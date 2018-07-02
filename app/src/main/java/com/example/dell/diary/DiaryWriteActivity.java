@@ -403,10 +403,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     diaryList.remove(index);
                     diaryList.add(index,diary);
                 }
-/*                List<Diary> diaryList = Diary.getAll(helper,true);
-                for(Diary i : diaryList){
-                    Log.i("test", i.getText());
-                } */
                 //CharSequence charSequence = Html.fromHtml(Html.toHtml(diary_write.getText()));
                 //Toast.makeText(DiaryWriteActivity.this,charSequence,Toast.LENGTH_SHORT).show();
                 diary_write.setEnabled(false);
@@ -869,6 +865,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         Pattern pattern = Pattern.compile( Environment.getExternalStorageDirectory().getPath()+"/HeartTrace/pic/image_[0-9]{14}\\.jpg");
         Matcher matcher = pattern.matcher(text);
         if(matcher.find()) {
+            Log.i("test","matched");
             Bitmap bitmap = BitmapFactory.decodeFile(matcher.group());
             SpannableString imageSpan = new SpannableString(matcher.group());
             imageSpan.setSpan(new ImageSpan(bitmap) , 0, imageSpan.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -878,6 +875,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             if(matcher1.find()) {
                 editable.delete(matcher1.start(),matcher1.end());
                 editable.insert(matcher1.start(), imageSpan);
+                Log.i("test","insert");
             }
             diary_write.setText(editable);
         }
