@@ -121,9 +121,7 @@ public class BottlesActivity extends AppCompatActivity {
                 inputBottleName.setId(R.id.edit_In_BottleName);
                 inputBottleName.setHint("请输入瓶子的名字");
                 inputBottleName.setFocusable(true);
-                final EditText inputBottleDescribe = new EditText(BottlesActivity.this);
-                inputBottleDescribe.setHint("请输入瓶子的描述");
-                inputBottleDescribe.setFocusable(true);
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(BottlesActivity.this);
                 builder.setTitle("新建一个瓶子##")
                         .setView(inputBottleName)                //设置一个控件（其他控件同理）
@@ -131,7 +129,6 @@ public class BottlesActivity extends AppCompatActivity {
                 builder.setPositiveButton("保存", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 String inputName = inputBottleName.getText().toString();
-                                String inputDescribe = inputBottleDescribe.getText().toString();
                                 Sentencebook sentencebook = new Sentencebook(inputName);
 
                                 DatabaseHelper helper = new DatabaseHelper(getApplicationContext());

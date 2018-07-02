@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--<item-->
+        <!--android:id="@+id/open_calendar"-->
+        <!--android:icon="@drawable/calendar_white"-->
+        <!--android:title="日历"-->
+        <!--app:showAsAction="always"/>-->
+
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/search_white"
+        android:title="搜索"
+        app:showAsAction="always"/>
+
+    <!--<item-->
+        <!--android:id="@+id/main_setting"-->
+        <!--android:icon="@drawable/setting_white"-->
+        <!--android:title="设置"-->
+        <!--app:showAsAction="never"/>-->
+</menu>

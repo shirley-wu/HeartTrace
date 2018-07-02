@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Scroller;
 
+import com.example.dell.diary.R;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.southernbox.nestedcalendar.helper.ViewOffsetBehavior;
@@ -69,7 +70,7 @@ public class CalendarBehavior extends ViewOffsetBehavior<MaterialCalendarView> {
             // 移动日历
             int calendarMinOffset = -calendarLineHeight * (weekOfMonth - 1);
             int calendarOffset = MathUtils.clamp(
-                    getTopAndBottomOffset() - dy, calendarMinOffset, 0);
+                    getTopAndBottomOffset() - dy*2*(2*weekOfMonth-1)/10, calendarMinOffset, 0);
             setTopAndBottomOffset(calendarOffset);
 
             // 移动列表

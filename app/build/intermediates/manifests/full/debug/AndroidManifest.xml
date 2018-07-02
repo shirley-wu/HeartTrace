@@ -8,6 +8,9 @@
         android:minSdkVersion="14"
         android:targetSdkVersion="26" />
 
+    <!-- 申请权限存取图片，误删！ -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
@@ -32,9 +35,10 @@
             android:theme="@style/calendar" />
         <activity
             android:name="com.example.dell.diary.DiaryWriteActivity"
-            android:windowSoftInputMode="adjustResize|stateHidden" >
-        </activity>
-        <activity android:name="com.example.dell.diary.TicketEditActivity" />
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name="com.example.dell.diary.TicketEditActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
 
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
