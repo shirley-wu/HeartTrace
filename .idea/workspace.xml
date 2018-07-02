@@ -10,33 +10,36 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-<<<<<<< HEAD
     <list default="true" id="55da90a9-7110-44ff-b7e4-cae3c589af79" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/classAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/classAnalysis.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/javaCompile.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/javaCompile.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskHistory.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskJars.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskJars.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/DiaryCardAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/DiaryCardAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/CalendarActivity$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/CalendarActivity$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/DiaryWriteActivity$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/DiaryWriteActivity$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/DiaryWriteActivity$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/DiaryWriteActivity$2.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/DiaryWriteActivity$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/DiaryWriteActivity$3.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/DiaryWriteActivity$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/DiaryWriteActivity$4.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/DiaryWriteActivity$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/DiaryWriteActivity$5.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/DiaryWriteActivity$ListItemAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/DiaryWriteActivity$ListItemAdapter.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/DiaryWriteActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/DiaryWriteActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/MainActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/dell/diary/MainActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/resources-debug.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/resources-debug.ap_" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/debug/dex-renamer-state.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/debug/dex-renamer-state.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/DiaryCardAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/DiaryCardAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/manifests/full/debug/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/manifests/full/debug/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/__content__.json" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/__content__.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/debug/__content__.json" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/debug/__content__.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/CalendarActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/CalendarActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/DiaryWriteActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/DiaryWriteActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/MainActivity.java" />
     </list>
-=======
-    <list default="true" id="55da90a9-7110-44ff-b7e4-cae3c589af79" name="Default" comment="" />
->>>>>>> 02fd9462d74be92d704be6d3a21aac653d946ca6
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/classes/" />
     <ignored path="$PROJECT_DIR$/app/build/intermediates/assets/" />
@@ -99,23 +102,77 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-<<<<<<< HEAD
-      <file leaf-file-name="CalendarActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/CalendarActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-770">
-              <caret line="33" column="13" lean-forward="false" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
-=======
       <file leaf-file-name="DiaryWriteActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/DiaryWriteActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-50">
-              <caret line="771" column="0" lean-forward="true" selection-start-line="771" selection-start-column="0" selection-end-line="771" selection-end-column="0" />
+            <state relative-caret-position="387">
+              <caret line="685" column="10" lean-forward="false" selection-start-line="685" selection-start-column="10" selection-end-line="685" selection-end-column="10" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#7983#9038#0" expanded="true" />
-                <element signature="e#9037#9038#0" expanded="true" />
+                <element signature="e#3942#3969#0" expanded="false" />
+                <element signature="e#5088#5099#0" expanded="true" />
+                <element signature="method#onCreate#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="e#7983#9145#0" expanded="true" />
+                <element signature="e#9144#9145#0" expanded="true" />
+                <element signature="method#onRestart#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="method#onTouch#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="class#MyGestureListener#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="method#onDown#0;class#MyGestureListener#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="method#onShowPress#0;class#MyGestureListener#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="method#onSingleTapUp#0;class#MyGestureListener#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="method#onScroll#0;class#MyGestureListener#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="method#onLongPress#0;class#MyGestureListener#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="method#onFling#0;class#MyGestureListener#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="method#initViewPage#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="method#getView#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="class#17004:17543" expanded="false" />
+                <element signature="class#17641:18113" expanded="false" />
+                <element signature="method#editchange#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="method#onCreateOptionsMenu#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="method#onOptionsItemSelected#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="e#47672#50120#0" expanded="true" />
+                <element signature="e#50119#50120#0" expanded="true" />
+                <element signature="method#openAlbum#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="method#onRequestPermissionsResult#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="method#onActivityResult#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="method#handleImageOnKitKat#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="method#getBitmapFromUri#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="method#compressImage#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="method#generateFileName#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="method#saveBitmap#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="method#handleImageBeforeKitKat#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="method#getImagePath#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="method#displayImage#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="method#getImage#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="method#colorSpanAdjust#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="method#onCreateDialog#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="e#59280#62412#0" expanded="true" />
+                <element signature="e#62411#62412#0" expanded="true" />
+                <element signature="method#onLongClick#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="e#63462#63797#0" expanded="true" />
+                <element signature="e#63796#63797#0" expanded="true" />
+                <element signature="e#64514#64846#0" expanded="true" />
+                <element signature="e#64845#64846#0" expanded="true" />
+                <element signature="e#65562#65894#0" expanded="true" />
+                <element signature="e#65893#65894#0" expanded="true" />
+                <element signature="e#66610#66942#0" expanded="true" />
+                <element signature="e#66941#66942#0" expanded="true" />
+                <element signature="e#67658#67990#0" expanded="true" />
+                <element signature="e#67989#67990#0" expanded="true" />
+                <element signature="class#ListItemAdapter#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="method#setTags#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="method#isMoodLabel#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="method#getLabelsOfDiary#0;class#DiaryWriteActivity#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TimeLineActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/TimeLineActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="88">
+              <caret line="26" column="13" lean-forward="false" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -123,52 +180,24 @@
       <file leaf-file-name="Diary.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/db/Diary.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4774">
+            <state relative-caret-position="858">
               <caret line="57" column="19" lean-forward="false" selection-start-line="57" selection-start-column="19" selection-end-line="57" selection-end-column="19" />
->>>>>>> 02fd9462d74be92d704be6d3a21aac653d946ca6
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
-      <file leaf-file-name="DiaryWriteActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/DiaryWriteActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="362">
-              <caret line="833" column="0" lean-forward="true" selection-start-line="833" selection-start-column="0" selection-end-line="833" selection-end-column="0" />
-              <folding>
-                <element signature="method#getView#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#setOnListener#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#init#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#onClick#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#editchange#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#onCreateOptionsMenu#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#onOptionsItemSelected#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#openAlbum#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#onRequestPermissionsResult#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#onActivityResult#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#getBitmapFromUri#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#compressImage#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#generateFileName#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#saveBitmap#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#handleImageBeforeKitKat#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#getImagePath#0;class#DiaryWriteActivity#0" expanded="false" />
-=======
       <file leaf-file-name="DiaryCardAdapter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/DiaryCardAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1998">
+            <state relative-caret-position="176">
               <caret line="33" column="46" lean-forward="false" selection-start-line="33" selection-start-column="46" selection-end-line="33" selection-end-column="46" />
               <folding>
-                <element signature="e#2451#3036#0" expanded="true" />
-                <element signature="e#3035#3036#0" expanded="true" />
-                <element signature="e#3115#4497#0" expanded="true" />
-                <element signature="e#3459#3992#0" expanded="true" />
-                <element signature="e#3991#3992#0" expanded="true" />
-                <element signature="e#4496#4497#0" expanded="true" />
-                <element signature="e#4551#4862#0" expanded="true" />
-                <element signature="e#4861#4862#0" expanded="true" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#1986#1987#0" expanded="false" />
+                <element signature="e#2032#2033#0" expanded="false" />
+                <element signature="e#6145#6146#0" expanded="false" />
+                <element signature="e#6189#6190#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -176,16 +205,14 @@
       </file>
       <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="29" column="69" lean-forward="false" selection-start-line="29" selection-start-column="69" selection-end-line="29" selection-end-column="69" />
-              <folding>
-                <element signature="e#1576#1615#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
           <provider editor-type-id="android-manifest">
             <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="638">
+              <caret line="29" column="69" lean-forward="false" selection-start-line="29" selection-start-column="69" selection-end-line="29" selection-end-column="69" />
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
@@ -195,24 +222,8 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
+            <state relative-caret-position="924">
               <caret line="42" column="17" lean-forward="false" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
-              <folding>
-                <element signature="e#1815#1855#0" expanded="true" />
-                <element signature="e#6540#6580#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_ticket_edit.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_ticket_edit.xml">
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="9" column="35" lean-forward="false" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -224,12 +235,9 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-138">
+            <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <element signature="e#1922#1962#0" expanded="true" />
->>>>>>> 02fd9462d74be92d704be6d3a21aac653d946ca6
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -272,7 +280,15 @@
       <find>add_diary</find>
       <find>originType = &quot;welcome&quot;;</find>
       <find>originType = &quot;welcome&quot;</find>
+      <find>calend</find>
+      <find>toast</find>
+      <find>case</find>
+      <find>index = index</find>
     </findStrings>
+  </component>
+  <component name="GenerateSignedApkSettings">
+    <option name="KEY_STORE_PATH" value="D:\SE\key\HeartTrace.jks" />
+    <option name="KEY_ALIAS" value="HeartTrace-alpha" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -280,7 +296,7 @@
   <component name="GradleLocalSettings">
     <option name="myGradleHomes">
       <map>
-        <entry key="$PROJECT_DIR$" value="C:\Users\dell\.gradle\wrapper\dists\gradle-4.4-all\9br9xq1tocpiv8o6njlyu5op1\gradle-4.4" />
+        <entry key="$PROJECT_DIR$" value="C:\Users\kx63\.gradle\wrapper\dists\gradle-4.4-all\9br9xq1tocpiv8o6njlyu5op1\gradle-4.4" />
       </map>
     </option>
     <option name="myGradleVersions">
@@ -293,14 +309,14 @@
         <entry>
           <key>
             <ExternalProjectPojo>
-              <option name="name" value="Diary" />
+              <option name="name" value="HeartTrace" />
               <option name="path" value="$PROJECT_DIR$" />
             </ExternalProjectPojo>
           </key>
           <value>
             <list>
               <ExternalProjectPojo>
-                <option name="name" value="Diary" />
+                <option name="name" value="HeartTrace" />
                 <option name="path" value="$PROJECT_DIR$" />
               </ExternalProjectPojo>
               <ExternalProjectPojo>
@@ -322,7 +338,7 @@
                 <option name="name" value="splitsDiscoveryTaskDebugAndroidTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the sub-projects of root project 'Diary'." />
+                <option name="description" value="Displays the sub-projects of root project 'HeartTrace'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="projects" />
               </ExternalTaskPojo>
@@ -360,7 +376,7 @@
                 <option name="name" value="assembleDebugUnitTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the configuration model of root project 'Diary'. [incubating]" />
+                <option name="description" value="Displays the configuration model of root project 'HeartTrace'. [incubating]" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="model" />
               </ExternalTaskPojo>
@@ -378,7 +394,7 @@
                 <option name="name" value="bundleAppClassesDebug" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the tasks runnable from root project 'Diary' (some of the displayed tasks may belong to subprojects)." />
+                <option name="description" value="Displays the tasks runnable from root project 'HeartTrace' (some of the displayed tasks may belong to subprojects)." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="tasks" />
               </ExternalTaskPojo>
@@ -397,7 +413,7 @@
                 <option name="name" value="deviceCheck" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays all dependencies declared in root project 'Diary'." />
+                <option name="description" value="Displays all dependencies declared in root project 'HeartTrace'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="dependencies" />
               </ExternalTaskPojo>
@@ -470,7 +486,7 @@
                 <option name="name" value="compileDebugAndroidTestJavaWithJavac" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the components produced by root project 'Diary'. [incubating]" />
+                <option name="description" value="Displays the components produced by root project 'HeartTrace'. [incubating]" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="components" />
               </ExternalTaskPojo>
@@ -587,7 +603,7 @@
                 <option name="name" value="uninstallDebugAndroidTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the insight into a specific dependency in root project 'Diary'." />
+                <option name="description" value="Displays the insight into a specific dependency in root project 'HeartTrace'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="dependencyInsight" />
               </ExternalTaskPojo>
@@ -864,12 +880,12 @@
                 <option name="name" value="transformDexArchiveWithDexMergerForDebugAndroidTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the dependent components of components in root project 'Diary'. [incubating]" />
+                <option name="description" value="Displays the dependent components of components in root project 'HeartTrace'. [incubating]" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="dependentComponents" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays all buildscript dependencies declared in root project 'Diary'." />
+                <option name="description" value="Displays all buildscript dependencies declared in root project 'HeartTrace'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="buildEnvironment" />
               </ExternalTaskPojo>
@@ -992,7 +1008,7 @@
                 <option name="name" value="generateReleaseResValues" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the properties of root project 'Diary'." />
+                <option name="description" value="Displays the properties of root project 'HeartTrace'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="properties" />
               </ExternalTaskPojo>
@@ -1842,7 +1858,7 @@
                   </entry>
                 </map>
               </option>
-              <option name="name" value="Diary" />
+              <option name="name" value="HeartTrace" />
               <option name="projectBuildClasspath">
                 <list>
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.4-all/9br9xq1tocpiv8o6njlyu5op1/gradle-4.4/src/announce" />
@@ -2014,25 +2030,25 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/BottlefrontActivity.java" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/.idea/misc.xml" />
-        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/TicketEditActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/font_setting_bottom_sheet.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/DiaryWriteActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/DiaryCardAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_ticket_edit.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/db/Diary.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/diary_write_content.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/CalendarActivity.java" />
+        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/DiaryWriteActivity.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
-    <option name="width" value="1938" />
-    <option name="height" value="1048" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="754" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -2050,16 +2066,26 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Diary" />
+              <option name="myItemId" value="HeartTrace" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HeartTrace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HeartTrace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HeartTrace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
@@ -2068,40 +2094,12 @@
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Diary" />
+              <option name="myItemId" value="HeartTrace" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
+              <option name="myItemId" value="HeartTrace" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Diary" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Diary" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
@@ -2111,19 +2109,15 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Diary" />
+              <option name="myItemId" value="HeartTrace" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HeartTrace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
@@ -2137,21 +2131,15 @@
               <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-<<<<<<< HEAD
-=======
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Diary" />
+              <option name="myItemId" value="HeartTrace" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HeartTrace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
@@ -2166,7 +2154,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
->>>>>>> 02fd9462d74be92d704be6d3a21aac653d946ca6
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -2177,8 +2164,12 @@
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Diary" />
+              <option name="myItemId" value="HeartTrace" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HeartTrace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
@@ -2211,8 +2202,12 @@
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Diary" />
+              <option name="myItemId" value="HeartTrace" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HeartTrace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
@@ -2238,13 +2233,13 @@
               <option name="myItemId" value="dell" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="db" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2254,6 +2249,11 @@
     <property name="android.profiler.active" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1530455104741" />
     <property name="sync.plugin.last.upgrade.timestamp" value="1530453350565" />
+    <property name="ExportApk.ApkPath" value="D:\Android\Project\Diary\app" />
+    <property name="ExportApk.Flavors" value="" />
+    <property name="ExportApk.BuildType" value="release" />
+    <property name="ExportApk.SignV1" value="true" />
+    <property name="ExportApk.SignV2" value="true" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -2339,11 +2339,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-<<<<<<< HEAD
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1530496856109" />
-=======
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1530494982398" />
->>>>>>> 02fd9462d74be92d704be6d3a21aac653d946ca6
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1530502520661" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2391,11 +2387,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-<<<<<<< HEAD
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1530496856110" />
-=======
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1530494982398" />
->>>>>>> 02fd9462d74be92d704be6d3a21aac653d946ca6
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1530502520661" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2427,27 +2419,6 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <method />
-    </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
       <method />
     </configuration>
     <configuration default="true" type="JarApplication" factoryName="JAR Application">
@@ -2578,11 +2549,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-<<<<<<< HEAD
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1530496856112" />
-=======
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1530494982404" />
->>>>>>> 02fd9462d74be92d704be6d3a21aac653d946ca6
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1530502520665" />
       </method>
     </configuration>
     <list size="1">
@@ -2633,10 +2600,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1048" extended-state="0" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993197" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4909297" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960895" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -2644,20 +2611,15 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5030257" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1973262" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.75396824" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32879817" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32879817" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-<<<<<<< HEAD
-      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27741936" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-=======
-      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28379887" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
->>>>>>> 02fd9462d74be92d704be6d3a21aac653d946ca6
+      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28341386" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2090909" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20877458" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2671,6 +2633,7 @@
       <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2774019" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1973262" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -2712,70 +2675,12 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-<<<<<<< HEAD
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/BottleAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1702">
-          <caret line="77" column="9" lean-forward="false" selection-start-line="77" selection-start-column="9" selection-end-line="77" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#3891#3892#0" expanded="false" />
-            <element signature="e#3978#3979#0" expanded="false" />
-            <element signature="e#4039#4229#0" expanded="false" />
-            <element signature="e#4228#4229#0" expanded="false" />
-            <element signature="e#5464#5465#0" expanded="false" />
-            <element signature="e#5511#5512#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/BottlefrontActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3224">
-          <caret line="97" column="70" lean-forward="false" selection-start-line="97" selection-start-column="70" selection-end-line="97" selection-end-column="70" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#5511#7275#0" expanded="false" />
-            <element signature="e#7274#7275#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/BottlesActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3569">
-          <caret line="75" column="88" lean-forward="false" selection-start-line="75" selection-start-column="15" selection-end-line="75" selection-end-column="88" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/BottleWriteActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2925">
-          <caret line="38" column="13" lean-forward="false" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
-=======
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/CalendarActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2373">
-          <caret line="33" column="13" lean-forward="false" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
->>>>>>> 02fd9462d74be92d704be6d3a21aac653d946ca6
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/DiaryCard.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-381">
-          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/LineChartManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-4673">
@@ -2802,7 +2707,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1219">
           <caret line="63" column="0" lean-forward="true" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2848,7 +2752,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-5566">
           <caret line="36" column="13" lean-forward="false" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2915,7 +2818,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Diary.iml">
+    <entry file="file://$PROJECT_DIR$/diary.iml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -3022,13 +2925,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6798">
-          <caret line="1113" column="35" lean-forward="false" selection-start-line="1113" selection-start-column="35" selection-end-line="1113" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/DiaryActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2121">
@@ -3054,7 +2950,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3074,36 +2969,18 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
+        <state relative-caret-position="198">
           <caret line="9" column="35" lean-forward="false" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/CalendarActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-770">
-          <caret line="33" column="13" lean-forward="false" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
-=======
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2621">
-          <caret line="156" column="41" lean-forward="false" selection-start-line="156" selection-start-column="41" selection-end-line="156" selection-end-column="41" />
->>>>>>> 02fd9462d74be92d704be6d3a21aac653d946ca6
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/MainActivity.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_bottlefront.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-        <state relative-caret-position="109">
-          <caret line="183" column="36" lean-forward="false" selection-start-line="183" selection-start-column="36" selection-end-line="183" selection-end-column="36" />
-=======
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
@@ -3112,24 +2989,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/db/Diary.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4774">
+        <state relative-caret-position="858">
           <caret line="57" column="19" lean-forward="false" selection-start-line="57" selection-start-column="19" selection-end-line="57" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="29" column="69" lean-forward="false" selection-start-line="29" selection-start-column="69" selection-end-line="29" selection-end-column="69" />
->>>>>>> 02fd9462d74be92d704be6d3a21aac653d946ca6
-          <folding>
-            <element signature="e#1576#1615#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
       <provider editor-type-id="android-manifest">
         <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="638">
+          <caret line="29" column="69" lean-forward="false" selection-start-line="29" selection-start-column="69" selection-end-line="29" selection-end-column="69" />
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_bottles.xml">
@@ -3137,43 +3011,22 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-138">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#1922#1962#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="682">
-          <caret line="31" column="68" lean-forward="true" selection-start-line="31" selection-start-column="68" selection-end-line="31" selection-end-column="68" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/DiaryCardAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-        <state relative-caret-position="387">
-          <caret line="144" column="5" lean-forward="false" selection-start-line="144" selection-start-column="5" selection-end-line="144" selection-end-column="5" />
-          <folding />
-=======
-        <state relative-caret-position="-1998">
+        <state relative-caret-position="176">
           <caret line="33" column="46" lean-forward="false" selection-start-line="33" selection-start-column="46" selection-end-line="33" selection-end-column="46" />
           <folding>
-            <element signature="e#2451#3036#0" expanded="true" />
-            <element signature="e#3035#3036#0" expanded="true" />
-            <element signature="e#3115#4497#0" expanded="true" />
-            <element signature="e#3459#3992#0" expanded="true" />
-            <element signature="e#3991#3992#0" expanded="true" />
-            <element signature="e#4496#4497#0" expanded="true" />
-            <element signature="e#4551#4862#0" expanded="true" />
-            <element signature="e#4861#4862#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1986#1987#0" expanded="false" />
+            <element signature="e#2032#2033#0" expanded="false" />
+            <element signature="e#6145#6146#0" expanded="false" />
+            <element signature="e#6189#6190#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3183,46 +3036,97 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
+        <state relative-caret-position="924">
           <caret line="42" column="17" lean-forward="false" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/TimeLineActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="26" column="13" lean-forward="false" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24398">
+          <caret line="1115" column="35" lean-forward="false" selection-start-line="1115" selection-start-column="35" selection-end-line="1115" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/CalendarActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1342">
+          <caret line="92" column="80" lean-forward="false" selection-start-line="92" selection-start-column="80" selection-end-line="92" selection-end-column="80" />
           <folding>
-            <element signature="e#1815#1855#0" expanded="true" />
-            <element signature="e#6540#6580#0" expanded="true" />
+            <element signature="method#onClick#0;class#CalendarActivity#0" expanded="false" />
           </folding>
->>>>>>> 02fd9462d74be92d704be6d3a21aac653d946ca6
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/DiaryWriteActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-        <state relative-caret-position="362">
-          <caret line="833" column="0" lean-forward="true" selection-start-line="833" selection-start-column="0" selection-end-line="833" selection-end-column="0" />
+        <state relative-caret-position="387">
+          <caret line="685" column="10" lean-forward="false" selection-start-line="685" selection-start-column="10" selection-end-line="685" selection-end-column="10" />
           <folding>
+            <element signature="e#3942#3969#0" expanded="false" />
+            <element signature="e#5088#5099#0" expanded="true" />
+            <element signature="method#onCreate#0;class#DiaryWriteActivity#0" expanded="false" />
+            <element signature="e#7983#9145#0" expanded="true" />
+            <element signature="e#9144#9145#0" expanded="true" />
+            <element signature="method#onRestart#0;class#DiaryWriteActivity#0" expanded="false" />
+            <element signature="method#onTouch#0;class#DiaryWriteActivity#0" expanded="false" />
+            <element signature="class#MyGestureListener#0;class#DiaryWriteActivity#0" expanded="false" />
+            <element signature="method#onDown#0;class#MyGestureListener#0;class#DiaryWriteActivity#0" expanded="false" />
+            <element signature="method#onShowPress#0;class#MyGestureListener#0;class#DiaryWriteActivity#0" expanded="false" />
+            <element signature="method#onSingleTapUp#0;class#MyGestureListener#0;class#DiaryWriteActivity#0" expanded="false" />
+            <element signature="method#onScroll#0;class#MyGestureListener#0;class#DiaryWriteActivity#0" expanded="false" />
+            <element signature="method#onLongPress#0;class#MyGestureListener#0;class#DiaryWriteActivity#0" expanded="false" />
+            <element signature="method#onFling#0;class#MyGestureListener#0;class#DiaryWriteActivity#0" expanded="false" />
+            <element signature="method#initViewPage#0;class#DiaryWriteActivity#0" expanded="false" />
             <element signature="method#getView#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="method#setOnListener#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="method#init#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="method#onClick#0;class#DiaryWriteActivity#0" expanded="false" />
+            <element signature="class#17004:17543" expanded="false" />
+            <element signature="class#17641:18113" expanded="false" />
             <element signature="method#editchange#0;class#DiaryWriteActivity#0" expanded="false" />
             <element signature="method#onCreateOptionsMenu#0;class#DiaryWriteActivity#0" expanded="false" />
             <element signature="method#onOptionsItemSelected#0;class#DiaryWriteActivity#0" expanded="false" />
+            <element signature="e#47672#50120#0" expanded="true" />
+            <element signature="e#50119#50120#0" expanded="true" />
             <element signature="method#openAlbum#0;class#DiaryWriteActivity#0" expanded="false" />
             <element signature="method#onRequestPermissionsResult#0;class#DiaryWriteActivity#0" expanded="false" />
             <element signature="method#onActivityResult#0;class#DiaryWriteActivity#0" expanded="false" />
+            <element signature="method#handleImageOnKitKat#0;class#DiaryWriteActivity#0" expanded="false" />
             <element signature="method#getBitmapFromUri#0;class#DiaryWriteActivity#0" expanded="false" />
             <element signature="method#compressImage#0;class#DiaryWriteActivity#0" expanded="false" />
             <element signature="method#generateFileName#0;class#DiaryWriteActivity#0" expanded="false" />
             <element signature="method#saveBitmap#0;class#DiaryWriteActivity#0" expanded="false" />
             <element signature="method#handleImageBeforeKitKat#0;class#DiaryWriteActivity#0" expanded="false" />
             <element signature="method#getImagePath#0;class#DiaryWriteActivity#0" expanded="false" />
-=======
-        <state relative-caret-position="-50">
-          <caret line="771" column="0" lean-forward="true" selection-start-line="771" selection-start-column="0" selection-end-line="771" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#7983#9038#0" expanded="true" />
-            <element signature="e#9037#9038#0" expanded="true" />
->>>>>>> 02fd9462d74be92d704be6d3a21aac653d946ca6
+            <element signature="method#displayImage#0;class#DiaryWriteActivity#0" expanded="false" />
+            <element signature="method#getImage#0;class#DiaryWriteActivity#0" expanded="false" />
+            <element signature="method#colorSpanAdjust#0;class#DiaryWriteActivity#0" expanded="false" />
+            <element signature="method#onCreateDialog#0;class#DiaryWriteActivity#0" expanded="false" />
+            <element signature="e#59280#62412#0" expanded="true" />
+            <element signature="e#62411#62412#0" expanded="true" />
+            <element signature="method#onLongClick#0;class#DiaryWriteActivity#0" expanded="false" />
+            <element signature="e#63462#63797#0" expanded="true" />
+            <element signature="e#63796#63797#0" expanded="true" />
+            <element signature="e#64514#64846#0" expanded="true" />
+            <element signature="e#64845#64846#0" expanded="true" />
+            <element signature="e#65562#65894#0" expanded="true" />
+            <element signature="e#65893#65894#0" expanded="true" />
+            <element signature="e#66610#66942#0" expanded="true" />
+            <element signature="e#66941#66942#0" expanded="true" />
+            <element signature="e#67658#67990#0" expanded="true" />
+            <element signature="e#67989#67990#0" expanded="true" />
+            <element signature="class#ListItemAdapter#0;class#DiaryWriteActivity#0" expanded="false" />
+            <element signature="method#setTags#0;class#DiaryWriteActivity#0" expanded="false" />
+            <element signature="method#isMoodLabel#0;class#DiaryWriteActivity#0" expanded="false" />
+            <element signature="method#getLabelsOfDiary#0;class#DiaryWriteActivity#0" expanded="false" />
           </folding>
         </state>
       </provider>

@@ -220,6 +220,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             public boolean onNavigationItemSelected(MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.favorite:
+                        Toast.makeText(DiaryWriteActivity.this, "暂不支持查看收藏T^T", Toast.LENGTH_SHORT).show();
                         mDrawerLayout.closeDrawers();
                         break;
                     case R.id.statistics:
@@ -280,7 +281,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                                float velocityY) {
             // TODO Auto-generated method stub
             DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-            if(confirm.getVisibility() == View.INVISIBLE){
+            if(confirm.getVisibility() == View.INVISIBLE && emptyImage.getVisibility() == View.INVISIBLE){
                 //Toast.makeText(DiaryWriteActivity.this, "onFling", Toast.LENGTH_LONG).show();
                 if (e1.getX() - e2.getX() > FLING_MIN_DISTANCE
                         && Math.abs(velocityX) > FLING_MIN_VELOCITY) {
@@ -671,6 +672,20 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 //
     }
 
+    private void initTextFormmat()
+    {
+        diary_write.setTextSize(20);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            diary_write.setLetterSpacing((float) 0.2);
+        }
+        diary_write.setLineSpacing(0,1);
+    }
+
+    private void setTextFormmat(Diary diary)
+    {
+        //diary_write.setTextSize(diary);
+    }
+
     public void onClick(View view) {
         DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
         switch (view.getId()) {
@@ -969,7 +984,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 }
                 break;
             case R.id.insert_image:
-                openAlbum();
+                //openAlbum();
+                Toast.makeText(this, "插入图片出了点小问题，帅气的kx小哥哥正在努力解决中￣ω￣=", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -1546,7 +1562,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
-
     public Drawable setTags(String id){
         switch(id)
         {
@@ -1589,7 +1604,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             default: return false;
         }
     }
-
 
     public void getLabelsOfDiary(Diary diary, DatabaseHelper helper ){
         diaryIcon.setImageDrawable(getResources().getDrawable(R.color.white));

@@ -91,7 +91,7 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
                 recyclerView.setAdapter(adapter);
 
                 toolbarTitle.setText(FORMATTER.format(selected_date.getDate()));
-                Toast.makeText(CalendarActivity.this, FORMATTER.format(selected_date.getDate()), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(CalendarActivity.this, FORMATTER.format(selected_date.getDate()), Toast.LENGTH_SHORT).show();
             }
         });
         toolbarTitle.setText(FORMATTER.format(new Date()));
