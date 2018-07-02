@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/user"
-            android:icon="@drawable/user_blue"
-            android:title="个人信息" />
+
         <item
             android:id="@+id/favorite"
             android:icon="@drawable/favorite_pink"
@@ -14,10 +11,16 @@
             android:icon="@drawable/statistics_black"
             android:title="情绪统计" />
 
+    </group>
+    <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_setting"
-            android:icon="@drawable/setting_grey"
-            android:title="个人设置" />
+            android:id="@+id/calendar_search"
+            android:icon="@drawable/calendar_black"
+            android:title="日历回顾" />
 
+        <item
+            android:id = "@+id/time_line"
+            android:icon="@drawable/timeline_black"
+            android:title="时间轴" />
     </group>
 </menu>

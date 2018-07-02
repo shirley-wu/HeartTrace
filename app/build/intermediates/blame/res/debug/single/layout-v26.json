@@ -2,5 +2,9 @@
     {
         "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\layout-v26\\abc_screen_toolbar.xml",
         "source": "C:\\Users\\kx63\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\66b8a8a8e53ceebd56165cd79675352a\\res\\layout-v26\\abc_screen_toolbar.xml"
+    },
+    {
+        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\layout-v26\\abc_screen_toolbar.xml",
+        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\22c565cf7d786504a3b25c164088eb3d\\res\\layout-v26\\abc_screen_toolbar.xml"
     }
 ]

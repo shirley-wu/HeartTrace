@@ -40,9 +40,9 @@ public class Diary implements Serializable
     @DatabaseField(dataType = DataType.DATE_STRING, columnName = "date", canBeNull = false)
     protected Date date;
 
-
     @DatabaseField
-    private boolean like;
+    private boolean like = false;
+
 
     public Diary(){
     };

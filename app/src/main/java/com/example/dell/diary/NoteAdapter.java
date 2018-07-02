@@ -109,10 +109,10 @@ public class NoteAdapter extends RecyclerView.Adapter <NoteAdapter.ViewHolder> {
                 dialog.show();
             }
 
-            @Override
-            public void onNextClick() {
-                Toast.makeText(mContext,"导出",Toast.LENGTH_SHORT).show();
-            }
+//            @Override
+//            public void onNextClick() {
+//                Toast.makeText(mContext,"导出",Toast.LENGTH_SHORT).show();
+//            }
         });
         holder.cardView.setOnLongClickListener(new View.OnLongClickListener(){
             @Override

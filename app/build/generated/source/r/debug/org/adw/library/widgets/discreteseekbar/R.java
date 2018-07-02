@@ -38,8 +38,8 @@ public final class R {
         public static final int dsb_track_color_list = 0x7f0c0136;
     }
     public static final class style {
-        public static final int Widget_DiscreteIndicatorTextAppearance = 0x7f090197;
-        public static final int Widget_DiscreteSeekBar = 0x7f090198;
+        public static final int Widget_DiscreteIndicatorTextAppearance = 0x7f090198;
+        public static final int Widget_DiscreteSeekBar = 0x7f090199;
     }
     public static final class styleable {
         public static final int[] DiscreteSeekBar = { 0x7f010121, 0x7f010122, 0x7f010123, 0x7f010124, 0x7f010125, 0x7f010126, 0x7f010127, 0x7f010128, 0x7f010129, 0x7f01012a, 0x7f01012b, 0x7f01012c, 0x7f01012d, 0x7f01012e, 0x7f01012f, 0x7f010130, 0x7f010131 };

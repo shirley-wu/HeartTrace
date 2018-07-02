@@ -7,10 +7,15 @@
         android:title="标签管理"
         app:showAsAction="always"/>
     <item
-        android:id="@+id/edit"
-        android:icon="@drawable/edit_white"
-        android:title="编辑"
+        android:id="@+id/search"
+        android:icon="@drawable/search_white"
+        android:title="搜索"
         app:showAsAction="always"/>
+    <!--<item-->
+        <!--android:id="@+id/edit"-->
+        <!--android:icon="@drawable/edit_white"-->
+        <!--android:title="编辑"-->
+        <!--app:showAsAction="always"/>-->
     <item
         android:id="@+id/delete"
         android:title="删除"

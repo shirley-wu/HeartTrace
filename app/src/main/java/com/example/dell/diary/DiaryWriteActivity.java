@@ -6,6 +6,7 @@ import android.animation.ObjectAnimator;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.Fragment;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
@@ -28,10 +29,17 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -52,10 +60,13 @@ import android.text.style.LeadingMarginSpan;
 import android.text.style.StyleSpan;
 import android.text.style.TypefaceSpan;
 import android.text.style.UnderlineSpan;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -89,6 +100,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -97,7 +109,13 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DiaryWriteActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
+public class DiaryWriteActivity extends AppCompatActivity implements View.OnClickListener,View.OnTouchListener,View.OnLongClickListener {
+//    private ViewPager vp;
+//    private DiaryFragment diaryFragment;
+//    private DiaryFragment preDiaryFragment;
+//    private DiaryFragment nextDiaryFragment;
+//    private List<android.support.v4.app.Fragment> mFragmentList = new ArrayList<android.support.v4.app.Fragment>();
+//    private DiaryFragmentAdapter mFragmentAdapter;
 
     public static final int CHOOSE_PHOTO = 2;
     private final int ICON_LIST_DIALOG = 1;
@@ -117,8 +135,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     List<Label> label_this = new ArrayList<>();
     private List<ImageView> imageItems = new ArrayList<ImageView>(3);
     int index;
-    Button preDiary;
-    Button nextDiary;
     ActionBar actionBar;
     private TextView diaryDate;
     private TextView diaryWeekday;
@@ -129,6 +145,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private ImageView diaryIcon4;
     private EditText diary_write;
     private LinearLayout edit_layout;
+    private LinearLayout date_layout;
+    private LinearLayout set_layout;
+    private ConstraintLayout floatingButtons;
     private DiscreteSeekBar set_size;
     private ImageButton confirm;
     private int start=0;
@@ -163,6 +182,23 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private SpannableStringBuilder spannableString = new SpannableStringBuilder();
     public List<String> weekList = new ArrayList<>(Arrays.asList("周日","周一","周二","周三"," 周四","周五","周六"));
 
+    private float mPosX, mPosY, mCurPosX, mCurPosY;
+    private static final int FLING_MIN_DISTANCE = 20;// 移动最小距离
+    private static final int FLING_MIN_VELOCITY = 200;// 移动最大速度
+    //构建手势探测器
+    private GestureDetector mGestureDetector;
+    private DrawerLayout mDrawerLayout;
+    private NavigationView navView;
+    private ImageView emptyImage;
+    String originType;
+
+    private FloatingActionButton addDiary;
+    private FloatingActionButton edit;
+    private FloatingActionButton enterBottle;
+    private FloatingActionButton like;
+    private FloatingActionButton add;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -171,14 +207,152 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         getView();
         setOnListener();
         init();
+//        //initViewPage();
+        mGestureDetector = new GestureDetector(new MyGestureListener()); //使用派生自OnGestureListener
+
+        edit_layout.setOnTouchListener(this);
+        edit_layout.setFocusable(true);
+        edit_layout.setClickable(true);
+        edit_layout.setLongClickable(true);
+
+        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.favorite:
+                        mDrawerLayout.closeDrawers();
+                        break;
+                    case R.id.statistics:
+                        Intent intent = new Intent(DiaryWriteActivity.this,StatisticsActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.calendar_search:
+                        Intent intent2 = new Intent(DiaryWriteActivity.this,CalendarActivity.class);
+                        startActivity(intent2);
+                        break;
+                    case R.id.time_line:
+                        Intent intent3 = new Intent(DiaryWriteActivity.this,TimeLineActivity.class);
+                        startActivity(intent3);
+                        break;
+                }
+                return true;
+            }
+        });
+    }
+    protected void onRestart(){
+        super.onRestart();
+        Log.d("restart",originType);
+        reStartInit();
+    }
+    public boolean onTouch(View v, MotionEvent event) {
+        return mGestureDetector.onTouchEvent(event);
     }
 
+    private class MyGestureListener implements GestureDetector.OnGestureListener{
+        public boolean onDown(MotionEvent e) {
+            // TODO Auto-generated method stub
+            //Toast.makeText(DiaryWriteActivity.this, "onDown", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        public void onShowPress(MotionEvent e) {
+            // TODO Auto-generated method stub
+
+        }
+
+        public boolean onSingleTapUp(MotionEvent e) {
+            // TODO Auto-generated method stub
+            return false;
+        }
+
+        public boolean onScroll(MotionEvent e1, MotionEvent e2,
+                                float distanceX, float distanceY) {
+            // TODO Auto-generated method stub
+            return false;
+        }
+
+        public void onLongPress(MotionEvent e) {
+            // TODO Auto-generated method stub
+
+        }
+
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+                               float velocityY) {
+            // TODO Auto-generated method stub
+            DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+            if(confirm.getVisibility() == View.INVISIBLE){
+                //Toast.makeText(DiaryWriteActivity.this, "onFling", Toast.LENGTH_LONG).show();
+                if (e1.getX() - e2.getX() > FLING_MIN_DISTANCE
+                        && Math.abs(velocityX) > FLING_MIN_VELOCITY) {
+                    // Fling left
+                    //Log.i("MyGesture", "Fling left");
+                    //Toast.makeText(DiaryWriteActivity.this, "Fling Left", Toast.LENGTH_SHORT).show();
+                    if(index == diaryList.size()-1){
+                        Toast.makeText(DiaryWriteActivity.this, "这已经是最新的日记啦",Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        index = index + 1;
+                        diary = diaryList.get(index);
+                        String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
+                        diaryDate.setText(date);
+                        diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
+                        diary_write.setText(Html.fromHtml(diary.getHtmlText()));
+                        getLabelsOfDiary(diary,helper);
+                    }
+                    getImage(diary.getText());
+                }
+                else if (e2.getX() - e1.getX() > FLING_MIN_DISTANCE
+                        && Math.abs(velocityX) > FLING_MIN_VELOCITY) {
+                    // Fling right
+                    //Log.i("MyGesture", "Fling right");
+                    //Toast.makeText(DiaryWriteActivity.this, "Fling Right", Toast.LENGTH_SHORT).show();
+                    //右滑 上一篇
+                    if(index == 0){
+                        Toast.makeText(DiaryWriteActivity.this, "没有更早的日记了哦",Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        index = index -1;
+                        diary = diaryList.get(index);
+                        String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
+                        diaryDate.setText(date);
+                        diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
+                        diary_write.setText(Html.fromHtml(diary.getHtmlText()));
+                        getLabelsOfDiary(diary,helper);
+                    }
+                    getImage(diary.getText());
+                }
+                return true;
+            }
+            return false;
+        }
+    }
+
+    public void initViewPage(){
+//        vp = (ViewPager)findViewById(R.id.diaryViewPager);
+//        diaryFragment = new DiaryFragment();
+//        preDiaryFragment = new DiaryFragment();
+//        nextDiaryFragment = new DiaryFragment();
+//        mFragmentList.add(preDiaryFragment);
+//        mFragmentList.add(diaryFragment);
+//        mFragmentList.add(nextDiaryFragment);
+//        //vp.addOnPageChangeListener(this);
+//        mFragmentAdapter = new DiaryFragmentAdapter(getSupportFragmentManager(),mFragmentList);
+//        vp.setOffscreenPageLimit(3);
+//        vp.setAdapter(mFragmentAdapter);
+//        vp.setCurrentItem(1);
+    }
     public void getView()
     {
-        preDiary = (Button)findViewById(R.id.pre_diary);
-        nextDiary = (Button)findViewById(R.id.next_diary);
+        floatingButtons = (ConstraintLayout)findViewById(R.id.floating_buttons);
+        addDiary = (FloatingActionButton)findViewById(R.id.add_diary);
+        add = (FloatingActionButton)findViewById(R.id.add);
+        enterBottle = (FloatingActionButton)findViewById(R.id.enterBottle);
+        like = (FloatingActionButton)findViewById(R.id.like);
+        edit = (FloatingActionButton)findViewById(R.id.edit);
         diary_write = (EditText) findViewById(R.id.diaryWrite);
         edit_layout = (LinearLayout) findViewById(R.id.edit_layout);
+        date_layout = (LinearLayout) findViewById(R.id.date_layout);
+        set_layout = (LinearLayout)findViewById(R.id.settings_column);
         set_size = (DiscreteSeekBar) findViewById(R.id.set_size);
         confirm = (ImageButton) findViewById(R.id.confirm);
         font_set = (ImageButton) findViewById(R.id.font_setting);
@@ -204,10 +378,32 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         diaryIcon2 = (ImageView) findViewById(R.id.diary_content_icon2);
         diaryIcon3 = (ImageView) findViewById(R.id.diary_content_icon3);
         diaryIcon4 = (ImageView) findViewById(R.id.diary_content_icon4);
+        emptyImage = (ImageView) findViewById(R.id.empty_image);
     }
 
     public void setOnListener()
     {
+        //ViewPager的监听事件
+//        vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//                /*此方法在页面被选中时调用*/
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//                /*此方法是在状态改变的时候调用，其中arg0这个参数有三种状态（0，1，2）。
+//                arg0 ==1的时辰默示正在滑动，
+//                arg0==2的时辰默示滑动完毕了，
+//                arg0==0的时辰默示什么都没做。*/
+//            }
+//        });
+
         diary_write.addTextChangedListener(new TextWatcher() {
             private int selectionStart;
             private int selectionEnd;
@@ -243,6 +439,11 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             public void onStopTrackingTouch(DiscreteSeekBar seekBar) {
             }
         });
+        add.setOnClickListener(this);
+        addDiary.setOnClickListener(this);
+        enterBottle.setOnClickListener(this);
+        like.setOnClickListener(this);
+        edit.setOnClickListener(this);
         confirm.setOnClickListener(this);
         font_set.setOnClickListener(this);
         set_font1.setOnClickListener(this);
@@ -261,8 +462,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         set_bold.setOnClickListener(this);
         set_italic.setOnClickListener(this);
         insert_image.setOnClickListener(this);
-        preDiary.setOnClickListener(this);
-        nextDiary.setOnClickListener(this);
         diaryIcon.setOnClickListener(this);
         diaryIcon1.setOnLongClickListener(this);
         diaryIcon1.setOnLongClickListener(this);
@@ -278,39 +477,83 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         imageItems.add(diaryIcon3);
         imageItems.add(diaryIcon4);
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar_diary_content);
+        toolbar.setTitle("心迹");
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navView = (NavigationView)findViewById(R.id.nav_view);
         diaryDate = (TextView)findViewById(R.id.diary_content_date);
         diaryWeekday = (TextView)findViewById(R.id.diary_content_weekday);
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.menu_white);
         }
+        //navView.setCheckedItem(R.id.favorite);
+        //navView.setItemIconTintList(null);
         Intent intent = getIntent();
-        diary = (Diary) intent.getSerializableExtra("diary_list");
         diaryList.clear();
-
         DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-        String originType = intent.getStringExtra("diary_origin");
-        if(originType.equals("diary")){
+        originType = intent.getStringExtra("diary_origin");
+        if(originType.equals("welcome")){
             diaryList = Diary.getAll(helper,true);
+            if(diaryList.size() == 0){
+
+            }
+            else{
+                index = diaryList.size()-1;
+                diary = diaryList.get(index);
+            }
+        }
+        else if(originType.equals("diary")){
+            diaryList = Diary.getAll(helper,true);
+            //diary = (Diary) intent.getSerializableExtra("diary_list");
+            index = intent.getIntExtra("diary_index",diaryList.size());
+            diary = diaryList.get(index);
             //labelList = Label.getAllLabel(helper);
+        }
+        else if(originType.equals("add_diary")){
+            diaryList = Diary.getAll(helper,true);
+            index = intent.getIntExtra("diary_index",diaryList.size());
         }
         else if(originType.equals("search")) {
             // Get the Bundle Object
-            Bundle bundleObject = intent.getExtras();
-            // Get ArrayList Bundle
-            diaryList = (ArrayList<Diary>) bundleObject.getSerializable("search_list");
+           Bundle bundleObject = intent.getExtras();
+//            // Get ArrayList Bundle
+           diaryList = (ArrayList<Diary>) bundleObject.getSerializable("search_list");
+            Collections.reverse(diaryList);
+           diary = (Diary) intent.getSerializableExtra("diary_list");
+           index = intent.getIntExtra("diary_index",diaryList.size());
+           diary = diaryList.get(index);
         }
-        index = intent.getIntExtra("diary_index",diaryList.size());
-        if(diary == null){
+
+        if(originType.equals("add_diary")){
             Date date = new Date();
             String today = (date.getYear()+1900)+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日";
             diaryDate.setText(today);
             diaryWeekday.setText(weekList.get(date.getDay()));
             //diaryIcon.setImageDrawable(setTag(tagId));
-            preDiary.setVisibility(View.INVISIBLE);
-            nextDiary.setVisibility(View.INVISIBLE);
             actionBar.hide();
+
+            floatingButtons.setVisibility(View.INVISIBLE);
+            emptyImage.setVisibility(View.INVISIBLE);
+
+        }
+        else if(diaryList.size() == 0){
+            emptyImage.setVisibility(View.VISIBLE);
+            font_set.setVisibility(View.INVISIBLE);
+            insert_image.setVisibility(View.INVISIBLE);
+            confirm.setVisibility(View.INVISIBLE);
+
+            diary_write.setText("");
+            diaryDate.setText("");
+            diaryWeekday.setText("");
+            diary_write.setEnabled(false);
+            floatingButtons.setVisibility(View.VISIBLE);
+            addDiary.setVisibility(View.INVISIBLE);
+            enterBottle.setVisibility(View.INVISIBLE);
+            like.setVisibility(View.INVISIBLE);
+            edit.setVisibility(View.INVISIBLE);
+
         }
         else {
             Log.i("show",diary.getHtmlText());
@@ -324,8 +567,108 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             font_set.setVisibility(View.INVISIBLE);
             insert_image.setVisibility(View.INVISIBLE);
             confirm.setVisibility(View.INVISIBLE);
+
+            emptyImage.setVisibility(View.INVISIBLE);
+            floatingButtons.setVisibility(View.VISIBLE);
+            addDiary.setVisibility(View.INVISIBLE);
+            enterBottle.setVisibility(View.INVISIBLE);
+            like.setVisibility(View.INVISIBLE);
+            edit.setVisibility(View.INVISIBLE);
+
             diary_write.setSelection(diary_write.getText().length());
+
         }
+//
+
+    }
+
+    public void reStartInit(){
+        imageItems.add(diaryIcon1);
+        imageItems.add(diaryIcon2);
+        imageItems.add(diaryIcon3);
+        imageItems.add(diaryIcon4);
+
+        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+        if(originType.equals("welcome")){
+            diaryList = Diary.getAll(helper,true);
+            if(diaryList.size() == 0){
+
+            }
+            else{
+                index = diaryList.size()-1;
+                diary = diaryList.get(index);
+            }
+        }
+        else if(originType.equals("diary")){
+            diaryList = Diary.getAll(helper,true);
+            //diary = (Diary) intent.getSerializableExtra("diary_list");
+            diary = diaryList.get(index);
+            //labelList = Label.getAllLabel(helper);
+        }
+        else if(originType.equals("add_diary")){
+            diaryList = Diary.getAll(helper,true);
+        }
+        else if(originType.equals("search")) {
+            // Get the Bundle Object
+
+            Bundle bundleObject = getIntent().getExtras();
+//            // Get ArrayList Bundle
+            diaryList = (ArrayList<Diary>) bundleObject.getSerializable("search_list");
+            Collections.reverse(diaryList);
+            diary = diaryList.get(index);
+        }
+
+        if(originType.equals("add_diary")){
+            Date date = new Date();
+            String today = (date.getYear()+1900)+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日";
+            diaryDate.setText(today);
+            diaryWeekday.setText(weekList.get(date.getDay()));
+            //diaryIcon.setImageDrawable(setTag(tagId));
+            actionBar.hide();
+
+            floatingButtons.setVisibility(View.INVISIBLE);
+            emptyImage.setVisibility(View.INVISIBLE);
+        }
+        else if(diaryList.size() == 0){
+            emptyImage.setVisibility(View.VISIBLE);
+            font_set.setVisibility(View.INVISIBLE);
+            insert_image.setVisibility(View.INVISIBLE);
+            confirm.setVisibility(View.INVISIBLE);
+
+            diary_write.setText("");
+            diaryDate.setText("");
+            diaryWeekday.setText("");
+            diary_write.setEnabled(false);
+            floatingButtons.setVisibility(View.VISIBLE);
+            addDiary.setVisibility(View.INVISIBLE);
+            enterBottle.setVisibility(View.INVISIBLE);
+            like.setVisibility(View.INVISIBLE);
+            edit.setVisibility(View.INVISIBLE);
+        }
+        else {
+            Log.i("show",diary.getHtmlText());
+            diary_write.setText(Html.fromHtml(diary.getHtmlText()));
+            getImage(diary.getText());
+            getLabelsOfDiary(diary,helper);
+            String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
+            diaryDate.setText(date);
+            diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
+            diary_write.setEnabled(false);
+            font_set.setVisibility(View.INVISIBLE);
+            insert_image.setVisibility(View.INVISIBLE);
+            confirm.setVisibility(View.INVISIBLE);
+
+            emptyImage.setVisibility(View.INVISIBLE);
+            floatingButtons.setVisibility(View.VISIBLE);
+            addDiary.setVisibility(View.INVISIBLE);
+            enterBottle.setVisibility(View.INVISIBLE);
+            like.setVisibility(View.INVISIBLE);
+            edit.setVisibility(View.INVISIBLE);
+
+            diary_write.setSelection(diary_write.getText().length());
+
+        }
+//
     }
 
     public void onClick(View view) {
@@ -344,35 +687,60 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 }
                 flag = -flag;
                 break;
-            case R.id.pre_diary:
-                if(index == 0){
-                    Toast.makeText(DiaryWriteActivity.this, "没有更早的日记了哦",Toast.LENGTH_SHORT).show();
+            case R.id.add:
+                if(addDiary.getVisibility() == View.INVISIBLE) {
+                    if(emptyImage.getVisibility() == View.VISIBLE || !diary.getLike()){
+                        like.setImageResource(R.drawable.unlike);
+                    }
+                    else{
+                        like.setImageResource(R.drawable.like);
+                    }
+                    addDiary.setVisibility(View.VISIBLE);
+                    enterBottle.setVisibility(View.VISIBLE);
+                    like.setVisibility(View.VISIBLE);
+                    edit.setVisibility(View.VISIBLE);
                 }
-                else{
-                    index = index -1;
-                    diary = diaryList.get(index);
-                    String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
-                    diaryDate.setText(date);
-                    diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
-                    diary_write.setText(Html.fromHtml(diary.getHtmlText()));
-                    getLabelsOfDiary(diary,helper);
+                else {
+                    addDiary.setVisibility(View.INVISIBLE);
+                    enterBottle.setVisibility(View.INVISIBLE);
+                    like.setVisibility(View.INVISIBLE);
+                    edit.setVisibility(View.INVISIBLE);
                 }
-                getImage(diary.getText());
                 break;
-            case R.id.next_diary:
-                if(index == diaryList.size()-1){
-                    Toast.makeText(DiaryWriteActivity.this, "这已经是最新的日记啦",Toast.LENGTH_SHORT).show();
+            case R.id.enterBottle:
+                Intent intent = new Intent(DiaryWriteActivity.this, BottlesActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.edit:
+                if(emptyImage.getVisibility() == View.INVISIBLE){
+                    diary_write.setEnabled(true);
+                    font_set.setVisibility(View.VISIBLE);
+                    insert_image.setVisibility(View.VISIBLE);
+                    confirm.setVisibility(View.VISIBLE);
+                    emptyImage.setVisibility(View.INVISIBLE);
+                    floatingButtons.setVisibility(View.INVISIBLE);
+                    actionBar.hide();
                 }
-                else{
-                    index = index + 1;
-                    diary = diaryList.get(index);
-                    String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
-                    diaryDate.setText(date);
-                    diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
-                    diary_write.setText(Html.fromHtml(diary.getHtmlText()));
-                    getLabelsOfDiary(diary,helper);
+                break;
+            case R.id.like:
+                if(emptyImage.getVisibility() == View.INVISIBLE){
+                    if(diary.getLike()) {
+                        like.setImageResource(R.drawable.unlike);
+                        diary.setLike(false);
+                        diary.update(helper);
+                    }
+                    else{
+                        like.setImageResource(R.drawable.like);
+                        diary.setLike(true);
+                        diary.update(helper);
+                    }
                 }
-                getImage(diary.getText());
+                break;
+            case R.id.add_diary:
+                Intent intent1 = new Intent(DiaryWriteActivity.this,DiaryWriteActivity.class);
+                intent1.putExtra("diary_origin","add_diary");
+                startActivity(intent1);
+                //finish();
                 break;
             case R.id.edit_layout:
                 if(confirm.getVisibility()==View.VISIBLE){
@@ -382,10 +750,17 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                         imm.showSoftInput(diary_write,0);
                     }
                 }
+                else{
+                    addDiary.setVisibility(View.INVISIBLE);
+                    enterBottle.setVisibility(View.INVISIBLE);
+                    like.setVisibility(View.INVISIBLE);
+                    edit.setVisibility(View.INVISIBLE);
+                }
                 break;
             case R.id.confirm:
                 String htmlText;
-                if(index == diaryList.size()){
+                //Log.i("test", Html.toHtml(diary_write.getText()));
+                if(originType.equals("add_diary")){
                     diary = new Diary();
                     diary.setText(diary_write.getText().toString());
                     htmlText = colorSpanAdjust(Html.toHtml(diary_write.getText()));
@@ -394,6 +769,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     diary.setDate(date);
                     diary.insert(helper);
                     diaryList.add(diary);
+
+                    originType = "welcome";
                 }
                 else{
                     diary.setText(diary_write.getText().toString());
@@ -409,8 +786,12 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 font_set.setVisibility(View.INVISIBLE);
                 insert_image.setVisibility(View.INVISIBLE);
                 confirm.setVisibility(View.INVISIBLE);
-                preDiary.setVisibility(View.VISIBLE);
-                nextDiary.setVisibility(View.VISIBLE);
+                emptyImage.setVisibility(View.INVISIBLE);
+                floatingButtons.setVisibility(View.VISIBLE);
+                addDiary.setVisibility(View.INVISIBLE);
+                enterBottle.setVisibility(View.INVISIBLE);
+                like.setVisibility(View.INVISIBLE);
+                edit.setVisibility(View.INVISIBLE);
                 actionBar.show();
                 break;
             case R.id.font_setting:
@@ -648,40 +1029,69 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.label_manage:
-                showDialog(ICON_LIST_DIALOG);
+                if(emptyImage.getVisibility() == View.INVISIBLE){
+                    showDialog(ICON_LIST_DIALOG);
+                }
                 break;
-            case R.id.edit:
-                diary_write.setEnabled(true);
-                font_set.setVisibility(View.VISIBLE);
-                insert_image.setVisibility(View.VISIBLE);
-                confirm.setVisibility(View.VISIBLE);
-                preDiary.setVisibility(View.INVISIBLE);
-                nextDiary.setVisibility(View.INVISIBLE);
-                actionBar.hide();
+            case R.id.search:
+                //Toast.makeText(this, "搜索你的日记", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(DiaryWriteActivity.this, SearchActivity.class);
+                startActivity(intent);
                 break;
             case android.R.id.home:
-                finish();
+                mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
             case R.id.delete:
-                //Toast.makeText(DiaryActivity.this, "删除这一篇日记",Toast.LENGTH_SHORT).show();
-                AlertDialog.Builder dialog = new AlertDialog.Builder(DiaryWriteActivity.this);
-                dialog.setTitle("提示");
-                dialog.setMessage("你确定要删除你的日记吗？");
-                dialog.setCancelable(true);
+                if(emptyImage.getVisibility() == View.INVISIBLE) {
+                    //Toast.makeText(DiaryActivity.this, "删除这一篇日记",Toast.LENGTH_SHORT).show();
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(DiaryWriteActivity.this);
+                    dialog.setTitle("提示");
+                    dialog.setMessage("你确定要删除你的日记吗？");
+                    dialog.setCancelable(true);
 
-                dialog.setPositiveButton("确认",new DialogInterface.OnClickListener(){
-                    public void onClick(DialogInterface dialog, int which){
-                        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-                        diary.delete(helper);
-                        finish();
-                    }
-                });
-                dialog.setNegativeButton("取消",new DialogInterface.OnClickListener(){
-                    public void onClick(DialogInterface dialog, int which){
+                    dialog.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+                            diary.delete(helper);
+                            diaryList.remove(diary);
+                            if (diaryList.size() == 0) {
+                                emptyImage.setVisibility(View.VISIBLE);
+                                font_set.setVisibility(View.INVISIBLE);
+                                insert_image.setVisibility(View.INVISIBLE);
+                                confirm.setVisibility(View.INVISIBLE);
+                                addDiary.setVisibility(View.INVISIBLE);
+                                enterBottle.setVisibility(View.INVISIBLE);
+                                like.setVisibility(View.INVISIBLE);
+                                edit.setVisibility(View.INVISIBLE);
+                                diary_write.setText("");
+                                diaryDate.setText("");
+                                diaryWeekday.setText("");
+                                getLabelsOfDiary(new Diary(), helper);
+                            } else if (index == diaryList.size()) {
+                                index = index - 1;
+                                diary = diaryList.get(index);
+                                String date = (diary.getDate().getYear() + 1900) + "年" + (diary.getDate().getMonth() + 1) + "月" + diary.getDate().getDate() + "日";
+                                diaryDate.setText(date);
+                                diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
+                                diary_write.setText(diary.getText());
+                                getLabelsOfDiary(diary, helper);
+                            } else {
+                                diary = diaryList.get(index);
+                                String date = (diary.getDate().getYear() + 1900) + "年" + (diary.getDate().getMonth() + 1) + "月" + diary.getDate().getDate() + "日";
+                                diaryDate.setText(date);
+                                diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
+                                diary_write.setText(diary.getText());
+                                getLabelsOfDiary(diary, helper);
+                            }
+                        }
+                    });
+                    dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
 
-                    }
-                });
-                dialog.show();
+                        }
+                    });
+                    dialog.show();
+                }
                 break;
             default:
         }

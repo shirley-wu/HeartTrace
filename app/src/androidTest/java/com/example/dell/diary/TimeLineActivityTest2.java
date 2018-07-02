@@ -25,10 +25,10 @@ import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class MainActivityTest2 {
+public class TimeLineActivityTest2 {
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<TimeLineActivity> mActivityTestRule = new ActivityTestRule<>(TimeLineActivity.class);
 
     @Test
     public void mainActivityTest2() {
