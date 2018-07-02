@@ -4,14 +4,16 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <!--导航栏底色-->
-        <item name="colorPrimary">#DEB887</item>
+        <item name="colorPrimary">#71cad2</item>
         <!--状态栏底色-->
-        <item name="colorPrimaryDark">#D2B48C</item>
+        <item name="colorPrimaryDark">#23af9a</item>
         <!--按钮选中或者点击获得焦点后的颜色-->
-        <item name="colorAccent">#a17d56</item>
+        <item name="colorAccent">#24af9b</item>
         <!--修改searchView样式-->
         <item name="searchViewStyle">@style/SearchViewStyle</item>
     </style>
+
+    <style name="AppTheme.Main" parent="AppTheme" />
 
     <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
         <!--<item name="searchIcon">@drawable/search_white</item>-->

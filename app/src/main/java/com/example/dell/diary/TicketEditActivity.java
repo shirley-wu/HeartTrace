@@ -3,6 +3,7 @@ package com.example.dell.diary;
 
 import android.animation.ObjectAnimator;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -14,17 +15,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,7 +46,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-public class TicketEditActivity extends AppCompatActivity implements View.OnClickListener {
+public class TicketEditActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
     public static final String BOTTLE_NAME = "bottle_name";
     public static final String SENTENCE_THIS = "sentence_this";
     public static final String NOTE_EDITABLE = "note_editable";
@@ -51,9 +55,9 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
     public static final String POSITION = "Position";
     private String sentence_name = "travel";
     private String tag= null;
+    private boolean ifExisted;
     private List<ImageView> imageItems = new ArrayList<ImageView>(3);
-    private int[] imgIds = {R.drawable.travel,
-            R.drawable.study, R.drawable.work};
+    private int[] imgIds = {R.drawable.travel, R.drawable.work, R.drawable.study, R.drawable.entertainment, R.drawable.love};
     List<Sentence> sentenceList = new ArrayList<>();
     List<Label> labelList = new ArrayList<>();
     List<Label> label_this = new ArrayList<>();
@@ -66,7 +70,6 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
     private ImageView sentenceIcon2;
     private ImageView sentenceIcon3;
     private ImageView sentenceIcon4;
-
     private FloatingActionButton ticket_confirm;
     private FloatingActionButton ticket_edit;
     private Button note_previous;
@@ -75,7 +78,9 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
     private String note_editable = "true";
     private Sentence sentence;
     private ObjectAnimator objAnimatorX;
+    private LinearLayout ticketEditLayout;
     private int flag = 1;
+    private int labelSize;
     private String note_new;
     private int position;
     public List<String> weekList = new ArrayList<>(Arrays.asList("周日","周一","周二","周三"," 周四","周五","周六"));
@@ -85,7 +90,6 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "onCreate: correct");
         setContentView(R.layout.activity_ticket_edit);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_sentence_content);
@@ -108,6 +112,8 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
         ticket_confirm.setOnClickListener(this);
         ticket_edit.setOnClickListener(this);
 
+        ticketEditLayout = (LinearLayout) findViewById(R.id.ticket_edit_layout);
+        ticketEditLayout.setOnClickListener(this);
 
         position = intent.getIntExtra(POSITION,1);
 
@@ -122,6 +128,13 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
         sentenceIcon3 = (ImageView) findViewById(R.id.sentence_content_icon3);
         sentenceIcon4 = (ImageView) findViewById(R.id.sentence_content_icon4);
         sentenceIcon.setOnClickListener(this);
+
+        sentenceIcon.setOnLongClickListener(this);
+        sentenceIcon1.setOnLongClickListener(this);
+        sentenceIcon2.setOnLongClickListener(this);
+        sentenceIcon3.setOnLongClickListener(this);
+        sentenceIcon4.setOnLongClickListener(this);
+
         Init();
     }
 
@@ -139,9 +152,7 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
         sentenceList = sentence.getSentencebook().getAllSubSentence(helper);
-
 
         if(note_editable.equals("false") ){
             editText.setText(sentence.getText());
@@ -174,6 +185,15 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View view) {
         switch(view.getId()) {
+            case R.id.ticket_edit_layout:
+                if(ticket_confirm.getVisibility()==View.VISIBLE){
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    if (imm != null) {
+                        editText.requestFocus();
+                        imm.showSoftInput(editText,0);
+                    }
+                }
+                break;
             case R.id.ticket_confirm:
                 actionBar.show();
                 ticket_edit.setVisibility(View.VISIBLE);
@@ -206,8 +226,8 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
                 note_next.setVisibility(View.INVISIBLE);
                 note_previous.setVisibility(View.INVISIBLE);
 
-
                 editText.setEnabled(true);
+                editText.setSelection(editText.getText().length());
                 break;
             case R.id.sentence_content_icon:
                 for(int i=0;i<imageItems.size();i++) {
@@ -261,6 +281,25 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
             case android.R.id.home:
                 finish();
                 return true;
+            case R.id.delete:
+                AlertDialog.Builder dialog = new AlertDialog.Builder(TicketEditActivity.this);
+                dialog.setTitle("提示");
+                dialog.setMessage("你确定要删除你的纸条吗？");
+                dialog.setCancelable(true);
+                dialog.setPositiveButton("确认",new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialog, int which){
+                        Intent intent_delete= new Intent();
+                        intent_delete.putExtra("result",position);
+                        setResult(2, intent_delete);
+                        finish();
+                    }
+                });
+                dialog.setNegativeButton("取消",new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialog, int which){
+                        dialog.cancel();
+                    }
+                });
+                dialog.show();
 
             default:
         }
@@ -273,17 +312,20 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
             case ICON_LIST_DIALOG:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setIcon(R.drawable.mood);
-                builder.setTitle("贴个标签？");
+                builder.setTitle("给小纸条贴个标签？");
                 BaseAdapter adapter = new TicketEditActivity.ListItemAdapter();
                 DialogInterface.OnClickListener listener =
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int which) {
-                                if(which == 0) sentence_name = "travel";
-                                else if(which == 1) sentence_name = "study";
-                                else if(which == 2) sentence_name = "work";
-                                else sentence_name = "travel";
-
+                                switch (which){
+                                    case 0: sentence_name = "travel";break;
+                                    case 1: sentence_name = "study";break;
+                                    case 2: sentence_name = "work";break;
+                                    case 3: sentence_name = "entertainment";break;
+                                    case 4: sentence_name = "love";break;
+                                }
+                                ifExisted = false;
                                 DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
 
                                 Label label = Label.getByName(helper,sentence_name);
@@ -291,9 +333,23 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
                                     label = new Label(sentence_name);
                                     label.insert(helper);
                                 }
-                                sentence.insertLabel(helper, label);
-                                getLabelsOfSentence(sentence,helper);
+                                label_this = null;
+                                try {
+                                    label_this = sentence.getAllLabel(helper);
+                                } catch (SQLException e) {
+                                    e.printStackTrace();
+                                }
 
+                                if(label_this != null && label_this.size()!= 0 && label_this.get(0).getLabelname() != null)
+                                {
+                                    for(Label i:label_this)
+                                    {
+                                        if(i.getLabelname().equals(sentence_name))
+                                            ifExisted = true;
+                                    }
+                                }
+                                if(!ifExisted) sentence.insertLabel(helper, label);
+                                getLabelsOfSentence(sentence,helper);
                             }
                         };
                 builder.setAdapter(adapter, listener);
@@ -301,6 +357,126 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
                 break;
         }
         return dialog;
+    }
+
+    @Override
+    public boolean onLongClick(View view) {
+        final DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+
+        label_this = null;
+        try {
+            label_this = sentence.getAllLabel(helper);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if(label_this != null && label_this.size()!= 0 && label_this.get(0).getLabelname() != null)
+        {
+            labelSize = label_this.size();
+            switch (view.getId()) {
+                case R.id.sentence_content_icon:
+                    if(labelSize >= 1) {
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                        dialog.setTitle("提示");
+                        dialog.setMessage("你确定要删除此标签吗？");
+                        dialog.setCancelable(true);
+
+                        dialog.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                sentence.deleteLabel(helper, label_this.get(labelSize - 1));
+                                getLabelsOfSentence(sentence, helper);
+                            }
+                        });
+                        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        });
+                        dialog.show();
+                    }
+                    break;
+                case R.id.sentence_content_icon1:
+                    if(labelSize >= 2){
+                        AlertDialog.Builder dialog1 = new AlertDialog.Builder(this);
+                        dialog1.setTitle("提示");
+                        dialog1.setMessage("你确定要删除此标签吗？");
+                        dialog1.setCancelable(true);
+
+                        dialog1.setPositiveButton("确认",new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog, int which){
+                                sentence.deleteLabel(helper, label_this.get(labelSize - 2));
+                                getLabelsOfSentence(sentence, helper);
+                            }
+                        });
+                        dialog1.setNegativeButton("取消",new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog, int which){
+                            }
+                        });
+                        dialog1.show();
+                    }
+                    break;
+                case R.id.sentence_content_icon2:
+                    if(labelSize >= 3){
+                        AlertDialog.Builder dialog2 = new AlertDialog.Builder(this);
+                        dialog2.setTitle("提示");
+                        dialog2.setMessage("你确定要删除此标签吗？");
+                        dialog2.setCancelable(true);
+
+                        dialog2.setPositiveButton("确认",new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog, int which){
+                                sentence.deleteLabel(helper, label_this.get(labelSize - 3));
+                                getLabelsOfSentence(sentence, helper);
+                            }
+                        });
+                        dialog2.setNegativeButton("取消",new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog, int which){
+                            }
+                        });
+                        dialog2.show();
+                    }
+                    break;
+                case R.id.sentence_content_icon3:
+                    if(labelSize >= 4){
+                        AlertDialog.Builder dialog3 = new AlertDialog.Builder(this);
+                        dialog3.setTitle("提示");
+                        dialog3.setMessage("你确定要删除此标签吗？");
+                        dialog3.setCancelable(true);
+
+                        dialog3.setPositiveButton("确认",new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog, int which){
+                                sentence.deleteLabel(helper, label_this.get(labelSize - 4));
+                                getLabelsOfSentence(sentence, helper);
+                            }
+                        });
+                        dialog3.setNegativeButton("取消",new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog, int which){
+                            }
+                        });
+                        dialog3.show();
+                    }
+                    break;
+                case R.id.sentence_content_icon4:
+                    if(labelSize >= 5){
+                        AlertDialog.Builder dialog4 = new AlertDialog.Builder(this);
+                        dialog4.setTitle("提示");
+                        dialog4.setMessage("你确定要删除此标签吗？");
+                        dialog4.setCancelable(true);
+
+                        dialog4.setPositiveButton("确认",new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog, int which){
+                                sentence.deleteLabel(helper, label_this.get(labelSize - 5));
+                                getLabelsOfSentence(sentence, helper);
+                            }
+                        });
+                        dialog4.setNegativeButton("取消",new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog, int which){
+                            }
+                        });
+                        dialog4.show();
+                    }
+                    break;
+
+            }
+        }
+        return false;
     }
 
     class ListItemAdapter extends BaseAdapter {
@@ -326,24 +502,24 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
             TextView textView =
                     new TextView(TicketEditActivity.this);
             //获得array.xml中的数组资源getStringArray返回的是一个String数组
-            String text = getResources().getStringArray(R.array.mood)[position];
+            String text = getResources().getStringArray(R.array.property)[position];
             textView.setText(text);
             //设置字体大小
-            textView.setTextSize(20);
+            textView.setTextSize(25);
             AbsListView.LayoutParams layoutParams = new AbsListView.LayoutParams(
                     WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
             textView.setLayoutParams(layoutParams);
             //设置水平方向上居中
-            textView.setGravity(android.view.Gravity.CENTER_VERTICAL);
-            textView.setMinHeight(65);
+            textView.setGravity(Gravity.CENTER_VERTICAL);
+            textView.setMinHeight(70);
             //设置文字颜色
             textView.setTextColor(Color.BLACK);
             //设置图标在文字的左边
             textView.setCompoundDrawablesWithIntrinsicBounds(imgIds[position], 0, 0, 0);
             //设置textView的左上右下的padding大小
-            textView.setPadding(30, 10, 30, 10);
+            textView.setPadding(80, 10, 20, 15);
             //设置文字和图标之间的padding大小
-            textView.setCompoundDrawablePadding(25);
+            textView.setCompoundDrawablePadding(30);
             return textView;
         }
     }
@@ -357,15 +533,19 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
                 return (getResources().getDrawable(R.drawable.study));
             case "work":
                 return (getResources().getDrawable(R.drawable.work));
+            case "entertainment":
+                return (getResources().getDrawable(R.drawable.entertainment));
+            case "love":
+                return (getResources().getDrawable(R.drawable.love));
             default:
                 return (getResources().getDrawable(R.drawable.travel));
         }
     }
 
     public void getLabelsOfSentence(Sentence sentence, DatabaseHelper helper ){
-        sentenceIcon.setImageDrawable(getResources().getDrawable(R.drawable.nothing));
+        sentenceIcon.setImageDrawable(getResources().getDrawable(R.color.white));
         for(int i = 0; i<=3; i++){
-            imageItems.get(i).setImageDrawable(getResources().getDrawable(R.drawable.nothing));
+            imageItems.get(i).setImageDrawable(getResources().getDrawable(R.color.white));
         }
         label_this = null;
         try {

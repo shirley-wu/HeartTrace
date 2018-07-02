@@ -8,6 +8,9 @@
         android:minSdkVersion="14"
         android:targetSdkVersion="26" />
 
+    <!-- 申请权限存取图片，误删！ -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
@@ -16,15 +19,11 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:testOnly="true"
+        android:theme="@style/AppTheme.Main" >
         <activity
-            android:name="com.example.dell.diary.MainActivity"
+            android:name="com.example.dell.diary.TimeLineActivity"
             android:label="HeartTrace" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name="com.example.dell.diary.StatisticsActivity" />
         <activity android:name="com.example.dell.diary.DiaryActivity" />
@@ -55,6 +54,13 @@
         <activity android:name="com.example.dell.diary.SearchResultActivity" />
         <activity android:name="com.example.dell.diary.LabelManageActivity" />
         <activity android:name="com.example.dell.diary.CollectActivity" />
+        <activity android:name="com.example.dell.diary.WelcomeActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <meta-data
             android:name="android.support.VERSION"

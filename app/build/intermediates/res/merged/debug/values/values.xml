@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2" xmlns:ns2="http://schemas.android.com/tools">
     <string-array name="mood">
-        <item>今天挺开心的2333</item>
-        <item>还行吧，一般般</item>
-        <item>好难过啊55</item>
+        <item>开心</item>
+        <item>一般</item>
+        <item>难过</item>
+        <item>尴尬</item>
+        <item>震惊</item>
+        <item>呆滞</item>
+        <item>旅游</item>
+        <item>工作</item>
+        <item>学习</item>
+        <item>娱乐</item>
+        <item>约会</item>
+    </string-array>
+    <string-array name="property">
+        <item>旅游</item>
+        <item>工作</item>
+        <item>学习</item>
+        <item>娱乐</item>
+        <item>约会</item>
     </string-array>
     <attr format="boolean" name="barrierAllowsGoneWidgets"/>
     <attr format="enum" name="barrierDirection">
@@ -1156,7 +1171,7 @@
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
-    <string name="app_name">Diary</string>
+    <string name="app_name">心迹</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
     <string name="bottom_sheet_behavior" translatable="false">android.support.design.widget.BottomSheetBehavior</string>
     <string name="calendar">Calendar</string>
@@ -1239,14 +1254,15 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <!--导航栏底色-->
-        <item name="colorPrimary">#DEB887</item>
+        <item name="colorPrimary">#71cad2</item>
         <!--状态栏底色-->
-        <item name="colorPrimaryDark">#D2B48C</item>
+        <item name="colorPrimaryDark">#23af9a</item>
         <!--按钮选中或者点击获得焦点后的颜色-->
-        <item name="colorAccent">#a17d56</item>
+        <item name="colorAccent">#24af9b</item>
         <!--修改searchView样式-->
         <item name="searchViewStyle">@style/SearchViewStyle</item>
     </style>
+    <style name="AppTheme.Main" parent="AppTheme"/>
     <style name="Base.AlertDialog.AppCompat" parent="android:Widget">
         <item name="android:layout">@layout/abc_alert_dialog_material</item>
         <item name="listLayout">@layout/abc_select_dialog_material</item>

@@ -54,10 +54,7 @@ public class BottlefrontActivity extends AppCompatActivity {
     private List<Sentence> sentenceList = new ArrayList<>();
     private NoteAdapter adapter;
 
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.bottletoolbar, menu);
-        return true;
-    }
+
 
    @Override
    protected  void onResume(){
@@ -88,7 +85,7 @@ public class BottlefrontActivity extends AppCompatActivity {
                         startActivityForResult(intent, 1);
                     }
                 }
-                if(resultCode == -1){
+                else if(resultCode == -1){
                     int return_positon1 = data.getIntExtra("result",0);
                     if(return_positon1>=0){
                         int new_positon1 = return_positon1 - 1;
@@ -100,6 +97,14 @@ public class BottlefrontActivity extends AppCompatActivity {
                         intent.putExtra(TicketEditActivity.NOTE_NEW, "false");
                         startActivityForResult(intent, 1);
                     }
+                }
+                else if(resultCode == 2){
+                    int return_position2 = data.getIntExtra("result",0);
+                    Sentence sentence = sentenceList.get(return_position2);
+                    DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+                    sentence.delete(helper);
+                    sentenceList.remove(return_position2);
+                    adapter.update(sentenceList);
                 }
         }
     }
@@ -134,28 +139,14 @@ public class BottlefrontActivity extends AppCompatActivity {
                 Sentencebook sentencebook = Sentencebook.getByName(helper,sentencebookname);
                 Sentence sentence = new Sentence();
                 sentence.setSentencebook(sentencebook);
+                sentenceList = sentencebook.getAllSubSentence(helper);
+                int position = sentenceList.size();
                 Intent intent = new Intent(BottlefrontActivity.this, TicketEditActivity.class);
+                intent.putExtra(TicketEditActivity.POSITION, position);
                 intent.putExtra(TicketEditActivity.NOTE_EDITABLE, "true");
                 intent.putExtra(TicketEditActivity.NOTE_NEW, "true");
                 intent.putExtra(TicketEditActivity.SENTENCE_THIS, sentence);
-                startActivity(intent);
-
-                /*Sentence sentence = new Sentence();
-                sentence.setText("123");
-                sentence.setDate();*/
-               /* Log.d(TAG, sentencebookname);*/
-               /* Sentencebook sentencebook = Sentencebook.getByName(helper, sentencebookname);
-                if(sentencebook == null){
-                    Log.d(TAG, "onClick: no sentencebook");
-                }
-                *//*sentence.setSentencebook(sentencebook);
-                sentence.insert(helper);*//*
-                sentenceList = sentencebook.getAllSubSentence(helper);
-                 Log.d(TAG, "onClick: correct");
-                int a =0;
-                a = sentenceList.size();
-                if(a == 0) Log.d(TAG, "onClick: 没有");
-                adapter.update(sentenceList);*/
+                startActivityForResult(intent,1);
             }
         });
 
@@ -214,6 +205,10 @@ public class BottlefrontActivity extends AppCompatActivity {
     }
 
 
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.bottletoolbar, menu);
+        return true;
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -239,8 +234,6 @@ public class BottlefrontActivity extends AppCompatActivity {
                         sententcebook.setSentencebookName(rename);
                         sententcebook.update(helper);
                         collapsingToolbar.setTitle(rename);
-                        /* adapter.addSentencebook(sentencebookList.size(),sentencebook);*/
-                        //adapter.addSentencebook(sentencebook);
                     }
                 });
                 builder.show();
@@ -253,5 +246,7 @@ public class BottlefrontActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    public void  update(){
 
+    }
 }

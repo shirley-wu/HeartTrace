@@ -288,10 +288,6 @@
         "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\d5d693b50368619a1ecbe4bd883a4018\\res\\drawable-hdpi-v4\\common_google_signin_btn_icon_dark_normal.9.png"
     },
     {
-        "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\nothing.jpg",
-        "source": "D:\\diary\\diary\\app\\src\\main\\res\\drawable-hdpi\\nothing.jpg"
-    },
-    {
         "merged": "D:\\diary\\diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\common_google_signin_btn_text_dark_disabled.9.png",
         "source": "C:\\Users\\Helen_L\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\d5d693b50368619a1ecbe4bd883a4018\\res\\drawable-hdpi-v4\\common_google_signin_btn_text_dark_disabled.9.png"
     },

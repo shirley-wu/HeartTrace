@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true"
+    android:background="@android:color/white"
     android:orientation="vertical">
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -24,6 +31,10 @@
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
 
+        <!--<android.support.v4.view.ViewPager-->
+            <!--android:id="@+id/diaryViewPager"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent" />-->
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -32,12 +43,15 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:id="@+id/date_layout">
 
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="10dp">
                     <TextView
                         android:id="@+id/diary_content_date"
                         android:layout_width="0dp"
@@ -53,6 +67,7 @@
                         android:layout_gravity="center"
                         />
                     <RelativeLayout
+                        android:id="@+id/icon_layout"
                         android:layout_width="0dp"
                         android:layout_weight="9"
                         android:layout_height="wrap_content">
@@ -63,6 +78,7 @@
                             android:layout_gravity="center"
                             android:layout_marginRight="20dp"
                             android:clickable="true"
+                            android:longClickable="true"
                             android:scaleType="centerCrop"/>
                         <ImageView
                             android:id="@+id/diary_content_icon1"
@@ -71,6 +87,7 @@
                             android:layout_gravity="center"
                             android:layout_marginRight="20dp"
                             android:visibility="invisible"
+                            android:longClickable="true"
                             android:scaleType="centerCrop"/>
                         <ImageView
                             android:id="@+id/diary_content_icon2"
@@ -79,6 +96,7 @@
                             android:layout_gravity="center"
                             android:layout_marginRight="20dp"
                             android:visibility="invisible"
+                            android:longClickable="true"
                             android:scaleType="centerCrop"/>
                         <ImageView
                             android:id="@+id/diary_content_icon3"
@@ -87,6 +105,7 @@
                             android:layout_gravity="center"
                             android:layout_marginRight="20dp"
                             android:visibility="invisible"
+                            android:longClickable="true"
                             android:scaleType="centerCrop"/>
                         <ImageView
                             android:id="@+id/diary_content_icon4"
@@ -95,6 +114,7 @@
                             android:layout_gravity="center"
                             android:layout_marginRight="20dp"
                             android:visibility="invisible"
+                            android:longClickable="true"
                             android:scaleType="centerCrop"/>
 
                     </RelativeLayout>
@@ -107,7 +127,7 @@
             android:id="@+id/edit_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="75dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -138,22 +158,75 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/pre_diary"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="@drawable/arrow_left_orange"
-            android:layout_gravity="left|bottom"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="15dp"/>
-        <Button
-            android:id="@+id/next_diary"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="@drawable/arrow_right_orange"
-            android:layout_gravity="right|bottom"
-            android:layout_marginBottom="20dp"
-            android:layout_marginRight="15dp"/>
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/floating_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginRight="50dp"
+                android:layout_marginBottom="60dp"
+                android:src="@drawable/add_black"
+                android:scaleType="centerCrop"
+                app:backgroundTint="#ffffff"
+                 />
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/add_diary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:backgroundTint="#ffffff"
+                android:src= "@drawable/add_diary_black"
+                android:scaleType="centerCrop"
+                app:layout_constraintCircle="@id/add"
+                app:layout_constraintCircleRadius="70dp"
+                app:layout_constraintCircleAngle="225"/>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:backgroundTint="#ffffff"
+                android:src = "@drawable/edit_black"
+                android:scaleType="centerCrop"
+                app:layout_constraintCircle="@id/add"
+                app:layout_constraintCircleRadius="70dp"
+                app:layout_constraintCircleAngle="280"/>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/enterBottle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:backgroundTint="#ffffff"
+                android:src = "@drawable/bottle_black"
+                android:scaleType="centerCrop"
+                app:layout_constraintCircle="@id/add"
+                app:layout_constraintCircleRadius="70dp"
+                app:layout_constraintCircleAngle="335"/>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:backgroundTint="#ffffff"
+                android:src = "@drawable/unlike"
+                android:scaleType="centerCrop"
+                app:layout_constraintCircle="@id/add"
+                app:layout_constraintCircleRadius="70dp"
+                app:layout_constraintCircleAngle="30"/>
+
+        </android.support.constraint.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/empty_image"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center"
+            android:src="@drawable/empty"/>
 
         <LinearLayout
             android:id="@+id/settings_column"
@@ -163,13 +236,6 @@
             android:orientation="horizontal"
             android:layout_marginBottom="20dp">
 
-            <ImageButton
-                android:id="@+id/more_setting"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:src="@drawable/more" />
 
             <ImageButton
                 android:id="@+id/font_setting"
@@ -177,15 +243,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
+                android:gravity="center_vertical|center_horizontal"
                 android:src="@drawable/font_setting" />
-
-            <ImageButton
-                android:id="@+id/face_insert"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:src="@drawable/face_insert" />
 
             <ImageButton
                 android:id="@+id/insert_image"
@@ -193,15 +252,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
+                android:gravity="center_vertical|center_horizontal"
                 android:src="@drawable/get_image" />
-
-            <ImageButton
-                android:id="@+id/keyboard"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:src="@drawable/keyboard" />
 
             <ImageButton
                 android:id="@+id/confirm"
@@ -209,8 +261,19 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
+                android:gravity="center_vertical|center_horizontal"
                 android:src="@drawable/confirm" />
 
         </LinearLayout>
     </android.support.design.widget.CoordinatorLayout>
+
+        <android.support.design.widget.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:headerLayout="@layout/nav_header_main"
+            app:menu="@menu/nav_menu_main" />
+
+    </android.support.v4.widget.DrawerLayout>
 </RelativeLayout>

@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Sun Jul 01 19:55:32 GMT+08:00 2018
+#Mon Jul 02 12:37:29 GMT+08:00 2018
 7.path=lib/armeabi-v7a/libsqlcipher.so
 2.base=D\:\\diary\\diary\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
 5.set=NATIVE_RESOURCE

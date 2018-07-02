@@ -8,7 +8,7 @@
         app:showAsAction="always"/>
 
     <item
-        android:id="@+id/delete"
-        android:title="Delete"
+        android:id="@+id/rename"
+        android:title="Rename"
         app:showAsAction="never"/>
 </menu>
