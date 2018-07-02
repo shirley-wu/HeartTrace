@@ -216,7 +216,7 @@ public class Diary implements Serializable
         }
     }
 
-    public static List<Diary> getByDate(DatabaseHelper helper, int year, int month, int day) {
+    public static List<Diary> getByDate(DatabaseHelper helper, int year, int month, int day, boolean ascending) {
         try {
             Calendar calendar = Calendar.getInstance();
             calendar.set(year, month - 1, day);
@@ -238,6 +238,7 @@ public class Diary implements Serializable
             QueryBuilder<Diary, Integer> qb = helper.getDiaryDao().queryBuilder();
             Where<Diary, Integer> where = qb.where();
             buildWhere(where, begin, end);
+            qb.orderBy("date",ascending);
             List<Diary> diaryList = qb.query();
             return diaryList;
         }

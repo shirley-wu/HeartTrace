@@ -433,7 +433,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         set_size.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
             @Override
             public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
-                diary_write.setTextSize(4*set_size.getProgress());
+                float text_size = (float)4.0*(float)set_size.getProgress();
+                diary_write.setTextSize(text_size);
+                Log.i("seekbar", text_size + " " +diary_write.getTextSize());
             }
 
             @Override
@@ -681,7 +683,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
     private void initTextFormmat()
     {
-        diary_write.setTextSize(20);
+        diary_write.setTextSize((float) 20.0);
         diary_write.setLineSpacing(0,1);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             diary_write.setLetterSpacing((float) 0.2);
@@ -791,7 +793,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     diary.setText(diary_write.getText().toString());
                     htmlText = colorSpanAdjust(Html.toHtml(diary_write.getText()));
                     diary.setHtmlText(htmlText);
-                    diary.setTextSize(diary_write.getTextSize());
+                    diary.setTextSize(diary_write.getTextSize()/(float)1.5);
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         diary.setLetterSpacing(diary_write.getLetterSpacing());
                     }
@@ -800,9 +802,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     }
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                         diary.setLineSpacingExtra((int)diary_write.getLineSpacingExtra());
-                    }
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        Log.i("fommat",diary_write.getTextSize()+" "+diary_write.getLetterSpacing()+" "+(int)diary_write.getLineSpacingMultiplier()+" "+(int)diary_write.getLineSpacingExtra());
                     }
                     Date date = new Date();
                     diary.setDate(date);
@@ -815,7 +814,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     diary.setText(diary_write.getText().toString());
                     htmlText = colorSpanAdjust(Html.toHtml(diary_write.getText()));
                     diary.setHtmlText(htmlText);
-                    diary.setTextSize(diary_write.getTextSize());
+                    diary.setTextSize(diary_write.getTextSize()/(float)1.5);
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         diary.setLetterSpacing(diary_write.getLetterSpacing());
                     }

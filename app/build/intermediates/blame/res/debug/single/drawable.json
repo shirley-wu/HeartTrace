@@ -16,12 +16,12 @@
         "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\22c565cf7d786504a3b25c164088eb3d\\res\\drawable\\abc_cab_background_internal_bg.xml"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_google_signin_btn_icon_light_focused.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\208e34f6859bac2d111ca3726ef91bcd\\res\\drawable\\common_google_signin_btn_icon_light_focused.xml"
-    },
-    {
         "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_google_signin_btn_icon_dark_focused.xml",
         "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\208e34f6859bac2d111ca3726ef91bcd\\res\\drawable\\common_google_signin_btn_icon_dark_focused.xml"
+    },
+    {
+        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_google_signin_btn_icon_light_focused.xml",
+        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\208e34f6859bac2d111ca3726ef91bcd\\res\\drawable\\common_google_signin_btn_icon_light_focused.xml"
     },
     {
         "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_borderless_material.xml",

@@ -4,44 +4,44 @@
         "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\foolish.png"
     },
     {
-        "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\setting.png",
-        "source": "D:\\Files\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\setting.png"
-    },
-    {
         "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\calendar_bg.jpg",
         "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\calendar_bg.jpg"
     },
     {
-        "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\frame_white.9.png",
-        "source": "D:\\Files\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\frame_white.9.png"
+        "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\setting.png",
+        "source": "D:\\Files\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\setting.png"
     },
     {
         "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\add2_black.png",
         "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\add2_black.png"
     },
     {
-        "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\ic_settings.png",
-        "source": "D:\\Files\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\ic_settings.png"
+        "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\frame_white.9.png",
+        "source": "D:\\Files\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\frame_white.9.png"
     },
     {
-        "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\search_gray.png",
-        "source": "D:\\Files\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\search_gray.png"
+        "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\ic_settings.png",
+        "source": "D:\\Files\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\ic_settings.png"
     },
     {
         "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_list_longpressed_holo.9.png",
         "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\22c565cf7d786504a3b25c164088eb3d\\res\\drawable-xxhdpi-v4\\abc_list_longpressed_holo.9.png"
     },
     {
+        "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\search_gray.png",
+        "source": "D:\\Files\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\search_gray.png"
+    },
+    {
         "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\frame_white2.9.png",
         "source": "D:\\Files\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\frame_white2.9.png"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\background3.jpg",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\background3.jpg"
-    },
-    {
         "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\keyboard.png",
         "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\keyboard.png"
+    },
+    {
+        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\background3.jpg",
+        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\background3.jpg"
     },
     {
         "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bottle_star.png",
@@ -84,12 +84,12 @@
         "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\22c565cf7d786504a3b25c164088eb3d\\res\\drawable-xxhdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png"
     },
     {
-        "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\frame_cat.9.png",
-        "source": "D:\\Files\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\frame_cat.9.png"
-    },
-    {
         "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_btn_switch_to_on_mtrl_00001.9.png",
         "source": "C:\\Users\\kx63\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\99d5ebae6d73078d0a8d8db18c4fa710\\res\\drawable-xxhdpi-v4\\abc_btn_switch_to_on_mtrl_00001.9.png"
+    },
+    {
+        "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\frame_cat.9.png",
+        "source": "D:\\Files\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\frame_cat.9.png"
     },
     {
         "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\search_gray.png",
@@ -120,12 +120,12 @@
         "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\setting_white.png"
     },
     {
-        "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\travel.png",
-        "source": "D:\\Files\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\travel.png"
-    },
-    {
         "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\background5.jpg",
         "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\background5.jpg"
+    },
+    {
+        "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\travel.png",
+        "source": "D:\\Files\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\travel.png"
     },
     {
         "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\embarrassed.png",
@@ -180,16 +180,16 @@
         "source": "C:\\Users\\kx63\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\99d5ebae6d73078d0a8d8db18c4fa710\\res\\drawable-xxhdpi-v4\\abc_list_pressed_holo_light.9.png"
     },
     {
-        "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png",
-        "source": "C:\\Users\\kx63\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\99d5ebae6d73078d0a8d8db18c4fa710\\res\\drawable-xxhdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png"
+        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\sad.png",
+        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\sad.png"
     },
     {
         "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png",
         "source": "C:\\Users\\kx63\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\99d5ebae6d73078d0a8d8db18c4fa710\\res\\drawable-xxhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\sad.png",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\sad.png"
+        "merged": "D:\\Files\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png",
+        "source": "C:\\Users\\kx63\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\99d5ebae6d73078d0a8d8db18c4fa710\\res\\drawable-xxhdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png"
     },
     {
         "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\add_bottle.png",
