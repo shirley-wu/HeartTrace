@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Mon Jul 02 08:57:53 CST 2018
+#Tue Jul 03 16:45:55 CST 2018
 4.path=fonts/font3.otf
 8.set=NATIVE_RESOURCE
 6.path=classes.dex

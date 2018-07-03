@@ -16,6 +16,10 @@
         "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\menu\\diary_menu.xml"
     },
     {
+        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\menu\\nav_menu_collect.xml",
+        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\menu\\nav_menu_collect.xml"
+    },
+    {
         "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\menu\\sentence_menu.xml",
         "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\menu\\sentence_menu.xml"
     },

@@ -53,6 +53,7 @@
         <activity android:name="com.example.dell.diary.BottlesActivity" />
         <activity android:name="com.example.dell.diary.SearchResultActivity" />
         <activity android:name="com.example.dell.diary.LabelManageActivity" />
+        <activity android:name="com.example.dell.diary.CollectActivity" />
         <activity android:name="com.example.dell.diary.WelcomeActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

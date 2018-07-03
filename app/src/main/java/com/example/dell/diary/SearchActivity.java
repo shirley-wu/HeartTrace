@@ -157,7 +157,7 @@ public class SearchActivity extends AppCompatActivity {
                 intent.putExtra("search_text",query);
                 if(checkTime.isChecked() == true){
                     startDate = new Date(mYear,mMonth,mDay);
-                    endDate = new Date(mYear2,mMonth2,mDay2);
+                    endDate = new Date(mYear2,mMonth2,mDay2+1);
                     intent.putExtra("start_date",startDate);
                     intent.putExtra("end_date",endDate);
                 }

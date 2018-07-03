@@ -77,7 +77,7 @@
                     android:layout_marginLeft="30dp"
                     android:layout_marginBottom="5dp"
                     android:textSize="14sp"
-                    android:textColor="#a17d56"
+                    android:textColor="?attr/colorAccent"
                     android:clickable="true"/>
 
             </LinearLayout>
@@ -93,7 +93,7 @@
                     android:layout_marginLeft="30dp"
                     android:layout_marginBottom="5dp"
                     android:textSize="14sp"
-                    android:textColor="#a17d56"
+                    android:textColor="?attr/colorAccent"
                     android:clickable="true"/>
 
             </LinearLayout>

@@ -90,7 +90,6 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "onCreate: correct");
         setContentView(R.layout.activity_ticket_edit);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_sentence_content);
@@ -282,6 +281,25 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
             case android.R.id.home:
                 finish();
                 return true;
+            case R.id.delete:
+                AlertDialog.Builder dialog = new AlertDialog.Builder(TicketEditActivity.this);
+                dialog.setTitle("提示");
+                dialog.setMessage("你确定要删除你的纸条吗？");
+                dialog.setCancelable(true);
+                dialog.setPositiveButton("确认",new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialog, int which){
+                        Intent intent_delete= new Intent();
+                        intent_delete.putExtra("result",position);
+                        setResult(2, intent_delete);
+                        finish();
+                    }
+                });
+                dialog.setNegativeButton("取消",new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialog, int which){
+                        dialog.cancel();
+                    }
+                });
+                dialog.show();
 
             default:
         }
