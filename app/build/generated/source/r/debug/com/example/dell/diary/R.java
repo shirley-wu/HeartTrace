@@ -2409,7 +2409,7 @@ containing a value of this type.
 <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
 <tr><td><code>none</code></td><td>0</td><td></td></tr>
 <tr><td><code>standard</code></td><td>3</td><td></td></tr>
-<tr><td><code>direct</code></td><td>1</td><td></td></tr>
+<tr><td><code>direct</code></td><td>1</td><td> for now only direct & barriers </td></tr>
 <tr><td><code>barrier</code></td><td>2</td><td></td></tr>
 <tr><td><code>chains</code></td><td>4</td><td></td></tr>
 <tr><td><code>dimensions</code></td><td>8</td><td></td></tr>
@@ -5678,6 +5678,9 @@ containing a value of this type.
         public static final int RtlOverlay_Widget_AppCompat_SearchView_MagIcon=0x7f09003a;
         public static final int RtlUnderlay_Widget_AppCompat_ActionButton=0x7f09003b;
         public static final int RtlUnderlay_Widget_AppCompat_ActionButton_Overflow=0x7f09003c;
+        /** <item name="searchIcon">@drawable/search_white</item>
+<item name="searchHintIcon">@null</item>
+         */
         public static final int SearchViewStyle=0x7f0900ea;
         public static final int TextAppearance_AppCompat=0x7f0900eb;
         public static final int TextAppearance_AppCompat_Body1=0x7f0900ec;
@@ -10786,7 +10789,7 @@ containing a value of this type.
 <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
 <tr><td><code>none</code></td><td>0</td><td></td></tr>
 <tr><td><code>standard</code></td><td>3</td><td></td></tr>
-<tr><td><code>direct</code></td><td>1</td><td></td></tr>
+<tr><td><code>direct</code></td><td>1</td><td> for now only direct & barriers </td></tr>
 <tr><td><code>barrier</code></td><td>2</td><td></td></tr>
 <tr><td><code>chains</code></td><td>4</td><td></td></tr>
 <tr><td><code>dimensions</code></td><td>8</td><td></td></tr>
