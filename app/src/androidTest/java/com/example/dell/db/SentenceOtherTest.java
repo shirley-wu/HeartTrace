@@ -64,7 +64,7 @@ public class SentenceOtherTest {
         sentence.setSentencebook(sentencebook);
         sentence.insert(databaseHelper);
 
-        List<Sentence> dL = Sentence.getByDate(databaseHelper, 1998, 3, 31);
+        List<Sentence> dL = Sentence.getByDate(databaseHelper, 1998, 3, 31, true);
         for(Sentence d : dL) {
             Log.d(TAG, "testGetSentenceByDate: end of month sentence " + d.getDate().toString());
         }
@@ -90,7 +90,7 @@ public class SentenceOtherTest {
 
         List<Sentence> dL;
         for(int i = 1; i <= num; i++) {
-            dL = Sentence.getByDate(databaseHelper, 1998, 8, i);
+            dL = Sentence.getByDate(databaseHelper, 1998, 8, i, true);
             for(Sentence d : dL) {
                 Log.d(TAG, "testGetSentenceByDate: " + i + " sentence " + d.getDate().toString());
             }
@@ -179,6 +179,29 @@ public class SentenceOtherTest {
 
         for(final Label label : labels) {
             label.delete(databaseHelper);
+        }
+    }
+
+    @Test
+    public void testGetLike() {
+        List<Sentence> sentenceList = new ArrayList();
+
+        for(int i = 0; i < 10; i++) {
+            Sentence sentence = new Sentence();
+            sentence.setDate();
+            sentence.setSentencebook(sentencebook);
+            sentence.setText("hello " + i);
+            sentence.setLike(i % 2 == 0);
+            sentenceList.add(sentence);
+            sentence.insert(databaseHelper);
+        }
+
+        List<Sentence> l = Sentence.getAllLike(databaseHelper, false);
+        assertEquals(5, l.size());
+        assertEquals("hello 8", l.get(0).getText());
+
+        for(final Sentence d : sentenceList) {
+            d.delete(databaseHelper);
         }
     }
 }

@@ -43,6 +43,9 @@ public class Sentence implements Serializable
     @DatabaseField(dataType = DataType.DATE_STRING, columnName = "date", canBeNull = false)
     protected Date date;
 
+    @DatabaseField
+    private boolean like = false;
+
     public Sentence(){
     };
 
@@ -76,6 +79,14 @@ public class Sentence implements Serializable
 
     public Sentencebook getSentencebook(){
         return sentencebook;
+    }
+
+    public boolean getLike() {
+        return like;
+    }
+
+    public void setLike(boolean like) {
+        this.like = like;
     }
 
     public void setSentencebook(Sentencebook sentencebook){
@@ -144,7 +155,7 @@ public class Sentence implements Serializable
         }
     }
 
-    public static List<Sentence> getByDate(DatabaseHelper helper, int year, int month, int day) {
+    public static List<Sentence> getByDate(DatabaseHelper helper, int year, int month, int day, boolean ascending) {
         try {
             Calendar calendar = Calendar.getInstance();
             calendar.set(year, month - 1, day);
@@ -166,6 +177,7 @@ public class Sentence implements Serializable
             QueryBuilder<Sentence, Integer> qb = helper.getSentenceDao().queryBuilder();
             Where<Sentence, Integer> where = qb.where();
             buildWhere(where, begin, end);
+            qb.orderBy("date",ascending);
             List<Sentence> sentenceList = qb.query();
             return sentenceList;
         }
@@ -186,12 +198,12 @@ public class Sentence implements Serializable
         }
     }
 
-    public static List<Diary> getAllLike(DatabaseHelper helper, Boolean ascending){
+    public static List<Sentence> getAllLike(DatabaseHelper helper, Boolean ascending) {
         try {
-            QueryBuilder<Diary, Integer> qb = helper.getDiaryDao().queryBuilder();
-            Where<Diary, Integer> where = qb.where();
+            QueryBuilder<Sentence, Integer> qb = helper.getSentenceDao().queryBuilder();
+            Where<Sentence, Integer> where = qb.where();
             where.eq("like", true);
-            qb.orderBy("date",ascending);
+            qb.orderBy("date", ascending);
             return qb.query();
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
