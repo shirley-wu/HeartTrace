@@ -41,7 +41,8 @@ public class TimeLineActivityTest2 {
                         isDisplayed()));
         relativeLayout.check(matches(isDisplayed()));
 
-        ViewInteraction appCompatButton = onView(
+        // TODO
+        /*ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.enter_bottle),
                         childAtPosition(
                                 childAtPosition(
@@ -49,7 +50,7 @@ public class TimeLineActivityTest2 {
                                         0),
                                 4),
                         isDisplayed()));
-        appCompatButton.perform(click());
+        appCompatButton.perform(click());*/
 
     }
 
