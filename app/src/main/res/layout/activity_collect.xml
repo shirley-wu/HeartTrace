@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusable="true"
-    android:clickable="true">
+    android:clickable="true"
+    android:fitsSystemWindows="true">
 
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/collect_coordinatorLayout"
@@ -50,5 +51,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header_bottle"
-        app:menu="@menu/nav_menu_collect" />
+        app:menu="@menu/nav_menu_main" />
 </android.support.v4.widget.DrawerLayout>
+

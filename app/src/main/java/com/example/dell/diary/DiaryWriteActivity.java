@@ -220,8 +220,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             public boolean onNavigationItemSelected(MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.favorite:
-                        Toast.makeText(DiaryWriteActivity.this, "暂不支持查看收藏T^T", Toast.LENGTH_SHORT).show();
-                        mDrawerLayout.closeDrawers();
+                        Intent intent0 = new Intent(DiaryWriteActivity.this, CollectActivity.class);
+                        startActivity(intent0);
                         break;
                     case R.id.statistics:
                         Intent intent = new Intent(DiaryWriteActivity.this,StatisticsActivity.class);
@@ -526,6 +526,12 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
            index = intent.getIntExtra("diary_index",diaryList.size());
            diary = diaryList.get(index);
         }
+        else if(originType.equals("like")){
+            diaryList = Diary.getAllLike(helper, false);
+            diary = (Diary) intent.getSerializableExtra("diary_like");
+            index = intent.getIntExtra("diarylike_index",diaryList.size());
+            diary = diaryList.get(index);
+        }
 
         if(originType.equals("add_diary")){
             Date date = new Date();
@@ -616,6 +622,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 //            // Get ArrayList Bundle
             diaryList = (ArrayList<Diary>) bundleObject.getSerializable("search_list");
             Collections.reverse(diaryList);
+            diary = diaryList.get(index);
+        }
+        else if(originType.equals("like")){
+            diaryList = Diary.getAllLike(helper, false);
             diary = diaryList.get(index);
         }
 

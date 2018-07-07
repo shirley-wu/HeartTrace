@@ -51,6 +51,7 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
     public static final String SENTENCE_THIS = "sentence_this";
     public static final String NOTE_EDITABLE = "note_editable";
     public static final String NOTE_NEW = "true";
+    public static final String TYPE = "type";
     private static final String TAG = "TicketEditActivity";
     public static final String POSITION = "Position";
     private String sentence_name = "travel";
