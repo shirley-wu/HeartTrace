@@ -21,4 +21,9 @@
         <item>娱乐</item>
         <item>约会</item>
     </string-array>
+
+    <string-array name="like_select">
+        <item>日记</item>
+        <item>纸条</item>
+    </string-array>
 </resources>

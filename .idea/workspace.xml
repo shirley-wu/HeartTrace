@@ -11,24 +11,42 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="55da90a9-7110-44ff-b7e4-cae3c589af79" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/LineChartManager.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/fileHashes/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/fileHashes/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/.gradle/4.1/fileHashes/fileHashes.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/javaCompile/classAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/javaCompile/classAnalysis.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/javaCompile/javaCompile.lock" afterPath="$PROJECT_DIR$/.gradle/4.1/javaCompile/javaCompile.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/javaCompile/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/javaCompile/taskHistory.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/taskHistory/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/taskHistory/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.lock" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/CollectActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/CollectDAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/CollectSAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_collect.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/collectd_item.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/collects_item.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/menu/collectoolbar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/dell/db/DiaryOtherTest.java" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/example/dell/db/DiaryOtherTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/dell/db/SentenceInstrumentedTest.java" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/example/dell/db/SentenceInstrumentedTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/dell/db/SentenceOtherTest.java" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/example/dell/db/SentenceOtherTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/dell/diary/MainActivityTest.java" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/example/dell/diary/MainActivityTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/dell/diary/TimeLineActivityTest2.java" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/example/dell/diary/TimeLineActivityTest2.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/dell/diary/TimeLineActivityTest3.java" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/example/dell/diary/TimeLineActivityTest3.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dell/db/DatabaseHelper.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dell/db/DatabaseHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dell/db/Diary.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dell/db/Diary.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dell/db/Sentence.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dell/db/Sentence.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/BottlefrontActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/BottlefrontActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/DiaryWriteActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/DiaryWriteActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/StatisticsActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/StatisticsActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/TimeLineActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/TimeLineActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_statistics.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_statistics.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/SearchActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/SearchActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/TicketEditActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/TicketEditActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_calendar.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_calendar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_diary_write.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_diary_write.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_search.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_search.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/calendar_content.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/calendar_content.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/diary_write_content.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/diary_write_content.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/help_tips.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/help_tips.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/bottlestoolbar.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/bottlestoolbar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/bottletoolbar.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/bottletoolbar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/array.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/array.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/classes/" />
@@ -92,47 +110,57 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="DiaryWriteActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DiaryWriteActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/DiaryWriteActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="130" column="73" lean-forward="false" selection-start-line="130" selection-start-column="73" selection-end-line="130" selection-end-column="73" />
+            <state relative-caret-position="264">
+              <caret line="125" column="34" lean-forward="false" selection-start-line="125" selection-start-column="34" selection-end-line="125" selection-end-column="34" />
               <folding>
                 <element signature="e#3978#4005#0" expanded="false" />
                 <element signature="method#onCreate#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#onRestart#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#onTouch#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="class#MyGestureListener#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#onFling#0;class#MyGestureListener#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#initViewPage#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#getView#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#setOnListener#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="class#17922:18461" expanded="false" />
-                <element signature="class#18559:19170" expanded="false" />
-                <element signature="method#init#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#reStartInit#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#initTextFormmat#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#setTextFormmat#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#editchange#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#onCreateOptionsMenu#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#onOptionsItemSelected#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#openAlbum#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#onRequestPermissionsResult#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#onActivityResult#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#getBitmapFromUri#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#generateFileName#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#saveBitmap#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#handleImageBeforeKitKat#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#getImagePath#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#displayImage#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#getImage#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#colorSpanAdjust#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#onCreateDialog#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#onLongClick#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="class#ListItemAdapter#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#setTags#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#isMoodLabel#0;class#DiaryWriteActivity#0" expanded="false" />
-                <element signature="method#getLabelsOfDiary#0;class#DiaryWriteActivity#0" expanded="false" />
+                <element signature="e#18385#18386#0" expanded="true" />
+                <element signature="e#18437#18438#0" expanded="true" />
+                <marker date="1530973528037" expanded="false" signature="29254:29483" ph="{...}" />
+                <marker date="1530973528037" expanded="false" signature="29534:29840" ph="{...}" />
+                <marker date="1530973528037" expanded="false" signature="47665:49538" ph="{...}" />
+                <marker date="1530973528037" expanded="false" signature="49590:49678" ph="{...}" />
+                <marker date="1530973528037" expanded="false" signature="49750:53665" ph="{...}" />
+                <marker date="1530973528037" expanded="false" signature="50858:50978" ph="(dialog, which) → {" />
+                <marker date="1530973528037" expanded="false" signature="53279:53306" ph="}" />
+                <marker date="1530973528037" expanded="false" signature="53695:53872" ph="{...}" />
+                <marker date="1530973528037" expanded="false" signature="53989:54132" ph="{...}" />
+                <marker date="1530973528037" expanded="false" signature="54230:55027" ph="{...}" />
+                <marker date="1530973528037" expanded="false" signature="55935:56161" ph="{...}" />
+                <marker date="1530973528037" expanded="false" signature="58036:58202" ph="{...}" />
+                <marker date="1530973528037" expanded="false" signature="58273:59233" ph="{...}" />
+                <marker date="1530973528037" expanded="false" signature="59289:59415" ph="{...}" />
+                <marker date="1530973528037" expanded="false" signature="59476:59871" ph="{...}" />
+                <marker date="1530973528037" expanded="false" signature="59921:60183" ph="{...}" />
+                <marker date="1530973528037" expanded="false" signature="60228:61308" ph="{...}" />
+                <marker date="1530973528037" expanded="false" signature="61366:61854" ph="{...}" />
+                <marker date="1530973528037" expanded="false" signature="61900:65599" ph="{...}" />
+                <marker date="1530973528037" expanded="false" signature="62306:62477" ph="(dialogInterface, which) → {" />
+                <marker date="1530973528037" expanded="false" signature="65407:65438" ph="}" />
+                <marker date="1530973528037" expanded="false" signature="65657:71397" ph="{...}" />
+                <marker date="1530973528037" expanded="false" signature="66488:66612" ph="(dialog, which) → {" />
+                <marker date="1530973528037" expanded="false" signature="67540:67662" ph="(dialog, which) → {" />
+                <marker date="1530973528037" expanded="false" signature="67841:67872" ph="}" />
+                <marker date="1530973528037" expanded="false" signature="68588:68710" ph="(dialog, which) → {" />
+                <marker date="1530973528037" expanded="false" signature="68889:68920" ph="}" />
+                <marker date="1530973528037" expanded="false" signature="69636:69758" ph="(dialog, which) → {" />
+                <marker date="1530973528037" expanded="false" signature="69937:69968" ph="}" />
+                <marker date="1530973528037" expanded="false" signature="70684:70806" ph="(dialog, which) → {" />
+                <marker date="1530973528037" expanded="false" signature="70985:71016" ph="}" />
+                <marker date="1530973528037" expanded="false" signature="71445:72953" ph="{...}" />
+                <marker date="1530973528037" expanded="false" signature="71495:71510" ph=" { " />
+                <marker date="1530973528037" expanded="false" signature="71531:71541" ph=" }" />
+                <marker date="1530973528037" expanded="false" signature="71604:71619" ph=" { " />
+                <marker date="1530973528037" expanded="false" signature="71631:71641" ph=" }" />
+                <marker date="1530973528037" expanded="false" signature="71704:71719" ph=" { " />
+                <marker date="1530973528037" expanded="false" signature="71728:71738" ph=" }" />
+                <marker date="1530973528037" expanded="false" signature="72993:74231" ph="{...}" />
+                <marker date="1530973528037" expanded="false" signature="74274:74598" ph="{...}" />
+                <marker date="1530973528037" expanded="false" signature="74669:75890" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -144,10 +172,10 @@
             <state relative-caret-position="176">
               <caret line="8" column="59" lean-forward="false" selection-start-line="8" selection-start-column="59" selection-end-line="8" selection-end-column="59" />
               <folding>
-                <marker date="1530973433844" expanded="true" signature="208379:208396" ph="..." />
-                <marker date="1530973433844" expanded="true" signature="208379:208414" ph="..." />
-                <marker date="1530973433844" expanded="true" signature="208379:208427" ph="..." />
-                <marker date="1530973433844" expanded="true" signature="208379:208442" ph="..." />
+                <marker date="1530973657164" expanded="true" signature="210300:210317" ph="..." />
+                <marker date="1530973657164" expanded="true" signature="210300:210335" ph="..." />
+                <marker date="1530973657164" expanded="true" signature="210300:210348" ph="..." />
+                <marker date="1530973657164" expanded="true" signature="210300:210363" ph="..." />
               </folding>
             </state>
           </provider>
@@ -156,8 +184,28 @@
       <file leaf-file-name="app.iml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/app.iml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="14" column="43" lean-forward="false" selection-start-line="14" selection-start-column="43" selection-end-line="14" selection-end-column="43" />
+            <state relative-caret-position="41">
+              <caret line="149" column="23" lean-forward="false" selection-start-line="149" selection-start-column="23" selection-end-line="149" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="modules.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.idea/modules.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="176">
+              <caret line="8" column="10" lean-forward="true" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gradle.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.idea/gradle.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -199,8 +247,8 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="57" column="68" lean-forward="false" selection-start-line="57" selection-start-column="68" selection-end-line="57" selection-end-column="68" />
+            <state relative-caret-position="368">
+              <caret line="62" column="68" lean-forward="false" selection-start-line="62" selection-start-column="68" selection-end-line="62" selection-end-column="68" />
               <folding />
             </state>
           </provider>
@@ -1963,13 +2011,14 @@
         <option value="$PROJECT_DIR$/.idea/misc.xml" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/TimeLineActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/DiaryWriteActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/diary_write_content.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_statistics.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/StatisticsActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/CombinedChartManager.java" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/DiaryWriteActivity.java" />
+        <option value="$PROJECT_DIR$/.idea/modules.xml" />
       </list>
     </option>
   </component>
@@ -2240,66 +2289,6 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidBuildScriptsGroupNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HeartTrace" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HeartTrace" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fonts" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HeartTrace" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HeartTrace" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manifests" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidManifestsGroupNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -2400,7 +2389,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1530973474506" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1530973677452" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2448,7 +2437,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1530973474506" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1530973677452" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2631,7 +2620,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1530973474507" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1530973677453" />
       </method>
     </configuration>
     <list size="1">
@@ -2685,12 +2674,12 @@
     <frame x="-6" y="1" width="1378" height="743" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993197" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4909297" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.32993197" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.58709675" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.0777897" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -2705,10 +2694,10 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16236722" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -2907,22 +2896,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/modules.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/gradle.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.idea/codeStyles/Project.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -2994,12 +2967,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-919">
           <caret line="45" column="52" lean-forward="true" selection-start-line="45" selection-start-column="52" selection-end-line="45" selection-end-column="52" />
-          <folding>
-            <element signature="e#2100#5941#0" expanded="false" />
-            <element signature="e#7446#10388#0" expanded="false" />
-            <element signature="e#10398#10621#0" expanded="false" />
-            <element signature="e#10631#12134#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -3114,19 +3082,11 @@
         <state relative-caret-position="176">
           <caret line="8" column="59" lean-forward="false" selection-start-line="8" selection-start-column="59" selection-end-line="8" selection-end-column="59" />
           <folding>
-            <marker date="1530973433844" expanded="true" signature="208379:208396" ph="..." />
-            <marker date="1530973433844" expanded="true" signature="208379:208414" ph="..." />
-            <marker date="1530973433844" expanded="true" signature="208379:208427" ph="..." />
-            <marker date="1530973433844" expanded="true" signature="208379:208442" ph="..." />
+            <marker date="1530973657164" expanded="true" signature="210300:210317" ph="..." />
+            <marker date="1530973657164" expanded="true" signature="210300:210335" ph="..." />
+            <marker date="1530973657164" expanded="true" signature="210300:210348" ph="..." />
+            <marker date="1530973657164" expanded="true" signature="210300:210363" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/app.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="14" column="43" lean-forward="false" selection-start-line="14" selection-start-column="43" selection-end-line="14" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3135,53 +3095,87 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="57" column="68" lean-forward="false" selection-start-line="57" selection-start-column="68" selection-end-line="57" selection-end-column="68" />
+        <state relative-caret-position="368">
+          <caret line="62" column="68" lean-forward="false" selection-start-line="62" selection-start-column="68" selection-end-line="62" selection-end-column="68" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dell/diary/DiaryWriteActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="130" column="73" lean-forward="false" selection-start-line="130" selection-start-column="73" selection-end-line="130" selection-end-column="73" />
+        <state relative-caret-position="264">
+          <caret line="125" column="34" lean-forward="false" selection-start-line="125" selection-start-column="34" selection-end-line="125" selection-end-column="34" />
           <folding>
             <element signature="e#3978#4005#0" expanded="false" />
             <element signature="method#onCreate#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="method#onRestart#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="method#onTouch#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="class#MyGestureListener#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="method#onFling#0;class#MyGestureListener#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="method#initViewPage#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="method#getView#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="method#setOnListener#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="class#17922:18461" expanded="false" />
-            <element signature="class#18559:19170" expanded="false" />
-            <element signature="method#init#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="method#reStartInit#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="method#initTextFormmat#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="method#setTextFormmat#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="method#editchange#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="method#onCreateOptionsMenu#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="method#onOptionsItemSelected#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="method#openAlbum#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="method#onRequestPermissionsResult#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="method#onActivityResult#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="method#getBitmapFromUri#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="method#generateFileName#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="method#saveBitmap#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="method#handleImageBeforeKitKat#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="method#getImagePath#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="method#displayImage#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="method#getImage#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="method#colorSpanAdjust#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="method#onCreateDialog#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="method#onLongClick#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="class#ListItemAdapter#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="method#setTags#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="method#isMoodLabel#0;class#DiaryWriteActivity#0" expanded="false" />
-            <element signature="method#getLabelsOfDiary#0;class#DiaryWriteActivity#0" expanded="false" />
+            <element signature="e#18385#18386#0" expanded="true" />
+            <element signature="e#18437#18438#0" expanded="true" />
+            <marker date="1530973528037" expanded="false" signature="29254:29483" ph="{...}" />
+            <marker date="1530973528037" expanded="false" signature="29534:29840" ph="{...}" />
+            <marker date="1530973528037" expanded="false" signature="47665:49538" ph="{...}" />
+            <marker date="1530973528037" expanded="false" signature="49590:49678" ph="{...}" />
+            <marker date="1530973528037" expanded="false" signature="49750:53665" ph="{...}" />
+            <marker date="1530973528037" expanded="false" signature="50858:50978" ph="(dialog, which) → {" />
+            <marker date="1530973528037" expanded="false" signature="53279:53306" ph="}" />
+            <marker date="1530973528037" expanded="false" signature="53695:53872" ph="{...}" />
+            <marker date="1530973528037" expanded="false" signature="53989:54132" ph="{...}" />
+            <marker date="1530973528037" expanded="false" signature="54230:55027" ph="{...}" />
+            <marker date="1530973528037" expanded="false" signature="55935:56161" ph="{...}" />
+            <marker date="1530973528037" expanded="false" signature="58036:58202" ph="{...}" />
+            <marker date="1530973528037" expanded="false" signature="58273:59233" ph="{...}" />
+            <marker date="1530973528037" expanded="false" signature="59289:59415" ph="{...}" />
+            <marker date="1530973528037" expanded="false" signature="59476:59871" ph="{...}" />
+            <marker date="1530973528037" expanded="false" signature="59921:60183" ph="{...}" />
+            <marker date="1530973528037" expanded="false" signature="60228:61308" ph="{...}" />
+            <marker date="1530973528037" expanded="false" signature="61366:61854" ph="{...}" />
+            <marker date="1530973528037" expanded="false" signature="61900:65599" ph="{...}" />
+            <marker date="1530973528037" expanded="false" signature="62306:62477" ph="(dialogInterface, which) → {" />
+            <marker date="1530973528037" expanded="false" signature="65407:65438" ph="}" />
+            <marker date="1530973528037" expanded="false" signature="65657:71397" ph="{...}" />
+            <marker date="1530973528037" expanded="false" signature="66488:66612" ph="(dialog, which) → {" />
+            <marker date="1530973528037" expanded="false" signature="67540:67662" ph="(dialog, which) → {" />
+            <marker date="1530973528037" expanded="false" signature="67841:67872" ph="}" />
+            <marker date="1530973528037" expanded="false" signature="68588:68710" ph="(dialog, which) → {" />
+            <marker date="1530973528037" expanded="false" signature="68889:68920" ph="}" />
+            <marker date="1530973528037" expanded="false" signature="69636:69758" ph="(dialog, which) → {" />
+            <marker date="1530973528037" expanded="false" signature="69937:69968" ph="}" />
+            <marker date="1530973528037" expanded="false" signature="70684:70806" ph="(dialog, which) → {" />
+            <marker date="1530973528037" expanded="false" signature="70985:71016" ph="}" />
+            <marker date="1530973528037" expanded="false" signature="71445:72953" ph="{...}" />
+            <marker date="1530973528037" expanded="false" signature="71495:71510" ph=" { " />
+            <marker date="1530973528037" expanded="false" signature="71531:71541" ph=" }" />
+            <marker date="1530973528037" expanded="false" signature="71604:71619" ph=" { " />
+            <marker date="1530973528037" expanded="false" signature="71631:71641" ph=" }" />
+            <marker date="1530973528037" expanded="false" signature="71704:71719" ph=" { " />
+            <marker date="1530973528037" expanded="false" signature="71728:71738" ph=" }" />
+            <marker date="1530973528037" expanded="false" signature="72993:74231" ph="{...}" />
+            <marker date="1530973528037" expanded="false" signature="74274:74598" ph="{...}" />
+            <marker date="1530973528037" expanded="false" signature="74669:75890" ph="{...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/app.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="41">
+          <caret line="149" column="23" lean-forward="false" selection-start-line="149" selection-start-column="23" selection-end-line="149" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/modules.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="8" column="10" lean-forward="true" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/gradle.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

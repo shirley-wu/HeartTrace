@@ -5,14 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:fitsSystemWindows="true"
     android:background="@android:color/white"
-    android:orientation="vertical">
-
-    <android.support.v4.widget.DrawerLayout
-        android:id="@+id/drawer_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    android:orientation="vertical"
+    >
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -27,7 +22,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
 
@@ -267,13 +262,4 @@
         </LinearLayout>
     </android.support.design.widget.CoordinatorLayout>
 
-        <android.support.design.widget.NavigationView
-            android:id="@+id/nav_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            app:headerLayout="@layout/nav_header_main"
-            app:menu="@menu/nav_menu_main" />
-
-    </android.support.v4.widget.DrawerLayout>
 </RelativeLayout>

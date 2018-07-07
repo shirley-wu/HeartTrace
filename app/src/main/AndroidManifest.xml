@@ -34,10 +34,12 @@
         <activity
             android:name=".CalendarActivity"
             android:label="Calendar"
-            android:theme="@style/calendar"/>
-        <activity android:name=".DiaryWriteActivity"
-            android:windowSoftInputMode="adjustResize|stateHidden"/>
-        <activity android:name=".TicketEditActivity"
+            android:theme="@style/calendar" />
+        <activity
+            android:name=".DiaryWriteActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".TicketEditActivity"
             android:windowSoftInputMode="adjustResize|stateHidden" />
 
         <!--
@@ -53,12 +55,16 @@
         <activity android:name=".BottlesActivity" />
         <activity android:name=".SearchResultActivity" />
         <activity android:name=".LabelManageActivity" />
+
+        <activity android:name=".CollectActivity"></activity>
+
         <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
