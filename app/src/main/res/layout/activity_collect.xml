@@ -13,36 +13,53 @@
         android:id="@+id/collect_coordinatorLayout"
         android:layout_height="match_parent"
         android:layout_width="match_parent">
-
-        <android.support.design.widget.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/collect_toolbar"
+            <android.support.design.widget.AppBarLayout
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                />
+                android:layout_height="wrap_content">
 
-        </android.support.design.widget.AppBarLayout>
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/collect_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/colorPrimary"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                    />
+                <LinearLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <Spinner
+                        android:id="@+id/collect_spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/property"
+                       >
+                    </Spinner>
+                    <TextView android:id="@+id/spinnerText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        >
+                    </TextView>
+                </LinearLayout>
+            </android.support.design.widget.AppBarLayout>
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/add_bottle_fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="16dp"
-            android:src="@drawable/add_bottle"
-            app:backgroundTint = "#ffffff"/>
+
+
+
+
+
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_collect_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior ="@string/appbar_scrolling_view_behavior"/>
+
+
+
 
     </android.support.design.widget.CoordinatorLayout>
     <android.support.design.widget.NavigationView
