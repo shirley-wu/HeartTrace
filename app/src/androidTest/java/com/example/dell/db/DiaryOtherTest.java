@@ -82,7 +82,7 @@ public class DiaryOtherTest {
                 Diary diary = new Diary();
                 diaryList.add(diary);
                 diary.setText(originText + j);
-                diary.setDate(new Date(1998, 8, i, j, 0));
+                diary.setDate(new Date(1998 - 1900, 8 - 1, i, j, 0));
                 diary.setDiarybook(diarybook);
                 diary.insert(databaseHelper);
             }

@@ -82,7 +82,7 @@ public class SentenceOtherTest {
                 Sentence sentence = new Sentence();
                 sentenceList.add(sentence);
                 sentence.setText(originText + j);
-                sentence.setDate(new Date(1998, 8, i, j, 0));
+                sentence.setDate(new Date(1998 - 1900, 8 - 1, i, j, 0));
                 sentence.setSentencebook(sentencebook);
                 sentence.insert(databaseHelper);
             }
