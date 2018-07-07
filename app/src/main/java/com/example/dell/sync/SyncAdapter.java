@@ -11,9 +11,21 @@ import android.util.Log;
 
 import com.example.dell.db.DatabaseHelper;
 import com.example.dell.db.Diary;
+import com.example.dell.server.ServerAccessor;
 import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -64,49 +76,42 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     public void onPerformSync(Account account, Bundle extras, String authority, ContentProviderClient provider, SyncResult syncResult) {
         Log.d(TAG, "onPerformSync: begin");
 
-        try{
-            DiarySync();
-            SentenceSync();
-            DiarybookSync();
-            SentencebookSync();
-            SentenceLabelSync();
-            LabelSync();
-            DiaryLabelSync();
-            SentenceLabelSync();
-        }
-        catch(SQLException e) {
-            Log.d(TAG, "onPerformSync: error");
-        }
+        DiarySync();
 
         Log.d(TAG, "onPerformSync: end");
     }
 
-    public void DiarySync() throws SQLException {
+    public void DiarySync() {
 
     }
 
-    public void SentenceSync() throws SQLException {
+    public String postSyncData(String table, String sendData) {
+        HttpClient httpClient = new DefaultHttpClient();
+        HttpPost httpPost = new HttpPost(ServerAccessor.SERVER_IP + "/sync");
 
-    }
+        ArrayList<NameValuePair> pairs = new ArrayList<NameValuePair>();
+        pairs.add(new BasicNameValuePair("table", table));
+        pairs.add(new BasicNameValuePair("data", sendData));
 
-    public void DiarybookSync() throws SQLException {
+        try {
+            HttpEntity requestEntity = new UrlEncodedFormEntity(pairs);
+            httpPost.setEntity(requestEntity);
 
-    }
+            try {
+                HttpResponse httpResponse = httpClient.execute(httpPost);
+                if (httpResponse.getStatusLine().getStatusCode() == 200) {
+                    HttpEntity entity = httpResponse.getEntity();
+                    String response = EntityUtils.toString(entity, "utf-8");
+                    return response.toString();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-    public void SentencebookSync() throws SQLException {
-
-    }
-
-    public void LabelSync() throws SQLException {
-
-    }
-
-    public void DiaryLabelSync() throws SQLException {
-
-    }
-
-    public void SentenceLabelSync() throws SQLException {
-
+        return null;
     }
 
 }
