@@ -66,29 +66,8 @@ public class TimeLineActivity extends AppCompatActivity {
           if(diaryList == null){
               diaryList = new ArrayList<>();
           }
-          else{
-//              Log.i("123",String.valueOf(diaryList.size()));
-//              int number = diaryList.size();
-//              for(int i=0;i< number; i++){
-//                  diaryList.get(0).delete(helper);
-//                  diaryList.remove(0);
-//                  Log.i("234",String.valueOf(diaryList.size()));
-//              }
-//              Log.i("456",String.valueOf(diaryList.size()));
+          else {
           }
-        //Collections.reverse(diaryList);
-//        for(int i = 1;i<4;i++){
-//            Diary newDiary = new Diary("一二三四"+i);
-//            newDiary.setDate(new Date(2018,6,i));
-//            diaryList.add(0,newDiary);
-//            newDiary.insert(helper);
-//        }
-//        for(int i = 4;i<8;i++){
-//            Diary newDiary = new Diary("五六七八"+i);
-//            newDiary.setDate(new Date(2018,6,i));
-//            diaryList.add(0,newDiary);
-//            newDiary.insert(helper);
-//        }
 
     }
 
