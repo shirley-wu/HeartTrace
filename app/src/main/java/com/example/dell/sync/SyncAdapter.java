@@ -9,6 +9,7 @@ import android.content.SyncResult;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.alibaba.fastjson.JSON;
 import com.example.dell.db.DatabaseHelper;
 import com.example.dell.db.Diary;
 import com.example.dell.server.ServerAccessor;
@@ -24,7 +25,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,9 +39,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
     // Global variables
     // Define a variable to contain a content resolver instance
-    ContentResolver mContentResolver;
-
-    DatabaseHelper helper;
+    private ContentResolver mContentResolver;
 
     /**
      * Set up the sync adapter
@@ -53,7 +51,6 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
          * from the incoming Context
          */
         mContentResolver = context.getContentResolver();
-        helper = OpenHelperManager.getHelper(context, DatabaseHelper.class);
     }
 
     /**
@@ -76,20 +73,32 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     public void onPerformSync(Account account, Bundle extras, String authority, ContentProviderClient provider, SyncResult syncResult) {
         Log.d(TAG, "onPerformSync: begin");
 
-        DiarySync();
+        DatabaseHelper helper = OpenHelperManager.getHelper(getContext(), DatabaseHelper.class);
+        DiarySync(helper);
+        OpenHelperManager.releaseHelper();
 
         Log.d(TAG, "onPerformSync: end");
     }
 
-    public void DiarySync() {
-
+    public void DiarySync(DatabaseHelper helper) {
+        List<Diary> list = Diary.getAll(helper, false);
+        String jo        = JSON.toJSONString(list);
+        String response  = postSyncData("Diary", jo);
+        if(response == null) {
+            Log.e(TAG, "DiarySync: error when getting http response");
+            return ;
+        }
+        List<Diary> modify = JSON.parseArray(response, Diary.class);
+        for(Diary diary : modify) {
+            diary.insertOrUpdate(helper);
+        }
     }
 
     public String postSyncData(String table, String sendData) {
         HttpClient httpClient = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(ServerAccessor.SERVER_IP + "/sync");
 
-        ArrayList<NameValuePair> pairs = new ArrayList<NameValuePair>();
+        ArrayList<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("table", table));
         pairs.add(new BasicNameValuePair("data", sendData));
 

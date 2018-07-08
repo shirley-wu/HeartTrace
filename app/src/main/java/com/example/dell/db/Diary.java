@@ -49,6 +49,14 @@ public class Diary implements Serializable
         this.text = text;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
     public String getText() {
         return text;
     }
@@ -81,12 +89,26 @@ public class Diary implements Serializable
         this.diarybook = diarybook;
     }
 
-    public void insert(DatabaseHelper helper) {
+    public int insert(DatabaseHelper helper) {
         try {
             Dao<Diary, Integer> dao = helper.getDiaryDao();
             Log.i("diary", "dao = " + dao + " 插入 diary " + this);
             int returnValue = dao.create(this);
             Log.i("diary", "插入后返回值：" + returnValue);
+            return returnValue;
+        } catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    public int insertOrUpdate(DatabaseHelper helper) {
+        try {
+            Dao<Diary, Integer> dao = helper.getDiaryDao();
+            Log.i("diary", "dao = " + dao + " 插入 diary " + this);
+            int returnValue = dao.create(this);
+            Log.i("diary", "插入或更新后返回值：" + returnValue);
+            return returnValue;
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);

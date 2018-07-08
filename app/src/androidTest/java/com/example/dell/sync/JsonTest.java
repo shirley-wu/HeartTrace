@@ -5,6 +5,9 @@ import android.support.test.InstrumentationRegistry;
 import android.test.InstrumentationTestCase;
 import android.util.Log;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
 import com.example.dell.db.DatabaseHelper;
 import com.example.dell.db.Diary;
 import com.example.dell.db.Diarybook;
@@ -14,9 +17,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import net.sf.json.JSONObject;
-
+import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by wu-pc on 2018/7/7.
@@ -30,7 +34,9 @@ public class JsonTest extends InstrumentationTestCase {
 
     private Diarybook diarybook = new Diarybook("fajskdlav");;
 
-    private Diary diary = new Diary("hello");
+    private Diary d1 = new Diary("1: hello");
+
+    private Diary d2 = new Diary("2: hi");
 
     @Before
     public void setUp() throws SQLException {
@@ -39,9 +45,13 @@ public class JsonTest extends InstrumentationTestCase {
 
         diarybook.insert(databaseHelper);
 
-        diary.setDate();
-        diary.setDiarybook(diarybook);
-        diary.insert(databaseHelper);
+        d1.setDate();
+        d1.setDiarybook(diarybook);
+        d1.insert(databaseHelper);
+
+        d2.setDate();
+        d2.setDiarybook(diarybook);
+        d2.insert(databaseHelper);
     }
 
     @After
@@ -52,32 +62,51 @@ public class JsonTest extends InstrumentationTestCase {
 
     @Test
     public void testObjectIntoJson() {
-        class D {
-            private int a;
+        String jo;
+        jo = JSON.toJSONString(d1);
+        Log.d(TAG, "testObjectIntoJson: d1 -> " + jo);
+        jo = JSON.toJSONString(d2);
+        Log.d(TAG, "testObjectIntoJson: d2 -> " + jo);
+    }
 
-            private double b;
+    @Test
+    public void testArrayIntoJson() {
+        List<Diary> list = new ArrayList<>();
+        list.add(d1);
+        list.add(d2);
+        String jo;
+        jo = JSON.toJSONString(list);
+        Log.d(TAG, "testArrayIntoJson: " + jo);
+    }
 
-            public void setA(int a) {
-                this.a = a;
-            }
+    @Test
+    public void testJsonIntoObject() {
+        String jo = "{\"date\":1531030209658,\"diarybook\":{\"diarybookName\":\"fajskdlav\"},\"id\":16,\"text\":\"jdakfldasj\"}";
+        Diary diary;
+        // diary = JSON.parseObject(jo, new TypeReference<Diary>(){});
+        diary = JSON.parseObject(jo, Diary.class);
+        assertEquals(1531030209658L, diary.getDate().getTime());
+        assertEquals("fajskdlav", diary.getDiarybook().getDiarybookName());
+        assertEquals(16, diary.getId());
+        assertEquals("jdakfldasj", diary.getText());
+    }
 
-            public int getA() {
-                return a;
-            }
-
-            public void setB(double b) {
-                this.b = b;
-            }
-
-            public double getB() {
-                return b;
-            }
-        }
-        D d = new D();
-        d.setA(13);
-        d.setB(15.5);
-        JSONObject json = JSONObject.fromObject(d);
-        Log.d(TAG, "testObjectIntoJson: " + json.toString());
+    @Test
+    public void testJsonIntoArray() {
+        String jo = "[" +
+                "{\"date\":1531030209658,\"diarybook\":{\"diarybookName\":\"fajskdlav\"},\"id\":16,\"text\":\"jdakfldasj\"}," +
+                "{\"date\":1546253475874,\"diarybook\":{\"diarybookName\":\"sbrycaevgr\"},\"id\":992,\"text\":\"afxamjncpau\"}" +
+                "]";
+        List<Diary> list = JSON.parseArray(jo, Diary.class);
+        assertEquals(2, list.size());
+        assertEquals(1531030209658L, list.get(0).getDate().getTime());
+        assertEquals("fajskdlav", list.get(0).getDiarybook().getDiarybookName());
+        assertEquals(16, list.get(0).getId());
+        assertEquals("jdakfldasj", list.get(0).getText());
+        assertEquals(1546253475874L, list.get(1).getDate().getTime());
+        assertEquals("sbrycaevgr", list.get(1).getDiarybook().getDiarybookName());
+        assertEquals(992, list.get(1).getId());
+        assertEquals("afxamjncpau", list.get(1).getText());
     }
 
 }
