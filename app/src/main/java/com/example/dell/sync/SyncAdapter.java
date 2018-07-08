@@ -7,14 +7,19 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SyncResult;
 import android.os.Bundle;
+import android.preference.PreferenceActivity;
+import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.example.dell.db.DatabaseHelper;
 import com.example.dell.db.Diary;
 import com.example.dell.server.ServerAccessor;
 import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
 
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -25,6 +30,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import java.lang.ref.Reference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,29 +80,45 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         Log.d(TAG, "onPerformSync: begin");
 
         DatabaseHelper helper = OpenHelperManager.getHelper(getContext(), DatabaseHelper.class);
-        DiarySync(helper);
+        syncDiary(helper);
         OpenHelperManager.releaseHelper();
 
         Log.d(TAG, "onPerformSync: end");
     }
 
-    public void DiarySync(DatabaseHelper helper) {
-        List<Diary> list = Diary.getAll(helper, false);
-        String jo        = JSON.toJSONString(list);
+    private void syncDiary(DatabaseHelper databaseHelper) {
+        List<Diary> list = Diary.getAll(databaseHelper, false);
+        String jo = parseJson(list, Diary.class);
+        Log.d(TAG, "parseDiarySync: jo " + jo);
         String response  = postSyncData("Diary", jo);
         if(response == null) {
             Log.e(TAG, "DiarySync: error when getting http response");
             return ;
         }
-        List<Diary> modify = JSON.parseArray(response, Diary.class);
-        for(Diary diary : modify) {
-            diary.insertOrUpdate(helper);
+        list = unparseJson(response, Diary.class);
+        for(Diary diary : list) {
+            diary.insertOrUpdate(databaseHelper);
         }
+    }
+
+    public String parseJson(List list, Class c) {
+        String jo = JSON.toJSONString(list);
+        jo = "{\"" + c.getSimpleName() + "List\":" + jo + "}";
+        return jo;
+    }
+
+    public List unparseJson(String jsonString, Class c) {
+        JSONObject jso = JSON.parseObject(jsonString);
+        JSONArray jsarr = jso.getJSONArray(c.getSimpleName() + "List");
+        Log.d(TAG, "unparseJson: " + jsarr.toJSONString());
+        return jsarr.toJavaList(c);
     }
 
     public String postSyncData(String table, String sendData) {
         HttpClient httpClient = new DefaultHttpClient();
-        HttpPost httpPost = new HttpPost(ServerAccessor.SERVER_IP + "/sync");
+        String url = ServerAccessor.SERVER_IP + ":8080/HeartTrace_Server_war3/Sync";
+        Log.d(TAG, "postSyncData: url " + url);
+        HttpPost httpPost = new HttpPost(url);
 
         ArrayList<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("table", table));
@@ -108,7 +130,15 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
             try {
                 HttpResponse httpResponse = httpClient.execute(httpPost);
-                if (httpResponse.getStatusLine().getStatusCode() == 200) {
+
+                Header[] headers = httpResponse.getAllHeaders();
+                for(Header header : headers) {
+                    Log.d(TAG, "postSyncData: header " + header.toString());
+                }
+
+                int code = httpResponse.getStatusLine().getStatusCode();
+                Log.d(TAG, "postSyncData: " + code);
+                if (code == 200) {
                     HttpEntity entity = httpResponse.getEntity();
                     String response = EntityUtils.toString(entity, "utf-8");
                     return response.toString();
