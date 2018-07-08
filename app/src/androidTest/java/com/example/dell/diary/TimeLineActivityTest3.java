@@ -39,7 +39,8 @@ public class TimeLineActivityTest3 {
     @Test
     public void mainActivityTest3() {
 
-        ViewInteraction appCompatButton = onView(
+        // TODO
+        /*ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.enter_bottle),
                         childAtPosition(
                                 childAtPosition(
@@ -47,7 +48,7 @@ public class TimeLineActivityTest3 {
                                         0),
                                 4),
                         isDisplayed()));
-        appCompatButton.perform(click());
+        appCompatButton.perform(click());*/
        /* 浮动按钮测试*/
         onView(withId(R.id.add_bottle_fab)).perform(click());
         /*新建一个瓶子*/

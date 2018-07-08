@@ -48,12 +48,12 @@
         "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\arrow_left_orange.png"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png"
-    },
-    {
         "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bottle_star.png",
         "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\bottle_star.png"
+    },
+    {
+        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png",
+        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png"
     },
     {
         "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bottle_gray1.png",
@@ -92,12 +92,12 @@
         "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\timeline_black.png"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\diary_bg.jpg",
-        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\diary_bg.jpg"
-    },
-    {
         "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\setting_white.png",
         "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\setting_white.png"
+    },
+    {
+        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\diary_bg.jpg",
+        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\diary_bg.jpg"
     },
     {
         "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\background5.jpg",

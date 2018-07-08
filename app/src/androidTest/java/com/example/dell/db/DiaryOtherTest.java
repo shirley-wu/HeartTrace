@@ -64,7 +64,7 @@ public class DiaryOtherTest {
         diary.setDiarybook(diarybook);
         diary.insert(databaseHelper);
 
-        List<Diary> dL = Diary.getByDate(databaseHelper, 1998, 3, 31);
+        List<Diary> dL = Diary.getByDate(databaseHelper, 1998, 3, 31, true);
         for(Diary d : dL) {
             Log.d(TAG, "testGetDiaryByDate: end of month diary " + d.getDate().toString());
         }
@@ -82,7 +82,7 @@ public class DiaryOtherTest {
                 Diary diary = new Diary();
                 diaryList.add(diary);
                 diary.setText(originText + j);
-                diary.setDate(new Date(1998, 8, i, j, 0));
+                diary.setDate(new Date(1998 - 1900, 8 - 1, i, j, 0));
                 diary.setDiarybook(diarybook);
                 diary.insert(databaseHelper);
             }
@@ -90,7 +90,7 @@ public class DiaryOtherTest {
 
         List<Diary> dL;
         for(int i = 1; i <= num; i++) {
-            dL = Diary.getByDate(databaseHelper, 1998, 8, i);
+            dL = Diary.getByDate(databaseHelper, 1998, 8, i, true);
             for(Diary d : dL) {
                 Log.d(TAG, "testGetDiaryByDate: " + i + " diary " + d.getDate().toString());
             }

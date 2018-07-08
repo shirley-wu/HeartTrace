@@ -61,6 +61,7 @@ import android.text.style.StyleSpan;
 import android.text.style.TypefaceSpan;
 import android.text.style.UnderlineSpan;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Gravity;
@@ -198,6 +199,22 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private FloatingActionButton like;
     private FloatingActionButton add;
 
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS};
+
+    public static void verifyStoragePermissions(Activity activity) {
+        int permission = ActivityCompat.checkSelfPermission(activity,
+                Manifest.permission.ACCESS_FINE_LOCATION);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(activity, PERMISSIONS_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -220,8 +237,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             public boolean onNavigationItemSelected(MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.favorite:
-                        Toast.makeText(DiaryWriteActivity.this, "暂不支持查看收藏T^T", Toast.LENGTH_SHORT).show();
-                        mDrawerLayout.closeDrawers();
+                        Intent intent0 = new Intent(DiaryWriteActivity.this, CollectActivity.class);
+                        startActivity(intent0);
                         break;
                     case R.id.statistics:
                         Intent intent = new Intent(DiaryWriteActivity.this,StatisticsActivity.class);
@@ -298,6 +315,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                         diaryDate.setText(date);
                         diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
                         diary_write.setText(Html.fromHtml(diary.getHtmlText()));
+                        getImage(diary.getText());
+                        setTextFormmat(diary);
                         getLabelsOfDiary(diary,helper);
                     }
                     getImage(diary.getText());
@@ -318,6 +337,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                         diaryDate.setText(date);
                         diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
                         diary_write.setText(Html.fromHtml(diary.getHtmlText()));
+                        getImage(diary.getText());
+                        setTextFormmat(diary);
                         getLabelsOfDiary(diary,helper);
                     }
                     getImage(diary.getText());
@@ -429,7 +450,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         set_size.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
             @Override
             public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
-                diary_write.setTextSize(4*set_size.getProgress());
+                float text_size = (float)4.0*(float)set_size.getProgress();
+                diary_write.setTextSize(text_size);
+                Log.i("seekbar", text_size + " " +diary_write.getTextSize());
             }
 
             @Override
@@ -526,6 +549,12 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
            index = intent.getIntExtra("diary_index",diaryList.size());
            diary = diaryList.get(index);
         }
+        else if(originType.equals("like")){
+            diaryList = Diary.getAllLike(helper, false);
+            diary = (Diary) intent.getSerializableExtra("diary_like");
+            index = intent.getIntExtra("diarylike_index",diaryList.size());
+            diary = diaryList.get(index);
+        }
 
         if(originType.equals("add_diary")){
             Date date = new Date();
@@ -538,6 +567,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             floatingButtons.setVisibility(View.INVISIBLE);
             emptyImage.setVisibility(View.INVISIBLE);
 
+            initTextFormmat();
         }
         else if(diaryList.size() == 0){
             emptyImage.setVisibility(View.VISIBLE);
@@ -560,6 +590,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             Log.i("show",diary.getHtmlText());
             diary_write.setText(Html.fromHtml(diary.getHtmlText()));
             getImage(diary.getText());
+            setTextFormmat(diary);
             getLabelsOfDiary(diary,helper);
             String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
             diaryDate.setText(date);
@@ -577,7 +608,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             edit.setVisibility(View.INVISIBLE);
 
             diary_write.setSelection(diary_write.getText().length());
-
         }
 //
 
@@ -618,6 +648,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             Collections.reverse(diaryList);
             diary = diaryList.get(index);
         }
+        else if(originType.equals("like")){
+            diaryList = Diary.getAllLike(helper, false);
+            diary = diaryList.get(index);
+        }
 
         if(originType.equals("add_diary")){
             Date date = new Date();
@@ -629,6 +663,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
             floatingButtons.setVisibility(View.INVISIBLE);
             emptyImage.setVisibility(View.INVISIBLE);
+
+            initTextFormmat();
         }
         else if(diaryList.size() == 0){
             emptyImage.setVisibility(View.VISIBLE);
@@ -650,6 +686,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             Log.i("show",diary.getHtmlText());
             diary_write.setText(Html.fromHtml(diary.getHtmlText()));
             getImage(diary.getText());
+            setTextFormmat(diary);
             getLabelsOfDiary(diary,helper);
             String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
             diaryDate.setText(date);
@@ -667,9 +704,26 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             edit.setVisibility(View.INVISIBLE);
 
             diary_write.setSelection(diary_write.getText().length());
-
         }
 //
+    }
+
+    private void initTextFormmat()
+    {
+        diary_write.setTextSize((float) 20.0);
+        diary_write.setLineSpacing(0,1);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            diary_write.setLetterSpacing((float) 0.2);
+        }
+    }
+
+    private void setTextFormmat(Diary diary)
+    {
+        diary_write.setTextSize(diary.getTextSize());
+        diary_write.setLineSpacing(diary.getLineSpacingExtra(),diary.getLineSpacingMultiplier());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            diary_write.setLetterSpacing(diary.getLetterSpacing());
+        }
     }
 
     public void onClick(View view) {
@@ -766,6 +820,16 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     diary.setText(diary_write.getText().toString());
                     htmlText = colorSpanAdjust(Html.toHtml(diary_write.getText()));
                     diary.setHtmlText(htmlText);
+                    diary.setTextSize(diary_write.getTextSize()/(float)1.5);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        diary.setLetterSpacing(diary_write.getLetterSpacing());
+                    }
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        diary.setLineSpacingMultiplier((int)diary_write.getLineSpacingMultiplier());
+                    }
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        diary.setLineSpacingExtra((int)diary_write.getLineSpacingExtra());
+                    }
                     Date date = new Date();
                     diary.setDate(date);
                     diary.insert(helper);
@@ -777,14 +841,20 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     diary.setText(diary_write.getText().toString());
                     htmlText = colorSpanAdjust(Html.toHtml(diary_write.getText()));
                     diary.setHtmlText(htmlText);
+                    diary.setTextSize(diary_write.getTextSize()/(float)1.5);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        diary.setLetterSpacing(diary_write.getLetterSpacing());
+                    }
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        diary.setLineSpacingMultiplier((int)diary_write.getLineSpacingMultiplier());
+                    }
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        diary.setLineSpacingExtra((int)diary_write.getLineSpacingExtra());
+                    }
                     diary.update(helper);
                     diaryList.remove(index);
                     diaryList.add(index,diary);
                 }
-/*                List<Diary> diaryList = Diary.getAll(helper,true);
-                for(Diary i : diaryList){
-                    Log.i("test", i.getText());
-                } */
                 //CharSequence charSequence = Html.fromHtml(Html.toHtml(diary_write.getText()));
                 //Toast.makeText(DiaryWriteActivity.this,charSequence,Toast.LENGTH_SHORT).show();
                 diary_write.setEnabled(false);
@@ -974,8 +1044,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 }
                 break;
             case R.id.insert_image:
-                //openAlbum();
-                Toast.makeText(this, "插入图片出了点小问题，帅气的kx小哥哥正在努力解决中￣ω￣=", Toast.LENGTH_SHORT).show();
+                verifyStoragePermissions(DiaryWriteActivity.this);
+                openAlbum();
                 break;
         }
     }
@@ -1114,7 +1184,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     public void onRequestPermissionsResult(int requestCode, String[]permissions, int[] grantResults) {
         switch (requestCode) {
             case 1:
-                openAlbum();
+                //openAlbum();
                 break;
             default:
         }
@@ -1124,6 +1194,11 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case CHOOSE_PHOTO:
+                Log.i("version", String.valueOf(Build.VERSION.SDK_INT));
+                if(resultCode==RESULT_OK)
+                    Log.i("request code","RESULT_OK");
+                else
+                    Log.i("request code","RESULT_NOT_OK");
                 if (resultCode == RESULT_OK) {
                     // 判断手机系统版本号
                     if (Build.VERSION.SDK_INT >= 19) {
@@ -1156,52 +1231,44 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         editable.insert(diary_write.getSelectionStart(), imageSpan);
         diary_write.setText(editable);
         diary_write.append("\n");
+        diary_write.setSelection(diary_write.getText().length());
     }
 
-    public static Bitmap getBitmapFromUri(Activity ac, Uri uri) throws FileNotFoundException, IOException {
-        InputStream input = ac.getContentResolver().openInputStream(uri);
-        BitmapFactory.Options onlyBoundsOptions = new BitmapFactory.Options();
-        onlyBoundsOptions.inJustDecodeBounds = true;
-        onlyBoundsOptions.inDither = true;//optional
-        onlyBoundsOptions.inPreferredConfig = Bitmap.Config.ARGB_8888;//optional
-        BitmapFactory.decodeStream(input, null, onlyBoundsOptions);
-        input.close();
-        int originalWidth = onlyBoundsOptions.outWidth;
-        int originalHeight = onlyBoundsOptions.outHeight;
-        if ((originalWidth == -1) || (originalHeight == -1))
-            return null;
-        //图片分辨率以480x800为标准
-        float hh = 800f;//这里设置高度为800f
-        float ww = 480f;//这里设置宽度为480f
-        //缩放比。由于是固定比例缩放，只用高或者宽其中一个数据进行计算即可
-        int be = 1;//be=1表示不缩放
-        if (originalWidth > originalHeight && originalWidth > ww) {//如果宽度大的话根据宽度固定大小缩放
-            be = (int) (originalWidth / ww);
-        } else if (originalWidth < originalHeight && originalHeight > hh) {//如果高度高的话根据宽度固定大小缩放
-            be = (int) (originalHeight / hh);
-        }
-        if (be <= 0)
-            be = 1;
-        //比例压缩
-        BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-        bitmapOptions.inSampleSize = be;//设置缩放比例
-        bitmapOptions.inDither = true;//optional
-        bitmapOptions.inPreferredConfig = Bitmap.Config.ARGB_8888;//optional
+    public Bitmap getBitmapFromUri(Activity ac, Uri uri) throws FileNotFoundException, IOException {
+        InputStream input;
         input = ac.getContentResolver().openInputStream(uri);
-        Bitmap bitmap = BitmapFactory.decodeStream(input, null, bitmapOptions);
+        Bitmap bitmap = BitmapFactory.decodeStream(input);
         input.close();
 
         return compressImage(bitmap);//再进行质量压缩
     }
 
-    public static Bitmap compressImage(Bitmap image) {
+    public Bitmap compressImage(Bitmap image) {
+        float width = image.getWidth();
+        float height = image.getHeight();
+        // 创建操作图片用的matrix对象
+        Matrix matrix = new Matrix();
+        // 计算宽高缩放率
+        DisplayMetrics displayMetrics=new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int heightPixels = displayMetrics.heightPixels;
+        int widthPixels=displayMetrics.widthPixels;
+        Log.i("density", String.valueOf(displayMetrics.density));
+        float scaleWidth = ((float) widthPixels) / width;
+        scaleWidth *= displayMetrics.density;
+        float scaleHeight = scaleWidth;
+        // 缩放图片动作
+        matrix.postScale(scaleWidth, scaleHeight);
+        Bitmap new_image = Bitmap.createBitmap(image, 0, 0, (int) width,
+                (int) height, matrix, true);
+
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+        new_image.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
         int options = 100;
         while (baos.toByteArray().length / 1024 > 100) {  //循环判断如果压缩后图片是否大于100kb,大于继续压缩
             baos.reset();//重置baos即清空baos
             //第一个参数 ：图片格式 ，第二个参数： 图片质量，100为最高，0为最差  ，第三个参数：保存压缩后的数据的流
-            image.compress(Bitmap.CompressFormat.JPEG, options, baos);//这里压缩options%，把压缩后的数据存放到baos中
+            new_image.compress(Bitmap.CompressFormat.JPEG, options, baos);//这里压缩options%，把压缩后的数据存放到baos中
             options -= 10;//每次都减少10
         }
         ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());//把压缩后的数据baos存放到ByteArrayInputStream中
@@ -1278,21 +1345,25 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
     private void getImage(String text)
     {
+        Editable editable = diary_write.getText();
         Pattern pattern = Pattern.compile( Environment.getExternalStorageDirectory().getPath()+"/HeartTrace/pic/image_[0-9]{14}\\.jpg");
         Matcher matcher = pattern.matcher(text);
-        if(matcher.find()) {
+        int matcher_end = 0;
+        while(matcher.find()) {
             Bitmap bitmap = BitmapFactory.decodeFile(matcher.group());
             SpannableString imageSpan = new SpannableString(matcher.group());
             imageSpan.setSpan(new ImageSpan(bitmap) , 0, imageSpan.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            Editable editable = diary_write.getText();
             Pattern pattern1 = Pattern.compile("￼");
             Matcher matcher1 = pattern1.matcher(diary_write.getText());
             if(matcher1.find()) {
                 editable.delete(matcher1.start(),matcher1.end());
                 editable.insert(matcher1.start(), imageSpan);
             }
-            diary_write.setText(editable);
+            matcher_end += matcher.end();
+            String new_text = text.substring(matcher_end,text.length());
+            matcher = pattern.matcher(new_text);
         }
+        diary_write.setText(editable);
     }
 
     private String colorSpanAdjust(String htmlText)
@@ -1550,7 +1621,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
-
     public Drawable setTags(String id){
         switch(id)
         {
@@ -1593,7 +1663,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             default: return false;
         }
     }
-
 
     public void getLabelsOfDiary(Diary diary, DatabaseHelper helper ){
         diaryIcon.setImageDrawable(getResources().getDrawable(R.color.white));

@@ -61,6 +61,7 @@ public class SentenceInstrumentedTest {
         sentence.setText(originText);
         sentence.setDate();
         sentence.setSentencebook(sentencebook);
+        sentence.setLike(true);
 
         // create
         sentence.insert(databaseHelper);
@@ -69,6 +70,8 @@ public class SentenceInstrumentedTest {
         sentenceList = dao.queryBuilder().where().eq("text", originText).query();
         assertEquals(1, sentenceList.size()); // TODO: not safe: assumes that there is no such text by wxq
         assertEquals(sentence.getDate(), sentenceList.get(0).getDate());
+        assertEquals(originText, sentenceList.get(0).getText());
+        assertEquals(true, sentenceList.get(0).getLike());
 
         // update
         sentence.setText(updateText);
