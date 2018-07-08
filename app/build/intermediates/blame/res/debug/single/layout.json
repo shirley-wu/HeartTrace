@@ -84,12 +84,12 @@
         "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\3a814188cbd1b7f22fffc0db6dfd285d\\res\\layout\\notification_template_big_media_narrow.xml"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_close_item_material.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\layout\\abc_action_mode_close_item_material.xml"
-    },
-    {
         "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_subheader.xml",
         "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\a738c3699867a98b793e4919817fe0f6\\res\\layout\\design_navigation_item_subheader.xml"
+    },
+    {
+        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_close_item_material.xml",
+        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\layout\\abc_action_mode_close_item_material.xml"
     },
     {
         "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_title_item.xml",
@@ -108,12 +108,12 @@
         "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\layout\\activity_bottles.xml"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_time.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\f8617ec7bf685a9926a6b8f955169f29\\res\\layout\\notification_template_part_time.xml"
-    },
-    {
         "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_welcome.xml",
         "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\layout\\activity_welcome.xml"
+    },
+    {
+        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_time.xml",
+        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\f8617ec7bf685a9926a6b8f955169f29\\res\\layout\\notification_template_part_time.xml"
     },
     {
         "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_item_layout.xml",
