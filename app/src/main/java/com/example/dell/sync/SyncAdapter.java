@@ -88,7 +88,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         Log.d(TAG, "onPerformSync: end");
     }
 
-    private void syncDiary(DatabaseHelper databaseHelper) {
+    /*private void syncDiary(DatabaseHelper databaseHelper) {
         List<Diary> list = Diary.getAll(databaseHelper, false);
         String jo = parseJson(list, Diary.class);
         Log.d(TAG, "parseDiarySync: jo " + jo);
@@ -101,7 +101,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         for(Diary diary : list) {
             diary.insertOrUpdate(databaseHelper);
         }
-    }
+    }*/
 
     public boolean sync(DatabaseHelper databaseHelper, Class c) {
         try {
@@ -146,7 +146,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
     public String postSyncData(String table, String sendData) {
         HttpClient httpClient = new DefaultHttpClient();
-        String url = ServerAccessor.SERVER_IP + ":8080/HeartTrace_Server_war3/Sync";
+        String url = ServerAccessor.SERVER_IP + ":8080/HeartTrace_Server_war4/Sync";
         Log.d(TAG, "postSyncData: url " + url);
         HttpPost httpPost = new HttpPost(url);
 
