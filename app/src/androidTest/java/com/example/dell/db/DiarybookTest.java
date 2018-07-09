@@ -7,6 +7,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 /**
  * Created by wu-pc on 2018/6/8.
  */
@@ -48,6 +50,10 @@ public class DiarybookTest extends InstrumentationTestCase {
     @Test
     public void testInsertDiary() {
         assertEquals(1, diarybook.getAllSubDiary(helper).size());
-        assertEquals(diary.getText(), diarybook.getAllSubDiary(helper).get(0).getText());
+        List<Diary> list = diarybook.getAllSubDiary(helper);
+        assertEquals(diary.getText(), list.get(0).getText());
+        Diarybook b = list.get(0).getDiarybook();
+        b.refresh(helper);
+        assertEquals(diarybook.getDiarybookName(), b.getDiarybookName());
     }
 }

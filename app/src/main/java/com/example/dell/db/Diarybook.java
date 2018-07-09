@@ -96,6 +96,18 @@ public class Diarybook {
         }
     }
 
+    public void refresh(DatabaseHelper helper) {
+        try {
+            Dao<Diarybook, Integer> dao = helper.getDiarybookDao();
+            Log.i("diarybook", "dao = " + dao + " refresh diarybook " + this);
+            int returnValue = dao.refresh(this);
+            Log.i("diarybook", "refresh后返回值：" + returnValue);
+        } catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
+
     public void delete(DatabaseHelper helper) {
         try {
             Dao<Diary, Integer> subdao = helper.getDiaryDao();

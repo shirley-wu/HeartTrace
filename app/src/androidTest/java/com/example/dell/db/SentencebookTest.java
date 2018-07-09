@@ -7,6 +7,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 /**
  * Created by wu-pc on 2018/6/8.
  */
@@ -22,6 +24,7 @@ public class SentencebookTest extends InstrumentationTestCase {
     @Before
     public void setUp() throws Exception {
         super.setUp();
+        sentencebook.setDescription("hihihihi");
         sentencebook.insert(helper);
         sentence.setDate();
         sentence.setSentencebook(sentencebook);
@@ -43,11 +46,16 @@ public class SentencebookTest extends InstrumentationTestCase {
         assertEquals(null, b);
         b = Sentencebook.getByName(helper, sentencebook.getSentencebookName());
         assertEquals(sentencebook.getSentencebookName(), b.getSentencebookName());
+        assertEquals(sentencebook.getDescription(), b.getDescription());
     }
     
     @Test
     public void testInsertSentence() {
         assertEquals(1, sentencebook.getAllSubSentence(helper).size());
-        assertEquals(sentence.getText(), sentencebook.getAllSubSentence(helper).get(0).getText());
+        List<Sentence> list = sentencebook.getAllSubSentence(helper);
+        assertEquals(sentence.getText(), list.get(0).getText());
+        Sentencebook b = list.get(0).getSentencebook();
+        b.refresh(helper);
+        assertEquals(sentencebook.getSentencebookName(), b.getSentencebookName());
     }
 }

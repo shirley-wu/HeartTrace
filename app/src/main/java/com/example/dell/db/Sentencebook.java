@@ -31,6 +31,9 @@ public class Sentencebook implements Serializable {
     @DatabaseField(unique = true, columnName = "sentencebookName", canBeNull = false)
     private String sentencebookName;
 
+    @DatabaseField
+    private String description;
+
     public Sentencebook(){};
     public Sentencebook(String sentencebookName)
     {
@@ -40,6 +43,14 @@ public class Sentencebook implements Serializable {
     public String getSentencebookName()
     {
         return sentencebookName;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public void setSentencebookName(String sentencebookName) {
@@ -87,6 +98,18 @@ public class Sentencebook implements Serializable {
             Log.i("sentencebook", "dao = " + dao + " 更新 sentencebook " + this);
             int returnValue = dao.update(this);
             Log.i("sentencebook", "更新后返回值：" + returnValue);
+        } catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void refresh(DatabaseHelper helper) {
+        try {
+            Dao<Sentencebook, Integer> dao = helper.getSentencebookDao();
+            Log.i("sentencebook", "dao = " + dao + " refresh sentencebook " + this);
+            int returnValue = dao.refresh(this);
+            Log.i("sentencebook", "refresh后返回值：" + returnValue);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
