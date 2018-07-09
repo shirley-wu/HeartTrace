@@ -76,6 +76,10 @@
         "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\3a814188cbd1b7f22fffc0db6dfd285d\\res\\layout\\notification_template_big_media_custom.xml"
     },
     {
+        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_login.xml",
+        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\layout\\activity_login.xml"
+    },
+    {
         "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_content_include.xml",
         "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\layout\\abc_screen_content_include.xml"
     },
@@ -404,12 +408,12 @@
         "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\layout\\activity_label_manage.xml"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_menu_item_action_area.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\a738c3699867a98b793e4919817fe0f6\\res\\layout\\design_menu_item_action_area.xml"
-    },
-    {
         "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\collectd_item.xml",
         "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\layout\\collectd_item.xml"
+    },
+    {
+        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_menu_item_action_area.xml",
+        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\a738c3699867a98b793e4919817fe0f6\\res\\layout\\design_menu_item_action_area.xml"
     },
     {
         "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\diary_write_content.xml",
