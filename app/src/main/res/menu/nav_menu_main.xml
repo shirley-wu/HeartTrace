@@ -3,6 +3,10 @@
     <group android:checkableBehavior="single">
 
         <item
+            android:id="@+id/personal_information"
+            android:icon="@drawable/personal_information"
+            android:title="个人信息" />
+        <item
             android:id="@+id/favorite"
             android:icon="@drawable/favorite_pink"
             android:title="我的收藏" />

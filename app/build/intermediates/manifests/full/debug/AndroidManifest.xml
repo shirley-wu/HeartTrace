@@ -11,6 +11,14 @@
     <!-- 申请权限存取图片，误删！ -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true" />
+
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
@@ -23,8 +31,7 @@
         android:theme="@style/AppTheme.Main" >
         <activity
             android:name="com.example.dell.diary.TimeLineActivity"
-            android:label="HeartTrace" >
-        </activity>
+            android:label="HeartTrace" />
         <activity android:name="com.example.dell.diary.StatisticsActivity" />
         <activity android:name="com.example.dell.diary.DiaryActivity" />
         <activity android:name="com.example.dell.diary.SearchActivity" />
@@ -61,6 +68,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.example.dell.diary.PersonalInformationActivity" />
 
         <meta-data
             android:name="android.support.VERSION"

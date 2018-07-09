@@ -205,8 +205,10 @@ public class StatisticsActivity extends AppCompatActivity implements DatePickerD
                 continue;
             }
             thisDayScore = 0;
-            for(Diary thisDiary : currentAllDiary){
-                Log.i("text",thisDiary.getText());
+            int num = currentAllDiary.size();
+            for(Diary thisDiary : currentAllDiary)
+            for(int i = num - 1; i >= 0; i -- ){
+                thisDiary = currentAllDiary.get(i);
                 labelThisDiary = null;
                 try {
                     labelThisDiary = thisDiary.getAllLabel(helper);

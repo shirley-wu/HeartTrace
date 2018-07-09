@@ -9,7 +9,6 @@
     android:fitsSystemWindows="true">
 
 <android.support.design.widget.CoordinatorLayout
-    android:id="@+id/diaryWriteLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
@@ -17,6 +16,8 @@
     <include layout="@layout/diary_write_content"/>
 
     <include layout="@layout/font_setting_bottom_sheet"/>
+
+    <include layout="@layout/theme_setting_bottom_sheet"/>
 
 </android.support.design.widget.CoordinatorLayout>
 

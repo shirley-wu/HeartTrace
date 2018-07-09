@@ -61,6 +61,7 @@ import android.text.style.StyleSpan;
 import android.text.style.TypefaceSpan;
 import android.text.style.UnderlineSpan;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Gravity;
@@ -109,6 +110,8 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.example.dell.diary.R.drawable.background1;
+
 public class DiaryWriteActivity extends AppCompatActivity implements View.OnClickListener,View.OnTouchListener,View.OnLongClickListener {
 //    private ViewPager vp;
 //    private DiaryFragment diaryFragment;
@@ -136,6 +139,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private List<ImageView> imageItems = new ArrayList<ImageView>(3);
     int index;
     ActionBar actionBar;
+    private android.support.design.widget.CoordinatorLayout drawer;
     private TextView diaryDate;
     private TextView diaryWeekday;
     private ImageView diaryIcon;
@@ -143,6 +147,14 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private ImageView diaryIcon2;
     private ImageView diaryIcon3;
     private ImageView diaryIcon4;
+    private ImageView background1;
+    private ImageView background2;
+    private ImageView background3;
+    private ImageView background4;
+    private ImageView background5;
+    private ImageView background6;
+    private ImageView background7;
+    private ImageView background8;
     private EditText diary_write;
     private LinearLayout edit_layout;
     private LinearLayout date_layout;
@@ -160,7 +172,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private boolean is_bold=false;
     private boolean is_italic=false;
     private ImageButton font_set;
+    private ImageButton theme_set;
     private BottomSheetBehavior font_setting_bottom_sheet;
+    private BottomSheetBehavior theme_setting_bottom_sheet;
     private TextView set_font1;
     private TextView set_font2;
     private TextView set_font3;
@@ -207,6 +221,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         getView();
         setOnListener();
         init();
+
+
 //        //initViewPage();
         mGestureDetector = new GestureDetector(new MyGestureListener()); //使用派生自OnGestureListener
 
@@ -219,13 +235,17 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 switch (item.getItemId()){
+                    case R.id.personal_information:
+                        Intent intent = new Intent(DiaryWriteActivity.this,PersonalInformationActivity.class);
+                        startActivity(intent);
+                        break;
                     case R.id.favorite:
                         Toast.makeText(DiaryWriteActivity.this, "暂不支持查看收藏T^T", Toast.LENGTH_SHORT).show();
                         mDrawerLayout.closeDrawers();
                         break;
                     case R.id.statistics:
-                        Intent intent = new Intent(DiaryWriteActivity.this,StatisticsActivity.class);
-                        startActivity(intent);
+                        Intent intent1 = new Intent(DiaryWriteActivity.this,StatisticsActivity.class);
+                        startActivity(intent1);
                         break;
                     case R.id.calendar_search:
                         Intent intent2 = new Intent(DiaryWriteActivity.this,CalendarActivity.class);
@@ -344,6 +364,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     }
     public void getView()
     {
+        drawer = (android.support.design.widget.CoordinatorLayout) findViewById(R.id.diaryWriteLayout);
         floatingButtons = (ConstraintLayout)findViewById(R.id.floating_buttons);
         addDiary = (FloatingActionButton)findViewById(R.id.add_diary);
         add = (FloatingActionButton)findViewById(R.id.add);
@@ -357,10 +378,20 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         set_size = (DiscreteSeekBar) findViewById(R.id.set_size);
         confirm = (ImageButton) findViewById(R.id.confirm);
         font_set = (ImageButton) findViewById(R.id.font_setting);
+        theme_set = (ImageButton) findViewById(R.id.theme_setting) ;
         font_setting_bottom_sheet =  BottomSheetBehavior.from(findViewById(R.id.fontSettingBottomSheetLayout));
+        theme_setting_bottom_sheet =  BottomSheetBehavior.from(findViewById(R.id.themeSettingBottomSheetLayout));
         set_font1 = (TextView) findViewById(R.id.font1);
         set_font2 = (TextView) findViewById(R.id.font2);
         set_font3 = (TextView) findViewById(R.id.font3);
+        background1 = (ImageView) findViewById(R.id.background1);
+        background2 = (ImageView) findViewById(R.id.background2);
+        background3 = (ImageView) findViewById(R.id.background3);
+        background4 = (ImageView) findViewById(R.id.background4);
+        background5 = (ImageView) findViewById(R.id.background5);
+        background6 = (ImageView) findViewById(R.id.background6);
+        background7 = (ImageView) findViewById(R.id.background7);
+        background8 = (ImageView) findViewById(R.id.background8);
         set_center = (ImageButton) findViewById(R.id.set_center);
         set_left = (ImageButton) findViewById(R.id.set_left);
         set_right = (ImageButton) findViewById(R.id.set_right);
@@ -447,6 +478,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         edit.setOnClickListener(this);
         confirm.setOnClickListener(this);
         font_set.setOnClickListener(this);
+        theme_set.setOnClickListener(this);
         set_font1.setOnClickListener(this);
         set_font2.setOnClickListener(this);
         set_font3.setOnClickListener(this);
@@ -469,6 +501,14 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         diaryIcon2.setOnLongClickListener(this);
         diaryIcon3.setOnLongClickListener(this);
         diaryIcon4.setOnLongClickListener(this);
+        background1.setOnClickListener(this);
+        background2.setOnClickListener(this);
+        background3.setOnClickListener(this);
+        background4.setOnClickListener(this);
+        background5.setOnClickListener(this);
+        background6.setOnClickListener(this);
+        background7.setOnClickListener(this);
+        background8.setOnClickListener(this);
     }
 
     public void init()
@@ -541,6 +581,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         }
         else if(diaryList.size() == 0){
             emptyImage.setVisibility(View.VISIBLE);
+            theme_set.setVisibility(View.INVISIBLE);
             font_set.setVisibility(View.INVISIBLE);
             insert_image.setVisibility(View.INVISIBLE);
             confirm.setVisibility(View.INVISIBLE);
@@ -565,6 +606,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             diaryDate.setText(date);
             diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
             diary_write.setEnabled(false);
+            theme_set.setVisibility(View.INVISIBLE);
             font_set.setVisibility(View.INVISIBLE);
             insert_image.setVisibility(View.INVISIBLE);
             confirm.setVisibility(View.INVISIBLE);
@@ -632,6 +674,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         }
         else if(diaryList.size() == 0){
             emptyImage.setVisibility(View.VISIBLE);
+            theme_set.setVisibility(View.INVISIBLE);
             font_set.setVisibility(View.INVISIBLE);
             insert_image.setVisibility(View.INVISIBLE);
             confirm.setVisibility(View.INVISIBLE);
@@ -655,6 +698,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             diaryDate.setText(date);
             diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
             diary_write.setEnabled(false);
+
+            theme_set.setVisibility(View.INVISIBLE);
             font_set.setVisibility(View.INVISIBLE);
             insert_image.setVisibility(View.INVISIBLE);
             confirm.setVisibility(View.INVISIBLE);
@@ -676,8 +721,14 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
         switch (view.getId()) {
             case R.id.diary_content_icon:
+                DisplayMetrics displayMetrics1 = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(displayMetrics1);
+                int screenWidth = displayMetrics1.widthPixels;
+                int screenHeight = displayMetrics1.heightPixels;
+                Log.d("debug", "screenWidth = "+screenWidth+"|screenHeight = "+screenHeight);
+
                 for(int i=0;i<imageItems.size();i++) {
-                    int radius = 90;
+                    float radius = (float) screenWidth / 12;
                     float distanceX = (float) (flag * radius * (i + 1));
                     objAnimatorX = ObjectAnimator.ofFloat(imageItems.get(i), "x", imageItems.get(i).getX(), imageItems.get(i).getX() + distanceX);
                     objAnimatorX.setDuration(120);
@@ -715,6 +766,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             case R.id.edit:
                 if(emptyImage.getVisibility() == View.INVISIBLE){
                     diary_write.setEnabled(true);
+                    theme_set.setVisibility(View.VISIBLE);
                     font_set.setVisibility(View.VISIBLE);
                     insert_image.setVisibility(View.VISIBLE);
                     confirm.setVisibility(View.VISIBLE);
@@ -788,6 +840,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 //CharSequence charSequence = Html.fromHtml(Html.toHtml(diary_write.getText()));
                 //Toast.makeText(DiaryWriteActivity.this,charSequence,Toast.LENGTH_SHORT).show();
                 diary_write.setEnabled(false);
+                theme_set.setVisibility(View.INVISIBLE);
                 font_set.setVisibility(View.INVISIBLE);
                 insert_image.setVisibility(View.INVISIBLE);
                 confirm.setVisibility(View.INVISIBLE);
@@ -801,6 +854,33 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.font_setting:
                 font_setting_bottom_sheet.setState(BottomSheetBehavior.STATE_EXPANDED);
+                break;
+            case R.id.theme_setting:
+                theme_setting_bottom_sheet.setState(BottomSheetBehavior.STATE_EXPANDED);
+                break;
+            case R.id.background1:
+                drawer.setBackgroundResource(R.drawable.background1);
+                break;
+            case R.id.background2:
+                drawer.setBackgroundResource(R.drawable.background2);
+                break;
+            case R.id.background3:
+                drawer.setBackgroundResource(R.drawable.background3);
+                break;
+            case R.id.background4:
+                drawer.setBackgroundResource(R.drawable.background4);
+                break;
+            case R.id.background5:
+                drawer.setBackgroundResource(R.drawable.background5);
+                break;
+            case R.id.background6:
+                drawer.setBackgroundResource(R.drawable.background6);
+                break;
+            case R.id.background7:
+                drawer.setBackgroundResource(R.drawable.background7);
+                break;
+            case R.id.background8:
+                drawer.setBackgroundResource(R.drawable.background8);
                 break;
             case R.id.font1:
                 set_font1.setBackgroundColor(Color.GRAY);
@@ -1581,7 +1661,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
-    public boolean isMoodLabel(String id){
+    private boolean isMoodLabel(String id){
         switch(id)
         {
             case "happy": return true;
@@ -1596,9 +1676,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
 
     public void getLabelsOfDiary(Diary diary, DatabaseHelper helper ){
-        diaryIcon.setImageDrawable(getResources().getDrawable(R.color.white));
+        diaryIcon.setImageDrawable(getResources().getDrawable(R.drawable.transparent));
         for(int i = 0; i<=3; i++){
-            imageItems.get(i).setImageDrawable(getResources().getDrawable(R.color.white));
+            imageItems.get(i).setImageDrawable(getResources().getDrawable(R.drawable.transparent));
         }
         label_this = null;
         try {
