@@ -104,6 +104,18 @@ public class Sentencebook implements Serializable {
         }
     }
 
+    public void refresh(DatabaseHelper helper) {
+        try {
+            Dao<Sentencebook, Integer> dao = helper.getSentencebookDao();
+            Log.i("sentencebook", "dao = " + dao + " refresh sentencebook " + this);
+            int returnValue = dao.refresh(this);
+            Log.i("sentencebook", "refresh后返回值：" + returnValue);
+        } catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
+
     public void delete(DatabaseHelper helper) {
         try {
             Dao<Sentence, Integer> subdao = helper.getSentenceDao();
