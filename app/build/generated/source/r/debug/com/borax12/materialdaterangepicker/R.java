@@ -117,7 +117,7 @@ public final class R {
         public static final int day_picker_selected_date_layout = 0x7f0e0155;
         public static final int day_picker_selected_date_layout_end = 0x7f0e015a;
         public static final int done_background = 0x7f0e0161;
-        public static final int end_date_group = 0x7f0e019d;
+        public static final int end_date_group = 0x7f0e019e;
         public static final int hour_space = 0x7f0e0166;
         public static final int hour_space_end = 0x7f0e016f;
         public static final int hours = 0x7f0e0168;
@@ -130,17 +130,17 @@ public final class R {
         public static final int ok = 0x7f0e0163;
         public static final int separator = 0x7f0e0167;
         public static final int separator_end = 0x7f0e0170;
-        public static final int start_date_group = 0x7f0e019c;
-        public static final int tabHost = 0x7f0e019b;
+        public static final int start_date_group = 0x7f0e019d;
+        public static final int tabHost = 0x7f0e019c;
         public static final int time_display = 0x7f0e0164;
-        public static final int time_display_background = 0x7f0e019f;
-        public static final int time_display_background_end = 0x7f0e01a4;
+        public static final int time_display_background = 0x7f0e01a0;
+        public static final int time_display_background_end = 0x7f0e01a5;
         public static final int time_display_end = 0x7f0e016d;
-        public static final int time_picker = 0x7f0e01a1;
-        public static final int time_picker_dialog = 0x7f0e019e;
-        public static final int time_picker_end = 0x7f0e01a3;
-        public static final int time_picker_header = 0x7f0e01a0;
-        public static final int time_picker_header_end = 0x7f0e01a2;
+        public static final int time_picker = 0x7f0e01a2;
+        public static final int time_picker_dialog = 0x7f0e019f;
+        public static final int time_picker_end = 0x7f0e01a4;
+        public static final int time_picker_header = 0x7f0e01a1;
+        public static final int time_picker_header_end = 0x7f0e01a3;
     }
     public static final class layout {
         public static final int mdtp_date_picker_header_view = 0x7f040046;

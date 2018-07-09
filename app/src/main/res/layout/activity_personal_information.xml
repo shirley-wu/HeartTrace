@@ -16,14 +16,15 @@
             android:layout_height="wrap_content">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/icon_image"
+                android:id="@+id/personal_image"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="60dp"
                 android:layout_marginBottom="30dp"
                 android:layout_alignParentTop="true"
-                android:src="@drawable/panda"/>
+                android:src="@drawable/panda"
+                android:clickable="true"/>
 
         </RelativeLayout>
 
@@ -39,6 +40,12 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="40dp"
                 android:text="昵称"/>
+
+            <LinearLayout
+                android:layout_width="10dp"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>
 
             <EditText
                 android:layout_width="0dp"
@@ -62,6 +69,12 @@
                 android:layout_marginLeft="40dp"
                 android:text="性别" />
 
+            <LinearLayout
+                android:layout_width="10dp"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>
+
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -83,6 +96,12 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="40dp"
                 android:text="出生日期"/>
+
+            <LinearLayout
+                android:layout_width="10dp"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>
 
             <EditText
                 android:layout_width="0dp"
@@ -107,14 +126,48 @@
                 android:gravity="right"
                 android:layout_weight="1"
                 android:layout_marginLeft="40dp"
-                android:text="学校"/>
+                android:text="邮箱"/>
+
+            <LinearLayout
+                android:layout_width="10dp"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>
 
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
                 android:layout_marginRight="40dp"
-                android:hint="你的学校~"/>
+                android:hint="设置一个邮箱吧！"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_weight="1"
+                android:layout_marginLeft="40dp"
+                android:text="学校"/>
+
+            <LinearLayout
+                android:layout_width="10dp"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:layout_marginRight="40dp"
+                android:hint="你的学校"/>
 
         </LinearLayout>
 
@@ -131,12 +184,18 @@
                 android:layout_marginLeft="40dp"
                 android:text="个性签名"/>
 
+            <LinearLayout
+                android:layout_width="10dp"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>
+
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
                 android:layout_marginRight="40dp"
-                android:hint="自由发挥~"/>
+                android:hint="自由发挥就可以啦~"/>
 
         </LinearLayout>
 

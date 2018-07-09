@@ -13,10 +13,13 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class PersonalInformationActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final DateFormat FORMATTER = SimpleDateFormat.getDateInstance();
     private EditText chooseBirthday;
+    private CircleImageView personalImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +27,9 @@ public class PersonalInformationActivity extends AppCompatActivity implements Vi
         setContentView(R.layout.activity_personal_information);
 
         chooseBirthday = (EditText) findViewById(R.id.choose_birthday);
+        personalImage = (CircleImageView) findViewById(R.id.personal_image);
         chooseBirthday.setOnClickListener(this);
+        personalImage.setOnClickListener(this);
     }
 
     @Override
@@ -43,6 +48,9 @@ public class PersonalInformationActivity extends AppCompatActivity implements Vi
                         .setLabel("","","","","","")//默认设置为年月日时分秒
                         .build();
                 pvTime.show();
+                break;
+            case R.id.personal_image: //打开相册选择图片
+
                 break;
         }
     }
