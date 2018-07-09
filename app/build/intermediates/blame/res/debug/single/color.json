@@ -1,258 +1,130 @@
 [
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_primary_text_material_light.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\color\\abc_primary_text_material_light.xml"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_tint_switch_track.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\color\\abc_tint_switch_track.xml"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\color\\mdtp_done_text_color_dark.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\ce074d0e028c72a68c1a23cee88f8ae6\\res\\color\\mdtp_done_text_color_dark.xml"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_tint_spinner.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\color\\abc_tint_spinner.xml"
-    },
-    {
-        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\dsb_ripple_color_list.xml",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\discrete-seekbar-1.0.1.aar\\96d8f31c8fb05dcf8c82b70c1bd82956\\res\\color\\dsb_ripple_color_list.xml"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\color\\mdtp_done_text_color.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\ce074d0e028c72a68c1a23cee88f8ae6\\res\\color\\mdtp_done_text_color.xml"
-    },
-    {
-        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\mdtp_date_picker_year_selector.xml",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\34d323ab6135b2c66a1b740726eb31af\\res\\color\\mdtp_date_picker_year_selector.xml"
-    },
-    {
-        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\switch_thumb_material_light.xml",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fc38064f65ab790a632bd12a13637e51\\res\\color\\switch_thumb_material_light.xml"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_primary_text_material_dark.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\color\\abc_primary_text_material_dark.xml"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_secondary_text_material_dark.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\color\\abc_secondary_text_material_dark.xml"
-    },
-    {
-        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\mdtp_done_text_color_dark.xml",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\34d323ab6135b2c66a1b740726eb31af\\res\\color\\mdtp_done_text_color_dark.xml"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_primary_text_disable_only_material_light.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\color\\abc_primary_text_disable_only_material_light.xml"
-    },
-    {
-        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_hint_foreground_material_dark.xml",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fc38064f65ab790a632bd12a13637e51\\res\\color\\abc_hint_foreground_material_dark.xml"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_hint_foreground_material_light.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\color\\abc_hint_foreground_material_light.xml"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_hint_foreground_material_dark.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\color\\abc_hint_foreground_material_dark.xml"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_btn_colored_borderless_text_material.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\color\\abc_btn_colored_borderless_text_material.xml"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_btn_colored_text_material.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\color\\abc_btn_colored_text_material.xml"
-    },
-    {
-        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_tint_default.xml",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fc38064f65ab790a632bd12a13637e51\\res\\color\\abc_tint_default.xml"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\color\\dsb_ripple_color_list.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\discrete-seekbar-1.0.1.aar\\94ad47dce1b9161576e70ab12264c1e4\\res\\color\\dsb_ripple_color_list.xml"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\color\\mcv_text_date_light.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\material-calendarview-1.4.0.aar\\17dd605597fe8f4f6000f2c471d854e1\\res\\color\\mcv_text_date_light.xml"
-    },
-    {
-        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_primary_text_material_light.xml",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fc38064f65ab790a632bd12a13637e51\\res\\color\\abc_primary_text_material_light.xml"
-    },
-    {
-        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_primary_text_disable_only_material_light.xml",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fc38064f65ab790a632bd12a13637e51\\res\\color\\abc_primary_text_disable_only_material_light.xml"
-    },
-    {
-        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\mcv_text_date_dark.xml",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\material-calendarview-1.4.0.aar\\262fbdbfb0176964126090f1975bfe01\\res\\color\\mcv_text_date_dark.xml"
-    },
-    {
-        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_primary_text_material_dark.xml",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fc38064f65ab790a632bd12a13637e51\\res\\color\\abc_primary_text_material_dark.xml"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\color\\common_google_signin_btn_text_light.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\06fef741ffd7503cc3f53761c53344f5\\res\\color\\common_google_signin_btn_text_light.xml"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\color\\dsb_progress_color_list.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\discrete-seekbar-1.0.1.aar\\94ad47dce1b9161576e70ab12264c1e4\\res\\color\\dsb_progress_color_list.xml"
-    },
-    {
-        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\dsb_track_color_list.xml",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\discrete-seekbar-1.0.1.aar\\96d8f31c8fb05dcf8c82b70c1bd82956\\res\\color\\dsb_track_color_list.xml"
-    },
-    {
-        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_btn_colored_borderless_text_material.xml",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fc38064f65ab790a632bd12a13637e51\\res\\color\\abc_btn_colored_borderless_text_material.xml"
-    },
-    {
-        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\mdtp_done_text_color.xml",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\34d323ab6135b2c66a1b740726eb31af\\res\\color\\mdtp_done_text_color.xml"
-    },
-    {
         "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_hint_foreground_material_light.xml",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fc38064f65ab790a632bd12a13637e51\\res\\color\\abc_hint_foreground_material_light.xml"
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fed31cfa17fbbafbfcca7f6a6718c5b1\\res\\color\\abc_hint_foreground_material_light.xml"
     },
     {
         "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_btn_colored_text_material.xml",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fc38064f65ab790a632bd12a13637e51\\res\\color\\abc_btn_colored_text_material.xml"
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fed31cfa17fbbafbfcca7f6a6718c5b1\\res\\color\\abc_btn_colored_text_material.xml"
     },
     {
         "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\mdtp_date_picker_selector.xml",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\34d323ab6135b2c66a1b740726eb31af\\res\\color\\mdtp_date_picker_selector.xml"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\color\\design_error.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\a738c3699867a98b793e4919817fe0f6\\res\\color\\design_error.xml"
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\141f7e1df2eefaa24d2365fe0be51194\\res\\color\\mdtp_date_picker_selector.xml"
     },
     {
         "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_tint_seek_thumb.xml",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fc38064f65ab790a632bd12a13637e51\\res\\color\\abc_tint_seek_thumb.xml"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_secondary_text_material_light.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\color\\abc_secondary_text_material_light.xml"
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fed31cfa17fbbafbfcca7f6a6718c5b1\\res\\color\\abc_tint_seek_thumb.xml"
     },
     {
         "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_search_url_text.xml",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fc38064f65ab790a632bd12a13637e51\\res\\color\\abc_search_url_text.xml"
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fed31cfa17fbbafbfcca7f6a6718c5b1\\res\\color\\abc_search_url_text.xml"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\color\\common_google_signin_btn_text_dark.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\06fef741ffd7503cc3f53761c53344f5\\res\\color\\common_google_signin_btn_text_dark.xml"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\color\\switch_thumb_material_dark.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\color\\switch_thumb_material_dark.xml"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_tint_edittext.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\color\\abc_tint_edittext.xml"
+        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\dsb_ripple_color_list.xml",
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\discrete-seekbar-1.0.1.aar\\432dbe5c5e1cf936856202e6b48dafd6\\res\\color\\dsb_ripple_color_list.xml"
     },
     {
         "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\dsb_progress_color_list.xml",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\discrete-seekbar-1.0.1.aar\\96d8f31c8fb05dcf8c82b70c1bd82956\\res\\color\\dsb_progress_color_list.xml"
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\discrete-seekbar-1.0.1.aar\\432dbe5c5e1cf936856202e6b48dafd6\\res\\color\\dsb_progress_color_list.xml"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\color\\design_tint_password_toggle.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\a738c3699867a98b793e4919817fe0f6\\res\\color\\design_tint_password_toggle.xml"
+        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\mdtp_date_picker_year_selector.xml",
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\141f7e1df2eefaa24d2365fe0be51194\\res\\color\\mdtp_date_picker_year_selector.xml"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_tint_btn_checkable.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\color\\abc_tint_btn_checkable.xml"
+        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\switch_thumb_material_light.xml",
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fed31cfa17fbbafbfcca7f6a6718c5b1\\res\\color\\switch_thumb_material_light.xml"
     },
     {
         "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\switch_thumb_material_dark.xml",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fc38064f65ab790a632bd12a13637e51\\res\\color\\switch_thumb_material_dark.xml"
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fed31cfa17fbbafbfcca7f6a6718c5b1\\res\\color\\switch_thumb_material_dark.xml"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\color\\dsb_track_color_list.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\discrete-seekbar-1.0.1.aar\\94ad47dce1b9161576e70ab12264c1e4\\res\\color\\dsb_track_color_list.xml"
+        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\mdtp_done_text_color_dark.xml",
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\141f7e1df2eefaa24d2365fe0be51194\\res\\color\\mdtp_done_text_color_dark.xml"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_primary_text_disable_only_material_dark.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\color\\abc_primary_text_disable_only_material_dark.xml"
+        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_hint_foreground_material_dark.xml",
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fed31cfa17fbbafbfcca7f6a6718c5b1\\res\\color\\abc_hint_foreground_material_dark.xml"
     },
     {
         "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\common_google_signin_btn_text_light.xml",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\b942d0551a502ba4090a6a2ede440fa8\\res\\color\\common_google_signin_btn_text_light.xml"
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\474814693474372557ac5ca920406528\\res\\color\\common_google_signin_btn_text_light.xml"
     },
     {
         "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_tint_switch_track.xml",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fc38064f65ab790a632bd12a13637e51\\res\\color\\abc_tint_switch_track.xml"
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fed31cfa17fbbafbfcca7f6a6718c5b1\\res\\color\\abc_tint_switch_track.xml"
     },
     {
         "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\design_tint_password_toggle.xml",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\3c07244715436dc73ba4a6a004f118c8\\res\\color\\design_tint_password_toggle.xml"
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\5e58f681b73f3ca982af46d4ab4f61a5\\res\\color\\design_tint_password_toggle.xml"
     },
     {
         "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_tint_spinner.xml",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fc38064f65ab790a632bd12a13637e51\\res\\color\\abc_tint_spinner.xml"
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fed31cfa17fbbafbfcca7f6a6718c5b1\\res\\color\\abc_tint_spinner.xml"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_tint_default.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\color\\abc_tint_default.xml"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\color\\switch_thumb_material_light.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\color\\switch_thumb_material_light.xml"
+        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_tint_default.xml",
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fed31cfa17fbbafbfcca7f6a6718c5b1\\res\\color\\abc_tint_default.xml"
     },
     {
         "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\design_error.xml",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\3c07244715436dc73ba4a6a004f118c8\\res\\color\\design_error.xml"
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\5e58f681b73f3ca982af46d4ab4f61a5\\res\\color\\design_error.xml"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_primary_text_material_light.xml",
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fed31cfa17fbbafbfcca7f6a6718c5b1\\res\\color\\abc_primary_text_material_light.xml"
     },
     {
         "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\mcv_text_date_light.xml",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\material-calendarview-1.4.0.aar\\262fbdbfb0176964126090f1975bfe01\\res\\color\\mcv_text_date_light.xml"
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\material-calendarview-1.4.0.aar\\bbe22933b7660bd123c9663c7dac29dc\\res\\color\\mcv_text_date_light.xml"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_primary_text_disable_only_material_light.xml",
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fed31cfa17fbbafbfcca7f6a6718c5b1\\res\\color\\abc_primary_text_disable_only_material_light.xml"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\mcv_text_date_dark.xml",
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\material-calendarview-1.4.0.aar\\bbe22933b7660bd123c9663c7dac29dc\\res\\color\\mcv_text_date_dark.xml"
     },
     {
         "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_tint_btn_checkable.xml",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fc38064f65ab790a632bd12a13637e51\\res\\color\\abc_tint_btn_checkable.xml"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\color\\mcv_text_date_dark.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\material-calendarview-1.4.0.aar\\17dd605597fe8f4f6000f2c471d854e1\\res\\color\\mcv_text_date_dark.xml"
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fed31cfa17fbbafbfcca7f6a6718c5b1\\res\\color\\abc_tint_btn_checkable.xml"
     },
     {
         "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_secondary_text_material_dark.xml",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fc38064f65ab790a632bd12a13637e51\\res\\color\\abc_secondary_text_material_dark.xml"
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fed31cfa17fbbafbfcca7f6a6718c5b1\\res\\color\\abc_secondary_text_material_dark.xml"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\color\\mdtp_date_picker_selector.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\ce074d0e028c72a68c1a23cee88f8ae6\\res\\color\\mdtp_date_picker_selector.xml"
+        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_primary_text_material_dark.xml",
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fed31cfa17fbbafbfcca7f6a6718c5b1\\res\\color\\abc_primary_text_material_dark.xml"
     },
     {
         "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_secondary_text_material_light.xml",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fc38064f65ab790a632bd12a13637e51\\res\\color\\abc_secondary_text_material_light.xml"
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fed31cfa17fbbafbfcca7f6a6718c5b1\\res\\color\\abc_secondary_text_material_light.xml"
     },
     {
         "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_primary_text_disable_only_material_dark.xml",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fc38064f65ab790a632bd12a13637e51\\res\\color\\abc_primary_text_disable_only_material_dark.xml"
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fed31cfa17fbbafbfcca7f6a6718c5b1\\res\\color\\abc_primary_text_disable_only_material_dark.xml"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\color\\mdtp_date_picker_year_selector.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\ce074d0e028c72a68c1a23cee88f8ae6\\res\\color\\mdtp_date_picker_year_selector.xml"
+        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\dsb_track_color_list.xml",
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\discrete-seekbar-1.0.1.aar\\432dbe5c5e1cf936856202e6b48dafd6\\res\\color\\dsb_track_color_list.xml"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_tint_seek_thumb.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\color\\abc_tint_seek_thumb.xml"
+        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_btn_colored_borderless_text_material.xml",
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fed31cfa17fbbafbfcca7f6a6718c5b1\\res\\color\\abc_btn_colored_borderless_text_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\mdtp_done_text_color.xml",
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.9.aar\\141f7e1df2eefaa24d2365fe0be51194\\res\\color\\mdtp_done_text_color.xml"
     },
     {
         "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_tint_edittext.xml",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fc38064f65ab790a632bd12a13637e51\\res\\color\\abc_tint_edittext.xml"
-    },
-    {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_search_url_text.xml",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\color\\abc_search_url_text.xml"
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fed31cfa17fbbafbfcca7f6a6718c5b1\\res\\color\\abc_tint_edittext.xml"
     },
     {
         "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\color\\common_google_signin_btn_text_dark.xml",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\b942d0551a502ba4090a6a2ede440fa8\\res\\color\\common_google_signin_btn_text_dark.xml"
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\474814693474372557ac5ca920406528\\res\\color\\common_google_signin_btn_text_dark.xml"
     }
 ]

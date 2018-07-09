@@ -18,9 +18,11 @@ import com.borax12.materialdaterangepicker.date.DatePickerDialog;
 import com.example.dell.db.DatabaseHelper;
 import com.example.dell.db.Diary;
 import com.example.dell.db.Label;
+import com.github.mikephil.charting.charts.CombinedChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.MarkerView;
+import com.github.mikephil.charting.data.CombinedData;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
@@ -182,18 +184,19 @@ public class StatisticsActivity extends AppCompatActivity implements DatePickerD
     }
 
     private void showChart() {
-        LineChart lineChart1 = (LineChart) findViewById(R.id.line_chart1);
-        LineChartManager lineChartManager1 = new LineChartManager(lineChart1);
+        CombinedChart combinedChart = (CombinedChart) findViewById(R.id.chart);
         DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+        Diary thisDiary;
 
         //设置x轴的数据
-        ArrayList<Float> xValues = new ArrayList<>();
+        ArrayList<String> xValues = new ArrayList<>();
         for (int i = 1; i <= dayNumber; i++) {
-            xValues.add((float) i);
+            xValues.add(String.valueOf(i));
         }
 
         //设置y轴的数据()
         List<Float> yValues = new ArrayList<>();
+        List<Float> zValues = new ArrayList<>();
         for (int j = 0; j < dayNumber; j++) {
             Date currentDate = new Date(startDate.getTime() + (long)j * oneDayLength);
             currentAllDiary = Diary.getByDate(helper,currentDate.getYear() + 1900,currentDate.getMonth() + 1,currentDate.getDate(), false);
@@ -202,11 +205,12 @@ public class StatisticsActivity extends AppCompatActivity implements DatePickerD
             {
                 Log.i("size",""+currentAllDiary.size());
                 yValues.add((float) 0);
+                zValues.add((float) 0);
                 continue;
             }
             thisDayScore = 0;
             int num = currentAllDiary.size();
-            for(Diary thisDiary : currentAllDiary)
+            //for(Diary thisDiary : currentAllDiary)
             for(int i = num - 1; i >= 0; i -- ){
                 thisDiary = currentAllDiary.get(i);
                 labelThisDiary = null;
@@ -240,40 +244,34 @@ public class StatisticsActivity extends AppCompatActivity implements DatePickerD
                     }
                 }
             }
-            if(thisDayScore > 10) thisDayScore = 10;
+            //if(thisDayScore > 10) thisDayScore = 10;
             yValues.add((float) thisDayScore);
+            zValues.add((float) thisDayScore / 2);
         }
 
         String name = "情绪曲线";
-        Legend legend = lineChart1.getLegend();
 
-        int color = Color.parseColor("#3F51B5");
-        int color_d = Color.parseColor("#555555");
+        int color = Color.parseColor("#FFA500");
 
-        //创建多条折线的图表
-
-        lineChartManager1.showLineChart(xValues, yValues, name, color);
-        lineChartManager1.setXAxis(dayNumber, 1, (int)dayNumber);
-        lineChartManager1.setYAxis(10, 0, 5);
-        lineChartManager1.setDescription(end, color_d);
-        legend.setFormSize(20f);
-        legend.setTextSize(12f);
-
-        final MarkerView markerView = new MarkerView(StatisticsActivity.this, R.layout.item_chart);
-        lineChart1.setMarker(markerView);
-        lineChart1.invalidate();
-        final TextView spirit = markerView.findViewById(R.id.spirit_tag);
-        //设置数据点点击事件，这里是更新弹窗中的信息
-        lineChart1.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
-            @Override
-            public void onValueSelected(Entry e, Highlight h) {
-                spirit.setText(e.getY() + "");
+        List<Integer> colorArray = new ArrayList<>();
+        for (int i = 0; i < dayNumber; i++) {
+            int spirit_value = yValues.get(i).intValue();
+            switch (spirit_value)
+            {
+                case 1: colorArray.add(Color.parseColor("#1E90FF"));break;
+                case 3: colorArray.add(Color.parseColor("#A9A9A9"));break;
+                case 4: colorArray.add(Color.parseColor("#3CB371"));break;
+                case 5: colorArray.add(Color.parseColor("#F4A460"));break;
+                case 7: colorArray.add(Color.parseColor("#FF9900"));break;
+                case 9: colorArray.add(Color.parseColor("#FF0033"));break;
+                default:colorArray.add(Color.parseColor("#FFFFFF"));
             }
+        }
 
-            @Override
-            public void onNothingSelected() {
-            }
-        });
+        CombinedChartManager combineChartManager = new CombinedChartManager(combinedChart);
+        combineChartManager.showCombinedChart(xValues, yValues, zValues,"每日情绪", "情绪走势" , colorArray, color);
+
+
     }
 
     //设置屏幕背景透明度

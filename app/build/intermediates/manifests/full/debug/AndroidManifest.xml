@@ -19,6 +19,17 @@
         android:resizeable="true"
         android:smallScreens="true" />
 
+    <!-- 文件操作，误删！ -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
+    <!-- 支持多分辨率 -->
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true" />
+
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application

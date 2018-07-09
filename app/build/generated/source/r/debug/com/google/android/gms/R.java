@@ -49,12 +49,12 @@ public final class R {
         public static final int userInputValue = 0x7f010159;
     }
     public static final class color {
-        public static final int common_google_signin_btn_text_dark = 0x7f0c0130;
+        public static final int common_google_signin_btn_text_dark = 0x7f0c012f;
         public static final int common_google_signin_btn_text_dark_default = 0x7f0c002b;
         public static final int common_google_signin_btn_text_dark_disabled = 0x7f0c002c;
         public static final int common_google_signin_btn_text_dark_focused = 0x7f0c002d;
         public static final int common_google_signin_btn_text_dark_pressed = 0x7f0c002e;
-        public static final int common_google_signin_btn_text_light = 0x7f0c0131;
+        public static final int common_google_signin_btn_text_light = 0x7f0c0130;
         public static final int common_google_signin_btn_text_light_default = 0x7f0c002f;
         public static final int common_google_signin_btn_text_light_disabled = 0x7f0c0030;
         public static final int common_google_signin_btn_text_light_focused = 0x7f0c0031;
@@ -118,7 +118,7 @@ public final class R {
         public static final int text1 = 0x7f0e0061;
         public static final int text2 = 0x7f0e0014;
         public static final int thing_proto = 0x7f0e0062;
-        public static final int toolbar = 0x7f0e0107;
+        public static final int toolbar = 0x7f0e0109;
         public static final int url = 0x7f0e0085;
         public static final int wide = 0x7f0e008d;
         public static final int wrap_content = 0x7f0e0048;
