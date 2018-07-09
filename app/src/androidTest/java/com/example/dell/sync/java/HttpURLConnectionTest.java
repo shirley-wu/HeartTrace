@@ -1,4 +1,4 @@
-package com.example.dell.sync;
+package com.example.dell.sync.java;
 
 import android.test.InstrumentationTestCase;
 import android.util.Log;
@@ -22,7 +22,7 @@ import java.util.List;
  * Created by wu-pc on 2018/6/6.
  */
 
-public class NetworkCommonTest extends InstrumentationTestCase {
+public class HttpURLConnectionTest extends InstrumentationTestCase {
 
     private final static String TAG = "NetworkCommonTest";
 

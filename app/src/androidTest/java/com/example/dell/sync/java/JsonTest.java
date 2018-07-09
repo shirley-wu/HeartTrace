@@ -1,4 +1,4 @@
-package com.example.dell.sync;
+package com.example.dell.sync.java;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

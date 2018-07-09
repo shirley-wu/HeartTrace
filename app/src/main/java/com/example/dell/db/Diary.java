@@ -169,7 +169,7 @@ public class Diary implements Serializable
         }
     }
 
-    public static List<Diary> getAll(DatabaseHelper helper, Boolean ascending){
+    public static List<Diary> getAll(DatabaseHelper helper, boolean ascending){
         try {
             QueryBuilder<Diary, Integer> qb = helper.getDiaryDao().queryBuilder();
             qb.orderBy("date",ascending);

@@ -31,6 +31,8 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import java.lang.ref.Reference;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,7 +82,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         Log.d(TAG, "onPerformSync: begin");
 
         DatabaseHelper helper = OpenHelperManager.getHelper(getContext(), DatabaseHelper.class);
-        syncDiary(helper);
+        sync(helper, Diary.class);
         OpenHelperManager.releaseHelper();
 
         Log.d(TAG, "onPerformSync: end");
@@ -98,6 +100,34 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         list = unparseJson(response, Diary.class);
         for(Diary diary : list) {
             diary.insertOrUpdate(databaseHelper);
+        }
+    }
+
+    public boolean sync(DatabaseHelper databaseHelper, Class c) {
+        try {
+            Method getAll = c.getDeclaredMethod("getAll", DatabaseHelper.class, boolean.class);
+            List list = (List) getAll.invoke(null, databaseHelper, false);
+
+            String jo = parseJson(list, c);
+            Log.d(TAG, "parseDiarySync: jo " + jo);
+
+            String response = postSyncData(c.getSimpleName(), jo);
+            if (response == null) {
+                Log.e(TAG, "sync: syncing " + c.getSimpleName() + ", error when getting http response");
+                return false;
+            }
+
+            list = unparseJson(response, c);
+
+            Method iou = c.getDeclaredMethod("insertOrUpdate", DatabaseHelper.class);
+            for (Object o : list) {
+                iou.invoke(o, databaseHelper);
+            }
+
+            return true;
+        } catch(Exception e) {
+            Log.e(TAG, "sync: " + c.getSimpleName() + " ", e);
+            return false;
         }
     }
 

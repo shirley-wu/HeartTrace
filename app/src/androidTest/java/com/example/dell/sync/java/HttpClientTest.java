@@ -1,4 +1,4 @@
-package com.example.dell.sync;
+package com.example.dell.sync.java;
 
 import android.test.InstrumentationTestCase;
 import android.util.Log;
