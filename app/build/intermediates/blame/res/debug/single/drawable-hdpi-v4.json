@@ -4,12 +4,12 @@
         "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\474814693474372557ac5ca920406528\\res\\drawable-hdpi-v4\\common_google_signin_btn_text_light_disabled.9.png"
     },
     {
-        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\design_ic_visibility.png",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\5e58f681b73f3ca982af46d4ab4f61a5\\res\\drawable-hdpi-v4\\design_ic_visibility.png"
-    },
-    {
         "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\retract.png",
         "source": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\src\\main\\res\\drawable-hdpi\\retract.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\design_ic_visibility.png",
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\5e58f681b73f3ca982af46d4ab4f61a5\\res\\drawable-hdpi-v4\\design_ic_visibility.png"
     },
     {
         "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\right.png",

@@ -76,16 +76,16 @@
         "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\474814693474372557ac5ca920406528\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_text_light_pressed.9.png"
     },
     {
-        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_text_dark_pressed.9.png",
-        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\474814693474372557ac5ca920406528\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_text_dark_pressed.9.png"
+        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bottle_star.png",
+        "source": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\bottle_star.png"
     },
     {
         "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\ic_edit.png",
         "source": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\ic_edit.png"
     },
     {
-        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\bottle_star.png",
-        "source": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\bottle_star.png"
+        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_text_dark_pressed.9.png",
+        "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\474814693474372557ac5ca920406528\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_text_dark_pressed.9.png"
     },
     {
         "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\timeline_black.png",
@@ -522,6 +522,10 @@
     {
         "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\theme_setting.png",
         "source": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\theme_setting.png"
+    },
+    {
+        "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\background_personal_information.png",
+        "source": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\src\\main\\res\\drawable-xxhdpi\\background_personal_information.png"
     },
     {
         "merged": "C:\\Users\\pc\\Desktop\\heart\\HeartTrace\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_popup_background_mtrl_mult.9.png",
