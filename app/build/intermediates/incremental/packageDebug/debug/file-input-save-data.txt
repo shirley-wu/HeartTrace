@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Mon Jul 09 12:39:27 CST 2018
+#Mon Jul 09 13:09:06 CST 2018
 4.path=lib/armeabi-v7a/libsqlcipher.so
 8.set=DEX
 6.path=classes.dex

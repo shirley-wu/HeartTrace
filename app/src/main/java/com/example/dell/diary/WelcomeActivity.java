@@ -7,7 +7,7 @@ import android.os.Bundle;
 
 public class WelcomeActivity extends AppCompatActivity {
 
-    private final int SPLASH_DISPLAY_LENGHT = 2000;  //延迟秒
+    private final int SPLASH_DISPLAY_LENGHT = 1500;  //延迟秒
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
