@@ -64,6 +64,10 @@
         "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\drawable-xxhdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png"
     },
     {
+        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\theme_setting.png",
+        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\theme_setting.png"
+    },
+    {
         "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\pen_white.png",
         "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\pen_white.png"
     },
@@ -268,6 +272,10 @@
         "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\confirm.png"
     },
     {
+        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\background_personal_information.png",
+        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\background_personal_information.png"
+    },
+    {
         "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\calendar_white.png",
         "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\calendar_white.png"
     },
@@ -460,6 +468,10 @@
         "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\panda.jpg"
     },
     {
+        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\transparent.jpg",
+        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\transparent.jpg"
+    },
+    {
         "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\frame_white.9.png",
         "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\frame_white.9.png"
     },
@@ -520,6 +532,10 @@
         "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\frame_white2.9.png"
     },
     {
+        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\personal_information.png",
+        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\personal_information.png"
+    },
+    {
         "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_dark_pressed.9.png",
         "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\06fef741ffd7503cc3f53761c53344f5\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_dark_pressed.9.png"
     },
@@ -536,12 +552,12 @@
         "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\06fef741ffd7503cc3f53761c53344f5\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_icon_light_pressed.9.png"
     },
     {
-        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_text_light_disabled.9.png",
-        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\06fef741ffd7503cc3f53761c53344f5\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_text_light_disabled.9.png"
-    },
-    {
         "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\pink_background.png",
         "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\drawable-xxhdpi\\pink_background.png"
+    },
+    {
+        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\common_google_signin_btn_text_light_disabled.9.png",
+        "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-10.0.0.aar\\06fef741ffd7503cc3f53761c53344f5\\res\\drawable-xxhdpi-v4\\common_google_signin_btn_text_light_disabled.9.png"
     },
     {
         "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png",

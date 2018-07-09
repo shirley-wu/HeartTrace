@@ -186,6 +186,7 @@ public class StatisticsActivity extends AppCompatActivity implements DatePickerD
     private void showChart() {
         CombinedChart combinedChart = (CombinedChart) findViewById(R.id.chart);
         DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+        Diary thisDiary;
 
         //设置x轴的数据
         ArrayList<String> xValues = new ArrayList<>();
@@ -208,8 +209,10 @@ public class StatisticsActivity extends AppCompatActivity implements DatePickerD
                 continue;
             }
             thisDayScore = 0;
-            for(Diary thisDiary : currentAllDiary){
-                Log.i("text",thisDiary.getText());
+            int num = currentAllDiary.size();
+            //for(Diary thisDiary : currentAllDiary)
+            for(int i = num - 1; i >= 0; i -- ){
+                thisDiary = currentAllDiary.get(i);
                 labelThisDiary = null;
                 try {
                     labelThisDiary = thisDiary.getAllLabel(helper);
@@ -261,6 +264,7 @@ public class StatisticsActivity extends AppCompatActivity implements DatePickerD
                 case 5: colorArray.add(Color.parseColor("#F4A460"));break;
                 case 7: colorArray.add(Color.parseColor("#FF9900"));break;
                 case 9: colorArray.add(Color.parseColor("#FF0033"));break;
+                default:colorArray.add(Color.parseColor("#FFFFFF"));
             }
         }
 

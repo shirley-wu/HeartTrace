@@ -256,6 +256,10 @@
         "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\cbbb933f4c8ecf91ebb5212fad6c6446\\res\\layout\\abc_popup_menu_item_layout.xml"
     },
     {
+        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_personal_information.xml",
+        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\layout\\activity_personal_information.xml"
+    },
+    {
         "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_big_media_narrow_custom.xml",
         "source": "C:\\Users\\dell\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\3a814188cbd1b7f22fffc0db6dfd285d\\res\\layout\\notification_template_big_media_narrow_custom.xml"
     },
@@ -406,6 +410,10 @@
     {
         "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_label_manage.xml",
         "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\layout\\activity_label_manage.xml"
+    },
+    {
+        "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\theme_setting_bottom_sheet.xml",
+        "source": "D:\\Android\\Project\\Diary\\app\\src\\main\\res\\layout\\theme_setting_bottom_sheet.xml"
     },
     {
         "merged": "D:\\Android\\Project\\Diary\\app\\build\\intermediates\\res\\merged\\debug\\layout\\collectd_item.xml",
