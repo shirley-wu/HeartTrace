@@ -33,6 +33,14 @@ public class Label {
         this.labelname = labelname;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
     public String getLabelname(){
         return labelname;
     }

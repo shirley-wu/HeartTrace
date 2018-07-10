@@ -38,6 +38,14 @@ public class Diarybook {
         this.diarybookName = diarybookName;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
     public String getDiarybookName() {
         return diarybookName;
     }

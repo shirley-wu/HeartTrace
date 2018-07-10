@@ -47,6 +47,14 @@ public class Sentence implements Serializable {
         this.text = text;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
     public String getText()
     {
         return text;
