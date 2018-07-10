@@ -14,8 +14,9 @@
         android:resizeable="true"
         android:smallScreens="true" />
 
-    <!--文件操作，误删！-->
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+    <!-- 文件操作，误删！ -->
+    <uses-permission
+        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
         tools:ignore="ProtectedPermissions" />
 
     <!-- 支持多分辨率 -->
@@ -34,7 +35,7 @@
         android:theme="@style/AppTheme.Main">
         <activity
             android:name=".TimeLineActivity"
-            android:label="HeartTrace"></activity>
+            android:label="HeartTrace" />
         <activity android:name=".StatisticsActivity" />
         <activity android:name=".DiaryActivity" />
         <activity android:name=".SearchActivity" />
@@ -71,11 +72,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-		
-        <activity android:name=".LoginActivity"></activity>
-
-        <activity android:name=".PersonalInformationActivity"></activity>
-
+        <activity android:name=".LoginActivity"
+            android:launchMode="singleTask"/>
+        <activity android:name=".PersonalInformationActivity" />
+        <activity android:name=".RegisterActivity"></activity>
     </application>
 
 </manifest>
