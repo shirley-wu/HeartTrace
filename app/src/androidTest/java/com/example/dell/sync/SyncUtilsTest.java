@@ -36,8 +36,8 @@ public class SyncUtilsTest extends InstrumentationTestCase {
     public void testPostSyncData() {
         String response = syncAdapter.postSyncData("Diary",
                 "{\"DiaryList\":[" +
-                        "{\"date\":1531030209658,\"diarybook\":{\"diarybookName\":\"fajskdlav\"},\"id\":16,\"text\":\"jdakfldasj\"}," +
-                        "{\"date\":1546253475874,\"diarybook\":{\"diarybookName\":\"sbrycaevgr\"},\"id\":992,\"text\":\"afxamjncpau\"}" +
+                        "{\"date\":1531030209658,\"diarybook\":{\"id\":134},\"id\":16,\"text\":\"jdakfldasj\"}," +
+                        "{\"date\":1546253475874,\"diarybook\":{\"id\":151},\"id\":992,\"text\":\"afxamjncpau\"}" +
                         "]}");
         Log.d(TAG, "testPostSyncData: response\n" + response);
     }

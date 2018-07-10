@@ -61,9 +61,9 @@ public class JsonTest extends InstrumentationTestCase {
     @Test
     public void testObjectIntoJson() {
         String jo;
-        jo = JSON.toJSONString(d1, SerializerFeature.WriteMapNullValue);
+        jo = JSON.toJSONString(d1);
         Log.d(TAG, "testObjectIntoJson: d1 -> " + jo);
-        jo = JSON.toJSONString(d2, SerializerFeature.WriteMapNullValue);
+        jo = JSON.toJSONString(d2);
         Log.d(TAG, "testObjectIntoJson: d2 -> " + jo);
     }
 
@@ -73,14 +73,14 @@ public class JsonTest extends InstrumentationTestCase {
         list.add(d1);
         list.add(d2);
         String jo;
-        jo = JSON.toJSONString(list, SerializerFeature.WriteMapNullValue, SerializerFeature.DisableCircularReferenceDetect);
+        jo = JSON.toJSONString(list, SerializerFeature.DisableCircularReferenceDetect);
         Log.d(TAG, "testArrayIntoJson: " + jo);
     }
 
     @Test
     public void testJsonIntoObject() {
         String jo = "{\"date\":1531215766554," +
-                "\"diarybook\":{\"description\":null,\"diarybookName\":null,\"id\":4399}," +
+                "\"diarybook\":{\"id\":4399}," +
                 "\"htmlText\":\"<h>1:</h> <p>This is <b>Jodie</b></p>\",\"id\":16," +
                 "\"letterSpacing\":1.5," +
                 "\"like\":true," +
@@ -104,11 +104,11 @@ public class JsonTest extends InstrumentationTestCase {
     @Test
     public void testJsonIntoArray() {
         String jo = "[" +
-                "{\"date\":1531216236466,\"diarybook\":{\"description\":null,\"diarybookName\":null,\"id\":4399}," +
+                "{\"date\":1531216236466,\"diarybook\":{\"id\":4399}," +
                 "\"htmlText\":\"<h>1:</h> <p>This is <b>Jodie</b></p>\",\"id\":0,\"letterSpacing\":1.5,\"like\":true," +
                 "\"lineSpacingExtra\":20,\"lineSpacingMultiplier\":15,\"text\":\"1: This is Jodie\",\"textAlignment\":12,\"textSize\":0.2}," +
-                "{\"date\":1531216236466,\"diarybook\":{\"description\":null,\"diarybookName\":null,\"id\":4399}," +
-                "\"htmlText\":null,\"id\":0,\"letterSpacing\":0.2,\"like\":false,\"lineSpacingExtra\":1,\"lineSpacingMultiplier\":0," +
+                "{\"date\":1531216236466,\"diarybook\":{\"id\":4399}," +
+                "\"id\":0,\"letterSpacing\":0.2,\"like\":false,\"lineSpacingExtra\":1,\"lineSpacingMultiplier\":0," +
                 "\"text\":\"2: hi\",\"textAlignment\":0,\"textSize\":20.0}]";
         List<Diary> list = JSON.parseArray(jo, Diary.class);
         assertEquals(2, list.size());

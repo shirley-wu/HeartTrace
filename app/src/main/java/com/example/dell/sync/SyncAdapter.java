@@ -133,7 +133,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     }
 
     public String parseJson(List list, Class c) {
-        String jo = JSON.toJSONString(list, SerializerFeature.WriteMapNullValue, SerializerFeature.DisableCircularReferenceDetect);
+        String jo = JSON.toJSONString(list, SerializerFeature.DisableCircularReferenceDetect);
         jo = "{\"" + c.getSimpleName() + "List\":" + jo + "}";
         return jo;
     }
