@@ -338,7 +338,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                         setTextFormmat(diary);
                         getLabelsOfDiary(diary,helper);
                     }
-                    getImage(diary.getText());
                 }
                 else if (e2.getX() - e1.getX() > FLING_MIN_DISTANCE
                         && Math.abs(velocityX) > FLING_MIN_VELOCITY) {
@@ -360,7 +359,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                         setTextFormmat(diary);
                         getLabelsOfDiary(diary,helper);
                     }
-                    getImage(diary.getText());
                 }
                 return true;
             }
@@ -1223,20 +1221,25 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                                 diaryWeekday.setText("");
                                 getLabelsOfDiary(new Diary(), helper);
                             } else if (index == diaryList.size()) {
-                                index = index - 1;
+                                index = index -  1;
                                 diary = diaryList.get(index);
-                                String date = (diary.getDate().getYear() + 1900) + "年" + (diary.getDate().getMonth() + 1) + "月" + diary.getDate().getDate() + "日";
+                                String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
                                 diaryDate.setText(date);
                                 diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
-                                diary_write.setText(diary.getText());
-                                getLabelsOfDiary(diary, helper);
+                                diary_write.setText(Html.fromHtml(diary.getHtmlText()));
+                                getImage(diary.getText());
+                                setTextFormmat(diary);
+                                getLabelsOfDiary(diary,helper);
+
                             } else {
                                 diary = diaryList.get(index);
-                                String date = (diary.getDate().getYear() + 1900) + "年" + (diary.getDate().getMonth() + 1) + "月" + diary.getDate().getDate() + "日";
+                                String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
                                 diaryDate.setText(date);
                                 diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
-                                diary_write.setText(diary.getText());
-                                getLabelsOfDiary(diary, helper);
+                                diary_write.setText(Html.fromHtml(diary.getHtmlText()));
+                                getImage(diary.getText());
+                                setTextFormmat(diary);
+                                getLabelsOfDiary(diary,helper);
                             }
                         }
                     });
