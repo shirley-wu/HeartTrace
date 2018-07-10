@@ -197,8 +197,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     public List<String> weekList = new ArrayList<>(Arrays.asList("周日","周一","周二","周三"," 周四","周五","周六"));
 
     private float mPosX, mPosY, mCurPosX, mCurPosY;
-    private static final int FLING_MIN_DISTANCE = 10;// 移动最小距离
-    private static final int FLING_MIN_VELOCITY = 0;// 移动最小速度
+    private static final int FLING_MIN_DISTANCE = 100;// 移动最小距离
+    private static final int FLING_MIN_VELOCITY = 200;// 移动最小速度
     //构建手势探测器
     private GestureDetector mGestureDetector;
     private DrawerLayout mDrawerLayout;
@@ -283,6 +283,20 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         Log.d("restart",originType);
         reStartInit();
     }
+
+    public boolean dispatchTouchEvent(MotionEvent ev){
+        //让GestureDetector响应触碰事件
+        mGestureDetector.onTouchEvent(ev);
+        //让Activity响应触碰事件
+        super.dispatchTouchEvent(ev);
+        return false;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return mGestureDetector.onTouchEvent(event);
+    }
+
     public boolean onTouch(View v, MotionEvent event) {
         return mGestureDetector.onTouchEvent(event);
     }
@@ -872,12 +886,14 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             case R.id.confirm:
                 String htmlText;
                 //Log.i("test", Html.toHtml(diary_write.getText()));
+                DisplayMetrics displayMetrics=new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
                 if(originType.equals("add_diary")){
                     diary = new Diary();
                     diary.setText(diary_write.getText().toString());
                     htmlText = colorSpanAdjust(Html.toHtml(diary_write.getText()));
                     diary.setHtmlText(htmlText);
-                    diary.setTextSize(diary_write.getTextSize()/(float)1.5);
+                    diary.setTextSize(diary_write.getTextSize()/displayMetrics.density);
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         diary.setLetterSpacing(diary_write.getLetterSpacing());
                     }
@@ -898,7 +914,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     diary.setText(diary_write.getText().toString());
                     htmlText = colorSpanAdjust(Html.toHtml(diary_write.getText()));
                     diary.setHtmlText(htmlText);
-                    diary.setTextSize(diary_write.getTextSize()/(float)1.5);
+                    diary.setTextSize(diary_write.getTextSize()/displayMetrics.density);
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         diary.setLetterSpacing(diary_write.getLetterSpacing());
                     }
