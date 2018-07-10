@@ -53,7 +53,7 @@ public class SentenceLabel {
 
     public void insert(DatabaseHelper helper) {
         try {
-            Dao<SentenceLabel, Integer> dao = helper.getSentenceLabelDao();
+            Dao<SentenceLabel, Integer> dao = helper.getDao(SentenceLabel.class);
             Log.i("db_diary_label", "dao = " + dao + "  db_diary_label " + this);
             int returnValue = dao.create(this);
             Log.i("db_diary_label", "插入后返回值："+returnValue);
@@ -65,7 +65,7 @@ public class SentenceLabel {
 
     public void delete(DatabaseHelper helper) {
         try {
-            Dao<SentenceLabel, Integer> dao = helper.getSentenceLabelDao();
+            Dao<SentenceLabel, Integer> dao = helper.getDao(SentenceLabel.class);
             Log.i("db_diary_label", "dao = " + dao + "  db_diary_label " + this);
             int returnValue = dao.delete(this);
             Log.i("db_diary_label", "删除后返回值："+returnValue);

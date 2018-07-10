@@ -156,7 +156,7 @@ public class Diary implements Serializable
 
     public void insert(DatabaseHelper helper) {
         try {
-            Dao<Diary, Integer> dao = helper.getDiaryDao();
+            Dao<Diary, Integer> dao = helper.getDao(Diary.class);
             Log.i("diary", "dao = " + dao + " 插入 diary " + this);
             int returnValue = dao.create(this);
             Log.i("diary", "插入后返回值：" + returnValue);
@@ -168,7 +168,7 @@ public class Diary implements Serializable
 
     public void update(DatabaseHelper helper) {
         try {
-            Dao<Diary, Integer> dao = helper.getDiaryDao();
+            Dao<Diary, Integer> dao = helper.getDao(Diary.class);
             Log.i("diary", "dao = " + dao + " 更新 diary " + this);
             int returnValue = dao.update(this);
             Log.i("diary", "更新后返回值：" + returnValue);
@@ -180,11 +180,11 @@ public class Diary implements Serializable
 
     public void delete(DatabaseHelper helper) {
         try {
-            DeleteBuilder<DiaryLabel, Integer> deleteBuilder = helper.getDiaryLabelDao().deleteBuilder();
+            DeleteBuilder<DiaryLabel, Integer> deleteBuilder = helper.getDao(DiaryLabel.class).deleteBuilder();
             deleteBuilder.where().eq(DiaryLabel.DIARY_TAG, this);
             deleteBuilder.delete();
 
-            Dao<Diary, Integer> dao = helper.getDiaryDao();
+            Dao<Diary, Integer> dao = helper.getDao(Diary.class);
             Log.i("diary", "dao = " + dao + " 删除 diary " + this);
             int returnValue = dao.delete(this);
             Log.i("diary", "删除后返回值：" + returnValue);
@@ -203,7 +203,7 @@ public class Diary implements Serializable
 
     public void deleteLabel(DatabaseHelper helper, Label label) {
         try {
-            QueryBuilder<DiaryLabel, Integer> qb = helper.getDiaryLabelDao().queryBuilder();
+            QueryBuilder<DiaryLabel, Integer> qb = helper.getDao(DiaryLabel.class).queryBuilder();
             Where<DiaryLabel, Integer> where = qb.where();
             where.eq(DiaryLabel.DIARY_TAG, this).and().eq(DiaryLabel.LABEL_TAG, label);
             List<DiaryLabel> l = qb.query();
@@ -235,7 +235,7 @@ public class Diary implements Serializable
             Date end = calendar.getTime();
             Log.d(TAG, "getByDate: end "   + end);
 
-            QueryBuilder<Diary, Integer> qb = helper.getDiaryDao().queryBuilder();
+            QueryBuilder<Diary, Integer> qb = helper.getDao(Diary.class).queryBuilder();
             Where<Diary, Integer> where = qb.where();
             buildWhere(where, begin, end);
             qb.orderBy("date",ascending);
@@ -250,7 +250,7 @@ public class Diary implements Serializable
 
     public static List<Diary> getAll(DatabaseHelper helper, Boolean ascending){
         try {
-            QueryBuilder<Diary, Integer> qb = helper.getDiaryDao().queryBuilder();
+            QueryBuilder<Diary, Integer> qb = helper.getDao(Diary.class).queryBuilder();
             qb.orderBy("date",ascending);
             return qb.query();
         } catch (SQLException e) {
@@ -261,7 +261,7 @@ public class Diary implements Serializable
 
     public static List<Diary> getAllLike(DatabaseHelper helper, Boolean ascending){
         try {
-            QueryBuilder<Diary, Integer> qb = helper.getDiaryDao().queryBuilder();
+            QueryBuilder<Diary, Integer> qb = helper.getDao(Diary.class).queryBuilder();
             Where<Diary, Integer> where = qb.where();
             where.eq("like", true);
             qb.orderBy("date", ascending);
@@ -273,10 +273,10 @@ public class Diary implements Serializable
     }
 
     public List<Label> getAllLabel(DatabaseHelper helper) throws SQLException {
-        QueryBuilder<DiaryLabel, Integer> qb = helper.getDiaryLabelDao().queryBuilder();
+        QueryBuilder<DiaryLabel, Integer> qb = helper.getDao(DiaryLabel.class).queryBuilder();
         qb.where().eq(DiaryLabel.DIARY_TAG, this);
 
-        QueryBuilder<Label, Integer> labelQb = helper.getLabelDao().queryBuilder();
+        QueryBuilder<Label, Integer> labelQb = helper.getDao(Label.class).queryBuilder();
         labelQb.join(qb);
 
         return labelQb.query();
@@ -284,7 +284,7 @@ public class Diary implements Serializable
 
     public static List<Diary> getByRestrict(DatabaseHelper helper, String text, Date begin,
                                             Date end, List<Label> labelList, Boolean ascending) throws SQLException {
-        QueryBuilder<Diary, Integer> qb = helper.getDiaryDao().queryBuilder();
+        QueryBuilder<Diary, Integer> qb = helper.getDao(Diary.class).queryBuilder();
 
         Boolean status1 = (text != null);
         Boolean status2 = (begin != null && end != null);
@@ -307,7 +307,7 @@ public class Diary implements Serializable
 
     public static long countByDateLabel (DatabaseHelper helper, Date begin, Date end, List<Label> labelList) {
         try {
-            QueryBuilder<Diary, Integer> queryBuilder = helper.getDiaryDao().queryBuilder();
+            QueryBuilder<Diary, Integer> queryBuilder = helper.getDao(Diary.class).queryBuilder();
             buildQuery(queryBuilder, helper, labelList);
             buildWhere(queryBuilder.where(), begin, end);
             return queryBuilder.countOf();
@@ -325,7 +325,7 @@ public class Diary implements Serializable
         }
 
         for(int i = 0; i < size; i++) {
-            QueryBuilder<DiaryLabel, Integer> diaryLabelQb = helper.getDiaryLabelDao().queryBuilder();
+            QueryBuilder<DiaryLabel, Integer> diaryLabelQb = helper.getDao(DiaryLabel.class).queryBuilder();
             diaryLabelQb.where().eq(DiaryLabel.LABEL_TAG, labelList.get(i));
             diaryLabelQb.setAlias("query" + i);
             qb.join(diaryLabelQb, QueryBuilder.JoinType.INNER, QueryBuilder.JoinWhereOperation.AND);

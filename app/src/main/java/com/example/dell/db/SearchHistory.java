@@ -36,7 +36,7 @@ public class SearchHistory {
 
     public void deleteEntry(DatabaseHelper helper) {
         try {
-            Dao<SearchHistory, Integer> dao = helper.getSearchHistoryDao();
+            Dao<SearchHistory, Integer> dao = helper.getDao(SearchHistory.class);
 
             dao.delete(this);
         } catch (SQLException e) {
@@ -47,7 +47,7 @@ public class SearchHistory {
 
     public static void deleteAllEntry(DatabaseHelper helper) {
         try {
-            Dao<SearchHistory, Integer> dao = helper.getSearchHistoryDao();
+            Dao<SearchHistory, Integer> dao = helper.getDao(SearchHistory.class);
 
             dao.deleteBuilder().delete();
         } catch (SQLException e) {

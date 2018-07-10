@@ -43,7 +43,7 @@ public class Label {
 
     public boolean insert(DatabaseHelper helper) { // TODO: cannot agree with setting string as pk by wxq
         try {
-            Dao<Label, Integer> dao = helper.getLabelDao();
+            Dao<Label, Integer> dao = helper.getDao(Label.class);
             Log.i("label", "dao = " + dao + "  label " + this);
             Dao.CreateOrUpdateStatus returnValue = dao.createOrUpdate(this); // TODO: cannot quite agree here. by wxq
             Log.i("label", "插入后返回值：" + returnValue.isCreated());
@@ -56,15 +56,15 @@ public class Label {
 
     public void delete(DatabaseHelper helper) {
         try {
-            DeleteBuilder<DiaryLabel, Integer> deleteBuilder1 = helper.getDiaryLabelDao().deleteBuilder();
+            DeleteBuilder<DiaryLabel, Integer> deleteBuilder1 = helper.getDao(DiaryLabel.class).deleteBuilder();
             deleteBuilder1.where().eq(DiaryLabel.LABEL_TAG, this);
             deleteBuilder1.delete();
 
-            DeleteBuilder<SentenceLabel, Integer> deleteBuilder2 = helper.getSentenceLabelDao().deleteBuilder();
+            DeleteBuilder<SentenceLabel, Integer> deleteBuilder2 = helper.getDao(SentenceLabel.class).deleteBuilder();
             deleteBuilder2.where().eq(SentenceLabel.LABEL_TAG, this);
             deleteBuilder2.delete();
 
-            Dao<Label, Integer> dao = helper.getLabelDao();
+            Dao<Label, Integer> dao = helper.getDao(Label.class);
             Log.i("label", "dao = " + dao + "  label " + this);
             dao.delete(this);
         } catch (SQLException e) {
@@ -75,7 +75,7 @@ public class Label {
 
     public static List<Label> getAllLabel(DatabaseHelper helper){
         try {
-            Dao<Label, Integer> dao = helper.getLabelDao();
+            Dao<Label, Integer> dao = helper.getDao(Label.class);
             return dao.queryForAll();
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
@@ -83,10 +83,10 @@ public class Label {
         }
     }
 
-    public static QueryBuilder<Label, Integer> makeQueryBuilderForDiary(DatabaseHelper helper, Diary diary){
+    /*public static QueryBuilder<Label, Integer> makeQueryBuilderForDiary(DatabaseHelper helper, Diary diary){
         try{
-            Dao<DiaryLabel, Integer> diaryLabelDao = helper.getDiaryLabelDao();
-            Dao<Label, Integer> labelDao = helper.getLabelDao();
+            Dao<DiaryLabel, Integer> diaryLabelDao = helper.getDao(DiaryLabel.class);
+            Dao<Label, Integer> labelDao = helper.getDao(Label.class);
             QueryBuilder<DiaryLabel, Integer> diaryLabelBuilder = diaryLabelDao.queryBuilder();
             //diaryLabelBuilder.selectColumns(DiaryLabel.LABEL_TAG);
             //SelectArg diarySelectAry = new SelectArg();
@@ -98,11 +98,11 @@ public class Label {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
     public static Label getByName(DatabaseHelper helper, String name) {
         try {
-            Dao<Label, Integer> dao = helper.getLabelDao();
+            Dao<Label, Integer> dao = helper.getDao(Label.class);
             Label label = dao.queryBuilder().where().eq("labelname", name).queryForFirst();
             return label;
         }
