@@ -40,7 +40,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:layout_weight="1"
-                android:layout_marginLeft="25dp"
                 android:text="昵称"/>
 
             <LinearLayout
@@ -52,7 +51,7 @@
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
+                android:layout_weight="3"
                 android:layout_marginRight="30dp"
                 android:hint="给自己起个名字~"/>
 
@@ -68,7 +67,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:layout_weight="1"
-                android:layout_marginLeft="25dp"
                 android:text="性别" />
 
             <LinearLayout
@@ -80,9 +78,9 @@
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:layout_marginRight="30dp"
-                android:hint="BOY or GIRL?"/>
+                android:layout_weight="3"
+                android:hint="BOY or GIRL?"
+                android:layout_marginRight="30dp"/>
 
         </LinearLayout>
 
@@ -96,8 +94,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:layout_weight="1"
-                android:layout_marginLeft="25dp"
-                android:text="出生日期"/>
+                android:text="出生日期"
+                />
 
             <LinearLayout
                 android:layout_width="6dp"
@@ -109,11 +107,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/choose_birthday"
-                android:layout_weight="4"
-                android:layout_marginRight="30dp"
+                android:layout_weight="3"
                 android:clickable="true"
                 android:focusable="false"
-                android:hint="点击设置你的生日~"/>
+                android:hint="点击设置你的生日~"
+                android:layout_marginRight="30dp"/>
 
         </LinearLayout>
 
@@ -127,7 +125,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:layout_weight="1"
-                android:layout_marginLeft="25dp"
                 android:text="邮箱"/>
 
             <LinearLayout
@@ -139,9 +136,9 @@
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:layout_marginRight="30dp"
-                android:hint="设置一个邮箱吧！"/>
+                android:layout_weight="3"
+                android:hint="设置一个邮箱吧！"
+                android:layout_marginRight="30dp"/>
 
         </LinearLayout>
 
@@ -155,7 +152,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:layout_weight="1"
-                android:layout_marginLeft="25dp"
                 android:text="学校"/>
 
             <LinearLayout
@@ -167,9 +163,9 @@
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:layout_marginRight="30dp"
-                android:hint="你的学校"/>
+                android:layout_weight="3"
+                android:hint="你的学校"
+                android:layout_marginRight="30dp"/>
 
         </LinearLayout>
 
@@ -183,8 +179,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:layout_weight="1"
-                android:layout_marginLeft="25dp"
-                android:text="个性签名"/>
+                android:text="个性签名"
+                />
 
             <LinearLayout
                 android:layout_width="6dp"
@@ -195,9 +191,9 @@
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:layout_marginRight="30dp"
-                android:hint="自由发挥就可以啦~"/>
+                android:layout_weight="3"
+                android:hint="自由发挥就可以啦~"
+                android:layout_marginRight="30dp"/>
 
         </LinearLayout>
 

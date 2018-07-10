@@ -603,7 +603,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
            diary = diaryList.get(index);
         }
         else if(originType.equals("like")){
-            diaryList = Diary.getAllLike(helper, false);
+            diaryList = Diary.getAllLike(helper, true);
             diary = (Diary) intent.getSerializableExtra("diary_like");
             index = intent.getIntExtra("diarylike_index",diaryList.size());
             diary = diaryList.get(index);

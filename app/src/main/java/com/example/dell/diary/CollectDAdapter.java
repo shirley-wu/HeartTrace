@@ -69,7 +69,7 @@ public class CollectDAdapter extends RecyclerView.Adapter<CollectDAdapter.ViewHo
                 Diary diary = mfavoriteDList.get(position);
                 Intent intent = new Intent(mContext, DiaryWriteActivity.class);
                 intent.putExtra("diary_like", diary);
-                intent.putExtra("diarylike_index", position);
+                intent.putExtra("diarylike_index", mfavoriteDList.size() - 1 -position);
                 intent.putExtra("diary_origin", "like");
                 mContext.startActivity(intent);
             }
