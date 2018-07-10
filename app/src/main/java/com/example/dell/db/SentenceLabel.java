@@ -62,8 +62,8 @@ public class SentenceLabel {
 
     public void insert(DatabaseHelper helper) {
         try {
-            Dao<SentenceLabel, Integer> dao = helper.getSentenceLabelDao();
-            Log.i("db_sentence_label", "dao = " + dao + "  db_sentence_label " + this);
+            Dao<SentenceLabel, Integer> dao = helper.getDaoAccess(SentenceLabel.class);
+            Log.i("db_diary_label", "dao = " + dao + "  db_diary_label " + this);
             int returnValue = dao.create(this);
             Log.i("db_sentence_label", "插入后返回值："+returnValue);
         } catch (SQLException e) {
@@ -74,8 +74,8 @@ public class SentenceLabel {
 
     public void delete(DatabaseHelper helper) {
         try {
-            Dao<SentenceLabel, Integer> dao = helper.getSentenceLabelDao();
-            Log.i("db_sentence_label", "dao = " + dao + "  db_sentence_label " + this);
+            Dao<SentenceLabel, Integer> dao = helper.getDaoAccess(SentenceLabel.class);
+            Log.i("db_diary_label", "dao = " + dao + "  db_diary_label " + this);
             int returnValue = dao.delete(this);
             Log.i("db_sentence_label", "删除后返回值："+returnValue);
         } catch (SQLException e) {

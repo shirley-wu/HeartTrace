@@ -35,7 +35,6 @@ public class SentenceGetByRestrictTest extends InstrumentationTestCase {
     private static final String TAG = "SentenceGetByRestrictTest";
 
     private DatabaseHelper databaseHelper;
-    private Dao<Sentence, Integer> dao;
 
     private List<Label> labels = new ArrayList();
     private List<Sentence> sentenceShirly = new ArrayList();
@@ -47,7 +46,6 @@ public class SentenceGetByRestrictTest extends InstrumentationTestCase {
     public void setUp() throws SQLException {
         Context appContext = InstrumentationRegistry.getTargetContext();
         databaseHelper = OpenHelperManager.getHelper(appContext, DatabaseHelper.class);
-        dao = databaseHelper.getSentenceDao();
 
         labels.add(new Label("label1sadfvabe"));
         labels.add(new Label("janvp"));
@@ -115,7 +113,8 @@ public class SentenceGetByRestrictTest extends InstrumentationTestCase {
 
     // @Test
     public void testWhereSingleText() throws SQLException {
-        QueryBuilder<Sentence, Integer> qb = databaseHelper.getSentenceDao().queryBuilder();
+        Dao<Sentence, Integer> dao = databaseHelper.getDao(Sentence.class);
+        QueryBuilder<Sentence, Integer> qb = dao.queryBuilder();
         Where<Sentence, Integer> where = qb.where();
         where.like("text", "%hi%");
         where.or(1);
@@ -124,7 +123,8 @@ public class SentenceGetByRestrictTest extends InstrumentationTestCase {
 
     // @Test
     public void testWhereMultipleText() throws SQLException {
-        QueryBuilder<Sentence, Integer> qb = databaseHelper.getSentenceDao().queryBuilder();
+        Dao<Sentence, Integer> dao = databaseHelper.getDao(Sentence.class);
+        QueryBuilder<Sentence, Integer> qb = dao.queryBuilder();
         Where<Sentence, Integer> where = qb.where();
         where.like("text", "%hi%");
         where.like("text", "%hello%");
@@ -134,28 +134,32 @@ public class SentenceGetByRestrictTest extends InstrumentationTestCase {
 
     @Test
     public void testBuildWhereSingleText() throws SQLException {
-        QueryBuilder<Sentence, Integer> qb = databaseHelper.getSentenceDao().queryBuilder();
+        Dao<Sentence, Integer> dao = databaseHelper.getDao(Sentence.class);
+        QueryBuilder<Sentence, Integer> qb = dao.queryBuilder();
         Sentence.buildWhere(qb.where(), "hellohi");
         Log.d(getClass().getName(), "testBuild: " + qb.prepareStatementString());
     }
 
     @Test
     public void testBuildWhereMultilpleText() throws SQLException {
-        QueryBuilder<Sentence, Integer> qb = databaseHelper.getSentenceDao().queryBuilder();
+        Dao<Sentence, Integer> dao = databaseHelper.getDao(Sentence.class);
+        QueryBuilder<Sentence, Integer> qb = dao.queryBuilder();
         Sentence.buildWhere(qb.where(), "hello hi lueluelue blablabla");
         Log.d(getClass().getName(), "testBuild: " + qb.prepareStatementString());
     }
 
     @Test
     public void testBuildWhereDate() throws SQLException {
-        QueryBuilder<Sentence, Integer> qb = databaseHelper.getSentenceDao().queryBuilder();
+        Dao<Sentence, Integer> dao = databaseHelper.getDao(Sentence.class);
+        QueryBuilder<Sentence, Integer> qb = dao.queryBuilder();
         Sentence.buildWhere(qb.where(), new Date(1998, 2, 19), new Date(2000, 2, 4));
         Log.d(getClass().getName(), "testBuild: " + qb.prepareStatementString());
     }
 
     @Test
     public void testBuildWhereDateAndSingleText() throws SQLException {
-        QueryBuilder<Sentence, Integer> qb = databaseHelper.getSentenceDao().queryBuilder();
+        Dao<Sentence, Integer> dao = databaseHelper.getDao(Sentence.class);
+        QueryBuilder<Sentence, Integer> qb = dao.queryBuilder();
         Where<Sentence, Integer> w = qb.where();
         Sentence.buildWhere(w, "hi");
         Sentence.buildWhere(w, new Date(1998, 2, 19), new Date(2000, 2, 4));
@@ -165,7 +169,8 @@ public class SentenceGetByRestrictTest extends InstrumentationTestCase {
 
     @Test
     public void testBuildWhereDateAndMultipleText() throws SQLException {
-        QueryBuilder<Sentence, Integer> qb = databaseHelper.getSentenceDao().queryBuilder();
+        Dao<Sentence, Integer> dao = databaseHelper.getDao(Sentence.class);
+        QueryBuilder<Sentence, Integer> qb = dao.queryBuilder();
         Where<Sentence, Integer> w = qb.where();
         Sentence.buildWhere(w, "hi hello");
         Sentence.buildWhere(w, new Date(1998, 2, 19), new Date(2000, 2, 4));
@@ -175,7 +180,8 @@ public class SentenceGetByRestrictTest extends InstrumentationTestCase {
 
     @Test
     public void testBuildQuerySingleLabel() throws SQLException {
-        QueryBuilder<Sentence, Integer> qb = databaseHelper.getSentenceDao().queryBuilder();
+        Dao<Sentence, Integer> dao = databaseHelper.getDao(Sentence.class);
+        QueryBuilder<Sentence, Integer> qb = dao.queryBuilder();
         List<Label> labelList = new ArrayList();
         labelList.add(labels.get(0));
         Sentence.buildQuery(qb, databaseHelper, labelList);
@@ -184,7 +190,8 @@ public class SentenceGetByRestrictTest extends InstrumentationTestCase {
 
     @Test
     public void testBuildQueryMultipleLabel() throws SQLException {
-        QueryBuilder<Sentence, Integer> qb = databaseHelper.getSentenceDao().queryBuilder();
+        Dao<Sentence, Integer> dao = databaseHelper.getDao(Sentence.class);
+        QueryBuilder<Sentence, Integer> qb = dao.queryBuilder();
         Sentence.buildQuery(qb, databaseHelper, labels);
         Log.d(getClass().getName(), "testBuild: " + qb.prepareStatementString());
     }

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +68,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
                 bundleObject.putSerializable("search_list", mDiaryList);
 // Put Bundle in to Intent and call start Activity
                 intent.putExtras(bundleObject);
+                //Log.d("0123",mDiaryList.size()+"");
                 mContext.startActivity(intent);
             }
         });

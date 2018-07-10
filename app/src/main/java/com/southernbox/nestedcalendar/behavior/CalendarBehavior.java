@@ -1,10 +1,7 @@
 package com.southernbox.nestedcalendar.behavior;
 
 import android.content.Context;
-import android.icu.util.Calendar;
-import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.math.MathUtils;
 import android.support.v4.view.ViewCompat;
@@ -13,9 +10,12 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Scroller;
 
+import com.example.dell.diary.R;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.southernbox.nestedcalendar.helper.ViewOffsetBehavior;
+
+import java.util.Calendar;
 
 import static android.support.v4.view.ViewCompat.TYPE_TOUCH;
 
@@ -24,9 +24,8 @@ import static android.support.v4.view.ViewCompat.TYPE_TOUCH;
  * Created by SouthernBox on 2018/1/19.
  */
 
-
-@RequiresApi(api = Build.VERSION_CODES.N)
 public class CalendarBehavior extends ViewOffsetBehavior<MaterialCalendarView> {
+
     private CalendarMode calendarMode = CalendarMode.MONTHS;
     private int weekOfMonth = Calendar.getInstance().get(Calendar.WEEK_OF_MONTH);
     private int calendarLineHeight;
@@ -70,8 +69,8 @@ public class CalendarBehavior extends ViewOffsetBehavior<MaterialCalendarView> {
             }
             // 移动日历
             int calendarMinOffset = -calendarLineHeight * (weekOfMonth - 1);
-            int calendarOffset = (int) MathUtils.clamp(
-                    getTopAndBottomOffset() - dy*2*(float)(2*weekOfMonth-1)/10, calendarMinOffset, 0);
+            int calendarOffset = MathUtils.clamp(
+                    getTopAndBottomOffset() - dy*2*(2*weekOfMonth-1)/10, calendarMinOffset, 0);
             setTopAndBottomOffset(calendarOffset);
 
             // 移动列表
@@ -82,7 +81,7 @@ public class CalendarBehavior extends ViewOffsetBehavior<MaterialCalendarView> {
                 int listOffset = MathUtils.clamp(
                         listBehavior.getTopAndBottomOffset() - dy*2, -listMaxOffset, 0);
                 listBehavior.setTopAndBottomOffset(listOffset);
-                if (listOffset <= -listMaxOffset) setWeekMode(child);
+                if (listOffset <= -listMaxOffset)  setWeekMode(child);
                 if (listOffset > -listMaxOffset && listOffset < 0) {
                     consumed[1] = dy;
                 }

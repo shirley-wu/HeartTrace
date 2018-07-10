@@ -14,6 +14,7 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -52,23 +53,48 @@ public class SentenceOtherTest {
 
 
     @Test
+    public void testGetSentenceByDateEndOfMonth() throws SQLException {
+        Sentence sentence = new Sentence();
+
+        sentence.setText(originText);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(1998, 3 - 1, 31, 23, 59);
+        sentence.setDate(calendar.getTime());
+        sentence.setSentencebook(sentencebook);
+        sentence.insert(databaseHelper);
+
+        List<Sentence> dL = Sentence.getByDate(databaseHelper, 1998, 3, 31, true);
+        for(Sentence d : dL) {
+            Log.d(TAG, "testGetSentenceByDate: end of month sentence " + d.getDate().toString());
+        }
+        assertEquals(1, dL.size());
+
+        sentence.delete(databaseHelper);
+    }
+
+    @Test
     public void testGetSentenceByDate() throws SQLException {
-        int num = 20;
+        int num = 24;
         List<Sentence> sentenceList = new ArrayList();
         for(int i = 1; i <= num; i++) {
             for(int j = 0; j < i; j++) {
                 Sentence sentence = new Sentence();
                 sentenceList.add(sentence);
                 sentence.setText(originText + j);
-                sentence.setDate(new Date(1998, 8, i));
+                sentence.setDate(new Date(1998 - 1900, 8 - 1, i, j, 0));
                 sentence.setSentencebook(sentencebook);
                 sentence.insert(databaseHelper);
             }
         }
 
-        Date date;
+        List<Sentence> dL;
         for(int i = 1; i <= num; i++) {
-            assertEquals(i, Sentence.getByDate(databaseHelper, new Date(1998, 8, i)).size());
+            dL = Sentence.getByDate(databaseHelper, 1998, 8, i, true);
+            for(Sentence d : dL) {
+                Log.d(TAG, "testGetSentenceByDate: " + i + " sentence " + d.getDate().toString());
+            }
+            assertEquals(i, dL.size());
         }
 
         for(final Sentence sentence : sentenceList) {
@@ -145,7 +171,7 @@ public class SentenceOtherTest {
         }
 
         sentence.delete(databaseHelper);
-        QueryBuilder<SentenceLabel, Integer> sentenceLabelQb = databaseHelper.getSentenceLabelDao().queryBuilder();
+        QueryBuilder<SentenceLabel, Integer> sentenceLabelQb = databaseHelper.getDaoAccess(SentenceLabel.class).queryBuilder();
         sentenceLabelQb.where().eq(SentenceLabel.SENTENCE_TAG, sentence);
         Log.d(TAG, "testGetAllLabel: " + sentenceLabelQb.prepareStatementString());
         List<SentenceLabel> sentenceLabelList = sentenceLabelQb.query();
@@ -153,6 +179,29 @@ public class SentenceOtherTest {
 
         for(final Label label : labels) {
             label.delete(databaseHelper);
+        }
+    }
+
+    @Test
+    public void testGetLike() {
+        List<Sentence> sentenceList = new ArrayList();
+
+        for(int i = 0; i < 10; i++) {
+            Sentence sentence = new Sentence();
+            sentence.setDate();
+            sentence.setSentencebook(sentencebook);
+            sentence.setText("hello " + i);
+            sentence.setLike(i % 2 == 0);
+            sentenceList.add(sentence);
+            sentence.insert(databaseHelper);
+        }
+
+        List<Sentence> l = Sentence.getAllLike(databaseHelper, false);
+        assertEquals(5, l.size());
+        assertEquals("hello 8", l.get(0).getText());
+
+        for(final Sentence d : sentenceList) {
+            d.delete(databaseHelper);
         }
     }
 }

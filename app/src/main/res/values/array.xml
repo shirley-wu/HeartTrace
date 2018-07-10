@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="mood">
+        <item>开心</item>
+        <item>一般</item>
+        <item>难过</item>
+        <item>尴尬</item>
+        <item>震惊</item>
+        <item>呆滞</item>
+        <item>旅游</item>
+        <item>工作</item>
+        <item>学习</item>
+        <item>娱乐</item>
+        <item>约会</item>
+    </string-array>
+
+    <string-array name="property">
+        <item>旅游</item>
+        <item>工作</item>
+        <item>学习</item>
+        <item>娱乐</item>
+        <item>约会</item>
+    </string-array>
+
+    <string-array name="like_select">
+        <item>日记</item>
+        <item>纸条</item>
+    </string-array>
+</resources>

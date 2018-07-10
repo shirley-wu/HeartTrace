@@ -1,32 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.dell.diary">
+
+    <!-- 申请权限存取图片，误删！ -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true" />
+
+    <!--文件操作，误删！-->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" />
+
+    <!-- 支持多分辨率 -->
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.Main">
         <activity
-            android:name=".MainActivity"
-            android:label="HeartTrace">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:name=".TimeLineActivity"
+            android:label="HeartTrace"></activity>
         <activity android:name=".StatisticsActivity" />
         <activity android:name=".DiaryActivity" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".BottleWriteActivity" />
-        <activity android:name=".CalendarActivity"
+        <activity
+            android:name=".CalendarActivity"
             android:label="Calendar"
-            android:theme="@style/calendar"/>
-        <activity android:name=".DiaryWriteActivity"
-            android:windowSoftInputMode="adjustResize|stateHidden"/>
-        <activity android:name=".TicketEditActivity" />
+            android:theme="@style/calendar" />
+        <activity
+            android:name=".DiaryWriteActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".TicketEditActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
 
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
@@ -39,9 +61,20 @@
         <activity android:name=".BottlefrontActivity" />
         <activity android:name=".NoteActivity" />
         <activity android:name=".BottlesActivity" />
-        <activity android:name=".SearchResultActivity"/>
+        <activity android:name=".SearchResultActivity" />
+        <activity android:name=".LabelManageActivity" />
+        <activity android:name=".CollectActivity" />
+        <activity android:name=".WelcomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-        <activity android:name=".LabelManageActivity"></activity>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".LoginActivity"></activity>
+
+        <activity android:name=".PersonalInformationActivity"></activity>
 
         <!-- Note: the followings are added for authentication (stub). If anything unpredicted happens tell us. -->
         <service
@@ -72,6 +105,7 @@
             <meta-data android:name="android.content.SyncAdapter"
                 android:resource="@xml/syncadapter" />
         </service>
+
     </application>
 
     <!--Note: the following pemissions are added for synchronization. -->

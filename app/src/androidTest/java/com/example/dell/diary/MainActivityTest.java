@@ -1,6 +1,6 @@
 package com.example.dell.diary;
 
-
+// TODO
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -37,7 +37,7 @@ import static org.hamcrest.Matchers.is;
 public class MainActivityTest {
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<TimeLineActivity> mActivityTestRule = new ActivityTestRule<>(TimeLineActivity.class);
 
     @Test
     public void mainActivityTest() {

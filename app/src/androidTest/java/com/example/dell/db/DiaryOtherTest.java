@@ -14,6 +14,7 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -52,23 +53,48 @@ public class DiaryOtherTest {
 
 
     @Test
+    public void testGetDiaryByDateEndOfMonth() throws SQLException {
+        Diary diary = new Diary();
+
+        diary.setText(originText);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(1998, 3 - 1, 31, 23, 59);
+        diary.setDate(calendar.getTime());
+        diary.setDiarybook(diarybook);
+        diary.insert(databaseHelper);
+
+        List<Diary> dL = Diary.getByDate(databaseHelper, 1998, 3, 31, true);
+        for(Diary d : dL) {
+            Log.d(TAG, "testGetDiaryByDate: end of month diary " + d.getDate().toString());
+        }
+        assertEquals(1, dL.size());
+
+        diary.delete(databaseHelper);
+    }
+
+    @Test
     public void testGetDiaryByDate() throws SQLException {
-        int num = 20;
+        int num = 24;
         List<Diary> diaryList = new ArrayList();
         for(int i = 1; i <= num; i++) {
             for(int j = 0; j < i; j++) {
                 Diary diary = new Diary();
                 diaryList.add(diary);
                 diary.setText(originText + j);
-                diary.setDate(new Date(1998, 8, i));
+                diary.setDate(new Date(1998 - 1900, 8 - 1, i, j, 0));
                 diary.setDiarybook(diarybook);
                 diary.insert(databaseHelper);
             }
         }
 
-        Date date;
+        List<Diary> dL;
         for(int i = 1; i <= num; i++) {
-            assertEquals(i, Diary.getByDate(databaseHelper, new Date(1998, 8, i)).size());
+            dL = Diary.getByDate(databaseHelper, 1998, 8, i, true);
+            for(Diary d : dL) {
+                Log.d(TAG, "testGetDiaryByDate: " + i + " diary " + d.getDate().toString());
+            }
+            assertEquals(i, dL.size());
         }
 
         for(final Diary diary : diaryList) {
@@ -145,7 +171,7 @@ public class DiaryOtherTest {
         }
 
         diary.delete(databaseHelper);
-        QueryBuilder<DiaryLabel, Integer> diaryLabelQb = databaseHelper.getDiaryLabelDao().queryBuilder();
+        QueryBuilder<DiaryLabel, Integer> diaryLabelQb = databaseHelper.getDaoAccess(DiaryLabel.class).queryBuilder();
         diaryLabelQb.where().eq(DiaryLabel.DIARY_TAG, diary);
         Log.d(TAG, "testGetAllLabel: " + diaryLabelQb.prepareStatementString());
         List<DiaryLabel> diaryLabelList = diaryLabelQb.query();
@@ -153,6 +179,29 @@ public class DiaryOtherTest {
 
         for(final Label label : labels) {
             label.delete(databaseHelper);
+        }
+    }
+
+    @Test
+    public void testGetLike() {
+        List<Diary> diaryList = new ArrayList();
+
+        for(int i = 0; i < 10; i++) {
+            Diary diary = new Diary();
+            diary.setDate();
+            diary.setDiarybook(diarybook);
+            diary.setText("hello " + i);
+            diary.setLike(i % 2 == 0);
+            diaryList.add(diary);
+            diary.insert(databaseHelper);
+        }
+
+        List<Diary> l = Diary.getAllLike(databaseHelper, false);
+        assertEquals(5, l.size());
+        assertEquals("hello 8", l.get(0).getText());
+
+        for(final Diary d : diaryList) {
+            d.delete(databaseHelper);
         }
     }
 }

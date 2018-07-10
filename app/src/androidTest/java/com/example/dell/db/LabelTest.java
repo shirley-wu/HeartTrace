@@ -90,7 +90,7 @@ public class LabelTest extends InstrumentationTestCase {
             diary.insert(databaseHelper);
             label.insert(databaseHelper);
             diary.insertLabel(databaseHelper, label);
-            List<DiaryLabel> l2 = databaseHelper.getDiaryLabelDao().queryForAll();
+            List<DiaryLabel> l2 = databaseHelper.getDao(DiaryLabel.class).queryForAll();
             for (DiaryLabel dl : l2) {
                 Log.d("test", "onClick: dl, diary" + dl.getDiary());
             }

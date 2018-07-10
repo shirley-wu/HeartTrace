@@ -81,7 +81,7 @@ public class SearchResultActivity extends AppCompatActivity {
                 DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
                 try{
                     diaryList.clear();
-                    if(startDate.getYear() == 1900){
+                    if(startDate == null){
                         diaryList.addAll(Diary.getByRestrict(helper,query,null,null,null,false));
                     }
                     else{
@@ -158,7 +158,11 @@ public class SearchResultActivity extends AppCompatActivity {
         }
         return true;
     }
-
+    protected void onRestart(){
+        super.onRestart();
+        String query = searchView.getQuery().toString();
+        searchView.setQuery(query,true);
+    }
     @Override
     protected void onDestroy(){
         super.onDestroy();
@@ -167,6 +171,7 @@ public class SearchResultActivity extends AppCompatActivity {
             databaseHelper = null;
         }
     }
+
 
     private DatabaseHelper getDataBaseHelper(){
         if(databaseHelper == null){

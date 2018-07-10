@@ -6,13 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:fitsSystemWindows="true">
+    >
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary">
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
         <TextView
             android:id="@+id/toolbarTitle"
             android:layout_width="wrap_content"
@@ -46,34 +48,35 @@
         android:layout_height="match_parent"
         android:background="#ffffff">
 
-    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-        android:id="@+id/calendar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ffffff"
-        app:mcv_tileHeight="48dp"
-        app:mcv_headerTextAppearance="@style/TextAppearance.AppCompat.Small"
-        app:mcv_dateTextAppearance="@style/TextAppearance.AppCompat.Small"
-        app:mcv_weekDayTextAppearance="@style/TextAppearance.AppCompat.Small"
-        app:mcv_showOtherDates="other_months"/>
-        <!--app:layout_behavior="@string/calendar_behavior"-->
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+            android:id="@+id/calendar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            app:mcv_tileHeight="48dp"
+            app:mcv_headerTextAppearance="@style/TextAppearance.AppCompat.Small"
+            app:mcv_dateTextAppearance="@style/TextAppearance.AppCompat.Small"
+            app:mcv_weekDayTextAppearance="@style/TextAppearance.AppCompat.Small"
+            app:mcv_showOtherDates="other_months"
+            app:layout_behavior="@string/calendar_behavior"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="110dp"
+            android:layout_height="500dp"
+            android:layout_gravity="bottom"
             android:background="#ffffff"
-            app:layout_behavior="@string/calendar_scrolling_behavior"
-            />
+            app:layout_behavior="@string/calendar_scrolling_behavior"/>
 
         <com.southernbox.nestedcalendar.view.WeekTitleView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#ffffff"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="20sp"
+            android:layout_marginRight="20sp"
             />
 
     </android.support.design.widget.CoordinatorLayout>
+
+
 </LinearLayout>

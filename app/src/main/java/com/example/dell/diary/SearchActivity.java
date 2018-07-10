@@ -72,6 +72,7 @@ public class SearchActivity extends AppCompatActivity {
         final CheckedTextView checkTime = (CheckedTextView) findViewById(R.id.check_time);
         final LinearLayout timeSelect = (LinearLayout) findViewById(R.id.time_select);
         timeSelect.setVisibility(View.INVISIBLE);
+        checkTag.setVisibility(View.GONE);
         checkTag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,7 +157,7 @@ public class SearchActivity extends AppCompatActivity {
                 intent.putExtra("search_text",query);
                 if(checkTime.isChecked() == true){
                     startDate = new Date(mYear,mMonth,mDay);
-                    endDate = new Date(mYear2,mMonth2,mDay2);
+                    endDate = new Date(mYear2,mMonth2,mDay2+1);
                     intent.putExtra("start_date",startDate);
                     intent.putExtra("end_date",endDate);
                 }
