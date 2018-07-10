@@ -36,7 +36,7 @@ public class SentenceInstrumentedTest {
     public void setUp() throws SQLException {
         Context appContext = InstrumentationRegistry.getTargetContext();
         databaseHelper = OpenHelperManager.getHelper(appContext, DatabaseHelper.class);
-        dao = databaseHelper.getSentenceDao();
+        dao = databaseHelper.getDaoAccess(Sentence.class);
         sentencebook.insert(databaseHelper);
     }
 
