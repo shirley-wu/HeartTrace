@@ -8,6 +8,7 @@ import android.util.Log;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.example.dell.db.DatabaseHelper;
 import com.example.dell.db.Diary;
 import com.example.dell.db.Diarybook;
@@ -30,42 +31,39 @@ public class JsonTest extends InstrumentationTestCase {
 
     final static private String TAG = "JsonTest";
 
-    private DatabaseHelper databaseHelper;
+    private Diarybook diarybook = new Diarybook();
 
-    private Diarybook diarybook = new Diarybook("fajskdlav");;
-
-    private Diary d1 = new Diary("1: hello");
+    private Diary d1 = new Diary();
 
     private Diary d2 = new Diary("2: hi");
 
     @Before
     public void setUp() throws SQLException {
-        Context appContext = InstrumentationRegistry.getTargetContext();
-        databaseHelper = OpenHelperManager.getHelper(appContext, DatabaseHelper.class);
+        diarybook.setId(4399);
 
-        diarybook.insert(databaseHelper);
-
+        d1.setText("1: This is Jodie");
+        d1.setHtmlText("<h>1:</h> <p>This is <b>Jodie</b></p>");
         d1.setDate();
+        d1.setLike(true);
+        d1.setLetterSpacing(1.5F);
+        d1.setLineSpacingMultiplier(15);
+        d1.setLineSpacingExtra(20);
+        d1.setTextSize(0.2F);
+        d1.setTextAlignment(12);
+
         d1.setDiarybook(diarybook);
-        d1.insert(databaseHelper);
 
         d2.setDate();
-        d2.setDiarybook(diarybook);
-        d2.insert(databaseHelper);
-    }
 
-    @After
-    public void tearDown() {
-        diarybook.delete(databaseHelper);
-        OpenHelperManager.releaseHelper();
+        d2.setDiarybook(diarybook);
     }
 
     @Test
     public void testObjectIntoJson() {
         String jo;
-        jo = JSON.toJSONString(d1);
+        jo = JSON.toJSONString(d1, SerializerFeature.WriteMapNullValue);
         Log.d(TAG, "testObjectIntoJson: d1 -> " + jo);
-        jo = JSON.toJSONString(d2);
+        jo = JSON.toJSONString(d2, SerializerFeature.WriteMapNullValue);
         Log.d(TAG, "testObjectIntoJson: d2 -> " + jo);
     }
 
@@ -75,38 +73,45 @@ public class JsonTest extends InstrumentationTestCase {
         list.add(d1);
         list.add(d2);
         String jo;
-        jo = JSON.toJSONString(list);
+        jo = JSON.toJSONString(list, SerializerFeature.WriteMapNullValue, SerializerFeature.DisableCircularReferenceDetect);
         Log.d(TAG, "testArrayIntoJson: " + jo);
     }
 
     @Test
     public void testJsonIntoObject() {
-        String jo = "{\"date\":1531030209658,\"diarybook\":{\"diarybookName\":\"fajskdlav\"},\"id\":16,\"text\":\"jdakfldasj\"}";
+        String jo = "{\"date\":1531215766554," +
+                "\"diarybook\":{\"description\":null,\"diarybookName\":null,\"id\":4399}," +
+                "\"htmlText\":\"<h>1:</h> <p>This is <b>Jodie</b></p>\",\"id\":16," +
+                "\"letterSpacing\":1.5," +
+                "\"like\":true," +
+                "\"lineSpacingExtra\":20," +
+                "\"lineSpacingMultiplier\":15," +
+                "\"text\":\"1: This is Jodie\"," +
+                "\"textAlignment\":12," +
+                "\"textSize\":0.2}";
         Diary diary;
         // diary = JSON.parseObject(jo, new TypeReference<Diary>(){});
         diary = JSON.parseObject(jo, Diary.class);
-        assertEquals(1531030209658L, diary.getDate().getTime());
-        assertEquals("fajskdlav", diary.getDiarybook().getDiarybookName());
+        assertEquals(1531215766554L, diary.getDate().getTime());
+        assertEquals(4399, diary.getDiarybook().getId());
         assertEquals(16, diary.getId());
-        assertEquals("jdakfldasj", diary.getText());
+        assertEquals("1: This is Jodie", diary.getText());
+        assertEquals("<h>1:</h> <p>This is <b>Jodie</b></p>", diary.getHtmlText());
+        assertEquals(1.5F, diary.getLetterSpacing());
+        assertEquals(20, diary.getLineSpacingExtra());
     }
 
     @Test
     public void testJsonIntoArray() {
         String jo = "[" +
-                "{\"date\":1531030209658,\"diarybook\":{\"diarybookName\":\"fajskdlav\"},\"id\":16,\"text\":\"jdakfldasj\"}," +
-                "{\"date\":1546253475874,\"diarybook\":{\"diarybookName\":\"sbrycaevgr\"},\"id\":992,\"text\":\"afxamjncpau\"}" +
-                "]";
+                "{\"date\":1531216236466,\"diarybook\":{\"description\":null,\"diarybookName\":null,\"id\":4399}," +
+                "\"htmlText\":\"<h>1:</h> <p>This is <b>Jodie</b></p>\",\"id\":0,\"letterSpacing\":1.5,\"like\":true," +
+                "\"lineSpacingExtra\":20,\"lineSpacingMultiplier\":15,\"text\":\"1: This is Jodie\",\"textAlignment\":12,\"textSize\":0.2}," +
+                "{\"date\":1531216236466,\"diarybook\":{\"description\":null,\"diarybookName\":null,\"id\":4399}," +
+                "\"htmlText\":null,\"id\":0,\"letterSpacing\":0.2,\"like\":false,\"lineSpacingExtra\":1,\"lineSpacingMultiplier\":0," +
+                "\"text\":\"2: hi\",\"textAlignment\":0,\"textSize\":20.0}]";
         List<Diary> list = JSON.parseArray(jo, Diary.class);
         assertEquals(2, list.size());
-        assertEquals(1531030209658L, list.get(0).getDate().getTime());
-        assertEquals("fajskdlav", list.get(0).getDiarybook().getDiarybookName());
-        assertEquals(16, list.get(0).getId());
-        assertEquals("jdakfldasj", list.get(0).getText());
-        assertEquals(1546253475874L, list.get(1).getDate().getTime());
-        assertEquals("sbrycaevgr", list.get(1).getDiarybook().getDiarybookName());
-        assertEquals(992, list.get(1).getId());
-        assertEquals("afxamjncpau", list.get(1).getText());
     }
 
 }

@@ -14,6 +14,7 @@ import android.util.Log;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.example.dell.db.DatabaseHelper;
 import com.example.dell.db.Diary;
 import com.example.dell.server.ServerAccessor;
@@ -132,7 +133,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     }
 
     public String parseJson(List list, Class c) {
-        String jo = JSON.toJSONString(list);
+        String jo = JSON.toJSONString(list, SerializerFeature.WriteMapNullValue, SerializerFeature.DisableCircularReferenceDetect);
         jo = "{\"" + c.getSimpleName() + "List\":" + jo + "}";
         return jo;
     }

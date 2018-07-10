@@ -177,7 +177,7 @@ public class Diary implements Serializable
 
     public int insertOrUpdate(DatabaseHelper helper) {
         try {
-            Dao<Diary, Integer> dao = helper.getDiaryDao();
+            Dao<Diary, Integer> dao = helper.getDaoAccess(Diary.class);
             Log.i("diary", "dao = " + dao + " 插入 diary " + this);
             int returnValue = dao.create(this);
             Log.i("diary", "插入或更新后返回值：" + returnValue);
