@@ -30,7 +30,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     // name of the database file for your application -- change to something appropriate for your app
     private static final String DATABASE_NAME = "heartTrace.db";
     // any time you make changes to your database objects, you may have to increase the database version
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
 
     private static final Class[] tableList = {
             Diarybook.class,
@@ -40,7 +40,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             Label.class,
             DiaryLabel.class,
             SentenceLabel.class,
-            SearchHistory.class
+            // SearchHistory.class,
     };
 
     // the DAO object we use to access the Diary table
@@ -121,6 +121,18 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             RuntimeExceptionDao dao = getRuntimeExceptionDao(clazz);
             runtimeExceptionDaoMap.put(clazz, dao);
             return dao;
+        }
+    }
+
+    public void clearAll() {
+        for(Class clazz : tableList) {
+            try {
+                TableUtils.clearTable(getConnectionSource(), clazz);
+                Log.d(TAG, "clearAll: clear table " + clazz.getName());
+            }
+            catch(SQLException e) {
+                Log.e(TAG, "clearAll: ", e);
+            }
         }
     }
 

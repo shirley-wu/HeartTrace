@@ -34,6 +34,18 @@ public class SearchHistory {
         return this.entry;
     }
 
+    public void insert(DatabaseHelper helper) {
+        try {
+            Dao<SearchHistory, Integer> dao = helper.getDaoAccess(SearchHistory.class);
+            Log.i("SearchHistory", "dao = " + dao + " 插入 " + this);
+            int returnValue = dao.create(this);
+            Log.i("SearchHistory", "插入后返回值：" + returnValue);
+        } catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
+            throw new RuntimeException(e);
+        }
+    }
+
     public void deleteEntry(DatabaseHelper helper) {
         try {
             Dao<SearchHistory, Integer> dao = helper.getDaoAccess(SearchHistory.class);
