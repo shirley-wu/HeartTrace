@@ -36,7 +36,7 @@ public class DiaryInstrumentedTest {
     public void setUp() throws SQLException {
         Context appContext = InstrumentationRegistry.getTargetContext();
         databaseHelper = OpenHelperManager.getHelper(appContext, DatabaseHelper.class);
-        dao = databaseHelper.getDiaryDao();
+        dao = databaseHelper.getDaoAccess(Diary.class);
         diarybook.insert(databaseHelper);
     }
 

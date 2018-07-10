@@ -98,7 +98,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
      * Returns the Database Access Object (DAO) for our Diary class. It will create it or just give the cached
      * value.
      */
-    public Dao getDao(Class clazz) throws SQLException {
+    public Dao getDaoAccess(Class clazz) throws SQLException {
         if (daoMap.containsKey(clazz)) {
             return daoMap.get(clazz);
         }
@@ -113,7 +113,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
      * Returns the RuntimeExceptionDao (Database Access Object) version of a Dao for our Diary class. It will
      * create it or just give the cached value. RuntimeExceptionDao only through RuntimeExceptions.
      */
-    public RuntimeExceptionDao getRuntimeExceptionDao(Class clazz) {
+    public RuntimeExceptionDao getRuntimeExceptionDaoAccess(Class clazz) {
         if (runtimeExceptionDaoMap.containsKey(clazz)) {
             return runtimeExceptionDaoMap.get(clazz);
         }

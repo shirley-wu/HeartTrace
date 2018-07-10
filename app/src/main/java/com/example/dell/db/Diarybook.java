@@ -59,7 +59,7 @@ public class Diarybook implements Serializable {
 
     public List<Diary> getAllSubDiary(DatabaseHelper helper) {
         try {
-            Dao<Diary, Integer> dao = helper.getDao(Diary.class);
+            Dao<Diary, Integer> dao = helper.getDaoAccess(Diary.class);
             List<Diary> subDiaryList = dao.queryBuilder().where().eq(Diarybook.TAG, this).query();
             return subDiaryList;
         }catch (SQLException e) {
@@ -70,7 +70,7 @@ public class Diarybook implements Serializable {
 
     public void deleteSubDiary(DatabaseHelper helper) {
         try {
-            Dao<Diary, Integer> dao = helper.getDao(Diary.class);
+            Dao<Diary, Integer> dao = helper.getDaoAccess(Diary.class);
             DeleteBuilder<Diary, Integer> deleteBuilder = dao.deleteBuilder();
 
             deleteBuilder.where().eq(Diarybook.TAG, this);
@@ -82,7 +82,7 @@ public class Diarybook implements Serializable {
     }
     public void insert(DatabaseHelper helper) {
         try {
-            Dao<Diarybook, Integer> dao = helper.getDao(Diarybook.class);
+            Dao<Diarybook, Integer> dao = helper.getDaoAccess(Diarybook.class);
             Log.i("diarybook", "dao = " + dao + " 插入 diarybook " + this);
             int returnValue = dao.create(this);
             Log.i("diarybook", "插入后返回值：" + returnValue);
@@ -94,7 +94,7 @@ public class Diarybook implements Serializable {
 
     public void update(DatabaseHelper helper) {
         try {
-            Dao<Diarybook, Integer> dao = helper.getDao(Diarybook.class);
+            Dao<Diarybook, Integer> dao = helper.getDaoAccess(Diarybook.class);
             Log.i("diarybook", "dao = " + dao + " 更新 diarybook " + this);
             int returnValue = dao.update(this);
             Log.i("diarybook", "更新后返回值：" + returnValue);
@@ -106,7 +106,7 @@ public class Diarybook implements Serializable {
 
     public void refresh(DatabaseHelper helper) {
         try {
-            Dao<Diarybook, Integer> dao = helper.getDao(Diarybook.class);
+            Dao<Diarybook, Integer> dao = helper.getDaoAccess(Diarybook.class);
             Log.i("diarybook", "dao = " + dao + " refresh diarybook " + this);
             int returnValue = dao.refresh(this);
             Log.i("diarybook", "refresh后返回值：" + returnValue);
@@ -118,13 +118,13 @@ public class Diarybook implements Serializable {
 
     public void delete(DatabaseHelper helper) {
         try {
-            Dao<Diary, Integer> subdao = helper.getDao(Diary.class);
+            Dao<Diary, Integer> subdao = helper.getDaoAccess(Diary.class);
             DeleteBuilder<Diary, Integer> deleteBuilder = subdao.deleteBuilder();
 
             deleteBuilder.where().eq(Diarybook.TAG, this);
             deleteBuilder.delete();
 
-            Dao<Diarybook, Integer> dao = helper.getDao(Diarybook.class);
+            Dao<Diarybook, Integer> dao = helper.getDaoAccess(Diarybook.class);
             Log.i("diarybook", "dao = " + dao + " 删除 diarybook " + this);
             int returnValue = dao.delete(this);
             Log.i("diarybook", "删除后返回值：" + returnValue);
@@ -136,7 +136,7 @@ public class Diarybook implements Serializable {
 
     public static List<Diarybook> getAll(DatabaseHelper helper, Boolean ascending){
         try {
-            QueryBuilder<Diarybook, Integer> qb = helper.getDao(Diarybook.class).queryBuilder();
+            QueryBuilder<Diarybook, Integer> qb = helper.getDaoAccess(Diarybook.class).queryBuilder();
             return qb.query();
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
@@ -146,7 +146,7 @@ public class Diarybook implements Serializable {
 
     public static Diarybook getByName(DatabaseHelper helper,String diarybookName) {
         try {
-            Dao<Diarybook, Integer> dao = helper.getDao(Diarybook.class);
+            Dao<Diarybook, Integer> dao = helper.getDaoAccess(Diarybook.class);
             Diarybook bookByName = dao.queryBuilder().where().eq("diarybookName", diarybookName).queryForFirst();
             return bookByName;
         }
