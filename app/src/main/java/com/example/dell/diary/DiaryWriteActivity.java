@@ -197,8 +197,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     public List<String> weekList = new ArrayList<>(Arrays.asList("周日","周一","周二","周三"," 周四","周五","周六"));
 
     private float mPosX, mPosY, mCurPosX, mCurPosY;
-    private static final int FLING_MIN_DISTANCE = 20;// 移动最小距离
-    private static final int FLING_MIN_VELOCITY = 200;// 移动最大速度
+    private static final int FLING_MIN_DISTANCE = 10;// 移动最小距离
+    private static final int FLING_MIN_VELOCITY = 0;// 移动最小速度
     //构建手势探测器
     private GestureDetector mGestureDetector;
     private DrawerLayout mDrawerLayout;
@@ -246,6 +246,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         edit_layout.setFocusable(true);
         edit_layout.setClickable(true);
         edit_layout.setLongClickable(true);
+
+        diary_write.setOnTouchListener(this);
 
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -338,7 +340,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                         setTextFormmat(diary);
                         getLabelsOfDiary(diary,helper);
                     }
-                    getImage(diary.getText());
                 }
                 else if (e2.getX() - e1.getX() > FLING_MIN_DISTANCE
                         && Math.abs(velocityX) > FLING_MIN_VELOCITY) {
@@ -360,7 +361,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                         setTextFormmat(diary);
                         getLabelsOfDiary(diary,helper);
                     }
-                    getImage(diary.getText());
                 }
                 return true;
             }
@@ -618,7 +618,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             diary_write.setText("");
             diaryDate.setText("");
             diaryWeekday.setText("");
-            diary_write.setEnabled(false);
+            diary_write.setFocusable(false);
+            diary_write.setCursorVisible(false);
             floatingButtons.setVisibility(View.VISIBLE);
             addDiary.setVisibility(View.INVISIBLE);
             enterBottle.setVisibility(View.INVISIBLE);
@@ -635,7 +636,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
             diaryDate.setText(date);
             diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
-            diary_write.setEnabled(false);
+            diary_write.setFocusable(false);
+            diary_write.setCursorVisible(false);
             theme_set.setVisibility(View.INVISIBLE);
             font_set.setVisibility(View.INVISIBLE);
             insert_image.setVisibility(View.INVISIBLE);
@@ -717,7 +719,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             diary_write.setText("");
             diaryDate.setText("");
             diaryWeekday.setText("");
-            diary_write.setEnabled(false);
+            diary_write.setFocusable(false);
+            diary_write.setCursorVisible(false);
             floatingButtons.setVisibility(View.VISIBLE);
             addDiary.setVisibility(View.INVISIBLE);
             enterBottle.setVisibility(View.INVISIBLE);
@@ -733,7 +736,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
             diaryDate.setText(date);
             diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
-            diary_write.setEnabled(false);
+            diary_write.setFocusable(false);
+            diary_write.setCursorVisible(false);
 
             theme_set.setVisibility(View.INVISIBLE);
             font_set.setVisibility(View.INVISIBLE);
@@ -818,7 +822,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.edit:
                 if(emptyImage.getVisibility() == View.INVISIBLE){
-                    diary_write.setEnabled(true);
+                    diary_write.setFocusable(true);
+                    diary_write.setFocusableInTouchMode(true);
+                    diary_write.setCursorVisible(true);
                     theme_set.setVisibility(View.VISIBLE);
                     font_set.setVisibility(View.VISIBLE);
                     insert_image.setVisibility(View.VISIBLE);
@@ -908,7 +914,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 }
                 //CharSequence charSequence = Html.fromHtml(Html.toHtml(diary_write.getText()));
                 //Toast.makeText(DiaryWriteActivity.this,charSequence,Toast.LENGTH_SHORT).show();
-                diary_write.setEnabled(false);
+                diary_write.setFocusable(false);
+                diary_write.setCursorVisible(false);
                 theme_set.setVisibility(View.INVISIBLE);
                 font_set.setVisibility(View.INVISIBLE);
                 insert_image.setVisibility(View.INVISIBLE);
@@ -1223,20 +1230,25 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                                 diaryWeekday.setText("");
                                 getLabelsOfDiary(new Diary(), helper);
                             } else if (index == diaryList.size()) {
-                                index = index - 1;
+                                index = index -  1;
                                 diary = diaryList.get(index);
-                                String date = (diary.getDate().getYear() + 1900) + "年" + (diary.getDate().getMonth() + 1) + "月" + diary.getDate().getDate() + "日";
+                                String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
                                 diaryDate.setText(date);
                                 diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
-                                diary_write.setText(diary.getText());
-                                getLabelsOfDiary(diary, helper);
+                                diary_write.setText(Html.fromHtml(diary.getHtmlText()));
+                                getImage(diary.getText());
+                                setTextFormmat(diary);
+                                getLabelsOfDiary(diary,helper);
+
                             } else {
                                 diary = diaryList.get(index);
-                                String date = (diary.getDate().getYear() + 1900) + "年" + (diary.getDate().getMonth() + 1) + "月" + diary.getDate().getDate() + "日";
+                                String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
                                 diaryDate.setText(date);
                                 diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
-                                diary_write.setText(diary.getText());
-                                getLabelsOfDiary(diary, helper);
+                                diary_write.setText(Html.fromHtml(diary.getHtmlText()));
+                                getImage(diary.getText());
+                                setTextFormmat(diary);
+                                getLabelsOfDiary(diary,helper);
                             }
                         }
                     });
