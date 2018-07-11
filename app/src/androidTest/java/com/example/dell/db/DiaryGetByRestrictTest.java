@@ -35,7 +35,6 @@ public class DiaryGetByRestrictTest extends InstrumentationTestCase {
     private static final String TAG = "DiaryGetByRestrictTest";
 
     private DatabaseHelper databaseHelper;
-    private Dao<Diary, Integer> dao;
 
     private List<Label> labels = new ArrayList();
     private List<Diary> diaryShirly = new ArrayList();
@@ -47,7 +46,6 @@ public class DiaryGetByRestrictTest extends InstrumentationTestCase {
     public void setUp() throws SQLException {
         Context appContext = InstrumentationRegistry.getTargetContext();
         databaseHelper = OpenHelperManager.getHelper(appContext, DatabaseHelper.class);
-        dao = databaseHelper.getDiaryDao();
 
         labels.add(new Label("label1sadfvabe"));
         labels.add(new Label("janvp"));
@@ -115,7 +113,8 @@ public class DiaryGetByRestrictTest extends InstrumentationTestCase {
 
     // @Test
     public void testWhereSingleText() throws SQLException {
-        QueryBuilder<Diary, Integer> qb = databaseHelper.getDiaryDao().queryBuilder();
+        Dao<Diary, Integer> dao = databaseHelper.getDao(Diary.class);
+        QueryBuilder<Diary, Integer> qb = dao.queryBuilder();
         Where<Diary, Integer> where = qb.where();
         where.like("text", "%hi%");
         where.or(1);
@@ -124,7 +123,8 @@ public class DiaryGetByRestrictTest extends InstrumentationTestCase {
 
     // @Test
     public void testWhereMultipleText() throws SQLException {
-        QueryBuilder<Diary, Integer> qb = databaseHelper.getDiaryDao().queryBuilder();
+        Dao<Diary, Integer> dao = databaseHelper.getDao(Diary.class);
+        QueryBuilder<Diary, Integer> qb = dao.queryBuilder();
         Where<Diary, Integer> where = qb.where();
         where.like("text", "%hi%");
         where.like("text", "%hello%");
@@ -134,28 +134,32 @@ public class DiaryGetByRestrictTest extends InstrumentationTestCase {
 
     @Test
     public void testBuildWhereSingleText() throws SQLException {
-        QueryBuilder<Diary, Integer> qb = databaseHelper.getDiaryDao().queryBuilder();
+        Dao<Diary, Integer> dao = databaseHelper.getDao(Diary.class);
+        QueryBuilder<Diary, Integer> qb = dao.queryBuilder();
         Diary.buildWhere(qb.where(), "hellohi");
         Log.d(getClass().getName(), "testBuild: " + qb.prepareStatementString());
     }
 
     @Test
     public void testBuildWhereMultilpleText() throws SQLException {
-        QueryBuilder<Diary, Integer> qb = databaseHelper.getDiaryDao().queryBuilder();
+        Dao<Diary, Integer> dao = databaseHelper.getDao(Diary.class);
+        QueryBuilder<Diary, Integer> qb = dao.queryBuilder();
         Diary.buildWhere(qb.where(), "hello hi lueluelue blablabla");
         Log.d(getClass().getName(), "testBuild: " + qb.prepareStatementString());
     }
 
     @Test
     public void testBuildWhereDate() throws SQLException {
-        QueryBuilder<Diary, Integer> qb = databaseHelper.getDiaryDao().queryBuilder();
+        Dao<Diary, Integer> dao = databaseHelper.getDao(Diary.class);
+        QueryBuilder<Diary, Integer> qb = dao.queryBuilder();
         Diary.buildWhere(qb.where(), new Date(1998, 2, 19), new Date(2000, 2, 4));
         Log.d(getClass().getName(), "testBuild: " + qb.prepareStatementString());
     }
 
     @Test
     public void testBuildWhereDateAndSingleText() throws SQLException {
-        QueryBuilder<Diary, Integer> qb = databaseHelper.getDiaryDao().queryBuilder();
+        Dao<Diary, Integer> dao = databaseHelper.getDao(Diary.class);
+        QueryBuilder<Diary, Integer> qb = dao.queryBuilder();
         Where<Diary, Integer> w = qb.where();
         Diary.buildWhere(w, "hi");
         Diary.buildWhere(w, new Date(1998, 2, 19), new Date(2000, 2, 4));
@@ -165,7 +169,8 @@ public class DiaryGetByRestrictTest extends InstrumentationTestCase {
 
     @Test
     public void testBuildWhereDateAndMultipleText() throws SQLException {
-        QueryBuilder<Diary, Integer> qb = databaseHelper.getDiaryDao().queryBuilder();
+        Dao<Diary, Integer> dao = databaseHelper.getDao(Diary.class);
+        QueryBuilder<Diary, Integer> qb = dao.queryBuilder();
         Where<Diary, Integer> w = qb.where();
         Diary.buildWhere(w, "hi hello");
         Diary.buildWhere(w, new Date(1998, 2, 19), new Date(2000, 2, 4));
@@ -175,7 +180,8 @@ public class DiaryGetByRestrictTest extends InstrumentationTestCase {
 
     @Test
     public void testBuildQuerySingleLabel() throws SQLException {
-        QueryBuilder<Diary, Integer> qb = databaseHelper.getDiaryDao().queryBuilder();
+        Dao<Diary, Integer> dao = databaseHelper.getDao(Diary.class);
+        QueryBuilder<Diary, Integer> qb = dao.queryBuilder();
         List<Label> labelList = new ArrayList();
         labelList.add(labels.get(0));
         Diary.buildQuery(qb, databaseHelper, labelList);
@@ -184,7 +190,8 @@ public class DiaryGetByRestrictTest extends InstrumentationTestCase {
 
     @Test
     public void testBuildQueryMultipleLabel() throws SQLException {
-        QueryBuilder<Diary, Integer> qb = databaseHelper.getDiaryDao().queryBuilder();
+        Dao<Diary, Integer> dao = databaseHelper.getDao(Diary.class);
+        QueryBuilder<Diary, Integer> qb = dao.queryBuilder();
         Diary.buildQuery(qb, databaseHelper, labels);
         Log.d(getClass().getName(), "testBuild: " + qb.prepareStatementString());
     }
@@ -207,7 +214,7 @@ public class DiaryGetByRestrictTest extends InstrumentationTestCase {
     public void testGetByRestrictDate() throws SQLException {
         List<Diary> list;
         list = Diary.getByRestrict(databaseHelper, null, new Date(2016, 1, 5),
-                                   new Date(2016, 1, 23), null, true);
+                new Date(2016, 1, 23), null, true);
         assertEquals(2 * (23 - 5 + 1), list.size());
     }
 

@@ -46,7 +46,7 @@ public class CollectActivity extends AppCompatActivity {
         setContentView(R.layout.activity_collect);
         Toolbar toolbar = (Toolbar) findViewById(R.id.collect_toolbar);
         setSupportActionBar(toolbar);
-        mDrawLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        //mDrawLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         NavigationView navView =(NavigationView) findViewById(R.id.nav_view);
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null){
@@ -54,6 +54,7 @@ public class CollectActivity extends AppCompatActivity {
             //actionBar.setHomeAsUpIndicator(R.drawable.menu_white);
         }
         actionBar.setTitle("我的收藏");
+
         navView.setCheckedItem(R.id.nav_user);
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -62,6 +63,7 @@ public class CollectActivity extends AppCompatActivity {
                 return true;
             }
         });
+
         initCollectList();
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_collect_view);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 1);

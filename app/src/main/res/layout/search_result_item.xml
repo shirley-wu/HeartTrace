@@ -19,13 +19,11 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"
         android:textSize="20sp"
-        android:text="一篇日记"
          />
     <TextView
         android:id="@+id/diary_search_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2018年6月4日 周一"
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="10dp"
         />

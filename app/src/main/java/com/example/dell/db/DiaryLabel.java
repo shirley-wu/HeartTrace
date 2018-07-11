@@ -56,7 +56,7 @@ public class DiaryLabel {
 
     public void insert(DatabaseHelper helper) {
         try {
-            Dao<DiaryLabel, Integer> dao = helper.getDiaryLabelDao();
+            Dao<DiaryLabel, Integer> dao = helper.getDaoAccess(DiaryLabel.class);
             Log.i("db_diary_label", "dao = " + dao + "  db_diary_label " + this);
             int returnValue = dao.create(this);
             Log.i("db_diary_label", "插入后返回值："+returnValue);
@@ -68,7 +68,7 @@ public class DiaryLabel {
 
     public void delete(DatabaseHelper helper) {
         try {
-            Dao<DiaryLabel, Integer> dao = helper.getDiaryLabelDao();
+            Dao<DiaryLabel, Integer> dao = helper.getDaoAccess(DiaryLabel.class);
             Log.i("db_diary_label", "dao = " + dao + "  db_diary_label " + this);
             int returnValue = dao.delete(this);
             Log.i("db_diary_label", "删除后返回值："+returnValue);

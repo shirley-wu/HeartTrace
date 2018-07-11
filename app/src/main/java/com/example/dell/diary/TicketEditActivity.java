@@ -332,7 +332,7 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.ticket_next:
                 if(position >= sentenceList.size()-1){
-                    Toast.makeText(this, "已经是最新的一张纸条拉", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "已经是最新的一张纸条啦", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 Intent intent_next= new Intent();
@@ -342,7 +342,7 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.ticket_previous:
                 if(position == 0){
-                    Toast.makeText(this, "已经是最后一张纸条拉", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "已经是最早的一张纸条啦", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 Intent intent_pre= new Intent();
