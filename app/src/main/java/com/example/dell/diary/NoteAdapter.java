@@ -75,6 +75,7 @@ public class NoteAdapter extends RecyclerView.Adapter <NoteAdapter.ViewHolder> {
                 intent.putExtra(TicketEditActivity.SENTENCE_THIS, sentence);
                 intent.putExtra(TicketEditActivity.NOTE_EDITABLE, "false");
                 intent.putExtra(TicketEditActivity.NOTE_NEW, "false");
+                intent.putExtra(TicketEditActivity.TYPE, "ordinary");
                 Activity activity = (Activity) mContext;
                 activity.startActivityForResult(intent,1);
             }

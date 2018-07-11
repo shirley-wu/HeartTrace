@@ -8,7 +8,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.ColorInt;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +31,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -46,6 +51,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import javax.security.auth.login.LoginException;
+
 public class TicketEditActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
     public static final String BOTTLE_NAME = "bottle_name";
     public static final String SENTENCE_THIS = "sentence_this";
@@ -54,16 +61,30 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
     public static final String TYPE = "type";
     private static final String TAG = "TicketEditActivity";
     public static final String POSITION = "Position";
-    private String sentence_name = "travel";
-    private String tag= null;
-    private boolean ifExisted;
+    private final int ICON_LIST_DIALOG = 1;
+
+    private String sentenceLable_name = "travel";
     private List<ImageView> imageItems = new ArrayList<ImageView>(3);
     private int[] imgIds = {R.drawable.travel, R.drawable.work, R.drawable.study, R.drawable.entertainment, R.drawable.love};
+
+    public List<String> weekList = new ArrayList<>(Arrays.asList("周日","周一","周二","周三"," 周四","周五","周六"));
+
+
+
+
     List<Sentence> sentenceList = new ArrayList<>();
     List<Label> labelList = new ArrayList<>();
+    //Label
     List<Label> label_this = new ArrayList<>();
-    private final int ICON_LIST_DIALOG = 1;
-    ActionBar actionBar;
+    private int labelSize;
+    private boolean ifExisted;
+
+
+    private Sentence sentence;
+
+    private ActionBar actionBar;
+    private Toolbar toolbar;
+
     private TextView sentenceDate;
     private TextView sentenceWeekday;
     private ImageView sentenceIcon;
@@ -75,16 +96,24 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
     private FloatingActionButton ticket_edit;
     private Button note_previous;
     private Button note_next;
+    private Button sentence_likeIcon;
     private EditText editText ;
-    private String note_editable = "true";
-    private Sentence sentence;
-    private ObjectAnimator objAnimatorX;
     private LinearLayout ticketEditLayout;
+    private NavigationView navView;
+    private DrawerLayout mDrawerLayout;
+
+
+
+    private ObjectAnimator objAnimatorX;
+
+    private String note_editable = "true";
     private int flag = 1;
-    private int labelSize;
     private String note_new;
     private int position;
-    public List<String> weekList = new ArrayList<>(Arrays.asList("周日","周一","周二","周三"," 周四","周五","周六"));
+    private boolean likeFlag = true;
+    private String tag= null;
+    private String type = null ;
+
     private DatabaseHelper databaseHelper= null;
 
 
@@ -92,32 +121,129 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ticket_edit);
+        toolbarInit();
+        intentInit();
+        viewInit();
+        Init();
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_sentence_content);
+    }
+
+    void Init(){
+        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+        imageItems.add(sentenceIcon1);
+        imageItems.add(sentenceIcon2);
+        imageItems.add(sentenceIcon3);
+        imageItems.add(sentenceIcon4);
+        sentenceList = sentence.getSentencebook().getAllSubSentence(helper);
+
+        likeFlag = sentence.getLike();
+        if(likeFlag == false){
+           sentence_likeIcon.setBackgroundResource(R.drawable.unlike);
+        }
+        else if (likeFlag == true){
+            sentence_likeIcon.setBackgroundResource(R.drawable.like);
+        }
+
+        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.favorite:
+                        Intent intent0 = new Intent(TicketEditActivity.this, CollectActivity.class);
+                        startActivity(intent0);
+                        break;
+                    case R.id.statistics:
+                        Intent intent = new Intent(TicketEditActivity.this,StatisticsActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.calendar_search:
+                        Intent intent2 = new Intent(TicketEditActivity.this,CalendarActivity.class);
+                        startActivity(intent2);
+                        break;
+                    case R.id.time_line:
+                        Intent intent3 = new Intent(TicketEditActivity.this,TimeLineActivity.class);
+                        startActivity(intent3);
+                        break;
+                }
+                return true;
+            }
+        });
+        if(note_editable.equals("false") ){
+               Log.i(TAG, "onCreate: just it three");
+               editText.setText(sentence.getText());
+               getLabelsOfSentence(sentence,helper);
+               String date = (sentence.getDate().getYear()+1900)+"年"+(sentence.getDate().getMonth()+1)+"月"+sentence.getDate().getDate()+"日";
+               sentenceDate.setText(date);
+               sentenceWeekday.setText(weekList.get(sentence.getDate().getDay()));
+
+               ticket_confirm.setVisibility(View.INVISIBLE);
+               if(type.equals("ordinary")) {
+                   note_next.setVisibility(View.VISIBLE);
+                   note_previous.setVisibility(View.VISIBLE);
+               }
+               else {
+
+                   note_next.setVisibility(View.INVISIBLE);
+                   note_previous.setVisibility(View.INVISIBLE);
+               }
+               editText.setEnabled(false);
+               actionBar.show();
+           }
+           else if (note_editable.equals("true")){
+               Date date = new Date();
+               String today = (date.getYear()+1900)+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日";
+               sentenceDate.setText(today);
+               sentenceWeekday.setText(weekList.get(date.getDay()));
+               ticket_edit.setVisibility(View.INVISIBLE);
+               note_next.setVisibility(View.INVISIBLE);
+               note_previous.setVisibility(View.INVISIBLE);
+               editText.setEnabled(true);
+               editText.setText(sentence.getText());
+               actionBar.hide();
+        }
+    }
+
+    public void toolbarInit(){
+        toolbar = (Toolbar) findViewById(R.id.toolbar_sentence_content);
         setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
+        actionBar = getSupportActionBar();
         if(actionBar != null){
 
             actionBar.setDisplayHomeAsUpEnabled(true);
-            //actionBar.setHomeAsUpIndicator(R.drawable.menu_white);
+            actionBar.setHomeAsUpIndicator(R.drawable.menu_white);
         }
         actionBar.setTitle("Little Note");
+        setSupportActionBar(toolbar);
+    }
 
+
+    public void intentInit(){
         Intent intent = getIntent();
         note_editable = intent.getStringExtra(NOTE_EDITABLE);
         sentence = (Sentence) intent.getSerializableExtra(SENTENCE_THIS);
         note_new = intent.getStringExtra(NOTE_NEW);
-        ticket_confirm = (FloatingActionButton)findViewById(R.id.ticket_confirm);
+        position = intent.getIntExtra(POSITION,1);
+        type = intent.getStringExtra(TYPE);
+    }
+
+    public void viewInit(){
+        ticketEditLayout = (LinearLayout) findViewById(R.id.ticket_edit_layout);
+        ticketEditLayout.setOnClickListener(this);
+        mDrawerLayout = findViewById(R.id.note_drawer_layout);
+
+        navView = findViewById(R.id.nav_view);
+
         editText = findViewById(R.id.ticket_text);
-        ticket_edit = (FloatingActionButton) findViewById(R.id.ticket_edit);
+        sentenceDate = (TextView)findViewById(R.id.sentence_date);
+        sentenceWeekday = (TextView)findViewById(R.id.sentence_weekday);
+
+        //floatingActionButton
+        ticket_confirm = findViewById(R.id.ticket_confirm);
+        ticket_edit =  findViewById(R.id.ticket_edit);
         ticket_confirm.setOnClickListener(this);
         ticket_edit.setOnClickListener(this);
 
-        ticketEditLayout = (LinearLayout) findViewById(R.id.ticket_edit_layout);
-        ticketEditLayout.setOnClickListener(this);
-
-        position = intent.getIntExtra(POSITION,1);
-
+        //button
         note_next = findViewById(R.id.ticket_previous);
         note_previous = findViewById(R.id.ticket_next);
         note_next.setOnClickListener(this);
@@ -129,58 +255,17 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
         sentenceIcon3 = (ImageView) findViewById(R.id.sentence_content_icon3);
         sentenceIcon4 = (ImageView) findViewById(R.id.sentence_content_icon4);
         sentenceIcon.setOnClickListener(this);
-
         sentenceIcon.setOnLongClickListener(this);
         sentenceIcon1.setOnLongClickListener(this);
         sentenceIcon2.setOnLongClickListener(this);
         sentenceIcon3.setOnLongClickListener(this);
         sentenceIcon4.setOnLongClickListener(this);
 
-        Init();
-    }
+        //button
+        sentence_likeIcon = findViewById(R.id.sentence_like_icon);
+        sentence_likeIcon.setOnClickListener(this);
 
-    void Init(){
-        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-        imageItems.add(sentenceIcon1);
-        imageItems.add(sentenceIcon2);
-        imageItems.add(sentenceIcon3);
-        imageItems.add(sentenceIcon4);
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar_sentence_content);
-        sentenceDate = (TextView)findViewById(R.id.sentence_date);
-        sentenceWeekday = (TextView)findViewById(R.id.sentence_weekday);
-        setSupportActionBar(toolbar);
-        actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-        sentenceList = sentence.getSentencebook().getAllSubSentence(helper);
 
-        if(note_editable.equals("false") ){
-            editText.setText(sentence.getText());
-            getLabelsOfSentence(sentence,helper);
-            String date = (sentence.getDate().getYear()+1900)+"年"+(sentence.getDate().getMonth()+1)+"月"+sentence.getDate().getDate()+"日";
-            sentenceDate.setText(date);
-            sentenceWeekday.setText(weekList.get(sentence.getDate().getDay()));
-
-            ticket_confirm.setVisibility(View.INVISIBLE);
-            note_next.setVisibility(View.VISIBLE);
-            note_previous.setVisibility(View.VISIBLE);
-
-            editText.setEnabled(false);
-            actionBar.show();
-        }
-        else if (note_editable.equals("true")){
-            Date date = new Date();
-            String today = (date.getYear()+1900)+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日";
-            sentenceDate.setText(today);
-            sentenceWeekday.setText(weekList.get(date.getDay()));
-            ticket_edit.setVisibility(View.INVISIBLE);
-            note_next.setVisibility(View.INVISIBLE);
-            note_previous.setVisibility(View.INVISIBLE);
-            editText.setEnabled(true);
-            editText.setText(sentence.getText());
-            actionBar.hide();
-        }
     }
 
     @Override
@@ -199,8 +284,10 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
                 actionBar.show();
                 ticket_edit.setVisibility(View.VISIBLE);
                 ticket_confirm.setVisibility(View.INVISIBLE);
-                note_next.setVisibility(View.VISIBLE);
-                note_previous.setVisibility(View.VISIBLE);
+                if(type.equals("ordinary")) {
+                    note_next.setVisibility(View.VISIBLE);
+                    note_previous.setVisibility(View.VISIBLE);
+                }
                 editText.setEnabled(false);
                 //添加新的纸条
                 if(note_new.equals("true")) {
@@ -263,6 +350,24 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
                 setResult(-1, intent_pre);
                 finish();
                 break;
+            case R.id.sentence_like_icon:
+                DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+                if (likeFlag == true) {
+                    Log.i(TAG, "onClick: like");
+                    likeFlag = false;
+                    sentence_likeIcon.setBackgroundResource(R.drawable.unlike);
+                    sentence.setLike(false);
+                    sentence.update(helper);
+                } else if (likeFlag == false) {
+                    Log.i(TAG, "onClick: unlike");
+                    likeFlag = true;
+                    sentence_likeIcon.setBackgroundResource(R.drawable.like);
+                    sentence.setLike(true);
+                    sentence.update(helper);
+                }
+                break;
+
+
 
         }
     }
@@ -280,8 +385,8 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
                 break;
 
             case android.R.id.home:
-                finish();
-                return true;
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                break;
             case R.id.delete:
                 AlertDialog.Builder dialog = new AlertDialog.Builder(TicketEditActivity.this);
                 dialog.setTitle("提示");
@@ -307,6 +412,10 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
         return true;
     }
 
+
+
+
+
     protected Dialog onCreateDialog(int id) {
         Dialog dialog = null;
         switch(id) {
@@ -320,18 +429,18 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
                             @Override
                             public void onClick(DialogInterface dialogInterface, int which) {
                                 switch (which){
-                                    case 0: sentence_name = "travel";break;
-                                    case 1: sentence_name = "study";break;
-                                    case 2: sentence_name = "work";break;
-                                    case 3: sentence_name = "entertainment";break;
-                                    case 4: sentence_name = "love";break;
+                                    case 0: sentenceLable_name = "travel";break;
+                                    case 1: sentenceLable_name = "study";break;
+                                    case 2: sentenceLable_name = "work";break;
+                                    case 3: sentenceLable_name = "entertainment";break;
+                                    case 4: sentenceLable_name = "love";break;
                                 }
                                 ifExisted = false;
                                 DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
 
-                                Label label = Label.getByName(helper,sentence_name);
+                                Label label = Label.getByName(helper,sentenceLable_name);
                                 if(label == null) {
-                                    label = new Label(sentence_name);
+                                    label = new Label(sentenceLable_name);
                                     label.insert(helper);
                                 }
                                 label_this = null;
@@ -345,7 +454,7 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
                                 {
                                     for(Label i:label_this)
                                     {
-                                        if(i.getLabelname().equals(sentence_name))
+                                        if(i.getLabelname().equals(sentenceLable_name))
                                             ifExisted = true;
                                     }
                                 }
