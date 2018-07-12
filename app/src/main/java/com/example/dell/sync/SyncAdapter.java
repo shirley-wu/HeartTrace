@@ -147,7 +147,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
     public String postSyncData(String table, String sendData) {
         HttpClient httpClient = new DefaultHttpClient();
-        String url = ServerAccessor.SERVER_IP + ":8080/HeartTrace_Server_war4/Sync";
+        String url = ServerAccessor.getServerIp() + ":8080/HeartTrace_Server_war4/Sync";
         Log.d(TAG, "postSyncData: url " + url);
         HttpPost httpPost = new HttpPost(url);
 

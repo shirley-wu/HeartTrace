@@ -22,6 +22,10 @@ public class ServerAccessor {
 
     private static final String TAG = "ServerAccessor";
 
-    public static final String SERVER_IP = "http://122.152.195.134";
+    private static final String SERVER_IP = "http://122.152.195.134";
+
+    static public String getServerIp() {
+        return SERVER_IP;
+    }
 
 }

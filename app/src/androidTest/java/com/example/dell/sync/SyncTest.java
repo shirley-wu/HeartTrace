@@ -24,7 +24,7 @@ public class SyncTest extends InstrumentationTestCase {
 
     private static final String ACCOUNT_TYPE = "dell.example.com";
 
-    private static final String AUTHORITY = "com.example.dell.sync.provider";
+    private static final String AUTHORITY = "com.example.dell.stub.sync.provider";
 
     private Account mAccount;
 

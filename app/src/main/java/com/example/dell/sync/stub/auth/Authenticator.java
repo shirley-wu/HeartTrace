@@ -1,4 +1,4 @@
-package com.example.dell.auth;
+package com.example.dell.sync.stub.auth;
 
 import android.accounts.AbstractAccountAuthenticator;
 import android.accounts.Account;
@@ -13,6 +13,7 @@ import android.os.Bundle;
  * of its methods
  */
 public class Authenticator extends AbstractAccountAuthenticator {
+
     // Simple constructor
     public Authenticator(Context context) {
         super(context);

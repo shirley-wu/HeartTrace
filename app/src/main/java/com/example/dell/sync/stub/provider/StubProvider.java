@@ -1,4 +1,4 @@
-package com.example.dell.sync.provider;
+package com.example.dell.sync.stub.provider;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;

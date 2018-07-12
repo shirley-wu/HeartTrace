@@ -1,4 +1,4 @@
-package com.example.dell.auth;
+package com.example.dell.sync.stub.auth;
 
 import android.app.Service;
 import android.content.Intent;

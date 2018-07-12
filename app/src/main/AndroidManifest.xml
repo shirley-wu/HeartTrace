@@ -78,7 +78,7 @@
 
         <!-- Note: the followings are added for authentication (stub). If anything unpredicted happens tell us. -->
         <service
-            android:name="com.example.dell.auth.AuthenticatorService"
+            android:name="com.example.dell.sync.stub.auth.AuthenticatorService"
             android:exported="false" >
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator"/>
@@ -90,8 +90,8 @@
 
         <!-- Note: the followings are added for synchronization. If anything unpredicted happens tell us. -->
         <provider
-            android:name="com.example.dell.sync.provider.StubProvider"
-            android:authorities="com.example.dell.sync.provider"
+            android:name="com.example.dell.sync.stub.provider.StubProvider"
+            android:authorities="com.example.dell.sync.stub.provider"
             android:exported="false"
             android:syncable="true" />
 
