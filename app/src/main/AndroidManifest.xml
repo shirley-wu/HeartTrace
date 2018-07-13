@@ -37,7 +37,7 @@
             android:theme="@style/calendar" />
         <activity
             android:name=".DiaryWriteActivity"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity
             android:name=".TicketEditActivity"
             android:windowSoftInputMode="adjustResize|stateHidden" />
