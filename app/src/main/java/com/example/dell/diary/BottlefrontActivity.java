@@ -9,6 +9,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -53,6 +54,8 @@ public class BottlefrontActivity extends AppCompatActivity {
     private DatabaseHelper databaseHelper = null;
     private List<Sentence> sentenceList = new ArrayList<>();
     private NoteAdapter adapter;
+    private NavigationView navView;
+    private DrawerLayout mDrawerLayout;
 
 
 
@@ -82,6 +85,7 @@ public class BottlefrontActivity extends AppCompatActivity {
                         intent.putExtra(TicketEditActivity.SENTENCE_THIS, sentence);
                         intent.putExtra(TicketEditActivity.NOTE_EDITABLE, "false");
                         intent.putExtra(TicketEditActivity.NOTE_NEW, "false");
+                        intent.putExtra(TicketEditActivity.TYPE, "ordinary");
                         startActivityForResult(intent, 1);
                     }
                 }
@@ -95,6 +99,7 @@ public class BottlefrontActivity extends AppCompatActivity {
                         intent.putExtra(TicketEditActivity.SENTENCE_THIS, sentence);
                         intent.putExtra(TicketEditActivity.NOTE_EDITABLE, "false");
                         intent.putExtra(TicketEditActivity.NOTE_NEW, "false");
+                        intent.putExtra(TicketEditActivity.TYPE, "ordinary");
                         startActivityForResult(intent, 1);
                     }
                 }
@@ -122,6 +127,7 @@ public class BottlefrontActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.menu_white);
         }
         collapsingToolbar.setTitle(sentencebookName);
         //  Glide.with(this).load(bottleImageId).into(bottleImageView);
@@ -146,6 +152,7 @@ public class BottlefrontActivity extends AppCompatActivity {
                 intent.putExtra(TicketEditActivity.NOTE_EDITABLE, "true");
                 intent.putExtra(TicketEditActivity.NOTE_NEW, "true");
                 intent.putExtra(TicketEditActivity.SENTENCE_THIS, sentence);
+                intent.putExtra(TicketEditActivity.TYPE, "ordinary");
                 startActivityForResult(intent,1);
             }
         });
@@ -189,6 +196,36 @@ public class BottlefrontActivity extends AppCompatActivity {
         read_me.setText(read_me_text);
 
 
+
+        mDrawerLayout = findViewById(R.id.note_drawer_layout);
+        navView = findViewById(R.id.nav_view);
+        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.favorite:
+                        Intent intent0 = new Intent(BottlefrontActivity.this, CollectActivity.class);
+                        startActivity(intent0);
+                        break;
+                    case R.id.statistics:
+                        Intent intent = new Intent(BottlefrontActivity.this,StatisticsActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.calendar_search:
+                        Intent intent2 = new Intent(BottlefrontActivity.this,CalendarActivity.class);
+                        startActivity(intent2);
+                        break;
+                    case R.id.time_line:
+                        Intent intent3 = new Intent(BottlefrontActivity.this,TimeLineActivity.class);
+                        startActivity(intent3);
+                        break;
+                }
+                return true;
+            }
+        });
+
+
+
         RecyclerView recyclerView = findViewById(R.id.recycler_note_view);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
@@ -213,8 +250,8 @@ public class BottlefrontActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
-                return true;
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                break;
             case R.id.rename:
                 final EditText renameBottleName = new EditText(BottlefrontActivity.this);
                 renameBottleName.setId(R.id.edit_In_BottleName);

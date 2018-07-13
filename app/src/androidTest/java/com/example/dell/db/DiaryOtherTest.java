@@ -171,7 +171,7 @@ public class DiaryOtherTest {
         }
 
         diary.delete(databaseHelper);
-        QueryBuilder<DiaryLabel, Integer> diaryLabelQb = databaseHelper.getDiaryLabelDao().queryBuilder();
+        QueryBuilder<DiaryLabel, Integer> diaryLabelQb = databaseHelper.getDaoAccess(DiaryLabel.class).queryBuilder();
         diaryLabelQb.where().eq(DiaryLabel.DIARY_TAG, diary);
         Log.d(TAG, "testGetAllLabel: " + diaryLabelQb.prepareStatementString());
         List<DiaryLabel> diaryLabelList = diaryLabelQb.query();

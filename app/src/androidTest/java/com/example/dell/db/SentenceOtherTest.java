@@ -171,7 +171,7 @@ public class SentenceOtherTest {
         }
 
         sentence.delete(databaseHelper);
-        QueryBuilder<SentenceLabel, Integer> sentenceLabelQb = databaseHelper.getSentenceLabelDao().queryBuilder();
+        QueryBuilder<SentenceLabel, Integer> sentenceLabelQb = databaseHelper.getDaoAccess(SentenceLabel.class).queryBuilder();
         sentenceLabelQb.where().eq(SentenceLabel.SENTENCE_TAG, sentence);
         Log.d(TAG, "testGetAllLabel: " + sentenceLabelQb.prepareStatementString());
         List<SentenceLabel> sentenceLabelList = sentenceLabelQb.query();

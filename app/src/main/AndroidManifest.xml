@@ -1,21 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.dell.diary">
 
-    <!--文件操作，误删！-->
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <!-- 申请权限存取图片，误删！ -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-    <!--申请权限存取图片，误删！-->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
-    <!--支持多分辨率-->
     <supports-screens
-        android:smallScreens="true"
-        android:normalScreens="true"
+        android:anyDensity="true"
         android:largeScreens="true"
+        android:normalScreens="true"
         android:resizeable="true"
-        android:anyDensity="true"/>
+        android:smallScreens="true" />
+
+    <!-- 文件操作，误删！ -->
+    <uses-permission
+        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" />
+
+    <!-- 支持多分辨率 -->
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true" />
 
     <application
         android:allowBackup="true"
@@ -25,8 +35,7 @@
         android:theme="@style/AppTheme.Main">
         <activity
             android:name=".TimeLineActivity"
-            android:label="HeartTrace">
-        </activity>
+            android:label="HeartTrace" />
         <activity android:name=".StatisticsActivity" />
         <activity android:name=".DiaryActivity" />
         <activity android:name=".SearchActivity" />
@@ -55,16 +64,18 @@
         <activity android:name=".BottlesActivity" />
         <activity android:name=".SearchResultActivity" />
         <activity android:name=".LabelManageActivity" />
-
-        <activity android:name=".CollectActivity"></activity>
-
+        <activity android:name=".CollectActivity" />
         <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".LoginActivity"
+            android:launchMode="singleTask"/>
+        <activity android:name=".PersonalInformationActivity" />
+        <activity android:name=".RegisterActivity"></activity>
     </application>
 
 </manifest>

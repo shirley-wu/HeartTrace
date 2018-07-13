@@ -14,7 +14,7 @@
         <com.github.mikephil.charting.charts.CombinedChart
             android:id="@+id/chart"
             android:layout_width="match_parent"
-            android:layout_height="300dp" />
+            android:layout_height="330dp" />
 
         <LinearLayout
             android:layout_width="match_parent"

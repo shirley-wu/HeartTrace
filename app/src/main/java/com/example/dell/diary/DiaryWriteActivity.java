@@ -110,6 +110,8 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.example.dell.diary.R.drawable.background1;
+
 public class DiaryWriteActivity extends AppCompatActivity implements View.OnClickListener,View.OnTouchListener,View.OnLongClickListener {
 //    private ViewPager vp;
 //    private DiaryFragment diaryFragment;
@@ -137,6 +139,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private List<ImageView> imageItems = new ArrayList<ImageView>(3);
     int index;
     ActionBar actionBar;
+    private android.support.design.widget.CoordinatorLayout drawer;
     private TextView diaryDate;
     private TextView diaryWeekday;
     private ImageView diaryIcon;
@@ -144,6 +147,14 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private ImageView diaryIcon2;
     private ImageView diaryIcon3;
     private ImageView diaryIcon4;
+    private ImageView background1;
+    private ImageView background2;
+    private ImageView background3;
+    private ImageView background4;
+    private ImageView background5;
+    private ImageView background6;
+    private ImageView background7;
+    private ImageView background8;
     private EditText diary_write;
     private LinearLayout edit_layout;
     private LinearLayout date_layout;
@@ -161,7 +172,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private boolean is_bold=false;
     private boolean is_italic=false;
     private ImageButton font_set;
+    private ImageButton theme_set;
     private BottomSheetBehavior font_setting_bottom_sheet;
+    private BottomSheetBehavior theme_setting_bottom_sheet;
     private TextView set_font1;
     private TextView set_font2;
     private TextView set_font3;
@@ -184,8 +197,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     public List<String> weekList = new ArrayList<>(Arrays.asList("周日","周一","周二","周三"," 周四","周五","周六"));
 
     private float mPosX, mPosY, mCurPosX, mCurPosY;
-    private static final int FLING_MIN_DISTANCE = 20;// 移动最小距离
-    private static final int FLING_MIN_VELOCITY = 200;// 移动最大速度
+    private static final int FLING_MIN_DISTANCE = 100;// 移动最小距离
+    private static final int FLING_MIN_VELOCITY = 200;// 移动最小速度
     //构建手势探测器
     private GestureDetector mGestureDetector;
     private DrawerLayout mDrawerLayout;
@@ -224,25 +237,34 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         getView();
         setOnListener();
         init();
+
+
 //        //initViewPage();
         mGestureDetector = new GestureDetector(new MyGestureListener()); //使用派生自OnGestureListener
 
         edit_layout.setOnTouchListener(this);
-        edit_layout.setFocusable(true);
-        edit_layout.setClickable(true);
-        edit_layout.setLongClickable(true);
+        //edit_layout.setFocusable(true);
+        //edit_layout.setClickable(true);
+        //edit_layout.setLongClickable(true);
+
+        diary_write.setOnTouchListener(this);
+
 
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 switch (item.getItemId()){
+                    case R.id.personal_information:
+                        Intent intent = new Intent(DiaryWriteActivity.this,PersonalInformationActivity.class);
+                        startActivity(intent);
+                        break;
                     case R.id.favorite:
                         Intent intent0 = new Intent(DiaryWriteActivity.this, CollectActivity.class);
                         startActivity(intent0);
                         break;
                     case R.id.statistics:
-                        Intent intent = new Intent(DiaryWriteActivity.this,StatisticsActivity.class);
-                        startActivity(intent);
+                        Intent intent1 = new Intent(DiaryWriteActivity.this,StatisticsActivity.class);
+                        startActivity(intent1);
                         break;
                     case R.id.calendar_search:
                         Intent intent2 = new Intent(DiaryWriteActivity.this,CalendarActivity.class);
@@ -257,14 +279,30 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             }
         });
     }
-/*
+
     @Override
     protected void onRestart(){
         super.onRestart();
-        Log.d("restart",originType);
-        reStartInit();
+
+        addDiary.setVisibility(View.INVISIBLE);
+        enterBottle.setVisibility(View.INVISIBLE);
+        like.setVisibility(View.INVISIBLE);
+        edit.setVisibility(View.INVISIBLE);
     }
-*/
+
+    public boolean dispatchTouchEvent(MotionEvent ev){
+        //让GestureDetector响应触碰事件
+        mGestureDetector.onTouchEvent(ev);
+        //让Activity响应触碰事件
+        super.dispatchTouchEvent(ev);
+        return false;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return mGestureDetector.onTouchEvent(event);
+    }
+
     public boolean onTouch(View v, MotionEvent event) {
         return mGestureDetector.onTouchEvent(event);
     }
@@ -322,7 +360,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                         setTextFormmat(diary);
                         getLabelsOfDiary(diary,helper);
                     }
-                    getImage(diary.getText());
                 }
                 else if (e2.getX() - e1.getX() > FLING_MIN_DISTANCE
                         && Math.abs(velocityX) > FLING_MIN_VELOCITY) {
@@ -344,26 +381,11 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                         setTextFormmat(diary);
                         getLabelsOfDiary(diary,helper);
                     }
-                    getImage(diary.getText());
                 }
                 return true;
             }
             return false;
         }
-    }
-
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev){
-        //让GestureDetector响应触碰事件
-        mGestureDetector.onTouchEvent(ev);
-        //让Activity响应触碰事件
-        super.dispatchTouchEvent(ev);
-        return false;
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        return mGestureDetector.onTouchEvent(event);
     }
 
     public void initViewPage(){
@@ -383,6 +405,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
     public void getView()
     {
+        drawer = (android.support.design.widget.CoordinatorLayout) findViewById(R.id.diaryWriteLayout);
         floatingButtons = (ConstraintLayout)findViewById(R.id.floating_buttons);
         addDiary = (FloatingActionButton)findViewById(R.id.add_diary);
         add = (FloatingActionButton)findViewById(R.id.add);
@@ -396,10 +419,20 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         set_size = (DiscreteSeekBar) findViewById(R.id.set_size);
         confirm = (ImageButton) findViewById(R.id.confirm);
         font_set = (ImageButton) findViewById(R.id.font_setting);
+        theme_set = (ImageButton) findViewById(R.id.theme_setting) ;
         font_setting_bottom_sheet =  BottomSheetBehavior.from(findViewById(R.id.fontSettingBottomSheetLayout));
+        theme_setting_bottom_sheet =  BottomSheetBehavior.from(findViewById(R.id.themeSettingBottomSheetLayout));
         set_font1 = (TextView) findViewById(R.id.font1);
         set_font2 = (TextView) findViewById(R.id.font2);
         set_font3 = (TextView) findViewById(R.id.font3);
+        background1 = (ImageView) findViewById(R.id.background1);
+        background2 = (ImageView) findViewById(R.id.background2);
+        background3 = (ImageView) findViewById(R.id.background3);
+        background4 = (ImageView) findViewById(R.id.background4);
+        background5 = (ImageView) findViewById(R.id.background5);
+        background6 = (ImageView) findViewById(R.id.background6);
+        background7 = (ImageView) findViewById(R.id.background7);
+        background8 = (ImageView) findViewById(R.id.background8);
         set_center = (ImageButton) findViewById(R.id.set_center);
         set_left = (ImageButton) findViewById(R.id.set_left);
         set_right = (ImageButton) findViewById(R.id.set_right);
@@ -488,6 +521,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         edit.setOnClickListener(this);
         confirm.setOnClickListener(this);
         font_set.setOnClickListener(this);
+        theme_set.setOnClickListener(this);
         set_font1.setOnClickListener(this);
         set_font2.setOnClickListener(this);
         set_font3.setOnClickListener(this);
@@ -510,6 +544,14 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         diaryIcon2.setOnLongClickListener(this);
         diaryIcon3.setOnLongClickListener(this);
         diaryIcon4.setOnLongClickListener(this);
+        background1.setOnClickListener(this);
+        background2.setOnClickListener(this);
+        background3.setOnClickListener(this);
+        background4.setOnClickListener(this);
+        background5.setOnClickListener(this);
+        background6.setOnClickListener(this);
+        background7.setOnClickListener(this);
+        background8.setOnClickListener(this);
     }
 
     public void init()
@@ -568,7 +610,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
            diary = diaryList.get(index);
         }
         else if(originType.equals("like")){
-            diaryList = Diary.getAllLike(helper, false);
+            diaryList = Diary.getAllLike(helper, true);
             diary = (Diary) intent.getSerializableExtra("diary_like");
             index = intent.getIntExtra("diarylike_index",diaryList.size());
             diary = diaryList.get(index);
@@ -589,6 +631,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         }
         else if(diaryList.size() == 0){
             emptyImage.setVisibility(View.VISIBLE);
+            theme_set.setVisibility(View.INVISIBLE);
             font_set.setVisibility(View.INVISIBLE);
             insert_image.setVisibility(View.INVISIBLE);
             confirm.setVisibility(View.INVISIBLE);
@@ -596,7 +639,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             diary_write.setText("");
             diaryDate.setText("");
             diaryWeekday.setText("");
-            diary_write.setEnabled(false);
+            diary_write.setFocusable(false);
+            diary_write.setCursorVisible(false);
             floatingButtons.setVisibility(View.VISIBLE);
             addDiary.setVisibility(View.INVISIBLE);
             enterBottle.setVisibility(View.INVISIBLE);
@@ -613,7 +657,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
             diaryDate.setText(date);
             diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
-            diary_write.setEnabled(false);
+            diary_write.setFocusable(false);
+            diary_write.setCursorVisible(false);
+            theme_set.setVisibility(View.INVISIBLE);
             font_set.setVisibility(View.INVISIBLE);
             insert_image.setVisibility(View.INVISIBLE);
             confirm.setVisibility(View.INVISIBLE);
@@ -629,101 +675,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         }
 //
 
-    }
-
-    public void reStartInit(){
-        imageItems.add(diaryIcon1);
-        imageItems.add(diaryIcon2);
-        imageItems.add(diaryIcon3);
-        imageItems.add(diaryIcon4);
-
-        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-        if(originType.equals("welcome")){
-            diaryList = Diary.getAll(helper,true);
-            if(diaryList.size() == 0){
-
-            }
-            else{
-                index = diaryList.size()-1;
-                diary = diaryList.get(index);
-            }
-        }
-        else if(originType.equals("diary")){
-            diaryList = Diary.getAll(helper,true);
-            //diary = (Diary) intent.getSerializableExtra("diary_list");
-            diary = diaryList.get(index);
-            //labelList = Label.getAllLabel(helper);
-        }
-        else if(originType.equals("add_diary")){
-            diaryList = Diary.getAll(helper,true);
-        }
-        else if(originType.equals("search")) {
-            // Get the Bundle Object
-
-            Bundle bundleObject = getIntent().getExtras();
-//            // Get ArrayList Bundle
-            diaryList = (ArrayList<Diary>) bundleObject.getSerializable("search_list");
-            Collections.reverse(diaryList);
-            diary = diaryList.get(index);
-        }
-        else if(originType.equals("like")){
-            diaryList = Diary.getAllLike(helper, false);
-            diary = diaryList.get(index);
-        }
-
-        if(originType.equals("add_diary")){
-            Date date = new Date();
-            String today = (date.getYear()+1900)+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日";
-            diaryDate.setText(today);
-            diaryWeekday.setText(weekList.get(date.getDay()));
-            //diaryIcon.setImageDrawable(setTag(tagId));
-            actionBar.hide();
-
-            floatingButtons.setVisibility(View.INVISIBLE);
-            emptyImage.setVisibility(View.INVISIBLE);
-
-            initTextFormmat();
-        }
-        else if(diaryList.size() == 0){
-            emptyImage.setVisibility(View.VISIBLE);
-            font_set.setVisibility(View.INVISIBLE);
-            insert_image.setVisibility(View.INVISIBLE);
-            confirm.setVisibility(View.INVISIBLE);
-
-            diary_write.setText("");
-            diaryDate.setText("");
-            diaryWeekday.setText("");
-            diary_write.setEnabled(false);
-            floatingButtons.setVisibility(View.VISIBLE);
-            addDiary.setVisibility(View.INVISIBLE);
-            enterBottle.setVisibility(View.INVISIBLE);
-            like.setVisibility(View.INVISIBLE);
-            edit.setVisibility(View.INVISIBLE);
-        }
-        else {
-            Log.i("show",diary.getHtmlText());
-            diary_write.setText(Html.fromHtml(diary.getHtmlText()));
-            getImage(diary.getText());
-            setTextFormmat(diary);
-            getLabelsOfDiary(diary,helper);
-            String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
-            diaryDate.setText(date);
-            diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
-            diary_write.setEnabled(false);
-            font_set.setVisibility(View.INVISIBLE);
-            insert_image.setVisibility(View.INVISIBLE);
-            confirm.setVisibility(View.INVISIBLE);
-
-            emptyImage.setVisibility(View.INVISIBLE);
-            floatingButtons.setVisibility(View.VISIBLE);
-            addDiary.setVisibility(View.INVISIBLE);
-            enterBottle.setVisibility(View.INVISIBLE);
-            like.setVisibility(View.INVISIBLE);
-            edit.setVisibility(View.INVISIBLE);
-
-            diary_write.setSelection(diary_write.getText().length());
-        }
-//
     }
 
     private void initTextFormmat()
@@ -748,13 +699,21 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
         switch (view.getId()) {
             case R.id.diary_content_icon:
+                DisplayMetrics displayMetrics1 = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(displayMetrics1);
+                int screenWidth = displayMetrics1.widthPixels;
+                int screenHeight = displayMetrics1.heightPixels;
+                Log.d("debug", "screenWidth = "+screenWidth+"|screenHeight = "+screenHeight);
+
                 for(int i=0;i<imageItems.size();i++) {
-                    int radius = 90;
+                    float radius = (float) screenWidth / 12;
                     float distanceX = (float) (flag * radius * (i + 1));
-                    objAnimatorX = ObjectAnimator.ofFloat(imageItems.get(i), "x", imageItems.get(i).getX(), imageItems.get(i).getX() + distanceX);
-                    objAnimatorX.setDuration(120);
-                    objAnimatorX.setStartDelay(50);
-                    objAnimatorX.start();
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                        objAnimatorX = ObjectAnimator.ofFloat(imageItems.get(i), "x", imageItems.get(i).getX(), imageItems.get(i).getX() + distanceX);
+                        objAnimatorX.setDuration(120);
+                        objAnimatorX.setStartDelay(50);
+                        objAnimatorX.start();
+                    }
                     if(flag == 1) imageItems.get(i).setVisibility(View.VISIBLE);
                     else if(flag == -1) imageItems.get(i).setVisibility(View.INVISIBLE);
                 }
@@ -788,6 +747,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 if(emptyImage.getVisibility() == View.INVISIBLE){
                     diary_write.setEnabled(true);
                     diary_write.setSelection(diary_write.getText().length());
+                    theme_set.setVisibility(View.VISIBLE);
                     font_set.setVisibility(View.VISIBLE);
                     insert_image.setVisibility(View.VISIBLE);
                     confirm.setVisibility(View.VISIBLE);
@@ -817,11 +777,14 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 //finish();
                 break;
             case R.id.edit_layout:
+            case R.id.diaryWrite:
                 if(confirm.getVisibility()==View.VISIBLE){
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     if (imm != null) {
                         diary_write.requestFocus();
-                        imm.showSoftInput(diary_write,0);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CUPCAKE) {
+                            imm.showSoftInput(diary_write,0);
+                        }
                     }
                 }
                 else{
@@ -877,6 +840,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     diaryList.add(index,diary);
                 }
                 diary_write.setEnabled(false);
+                theme_set.setVisibility(View.INVISIBLE);
                 font_set.setVisibility(View.INVISIBLE);
                 insert_image.setVisibility(View.INVISIBLE);
                 confirm.setVisibility(View.INVISIBLE);
@@ -890,6 +854,33 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.font_setting:
                 font_setting_bottom_sheet.setState(BottomSheetBehavior.STATE_EXPANDED);
+                break;
+            case R.id.theme_setting:
+                theme_setting_bottom_sheet.setState(BottomSheetBehavior.STATE_EXPANDED);
+                break;
+            case R.id.background1:
+                drawer.setBackgroundResource(R.drawable.background1);
+                break;
+            case R.id.background2:
+                drawer.setBackgroundResource(R.drawable.background2);
+                break;
+            case R.id.background3:
+                drawer.setBackgroundResource(R.drawable.background3);
+                break;
+            case R.id.background4:
+                drawer.setBackgroundResource(R.drawable.background4);
+                break;
+            case R.id.background5:
+                drawer.setBackgroundResource(R.drawable.background5);
+                break;
+            case R.id.background6:
+                drawer.setBackgroundResource(R.drawable.background6);
+                break;
+            case R.id.background7:
+                drawer.setBackgroundResource(R.drawable.background7);
+                break;
+            case R.id.background8:
+                drawer.setBackgroundResource(R.drawable.background8);
                 break;
             case R.id.font1:
                 set_font1.setBackgroundColor(Color.GRAY);
@@ -1121,20 +1112,25 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                                 diaryWeekday.setText("");
                                 getLabelsOfDiary(new Diary(), helper);
                             } else if (index == diaryList.size()) {
-                                index = index - 1;
+                                index = index -  1;
                                 diary = diaryList.get(index);
-                                String date = (diary.getDate().getYear() + 1900) + "年" + (diary.getDate().getMonth() + 1) + "月" + diary.getDate().getDate() + "日";
+                                String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
                                 diaryDate.setText(date);
                                 diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
-                                diary_write.setText(diary.getText());
-                                getLabelsOfDiary(diary, helper);
+                                diary_write.setText(Html.fromHtml(diary.getHtmlText()));
+                                getImage(diary.getText());
+                                setTextFormmat(diary);
+                                getLabelsOfDiary(diary,helper);
+
                             } else {
                                 diary = diaryList.get(index);
-                                String date = (diary.getDate().getYear() + 1900) + "年" + (diary.getDate().getMonth() + 1) + "月" + diary.getDate().getDate() + "日";
+                                String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
                                 diaryDate.setText(date);
                                 diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
-                                diary_write.setText(diary.getText());
-                                getLabelsOfDiary(diary, helper);
+                                diary_write.setText(Html.fromHtml(diary.getHtmlText()));
+                                getImage(diary.getText());
+                                setTextFormmat(diary);
+                                getLabelsOfDiary(diary,helper);
                             }
                         }
                     });
@@ -1584,7 +1580,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             //设置文字颜色
             textView.setTextColor(Color.BLACK);
             //设置图标在文字的左边
-            textView.setCompoundDrawablesWithIntrinsicBounds(imgIds[position], 0, 0, 0);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CUPCAKE) {
+                textView.setCompoundDrawablesWithIntrinsicBounds(imgIds[position], 0, 0, 0);
+            }
             //设置textView的左上右下的padding大小
             textView.setPadding(80, 10, 20, 15);
             //设置文字和图标之间的padding大小
@@ -1623,7 +1621,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
-    public boolean isMoodLabel(String id){
+    private boolean isMoodLabel(String id){
         switch(id)
         {
             case "happy": return true;
@@ -1637,9 +1635,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     }
 
     public void getLabelsOfDiary(Diary diary, DatabaseHelper helper ){
-        diaryIcon.setImageDrawable(getResources().getDrawable(R.color.white));
+        diaryIcon.setImageDrawable(getResources().getDrawable(R.drawable.transparent));
         for(int i = 0; i<=3; i++){
-            imageItems.get(i).setImageDrawable(getResources().getDrawable(R.color.white));
+            imageItems.get(i).setImageDrawable(getResources().getDrawable(R.drawable.transparent));
         }
         label_this = null;
         try {
