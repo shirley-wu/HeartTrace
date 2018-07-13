@@ -55,14 +55,14 @@ public class CollectActivity extends AppCompatActivity {
         }
         actionBar.setTitle("我的收藏");
 
-        navView.setCheckedItem(R.id.nav_user);
-        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
-                mDrawLayout.closeDrawers();
-                return true;
-            }
-        });
+//        navView.setCheckedItem(R.id.nav_user);
+//        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(MenuItem item) {
+//                mDrawLayout.closeDrawers();
+//                return true;
+//            }
+//        });
 
         initCollectList();
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_collect_view);

@@ -3,6 +3,7 @@ package com.example.dell.diary;
         import android.content.Context;
         import android.content.DialogInterface;
         import android.content.Intent;
+        import android.os.Environment;
         import android.support.v7.app.AlertDialog;
         import android.support.v7.widget.CardView;
         import android.support.v7.widget.RecyclerView;
@@ -22,6 +23,8 @@ package com.example.dell.diary;
         import com.example.dell.db.Sentencebook;
 
         import java.util.List;
+        import java.util.regex.Matcher;
+        import java.util.regex.Pattern;
 
 public class CollectDAdapter extends RecyclerView.Adapter<CollectDAdapter.ViewHolder> {
     private List<Diary> mfavoriteDList;
@@ -82,7 +85,7 @@ public class CollectDAdapter extends RecyclerView.Adapter<CollectDAdapter.ViewHo
             public void onPreClick() {
                 AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
                 dialog.setTitle("提示");
-                dialog.setMessage("确认删除？");
+                dialog.setMessage("确认不再收藏这篇日记吗？");
                 dialog.setCancelable(true);
 
                 dialog.setPositiveButton("确认",new DialogInterface.OnClickListener(){
@@ -118,8 +121,19 @@ public class CollectDAdapter extends RecyclerView.Adapter<CollectDAdapter.ViewHo
     @Override
     public void onBindViewHolder(CollectDAdapter.ViewHolder holder, int position) {
         Diary diary = mfavoriteDList.get(position);
+        String diary_card_text;
+        diary_card_text = diary.getText();
+        Pattern pattern = Pattern.compile( Environment.getExternalStorageDirectory().getPath()+"/HeartTrace/pic/image_[0-9]{14}\\.jpg");
+        Matcher matcher = pattern.matcher(diary_card_text);
+        while(matcher.find()) {
+            StringBuilder sb=new StringBuilder(diary_card_text);
+            sb.delete(matcher.start(),matcher.end());
+            sb.insert(matcher.start(),"/image/");
+            diary_card_text = sb.toString();
+            matcher = pattern.matcher(diary_card_text);
+        }
+        holder.diary_write.setText(diary_card_text);
         holder.diaryDate.setText(diary.getDate().toString());
-        holder.diary_write.setText(diary.getText());
     }
 
 

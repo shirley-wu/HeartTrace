@@ -243,11 +243,12 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         mGestureDetector = new GestureDetector(new MyGestureListener()); //使用派生自OnGestureListener
 
         edit_layout.setOnTouchListener(this);
-        edit_layout.setFocusable(true);
-        edit_layout.setClickable(true);
-        edit_layout.setLongClickable(true);
+        //edit_layout.setFocusable(true);
+        //edit_layout.setClickable(true);
+        //edit_layout.setLongClickable(true);
 
         diary_write.setOnTouchListener(this);
+
 
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -280,8 +281,11 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     }
     protected void onRestart(){
         super.onRestart();
-        Log.d("restart",originType);
-        reStartInit();
+
+        addDiary.setVisibility(View.INVISIBLE);
+        enterBottle.setVisibility(View.INVISIBLE);
+        like.setVisibility(View.INVISIBLE);
+        edit.setVisibility(View.INVISIBLE);
     }
 
     public boolean dispatchTouchEvent(MotionEvent ev){
@@ -670,106 +674,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
     }
 
-    public void reStartInit(){
-        imageItems.add(diaryIcon1);
-        imageItems.add(diaryIcon2);
-        imageItems.add(diaryIcon3);
-        imageItems.add(diaryIcon4);
-
-        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-        if(originType.equals("welcome")){
-            diaryList = Diary.getAll(helper,true);
-            if(diaryList.size() == 0){
-
-            }
-            else{
-                index = diaryList.size()-1;
-                diary = diaryList.get(index);
-            }
-        }
-        else if(originType.equals("diary")){
-            diaryList = Diary.getAll(helper,true);
-            //diary = (Diary) intent.getSerializableExtra("diary_list");
-            diary = diaryList.get(index);
-            //labelList = Label.getAllLabel(helper);
-        }
-        else if(originType.equals("add_diary")){
-            diaryList = Diary.getAll(helper,true);
-        }
-        else if(originType.equals("search")) {
-            // Get the Bundle Object
-
-            Bundle bundleObject = getIntent().getExtras();
-//            // Get ArrayList Bundle
-            diaryList = (ArrayList<Diary>) bundleObject.getSerializable("search_list");
-            Collections.reverse(diaryList);
-            diary = diaryList.get(index);
-        }
-        else if(originType.equals("like")){
-            diaryList = Diary.getAllLike(helper, false);
-            diary = diaryList.get(index);
-        }
-
-        if(originType.equals("add_diary")){
-            Date date = new Date();
-            String today = (date.getYear()+1900)+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日";
-            diaryDate.setText(today);
-            diaryWeekday.setText(weekList.get(date.getDay()));
-            //diaryIcon.setImageDrawable(setTag(tagId));
-            actionBar.hide();
-
-            floatingButtons.setVisibility(View.INVISIBLE);
-            emptyImage.setVisibility(View.INVISIBLE);
-
-            initTextFormmat();
-        }
-        else if(diaryList.size() == 0){
-            emptyImage.setVisibility(View.VISIBLE);
-            theme_set.setVisibility(View.INVISIBLE);
-            font_set.setVisibility(View.INVISIBLE);
-            insert_image.setVisibility(View.INVISIBLE);
-            confirm.setVisibility(View.INVISIBLE);
-
-            diary_write.setText("");
-            diaryDate.setText("");
-            diaryWeekday.setText("");
-            diary_write.setFocusable(false);
-            diary_write.setCursorVisible(false);
-            floatingButtons.setVisibility(View.VISIBLE);
-            addDiary.setVisibility(View.INVISIBLE);
-            enterBottle.setVisibility(View.INVISIBLE);
-            like.setVisibility(View.INVISIBLE);
-            edit.setVisibility(View.INVISIBLE);
-        }
-        else {
-            Log.i("show",diary.getHtmlText());
-            diary_write.setText(Html.fromHtml(diary.getHtmlText()));
-            getImage(diary.getText());
-            setTextFormmat(diary);
-            getLabelsOfDiary(diary,helper);
-            String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
-            diaryDate.setText(date);
-            diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
-            diary_write.setFocusable(false);
-            diary_write.setCursorVisible(false);
-
-            theme_set.setVisibility(View.INVISIBLE);
-            font_set.setVisibility(View.INVISIBLE);
-            insert_image.setVisibility(View.INVISIBLE);
-            confirm.setVisibility(View.INVISIBLE);
-
-            emptyImage.setVisibility(View.INVISIBLE);
-            floatingButtons.setVisibility(View.VISIBLE);
-            addDiary.setVisibility(View.INVISIBLE);
-            enterBottle.setVisibility(View.INVISIBLE);
-            like.setVisibility(View.INVISIBLE);
-            edit.setVisibility(View.INVISIBLE);
-
-            diary_write.setSelection(diary_write.getText().length());
-        }
-//
-    }
-
     private void initTextFormmat()
     {
         diary_write.setTextSize((float) 20.0);
@@ -869,6 +773,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 //finish();
                 break;
             case R.id.edit_layout:
+            case R.id.diaryWrite:
                 if(confirm.getVisibility()==View.VISIBLE){
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     if (imm != null) {
