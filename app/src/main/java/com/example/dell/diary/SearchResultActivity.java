@@ -13,14 +13,17 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dell.db.DatabaseHelper;
 import com.example.dell.db.Diary;
 import com.example.dell.db.SearchHistory;
+import com.example.dell.db.Sentence;
 import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
 
 import java.util.ArrayList;
@@ -31,8 +34,13 @@ import java.util.List;
 public class SearchResultActivity extends AppCompatActivity {
 
     public ArrayList<Diary> diaryList = new ArrayList<>();
+    public ArrayList<Sentence> sentenceList = new ArrayList<>();
     private SearchResultAdapter adapter;
+    private SearchResultSAdapter adapterS;
     private RecyclerView recyclerView;
+    private RecyclerView recyclerViewS;
+    private LinearLayout diaryResult;
+    private LinearLayout sentenceResult;
     private SearchView searchView;
     private DatabaseHelper databaseHelper = null;
     private Date startDate;
@@ -74,26 +82,40 @@ public class SearchResultActivity extends AppCompatActivity {
 //设置图片
         closeButton.setImageResource(R.drawable.close_gray);
 
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
             public boolean onQueryTextSubmit(String query) {
                 diaryList.clear();
+                sentenceList.clear();
                 DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
                 try{
-                    diaryList.clear();
+                    //diaryList.clear();
                     if(startDate == null){
                         diaryList.addAll(Diary.getByRestrict(helper,query,null,null,null,false));
+                        sentenceList.addAll(Sentence.getByRestrict(helper,query,null,null,null,false));
                     }
                     else{
                         diaryList.addAll(Diary.getByRestrict(helper,query,startDate,endDate,null,false));
+                        sentenceList.addAll(Sentence.getByRestrict(helper,query,startDate,endDate,null,false));
                     }
 
-                    //adapter = new SearchResultAdapter(diaryList);
+                    //adapter = new SearchResultSAdapter(diaryList);
                     adapter.notifyDataSetChanged();
                     }
                 catch (Exception e){}
                 if(diaryList.size() == 0){
-                    Toast.makeText(SearchResultActivity.this,"没有搜索到相关日记",Toast.LENGTH_LONG).show();
+                    diaryResult.setVisibility(View.INVISIBLE);
+                }
+                else {
+                    diaryResult.setVisibility(View.VISIBLE);
+                }
+                if(sentenceList.size() == 0){
+                    sentenceResult.setVisibility(View.INVISIBLE);
+                }
+                else {
+                    sentenceResult.setVisibility(View.VISIBLE);
+                }
+                if(diaryList.size() == 0 && sentenceList.size() == 0){
+                    Toast.makeText(SearchResultActivity.this,"没有搜索到相关日记或纸条",Toast.LENGTH_LONG).show();
                 }
                 searchView.clearFocus();
                 return true;
@@ -108,38 +130,60 @@ public class SearchResultActivity extends AppCompatActivity {
                 return true;
             }
         });
+        diaryResult = (LinearLayout)findViewById(R.id.diary_seach_result);
+        sentenceResult = (LinearLayout)findViewById(R.id.sentence_seach_result);
+
         initSearchResult();
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         adapter = new SearchResultAdapter(diaryList);
         recyclerView.setAdapter(adapter);
+
+        recyclerViewS = (RecyclerView) findViewById(R.id.recycler_view_S);
+        LinearLayoutManager layoutManagerS = new LinearLayoutManager(this);
+        recyclerViewS.setLayoutManager(layoutManagerS);
+        adapterS = new SearchResultSAdapter(sentenceList);
+        recyclerViewS.setAdapter(adapterS);
     }
 
     private void initSearchResult(){
         diaryList.clear();
+        sentenceList.clear();
         DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
         Intent intent = getIntent();
         String searchText = intent.getStringExtra("search_text");
 
         startDate = (Date)intent.getSerializableExtra("start_date");
         endDate = (Date)intent.getSerializableExtra("end_date");
-//        Log.i("start_year",String.valueOf(startDate.getYear())+startDate.getMonth()+startDate.getDate());
-//        Log.i("end_year",String.valueOf(endDate.getYear())+endDate.getMonth()+endDate.getDate());
+
         searchView.setQuery(searchText,false);
         searchView.clearFocus();
         try{
             if(startDate == null){
                 diaryList = (ArrayList<Diary>) Diary.getByRestrict(helper,searchText,null,null,null,false);
+                sentenceList = (ArrayList<Sentence>) Sentence.getByRestrict(helper,searchText,null,null,null,false);
             }
             else{
                 diaryList = (ArrayList<Diary>) Diary.getByRestrict(helper,searchText,startDate,endDate,null,false);
-            //diaryList = Diary.getByRestrict(helper,searchText,new Date(2018,6,1),new Date(2018,6,2),null,false);
+                sentenceList = (ArrayList<Sentence>) Sentence.getByRestrict(helper,searchText,startDate,endDate,null,false);
             }
         }
         catch (Exception e){}
         if(diaryList.size() == 0){
-           Toast.makeText(SearchResultActivity.this,"没有搜索到相关日记",Toast.LENGTH_LONG).show();
+            diaryResult.setVisibility(View.INVISIBLE);
+        }
+        else {
+            diaryResult.setVisibility(View.VISIBLE);
+        }
+        if(sentenceList.size() == 0){
+            sentenceResult.setVisibility(View.INVISIBLE);
+        }
+        else {
+            sentenceResult.setVisibility(View.VISIBLE);
+        }
+        if(diaryList.size() == 0 && sentenceList.size() == 0){
+           Toast.makeText(SearchResultActivity.this,"没有搜索到相关日记或纸条",Toast.LENGTH_LONG).show();
         }
     }
 

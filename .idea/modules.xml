@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://D:\Users\wu-pc\repos\HeartTrace\Diary.iml" filepath="D:\Users\wu-pc\repos\HeartTrace\Diary.iml" />
+      <module fileurl="file://D:\Files\HeartTrace\Diary.iml" filepath="D:\Files\HeartTrace\Diary.iml" />
       <module fileurl="file://$PROJECT_DIR$/HeartTrace.iml" filepath="$PROJECT_DIR$/HeartTrace.iml" />
+      <module fileurl="file://D:\Android\Project\Diary\HeartTrace.iml" filepath="D:\Android\Project\Diary\HeartTrace.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

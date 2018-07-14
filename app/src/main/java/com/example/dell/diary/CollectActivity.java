@@ -55,6 +55,15 @@ public class CollectActivity extends AppCompatActivity {
         }
         actionBar.setTitle("我的收藏");
 
+//        navView.setCheckedItem(R.id.nav_user);
+//        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(MenuItem item) {
+//                mDrawLayout.closeDrawers();
+//                return true;
+//            }
+//        });
+
         initCollectList();
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_collect_view);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 1);
@@ -76,12 +85,10 @@ public class CollectActivity extends AppCompatActivity {
                     }
                 }
                 else if(arg2 == 1){
-                    Toast.makeText(CollectActivity.this,"暂时还没有纸条噢", Toast.LENGTH_LONG).show();
                     if(adapterS != null){
                         recyclerView.setAdapter(adapterS);
                     }
                     else {
-                        Toast.makeText(CollectActivity.this,"暂时还没有纸条噢", Toast.LENGTH_LONG).show();
                         adapterS = new CollectSAdapter(collect_sentenceList);
                         recyclerView.setAdapter(adapterS);
                     }
@@ -104,9 +111,11 @@ public class CollectActivity extends AppCompatActivity {
 
 
     public void initCollectList() {
-        collect_diaryList.clear();
         DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+        collect_diaryList.clear();
         collect_diaryList = Diary.getAllLike(helper,false);
+        collect_sentenceList.clear();
+        collect_sentenceList = Sentence.getAllLike(helper, false);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

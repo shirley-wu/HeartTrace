@@ -1,7 +1,6 @@
 package com.example.dell.diary;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Looper;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -14,50 +13,50 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dell.auth.ServerAuthenticator;
-import com.j256.ormlite.stmt.query.In;
 
-public class LoginActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
-    Button bt_login;
+    Button bt_Reg;
     TextInputLayout username_layout;
     TextInputLayout password_layout;
+    TextInputLayout password_layout2;
     EditText username;
     EditText password;
-    TextView toRegist;
-    Button d_btn;
+    EditText password2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
 
-        bt_login = (Button) findViewById(R.id.btn_login);
+        bt_Reg = (Button) findViewById(R.id.btn_Reg);
         username_layout = (TextInputLayout) findViewById(R.id.username_wrapper);
         password_layout = (TextInputLayout) findViewById(R.id.password_wrapper);
+        password_layout2 = (TextInputLayout) findViewById(R.id.password_wrapper2);
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
-        toRegist = (TextView)findViewById(R.id.to_regist);
-        d_btn = (Button)findViewById(R.id.direct_enter);
+        password2 = (EditText) findViewById(R.id.password2);
 
         password_layout.setPasswordVisibilityToggleEnabled(true);
+        password_layout2.setPasswordVisibilityToggleEnabled(true);
 
-        bt_login.setOnClickListener(new View.OnClickListener() {
+        bt_Reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final String name = username.getText().toString();
-                final String pw = password.getText().toString();
-;
-                if (validateAccount(name) && validatePassword(pw)) {
+                final String pw1 = password.getText().toString();
+                final String pw2 = password2.getText().toString();
+                if (validateAccount(name) && validatePassword1(pw1) && validatePassword2( pw1,pw2)) {
                     new Thread(new Runnable(){
                         @Override
                         public void run() {
                             Bundle bundle = new Bundle();
-                            boolean status = ServerAuthenticator.signIn(name, pw, bundle);
+                            boolean status = ServerAuthenticator.signUp(name, pw1, bundle);
                             if(status == false) {
                                 // 接口错误或者网络错误
                                 Looper.prepare();
                                 try {
-                                    Toast.makeText(LoginActivity.this, "接口错误或者网络错误", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(RegisterActivity.this, "接口错误或者网络错误", Toast.LENGTH_SHORT).show();
                                 }catch (Exception e) {
                                     Log.e("error",e.toString());
                                 }
@@ -67,76 +66,42 @@ public class LoginActivity extends AppCompatActivity {
                                 boolean success = bundle.getBoolean("success");
                                 String msg = bundle.getString("msg");
                                 // success表示操作成功与否；msg表示服务器返回信息
-                                if (success) {
-                                    Intent intent = new Intent(LoginActivity.this, DiaryWriteActivity.class);
-                                    intent.putExtra("diary_origin", "welcome");
+                                if(success){
+                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                    intent.putExtra("origin", "register");
+                                    intent.putExtra("name",name);
+                                    intent.putExtra("password",pw1);
                                     startActivity(intent);
                                     finish();
 
                                     Looper.prepare();
                                     try {
-                                        Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
                                     }catch (Exception e) {
                                         Log.e("error",e.toString());
                                     }
                                     Looper.loop();
 
-                                } else {
+                                }
+                                else{
                                     Looper.prepare();
                                     try {
-                                        Toast.makeText(LoginActivity.this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
-
+                                        Toast.makeText(RegisterActivity.this, "注册失败，该用户名已被使用", Toast.LENGTH_SHORT).show();
                                     }catch (Exception e) {
                                         Log.e("error",e.toString());
                                     }
                                     Looper.loop();
+
                                 }
                             }
                         }
                     }).start();
+
                 }
             }
         });
 
-        toRegist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                    startActivity(intent);
-            }
-        });
-
-        d_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, DiaryWriteActivity.class);
-                intent.putExtra("diary_origin", "welcome");
-                startActivity(intent);
-            }
-        });
-
     }
-
-    protected void onRestart(){
-        super.onRestart();
-        Intent intent = getIntent();
-        String origin = intent.getStringExtra("origin");
-        //Log.d("123",intent.getStringExtra("origin"));
-        if(origin != null){
-            username_layout.setErrorEnabled(false);
-            password_layout.setErrorEnabled(false);
-            username.setText(intent.getStringExtra("name"));
-            password.setText(intent.getStringExtra("password"));
-            password.requestFocus();
-            password.setSelection(password.getText().length());
-        }
-    }
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        setIntent(intent);
-    }
-
     private boolean validateAccount(String name) {
         //username_layout.setErrorEnabled(true);
         if (name.isEmpty()) {
@@ -148,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
         return true;
     }
 
-    private boolean validatePassword(String pw) {
+    private boolean validatePassword1(String pw) {
         //password_layout.setErrorEnabled(true);
         if (pw.isEmpty()) {
             password_layout.setError("密码不能为空");
@@ -159,6 +124,18 @@ public class LoginActivity extends AppCompatActivity {
             return false;
         } else {
             password_layout.setErrorEnabled(false);
+        }
+        return true;
+    }
+
+    private boolean validatePassword2(String pw1,String pw2) {
+        //password_layout.setErrorEnabled(true);
+        if (!pw1.equals(pw2)) {
+            password_layout2.setError("两次输入密码不一致");
+            return false;
+        }
+         else {
+            password_layout2.setErrorEnabled(false);
         }
         return true;
     }
