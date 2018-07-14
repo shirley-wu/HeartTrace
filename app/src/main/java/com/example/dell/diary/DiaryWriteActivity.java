@@ -639,8 +639,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             diary_write.setText("");
             diaryDate.setText("");
             diaryWeekday.setText("");
-            diary_write.setFocusable(false);
-            diary_write.setCursorVisible(false);
+            //diary_write.setFocusable(false);
+            //diary_write.setCursorVisible(false);
+            diary_write.setEnabled(false);
             floatingButtons.setVisibility(View.VISIBLE);
             addDiary.setVisibility(View.INVISIBLE);
             enterBottle.setVisibility(View.INVISIBLE);
@@ -657,8 +658,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
             diaryDate.setText(date);
             diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
-            diary_write.setFocusable(false);
-            diary_write.setCursorVisible(false);
+//            diary_write.setFocusable(false);
+//            diary_write.setCursorVisible(false);
+            diary_write.setEnabled(false);
             theme_set.setVisibility(View.INVISIBLE);
             font_set.setVisibility(View.INVISIBLE);
             insert_image.setVisibility(View.INVISIBLE);
