@@ -558,7 +558,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         imageItems.add(diaryIcon3);
         imageItems.add(diaryIcon4);
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar_diary_content);
-        toolbar.setTitle("心迹");
+        toolbar.setTitle("心·迹");
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navView = (NavigationView)findViewById(R.id.nav_view);
         diaryDate = (TextView)findViewById(R.id.diary_content_date);
