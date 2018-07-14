@@ -59,8 +59,10 @@ public class ServerAuthenticator {
                     JSONObject jsonObject = new JSONObject(response);
                     boolean success = jsonObject.optBoolean("success");
                     String msg = jsonObject.optString("msg");
+                    String token = jsonObject.optString("token");
                     bundle.putString("msg", msg);
                     bundle.putBoolean("success", success);
+                    bundle.putString("token", token);
 
                     return true;
                 }
@@ -79,7 +81,7 @@ public class ServerAuthenticator {
 
     static public boolean signUp(String username, String password, Bundle bundle) {
         HttpClient httpClient = new DefaultHttpClient();
-        String url = ServerAccessor.getServerIp() + ":8080/HeartTrace_Server_war/Servlet.Loginin";
+        String url = ServerAccessor.getServerIp() + ":8080/HeartTrace_Server_war/Servlet.Signin";
         Log.d(TAG, "signIn: url " + url);
         HttpPost httpPost = new HttpPost(url);
 
