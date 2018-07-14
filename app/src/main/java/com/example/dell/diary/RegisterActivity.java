@@ -67,6 +67,13 @@ public class RegisterActivity extends AppCompatActivity {
                                 String msg = bundle.getString("msg");
                                 // success表示操作成功与否；msg表示服务器返回信息
                                 if(success){
+                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                    intent.putExtra("origin", "register");
+                                    intent.putExtra("name",name);
+                                    intent.putExtra("password",pw1);
+                                    startActivity(intent);
+                                    finish();
+
                                     Looper.prepare();
                                     try {
                                         Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
@@ -75,12 +82,6 @@ public class RegisterActivity extends AppCompatActivity {
                                     }
                                     Looper.loop();
 
-                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                    intent.putExtra("origin", "register");
-                                    intent.putExtra("name",name);
-                                    intent.putExtra("password",pw1);
-                                    startActivity(intent);
-                                    finish();
                                 }
                                 else{
                                     Looper.prepare();

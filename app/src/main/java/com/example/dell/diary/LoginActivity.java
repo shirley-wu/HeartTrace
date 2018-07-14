@@ -68,6 +68,11 @@ public class LoginActivity extends AppCompatActivity {
                                 String msg = bundle.getString("msg");
                                 // success表示操作成功与否；msg表示服务器返回信息
                                 if (success) {
+                                    Intent intent = new Intent(LoginActivity.this, DiaryWriteActivity.class);
+                                    intent.putExtra("diary_origin", "welcome");
+                                    startActivity(intent);
+                                    finish();
+
                                     Looper.prepare();
                                     try {
                                         Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
@@ -76,10 +81,6 @@ public class LoginActivity extends AppCompatActivity {
                                     }
                                     Looper.loop();
 
-                                    Intent intent = new Intent(LoginActivity.this, DiaryWriteActivity.class);
-                                    intent.putExtra("diary_origin", "welcome");
-                                    startActivity(intent);
-                                    finish();
                                 } else {
                                     Looper.prepare();
                                     try {
