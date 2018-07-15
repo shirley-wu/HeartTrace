@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.dell.auth.MyAccount;
 import com.example.dell.auth.ServerAuthenticator;
 import com.j256.ormlite.stmt.query.In;
 
@@ -26,10 +27,14 @@ public class LoginActivity extends AppCompatActivity {
     TextView toRegist;
     Button d_btn;
 
+    MyAccount myAccount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        myAccount = MyAccount.get(this);
 
         bt_login = (Button) findViewById(R.id.btn_login);
         username_layout = (TextInputLayout) findViewById(R.id.username_wrapper);
@@ -68,6 +73,9 @@ public class LoginActivity extends AppCompatActivity {
                                 String msg = bundle.getString("msg");
                                 // success表示操作成功与否；msg表示服务器返回信息
                                 if (success) {
+                                    myAccount.setName(name);
+                                    myAccount.setToken(bundle.getString("token"));
+
                                     Intent intent = new Intent(LoginActivity.this, DiaryWriteActivity.class);
                                     intent.putExtra("diary_origin", "welcome");
                                     startActivity(intent);
