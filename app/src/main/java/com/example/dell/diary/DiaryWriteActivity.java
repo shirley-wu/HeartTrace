@@ -297,6 +297,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         enterBottle.setVisibility(View.INVISIBLE);
         like.setVisibility(View.INVISIBLE);
         edit.setVisibility(View.INVISIBLE);
+        initNavHeader();
     }
 
     public void initNavHeader(){
@@ -304,11 +305,18 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         //Log.d("123",myAccount.getNickname());
         nickName.setText(myAccount.getNickname());
         String sig = myAccount.getSignature();
+        int imageID = myAccount.getImage();
         if(sig == null){
             personalSignature.setText("一切都在慢慢变好。");
         }
         else{
             personalSignature.setText(sig);
+        }
+        if(imageID == -1){
+            displayImage.setImageResource(R.drawable.panda);
+        }
+        else{
+            displayImage.setImageResource(imageID);
         }
     }
     public boolean dispatchTouchEvent(MotionEvent ev){
@@ -431,7 +439,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         View headerLayout = navView.getHeaderView(0);
         nickName = (TextView)headerLayout.findViewById(R.id.nick_name);
         personalSignature = (TextView)headerLayout.findViewById(R.id.personal_signature);
-        displayImage = (CircleImageView)findViewById(R.id.icon_image);
+        displayImage = (CircleImageView)headerLayout.findViewById(R.id.icon_image);
         drawer = (android.support.design.widget.CoordinatorLayout) findViewById(R.id.diaryWriteLayout);
         floatingButtons = (ConstraintLayout)findViewById(R.id.floating_buttons);
         addDiary = (FloatingActionButton)findViewById(R.id.add_diary);
