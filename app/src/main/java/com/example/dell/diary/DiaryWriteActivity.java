@@ -83,6 +83,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.dell.auth.MyAccount;
 import com.example.dell.db.DatabaseHelper;
 import com.example.dell.db.Diary;
 import com.example.dell.db.Label;
@@ -109,6 +110,8 @@ import java.util.ListIterator;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.example.dell.diary.R.drawable.background1;
 
@@ -212,6 +215,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private FloatingActionButton like;
     private FloatingActionButton add;
 
+    private CircleImageView displayImage;
+    private TextView nickName;
+    private TextView personalSignature;
+
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
 
     private static String[] PERMISSIONS_STORAGE = {
@@ -234,9 +241,11 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_write);
 
+
         getView();
         setOnListener();
         init();
+        initNavHeader();
 
 
 //        //initViewPage();
@@ -290,6 +299,18 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         edit.setVisibility(View.INVISIBLE);
     }
 
+    public void initNavHeader(){
+        MyAccount myAccount = MyAccount.get(this);
+        //Log.d("123",myAccount.getNickname());
+        nickName.setText(myAccount.getNickname());
+        String sig = myAccount.getSignature();
+        if(sig == null){
+            personalSignature.setText("一切都在慢慢变好。");
+        }
+        else{
+            personalSignature.setText(sig);
+        }
+    }
     public boolean dispatchTouchEvent(MotionEvent ev){
         //让GestureDetector响应触碰事件
         mGestureDetector.onTouchEvent(ev);
@@ -405,6 +426,12 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
     public void getView()
     {
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navView = (NavigationView)findViewById(R.id.nav_view);
+        View headerLayout = navView.getHeaderView(0);
+        nickName = (TextView)headerLayout.findViewById(R.id.nick_name);
+        personalSignature = (TextView)headerLayout.findViewById(R.id.personal_signature);
+        displayImage = (CircleImageView)findViewById(R.id.icon_image);
         drawer = (android.support.design.widget.CoordinatorLayout) findViewById(R.id.diaryWriteLayout);
         floatingButtons = (ConstraintLayout)findViewById(R.id.floating_buttons);
         addDiary = (FloatingActionButton)findViewById(R.id.add_diary);
@@ -562,8 +589,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         imageItems.add(diaryIcon4);
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar_diary_content);
         toolbar.setTitle("心·迹");
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        navView = (NavigationView)findViewById(R.id.nav_view);
+
         diaryDate = (TextView)findViewById(R.id.diary_content_date);
         diaryWeekday = (TextView)findViewById(R.id.diary_content_weekday);
         setSupportActionBar(toolbar);

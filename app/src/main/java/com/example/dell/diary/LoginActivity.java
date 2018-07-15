@@ -75,6 +75,8 @@ public class LoginActivity extends AppCompatActivity {
                                 if (success) {
                                     myAccount.setName(name);
                                     myAccount.setToken(bundle.getString("token"));
+                                    myAccount.setNickname(name);
+                                    myAccount.save();
 
                                     Intent intent = new Intent(LoginActivity.this, DiaryWriteActivity.class);
                                     intent.putExtra("diary_origin", "welcome");
@@ -117,6 +119,10 @@ public class LoginActivity extends AppCompatActivity {
         d_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                myAccount.setName("测试用户");
+                myAccount.setNickname("测试用户");
+                myAccount.save();
+
                 Intent intent = new Intent(LoginActivity.this, DiaryWriteActivity.class);
                 intent.putExtra("diary_origin", "welcome");
                 startActivity(intent);
