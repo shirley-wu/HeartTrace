@@ -35,21 +35,27 @@ public class DiaryLabel {
         this.diary = diary;
         this.label = label;
     }
-    public int getId(){
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
         return id;
     }
+
     public Diary getDiary(){
         return diary;
     }
-    public Label getLabel(){
-        return label;
-    }
-    public void setId(int id){
-        this.id = id;
-    }
+
     public void setDiary(Diary diary){
         this.diary = diary;
     }
+
+    public Label getLabel(){
+        return label;
+    }
+
     public void setLabel(Label label){
         this.label = label;
     }

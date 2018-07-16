@@ -40,8 +40,16 @@ public class Diarybook implements Serializable {
         this.diarybookName = diarybookName;
     }
 
-    public String getDiarybookName()
-    {
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getDiarybookName() {
         return diarybookName;
     }
 

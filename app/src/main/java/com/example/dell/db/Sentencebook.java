@@ -40,6 +40,14 @@ public class Sentencebook implements Serializable {
         this.sentencebookName = sentencebookName;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
     public String getSentencebookName()
     {
         return sentencebookName;

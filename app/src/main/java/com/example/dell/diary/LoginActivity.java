@@ -1,6 +1,8 @@
 package com.example.dell.diary;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Looper;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +13,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.dell.auth.MyAccount;
+import com.example.dell.auth.ServerAuthenticator;
 import com.j256.ormlite.stmt.query.In;
 
 public class LoginActivity extends AppCompatActivity {
@@ -21,11 +25,16 @@ public class LoginActivity extends AppCompatActivity {
     EditText username;
     EditText password;
     TextView toRegist;
+    Button d_btn;
+
+    MyAccount myAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        myAccount = MyAccount.get(this);
 
         bt_login = (Button) findViewById(R.id.btn_login);
         username_layout = (TextInputLayout) findViewById(R.id.username_wrapper);
@@ -33,23 +42,68 @@ public class LoginActivity extends AppCompatActivity {
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
         toRegist = (TextView)findViewById(R.id.to_regist);
+        d_btn = (Button)findViewById(R.id.direct_enter);
 
         password_layout.setPasswordVisibilityToggleEnabled(true);
 
         bt_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = username.getText().toString();
-                String pw = password.getText().toString();
-
+                final String name = username.getText().toString();
+                final String pw = password.getText().toString();
+;
                 if (validateAccount(name) && validatePassword(pw)) {
-                    Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, DiaryWriteActivity.class);
-                    intent.putExtra("diary_origin", "welcome");
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Toast.makeText(LoginActivity.this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
+                    new Thread(new Runnable(){
+                        @Override
+                        public void run() {
+                            Bundle bundle = new Bundle();
+                            boolean status = ServerAuthenticator.signIn(name, pw, bundle);
+                            if(status == false) {
+                                // 接口错误或者网络错误
+                                Looper.prepare();
+                                try {
+                                    Toast.makeText(LoginActivity.this, "接口错误或者网络错误", Toast.LENGTH_SHORT).show();
+                                }catch (Exception e) {
+                                    Log.e("error",e.toString());
+                                }
+                                Looper.loop();
+                            }
+                            else {
+                                boolean success = bundle.getBoolean("success");
+                                String msg = bundle.getString("msg");
+                                // success表示操作成功与否；msg表示服务器返回信息
+                                if (success) {
+                                    myAccount.setName(name);
+                                    myAccount.setToken(bundle.getString("token"));
+                                    myAccount.setNickname(name);
+                                    myAccount.save();
+
+                                    Intent intent = new Intent(LoginActivity.this, DiaryWriteActivity.class);
+                                    intent.putExtra("diary_origin", "welcome");
+                                    startActivity(intent);
+                                    finish();
+
+                                    Looper.prepare();
+                                    try {
+                                        Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                                    }catch (Exception e) {
+                                        Log.e("error",e.toString());
+                                    }
+                                    Looper.loop();
+
+                                } else {
+                                    Looper.prepare();
+                                    try {
+                                        Toast.makeText(LoginActivity.this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
+
+                                    }catch (Exception e) {
+                                        Log.e("error",e.toString());
+                                    }
+                                    Looper.loop();
+                                }
+                            }
+                        }
+                    }).start();
                 }
             }
         });
@@ -59,6 +113,19 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                     Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                     startActivity(intent);
+            }
+        });
+
+        d_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myAccount.setName("测试用户");
+                myAccount.setNickname("测试用户");
+                myAccount.save();
+
+                Intent intent = new Intent(LoginActivity.this, DiaryWriteActivity.class);
+                intent.putExtra("diary_origin", "welcome");
+                startActivity(intent);
             }
         });
 
