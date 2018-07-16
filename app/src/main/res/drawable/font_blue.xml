@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="oval"
-    android:useLevel="false">
-
-    <solid
-        android:color="@android:color/holo_blue_dark" />
-
-    <size android:width="32dp" android:height="32dp" />
-
-</shape>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="false"
+        android:drawable="@drawable/font_blue_not_pressed" />
+    <item android:state_selected="true"
+        android:drawable="@drawable/font_blue_pressed" />
+</selector>
