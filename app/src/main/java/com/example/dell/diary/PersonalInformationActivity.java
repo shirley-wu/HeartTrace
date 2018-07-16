@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
@@ -72,6 +73,14 @@ public class PersonalInformationActivity extends AppCompatActivity implements Vi
         setEmail.setCursorVisible(false);
         setSchool.setCursorVisible(false);
         setSignature.setCursorVisible(false);
+
+        if(myAccount.getNickname() != null) setName.setText(myAccount.getNickname());
+        if(myAccount.getGender() != null) chooseSex.setText(myAccount.getGender());
+        if(myAccount.getBirthday() != null) chooseBirthday.setText(myAccount.getBirthday());
+        if(myAccount.getEmail() != null) setEmail.setText(myAccount.getEmail());
+        if(myAccount.getSchool() != null) setSchool.setText(myAccount.getSchool());
+        if(myAccount.getSignature() != null) setSignature.setText(myAccount.getSignature());
+
     }
 
     @Override
@@ -110,14 +119,25 @@ public class PersonalInformationActivity extends AppCompatActivity implements Vi
 
                 break;
             case R.id.personal_confirm:
-                myAccount.setName(setName.getText().toString());
-                Toast.makeText(PersonalInformationActivity.this, myAccount.getName(), Toast.LENGTH_SHORT).show();
+                myAccount.setNickname(setName.getText().toString());
+                myAccount.setGender(chooseSex.getText().toString());
+                myAccount.setBirthday(chooseBirthday.getText().toString());
+                myAccount.setEmail(setEmail.getText().toString());
+                myAccount.setSchool(setSchool.getText().toString());
+                myAccount.setSignature(setSignature.getText().toString());
+                myAccount.save();
                 break;
         }
     }
      protected void onDestroy(Bundle savedInstanceState){
-         myAccount.setName(setName.getText().toString());
-         Toast.makeText(PersonalInformationActivity.this, myAccount.getName(), Toast.LENGTH_SHORT).show();
+         myAccount.setNickname(setName.getText().toString());
+         myAccount.setGender(chooseSex.getText().toString());
+         myAccount.setBirthday(chooseBirthday.getText().toString());
+         myAccount.setEmail(setEmail.getText().toString());
+         myAccount.setSchool(setSchool.getText().toString());
+         myAccount.setSignature(setSignature.getText().toString());
+         myAccount.save();
+         //Toast.makeText(PersonalInformationActivity.this, myAccount.getNickname(), Toast.LENGTH_SHORT).show();
          super.onDestroy();
      }
 }
