@@ -61,6 +61,7 @@ import android.text.style.StyleSpan;
 import android.text.style.TypefaceSpan;
 import android.text.style.UnderlineSpan;
 import android.util.AttributeSet;
+import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -87,6 +88,7 @@ import com.example.dell.auth.MyAccount;
 import com.example.dell.db.DatabaseHelper;
 import com.example.dell.db.Diary;
 import com.example.dell.db.Label;
+import com.j256.ormlite.stmt.query.In;
 
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
 
@@ -223,7 +225,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private FloatingActionButton like;
     private FloatingActionButton add;
 
-    private CircleImageView displayImage;
+    private CircleImageView headImage;
     private TextView nickName;
     private TextView personalSignature;
 
@@ -313,18 +315,25 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         //Log.d("123",myAccount.getNickname());
         nickName.setText(myAccount.getNickname());
         String sig = myAccount.getSignature();
-        int imageID = myAccount.getImage();
+        String imageID = myAccount.getHeadimage();
         if(sig == null){
             personalSignature.setText("一切都在慢慢变好。");
         }
         else{
             personalSignature.setText(sig);
         }
-        if(imageID == -1){
-            displayImage.setImageResource(R.drawable.panda);
+        if(imageID == null){
+            headImage.setImageResource(R.drawable.panda);
         }
         else{
-            displayImage.setImageResource(imageID);
+            //headImage.setImageResource(imageID);
+            //headImage.setImageResource(R.drawable.panda);
+            if (imageID != "") {
+                byte[] bytes = Base64.decode(imageID.getBytes(), 1);
+                //  byte[] bytes =headPic.getBytes();
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                headImage.setImageBitmap(bitmap);
+            }
         }
     }
     public boolean dispatchTouchEvent(MotionEvent ev){
@@ -469,7 +478,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         View headerLayout = navView.getHeaderView(0);
         nickName = (TextView)headerLayout.findViewById(R.id.nick_name);
         personalSignature = (TextView)headerLayout.findViewById(R.id.personal_signature);
-        displayImage = (CircleImageView)headerLayout.findViewById(R.id.icon_image);
+        headImage = (CircleImageView)headerLayout.findViewById(R.id.icon_image);
         drawer = (android.support.design.widget.CoordinatorLayout) findViewById(R.id.diaryWriteLayout);
         floatingButtons = (ConstraintLayout)findViewById(R.id.floating_buttons);
         addDiary = (FloatingActionButton)findViewById(R.id.add_diary);
@@ -587,6 +596,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             public void onStopTrackingTouch(DiscreteSeekBar seekBar) {
             }
         });
+        headImage.setOnClickListener(this);
+        nickName.setOnClickListener(this);
         add.setOnClickListener(this);
         addDiary.setOnClickListener(this);
         enterBottle.setOnClickListener(this);
@@ -793,6 +804,11 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View view) {
         DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
         switch (view.getId()) {
+            case R.id.nick_name:
+            case R.id.icon_image:
+                Intent intentP = new Intent(DiaryWriteActivity.this,PersonalInformationActivity.class);
+                startActivity(intentP);
+                break;
             case R.id.diary_content_icon:
                 DisplayMetrics displayMetrics1 = new DisplayMetrics();
                 getWindowManager().getDefaultDisplay().getMetrics(displayMetrics1);

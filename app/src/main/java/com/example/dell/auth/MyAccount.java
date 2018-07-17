@@ -33,7 +33,7 @@ public class MyAccount {
 
     private String signature;
 
-    private int image;
+    private String headimage;
 
     private MyAccount() {
 
@@ -103,12 +103,12 @@ public class MyAccount {
         return signature;
     }
 
-    public void setImage(int image) {
-        this.image = image;
+    public void setHeadimage(String headimage){
+        this.headimage = headimage;
     }
 
-    public int getImage() {
-        return image;
+    public String getHeadimage(){
+        return headimage;
     }
 
     public boolean save() {
@@ -122,7 +122,7 @@ public class MyAccount {
         editor.putString("email", email);
         editor.putString("school", school);
         editor.putString("signature", signature);
-        editor.putInt("image", image);
+        editor.putString("headimage",headimage);
 
         return editor.commit();
     }
@@ -140,7 +140,7 @@ public class MyAccount {
             myAccount.email = preferences.getString("email", null);
             myAccount.school = preferences.getString("school", null);
             myAccount.signature = preferences.getString("signature", null);
-            myAccount.image = preferences.getInt("image", -1);
+            myAccount.headimage = preferences.getString("headimage",null);
         }
         return myAccount;
     }

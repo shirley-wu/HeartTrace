@@ -75,7 +75,9 @@ public class LoginActivity extends AppCompatActivity {
                                 if (success) {
                                     myAccount.setName(name);
                                     myAccount.setToken(bundle.getString("token"));
-                                    myAccount.setNickname(name);
+                                    if(myAccount.getNickname() == null){
+                                        myAccount.setNickname(name);
+                                    }
                                     myAccount.save();
 
                                     Intent intent = new Intent(LoginActivity.this, DiaryWriteActivity.class);
@@ -120,7 +122,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 myAccount.setName("测试用户");
-                myAccount.setNickname("测试用户");
+                if(myAccount.getNickname() == null) {
+                    myAccount.setNickname("测试用户");
+                }
                 myAccount.save();
 
                 Intent intent = new Intent(LoginActivity.this, DiaryWriteActivity.class);
@@ -135,7 +139,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onRestart();
         Intent intent = getIntent();
         String origin = intent.getStringExtra("origin");
-        //Log.d("123",intent.getStringExtra("origin"));
         if(origin != null){
             username_layout.setErrorEnabled(false);
             password_layout.setErrorEnabled(false);

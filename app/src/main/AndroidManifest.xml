@@ -90,6 +90,18 @@
             android:exported="false"
             android:syncable="true" />
 
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.rachel.studyapp.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <!--提供共享路径-->
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
+
+
         <service
             android:name="com.example.dell.sync.SyncService"
             android:exported="true"
@@ -112,5 +124,6 @@
         android:name="android.permission.WRITE_SYNC_SETTINGS"/>
     <uses-permission
         android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
+
 
 </manifest>
