@@ -218,7 +218,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/round_rectangle"
-                android:text="确定"/>
+                android:text="保存"
+                android:textSize="20dp"/>
 
         </RelativeLayout>
 

@@ -194,6 +194,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private ImageButton set_bold;
     private ImageButton set_italic;
     private ImageButton insert_image;
+    private ImageButton drop_down;
     private ObjectAnimator objAnimatorX;
 
     private SpannableStringBuilder spannableString = new SpannableStringBuilder();
@@ -481,6 +482,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         set_bold = (ImageButton) findViewById(R.id.bold);
         set_italic = (ImageButton) findViewById(R.id.italic);
         insert_image = (ImageButton) findViewById(R.id.insert_image);
+        drop_down = (ImageButton) findViewById(R.id.drop_down);
         diaryIcon = (ImageView) findViewById(R.id.diary_content_icon);
         diaryIcon1 = (ImageView) findViewById(R.id.diary_content_icon1);
         diaryIcon2 = (ImageView) findViewById(R.id.diary_content_icon2);
@@ -573,6 +575,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         set_bold.setOnClickListener(this);
         set_italic.setOnClickListener(this);
         insert_image.setOnClickListener(this);
+        drop_down.setOnClickListener(this);
         diaryIcon.setOnClickListener(this);
         diaryIcon1.setOnLongClickListener(this);
         diaryIcon1.setOnLongClickListener(this);
@@ -890,6 +893,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.font_setting:
                 font_setting_bottom_sheet.setState(BottomSheetBehavior.STATE_EXPANDED);
+                break;
+            case R.id.drop_down:
+                font_setting_bottom_sheet.setState(BottomSheetBehavior.STATE_HIDDEN);
                 break;
             case R.id.theme_setting:
                 theme_setting_bottom_sheet.setState(BottomSheetBehavior.STATE_EXPANDED);

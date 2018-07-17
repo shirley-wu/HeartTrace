@@ -1,5 +1,6 @@
 package com.example.dell.diary;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -126,36 +127,12 @@ public class PersonalInformationActivity extends AppCompatActivity implements Vi
                 myAccount.setSchool(setSchool.getText().toString());
                 myAccount.setSignature(setSignature.getText().toString());
                 myAccount.save();
+                Intent intent = new Intent(PersonalInformationActivity.this, DiaryWriteActivity.class);
+                startActivity(intent);
                 break;
         }
     }
-     protected void onDestroy(Bundle savedInstanceState){
-         myAccount.setNickname(setName.getText().toString());
-         myAccount.setGender(chooseSex.getText().toString());
-         myAccount.setBirthday(chooseBirthday.getText().toString());
-         myAccount.setEmail(setEmail.getText().toString());
-         myAccount.setSchool(setSchool.getText().toString());
-         myAccount.setSignature(setSignature.getText().toString());
-         myAccount.save();
-         //Toast.makeText(PersonalInformationActivity.this, myAccount.getNickname(), Toast.LENGTH_SHORT).show();
-         super.onDestroy();
-     }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
