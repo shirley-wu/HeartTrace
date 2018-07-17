@@ -3,11 +3,15 @@ package com.example.dell.diary;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
+import com.example.dell.auth.MyAccount;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -20,16 +24,63 @@ public class PersonalInformationActivity extends AppCompatActivity implements Vi
     private static final DateFormat FORMATTER = SimpleDateFormat.getDateInstance();
     private EditText chooseBirthday;
     private CircleImageView personalImage;
+    private EditText setName;
+    private EditText chooseSex;
+    private EditText setEmail;
+    private EditText setSchool;
+    private EditText setSignature;
+    private Button personalConfirm;
+    private MyAccount myAccount;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_information);
+        myAccount = MyAccount.get(getApplicationContext());
 
+        setView();
+        setListener();
+        init();
+
+    }
+
+    private void setView(){
         chooseBirthday = (EditText) findViewById(R.id.choose_birthday);
         personalImage = (CircleImageView) findViewById(R.id.personal_image);
+        setName = (EditText) findViewById(R.id.set_name);
+        chooseSex = (EditText) findViewById(R.id.choose_sex);
+        setEmail = (EditText) findViewById(R.id.set_email);
+        setSchool = (EditText) findViewById(R.id.set_school);
+        setSignature = (EditText) findViewById(R.id.set_signature);
+        personalConfirm = (Button) findViewById(R.id.personal_confirm);
+    }
+
+    private void setListener(){
         chooseBirthday.setOnClickListener(this);
         personalImage.setOnClickListener(this);
+        setName.setOnClickListener(this);
+        chooseSex.setOnClickListener(this);
+        setEmail.setOnClickListener(this);
+        setSchool.setOnClickListener(this);
+        setSignature.setOnClickListener(this);
+        personalConfirm.setOnClickListener(this);
+    }
+
+    private void init(){
+        setName.setCursorVisible(false);
+        chooseSex.setCursorVisible(false);
+        setEmail.setCursorVisible(false);
+        setSchool.setCursorVisible(false);
+        setSignature.setCursorVisible(false);
+
+        if(myAccount.getNickname() != null) setName.setText(myAccount.getNickname());
+        if(myAccount.getGender() != null) chooseSex.setText(myAccount.getGender());
+        if(myAccount.getBirthday() != null) chooseBirthday.setText(myAccount.getBirthday());
+        if(myAccount.getEmail() != null) setEmail.setText(myAccount.getEmail());
+        if(myAccount.getSchool() != null) setSchool.setText(myAccount.getSchool());
+        if(myAccount.getSignature() != null) setSignature.setText(myAccount.getSignature());
+
     }
 
     @Override
@@ -49,9 +100,62 @@ public class PersonalInformationActivity extends AppCompatActivity implements Vi
                         .build();
                 pvTime.show();
                 break;
+            case R.id.set_name:
+                setName.setCursorVisible(true);
+                break;
+            case R.id.choose_sex:
+                chooseSex.setCursorVisible(true);
+                break;
+            case R.id.set_email:
+                setEmail.setCursorVisible(true);
+                break;
+            case R.id.set_school:
+                setSchool.setCursorVisible(true);
+                break;
+            case R.id.set_signature:
+                setSignature.setCursorVisible(true);
+                break;
             case R.id.personal_image: //打开相册选择图片
 
                 break;
+            case R.id.personal_confirm:
+                myAccount.setNickname(setName.getText().toString());
+                myAccount.setGender(chooseSex.getText().toString());
+                myAccount.setBirthday(chooseBirthday.getText().toString());
+                myAccount.setEmail(setEmail.getText().toString());
+                myAccount.setSchool(setSchool.getText().toString());
+                myAccount.setSignature(setSignature.getText().toString());
+                myAccount.save();
+                break;
         }
     }
+     protected void onDestroy(Bundle savedInstanceState){
+         myAccount.setNickname(setName.getText().toString());
+         myAccount.setGender(chooseSex.getText().toString());
+         myAccount.setBirthday(chooseBirthday.getText().toString());
+         myAccount.setEmail(setEmail.getText().toString());
+         myAccount.setSchool(setSchool.getText().toString());
+         myAccount.setSignature(setSignature.getText().toString());
+         myAccount.save();
+         //Toast.makeText(PersonalInformationActivity.this, myAccount.getNickname(), Toast.LENGTH_SHORT).show();
+         super.onDestroy();
+     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
