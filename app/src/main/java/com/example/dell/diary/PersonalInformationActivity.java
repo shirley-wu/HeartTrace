@@ -10,6 +10,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -184,6 +185,7 @@ public class PersonalInformationActivity extends AppCompatActivity implements Vi
                 myAccount.setSignature(setSignature.getText().toString());
                 myAccount.save();
                 Toast.makeText(PersonalInformationActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
+                finish();
                 break;
         }
     }
@@ -418,18 +420,6 @@ public class PersonalInformationActivity extends AppCompatActivity implements Vi
 //         Toast.makeText(PersonalInformationActivity.this, myAccount.getNickname(), Toast.LENGTH_SHORT).show();
      }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

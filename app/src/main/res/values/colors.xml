@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="colorBase">#836fff</color>
+    <color name="colorPrimary">#71cad2</color>
+    <color name="colorPrimaryDark">#23af9a</color>
+    <color name="colorAccent">#24af9b</color>
+    <color name="colorBase">#71cad2</color>
     <color name="white">#FFFFFF</color> <!--白色 -->
     <color name="ivory">#FFFFF0</color> <!--象牙色 -->
     <color name="lightyellow">#FFFFE0</color> <!--亮黄色 -->

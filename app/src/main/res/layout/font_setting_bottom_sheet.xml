@@ -21,94 +21,33 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <!-- background setting
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="26dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/set_theme"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:text="主题"
-            android:textColor="#000000"
-            android:layout_alignParentLeft="true"
-            android:gravity="center_vertical|center_horizontal"
-            android:textSize="20dp"/>
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:text="设置"
+                    android:textStyle="italic"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:textColor="#000000"
+                    android:layout_marginLeft="22dp"
+                    android:textSize="20dp" />
 
-        <Button
-            android:id="@+id/drop_down"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:layout_marginRight="10dp"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/drop_down"/>
-    </RelativeLayout>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:paddingTop="15dp"
-        android:layout_height="50dp">
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/drop_down"
+                    android:background="@color/white"
+                    android:id="@+id/drop_down"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="12dp"/>
 
-        <ImageButton
-            android:id="@+id/theme1"
-            android:src="@drawable/background1"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"/>
+            </RelativeLayout>
 
-        <ImageButton
-            android:id="@+id/theme2"
-            android:src="@drawable/background2"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"/>
-
-        <ImageButton
-            android:id="@+id/theme3"
-            android:src="@drawable/background3"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"/>
-
-        <ImageButton
-            android:id="@+id/theme4"
-            android:src="@drawable/background4"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"/>
-
-        <ImageButton
-            android:id="@+id/theme5"
-            android:src="@drawable/background5"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"/>
-
-        <ImageButton
-            android:id="@+id/theme6"
-            android:src="@drawable/background6"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"/>
-
-    </LinearLayout>
-
-    -->
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
