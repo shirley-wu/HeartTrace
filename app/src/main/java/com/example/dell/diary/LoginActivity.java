@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText password;
     TextView toRegist;
     Button d_btn;
+    CheckedTextView rememberPw;
 
     MyAccount myAccount;
 
@@ -43,8 +45,15 @@ public class LoginActivity extends AppCompatActivity {
         password = (EditText) findViewById(R.id.password);
         toRegist = (TextView)findViewById(R.id.to_regist);
         d_btn = (Button)findViewById(R.id.direct_enter);
+        rememberPw = (CheckedTextView)findViewById(R.id.remember_pw);
 
         password_layout.setPasswordVisibilityToggleEnabled(true);
+
+        if(myAccount.getName() != null){
+            username.setText(myAccount.getName());
+            password.requestFocus();
+            password.setSelection(password.getText().length());
+        }
 
         bt_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,6 +139,18 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(LoginActivity.this, DiaryWriteActivity.class);
                 intent.putExtra("diary_origin", "welcome");
                 startActivity(intent);
+            }
+        });
+
+        rememberPw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                CheckedTextView checkedTextView = (CheckedTextView) v;
+                checkedTextView.toggle();
+                if (rememberPw.isChecked() == true) {
+
+                }
             }
         });
 

@@ -32,6 +32,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -216,6 +217,7 @@ public class StatisticsActivity extends AppCompatActivity implements DatePickerD
                 labelThisDiary = null;
                 try {
                     labelThisDiary = thisDiary.getAllLabel(helper);
+                    Collections.reverse(labelThisDiary);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
