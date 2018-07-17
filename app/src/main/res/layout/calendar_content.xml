@@ -7,7 +7,14 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     >
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/diaryWriteLayout">
 
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -21,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textSize="20sp"
-            android:textColor="@color/lightgrey"/>
+            android:textColor="@color/white"/>
         <ImageButton
             android:id="@+id/selectDate"
             android:layout_width="wrap_content"
@@ -31,6 +38,9 @@
             android:src="@drawable/calendar_grey"
             android:background="@android:color/transparent"/>
     </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+    </android.support.design.widget.CoordinatorLayout>
 
     <ImageView
         android:id="@+id/calendar_picture"
