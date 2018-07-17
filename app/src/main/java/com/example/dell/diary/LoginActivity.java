@@ -146,8 +146,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                CheckedTextView checkedTextView = (CheckedTextView) v;
-                checkedTextView.toggle();
+                //CheckedTextView checkedTextView = (CheckedTextView) v;
+                rememberPw.toggle();
                 if (rememberPw.isChecked() == true) {
 
                 }
