@@ -28,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView toRegist;
     Button d_btn;
     CheckedTextView rememberPw;
+    CheckedTextView autoLogin;
 
     MyAccount myAccount;
 
@@ -46,14 +47,25 @@ public class LoginActivity extends AppCompatActivity {
         toRegist = (TextView)findViewById(R.id.to_regist);
         d_btn = (Button)findViewById(R.id.direct_enter);
         rememberPw = (CheckedTextView)findViewById(R.id.remember_pw);
+        autoLogin = (CheckedTextView)findViewById(R.id.auto_login);
 
         password_layout.setPasswordVisibilityToggleEnabled(true);
 
         if(myAccount.getName() != null){
             username.setText(myAccount.getName());
+            if(myAccount.getIsRemember()){
+                rememberPw.setChecked(true);
+                if(myAccount.getPassword() != null){
+                    password.setText(myAccount.getPassword());
+                    if(myAccount.getAutoLogin()){
+                        bt_login.callOnClick();
+                    }
+                }
+            }
             password.requestFocus();
             password.setSelection(password.getText().length());
         }
+
 
         bt_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +98,22 @@ public class LoginActivity extends AppCompatActivity {
                                     myAccount.setToken(bundle.getString("token"));
                                     if(myAccount.getNickname() == null){
                                         myAccount.setNickname(name);
+                                    }
+                                    //记住密码 自动登录
+                                    if (rememberPw.isChecked() == true) {
+                                        myAccount.setIsRemember(true);
+                                        myAccount.setPassword(pw);
+                                        if(autoLogin.isChecked() == true){
+                                            myAccount.setAutoLogin(true);
+                                        }
+                                        else{
+                                            myAccount.setAutoLogin(false);
+                                        }
+                                    }
+                                    else{
+                                        myAccount.setIsRemember(false);
+                                        myAccount.setPassword(null);
+                                        myAccount.setAutoLogin(false);
                                     }
                                     myAccount.save();
 
@@ -148,8 +176,17 @@ public class LoginActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 //CheckedTextView checkedTextView = (CheckedTextView) v;
                 rememberPw.toggle();
-                if (rememberPw.isChecked() == true) {
+            }
+        });
 
+        autoLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                //CheckedTextView checkedTextView = (CheckedTextView) v;
+                autoLogin.toggle();
+                if(autoLogin.isChecked()){
+                    rememberPw.setChecked(true);
                 }
             }
         });

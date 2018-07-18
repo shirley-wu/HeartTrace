@@ -294,6 +294,12 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                         Intent intent3 = new Intent(DiaryWriteActivity.this,TimeLineActivity.class);
                         startActivity(intent3);
                         break;
+                    case R.id.exit:
+                        MyAccount myAccount = MyAccount.get(DiaryWriteActivity.this);
+                        myAccount.setAutoLogin(false);
+                        Intent intent4 = new Intent(DiaryWriteActivity.this,LoginActivity.class);
+                        intent4.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent4);
                 }
                 return true;
             }

@@ -67,6 +67,7 @@ public class CollectSAdapter extends RecyclerView.Adapter<CollectSAdapter.ViewHo
                 intent.putExtra(TicketEditActivity.SENTENCE_THIS, sentence);
                 intent.putExtra(TicketEditActivity.NOTE_EDITABLE, "false");
                 intent.putExtra(TicketEditActivity.NOTE_NEW, "false");
+                intent.putExtra(TicketEditActivity.TYPE, "ordinary");
                 Activity activity = (Activity) mContext;
                 activity.startActivityForResult(intent,2);
             }

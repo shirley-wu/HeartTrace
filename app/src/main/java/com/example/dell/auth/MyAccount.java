@@ -35,6 +35,12 @@ public class MyAccount {
 
     private String headimage;
 
+    private boolean isRemember;
+
+    private boolean autoLogin;
+
+    private String password;
+
     private MyAccount() {
 
     }
@@ -111,6 +117,33 @@ public class MyAccount {
         return headimage;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setIsRemember(boolean isRemember){
+        this.isRemember = isRemember;
+    }
+
+    public boolean getIsRemember(){
+        return isRemember;
+    }
+
+    public boolean getAutoLogin() {
+        return autoLogin;
+    }
+
+    public void setAutoLogin(boolean autoLogin) {
+        this.autoLogin = autoLogin;
+    }
+
+
+
+
     public boolean save() {
         SharedPreferences.Editor editor = preferences.edit();
 
@@ -123,6 +156,9 @@ public class MyAccount {
         editor.putString("school", school);
         editor.putString("signature", signature);
         editor.putString("headimage",headimage);
+        editor.putBoolean("isRemember",isRemember);
+        editor.putBoolean("autoLogin",autoLogin);
+        editor.putString("password",password);
 
         return editor.commit();
     }
@@ -141,6 +177,9 @@ public class MyAccount {
             myAccount.school = preferences.getString("school", null);
             myAccount.signature = preferences.getString("signature", null);
             myAccount.headimage = preferences.getString("headimage",null);
+            myAccount.password = preferences.getString("password",null);
+            myAccount.isRemember = preferences.getBoolean("isRemember",false);
+            myAccount.autoLogin = preferences.getBoolean("autoLogin",false);
         }
         return myAccount;
     }
