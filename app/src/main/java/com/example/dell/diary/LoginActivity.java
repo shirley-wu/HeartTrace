@@ -51,22 +51,6 @@ public class LoginActivity extends AppCompatActivity {
 
         password_layout.setPasswordVisibilityToggleEnabled(true);
 
-        if(myAccount.getName() != null){
-            username.setText(myAccount.getName());
-            if(myAccount.getIsRemember()){
-                rememberPw.setChecked(true);
-                if(myAccount.getPassword() != null){
-                    password.setText(myAccount.getPassword());
-                    if(myAccount.getAutoLogin()){
-                        bt_login.callOnClick();
-                    }
-                }
-            }
-            password.requestFocus();
-            password.setSelection(password.getText().length());
-        }
-
-
         bt_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,6 +130,23 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+        if(myAccount.getName() != null){
+            username.setText(myAccount.getName());
+            if(myAccount.getIsRemember()){
+                rememberPw.setChecked(true);
+                if(myAccount.getPassword() != null){
+                    password.setText(myAccount.getPassword());
+                    if(myAccount.getAutoLogin()){
+                        autoLogin.setChecked(true);
+                        bt_login.performClick();
+                    }
+                }
+            }
+            password.requestFocus();
+            password.setSelection(password.getText().length());
+        }
+
 
         toRegist.setOnClickListener(new View.OnClickListener() {
             @Override
