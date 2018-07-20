@@ -121,7 +121,7 @@ public class CombinedChartManager {
 
         dataSet.setCircleSize(1);
         //显示值
-        dataSet.setDrawValues(true);
+        dataSet.setDrawValues(false);
         dataSet.setValueTextSize(10f);
         dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
         dataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
@@ -151,7 +151,7 @@ public class CombinedChartManager {
             dataSet.setValueTextColor(lineColors.get(i));
 
             dataSet.setCircleSize(1);
-            dataSet.setDrawValues(true);
+            dataSet.setDrawValues(false); //
             dataSet.setValueTextSize(10f);
             dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
             dataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
@@ -178,6 +178,7 @@ public class CombinedChartManager {
 
         BarDataSet barDataSet = new BarDataSet(yValues, barName);
         barDataSet.setColors(barColor);
+        barDataSet.setDrawValues(false);
         barDataSet.setValueTextSize(10f);
         barDataSet.setValueTextColors(barColor);
         barDataSet.setAxisDependency(YAxis.AxisDependency.LEFT);

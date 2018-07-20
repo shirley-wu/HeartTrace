@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="300dp"
-    android:background="@android:color/background_light"
+    android:background="@color/snow"
     android:paddingTop="20dp"
     app:behavior_hideable="true"
     app:behavior_peekHeight="0dp"

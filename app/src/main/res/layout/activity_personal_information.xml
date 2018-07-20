@@ -15,7 +15,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_personal_image">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/personal_image"
@@ -29,6 +30,12 @@
                 android:clickable="true"/>
 
         </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="15dp">
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
