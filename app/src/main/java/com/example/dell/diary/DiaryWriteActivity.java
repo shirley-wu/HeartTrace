@@ -79,6 +79,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.NumberPicker;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -163,7 +164,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private LinearLayout date_layout;
     private LinearLayout set_layout;
     private ConstraintLayout floatingButtons;
-    private DiscreteSeekBar set_size;
+    private NumberPicker set_size;
     private ImageButton confirm;
     private int start=0;
     private int count=0;
@@ -481,7 +482,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         edit_layout = (LinearLayout) findViewById(R.id.edit_layout);
         date_layout = (LinearLayout) findViewById(R.id.date_layout);
         set_layout = (LinearLayout)findViewById(R.id.settings_column);
-        set_size = (DiscreteSeekBar) findViewById(R.id.set_size);
+        set_size = (NumberPicker) findViewById(R.id.set_size);
         confirm = (ImageButton) findViewById(R.id.confirm);
         font_set = (ImageButton) findViewById(R.id.font_setting);
         theme_set = (ImageButton) findViewById(R.id.theme_setting) ;
@@ -571,20 +572,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
         });
         edit_layout.setOnClickListener(this);
-        set_size.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
+        set_size.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
-            public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
-                float text_size = (float)4.0*(float)set_size.getProgress();
-                diary_write.setTextSize(text_size);
-                Log.i("seekbar", text_size + " " +diary_write.getTextSize());
-            }
-
-            @Override
-            public void onStartTrackingTouch(DiscreteSeekBar seekBar) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(DiscreteSeekBar seekBar) {
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                diary_write.setTextSize(newVal*4);
             }
         });
         add.setOnClickListener(this);
@@ -643,7 +634,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         imageItems.add(diaryIcon4);
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar_diary_content);
         toolbar.setTitle("心·迹");
-
         diaryDate = (TextView)findViewById(R.id.diary_content_date);
         diaryWeekday = (TextView)findViewById(R.id.diary_content_weekday);
         setSupportActionBar(toolbar);
@@ -768,7 +758,31 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         font_blue.setSelected(false);
         font_dark_blue.setSelected(false);
         font_grey.setSelected(false);
-        font_black.setSelected(false);
+        font_black.setSelected(true);
+
+        set_font1.setSelected(false);
+        set_font2.setSelected(true);
+        set_font3.setSelected(false);
+
+        set_left.setSelected(true);
+        set_center.setSelected(false);
+        set_right.setSelected(false);
+
+        font_padding1.setSelected(false);
+        font_padding2.setSelected(true);
+        font_padding3.setSelected(false);
+
+        line_spacing1.setSelected(true);
+        line_spacing2.setSelected(false);
+        line_spacing3.setSelected(false);
+
+        set_underline.setSelected(false);
+        set_bold.setSelected(false);
+        set_italic.setSelected(false);
+
+        set_size.setMinValue(1);
+        set_size.setMaxValue(10);
+        set_size.setValue(5);
 
     }
 
@@ -978,9 +992,11 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 drawer.setBackgroundResource(R.drawable.background8);
                 break;
             case R.id.font1:
-                set_font1.setBackgroundColor(Color.GRAY);
-                set_font2.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                set_font3.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                if(set_font1.isSelected() == false){
+                    set_font1.setSelected(true);
+                    set_font2.setSelected(false);
+                    set_font3.setSelected(false);
+                }
                 if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
                 {
                     Editable editable = diary_write.getText();
@@ -990,9 +1006,11 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     font_type = 1;
                 break;
             case R.id.font2:
-                set_font2.setBackgroundColor(Color.GRAY);
-                set_font1.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                set_font3.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                if(set_font2.isSelected() == false){
+                    set_font2.setSelected(true);
+                    set_font1.setSelected(false);
+                    set_font3.setSelected(false);
+                }
                 if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
                 {
                     Editable editable = diary_write.getText();
@@ -1002,9 +1020,11 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     font_type = 2;
                 break;
             case R.id.font3:
-                set_font3.setBackgroundColor(Color.GRAY);
-                set_font1.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                set_font2.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                if(set_font3.isSelected() == false){
+                    set_font3.setSelected(true);
+                    set_font1.setSelected(false);
+                    set_font2.setSelected(false);
+                }
                 if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
                 {
                     Editable editable = diary_write.getText();
@@ -1014,8 +1034,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     font_type = 3;
                 break;
             case R.id.font_red:
-                font_red.setSelected(!font_red.isSelected());
-                if(font_red.isSelected() == true){
+                if(font_red.isSelected() == false){
+                    font_red.setSelected(true);
                     font_orange.setSelected(false);
                     font_pink.setSelected(false);
                     font_green.setSelected(false);
@@ -1033,8 +1053,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     font_color = 1;
                 break;
             case R.id.font_orange:
-                font_orange.setSelected(!font_orange.isSelected());
-                if(font_orange.isSelected() == true){
+                if(font_orange.isSelected() == false){
+                    font_orange.setSelected(true);
                     font_red.setSelected(false);
                     font_pink.setSelected(false);
                     font_green.setSelected(false);
@@ -1052,8 +1072,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     font_color = 2;
                 break;
             case R.id.font_pink:
-                font_pink.setSelected(!font_pink.isSelected());
-                if(font_pink.isSelected() == true){
+                if(font_pink.isSelected() == false){
+                    font_pink.setSelected(true);
                     font_red.setSelected(false);
                     font_orange.setSelected(false);
                     font_green.setSelected(false);
@@ -1071,8 +1091,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     font_color = 3;
                 break;
             case R.id.font_green:
-                font_green.setSelected(!font_green.isSelected());
-                if(font_green.isSelected() == true){
+                if(font_green.isSelected() == false){
+                    font_green.setSelected(true);
                     font_red.setSelected(false);
                     font_orange.setSelected(false);
                     font_pink.setSelected(false);
@@ -1090,8 +1110,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     font_color = 4;
                 break;
             case R.id.font_blue:
-                font_blue.setSelected(!font_blue.isSelected());
-                if(font_blue.isSelected() == true){
+                if(font_blue.isSelected() == false){
+                    font_blue.setSelected(true);
                     font_red.setSelected(false);
                     font_orange.setSelected(false);
                     font_pink.setSelected(false);
@@ -1109,8 +1129,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     font_color = 5;
                 break;
             case R.id.font_dark_blue:
-                font_dark_blue.setSelected(!font_dark_blue.isSelected());
-                if(font_dark_blue.isSelected() == true){
+                if(font_dark_blue.isSelected() == false){
+                    font_dark_blue.setSelected(true);
                     font_red.setSelected(false);
                     font_orange.setSelected(false);
                     font_pink.setSelected(false);
@@ -1128,8 +1148,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     font_color = 6;
                 break;
             case R.id.font_grey:
-                font_grey.setSelected(!font_grey.isSelected());
-                if(font_grey.isSelected() == true){
+                if(font_grey.isSelected() == false){
+                    font_grey.setSelected(true);
                     font_red.setSelected(false);
                     font_orange.setSelected(false);
                     font_pink.setSelected(false);
@@ -1147,8 +1167,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     font_color = 7;
                 break;
             case R.id.font_black:
-                font_black.setSelected(!font_black.isSelected());
-                if(font_black.isSelected() == true){
+                if(font_black.isSelected() == false){
+                    font_black.setSelected(true);
                     font_red.setSelected(false);
                     font_orange.setSelected(false);
                     font_pink.setSelected(false);
@@ -1166,97 +1186,106 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     font_color = 8;
                 break;
             case R.id.set_center:
+                if(set_center.isSelected() == false) {
+                    set_center.setSelected(true);
+                    set_left.setSelected(false);
+                    set_right.setSelected(false);
+                }
                 Editable editable_align_center = diary_write.getText();
                 editable_align_center.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), 0, count, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                set_center.setBackgroundColor(Color.GRAY);
-                set_right.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                set_left.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 style=2;
                 break;
             case R.id.set_left:
+                if(set_left.isSelected() == false) {
+                    set_left.setSelected(true);
+                    set_center.setSelected(false);
+                    set_right.setSelected(false);
+                }
                 Editable editable_align_left = diary_write.getText();
                 editable_align_left.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), 0, count, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                set_left.setBackgroundColor(Color.GRAY);
-                set_right.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                set_center.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 style=3;
                 break;
             case R.id.set_right:
+                if(set_right.isSelected() == false) {
+                    set_right.setSelected(true);
+                    set_left.setSelected(false);
+                    set_center.setSelected(false);
+                }
                 Editable editable_align_right = diary_write.getText();
                 editable_align_right.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_OPPOSITE), 0, count, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                set_right.setBackgroundColor(Color.GRAY);
-                set_left.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                set_center.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 style=4;
                 break;
             case R.id.font_padding1:
-                font_padding1.setBackgroundColor(Color.GRAY);
-                font_padding2.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                font_padding3.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                if(font_padding1.isSelected() == false){
+                    font_padding1.setSelected(true);
+                    font_padding2.setSelected(false);
+                    font_padding3.setSelected(false);
+                }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     diary_write.setLetterSpacing(0);
                 }
                 break;
             case R.id.font_padding2:
-                font_padding2.setBackgroundColor(Color.GRAY);
-                font_padding1.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                font_padding3.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                if(font_padding2.isSelected() == false){
+                    font_padding2.setSelected(true);
+                    font_padding1.setSelected(false);
+                    font_padding3.setSelected(false);
+                }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     diary_write.setLetterSpacing((float) 0.2);
                 }
                 break;
             case R.id.font_padding3:
-                font_padding3.setBackgroundColor(Color.GRAY);
-                font_padding1.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                font_padding2.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                if(font_padding3.isSelected() == false){
+                    font_padding3.setSelected(true);
+                    font_padding1.setSelected(false);
+                    font_padding2.setSelected(false);
+                }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     diary_write.setLetterSpacing((float) 0.5);
                 }
                 break;
             case R.id.line_spacing1:
-                line_spacing1.setBackgroundColor(Color.GRAY);
-                line_spacing2.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                line_spacing3.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                if(line_spacing1.isSelected() == false){
+                    line_spacing1.setSelected(true);
+                    line_spacing2.setSelected(false);
+                    line_spacing3.setSelected(false);
+                }
                 diary_write.setLineSpacing(0,1);
                 break;
             case R.id.line_spacing2:
-                line_spacing2.setBackgroundColor(Color.GRAY);
-                line_spacing1.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                line_spacing3.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                if(line_spacing2.isSelected() == false){
+                    line_spacing2.setSelected(true);
+                    line_spacing1.setSelected(false);
+                    line_spacing3.setSelected(false);
+                }
                 diary_write.setLineSpacing(5,1);
                 break;
             case R.id.line_spacing3:
-                line_spacing3.setBackgroundColor(Color.GRAY);
-                line_spacing1.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                line_spacing2.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                if(line_spacing3.isSelected() == false){
+                    line_spacing3.setSelected(true);
+                    line_spacing1.setSelected(false);
+                    line_spacing2.setSelected(false);
+                }
                 diary_write.setLineSpacing(10,1);
                 break;
             case R.id.underline:
                 is_underline=!is_underline;
+                set_underline.setSelected(is_underline);
                 if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
                     setSelectedUnderstyleStyle();
-                if(is_underline)
-                    set_underline.setBackgroundColor(Color.GRAY);
-                else
-                    set_underline.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 break;
             case R.id.bold:
                 is_bold=!is_bold;
+                set_bold.setSelected(is_bold);
                 if (diary_write.getSelectionStart() != diary_write.getSelectionEnd())
                     setSelectedBoldStyle();
-                if(is_bold)
-                    set_bold.setBackgroundColor(Color.GRAY);
-                else
-                    set_bold.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 break;
             case R.id.italic:
                 is_italic=!is_italic;
+                set_italic.setSelected(is_italic);
                 if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
                     setSelectedItalicStyle();
-                if(is_italic)
-                    set_italic.setBackgroundColor(Color.GRAY);
-                else
-                    set_italic.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 break;
             case R.id.insert_image:
                 verifyStoragePermissions(DiaryWriteActivity.this);
