@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -19,6 +21,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,6 +34,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.dell.auth.MyAccount;
 import com.example.dell.db.DatabaseHelper;
 import com.example.dell.db.Diary;
 import com.example.dell.db.DiaryLabel;
@@ -42,6 +46,8 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class BottlefrontActivity extends AppCompatActivity {
     private CoordinatorLayout container;
@@ -57,7 +63,9 @@ public class BottlefrontActivity extends AppCompatActivity {
     private NavigationView navView;
     private DrawerLayout mDrawerLayout;
 
-
+    private CircleImageView headImage;
+    private TextView nickName;
+    private TextView personalSignature;
 
    @Override
    protected  void onResume(){
@@ -232,6 +240,40 @@ public class BottlefrontActivity extends AppCompatActivity {
         adapter = new NoteAdapter(sentenceList, sentencebookName);
         recyclerView.setAdapter(adapter);
 
+        navView = (NavigationView)findViewById(R.id.nav_view);
+        View headerLayout = navView.getHeaderView(0);
+        nickName = (TextView)headerLayout.findViewById(R.id.nick_name);
+        personalSignature = (TextView)headerLayout.findViewById(R.id.personal_signature);
+        headImage = (CircleImageView)headerLayout.findViewById(R.id.icon_image);
+
+        initNavHeader();
+    }
+
+    public void initNavHeader(){
+        MyAccount myAccount = MyAccount.get(this);
+        //Log.d("123",myAccount.getNickname());
+        nickName.setText(myAccount.getNickname());
+        String sig = myAccount.getSignature();
+        String imageID = myAccount.getHeadimage();
+        if(sig == null){
+            personalSignature.setText("一切都在慢慢变好。");
+        }
+        else{
+            personalSignature.setText(sig);
+        }
+        if(imageID == null){
+            headImage.setImageResource(R.drawable.panda);
+        }
+        else{
+            //headImage.setImageResource(imageID);
+            //headImage.setImageResource(R.drawable.panda);
+            if (imageID != "") {
+                byte[] bytes = Base64.decode(imageID.getBytes(), 1);
+                //  byte[] bytes =headPic.getBytes();
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                headImage.setImageBitmap(bitmap);
+            }
+        }
     }
 
     //初始化sentenceList

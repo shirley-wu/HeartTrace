@@ -33,7 +33,13 @@ public class MyAccount {
 
     private String signature;
 
-    private int image;
+    private String headimage;
+
+    private boolean isRemember;
+
+    private boolean autoLogin;
+
+    private String password;
 
     private MyAccount() {
 
@@ -103,13 +109,40 @@ public class MyAccount {
         return signature;
     }
 
-    public void setImage(int image) {
-        this.image = image;
+    public void setHeadimage(String headimage){
+        this.headimage = headimage;
     }
 
-    public int getImage() {
-        return image;
+    public String getHeadimage(){
+        return headimage;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setIsRemember(boolean isRemember){
+        this.isRemember = isRemember;
+    }
+
+    public boolean getIsRemember(){
+        return isRemember;
+    }
+
+    public boolean getAutoLogin() {
+        return autoLogin;
+    }
+
+    public void setAutoLogin(boolean autoLogin) {
+        this.autoLogin = autoLogin;
+    }
+
+
+
 
     public boolean save() {
         SharedPreferences.Editor editor = preferences.edit();
@@ -122,7 +155,10 @@ public class MyAccount {
         editor.putString("email", email);
         editor.putString("school", school);
         editor.putString("signature", signature);
-        editor.putInt("image", image);
+        editor.putString("headimage",headimage);
+        editor.putBoolean("isRemember",isRemember);
+        editor.putBoolean("autoLogin",autoLogin);
+        editor.putString("password",password);
 
         return editor.commit();
     }
@@ -140,7 +176,10 @@ public class MyAccount {
             myAccount.email = preferences.getString("email", null);
             myAccount.school = preferences.getString("school", null);
             myAccount.signature = preferences.getString("signature", null);
-            myAccount.image = preferences.getInt("image", -1);
+            myAccount.headimage = preferences.getString("headimage",null);
+            myAccount.password = preferences.getString("password",null);
+            myAccount.isRemember = preferences.getBoolean("isRemember",false);
+            myAccount.autoLogin = preferences.getBoolean("autoLogin",false);
         }
         return myAccount;
     }

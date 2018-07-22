@@ -8,7 +8,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="温馨提示: 情绪统计采用计分模式，在日记内插入情绪类标签即可参与计分。
-                               具体细则为： 开心*9、震惊*7、一般*5、尴尬*4、呆滞*3、难过*1。"
-        android:background="@drawable/background3"/>
+                               具体规则如下： 开心*9、震惊*7、一般*5、尴尬*4、呆滞*3、难过*1。"
+        android:textSize="20dp"
+        android:background="@drawable/background5"/>
 
 </LinearLayout>

@@ -94,14 +94,14 @@ public class BottlesActivity extends AppCompatActivity {
             //actionBar.setHomeAsUpIndicator(R.drawable.menu_white);
         }
         actionBar.setTitle("Bottles");
-        navView.setCheckedItem(R.id.nav_user);
-        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
-                mDrawLayout.closeDrawers();
-                return true;
-            }
-        });
+//        navView.setCheckedItem(R.id.nav_user);
+//        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(MenuItem item) {
+//                mDrawLayout.closeDrawers();
+//                return true;
+//            }
+//        });
         //初始化日记本
         initSententcebookList();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_bottle_view);

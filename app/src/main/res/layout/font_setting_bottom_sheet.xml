@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="280dp"
-    android:background="@android:color/background_light"
+    android:background="@color/snow"
     android:paddingTop="20dp"
     app:behavior_hideable="true"
     app:behavior_peekHeight="0dp"
@@ -20,95 +20,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <!-- background setting
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="26dp">
-
-        <TextView
-            android:id="@+id/set_theme"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:text="主题"
-            android:textColor="#000000"
-            android:layout_alignParentLeft="true"
-            android:gravity="center_vertical|center_horizontal"
-            android:textSize="20dp"/>
-
-        <Button
-            android:id="@+id/drop_down"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:layout_marginRight="10dp"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/drop_down"/>
-    </RelativeLayout>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:paddingTop="15dp"
-        android:layout_height="50dp">
-
-        <ImageButton
-            android:id="@+id/theme1"
-            android:src="@drawable/background1"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"/>
-
-        <ImageButton
-            android:id="@+id/theme2"
-            android:src="@drawable/background2"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"/>
-
-        <ImageButton
-            android:id="@+id/theme3"
-            android:src="@drawable/background3"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"/>
-
-        <ImageButton
-            android:id="@+id/theme4"
-            android:src="@drawable/background4"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"/>
-
-        <ImageButton
-            android:id="@+id/theme5"
-            android:src="@drawable/background5"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"/>
-
-        <ImageButton
-            android:id="@+id/theme6"
-            android:src="@drawable/background6"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"/>
-
-    </LinearLayout>
-
-    -->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -133,7 +44,7 @@
                         android:id="@+id/set_size"
                         android:layout_width="50dp"
                         android:layout_height="80dp"
-                        android:background="@android:color/white"
+                        android:background="@android:color/transparent"
                         android:focusable="true"
                         android:focusableInTouchMode="true"
                         />
@@ -259,7 +170,7 @@
                             android:gravity="center_vertical|center_horizontal"
                             android:text="楷体"
                             android:textColor="#000000"
-                            android:textSize="16dp" />
+                            android:textSize="14dp" />
 
                         <TextView
                             android:id="@+id/font2"
@@ -273,7 +184,7 @@
                             android:gravity="center_vertical|center_horizontal"
                             android:text="黑体"
                             android:textColor="#000000"
-                            android:textSize="16dp" />
+                            android:textSize="14dp" />
 
                         <TextView
                             android:id="@+id/font3"
@@ -287,7 +198,7 @@
                             android:gravity="center_vertical|center_horizontal"
                             android:text="喵呜"
                             android:textColor="#000000"
-                            android:textSize="16dp" />
+                            android:textSize="14dp" />
 
 
                     </LinearLayout>
@@ -317,7 +228,7 @@
                     android:background="@drawable/style"
                     android:text="AA"
                     android:textColor="#000000"
-                    android:textSize="16dp" />
+                    android:textSize="14dp" />
 
                 <TextView
                     android:id="@+id/font_padding2"
@@ -331,7 +242,7 @@
                     android:background="@drawable/style"
                     android:text="A-A"
                     android:textColor="#000000"
-                    android:textSize="16dp" />
+                    android:textSize="14dp" />
 
                 <TextView
                     android:id="@+id/font_padding3"
@@ -345,7 +256,7 @@
                     android:background="@drawable/style"
                     android:text="A—A"
                     android:textColor="#000000"
-                    android:textSize="16dp" />
+                    android:textSize="14dp" />
 
                 <ImageButton
                     android:id="@+id/line_spacing1"

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +27,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText password;
     TextView toRegist;
     Button d_btn;
+    CheckedTextView rememberPw;
+    CheckedTextView autoLogin;
 
     MyAccount myAccount;
 
@@ -43,6 +46,8 @@ public class LoginActivity extends AppCompatActivity {
         password = (EditText) findViewById(R.id.password);
         toRegist = (TextView)findViewById(R.id.to_regist);
         d_btn = (Button)findViewById(R.id.direct_enter);
+        rememberPw = (CheckedTextView)findViewById(R.id.remember_pw);
+        autoLogin = (CheckedTextView)findViewById(R.id.auto_login);
 
         password_layout.setPasswordVisibilityToggleEnabled(true);
 
@@ -75,7 +80,25 @@ public class LoginActivity extends AppCompatActivity {
                                 if (success) {
                                     myAccount.setName(name);
                                     myAccount.setToken(bundle.getString("token"));
-                                    myAccount.setNickname(name);
+                                    if(myAccount.getNickname() == null){
+                                        myAccount.setNickname(name);
+                                    }
+                                    //记住密码 自动登录
+                                    if (rememberPw.isChecked() == true) {
+                                        myAccount.setIsRemember(true);
+                                        myAccount.setPassword(pw);
+                                        if(autoLogin.isChecked() == true){
+                                            myAccount.setAutoLogin(true);
+                                        }
+                                        else{
+                                            myAccount.setAutoLogin(false);
+                                        }
+                                    }
+                                    else{
+                                        myAccount.setIsRemember(false);
+                                        myAccount.setPassword(null);
+                                        myAccount.setAutoLogin(false);
+                                    }
                                     myAccount.save();
 
                                     Intent intent = new Intent(LoginActivity.this, DiaryWriteActivity.class);
@@ -108,6 +131,23 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        if(myAccount.getName() != null){
+            username.setText(myAccount.getName());
+            if(myAccount.getIsRemember()){
+                rememberPw.setChecked(true);
+                if(myAccount.getPassword() != null){
+                    password.setText(myAccount.getPassword());
+                    if(myAccount.getAutoLogin()){
+                        autoLogin.setChecked(true);
+                        bt_login.performClick();
+                    }
+                }
+            }
+            password.requestFocus();
+            password.setSelection(password.getText().length());
+        }
+
+
         toRegist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,12 +160,35 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 myAccount.setName("测试用户");
-                myAccount.setNickname("测试用户");
+                if(myAccount.getNickname() == null) {
+                    myAccount.setNickname("测试用户");
+                }
                 myAccount.save();
 
                 Intent intent = new Intent(LoginActivity.this, DiaryWriteActivity.class);
                 intent.putExtra("diary_origin", "welcome");
                 startActivity(intent);
+            }
+        });
+
+        rememberPw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                //CheckedTextView checkedTextView = (CheckedTextView) v;
+                rememberPw.toggle();
+            }
+        });
+
+        autoLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                //CheckedTextView checkedTextView = (CheckedTextView) v;
+                autoLogin.toggle();
+                if(autoLogin.isChecked()){
+                    rememberPw.setChecked(true);
+                }
             }
         });
 
@@ -135,7 +198,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onRestart();
         Intent intent = getIntent();
         String origin = intent.getStringExtra("origin");
-        //Log.d("123",intent.getStringExtra("origin"));
         if(origin != null){
             username_layout.setErrorEnabled(false);
             password_layout.setErrorEnabled(false);
