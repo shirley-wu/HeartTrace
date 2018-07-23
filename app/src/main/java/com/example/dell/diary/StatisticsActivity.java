@@ -39,9 +39,8 @@ import java.util.Locale;
 
 public class StatisticsActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
+    private ImageButton statistics_selectDate;
     private TextView dateTextView;
-    private Button changeData;
-    private Button chooseDate;
     private ImageButton help;
     private String end;
     private String startYear;
@@ -63,9 +62,8 @@ public class StatisticsActivity extends AppCompatActivity implements DatePickerD
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
 
+        statistics_selectDate = (ImageButton) findViewById(R.id.statistics_selectDate);
         dateTextView = (TextView) findViewById(R.id.date_textview);
-        changeData = (Button) findViewById(R.id.change_data);
-        chooseDate = (Button) findViewById(R.id.choose_date);
         help = (ImageButton) findViewById(R.id.help);
 
         Calendar now = Calendar.getInstance();
@@ -93,13 +91,6 @@ public class StatisticsActivity extends AppCompatActivity implements DatePickerD
 
         end = (now.get(Calendar.MONTH) + 1) + "/" + now.get(Calendar.DAY_OF_MONTH);
         dateTextView.setText(init_range);
-
-        changeData.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showChart();
-            }
-        });
 
         help.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,7 +120,7 @@ public class StatisticsActivity extends AppCompatActivity implements DatePickerD
             }
         });
 
-        chooseDate.setOnClickListener(new View.OnClickListener() {
+        statistics_selectDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Calendar now = Calendar.getInstance();
@@ -144,8 +135,8 @@ public class StatisticsActivity extends AppCompatActivity implements DatePickerD
                 dpd.show(getFragmentManager(), "Datepickerdialog");
             }
         });
-        showChart();
 
+        showChart();
     }
 
     @Override

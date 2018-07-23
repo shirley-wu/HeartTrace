@@ -24,6 +24,15 @@
                 android:textSize="20sp"
                 android:textColor="@color/white"/>
 
+            <ImageButton
+                android:id="@+id/statistics_selectDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/calendar_grey"
+                android:background="@android:color/transparent"/>
+
         </android.support.v7.widget.Toolbar>
 
         <com.github.mikephil.charting.charts.CombinedChart
@@ -55,37 +64,6 @@
             </LinearLayout>
 
         </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_centerInParent="true"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="8dp">
-
-                <Button
-                    android:id="@+id/change_data"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/mdtp_material_button_height"
-                    android:background="@drawable/round_rectangle"
-                    android:text="刷新"/>
-
-                <Button
-                    android:id="@+id/choose_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/round_rectangle"
-                    android:text="选择时间范围"/>
-
-            </LinearLayout>
-
-        </RelativeLayout>
 
         <TextView
             android:id="@+id/date_textview"
