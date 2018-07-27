@@ -4,29 +4,24 @@
     android:id="@+id/themeSettingBottomSheetLayout"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="280dp"
-    android:background="@color/snow"
-    android:paddingTop="20dp"
+    android:layout_height="256dp"
     app:behavior_hideable="true"
     app:behavior_peekHeight="0dp"
     android:fitsSystemWindows="true"
-    app:layout_behavior="@string/bottom_sheet_behavior">
+    app:layout_behavior="@string/bottom_sheet_behavior"
+    android:background="@color/snow">
 
-    <TextView
-        android:id="@+id/set_theme"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:text="主题"
-        android:textStyle="italic"
-        android:textColor="#000000"
-        android:layout_alignParentLeft="true"
-        android:gravity="center_vertical|center_horizontal"
-        android:textSize="20dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp">
+    </LinearLayout>
 
     <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/button_shape">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,12 +35,22 @@
                 android:id="@+id/background1"
                 android:clickable="true"/>
 
+            <LinearLayout
+                android:layout_width="10dp"
+                android:layout_height="192dp">
+            </LinearLayout>
+
             <ImageView
                 android:layout_width="108dp"
                 android:layout_height="192dp"
                 android:src="@drawable/background2"
                 android:id="@+id/background2"
                 android:clickable="true"/>
+
+            <LinearLayout
+                android:layout_width="10dp"
+                android:layout_height="192dp">
+            </LinearLayout>
 
             <ImageView
                 android:layout_width="108dp"
@@ -54,12 +59,22 @@
                 android:id="@+id/background3"
                 android:clickable="true"/>
 
+            <LinearLayout
+                android:layout_width="10dp"
+                android:layout_height="192dp">
+            </LinearLayout>
+
             <ImageView
                 android:layout_width="108dp"
                 android:layout_height="192dp"
                 android:src="@drawable/background4"
                 android:id="@+id/background4"
                 android:clickable="true"/>
+
+            <LinearLayout
+                android:layout_width="10dp"
+                android:layout_height="192dp">
+            </LinearLayout>
 
             <ImageView
                 android:layout_width="108dp"
@@ -68,6 +83,11 @@
                 android:id="@+id/background5"
                 android:clickable="true"/>
 
+            <LinearLayout
+                android:layout_width="10dp"
+                android:layout_height="192dp">
+            </LinearLayout>
+
             <ImageView
                 android:layout_width="108dp"
                 android:layout_height="192dp"
@@ -75,12 +95,22 @@
                 android:id="@+id/background6"
                 android:clickable="true"/>
 
+            <LinearLayout
+                android:layout_width="10dp"
+                android:layout_height="192dp">
+            </LinearLayout>
+
             <ImageView
                 android:layout_width="108dp"
                 android:layout_height="192dp"
                 android:src="@drawable/background7"
                 android:id="@+id/background7"
                 android:clickable="true"/>
+
+            <LinearLayout
+                android:layout_width="10dp"
+                android:layout_height="192dp">
+            </LinearLayout>
 
             <ImageView
                 android:layout_width="108dp"
