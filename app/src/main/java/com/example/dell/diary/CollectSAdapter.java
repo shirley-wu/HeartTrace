@@ -125,7 +125,7 @@ public class CollectSAdapter extends RecyclerView.Adapter<CollectSAdapter.ViewHo
     public void deleteSentenceLike(int position){
         DatabaseHelper helper = new DatabaseHelper(mContext);
         Sentence sentence = mfavoriteSList.get(position);
-        sentence.setLike(false);
+        sentence.setIsLike(false);
         sentence.update(helper);
         mfavoriteSList=Sentence.getAllLike(helper, false);
         notifyDataSetChanged();

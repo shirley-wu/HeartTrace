@@ -191,7 +191,7 @@ public class SentenceOtherTest {
             sentence.setDate();
             sentence.setSentencebook(sentencebook);
             sentence.setText("hello " + i);
-            sentence.setLike(i % 2 == 0);
+            sentence.setIsLike(i % 2 == 0);
             sentenceList.add(sentence);
             sentence.insert(databaseHelper);
         }

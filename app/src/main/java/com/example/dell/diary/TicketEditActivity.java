@@ -173,7 +173,7 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
         imageItems.add(sentenceIcon4);
         sentenceList = sentence.getSentencebook().getAllSubSentence(helper);
 
-        likeFlag = sentence.getLike();
+        likeFlag = sentence.getIsLike();
         if(likeFlag == false){
            sentence_likeIcon.setBackgroundResource(R.drawable.unlike);
         }
@@ -399,13 +399,13 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
                     Log.i(TAG, "onClick: like");
                     likeFlag = false;
                     sentence_likeIcon.setBackgroundResource(R.drawable.unlike);
-                    sentence.setLike(false);
+                    sentence.setIsLike(false);
                     sentence.update(helper);
                 } else if (likeFlag == false) {
                     Log.i(TAG, "onClick: unlike");
                     likeFlag = true;
                     sentence_likeIcon.setBackgroundResource(R.drawable.like);
-                    sentence.setLike(true);
+                    sentence.setIsLike(true);
                     sentence.update(helper);
                 }
                 break;

@@ -61,7 +61,7 @@ public class SentenceInstrumentedTest {
         sentence.setText(originText);
         sentence.setDate();
         sentence.setSentencebook(sentencebook);
-        sentence.setLike(true);
+        sentence.setIsLike(true);
 
         // create
         sentence.insert(databaseHelper);
@@ -71,7 +71,7 @@ public class SentenceInstrumentedTest {
         assertEquals(1, sentenceList.size()); // TODO: not safe: assumes that there is no such text by wxq
         assertEquals(sentence.getDate(), sentenceList.get(0).getDate());
         assertEquals(originText, sentenceList.get(0).getText());
-        assertEquals(true, sentenceList.get(0).getLike());
+        assertEquals(true, sentenceList.get(0).getIsLike());
 
         // update
         sentence.setText(updateText);

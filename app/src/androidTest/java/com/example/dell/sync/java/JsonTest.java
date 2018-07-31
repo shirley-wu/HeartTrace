@@ -44,7 +44,7 @@ public class JsonTest extends InstrumentationTestCase {
         d1.setText("1: This is Jodie");
         d1.setHtmlText("<h>1:</h> <p>This is <b>Jodie</b></p>");
         d1.setDate();
-        d1.setLike(true);
+        d1.setIsLike(true);
         d1.setLetterSpacing(1.5F);
         d1.setLineSpacingMultiplier(15);
         d1.setLineSpacingExtra(20);

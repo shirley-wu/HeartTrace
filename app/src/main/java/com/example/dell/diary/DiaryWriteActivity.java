@@ -856,7 +856,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.add:
                 if(addDiary.getVisibility() == View.INVISIBLE) {
-                    if(emptyImage.getVisibility() == View.VISIBLE || !diary.getLike()){
+                    if(emptyImage.getVisibility() == View.VISIBLE || !diary.getIsLike()){
                         like.setImageResource(R.drawable.unlike);
                     }
                     else{
@@ -893,14 +893,14 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.like:
                 if(emptyImage.getVisibility() == View.INVISIBLE){
-                    if(diary.getLike()) {
+                    if(diary.getIsLike()) {
                         like.setImageResource(R.drawable.unlike);
-                        diary.setLike(false);
+                        diary.setIsLike(false);
                         diary.update(helper);
                     }
                     else{
                         like.setImageResource(R.drawable.like);
-                        diary.setLike(true);
+                        diary.setIsLike(true);
                         diary.update(helper);
                     }
                 }
