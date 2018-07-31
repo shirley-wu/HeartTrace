@@ -191,7 +191,7 @@ public class DiaryOtherTest {
             diary.setDate();
             diary.setDiarybook(diarybook);
             diary.setText("hello " + i);
-            diary.setLike(i % 2 == 0);
+            diary.setIsLike(i % 2 == 0);
             diaryList.add(diary);
             diary.insert(databaseHelper);
         }

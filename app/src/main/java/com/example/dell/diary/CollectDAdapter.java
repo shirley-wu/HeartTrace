@@ -146,7 +146,7 @@ public class CollectDAdapter extends RecyclerView.Adapter<CollectDAdapter.ViewHo
     public void deleteDiaryLike(int position){
         DatabaseHelper helper = new DatabaseHelper(mContext);
         Diary diary = mfavoriteDList.get(position);
-        diary.setLike(false);
+        diary.setIsLike(false);
         diary.update(helper);
         mfavoriteDList=Diary.getAllLike(helper, false);
         notifyDataSetChanged();

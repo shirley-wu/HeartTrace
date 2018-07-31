@@ -62,7 +62,7 @@ public class DiaryInstrumentedTest {
         diary.setHtmlText("<p>" + originText + "</p>");
         diary.setDate();
         diary.setDiarybook(diarybook);
-        diary.setLike(true);
+        diary.setIsLike(true);
 
         // create
         diary.insert(databaseHelper);
@@ -73,7 +73,7 @@ public class DiaryInstrumentedTest {
         assertEquals(diary.getDate(), diaryList.get(0).getDate());
         assertEquals(originText, diaryList.get(0).getText());
         assertEquals("<p>" + originText + "</p>", diaryList.get(0).getHtmlText());
-        assertEquals(true, diaryList.get(0).getLike());
+        assertEquals(true, diaryList.get(0).getIsLike());
 
         // update
         diary.setText(updateText);
