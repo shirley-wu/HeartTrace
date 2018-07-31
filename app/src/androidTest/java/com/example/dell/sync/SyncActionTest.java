@@ -59,6 +59,7 @@ public class SyncActionTest {
 
     @Test
     public void testSyncDiary() {
-        syncAdapter.sync(databaseHelper, Diary.class);
+        // syncAdapter.sync(databaseHelper, Diary.class);
+        syncAdapter.syncDiary(databaseHelper);
     }
 }

@@ -225,7 +225,7 @@ public class Diary implements Serializable
             UpdateBuilder<DiaryLabel, Integer> updateBuilder = helper.getDaoAccess(DiaryLabel.class).updateBuilder();
             updateBuilder.updateColumnValue("status", -1);
             updateBuilder.where().eq(DiaryLabel.DIARY_TAG, this);
-            Log.i("diary", "dao = " + dao + " 批量删除 diary label " + this);
+            Log.i("diary", "批量删除 diary label " + this);
             returnValue = updateBuilder.update();
             Log.i("diary", "删除后返回值：" + returnValue);
         } catch (SQLException e) {

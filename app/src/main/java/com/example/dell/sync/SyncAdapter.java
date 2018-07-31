@@ -6,6 +6,7 @@ import android.content.ContentProviderClient;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SyncResult;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.provider.ContactsContract;
@@ -15,10 +16,13 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.example.dell.auth.MyAccount;
 import com.example.dell.db.DatabaseHelper;
 import com.example.dell.db.Diary;
 import com.example.dell.server.ServerAccessor;
 import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.QueryBuilder;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -34,6 +38,7 @@ import org.apache.http.util.EntityUtils;
 import java.lang.ref.Reference;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,20 +94,41 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         Log.d(TAG, "onPerformSync: end");
     }
 
-    /*private void syncDiary(DatabaseHelper databaseHelper) {
-        List<Diary> list = Diary.getAll(databaseHelper, false);
-        String jo = parseJson(list, Diary.class);
-        Log.d(TAG, "parseDiarySync: jo " + jo);
-        String response  = postSyncData("Diary", jo);
-        if(response == null) {
-            Log.e(TAG, "DiarySync: error when getting http response");
-            return ;
-        }
-        list = unparseJson(response, Diary.class);
+    public void syncDiary(DatabaseHelper databaseHelper) {
+        try {
+            Dao<Diary, Integer> dao = databaseHelper.getDaoAccess(Diary.class);
+            QueryBuilder<Diary, Integer> queryBuilder = dao.queryBuilder();
+            queryBuilder.where().lt("status", 9);
+
+            List<Diary> list = queryBuilder.query();
+
+            String jo = parseJson(list, Diary.class);
+            Log.d(TAG, "parseDiarySync: jo " + jo);
+            String response = postSyncData("Diary", jo);
+            if (response == null) {
+                Log.e(TAG, "DiarySync: error when getting http response");
+                return;
+            }
+
+        /*list = unparseJson(response, Diary.class);
         for(Diary diary : list) {
             diary.insertOrUpdate(databaseHelper);
+        }*/
+            int returnVal;
+            for (Diary diary : list) {
+                if (diary.getStatus() == -1) {
+                    returnVal = dao.delete(diary);
+                    Log.d(TAG, "syncDiary: 删除返回值 = " + returnVal);
+                } else {
+                    diary.setStatus(9);
+                    returnVal = dao.update(diary);
+                    Log.d(TAG, "syncDiary: 更新返回值 = " + returnVal);
+                }
+            }
+        } catch (SQLException e) {
+            Log.e(TAG, "syncDiary: ", e);
         }
-    }*/
+    }
 
     public boolean sync(DatabaseHelper databaseHelper, Class c) {
         try {
@@ -147,13 +173,17 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
     public String postSyncData(String table, String sendData) {
         HttpClient httpClient = new DefaultHttpClient();
-        String url = ServerAccessor.getServerIp() + ":8080/HeartTrace_Server_war4/Sync";
+        // String url = ServerAccessor.getServerIp() + ":8080/HeartTrace_Server_war4/Sync";
+        String url = ServerAccessor.getServerIp() + ":8080/HeartTrace_Server_war/Servlet.Sync";
         Log.d(TAG, "postSyncData: url " + url);
         HttpPost httpPost = new HttpPost(url);
 
         ArrayList<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("table", table));
         pairs.add(new BasicNameValuePair("data", sendData));
+
+        pairs.add(new BasicNameValuePair("modelnum", Build.MODEL));
+        pairs.add(new BasicNameValuePair("token", MyAccount.get(getContext()).getToken()));
 
         try {
             HttpEntity requestEntity = new UrlEncodedFormEntity(pairs);

@@ -8,6 +8,7 @@ import com.j256.ormlite.stmt.DeleteBuilder;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.UpdateBuilder;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
@@ -34,7 +35,14 @@ public class Diarybook implements Serializable {
     @DatabaseField
     private String description;
 
+    @DatabaseField
+    private int status;
+
+    @DatabaseField
+    private long anchor;
+
     public Diarybook(){};
+
     public Diarybook(String diarybookName)
     {
         this.diarybookName = diarybookName;
@@ -65,6 +73,22 @@ public class Diarybook implements Serializable {
         this.diarybookName = diarybookName;
     }
 
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setAnchor(long anchor) {
+        this.anchor = anchor;
+    }
+
+    public long getAnchor() {
+        return anchor;
+    }
+
     public List<Diary> getAllSubDiary(DatabaseHelper helper) {
         try {
             Dao<Diary, Integer> dao = helper.getDaoAccess(Diary.class);
@@ -78,11 +102,12 @@ public class Diarybook implements Serializable {
 
     public void deleteSubDiary(DatabaseHelper helper) {
         try {
-            Dao<Diary, Integer> dao = helper.getDaoAccess(Diary.class);
-            DeleteBuilder<Diary, Integer> deleteBuilder = dao.deleteBuilder();
-
-            deleteBuilder.where().eq(Diarybook.TAG, this);
-            deleteBuilder.delete();
+            UpdateBuilder<Diary, Integer> updateBuilder = helper.getDaoAccess(Diary.class).updateBuilder();
+            updateBuilder.updateColumnValue("status", -1);
+            updateBuilder.where().eq(Diarybook.TAG, this);
+            Log.i("diary", "批量删除 diary " + this);
+            int returnValue = updateBuilder.update();
+            Log.i("diary", "删除后返回值：" + returnValue);
         }catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
@@ -90,6 +115,7 @@ public class Diarybook implements Serializable {
     }
     public void insert(DatabaseHelper helper) {
         try {
+            status = 0;
             Dao<Diarybook, Integer> dao = helper.getDaoAccess(Diarybook.class);
             Log.i("diarybook", "dao = " + dao + " 插入 diarybook " + this);
             int returnValue = dao.create(this);
@@ -102,6 +128,7 @@ public class Diarybook implements Serializable {
 
     public void update(DatabaseHelper helper) {
         try {
+            if(status != 0) status = 1;
             Dao<Diarybook, Integer> dao = helper.getDaoAccess(Diarybook.class);
             Log.i("diarybook", "dao = " + dao + " 更新 diarybook " + this);
             int returnValue = dao.update(this);
@@ -126,15 +153,12 @@ public class Diarybook implements Serializable {
 
     public void delete(DatabaseHelper helper) {
         try {
-            Dao<Diary, Integer> subdao = helper.getDaoAccess(Diary.class);
-            DeleteBuilder<Diary, Integer> deleteBuilder = subdao.deleteBuilder();
+            deleteSubDiary(helper);
 
-            deleteBuilder.where().eq(Diarybook.TAG, this);
-            deleteBuilder.delete();
-
+            status = -1;
             Dao<Diarybook, Integer> dao = helper.getDaoAccess(Diarybook.class);
             Log.i("diarybook", "dao = " + dao + " 删除 diarybook " + this);
-            int returnValue = dao.delete(this);
+            int returnValue = dao.update(this);
             Log.i("diarybook", "删除后返回值：" + returnValue);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);

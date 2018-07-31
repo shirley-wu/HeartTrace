@@ -5,7 +5,6 @@ import android.support.test.InstrumentationRegistry;
 import android.util.Log;
 
 import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
-import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
 
 import org.junit.After;
@@ -45,9 +44,9 @@ public class DiaryOtherTest {
     }
 
     @After
-    public void tearDown() {
+    public void tearDown() throws SQLException {
         Log.d(TAG, "tearDown");
-        diarybook.delete(databaseHelper);
+        databaseHelper.clearAll();
         OpenHelperManager.releaseHelper();
     }
 

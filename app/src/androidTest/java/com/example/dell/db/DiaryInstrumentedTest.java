@@ -42,7 +42,7 @@ public class DiaryInstrumentedTest {
 
     @After
     public void tearDown() {
-        diarybook.delete(databaseHelper);
+        databaseHelper.clearAll();
         OpenHelperManager.releaseHelper();
     }
 
@@ -80,7 +80,6 @@ public class DiaryInstrumentedTest {
         diary.setText(updateText);
         diary.update(databaseHelper);
         diaryList = dao.queryBuilder().where().eq("text", originText).query();
-        for(Diary d : diaryList)
         assertEquals(0, diaryList.size()); // TODO: not safe: assumes that there is no such text by wxq
         diaryList = dao.queryBuilder().where().eq("text", updateText).query();
         assertEquals(1, diaryList.size()); // TODO: not safe: assumes that there is no such text by wxq

@@ -3,6 +3,8 @@ package com.example.dell.db;
 import android.support.test.InstrumentationRegistry;
 import android.test.InstrumentationTestCase;
 
+import com.j256.ormlite.dao.Dao;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,8 +35,7 @@ public class DiarybookTest extends InstrumentationTestCase {
     @After
     public void tearDown() throws Exception {
         super.tearDown();
-        diarybook.delete(helper);
-        diary.delete(helper);
+        helper.clearAll();
         helper.close();
     }
 
@@ -56,4 +57,26 @@ public class DiarybookTest extends InstrumentationTestCase {
         b.refresh(helper);
         assertEquals(diarybook.getDiarybookName(), b.getDiarybookName());
     }
+
+    @Test
+    public void delete() {
+        assertEquals(0, diarybook.getStatus());
+        diarybook.delete(helper);
+        assertEquals(-1, diarybook.getStatus());
+        List<Diary> list = diarybook.getAllSubDiary(helper);
+        for(Diary d : list) {
+            assertEquals(-1, d.getStatus());
+        }
+    }
+
+    @Test
+    public void update() {
+        assertEquals(0, diarybook.getStatus());
+        diarybook.update(helper);
+        assertEquals(0, diarybook.getStatus());
+        diarybook.setStatus(9);
+        diarybook.update(helper);
+        assertEquals(1, diarybook.getStatus());
+    }
+
 }
