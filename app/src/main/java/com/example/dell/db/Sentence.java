@@ -7,6 +7,7 @@ import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.UpdateBuilder;
 import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -41,7 +42,7 @@ public class Sentence implements Serializable
     protected Date date;
 
     @DatabaseField
-    private boolean like = false;
+    private boolean isLike = false;
 
     @DatabaseField
     private float letterSpacing = (float)0.2;
@@ -58,6 +59,11 @@ public class Sentence implements Serializable
     @DatabaseField
     private int textAlignment = 0;
 
+    @DatabaseField
+    private int status;
+
+    @DatabaseField
+    private long anchor;
 
     public Sentence(){
     };
@@ -74,8 +80,7 @@ public class Sentence implements Serializable
         return id;
     }
 
-    public String getText()
-    {
+    public String getText() {
         return text;
     }
 
@@ -104,15 +109,15 @@ public class Sentence implements Serializable
     public void setDate(Date date){
         // dangerous!!!!! for test only.
         this.date = date;
-        Log.i(TAG, "setDate: dangerous call!, set into " + date.toString());
+        Log.d(TAG, "setDate: dangerous call!, set into " + date.toString());
     }
 
-    public boolean getLike() {
-        return like;
+    public boolean getIsLike() {
+        return isLike;
     }
 
-    public void setLike(boolean like) {
-        this.like = like;
+    public void setIsLike(boolean isLike) {
+        this.isLike = isLike;
     }
 
     public float getLetterSpacing() {
@@ -163,12 +168,31 @@ public class Sentence implements Serializable
         this.sentencebook = sentencebook;
     }
 
-    public void insert(DatabaseHelper helper) {
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getStatus() {
+        return this.status;
+    }
+
+    public void setAnchor(long anchor) {
+        this.anchor = anchor;
+    }
+
+    public long getAnchor() {
+        return this.anchor;
+    }
+
+    public int insert(DatabaseHelper helper) {
         try {
+            status = 0;
+            anchor = 0;
             Dao<Sentence, Integer> dao = helper.getDaoAccess(Sentence.class);
-            Log.i("sentence", "dao = " + dao + " 插入 sentence " + this);
+            Log.d("sentence", "dao = " + dao + " 插入 sentence " + this);
             int returnValue = dao.create(this);
-            Log.i("sentence", "插入后返回值：" + returnValue);
+            Log.d("sentence", "插入后返回值：" + returnValue);
+            return returnValue;
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
@@ -177,10 +201,11 @@ public class Sentence implements Serializable
 
     public void update(DatabaseHelper helper) {
         try {
+            if(status != 0) status = 1;
             Dao<Sentence, Integer> dao = helper.getDaoAccess(Sentence.class);
-            Log.i("sentence", "dao = " + dao + " 更新 sentence " + this);
+            Log.d("sentence", "dao = " + dao + " 更新 sentence " + this);
             int returnValue = dao.update(this);
-            Log.i("sentence", "更新后返回值：" + returnValue);
+            Log.d("sentence", "更新后返回值：" + returnValue);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
@@ -189,14 +214,20 @@ public class Sentence implements Serializable
 
     public void delete(DatabaseHelper helper) {
         try {
-            DeleteBuilder<SentenceLabel, Integer> deleteBuilder = helper.getDaoAccess(SentenceLabel.class).deleteBuilder();
-            deleteBuilder.where().eq(SentenceLabel.SENTENCE_TAG, this);
-            deleteBuilder.delete();
+            int returnValue;
 
+            status = -1;
             Dao<Sentence, Integer> dao = helper.getDaoAccess(Sentence.class);
-            Log.i("sentence", "dao = " + dao + " 删除 sentence " + this);
-            int returnValue = dao.delete(this);
-            Log.i("sentence", "删除后返回值：" + returnValue);
+            Log.d("sentence", "dao = " + dao + " 删除 sentence " + this);
+            returnValue = dao.update(this);
+            Log.d("sentence", "删除后返回值：" + returnValue);
+
+            UpdateBuilder<SentenceLabel, Integer> updateBuilder = helper.getDaoAccess(SentenceLabel.class).updateBuilder();
+            updateBuilder.updateColumnValue("status", -1);
+            updateBuilder.where().eq(SentenceLabel.SENTENCE_TAG, this);
+            Log.d("sentence", "批量删除 sentence label " + this);
+            returnValue = updateBuilder.update();
+            Log.d("sentence", "删除后返回值：" + returnValue);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
@@ -257,7 +288,7 @@ public class Sentence implements Serializable
         }
     }
 
-    public static List<Sentence> getAll(DatabaseHelper helper, Boolean ascending){
+    public static List<Sentence> getAll(DatabaseHelper helper, boolean ascending){
         try {
             QueryBuilder<Sentence, Integer> qb = helper.getDaoAccess(Sentence.class).queryBuilder();
             qb.orderBy("date",ascending);
@@ -272,7 +303,7 @@ public class Sentence implements Serializable
         try {
             QueryBuilder<Sentence, Integer> qb = helper.getDaoAccess(Sentence.class).queryBuilder();
             Where<Sentence, Integer> where = qb.where();
-            where.eq("like", true);
+            where.eq("isLike", true);
             qb.orderBy("date", ascending);
             return qb.query();
         } catch (SQLException e) {

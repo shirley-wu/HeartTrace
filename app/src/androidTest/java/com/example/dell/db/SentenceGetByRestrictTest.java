@@ -95,19 +95,7 @@ public class SentenceGetByRestrictTest extends InstrumentationTestCase {
     @After
     public void tearDown() {
         Log.d(TAG, "tearDown");
-        for(final Label label : labels) {
-            label.delete(databaseHelper);
-        }
-        for(final Sentence sentence : sentenceShirly) {
-            sentence.delete(databaseHelper);
-        }
-        for(final Sentence sentence : sentenceLisa) {
-            sentence.delete(databaseHelper);
-        }
-        for(final Sentence sentence : sentenceMmp) {
-            sentence.delete(databaseHelper);
-        }
-        sentencebook.delete(databaseHelper);
+        databaseHelper.clearAll();
         OpenHelperManager.releaseHelper();
     }
 

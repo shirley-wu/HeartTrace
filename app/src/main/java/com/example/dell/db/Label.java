@@ -103,12 +103,12 @@ public class Label {
             returnValue = diaryLabelIntegerUpdateBuilder.update();
             Log.d("label", "删除后返回值：" + returnValue);
 
-            /*UpdateBuilder<SentenceLabel, Integer> sentenceLabelIntegerUpdateBuilder = helper.getDaoAccess(SentenceLabel.class).updateBuilder();
+            UpdateBuilder<SentenceLabel, Integer> sentenceLabelIntegerUpdateBuilder = helper.getDaoAccess(SentenceLabel.class).updateBuilder();
             sentenceLabelIntegerUpdateBuilder.updateColumnValue("status", -1);
             sentenceLabelIntegerUpdateBuilder.where().eq(SentenceLabel.LABEL_TAG, this);
             Log.d("label", "批量删除 sentence label " + this);
             returnValue = sentenceLabelIntegerUpdateBuilder.update();
-            Log.d("label", "删除后返回值：" + returnValue);*/
+            Log.d("label", "删除后返回值：" + returnValue);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);

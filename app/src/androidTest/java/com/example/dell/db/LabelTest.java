@@ -108,4 +108,24 @@ public class LabelTest extends InstrumentationTestCase {
             Log.e("test", "getDiaryLabel: ", e);
         }
     }
+
+    @Test
+    public void getSentenceLabel() {
+        Sentence sentence = null;
+        Label label = null;
+        try{
+            sentence = new Sentence("agoisdhadfagg");
+            label = new Label("dahlavakggsd");
+            sentence.insert(databaseHelper);
+            label.insert(databaseHelper);
+            sentence.insertLabel(databaseHelper, label);
+            List<SentenceLabel> l2 = databaseHelper.getDao(SentenceLabel.class).queryForAll();
+            for (SentenceLabel dl : l2) {
+                Log.d("test", "onClick: dl, sentence" + dl.getSentence());
+            }
+        }
+        catch(Exception e) {
+            Log.e("test", "getSentenceLabel: ", e);
+        }
+    }
 }

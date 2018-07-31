@@ -42,7 +42,7 @@ public class SentenceInstrumentedTest {
 
     @After
     public void tearDown() {
-        sentencebook.delete(databaseHelper);
+        databaseHelper.clearAll();
         OpenHelperManager.releaseHelper();
     }
 
@@ -59,6 +59,7 @@ public class SentenceInstrumentedTest {
         Sentence sentence = new Sentence();
         List<Sentence> sentenceList;
         sentence.setText(originText);
+        sentence.setHtmlText("<p>" + originText + "</p>");
         sentence.setDate();
         sentence.setSentencebook(sentencebook);
         sentence.setIsLike(true);
@@ -71,7 +72,9 @@ public class SentenceInstrumentedTest {
         assertEquals(1, sentenceList.size()); // TODO: not safe: assumes that there is no such text by wxq
         assertEquals(sentence.getDate(), sentenceList.get(0).getDate());
         assertEquals(originText, sentenceList.get(0).getText());
+        assertEquals("<p>" + originText + "</p>", sentenceList.get(0).getHtmlText());
         assertEquals(true, sentenceList.get(0).getIsLike());
+        assertEquals(0, sentenceList.get(0).getStatus());
 
         // update
         sentence.setText(updateText);
@@ -79,12 +82,23 @@ public class SentenceInstrumentedTest {
         sentenceList = dao.queryBuilder().where().eq("text", originText).query();
         assertEquals(0, sentenceList.size()); // TODO: not safe: assumes that there is no such text by wxq
         sentenceList = dao.queryBuilder().where().eq("text", updateText).query();
-        assertEquals(sentence.getDate(), sentenceList.get(0).getDate()); // TODO: not safe: assumes that there is no such text by wxq
+        assertEquals(1, sentenceList.size()); // TODO: not safe: assumes that there is no such text by wxq
+        assertEquals(sentence.getDate(), sentenceList.get(0).getDate());
+        assertEquals(0, sentenceList.get(0).getStatus());
+
+        // update after so-called sync
+        sentence.setStatus(9);
+        sentence.update(databaseHelper);
+        sentenceList = dao.queryBuilder().where().eq("text", updateText).query();
+        assertEquals(1, sentenceList.size()); // TODO: not safe: assumes that there is no such text by wxq
+        assertEquals(sentence.getDate(), sentenceList.get(0).getDate());
+        assertEquals(1, sentenceList.get(0).getStatus());
 
         // delete
         sentence.delete(databaseHelper);
         sentenceList = dao.queryBuilder().where().eq("text", updateText).query();
-        assertEquals(0, sentenceList.size()); // TODO: not safe: assumes that there is no such text by wxq
+        assertEquals(1, sentenceList.size()); // TODO: not safe: assumes that there is no such text by wxq
+        assertEquals(-1, sentenceList.get(0).getStatus());
     }
 
     @Test
