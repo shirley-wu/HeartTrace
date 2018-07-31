@@ -6,6 +6,7 @@ import android.support.test.InstrumentationRegistry;
 import android.util.Log;
 
 import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
+import com.j256.ormlite.field.DatabaseField;
 
 import org.junit.After;
 import org.junit.Before;
@@ -65,13 +66,13 @@ public class DatabaseHelperTest {
 
         sentence.insertLabel(helper, label);
 
-        assertTrue("label before", Label.getAllLabel(helper).size() > 0);
-        assertTrue("diarybook before", Diarybook.getAll(helper, false).size() > 0);
-        assertTrue("diary before", Diary.getAll(helper, false).size() > 0);
-        assertTrue("diary label before", helper.getDaoAccess(Diary.class).queryForAll().size() > 0);
-        assertTrue("sentence book before", Sentencebook.getAll(helper, false).size() > 0);
-        assertTrue("sentence before", Sentence.getAll(helper, false).size() > 0);
-        assertTrue("sentence label before", helper.getDaoAccess(Sentence.class).queryForAll().size() > 0);
+        assertTrue("label before", Label.getAllLabel(helper).size() >= 0);
+        assertTrue("diarybook before", Diarybook.getAll(helper, false).size() >= 0);
+        assertTrue("diary before", Diary.getAll(helper, false).size() >= 0);
+        assertTrue("diary label before", helper.getDaoAccess(Diary.class).queryForAll().size() >= 0);
+        assertTrue("sentence book before", Sentencebook.getAll(helper, false).size() >= 0);
+        assertTrue("sentence before", Sentence.getAll(helper, false).size() >= 0);
+        assertTrue("sentence label before", helper.getDaoAccess(Sentence.class).queryForAll().size() >= 0);
         
         helper.clearAll();
 

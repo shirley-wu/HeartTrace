@@ -7,6 +7,7 @@ import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.UpdateBuilder;
 import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -58,6 +59,11 @@ public class Diary implements Serializable
     @DatabaseField
     private int textAlignment = 0;
 
+    @DatabaseField
+    private int status;
+
+    @DatabaseField
+    private long anchor;
 
     public Diary(){
     };
@@ -162,8 +168,26 @@ public class Diary implements Serializable
         this.diarybook = diarybook;
     }
 
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getStatus() {
+        return this.status;
+    }
+
+    public void setAnchor(long anchor) {
+        this.anchor = anchor;
+    }
+
+    public long getAnchor() {
+        return this.anchor;
+    }
+
     public int insert(DatabaseHelper helper) {
         try {
+            status = 0;
+            anchor = 0;
             Dao<Diary, Integer> dao = helper.getDaoAccess(Diary.class);
             Log.i("diary", "dao = " + dao + " 插入 diary " + this);
             int returnValue = dao.create(this);
@@ -175,21 +199,9 @@ public class Diary implements Serializable
         }
     }
 
-    public int insertOrUpdate(DatabaseHelper helper) {
-        try {
-            Dao<Diary, Integer> dao = helper.getDaoAccess(Diary.class);
-            Log.i("diary", "dao = " + dao + " 插入 diary " + this);
-            int returnValue = dao.create(this);
-            Log.i("diary", "插入或更新后返回值：" + returnValue);
-            return returnValue;
-        } catch (SQLException e) {
-            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
-            throw new RuntimeException(e);
-        }
-    }
-
     public void update(DatabaseHelper helper) {
         try {
+            if(status != 0) status = 1;
             Dao<Diary, Integer> dao = helper.getDaoAccess(Diary.class);
             Log.i("diary", "dao = " + dao + " 更新 diary " + this);
             int returnValue = dao.update(this);
@@ -202,13 +214,19 @@ public class Diary implements Serializable
 
     public void delete(DatabaseHelper helper) {
         try {
-            DeleteBuilder<DiaryLabel, Integer> deleteBuilder = helper.getDaoAccess(DiaryLabel.class).deleteBuilder();
-            deleteBuilder.where().eq(DiaryLabel.DIARY_TAG, this);
-            deleteBuilder.delete();
+            int returnValue;
 
+            status = -1;
             Dao<Diary, Integer> dao = helper.getDaoAccess(Diary.class);
             Log.i("diary", "dao = " + dao + " 删除 diary " + this);
-            int returnValue = dao.delete(this);
+            returnValue = dao.update(this);
+            Log.i("diary", "删除后返回值：" + returnValue);
+
+            UpdateBuilder<DiaryLabel, Integer> updateBuilder = helper.getDaoAccess(DiaryLabel.class).updateBuilder();
+            updateBuilder.updateColumnValue("status", -1);
+            updateBuilder.where().eq(DiaryLabel.DIARY_TAG, this);
+            Log.i("diary", "dao = " + dao + " 批量删除 diary label " + this);
+            returnValue = updateBuilder.update();
             Log.i("diary", "删除后返回值：" + returnValue);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);

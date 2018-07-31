@@ -170,12 +170,23 @@ public class DiaryOtherTest {
             Log.d(TAG, "testGetAllLabel: label " + label.getLabelname());
         }
 
-        diary.delete(databaseHelper);
         QueryBuilder<DiaryLabel, Integer> diaryLabelQb = databaseHelper.getDaoAccess(DiaryLabel.class).queryBuilder();
         diaryLabelQb.where().eq(DiaryLabel.DIARY_TAG, diary);
         Log.d(TAG, "testGetAllLabel: " + diaryLabelQb.prepareStatementString());
+
         List<DiaryLabel> diaryLabelList = diaryLabelQb.query();
-        assertEquals(0, diaryLabelList.size());
+        assertEquals(3, diaryLabelList.size());
+        for (DiaryLabel dl : diaryLabelList) {
+            assertEquals(0, dl.getStatus());
+        }
+
+        diary.delete(databaseHelper);
+
+        diaryLabelList = diaryLabelQb.query();
+        assertEquals(3, diaryLabelList.size());
+        for (DiaryLabel dl : diaryLabelList) {
+            assertEquals(-1, dl.getStatus());
+        }
 
         for(final Label label : labels) {
             label.delete(databaseHelper);
