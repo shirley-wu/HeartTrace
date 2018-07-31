@@ -116,6 +116,7 @@ public class Diarybook implements Serializable {
     public void insert(DatabaseHelper helper) {
         try {
             status = 0;
+            anchor = 0;
             Dao<Diarybook, Integer> dao = helper.getDaoAccess(Diarybook.class);
             Log.i("diarybook", "dao = " + dao + " 插入 diarybook " + this);
             int returnValue = dao.create(this);

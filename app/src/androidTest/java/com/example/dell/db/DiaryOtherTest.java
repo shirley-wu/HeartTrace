@@ -186,10 +186,6 @@ public class DiaryOtherTest {
         for (DiaryLabel dl : diaryLabelList) {
             assertEquals(-1, dl.getStatus());
         }
-
-        for(final Label label : labels) {
-            label.delete(databaseHelper);
-        }
     }
 
     @Test

@@ -109,7 +109,7 @@ public class Diary implements Serializable
     public void setDate(Date date){
         // dangerous!!!!! for test only.
         this.date = date;
-        Log.i(TAG, "setDate: dangerous call!, set into " + date.toString());
+        Log.d(TAG, "setDate: dangerous call!, set into " + date.toString());
     }
 
     public boolean getIsLike() {
@@ -189,9 +189,9 @@ public class Diary implements Serializable
             status = 0;
             anchor = 0;
             Dao<Diary, Integer> dao = helper.getDaoAccess(Diary.class);
-            Log.i("diary", "dao = " + dao + " 插入 diary " + this);
+            Log.d("diary", "dao = " + dao + " 插入 diary " + this);
             int returnValue = dao.create(this);
-            Log.i("diary", "插入后返回值：" + returnValue);
+            Log.d("diary", "插入后返回值：" + returnValue);
             return returnValue;
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
@@ -203,9 +203,9 @@ public class Diary implements Serializable
         try {
             if(status != 0) status = 1;
             Dao<Diary, Integer> dao = helper.getDaoAccess(Diary.class);
-            Log.i("diary", "dao = " + dao + " 更新 diary " + this);
+            Log.d("diary", "dao = " + dao + " 更新 diary " + this);
             int returnValue = dao.update(this);
-            Log.i("diary", "更新后返回值：" + returnValue);
+            Log.d("diary", "更新后返回值：" + returnValue);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
@@ -218,16 +218,16 @@ public class Diary implements Serializable
 
             status = -1;
             Dao<Diary, Integer> dao = helper.getDaoAccess(Diary.class);
-            Log.i("diary", "dao = " + dao + " 删除 diary " + this);
+            Log.d("diary", "dao = " + dao + " 删除 diary " + this);
             returnValue = dao.update(this);
-            Log.i("diary", "删除后返回值：" + returnValue);
+            Log.d("diary", "删除后返回值：" + returnValue);
 
             UpdateBuilder<DiaryLabel, Integer> updateBuilder = helper.getDaoAccess(DiaryLabel.class).updateBuilder();
             updateBuilder.updateColumnValue("status", -1);
             updateBuilder.where().eq(DiaryLabel.DIARY_TAG, this);
-            Log.i("diary", "批量删除 diary label " + this);
+            Log.d("diary", "批量删除 diary label " + this);
             returnValue = updateBuilder.update();
-            Log.i("diary", "删除后返回值：" + returnValue);
+            Log.d("diary", "删除后返回值：" + returnValue);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
             throw new RuntimeException(e);
