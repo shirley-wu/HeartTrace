@@ -26,7 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText username;
     EditText password;
     TextView toRegist;
-    Button d_btn;
+    //Button d_btn;
     CheckedTextView rememberPw;
     CheckedTextView autoLogin;
 
@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
         toRegist = (TextView)findViewById(R.id.to_regist);
-        d_btn = (Button)findViewById(R.id.direct_enter);
+        //d_btn = (Button)findViewById(R.id.direct_enter);
         rememberPw = (CheckedTextView)findViewById(R.id.remember_pw);
         autoLogin = (CheckedTextView)findViewById(R.id.auto_login);
 
@@ -155,7 +155,7 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent);
             }
         });
-
+/*
         d_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -169,7 +169,7 @@ public class LoginActivity extends AppCompatActivity {
                 intent.putExtra("diary_origin", "welcome");
                 startActivity(intent);
             }
-        });
+        });*/
 
         rememberPw.setOnClickListener(new View.OnClickListener() {
             @Override
