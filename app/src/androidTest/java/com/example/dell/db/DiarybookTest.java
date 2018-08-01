@@ -77,10 +77,11 @@ public class DiarybookTest extends InstrumentationTestCase {
         Log.d(TAG, "delete: modified after delete " + diarybook.getModified());
         
         list = diarybook.getAllSubDiary(helper);
-        for(Diary d : list) {
+        /*for(Diary d : list) {
             assertEquals(-1, d.getStatus());
             Log.d(TAG, "delete: diary modified after delete " + d.getModified());
-        }
+        }*/
+        assertEquals(0, list.size());
     }
 
     @Test

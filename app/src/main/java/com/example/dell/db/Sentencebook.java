@@ -94,9 +94,7 @@ public class Sentencebook implements Serializable {
         try {
             Dao<Sentence, Long> dao = helper.getDaoAccess(Sentence.class);
             QueryBuilder<Sentence, Long> queryBuilder = dao.queryBuilder();
-            Where<Sentence, Long> where = queryBuilder.where();
-            where.eq(Sentencebook.TAG, this);
-            where.ge("status", 0);
+            queryBuilder.where().eq(Sentencebook.TAG, this).and().ge("status", 0);
             List<Sentence> subSentenceList = queryBuilder.query();
             return subSentenceList;
         }catch (SQLException e) {
@@ -194,9 +192,7 @@ public class Sentencebook implements Serializable {
         try {
             Dao<Sentencebook, Long> dao = helper.getDaoAccess(Sentencebook.class);
             QueryBuilder<Sentencebook, Long> queryBuilder = dao.queryBuilder();
-            Where<Sentencebook, Long> where = queryBuilder.where();
-            where.eq("sentencebookName", sentencebookName);
-            where.ge("status", 0);
+            queryBuilder.where().eq("sentencebookName", sentencebookName).and().ge("status", 0);
             Sentencebook bookByName = queryBuilder.queryForFirst();
             return bookByName;
         }

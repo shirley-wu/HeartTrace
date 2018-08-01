@@ -281,9 +281,12 @@ public class Sentence implements Serializable
             Log.d(TAG, "getByDate: end "   + end);
 
             QueryBuilder<Sentence, Long> qb = helper.getDaoAccess(Sentence.class).queryBuilder();
+
             Where<Sentence, Long> where = qb.where();
             buildWhere(where, begin, end);
             where.ge("status", 0);
+            where.and(2);
+
             qb.orderBy("date",ascending);
             List<Sentence> sentenceList = qb.query();
             return sentenceList;
@@ -309,9 +312,7 @@ public class Sentence implements Serializable
     public static List<Sentence> getAllLike(DatabaseHelper helper, Boolean ascending){
         try {
             QueryBuilder<Sentence, Long> qb = helper.getDaoAccess(Sentence.class).queryBuilder();
-            Where<Sentence, Long> where = qb.where();
-            where.eq("isLike", true);
-            where.ge("status", 0);
+            qb.where().eq("isLike", true).and().ge("status", 0);
             qb.orderBy("date", ascending);
             return qb.query();
         } catch (SQLException e) {
@@ -322,9 +323,7 @@ public class Sentence implements Serializable
 
     public List<Label> getAllLabel(DatabaseHelper helper) throws SQLException {
         QueryBuilder<SentenceLabel, Long> qb = helper.getDaoAccess(SentenceLabel.class).queryBuilder();
-        Where<SentenceLabel, Long> where = qb.where();
-        where.eq(SentenceLabel.SENTENCE_TAG, this);
-        where.ge("status", 0);
+        qb.where().eq(SentenceLabel.SENTENCE_TAG, this).and().ge("status", 0);
 
         QueryBuilder<Label, Long> labelQb = helper.getDaoAccess(Label.class).queryBuilder();
         labelQb.join(qb);
@@ -342,8 +341,9 @@ public class Sentence implements Serializable
             Where<Sentence, Long> where = qb.where();
             if (status1) buildWhere(where, text);
             if (status2) buildWhere(where, begin, end);
-            if (status1 && status2) where.and(2);
             where.ge("status", 0);
+            if (status1 && status2) where.and(3);
+            else where.and(2);
         }
 
         if(labelList != null && labelList.size() > 0) {
@@ -360,9 +360,10 @@ public class Sentence implements Serializable
         try {
             QueryBuilder<Sentence, Long> queryBuilder = helper.getDaoAccess(Sentence.class).queryBuilder();
             Where<Sentence, Long> where = queryBuilder.where();
-            buildQuery(queryBuilder, helper, labelList);
             buildWhere(where, begin, end);
             where.ge("status", 0);
+            where.and(2);
+            buildQuery(queryBuilder, helper, labelList);
             return queryBuilder.countOf();
         }
         catch(SQLException e) {

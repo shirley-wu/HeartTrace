@@ -125,6 +125,8 @@ public class Label {
     public static List<Label> getAllLabel(DatabaseHelper helper){
         try {
             Dao<Label, Long> dao = helper.getDaoAccess(Label.class);
+            QueryBuilder<Label, Long> queryBuilder = dao.queryBuilder();
+            queryBuilder.where().ge("status", 0);
             return dao.queryForAll();
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);

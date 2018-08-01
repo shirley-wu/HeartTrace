@@ -77,10 +77,11 @@ public class SentencebookTest extends InstrumentationTestCase {
         Log.d(TAG, "delete: modified after delete " + sentencebook.getModified());
 
         list = sentencebook.getAllSubSentence(helper);
-        for(Sentence d : list) {
+        /*for(Sentence d : list) {
             assertEquals(-1, d.getStatus());
             Log.d(TAG, "delete: sentence modified after delete " + d.getModified());
-        }
+        }*/
+        assertEquals(0, list.size());
     }
 
     @Test
