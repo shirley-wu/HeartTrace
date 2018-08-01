@@ -25,8 +25,8 @@ public class DiaryLabel {
 
     public static final String LABEL_TAG = "tb_label";
 
-    @DatabaseField(generatedId = true, columnName = TAG)
-    private int id;
+    @DatabaseField(id = true, columnName = TAG)
+    private long id;
 
     @DatabaseField(foreign = true, columnName = DIARY_TAG)
     private Diary diary;
@@ -47,11 +47,11 @@ public class DiaryLabel {
         this.label = label;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -89,9 +89,11 @@ public class DiaryLabel {
 
     public void insert(DatabaseHelper helper) {
         try {
+            id = helper.getIdWorker().nextId();
+            Log.d(TAG, "insert: id = " + id);
             status = 0;
-            modified = System.currentTimeMillis();;
-            Dao<DiaryLabel, Integer> dao = helper.getDaoAccess(DiaryLabel.class);
+            modified = 0;
+            Dao<DiaryLabel, Long> dao = helper.getDaoAccess(DiaryLabel.class);
             Log.i("db_diary_label", "dao = " + dao + "  tb_diary_label " + this);
             int returnValue = dao.create(this);
             Log.i("db_diary_label", "插入后返回值："+returnValue);
@@ -104,8 +106,7 @@ public class DiaryLabel {
     public void delete(DatabaseHelper helper) {
         try {
             status = -1;
-            modified = System.currentTimeMillis();
-            Dao<DiaryLabel, Integer> dao = helper.getDaoAccess(DiaryLabel.class);
+            Dao<DiaryLabel, Long> dao = helper.getDaoAccess(DiaryLabel.class);
             Log.i("db_diary_label", "dao = " + dao + "  tb_diary_label " + this);
             int returnValue = dao.update(this);
             Log.i("db_diary_label", "删除后返回值："+returnValue);

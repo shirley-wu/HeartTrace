@@ -26,7 +26,7 @@ public class DiaryInstrumentedTest {
     final static String TAG = "DiaryInstrumentedTest";
 
     private DatabaseHelper databaseHelper;
-    private Dao<Diary, Integer> dao;
+    private Dao<Diary, Long> dao;
 
     private Diarybook diarybook = new Diarybook("fajskdlav");
 

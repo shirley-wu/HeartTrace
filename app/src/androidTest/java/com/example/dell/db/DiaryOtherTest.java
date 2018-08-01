@@ -172,7 +172,7 @@ public class DiaryOtherTest {
             Log.d(TAG, "testGetAllLabel: label modified after inserting = " + label.getModified());
         }
 
-        QueryBuilder<DiaryLabel, Integer> diaryLabelQb = databaseHelper.getDaoAccess(DiaryLabel.class).queryBuilder();
+        QueryBuilder<DiaryLabel, Long> diaryLabelQb = databaseHelper.getDaoAccess(DiaryLabel.class).queryBuilder();
         diaryLabelQb.where().eq(DiaryLabel.DIARY_TAG, diary);
         Log.d(TAG, "testGetAllLabel: " + diaryLabelQb.prepareStatementString());
 

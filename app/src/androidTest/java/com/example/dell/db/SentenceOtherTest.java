@@ -172,7 +172,7 @@ public class SentenceOtherTest {
             Log.d(TAG, "testGetAllLabel: label modified after inserting = " + label.getModified());
         }
 
-        QueryBuilder<SentenceLabel, Integer> sentenceLabelQb = databaseHelper.getDaoAccess(SentenceLabel.class).queryBuilder();
+        QueryBuilder<SentenceLabel, Long> sentenceLabelQb = databaseHelper.getDaoAccess(SentenceLabel.class).queryBuilder();
         sentenceLabelQb.where().eq(SentenceLabel.SENTENCE_TAG, sentence);
         Log.d(TAG, "testGetAllLabel: " + sentenceLabelQb.prepareStatementString());
 

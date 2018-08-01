@@ -22,8 +22,8 @@ import java.util.List;
 public class Label {
     public static final String TAG = "label";
 
-    @DatabaseField(generatedId = true, columnName = TAG)
-    private Integer id;
+    @DatabaseField(id = true, columnName = TAG)
+    private long id;
 
     @DatabaseField(unique = true, columnName = "labelname")
     private String labelname;
@@ -40,11 +40,11 @@ public class Label {
         this.labelname = labelname;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -74,9 +74,11 @@ public class Label {
 
     public void insert(DatabaseHelper helper) {
         try {
+            id = helper.getIdWorker().nextId();
+            Log.d(TAG, "insert: id = " + id);
             status = 0;
             modified = System.currentTimeMillis();
-            Dao<Label, Integer> dao = helper.getDaoAccess(Label.class);
+            Dao<Label, Long> dao = helper.getDaoAccess(Label.class);
             Log.d("label", "dao = " + dao + "  label " + this);
             int returnValue = dao.create(this);
             Log.d("label", "插入后返回值：" + returnValue);
@@ -92,12 +94,12 @@ public class Label {
 
             status = -1;
             modified = System.currentTimeMillis();
-            Dao<Label, Integer> dao = helper.getDaoAccess(Label.class);
+            Dao<Label, Long> dao = helper.getDaoAccess(Label.class);
             Log.d("label", "dao = " + dao + " 删除 label " + this);
             returnValue = dao.update(this);
             Log.d("label", "删除后返回值：" + returnValue);
 
-            UpdateBuilder<DiaryLabel, Integer> diaryLabelIntegerUpdateBuilder = helper.getDaoAccess(DiaryLabel.class).updateBuilder();
+            UpdateBuilder<DiaryLabel, Long> diaryLabelIntegerUpdateBuilder = helper.getDaoAccess(DiaryLabel.class).updateBuilder();
             diaryLabelIntegerUpdateBuilder.
                     updateColumnValue("status", -1).
                     updateColumnValue("modified", System.currentTimeMillis());
@@ -106,7 +108,7 @@ public class Label {
             returnValue = diaryLabelIntegerUpdateBuilder.update();
             Log.d("label", "删除后返回值：" + returnValue);
 
-            UpdateBuilder<SentenceLabel, Integer> sentenceLabelIntegerUpdateBuilder = helper.getDaoAccess(SentenceLabel.class).updateBuilder();
+            UpdateBuilder<SentenceLabel, Long> sentenceLabelIntegerUpdateBuilder = helper.getDaoAccess(SentenceLabel.class).updateBuilder();
             sentenceLabelIntegerUpdateBuilder.
                     updateColumnValue("status", -1).
                     updateColumnValue("modified", System.currentTimeMillis());
@@ -122,7 +124,7 @@ public class Label {
 
     public static List<Label> getAllLabel(DatabaseHelper helper){
         try {
-            Dao<Label, Integer> dao = helper.getDaoAccess(Label.class);
+            Dao<Label, Long> dao = helper.getDaoAccess(Label.class);
             return dao.queryForAll();
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
@@ -130,15 +132,15 @@ public class Label {
         }
     }
 
-    /*public static QueryBuilder<Label, Integer> makeQueryBuilderForDiary(DatabaseHelper helper, Diary diary){
+    /*public static QueryBuilder<Label, Long> makeQueryBuilderForDiary(DatabaseHelper helper, Diary diary){
         try{
-            Dao<DiaryLabel, Integer> diaryLabelDao = helper.getDaoAccess(DiaryLabel.class);
-            Dao<Label, Integer> labelDao = helper.getDaoAccess(Label.class);
-            QueryBuilder<DiaryLabel, Integer> diaryLabelBuilder = diaryLabelDao.queryBuilder();
+            Dao<DiaryLabel, Long> diaryLabelDao = helper.getDaoAccess(DiaryLabel.class);
+            Dao<Label, Long> labelDao = helper.getDaoAccess(Label.class);
+            QueryBuilder<DiaryLabel, Long> diaryLabelBuilder = diaryLabelDao.queryBuilder();
             //diaryLabelBuilder.selectColumns(DiaryLabel.LABEL_TAG);
             //SelectArg diarySelectAry = new SelectArg();
             diaryLabelBuilder.where().eq(DiaryLabel.DIARY_TAG, diary);
-            QueryBuilder<Label, Integer> labelQueryBuilder = labelDao.queryBuilder();
+            QueryBuilder<Label, Long> labelQueryBuilder = labelDao.queryBuilder();
             labelQueryBuilder.where().in(Label.TAG, diaryLabelBuilder);
             return labelQueryBuilder;
         }catch (SQLException e) {
@@ -149,7 +151,7 @@ public class Label {
 
     public static Label getByName(DatabaseHelper helper, String name) {
         try {
-            Dao<Label, Integer> dao = helper.getDaoAccess(Label.class);
+            Dao<Label, Long> dao = helper.getDaoAccess(Label.class);
             Label label = dao.queryBuilder().where().eq("labelname", name).queryForFirst();
             return label;
         }

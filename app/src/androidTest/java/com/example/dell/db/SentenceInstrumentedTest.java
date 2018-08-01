@@ -26,7 +26,7 @@ public class SentenceInstrumentedTest {
     final static String TAG = "SentenceInstrumentedTest";
 
     private DatabaseHelper databaseHelper;
-    private Dao<Sentence, Integer> dao;
+    private Dao<Sentence, Long> dao;
 
     private Sentencebook sentencebook = new Sentencebook("fajskdlav");
 

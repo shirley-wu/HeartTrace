@@ -13,6 +13,7 @@ import com.j256.ormlite.table.TableUtils;
 import net.sqlcipher.database.SQLiteDatabase;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.List;
@@ -30,7 +31,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     // name of the database file for your application -- change to something appropriate for your app
     private static final String DATABASE_NAME = "heartTrace.db";
     // any time you make changes to your database objects, you may have to increase the database version
-    private static final int DATABASE_VERSION = 12;
+    private static final int DATABASE_VERSION = 13;
 
     private static final Class[] tableList = {
             Diarybook.class,
@@ -48,8 +49,11 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private Map<Class, RuntimeExceptionDao> runtimeExceptionDaoMap = new Hashtable<>();
 
+    private IdWorker idWorker;
+
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        idWorker = new IdWorker(context);
         SQLiteDatabase.loadLibs(context);
     }
 
@@ -122,6 +126,10 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             runtimeExceptionDaoMap.put(clazz, dao);
             return dao;
         }
+    }
+
+    public IdWorker getIdWorker() {
+        return idWorker;
     }
 
     public void clearAll() {

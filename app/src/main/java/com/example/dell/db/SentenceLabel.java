@@ -25,8 +25,8 @@ public class SentenceLabel {
 
     public static final String LABEL_TAG = "tb_label";
 
-    @DatabaseField(generatedId = true, columnName = TAG)
-    private int id;
+    @DatabaseField(id = true, columnName = TAG)
+    private long id;
 
     @DatabaseField(foreign = true, columnName = SENTENCE_TAG)
     private Sentence sentence;
@@ -47,11 +47,11 @@ public class SentenceLabel {
         this.label = label;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -89,9 +89,11 @@ public class SentenceLabel {
 
     public void insert(DatabaseHelper helper) {
         try {
+            id = helper.getIdWorker().nextId();
+            Log.d(TAG, "insert: id = " + id);
             status = 0;
-            modified = System.currentTimeMillis();;
-            Dao<SentenceLabel, Integer> dao = helper.getDaoAccess(SentenceLabel.class);
+            modified = 0;
+            Dao<SentenceLabel, Long> dao = helper.getDaoAccess(SentenceLabel.class);
             Log.i("db_sentence_label", "dao = " + dao + "  tb_sentence_label " + this);
             int returnValue = dao.create(this);
             Log.i("db_sentence_label", "插入后返回值："+returnValue);
@@ -104,8 +106,7 @@ public class SentenceLabel {
     public void delete(DatabaseHelper helper) {
         try {
             status = -1;
-            modified = System.currentTimeMillis();
-            Dao<SentenceLabel, Integer> dao = helper.getDaoAccess(SentenceLabel.class);
+            Dao<SentenceLabel, Long> dao = helper.getDaoAccess(SentenceLabel.class);
             Log.i("db_sentence_label", "dao = " + dao + "  tb_sentence_label " + this);
             int returnValue = dao.update(this);
             Log.i("db_sentence_label", "删除后返回值："+returnValue);

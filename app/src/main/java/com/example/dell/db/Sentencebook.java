@@ -26,8 +26,8 @@ public class Sentencebook implements Serializable {
 
     private static final String default_name = "default";
 
-    @DatabaseField(generatedId = true, columnName = TAG)
-    private int id;
+    @DatabaseField(id = true, columnName = TAG)
+    private long id;
 
     @DatabaseField(unique = true, columnName = "sentencebookName", canBeNull = false)
     private String sentencebookName;
@@ -53,7 +53,7 @@ public class Sentencebook implements Serializable {
         this.id = id;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -91,7 +91,7 @@ public class Sentencebook implements Serializable {
 
     public List<Sentence> getAllSubSentence(DatabaseHelper helper) {
         try {
-            Dao<Sentence, Integer> dao = helper.getDaoAccess(Sentence.class);
+            Dao<Sentence, Long> dao = helper.getDaoAccess(Sentence.class);
             List<Sentence> subSentenceList = dao.queryBuilder().where().eq(Sentencebook.TAG, this).query();
             return subSentenceList;
         }catch (SQLException e) {
@@ -102,7 +102,7 @@ public class Sentencebook implements Serializable {
 
     public void deleteSubSentence(DatabaseHelper helper) {
         try {
-            UpdateBuilder<Sentence, Integer> updateBuilder = helper.getDaoAccess(Sentence.class).updateBuilder();
+            UpdateBuilder<Sentence, Long> updateBuilder = helper.getDaoAccess(Sentence.class).updateBuilder();
             updateBuilder.
                     updateColumnValue("status", -1).
                     updateColumnValue("modified", System.currentTimeMillis());
@@ -117,9 +117,11 @@ public class Sentencebook implements Serializable {
     }
     public void insert(DatabaseHelper helper) {
         try {
+            id = helper.getIdWorker().nextId();
+            Log.d(TAG, "insert: id = " + id);
             status = 0;
             modified = System.currentTimeMillis();
-            Dao<Sentencebook, Integer> dao = helper.getDaoAccess(Sentencebook.class);
+            Dao<Sentencebook, Long> dao = helper.getDaoAccess(Sentencebook.class);
             Log.i("sentencebook", "dao = " + dao + " 插入 sentencebook " + this);
             int returnValue = dao.create(this);
             Log.i("sentencebook", "插入后返回值：" + returnValue);
@@ -133,7 +135,7 @@ public class Sentencebook implements Serializable {
         try {
             if(status != 0) status = 1;
             modified = System.currentTimeMillis();
-            Dao<Sentencebook, Integer> dao = helper.getDaoAccess(Sentencebook.class);
+            Dao<Sentencebook, Long> dao = helper.getDaoAccess(Sentencebook.class);
             Log.i("sentencebook", "dao = " + dao + " 更新 sentencebook " + this);
             int returnValue = dao.update(this);
             Log.i("sentencebook", "更新后返回值：" + returnValue);
@@ -145,7 +147,7 @@ public class Sentencebook implements Serializable {
 
     public void refresh(DatabaseHelper helper) {
         try {
-            Dao<Sentencebook, Integer> dao = helper.getDaoAccess(Sentencebook.class);
+            Dao<Sentencebook, Long> dao = helper.getDaoAccess(Sentencebook.class);
             Log.i("sentencebook", "dao = " + dao + " refresh sentencebook " + this);
             int returnValue = dao.refresh(this);
             Log.i("sentencebook", "refresh后返回值：" + returnValue);
@@ -161,7 +163,7 @@ public class Sentencebook implements Serializable {
 
             status = -1;
             modified = System.currentTimeMillis();
-            Dao<Sentencebook, Integer> dao = helper.getDaoAccess(Sentencebook.class);
+            Dao<Sentencebook, Long> dao = helper.getDaoAccess(Sentencebook.class);
             Log.i("sentencebook", "dao = " + dao + " 删除 sentencebook " + this);
             int returnValue = dao.update(this);
             Log.i("sentencebook", "删除后返回值：" + returnValue);
@@ -173,7 +175,7 @@ public class Sentencebook implements Serializable {
 
     public static List<Sentencebook> getAll(DatabaseHelper helper, Boolean ascending){
         try {
-            QueryBuilder<Sentencebook, Integer> qb = helper.getDaoAccess(Sentencebook.class).queryBuilder();
+            QueryBuilder<Sentencebook, Long> qb = helper.getDaoAccess(Sentencebook.class).queryBuilder();
             return qb.query();
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
@@ -183,7 +185,7 @@ public class Sentencebook implements Serializable {
 
     public static Sentencebook getByName(DatabaseHelper helper,String sentencebookName) {
         try {
-            Dao<Sentencebook, Integer> dao = helper.getDaoAccess(Sentencebook.class);
+            Dao<Sentencebook, Long> dao = helper.getDaoAccess(Sentencebook.class);
             Sentencebook bookByName = dao.queryBuilder().where().eq("sentencebookName", sentencebookName).queryForFirst();
             return bookByName;
         }

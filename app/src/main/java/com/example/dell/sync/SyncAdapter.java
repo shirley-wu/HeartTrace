@@ -96,8 +96,8 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
     public void syncDiary(DatabaseHelper databaseHelper) {
         try {
-            Dao<Diary, Integer> dao = databaseHelper.getDaoAccess(Diary.class);
-            QueryBuilder<Diary, Integer> queryBuilder = dao.queryBuilder();
+            Dao<Diary, Long> dao = databaseHelper.getDaoAccess(Diary.class);
+            QueryBuilder<Diary, Long> queryBuilder = dao.queryBuilder();
             queryBuilder.where().lt("status", 9);
 
             List<Diary> list = queryBuilder.query();
