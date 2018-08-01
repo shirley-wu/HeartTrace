@@ -54,5 +54,5 @@ freeline.py
 freeline/
 freeline_project_description.json
 
-# Added by Xueqing Wu at 18:05, 2018.6.8: to fix a problem of local sdk
-local.properties
+# Add by wxq 2018.8.1 14:29, in case passwd generator leaked
+PasswdWorker.java
