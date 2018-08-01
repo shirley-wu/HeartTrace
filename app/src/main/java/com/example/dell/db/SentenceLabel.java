@@ -38,7 +38,7 @@ public class SentenceLabel {
     private int status;
 
     @DatabaseField
-    private long anchor;
+    private long modified;
 
     public SentenceLabel(){}
 
@@ -79,18 +79,18 @@ public class SentenceLabel {
         return status;
     }
 
-    public void setAnchor(long anchor) {
-        this.anchor = anchor;
+    public void setModified(long modified) {
+        this.modified = modified;
     }
 
-    public long getAnchor() {
-        return anchor;
+    public long getModified() {
+        return modified;
     }
 
     public void insert(DatabaseHelper helper) {
         try {
             status = 0;
-            anchor = 0;
+            modified = System.currentTimeMillis();;
             Dao<SentenceLabel, Integer> dao = helper.getDaoAccess(SentenceLabel.class);
             Log.i("db_sentence_label", "dao = " + dao + "  tb_sentence_label " + this);
             int returnValue = dao.create(this);
@@ -104,6 +104,7 @@ public class SentenceLabel {
     public void delete(DatabaseHelper helper) {
         try {
             status = -1;
+            modified = System.currentTimeMillis();
             Dao<SentenceLabel, Integer> dao = helper.getDaoAccess(SentenceLabel.class);
             Log.i("db_sentence_label", "dao = " + dao + "  tb_sentence_label " + this);
             int returnValue = dao.update(this);
