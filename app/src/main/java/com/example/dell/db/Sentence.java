@@ -63,7 +63,7 @@ public class Sentence implements Serializable
     private int status;
 
     @DatabaseField
-    private long anchor;
+    private long modified;
 
     public Sentence(){
     };
@@ -176,18 +176,18 @@ public class Sentence implements Serializable
         return this.status;
     }
 
-    public void setAnchor(long anchor) {
-        this.anchor = anchor;
+    public void setModified(long modified) {
+        this.modified = modified;
     }
 
-    public long getAnchor() {
-        return this.anchor;
+    public long getModified() {
+        return this.modified;
     }
 
     public int insert(DatabaseHelper helper) {
         try {
             status = 0;
-            anchor = 0;
+            modified = System.currentTimeMillis();
             Dao<Sentence, Integer> dao = helper.getDaoAccess(Sentence.class);
             Log.d("sentence", "dao = " + dao + " 插入 sentence " + this);
             int returnValue = dao.create(this);
@@ -202,6 +202,7 @@ public class Sentence implements Serializable
     public void update(DatabaseHelper helper) {
         try {
             if(status != 0) status = 1;
+            modified = System.currentTimeMillis();
             Dao<Sentence, Integer> dao = helper.getDaoAccess(Sentence.class);
             Log.d("sentence", "dao = " + dao + " 更新 sentence " + this);
             int returnValue = dao.update(this);
@@ -217,13 +218,16 @@ public class Sentence implements Serializable
             int returnValue;
 
             status = -1;
+            modified = System.currentTimeMillis();
             Dao<Sentence, Integer> dao = helper.getDaoAccess(Sentence.class);
             Log.d("sentence", "dao = " + dao + " 删除 sentence " + this);
             returnValue = dao.update(this);
             Log.d("sentence", "删除后返回值：" + returnValue);
 
             UpdateBuilder<SentenceLabel, Integer> updateBuilder = helper.getDaoAccess(SentenceLabel.class).updateBuilder();
-            updateBuilder.updateColumnValue("status", -1);
+            updateBuilder.
+                    updateColumnValue("status", -1).
+                    updateColumnValue("modified", System.currentTimeMillis());
             updateBuilder.where().eq(SentenceLabel.SENTENCE_TAG, this);
             Log.d("sentence", "批量删除 sentence label " + this);
             returnValue = updateBuilder.update();

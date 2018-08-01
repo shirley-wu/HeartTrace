@@ -26,7 +26,7 @@ import static org.junit.Assert.assertEquals;
 
 public class SentenceOtherTest {
 
-    private static final String TAG = "SentenceGetByRestrictTest";
+    private static final String TAG = "SentenceOtherTest";
 
     private DatabaseHelper databaseHelper;
 
@@ -147,7 +147,9 @@ public class SentenceOtherTest {
     }
 
     @Test
-    public void testGetAllLabel() throws SQLException {
+    public void testLabel() throws SQLException {
+        // 测试SentenceLabel的getAll与删除方法
+
         Sentence sentence = new Sentence("hello");
         sentence.setDate();
         sentence.setSentencebook(sentencebook);
@@ -167,6 +169,7 @@ public class SentenceOtherTest {
         assertEquals(3, labels2.size());
         for(final Label label : labels2) {
             Log.d(TAG, "testGetAllLabel: label " + label.getLabelname());
+            Log.d(TAG, "testGetAllLabel: label modified after inserting = " + label.getModified());
         }
 
         QueryBuilder<SentenceLabel, Integer> sentenceLabelQb = databaseHelper.getDaoAccess(SentenceLabel.class).queryBuilder();
@@ -177,6 +180,7 @@ public class SentenceOtherTest {
         assertEquals(3, sentenceLabelList.size());
         for (SentenceLabel dl : sentenceLabelList) {
             assertEquals(0, dl.getStatus());
+            Log.d(TAG, "testGetAllLabel: sentencelabel modified after inserting = " + dl.getModified());
         }
 
         sentence.delete(databaseHelper);
@@ -185,6 +189,7 @@ public class SentenceOtherTest {
         assertEquals(3, sentenceLabelList.size());
         for (SentenceLabel dl : sentenceLabelList) {
             assertEquals(-1, dl.getStatus());
+            Log.d(TAG, "testGetAllLabel: sentencelabel modified after deleting = " + dl.getModified());
         }
     }
 

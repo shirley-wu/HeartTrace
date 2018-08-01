@@ -93,12 +93,24 @@ public class LabelTest extends InstrumentationTestCase {
         labelList = sentence.getAllLabel(databaseHelper);
         assertEquals(1, labelList.size());
         assertEquals(0, labelList.get(0).getStatus());
+        Log.d(TAG, "testRelatedDeleteSentence: label modified = " + labelList.get(0).getModified());
+
+        List<SentenceLabel> sentenceLabelList = databaseHelper.getDaoAccess(SentenceLabel.class).queryForAll();
+        assertEquals(1, sentenceLabelList.size());
+        assertEquals(0, sentenceLabelList.get(0).getStatus());
+        Log.d(TAG, "testRelatedDeleteSentence: sentence label modified = " + sentenceLabelList.get(0).getModified());
 
         label.delete(databaseHelper);
 
         labelList = sentence.getAllLabel(databaseHelper);
         assertEquals(1, labelList.size());
         assertEquals(-1, labelList.get(0).getStatus());
+        Log.d(TAG, "testRelatedDeleteSentence: label modified = " + labelList.get(0).getModified());
+
+        sentenceLabelList = databaseHelper.getDaoAccess(SentenceLabel.class).queryForAll();
+        assertEquals(1, sentenceLabelList.size());
+        assertEquals(-1, sentenceLabelList.get(0).getStatus());
+        Log.d(TAG, "testRelatedDeleteSentence: sentence label modified = " + sentenceLabelList.get(0).getModified());
     }
 
     @Test

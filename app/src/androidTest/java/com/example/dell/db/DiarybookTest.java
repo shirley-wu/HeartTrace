@@ -65,10 +65,18 @@ public class DiarybookTest extends InstrumentationTestCase {
     public void testDelete() {
         assertEquals(0, diarybook.getStatus());
         Log.d(TAG, "delete: modified before delete " + diarybook.getModified());
+        
+        List<Diary> list = diarybook.getAllSubDiary(helper);
+        for(Diary d : list) {
+            assertEquals(0, d.getStatus());
+            Log.d(TAG, "delete: diary modified before delete " + d.getModified());
+        }
+        
         diarybook.delete(helper);
         assertEquals(-1, diarybook.getStatus());
         Log.d(TAG, "delete: modified after delete " + diarybook.getModified());
-        List<Diary> list = diarybook.getAllSubDiary(helper);
+        
+        list = diarybook.getAllSubDiary(helper);
         for(Diary d : list) {
             assertEquals(-1, d.getStatus());
             Log.d(TAG, "delete: diary modified after delete " + d.getModified());
@@ -78,14 +86,14 @@ public class DiarybookTest extends InstrumentationTestCase {
     @Test
     public void testUpdate() {
         assertEquals(0, diarybook.getStatus());
-        Log.d(TAG, "delete: modified before update " + diarybook.getModified());
+        Log.d(TAG, "update: modified before update " + diarybook.getModified());
         diarybook.update(helper);
         assertEquals(0, diarybook.getStatus());
-        Log.d(TAG, "delete: modified after update " + diarybook.getModified());
+        Log.d(TAG, "update: modified after update " + diarybook.getModified());
         diarybook.setStatus(9);
         diarybook.update(helper);
         assertEquals(1, diarybook.getStatus());
-        Log.d(TAG, "delete: modified after update 2 " + diarybook.getModified());
+        Log.d(TAG, "update: modified after update 2 " + diarybook.getModified());
     }
 
 }

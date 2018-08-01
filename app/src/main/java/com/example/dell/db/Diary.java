@@ -5,7 +5,6 @@ import android.util.Log;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.UpdateBuilder;
 import com.j256.ormlite.stmt.Where;
