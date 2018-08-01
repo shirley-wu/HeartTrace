@@ -42,6 +42,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -94,7 +95,8 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
             StringBuilder dataBuilder = new StringBuilder("{");
 
-            for(Class clazz : tableList) {
+           for(int i=0; ; ) {
+                Class clazz = tableList[i];
                 QueryBuilder queryBuilder = databaseHelper.getDaoAccess(clazz).queryBuilder();
                 queryBuilder.where().lt("status", 9);
                 List list = queryBuilder.query();
@@ -102,7 +104,12 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                 dataBuilder.append(
                         clazz.getSimpleName() + "List\":" + JSON.toJSONString(list, SerializerFeature.DisableCircularReferenceDetect)
                 );
+                i++;
+                if(i < tableList.length) dataBuilder.append(",");
+                else break;
             }
+
+            dataBuilder.append("}");
 
             String data = dataBuilder.toString();
             Log.d(TAG, "sync: data = " + data);
@@ -126,7 +133,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
     public String postSyncData(String sendData) {
         HttpClient httpClient = new DefaultHttpClient();
-        String url = ServerAccessor.getServerIp() + ":8080/HeartTrace_Server_war/Sync1";
+        String url = ServerAccessor.getServerIp() + ":8080/HeartTrace_Server_war/Servlet.Sync1";
         Log.d(TAG, "postSyncData: url " + url);
         HttpPost httpPost = new HttpPost(url);
 
@@ -159,14 +166,21 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
                 int code = httpResponse.getStatusLine().getStatusCode();
                 Log.d(TAG, "postSyncData: " + code);
-                if (code == 200) {
+                /*if (code == 200) {
                     HttpEntity entity = httpResponse.getEntity();
                     return EntityUtils.toString(entity, "utf-8");
-                }
-            } catch (Exception e) {
+                }*/
+
+                HttpEntity entity = httpResponse.getEntity();
+                String response = EntityUtils.toString(entity, "utf-8");
+                Log.d(TAG, "postSyncData: response entity = " + entity);
+                if (code == 200) return response;
+            }
+            catch (Exception e) {
                 Log.e(TAG, "postSyncData: ", e);
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             Log.e(TAG, "postSyncData: ", e);
         }
 

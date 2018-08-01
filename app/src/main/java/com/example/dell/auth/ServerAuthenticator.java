@@ -1,5 +1,6 @@
 package com.example.dell.auth;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -36,6 +37,7 @@ public class ServerAuthenticator {
         ArrayList<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("username", username));
         pairs.add(new BasicNameValuePair("password", password));
+        pairs.add(new BasicNameValuePair("modelnum", Build.MODEL));
 
         try {
             HttpEntity requestEntity = new UrlEncodedFormEntity(pairs);
