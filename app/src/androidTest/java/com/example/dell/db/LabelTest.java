@@ -39,8 +39,7 @@ public class LabelTest extends InstrumentationTestCase {
     @After
     public void tearDown() {
         Log.d(TAG, "tearDown");
-        diarybook.delete(databaseHelper);
-        sentencebook.delete(databaseHelper);
+        databaseHelper.clearAll();
         OpenHelperManager.releaseHelper();
     }
 
@@ -55,11 +54,16 @@ public class LabelTest extends InstrumentationTestCase {
         diary.insert(databaseHelper);
         diary.insertLabel(databaseHelper, label);
 
-        assertEquals(1, diary.getAllLabel(databaseHelper).size());
-        label.delete(databaseHelper);
-        assertEquals(0, diary.getAllLabel(databaseHelper).size());
+        List<Label> labelList;
+        labelList = diary.getAllLabel(databaseHelper);
+        assertEquals(1, labelList.size());
+        assertEquals(0, labelList.get(0).getStatus());
 
-        diary.delete(databaseHelper);
+        label.delete(databaseHelper);
+
+        labelList = diary.getAllLabel(databaseHelper);
+        assertEquals(1, labelList.size());
+        assertEquals(-1, labelList.get(0).getStatus());
     }
 
     @Test
@@ -73,11 +77,16 @@ public class LabelTest extends InstrumentationTestCase {
         sentence.insert(databaseHelper);
         sentence.insertLabel(databaseHelper, label);
 
-        assertEquals(1, sentence.getAllLabel(databaseHelper).size());
-        label.delete(databaseHelper);
-        assertEquals(0, sentence.getAllLabel(databaseHelper).size());
+        List<Label> labelList;
+        labelList = sentence.getAllLabel(databaseHelper);
+        assertEquals(1, labelList.size());
+        assertEquals(0, labelList.get(0).getStatus());
 
-        sentence.delete(databaseHelper);
+        label.delete(databaseHelper);
+
+        labelList = sentence.getAllLabel(databaseHelper);
+        assertEquals(1, labelList.size());
+        assertEquals(-1, labelList.get(0).getStatus());
     }
 
     @Test
@@ -96,11 +105,27 @@ public class LabelTest extends InstrumentationTestCase {
             }
         }
         catch(Exception e) {
-            Log.e("test", "onClick: ", e);
+            Log.e("test", "getDiaryLabel: ", e);
         }
-        finally {
-            diary.delete(databaseHelper);
-            label.delete(databaseHelper);
+    }
+
+    @Test
+    public void getSentenceLabel() {
+        Sentence sentence = null;
+        Label label = null;
+        try{
+            sentence = new Sentence("agoisdhadfagg");
+            label = new Label("dahlavakggsd");
+            sentence.insert(databaseHelper);
+            label.insert(databaseHelper);
+            sentence.insertLabel(databaseHelper, label);
+            List<SentenceLabel> l2 = databaseHelper.getDao(SentenceLabel.class).queryForAll();
+            for (SentenceLabel dl : l2) {
+                Log.d("test", "onClick: dl, sentence" + dl.getSentence());
+            }
+        }
+        catch(Exception e) {
+            Log.e("test", "getSentenceLabel: ", e);
         }
     }
 }

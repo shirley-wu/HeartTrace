@@ -5,7 +5,6 @@ import android.support.test.InstrumentationRegistry;
 import android.util.Log;
 
 import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
-import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
 
 import org.junit.After;
@@ -45,9 +44,9 @@ public class DiaryOtherTest {
     }
 
     @After
-    public void tearDown() {
+    public void tearDown() throws SQLException {
         Log.d(TAG, "tearDown");
-        diarybook.delete(databaseHelper);
+        databaseHelper.clearAll();
         OpenHelperManager.releaseHelper();
     }
 
@@ -170,15 +169,22 @@ public class DiaryOtherTest {
             Log.d(TAG, "testGetAllLabel: label " + label.getLabelname());
         }
 
-        diary.delete(databaseHelper);
         QueryBuilder<DiaryLabel, Integer> diaryLabelQb = databaseHelper.getDaoAccess(DiaryLabel.class).queryBuilder();
         diaryLabelQb.where().eq(DiaryLabel.DIARY_TAG, diary);
         Log.d(TAG, "testGetAllLabel: " + diaryLabelQb.prepareStatementString());
-        List<DiaryLabel> diaryLabelList = diaryLabelQb.query();
-        assertEquals(0, diaryLabelList.size());
 
-        for(final Label label : labels) {
-            label.delete(databaseHelper);
+        List<DiaryLabel> diaryLabelList = diaryLabelQb.query();
+        assertEquals(3, diaryLabelList.size());
+        for (DiaryLabel dl : diaryLabelList) {
+            assertEquals(0, dl.getStatus());
+        }
+
+        diary.delete(databaseHelper);
+
+        diaryLabelList = diaryLabelQb.query();
+        assertEquals(3, diaryLabelList.size());
+        for (DiaryLabel dl : diaryLabelList) {
+            assertEquals(-1, dl.getStatus());
         }
     }
 

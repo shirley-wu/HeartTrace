@@ -95,19 +95,7 @@ public class DiaryGetByRestrictTest extends InstrumentationTestCase {
     @After
     public void tearDown() {
         Log.d(TAG, "tearDown");
-        for(final Label label : labels) {
-            label.delete(databaseHelper);
-        }
-        for(final Diary diary : diaryShirly) {
-            diary.delete(databaseHelper);
-        }
-        for(final Diary diary : diaryLisa) {
-            diary.delete(databaseHelper);
-        }
-        for(final Diary diary : diaryMmp) {
-            diary.delete(databaseHelper);
-        }
-        diarybook.delete(databaseHelper);
+        databaseHelper.clearAll();
         OpenHelperManager.releaseHelper();
     }
 

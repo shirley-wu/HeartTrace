@@ -42,7 +42,7 @@ public class DiaryInstrumentedTest {
 
     @After
     public void tearDown() {
-        diarybook.delete(databaseHelper);
+        databaseHelper.clearAll();
         OpenHelperManager.releaseHelper();
     }
 
@@ -74,6 +74,7 @@ public class DiaryInstrumentedTest {
         assertEquals(originText, diaryList.get(0).getText());
         assertEquals("<p>" + originText + "</p>", diaryList.get(0).getHtmlText());
         assertEquals(true, diaryList.get(0).getIsLike());
+        assertEquals(0, diaryList.get(0).getStatus());
 
         // update
         diary.setText(updateText);
@@ -81,12 +82,23 @@ public class DiaryInstrumentedTest {
         diaryList = dao.queryBuilder().where().eq("text", originText).query();
         assertEquals(0, diaryList.size()); // TODO: not safe: assumes that there is no such text by wxq
         diaryList = dao.queryBuilder().where().eq("text", updateText).query();
-        assertEquals(diary.getDate(), diaryList.get(0).getDate()); // TODO: not safe: assumes that there is no such text by wxq
+        assertEquals(1, diaryList.size()); // TODO: not safe: assumes that there is no such text by wxq
+        assertEquals(diary.getDate(), diaryList.get(0).getDate());
+        assertEquals(0, diaryList.get(0).getStatus());
+
+        // update after so-called sync
+        diary.setStatus(9);
+        diary.update(databaseHelper);
+        diaryList = dao.queryBuilder().where().eq("text", updateText).query();
+        assertEquals(1, diaryList.size()); // TODO: not safe: assumes that there is no such text by wxq
+        assertEquals(diary.getDate(), diaryList.get(0).getDate());
+        assertEquals(1, diaryList.get(0).getStatus());
 
         // delete
         diary.delete(databaseHelper);
         diaryList = dao.queryBuilder().where().eq("text", updateText).query();
-        assertEquals(0, diaryList.size()); // TODO: not safe: assumes that there is no such text by wxq
+        assertEquals(1, diaryList.size()); // TODO: not safe: assumes that there is no such text by wxq
+        assertEquals(-1, diaryList.get(0).getStatus());
     }
 
     @Test

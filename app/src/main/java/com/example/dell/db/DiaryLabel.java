@@ -18,6 +18,7 @@ import java.util.concurrent.Callable;
  */
 @DatabaseTable(tableName = "tb_diary_label")
 public class DiaryLabel {
+
     public static final String TAG = "tb_diary_label";
 
     public static final String DIARY_TAG = "tb_diary";
@@ -26,11 +27,21 @@ public class DiaryLabel {
 
     @DatabaseField(generatedId = true, columnName = TAG)
     private int id;
+
     @DatabaseField(foreign = true, columnName = DIARY_TAG)
     private Diary diary;
+
     @DatabaseField(foreign = true, columnName = LABEL_TAG)
     private Label label;
+
+    @DatabaseField
+    private int status;
+
+    @DatabaseField
+    private long anchor;
+
     public DiaryLabel(){}
+
     public DiaryLabel(Diary diary, Label label){
         this.diary = diary;
         this.label = label;
@@ -60,10 +71,28 @@ public class DiaryLabel {
         this.label = label;
     }
 
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setAnchor(long anchor) {
+        this.anchor = anchor;
+    }
+
+    public long getAnchor() {
+        return anchor;
+    }
+
     public void insert(DatabaseHelper helper) {
         try {
+            status = 0;
+            anchor = 0;
             Dao<DiaryLabel, Integer> dao = helper.getDaoAccess(DiaryLabel.class);
-            Log.i("db_diary_label", "dao = " + dao + "  db_diary_label " + this);
+            Log.i("db_diary_label", "dao = " + dao + "  tb_diary_label " + this);
             int returnValue = dao.create(this);
             Log.i("db_diary_label", "插入后返回值："+returnValue);
         } catch (SQLException e) {
@@ -74,9 +103,10 @@ public class DiaryLabel {
 
     public void delete(DatabaseHelper helper) {
         try {
+            status = -1;
             Dao<DiaryLabel, Integer> dao = helper.getDaoAccess(DiaryLabel.class);
-            Log.i("db_diary_label", "dao = " + dao + "  db_diary_label " + this);
-            int returnValue = dao.delete(this);
+            Log.i("db_diary_label", "dao = " + dao + "  tb_diary_label " + this);
+            int returnValue = dao.update(this);
             Log.i("db_diary_label", "删除后返回值："+returnValue);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);

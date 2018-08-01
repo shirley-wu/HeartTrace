@@ -5,7 +5,6 @@ import android.support.test.InstrumentationRegistry;
 import android.util.Log;
 
 import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
-import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
 
 import org.junit.After;
@@ -45,9 +44,9 @@ public class SentenceOtherTest {
     }
 
     @After
-    public void tearDown() {
+    public void tearDown() throws SQLException {
         Log.d(TAG, "tearDown");
-        sentencebook.delete(databaseHelper);
+        databaseHelper.clearAll();
         OpenHelperManager.releaseHelper();
     }
 
@@ -170,15 +169,22 @@ public class SentenceOtherTest {
             Log.d(TAG, "testGetAllLabel: label " + label.getLabelname());
         }
 
-        sentence.delete(databaseHelper);
         QueryBuilder<SentenceLabel, Integer> sentenceLabelQb = databaseHelper.getDaoAccess(SentenceLabel.class).queryBuilder();
         sentenceLabelQb.where().eq(SentenceLabel.SENTENCE_TAG, sentence);
         Log.d(TAG, "testGetAllLabel: " + sentenceLabelQb.prepareStatementString());
-        List<SentenceLabel> sentenceLabelList = sentenceLabelQb.query();
-        assertEquals(0, sentenceLabelList.size());
 
-        for(final Label label : labels) {
-            label.delete(databaseHelper);
+        List<SentenceLabel> sentenceLabelList = sentenceLabelQb.query();
+        assertEquals(3, sentenceLabelList.size());
+        for (SentenceLabel dl : sentenceLabelList) {
+            assertEquals(0, dl.getStatus());
+        }
+
+        sentence.delete(databaseHelper);
+
+        sentenceLabelList = sentenceLabelQb.query();
+        assertEquals(3, sentenceLabelList.size());
+        for (SentenceLabel dl : sentenceLabelList) {
+            assertEquals(-1, dl.getStatus());
         }
     }
 
