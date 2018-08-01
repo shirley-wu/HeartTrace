@@ -35,12 +35,12 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private static final int DATABASE_VERSION = 15;
 
     private static final Class[] tableList = {
-            Diarybook.class,
-            Sentencebook.class,
             Diary.class,
-            Sentence.class,
-            Label.class,
+            Diarybook.class,
             DiaryLabel.class,
+            Label.class,
+            Sentence.class,
+            Sentencebook.class,
             SentenceLabel.class,
             // SearchHistory.class,
     };

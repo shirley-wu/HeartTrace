@@ -24,7 +24,7 @@ public class SyncTest extends InstrumentationTestCase {
 
     private static final String ACCOUNT_TYPE = "dell.example.com";
 
-    private static final String AUTHORITY = "com.example.dell.stub.sync.provider";
+    private static final String AUTHORITY = "com.example.dell.sync.stub.provider";
 
     private Account mAccount;
 
@@ -42,7 +42,7 @@ public class SyncTest extends InstrumentationTestCase {
                 Bundle.EMPTY, 1); // 1 seconds period
         // However, the minimum interval is 900s.
         Log.d(TAG, "testPeriodSync: begin to sleep");
-        Thread.sleep(5500);
+        Thread.sleep(10000);
         Log.d(TAG, "testPeriodSync: sleep end");
     }
 
@@ -53,7 +53,7 @@ public class SyncTest extends InstrumentationTestCase {
         bundle.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
         ContentResolver.requestSync(mAccount, AUTHORITY, bundle);
         Log.d(TAG, "testRequestSync: begin to sleep");
-        Thread.sleep(500);
+        Thread.sleep(60000);
         Log.d(TAG, "testRequestSync: sleep end");
     }
 

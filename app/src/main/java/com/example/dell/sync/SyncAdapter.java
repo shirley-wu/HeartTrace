@@ -32,6 +32,9 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 
 import java.lang.reflect.Method;
@@ -219,15 +222,11 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         }
     }
 
-    /*public List unparseJson(String jsonString, Class c) {
-        JSONObject jso = JSON.parseObject(jsonString);
-        JSONArray jsarr = jso.getJSONArray(c.getSimpleName() + "List");
-        Log.d(TAG, "unparseJson: " + jsarr.toJSONString());
-        return jsarr.toJavaList(c);
-    }*/
-
     public HttpResponse postSyncData(String sendData) {
-        HttpClient httpClient = new DefaultHttpClient();
+        HttpParams httpParams = new BasicHttpParams();
+        HttpConnectionParams.setSoTimeout(httpParams, 60000);
+        HttpClient httpClient = new DefaultHttpClient(httpParams);
+
         String url = ServerAccessor.getServerIp() + ":8080/HeartTrace_Server_war/Servlet.Sync1";
         Log.d(TAG, "postSyncData: url " + url);
         HttpPost httpPost = new HttpPost(url);
@@ -243,6 +242,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         pairs.add(new BasicNameValuePair("content", sendData));
 
         Long anchor = sharedPreferences.getLong("anchor", -1);
+        Log.d(TAG, "postSyncData: anchor = " + anchor);
         pairs.add(new BasicNameValuePair("anchor", anchor.toString()));
 
         try {
