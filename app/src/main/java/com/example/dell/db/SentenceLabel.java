@@ -26,7 +26,7 @@ public class SentenceLabel {
     public static final String LABEL_TAG = "tb_label";
 
     @DatabaseField(id = true, columnName = TAG)
-    private Long id;
+    private long id;
 
     @DatabaseField(foreign = true, columnName = SENTENCE_TAG)
     private Sentence sentence;
@@ -35,10 +35,10 @@ public class SentenceLabel {
     private Label label;
 
     @DatabaseField
-    private Integer status;
+    private int status;
 
     @DatabaseField
-    private Long modified;
+    private long modified;
 
     public SentenceLabel(){}
 
@@ -47,11 +47,11 @@ public class SentenceLabel {
         this.label = label;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
@@ -71,19 +71,19 @@ public class SentenceLabel {
         this.label = label;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
-    public Integer getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setModified(Long modified) {
+    public void setModified(long modified) {
         this.modified = modified;
     }
 
-    public Long getModified() {
+    public long getModified() {
         return modified;
     }
 
