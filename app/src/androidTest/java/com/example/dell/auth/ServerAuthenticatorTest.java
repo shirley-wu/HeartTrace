@@ -1,6 +1,8 @@
 package com.example.dell.auth;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.support.test.InstrumentationRegistry;
 import android.test.InstrumentationTestCase;
 import android.util.Log;
 
@@ -37,6 +39,13 @@ public class ServerAuthenticatorTest extends InstrumentationTestCase {
         for(String key : bundle.keySet()) {
             Log.d(TAG, "testSignUp: key " + key + " value " + bundle.get(key));
         }
+    }
+
+    public void testVerify() {
+        Context context = InstrumentationRegistry.getTargetContext();
+        MyAccount myAccount = MyAccount.get(context);
+        boolean verified = ServerAuthenticator.veriy(myAccount.getName(), myAccount.getToken());
+        Log.d(TAG, "testVerify: verified = " + verified);
     }
 
 }

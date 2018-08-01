@@ -29,6 +29,7 @@ public class MyAccountTest extends InstrumentationTestCase {
 
     public void testSet() {
         Context context = InstrumentationRegistry.getTargetContext();
+        Log.d(TAG, "testSet: package name = " + context.getApplicationContext().getPackageName());
         MyAccount myAccount = MyAccount.get(context);
         myAccount.setName("name");
         myAccount.setToken("token");

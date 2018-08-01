@@ -72,10 +72,10 @@ public class ServerAuthenticator {
                     return false;
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                Log.e(TAG, "signIn: ", e);;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e(TAG, "signIn: ", e);
         }
 
         return false;
@@ -90,6 +90,7 @@ public class ServerAuthenticator {
         ArrayList<NameValuePair> pairs = new ArrayList<>();
         pairs.add(new BasicNameValuePair("username", username));
         pairs.add(new BasicNameValuePair("password", password));
+        pairs.add(new BasicNameValuePair("modelnum", Build.MODEL));
 
         try {
             HttpEntity requestEntity = new UrlEncodedFormEntity(pairs);
@@ -122,10 +123,54 @@ public class ServerAuthenticator {
                     return false;
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                Log.e(TAG, "signUp: ", e);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e(TAG, "signUp: ", e);
+        }
+
+        return false;
+    }
+
+    static public boolean veriy(String username, String token) {
+        HttpClient httpClient = new DefaultHttpClient();
+        String url = ServerAccessor.getServerIp() + ":8080/HeartTrace_Server_war/Servlet.Verify";
+        Log.d(TAG, "verify: url " + url);
+        HttpPost httpPost = new HttpPost(url);
+
+        ArrayList<NameValuePair> pairs = new ArrayList<>();
+        pairs.add(new BasicNameValuePair("username", username));
+        pairs.add(new BasicNameValuePair("token", token));
+
+        try {
+            HttpEntity requestEntity = new UrlEncodedFormEntity(pairs);
+            httpPost.setEntity(requestEntity);
+
+            try {
+                HttpResponse httpResponse = httpClient.execute(httpPost);
+
+                Header[] headers = httpResponse.getAllHeaders();
+                for(Header header : headers) {
+                    Log.d(TAG, "verify: header " + header.toString());
+                }
+
+                int code = httpResponse.getStatusLine().getStatusCode();
+                Log.d(TAG, "verify: " + code);
+                if (code == 200) {
+                    HttpEntity entity = httpResponse.getEntity();
+                    String response = EntityUtils.toString(entity, "utf-8");
+                    Log.d(TAG, "verify: http response " + response);
+
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            } catch (Exception e) {
+                Log.e(TAG, "veriy: ", e);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "veriy: ", e);
         }
 
         return false;

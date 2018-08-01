@@ -35,6 +35,8 @@ public class MyAccount {
 
     private static String key = null;
 
+    private static Context mContext = null;
+
     private String name;
 
     private String token;
@@ -162,15 +164,15 @@ public class MyAccount {
     public boolean save() {
         SharedPreferences.Editor editor = preferences.edit();
 
-        editor.putString("name", PasswdTool.desEncrypt(name, key));
-        editor.putString("token", PasswdTool.desEncrypt(token, key));
-        editor.putString("nickname", PasswdTool.desEncrypt(nickname, key));
-        editor.putString("gender", PasswdTool.desEncrypt(gender, key));
-        editor.putString("birthday", PasswdTool.desEncrypt(birthday, key));
-        editor.putString("email", PasswdTool.desEncrypt(email, key));
-        editor.putString("school", PasswdTool.desEncrypt(school, key));
-        editor.putString("signature", PasswdTool.desEncrypt(signature, key));
-        editor.putString("headimage", PasswdTool.desEncrypt(headimage, key));
+        if (name != null) editor.putString("name", PasswdTool.desEncrypt(name, key));
+        if (token != null) editor.putString("token", PasswdTool.desEncrypt(token, key));
+        if (nickname != null) editor.putString("nickname", PasswdTool.desEncrypt(nickname, key));
+        if (gender != null) editor.putString("gender", PasswdTool.desEncrypt(gender, key));
+        if (birthday != null) editor.putString("birthday", PasswdTool.desEncrypt(birthday, key));
+        if (email != null) editor.putString("email", PasswdTool.desEncrypt(email, key));
+        if (school != null) editor.putString("school", PasswdTool.desEncrypt(school, key));
+        if (signature != null) editor.putString("signature", PasswdTool.desEncrypt(signature, key));
+        if (headimage != null) editor.putString("headimage", PasswdTool.desEncrypt(headimage, key));
 
         String isRememberString = isRemember ? "true" : "false";
         editor.putString("isRemember", PasswdTool.desEncrypt(isRememberString, key));
@@ -184,7 +186,9 @@ public class MyAccount {
     }
 
     static public MyAccount get(Context context) {
-        if(preferences == null) {
+        if(mContext == null) {
+            mContext = context;
+
             key = PasswdWorker.getPasswd(context);
 
             preferences = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
@@ -228,6 +232,12 @@ public class MyAccount {
             String autoLogin = preferences.getString("autoLogin", null);
             String autoLoginDecrypted = autoLogin == null ? null : PasswdTool.desDecrypt(autoLogin, key);
             myAccount.autoLogin = autoLoginDecrypted != null && autoLoginDecrypted.equals("true");
+        }
+        else if(!
+                mContext.getApplicationContext().getPackageName().equals(
+                        context.getApplicationContext().getPackageName()
+                )) {
+            return null;
         }
         return myAccount;
     }
