@@ -41,7 +41,7 @@ public class Diary implements Serializable
     protected Date date;
 
     @DatabaseField
-    private boolean isLike = false;
+    private boolean islike = false;
 
     @DatabaseField
     private float letterSpacing = (float)0.2;
@@ -112,11 +112,11 @@ public class Diary implements Serializable
     }
 
     public boolean getIsLike() {
-        return isLike;
+        return islike;
     }
 
-    public void setIsLike(boolean isLike) {
-        this.isLike = isLike;
+    public void setIsLike(boolean islike) {
+        this.islike = islike;
     }
 
     public float getLetterSpacing() {
@@ -312,7 +312,7 @@ public class Diary implements Serializable
     public static List<Diary> getAllLike(DatabaseHelper helper, Boolean ascending){
         try {
             QueryBuilder<Diary, Long> qb = helper.getDaoAccess(Diary.class).queryBuilder();
-            qb.where().eq("isLike", true).and().ge("status", 0);
+            qb.where().eq("islike", true).and().ge("status", 0);
             qb.orderBy("date", ascending);
             return qb.query();
         } catch (SQLException e) {

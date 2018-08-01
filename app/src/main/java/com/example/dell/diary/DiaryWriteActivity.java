@@ -737,7 +737,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
         }
         else {
-            Log.i("show",diary.getHtmlText());
+            Log.i("show", diary.getHtmlText());
             diary_write.setText(Html.fromHtml(diary.getHtmlText()));
             getImage(diary.getText());
             setTextFormmat(diary);

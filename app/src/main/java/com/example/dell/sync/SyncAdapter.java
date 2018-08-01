@@ -205,7 +205,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                         if (status != -1) {
                             // 更新
                             Dao.CreateOrUpdateStatus code = dao.createOrUpdate(o);
-                            Log.d(TAG, "sync: 插入或更新 返回值 = " + code);
+                            Log.d(TAG, "sync: 插入或更新 返回值 = 插入" + code.isCreated() + " 更新" + code.isUpdated());
                         }
                     }
                     catch (Exception e) {
