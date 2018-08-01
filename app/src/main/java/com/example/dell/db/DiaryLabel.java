@@ -38,7 +38,7 @@ public class DiaryLabel {
     private int status;
 
     @DatabaseField
-    private long anchor;
+    private long modified;
 
     public DiaryLabel(){}
 
@@ -79,18 +79,18 @@ public class DiaryLabel {
         return status;
     }
 
-    public void setAnchor(long anchor) {
-        this.anchor = anchor;
+    public void setModified(long modified) {
+        this.modified = modified;
     }
 
-    public long getAnchor() {
-        return anchor;
+    public long getModified() {
+        return modified;
     }
 
     public void insert(DatabaseHelper helper) {
         try {
             status = 0;
-            anchor = 0;
+            modified = System.currentTimeMillis();;
             Dao<DiaryLabel, Integer> dao = helper.getDaoAccess(DiaryLabel.class);
             Log.i("db_diary_label", "dao = " + dao + "  tb_diary_label " + this);
             int returnValue = dao.create(this);
@@ -104,6 +104,7 @@ public class DiaryLabel {
     public void delete(DatabaseHelper helper) {
         try {
             status = -1;
+            modified = System.currentTimeMillis();
             Dao<DiaryLabel, Integer> dao = helper.getDaoAccess(DiaryLabel.class);
             Log.i("db_diary_label", "dao = " + dao + "  tb_diary_label " + this);
             int returnValue = dao.update(this);

@@ -32,7 +32,7 @@ public class Label {
     private int status;
     
     @DatabaseField
-    private long anchor;
+    private long modified;
 
     public Label(){}
 
@@ -64,18 +64,18 @@ public class Label {
         return status;
     }
 
-    public void setAnchor(long anchor) {
-        this.anchor = anchor;
+    public void setModified(long modified) {
+        this.modified = modified;
     }
 
-    public long getAnchor() {
-        return anchor;
+    public long getModified() {
+        return modified;
     }
 
     public void insert(DatabaseHelper helper) {
         try {
             status = 0;
-            anchor = 0;
+            modified = System.currentTimeMillis();
             Dao<Label, Integer> dao = helper.getDaoAccess(Label.class);
             Log.d("label", "dao = " + dao + "  label " + this);
             int returnValue = dao.create(this);
@@ -91,20 +91,25 @@ public class Label {
             int returnValue;
 
             status = -1;
+            modified = System.currentTimeMillis();
             Dao<Label, Integer> dao = helper.getDaoAccess(Label.class);
             Log.d("label", "dao = " + dao + " 删除 label " + this);
             returnValue = dao.update(this);
             Log.d("label", "删除后返回值：" + returnValue);
 
             UpdateBuilder<DiaryLabel, Integer> diaryLabelIntegerUpdateBuilder = helper.getDaoAccess(DiaryLabel.class).updateBuilder();
-            diaryLabelIntegerUpdateBuilder.updateColumnValue("status", -1);
+            diaryLabelIntegerUpdateBuilder.
+                    updateColumnValue("status", -1).
+                    updateColumnValue("modified", System.currentTimeMillis());
             diaryLabelIntegerUpdateBuilder.where().eq(DiaryLabel.LABEL_TAG, this);
             Log.d("label", "批量删除 diary label " + this);
             returnValue = diaryLabelIntegerUpdateBuilder.update();
             Log.d("label", "删除后返回值：" + returnValue);
 
             UpdateBuilder<SentenceLabel, Integer> sentenceLabelIntegerUpdateBuilder = helper.getDaoAccess(SentenceLabel.class).updateBuilder();
-            sentenceLabelIntegerUpdateBuilder.updateColumnValue("status", -1);
+            sentenceLabelIntegerUpdateBuilder.
+                    updateColumnValue("status", -1).
+                    updateColumnValue("modified", System.currentTimeMillis());
             sentenceLabelIntegerUpdateBuilder.where().eq(SentenceLabel.LABEL_TAG, this);
             Log.d("label", "批量删除 sentence label " + this);
             returnValue = sentenceLabelIntegerUpdateBuilder.update();

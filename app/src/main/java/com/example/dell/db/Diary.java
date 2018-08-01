@@ -63,7 +63,7 @@ public class Diary implements Serializable
     private int status;
 
     @DatabaseField
-    private long anchor;
+    private long modified;
 
     public Diary(){
     };
@@ -176,18 +176,18 @@ public class Diary implements Serializable
         return this.status;
     }
 
-    public void setAnchor(long anchor) {
-        this.anchor = anchor;
+    public void setModified(long modified) {
+        this.modified = modified;
     }
 
-    public long getAnchor() {
-        return this.anchor;
+    public long getModified() {
+        return this.modified;
     }
 
     public int insert(DatabaseHelper helper) {
         try {
             status = 0;
-            anchor = 0;
+            modified = System.currentTimeMillis();
             Dao<Diary, Integer> dao = helper.getDaoAccess(Diary.class);
             Log.d("diary", "dao = " + dao + " 插入 diary " + this);
             int returnValue = dao.create(this);
@@ -202,6 +202,7 @@ public class Diary implements Serializable
     public void update(DatabaseHelper helper) {
         try {
             if(status != 0) status = 1;
+            modified = System.currentTimeMillis();
             Dao<Diary, Integer> dao = helper.getDaoAccess(Diary.class);
             Log.d("diary", "dao = " + dao + " 更新 diary " + this);
             int returnValue = dao.update(this);
@@ -217,13 +218,16 @@ public class Diary implements Serializable
             int returnValue;
 
             status = -1;
+            modified = System.currentTimeMillis();
             Dao<Diary, Integer> dao = helper.getDaoAccess(Diary.class);
             Log.d("diary", "dao = " + dao + " 删除 diary " + this);
             returnValue = dao.update(this);
             Log.d("diary", "删除后返回值：" + returnValue);
 
             UpdateBuilder<DiaryLabel, Integer> updateBuilder = helper.getDaoAccess(DiaryLabel.class).updateBuilder();
-            updateBuilder.updateColumnValue("status", -1);
+            updateBuilder.
+                    updateColumnValue("status", -1).
+                    updateColumnValue("modified", System.currentTimeMillis());
             updateBuilder.where().eq(DiaryLabel.DIARY_TAG, this);
             Log.d("diary", "批量删除 diary label " + this);
             returnValue = updateBuilder.update();

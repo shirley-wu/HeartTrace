@@ -39,7 +39,7 @@ public class Diarybook implements Serializable {
     private int status;
 
     @DatabaseField
-    private long anchor;
+    private long modified;
 
     public Diarybook(){};
 
@@ -81,12 +81,12 @@ public class Diarybook implements Serializable {
         return status;
     }
 
-    public void setAnchor(long anchor) {
-        this.anchor = anchor;
+    public void setModified(long modified) {
+        this.modified = modified;
     }
 
-    public long getAnchor() {
-        return anchor;
+    public long getModified() {
+        return modified;
     }
 
     public List<Diary> getAllSubDiary(DatabaseHelper helper) {
@@ -103,7 +103,9 @@ public class Diarybook implements Serializable {
     public void deleteSubDiary(DatabaseHelper helper) {
         try {
             UpdateBuilder<Diary, Integer> updateBuilder = helper.getDaoAccess(Diary.class).updateBuilder();
-            updateBuilder.updateColumnValue("status", -1);
+            updateBuilder.
+                    updateColumnValue("status", -1).
+                    updateColumnValue("modified", System.currentTimeMillis());
             updateBuilder.where().eq(Diarybook.TAG, this);
             Log.i("diary", "批量删除 diary " + this);
             int returnValue = updateBuilder.update();
@@ -116,7 +118,7 @@ public class Diarybook implements Serializable {
     public void insert(DatabaseHelper helper) {
         try {
             status = 0;
-            anchor = 0;
+            modified = System.currentTimeMillis();
             Dao<Diarybook, Integer> dao = helper.getDaoAccess(Diarybook.class);
             Log.i("diarybook", "dao = " + dao + " 插入 diarybook " + this);
             int returnValue = dao.create(this);
@@ -130,6 +132,7 @@ public class Diarybook implements Serializable {
     public void update(DatabaseHelper helper) {
         try {
             if(status != 0) status = 1;
+            modified = System.currentTimeMillis();
             Dao<Diarybook, Integer> dao = helper.getDaoAccess(Diarybook.class);
             Log.i("diarybook", "dao = " + dao + " 更新 diarybook " + this);
             int returnValue = dao.update(this);
@@ -157,6 +160,7 @@ public class Diarybook implements Serializable {
             deleteSubDiary(helper);
 
             status = -1;
+            modified = System.currentTimeMillis();
             Dao<Diarybook, Integer> dao = helper.getDaoAccess(Diarybook.class);
             Log.i("diarybook", "dao = " + dao + " 删除 diarybook " + this);
             int returnValue = dao.update(this);
