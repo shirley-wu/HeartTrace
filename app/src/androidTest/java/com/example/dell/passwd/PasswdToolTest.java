@@ -24,7 +24,7 @@ public class PasswdToolTest {
         Log.d(TAG, "testCryption: passwd = " + passwd);
         String result = PasswdTool.desEncrypt(data, passwd);
         Log.d(TAG, "main: result = " + result);
-        String backData = PasswdTool.desDescrypt(data, passwd);
+        String backData = PasswdTool.desDecrypt(result, passwd);
         Log.d(TAG, "testCryption: back data = " + backData);
         assertEquals(data, backData);
     }

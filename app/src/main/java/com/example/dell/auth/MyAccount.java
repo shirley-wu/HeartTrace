@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.example.dell.passwd.PasswdTool;
 import com.example.dell.passwd.PasswdWorker;
 
 import java.security.InvalidKeyException;
@@ -31,6 +32,8 @@ public class MyAccount {
     private static MyAccount myAccount = null;
 
     private static SharedPreferences preferences = null;
+
+    private static String key = null;
 
     private String name;
 
@@ -159,39 +162,72 @@ public class MyAccount {
     public boolean save() {
         SharedPreferences.Editor editor = preferences.edit();
 
-        editor.putString("name", name);
-        editor.putString("token", token);
-        editor.putString("nickname", nickname);
-        editor.putString("gender", gender);
-        editor.putString("birthday", birthday);
-        editor.putString("email", email);
-        editor.putString("school", school);
-        editor.putString("signature", signature);
-        editor.putString("headimage",headimage);
-        editor.putBoolean("isRemember",isRemember);
-        editor.putBoolean("autoLogin",autoLogin);
-        editor.putString("password",password);
+        editor.putString("name", PasswdTool.desEncrypt(name, key));
+        editor.putString("token", PasswdTool.desEncrypt(token, key));
+        editor.putString("nickname", PasswdTool.desEncrypt(nickname, key));
+        editor.putString("gender", PasswdTool.desEncrypt(gender, key));
+        editor.putString("birthday", PasswdTool.desEncrypt(birthday, key));
+        editor.putString("email", PasswdTool.desEncrypt(email, key));
+        editor.putString("school", PasswdTool.desEncrypt(school, key));
+        editor.putString("signature", PasswdTool.desEncrypt(signature, key));
+        editor.putString("headimage", PasswdTool.desEncrypt(headimage, key));
+
+        String isRememberString = isRemember ? "true" : "false";
+        editor.putString("isRemember", PasswdTool.desEncrypt(isRememberString, key));
+
+        String autoLoginString = autoLogin ? "true" : "false";
+        editor.putString("autoLogin", PasswdTool.desEncrypt(autoLoginString, key));
+
+        editor.putString("password", PasswdTool.desEncrypt(password, key));
 
         return editor.commit();
     }
 
     static public MyAccount get(Context context) {
         if(preferences == null) {
+            key = PasswdWorker.getPasswd(context);
+
             preferences = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
 
             myAccount   = new MyAccount();
-            myAccount.name = preferences.getString("name", null);
-            myAccount.token = preferences.getString("token", null);
-            myAccount.nickname = preferences.getString("nickname", null);
-            myAccount.gender = preferences.getString("gender", null);
-            myAccount.birthday = preferences.getString("birthday",null);
-            myAccount.email = preferences.getString("email", null);
-            myAccount.school = preferences.getString("school", null);
-            myAccount.signature = preferences.getString("signature", null);
-            myAccount.headimage = preferences.getString("headimage",null);
-            myAccount.password = preferences.getString("password",null);
-            myAccount.isRemember = preferences.getBoolean("isRemember",false);
-            myAccount.autoLogin = preferences.getBoolean("autoLogin",false);
+
+            String name = preferences.getString("name", null);
+            myAccount.name = name == null ? null : PasswdTool.desDecrypt(name, key);
+
+            String token = preferences.getString("token", null);
+            myAccount.token = token == null ? null : PasswdTool.desDecrypt(token, key);
+
+            String nickname = preferences.getString("nickname", null);
+            myAccount.nickname = nickname == null ? null : PasswdTool.desDecrypt(nickname, key);
+
+            String gender = preferences.getString("gender", null);
+            myAccount.gender = gender == null ? null : PasswdTool.desDecrypt(gender, key);
+
+            String birthday = preferences.getString("birthday", null);
+            myAccount.birthday = birthday == null ? null : PasswdTool.desDecrypt(birthday, key);
+
+            String email = preferences.getString("email", null);
+            myAccount.email = email == null ? null : PasswdTool.desDecrypt(email, key);
+
+            String school = preferences.getString("school", null);
+            myAccount.school = school == null ? null : PasswdTool.desDecrypt(school, key);
+
+            String signature = preferences.getString("signature", null);
+            myAccount.signature = signature == null ? null : PasswdTool.desDecrypt(signature, key);
+
+            String headimage = preferences.getString("headimage", null);
+            myAccount.headimage = headimage == null ? null : PasswdTool.desDecrypt(headimage, key);
+
+            String password = preferences.getString("password", null);
+            myAccount.password = password == null ? null : PasswdTool.desDecrypt(password, key);
+
+            String isRemember = preferences.getString("isRemember", null);
+            String isRememberDecrypted = isRemember == null ? null : PasswdTool.desDecrypt(isRemember, key);
+            myAccount.isRemember = isRememberDecrypted != null && isRememberDecrypted.equals("true");
+
+            String autoLogin = preferences.getString("autoLogin", null);
+            String autoLoginDecrypted = autoLogin == null ? null : PasswdTool.desDecrypt(autoLogin, key);
+            myAccount.autoLogin = autoLoginDecrypted != null && autoLoginDecrypted.equals("true");
         }
         return myAccount;
     }
