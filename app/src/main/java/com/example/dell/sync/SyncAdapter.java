@@ -5,6 +5,7 @@ import android.content.AbstractThreadedSyncAdapter;
 import android.content.ContentProviderClient;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Entity;
 import android.content.SharedPreferences;
 import android.content.SyncResult;
 import android.os.Build;
@@ -81,13 +82,13 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         Log.d(TAG, "onPerformSync: begin");
 
         DatabaseHelper helper = OpenHelperManager.getHelper(mContext, DatabaseHelper.class);
-        sync(helper, Diary.class);
+        sync(helper);
         OpenHelperManager.releaseHelper();
 
         Log.d(TAG, "onPerformSync: end");
     }
 
-    public boolean sync(DatabaseHelper databaseHelper, Class c) {
+    public boolean sync(DatabaseHelper databaseHelper) {
         try {
             Class[] tableList = databaseHelper.getTableList();
 
@@ -99,17 +100,19 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                 List list = queryBuilder.query();
 
                 dataBuilder.append(
-                        c.getSimpleName() + "List\":" + JSON.toJSONString(list, SerializerFeature.DisableCircularReferenceDetect)
+                        clazz.getSimpleName() + "List\":" + JSON.toJSONString(list, SerializerFeature.DisableCircularReferenceDetect)
                 );
             }
 
             String data = dataBuilder.toString();
             Log.d(TAG, "sync: data = " + data);
+
             String response = postSyncData(data);
+            Log.d(TAG, "sync: response = " + response);
 
             return true;
         } catch(Exception e) {
-            Log.e(TAG, "sync: " + c.getSimpleName() + " ", e);
+            Log.e(TAG, "sync: ", e);
             return false;
         }
     }
@@ -123,15 +126,19 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
     public String postSyncData(String sendData) {
         HttpClient httpClient = new DefaultHttpClient();
-        // String url = ServerAccessor.getServerIp() + ":8080/HeartTrace_Server_war4/Sync";
-        String url = ServerAccessor.getServerIp() + ":8080/HeartTrace_Server_war/Servlet.Sync";
+        String url = ServerAccessor.getServerIp() + ":8080/HeartTrace_Server_war/Sync1";
         Log.d(TAG, "postSyncData: url " + url);
         HttpPost httpPost = new HttpPost(url);
 
         ArrayList<NameValuePair> pairs = new ArrayList<>();
+
         pairs.add(new BasicNameValuePair("modelnum", Build.MODEL));
-        pairs.add(new BasicNameValuePair("token", MyAccount.get(mContext).getToken()));
-        pairs.add(new BasicNameValuePair("data", sendData));
+
+        MyAccount myAccount = MyAccount.get(mContext);
+        pairs.add(new BasicNameValuePair("username", myAccount.getName()));
+        pairs.add(new BasicNameValuePair("token", myAccount.getToken()));
+
+        pairs.add(new BasicNameValuePair("content", sendData));
 
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
         Long anchor = sharedPreferences.getLong("anchor", -1);
@@ -139,6 +146,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
         try {
             HttpEntity requestEntity = new UrlEncodedFormEntity(pairs);
+            Log.d(TAG, "postSyncData: request entity = " + EntityUtils.toString(requestEntity, "utf-8"));
             httpPost.setEntity(requestEntity);
 
             try {
@@ -153,14 +161,13 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                 Log.d(TAG, "postSyncData: " + code);
                 if (code == 200) {
                     HttpEntity entity = httpResponse.getEntity();
-                    String response = EntityUtils.toString(entity, "utf-8");
-                    return response.toString();
+                    return EntityUtils.toString(entity, "utf-8");
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                Log.e(TAG, "postSyncData: ", e);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e(TAG, "postSyncData: ", e);
         }
 
         return null;
