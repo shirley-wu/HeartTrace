@@ -5,6 +5,7 @@ import android.content.AbstractThreadedSyncAdapter;
 import android.content.ContentProviderClient;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.SyncResult;
 import android.os.Build;
 import android.os.Bundle;
@@ -51,20 +52,16 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
     private static final String TAG = "SyncAdapter";
 
-    // Global variables
-    // Define a variable to contain a content resolver instance
-    private ContentResolver mContentResolver;
+    private static final String PREFERENCE_NAME = "SYNC ANCHOR";
+
+    private Context mContext;
 
     /**
      * Set up the sync adapter
      */
     public SyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
-        /*
-         * If your app uses a content resolver, get an instance of it
-         * from the incoming Context
-         */
-        mContentResolver = context.getContentResolver();
+        mContext = context;
     }
 
     /**
@@ -77,79 +74,38 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             boolean autoInitialize,
             boolean allowParallelSyncs) {
         super(context, autoInitialize, allowParallelSyncs);
-        /*
-         * If your app uses a content resolver, get an instance of it
-         * from the incoming Context
-         */
-        mContentResolver = context.getContentResolver();
+        mContext = context;
     }
 
     public void onPerformSync(Account account, Bundle extras, String authority, ContentProviderClient provider, SyncResult syncResult) {
         Log.d(TAG, "onPerformSync: begin");
 
-        DatabaseHelper helper = OpenHelperManager.getHelper(getContext(), DatabaseHelper.class);
+        DatabaseHelper helper = OpenHelperManager.getHelper(mContext, DatabaseHelper.class);
         sync(helper, Diary.class);
         OpenHelperManager.releaseHelper();
 
         Log.d(TAG, "onPerformSync: end");
     }
 
-    public void syncDiary(DatabaseHelper databaseHelper) {
-        try {
-            Dao<Diary, Long> dao = databaseHelper.getDaoAccess(Diary.class);
-            QueryBuilder<Diary, Long> queryBuilder = dao.queryBuilder();
-            queryBuilder.where().lt("status", 9);
-
-            List<Diary> list = queryBuilder.query();
-
-            String jo = parseJson(list, Diary.class);
-            Log.d(TAG, "parseDiarySync: jo " + jo);
-            String response = postSyncData("Diary", jo);
-            if (response == null) {
-                Log.e(TAG, "DiarySync: error when getting http response");
-                return;
-            }
-
-        /*list = unparseJson(response, Diary.class);
-        for(Diary diary : list) {
-            diary.insertOrUpdate(databaseHelper);
-        }*/
-            int returnVal;
-            for (Diary diary : list) {
-                if (diary.getStatus() == -1) {
-                    returnVal = dao.delete(diary);
-                    Log.d(TAG, "syncDiary: 删除返回值 = " + returnVal);
-                } else {
-                    diary.setStatus(9);
-                    returnVal = dao.update(diary);
-                    Log.d(TAG, "syncDiary: 更新返回值 = " + returnVal);
-                }
-            }
-        } catch (SQLException e) {
-            Log.e(TAG, "syncDiary: ", e);
-        }
-    }
-
     public boolean sync(DatabaseHelper databaseHelper, Class c) {
         try {
-            Method getAll = c.getDeclaredMethod("getAll", DatabaseHelper.class, boolean.class);
-            List list = (List) getAll.invoke(null, databaseHelper, false);
+            Class[] tableList = databaseHelper.getTableList();
 
-            String jo = parseJson(list, c);
-            Log.d(TAG, "parseDiarySync: jo " + jo);
+            StringBuilder dataBuilder = new StringBuilder("{");
 
-            String response = postSyncData(c.getSimpleName(), jo);
-            if (response == null) {
-                Log.e(TAG, "sync: syncing " + c.getSimpleName() + ", error when getting http response");
-                return false;
+            for(Class clazz : tableList) {
+                QueryBuilder queryBuilder = databaseHelper.getDaoAccess(clazz).queryBuilder();
+                queryBuilder.where().lt("status", 9);
+                List list = queryBuilder.query();
+
+                dataBuilder.append(
+                        c.getSimpleName() + "List\":" + JSON.toJSONString(list, SerializerFeature.DisableCircularReferenceDetect)
+                );
             }
 
-            list = unparseJson(response, c);
-
-            Method iou = c.getDeclaredMethod("insertOrUpdate", DatabaseHelper.class);
-            for (Object o : list) {
-                iou.invoke(o, databaseHelper);
-            }
+            String data = dataBuilder.toString();
+            Log.d(TAG, "sync: data = " + data);
+            String response = postSyncData(data);
 
             return true;
         } catch(Exception e) {
@@ -158,20 +114,14 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         }
     }
 
-    public String parseJson(List list, Class c) {
-        String jo = JSON.toJSONString(list, SerializerFeature.DisableCircularReferenceDetect);
-        jo = "{\"" + c.getSimpleName() + "List\":" + jo + "}";
-        return jo;
-    }
-
-    public List unparseJson(String jsonString, Class c) {
+    /*public List unparseJson(String jsonString, Class c) {
         JSONObject jso = JSON.parseObject(jsonString);
         JSONArray jsarr = jso.getJSONArray(c.getSimpleName() + "List");
         Log.d(TAG, "unparseJson: " + jsarr.toJSONString());
         return jsarr.toJavaList(c);
-    }
+    }*/
 
-    public String postSyncData(String table, String sendData) {
+    public String postSyncData(String sendData) {
         HttpClient httpClient = new DefaultHttpClient();
         // String url = ServerAccessor.getServerIp() + ":8080/HeartTrace_Server_war4/Sync";
         String url = ServerAccessor.getServerIp() + ":8080/HeartTrace_Server_war/Servlet.Sync";
@@ -179,11 +129,13 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         HttpPost httpPost = new HttpPost(url);
 
         ArrayList<NameValuePair> pairs = new ArrayList<>();
-        pairs.add(new BasicNameValuePair("table", table));
+        pairs.add(new BasicNameValuePair("modelnum", Build.MODEL));
+        pairs.add(new BasicNameValuePair("token", MyAccount.get(mContext).getToken()));
         pairs.add(new BasicNameValuePair("data", sendData));
 
-        pairs.add(new BasicNameValuePair("modelnum", Build.MODEL));
-        pairs.add(new BasicNameValuePair("token", MyAccount.get(getContext()).getToken()));
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+        Long anchor = sharedPreferences.getLong("anchor", -1);
+        pairs.add(new BasicNameValuePair("anchor", anchor.toString()));
 
         try {
             HttpEntity requestEntity = new UrlEncodedFormEntity(pairs);

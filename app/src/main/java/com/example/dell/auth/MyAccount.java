@@ -141,9 +141,6 @@ public class MyAccount {
         this.autoLogin = autoLogin;
     }
 
-
-
-
     public boolean save() {
         SharedPreferences.Editor editor = preferences.edit();
 

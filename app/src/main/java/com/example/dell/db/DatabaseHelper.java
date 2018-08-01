@@ -98,6 +98,10 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return "hello I'm password";
     }
 
+    public Class[] getTableList() {
+        return tableList;
+    }
+
     /**
      * Returns the Database Access Object (DAO) for our Diary class. It will create it or just give the cached
      * value.
