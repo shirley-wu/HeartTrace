@@ -3,13 +3,7 @@ package com.example.dell.db;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.dell.appid.AppIdWorker;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Random;
-import java.util.UUID;
+import com.google.android.gms.iid.InstanceID;
 
 /**
  * Created by wu-pc on 2018/8/1.
@@ -49,13 +43,8 @@ public class IdWorker {
 
     public IdWorker(Context context) {
         // generate datacenter id
-        try {
-            datacenterId = (long) AppIdWorker.getAppId(context).hashCode();
-        } catch (Exception e) {
-            datacenterId = new Random().nextLong();
-        } finally {
-            datacenterId = datacenterId & maxDatacenterId;
-        }
+        datacenterId = (long) InstanceID.getInstance(context).getId().hashCode();
+        datacenterId = datacenterId & maxDatacenterId;
 
         // generate worker id
         workerId = System.identityHashCode(this);
