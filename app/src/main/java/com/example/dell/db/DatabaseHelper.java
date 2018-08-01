@@ -4,6 +4,7 @@ import android.content.Context;
 import android.provider.Telephony;
 import android.util.Log;
 
+import com.example.dell.passwd.PasswdWorker;
 import com.j256.ormlite.cipher.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
@@ -31,7 +32,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     // name of the database file for your application -- change to something appropriate for your app
     private static final String DATABASE_NAME = "heartTrace.db";
     // any time you make changes to your database objects, you may have to increase the database version
-    private static final int DATABASE_VERSION = 13;
+    private static final int DATABASE_VERSION = 14;
 
     private static final Class[] tableList = {
             Diarybook.class,
@@ -44,6 +45,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             // SearchHistory.class,
     };
 
+    private Context context;
+
     // the DAO object we use to access the Diary table
     private Map<Class, Dao> daoMap = new Hashtable<>();
 
@@ -53,6 +56,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
         idWorker = new IdWorker(context);
         SQLiteDatabase.loadLibs(context);
     }
@@ -95,7 +99,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     }
 
     protected String getPassword() {
-        return "hello I'm password";
+        return PasswdWorker.getPasswd(context);
     }
 
     public Class[] getTableList() {

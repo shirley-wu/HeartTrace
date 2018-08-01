@@ -5,6 +5,8 @@ import android.support.test.InstrumentationRegistry;
 import android.test.InstrumentationTestCase;
 import android.util.Log;
 
+import com.example.dell.passwd.PasswdWorker;
+
 /**
  * Created by wu-pc on 2018/7/12.
  */
@@ -32,5 +34,4 @@ public class MyAccountTest extends InstrumentationTestCase {
         myAccount.setToken("token");
         Log.d(TAG, "testSet: save = " + myAccount.save());
     }
-
 }
