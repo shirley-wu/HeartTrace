@@ -283,6 +283,7 @@ public class Sentence implements Serializable
             QueryBuilder<Sentence, Long> qb = helper.getDaoAccess(Sentence.class).queryBuilder();
             Where<Sentence, Long> where = qb.where();
             buildWhere(where, begin, end);
+            where.ge("status", 0);
             qb.orderBy("date",ascending);
             List<Sentence> sentenceList = qb.query();
             return sentenceList;
@@ -296,6 +297,7 @@ public class Sentence implements Serializable
     public static List<Sentence> getAll(DatabaseHelper helper, boolean ascending){
         try {
             QueryBuilder<Sentence, Long> qb = helper.getDaoAccess(Sentence.class).queryBuilder();
+            qb.where().ge("status", 0);
             qb.orderBy("date",ascending);
             return qb.query();
         } catch (SQLException e) {
@@ -309,6 +311,7 @@ public class Sentence implements Serializable
             QueryBuilder<Sentence, Long> qb = helper.getDaoAccess(Sentence.class).queryBuilder();
             Where<Sentence, Long> where = qb.where();
             where.eq("isLike", true);
+            where.ge("status", 0);
             qb.orderBy("date", ascending);
             return qb.query();
         } catch (SQLException e) {
@@ -319,7 +322,9 @@ public class Sentence implements Serializable
 
     public List<Label> getAllLabel(DatabaseHelper helper) throws SQLException {
         QueryBuilder<SentenceLabel, Long> qb = helper.getDaoAccess(SentenceLabel.class).queryBuilder();
-        qb.where().eq(SentenceLabel.SENTENCE_TAG, this);
+        Where<SentenceLabel, Long> where = qb.where();
+        where.eq(SentenceLabel.SENTENCE_TAG, this);
+        where.ge("status", 0);
 
         QueryBuilder<Label, Long> labelQb = helper.getDaoAccess(Label.class).queryBuilder();
         labelQb.join(qb);
@@ -338,6 +343,7 @@ public class Sentence implements Serializable
             if (status1) buildWhere(where, text);
             if (status2) buildWhere(where, begin, end);
             if (status1 && status2) where.and(2);
+            where.ge("status", 0);
         }
 
         if(labelList != null && labelList.size() > 0) {
@@ -353,8 +359,10 @@ public class Sentence implements Serializable
     public static long countByDateLabel (DatabaseHelper helper, Date begin, Date end, List<Label> labelList) {
         try {
             QueryBuilder<Sentence, Long> queryBuilder = helper.getDaoAccess(Sentence.class).queryBuilder();
+            Where<Sentence, Long> where = queryBuilder.where();
             buildQuery(queryBuilder, helper, labelList);
-            buildWhere(queryBuilder.where(), begin, end);
+            buildWhere(where, begin, end);
+            where.ge("status", 0);
             return queryBuilder.countOf();
         }
         catch(SQLException e) {

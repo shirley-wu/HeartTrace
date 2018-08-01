@@ -152,7 +152,10 @@ public class Label {
     public static Label getByName(DatabaseHelper helper, String name) {
         try {
             Dao<Label, Long> dao = helper.getDaoAccess(Label.class);
-            Label label = dao.queryBuilder().where().eq("labelname", name).queryForFirst();
+            Label label = dao.queryBuilder().where().
+                    eq("labelname", name).
+                    ge("status", 0).
+                    queryForFirst();
             return label;
         }
         catch(SQLException e) {

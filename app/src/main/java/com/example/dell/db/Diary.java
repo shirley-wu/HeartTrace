@@ -281,8 +281,12 @@ public class Diary implements Serializable
             Log.d(TAG, "getByDate: end "   + end);
 
             QueryBuilder<Diary, Long> qb = helper.getDaoAccess(Diary.class).queryBuilder();
+
             Where<Diary, Long> where = qb.where();
             buildWhere(where, begin, end);
+            where.ge("status", 0);
+            where.and(2);
+
             qb.orderBy("date",ascending);
             List<Diary> diaryList = qb.query();
             return diaryList;
@@ -296,6 +300,7 @@ public class Diary implements Serializable
     public static List<Diary> getAll(DatabaseHelper helper, boolean ascending){
         try {
             QueryBuilder<Diary, Long> qb = helper.getDaoAccess(Diary.class).queryBuilder();
+            qb.where().ge("status", 0);
             qb.orderBy("date",ascending);
             return qb.query();
         } catch (SQLException e) {
@@ -307,8 +312,7 @@ public class Diary implements Serializable
     public static List<Diary> getAllLike(DatabaseHelper helper, Boolean ascending){
         try {
             QueryBuilder<Diary, Long> qb = helper.getDaoAccess(Diary.class).queryBuilder();
-            Where<Diary, Long> where = qb.where();
-            where.eq("isLike", true);
+            qb.where().eq("isLike", true).and().ge("status", 0);
             qb.orderBy("date", ascending);
             return qb.query();
         } catch (SQLException e) {
@@ -319,7 +323,7 @@ public class Diary implements Serializable
 
     public List<Label> getAllLabel(DatabaseHelper helper) throws SQLException {
         QueryBuilder<DiaryLabel, Long> qb = helper.getDaoAccess(DiaryLabel.class).queryBuilder();
-        qb.where().eq(DiaryLabel.DIARY_TAG, this);
+        qb.where().eq(DiaryLabel.DIARY_TAG, this).and().ge("status", 0);
 
         QueryBuilder<Label, Long> labelQb = helper.getDaoAccess(Label.class).queryBuilder();
         labelQb.join(qb);
@@ -337,7 +341,9 @@ public class Diary implements Serializable
             Where<Diary, Long> where = qb.where();
             if (status1) buildWhere(where, text);
             if (status2) buildWhere(where, begin, end);
-            if (status1 && status2) where.and(2);
+            where.ge("status", 0);
+            if (status1 && status2) where.and(3);
+            else where.and(2);
         }
 
         if(labelList != null && labelList.size() > 0) {
@@ -353,8 +359,11 @@ public class Diary implements Serializable
     public static long countByDateLabel (DatabaseHelper helper, Date begin, Date end, List<Label> labelList) {
         try {
             QueryBuilder<Diary, Long> queryBuilder = helper.getDaoAccess(Diary.class).queryBuilder();
+            Where<Diary, Long> where = queryBuilder.where();
+            buildWhere(where, begin, end);
+            where.ge("status", 0);
+            where.and(2);
             buildQuery(queryBuilder, helper, labelList);
-            buildWhere(queryBuilder.where(), begin, end);
             return queryBuilder.countOf();
         }
         catch(SQLException e) {

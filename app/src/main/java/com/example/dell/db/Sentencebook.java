@@ -9,6 +9,7 @@ import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.UpdateBuilder;
+import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
@@ -92,7 +93,11 @@ public class Sentencebook implements Serializable {
     public List<Sentence> getAllSubSentence(DatabaseHelper helper) {
         try {
             Dao<Sentence, Long> dao = helper.getDaoAccess(Sentence.class);
-            List<Sentence> subSentenceList = dao.queryBuilder().where().eq(Sentencebook.TAG, this).query();
+            QueryBuilder<Sentence, Long> queryBuilder = dao.queryBuilder();
+            Where<Sentence, Long> where = queryBuilder.where();
+            where.eq(Sentencebook.TAG, this);
+            where.ge("status", 0);
+            List<Sentence> subSentenceList = queryBuilder.query();
             return subSentenceList;
         }catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
@@ -176,6 +181,8 @@ public class Sentencebook implements Serializable {
     public static List<Sentencebook> getAll(DatabaseHelper helper, Boolean ascending){
         try {
             QueryBuilder<Sentencebook, Long> qb = helper.getDaoAccess(Sentencebook.class).queryBuilder();
+            Where<Sentencebook, Long> where = qb.where();
+            where.ge("status", 0);
             return qb.query();
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
@@ -186,7 +193,11 @@ public class Sentencebook implements Serializable {
     public static Sentencebook getByName(DatabaseHelper helper,String sentencebookName) {
         try {
             Dao<Sentencebook, Long> dao = helper.getDaoAccess(Sentencebook.class);
-            Sentencebook bookByName = dao.queryBuilder().where().eq("sentencebookName", sentencebookName).queryForFirst();
+            QueryBuilder<Sentencebook, Long> queryBuilder = dao.queryBuilder();
+            Where<Sentencebook, Long> where = queryBuilder.where();
+            where.eq("sentencebookName", sentencebookName);
+            where.ge("status", 0);
+            Sentencebook bookByName = queryBuilder.queryForFirst();
             return bookByName;
         }
         catch(SQLException e) {

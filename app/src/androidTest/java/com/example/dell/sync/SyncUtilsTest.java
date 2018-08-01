@@ -32,7 +32,7 @@ public class SyncUtilsTest extends InstrumentationTestCase {
         syncAdapter = new SyncAdapter(context, true);
     }
 
-    @Test
+    /*@Test
     public void testPostSyncData() {
         String response = syncAdapter.postSyncData("Diary",
                 "{\"DiaryList\":[" +
@@ -40,9 +40,9 @@ public class SyncUtilsTest extends InstrumentationTestCase {
                         "{\"date\":1546253475874,\"diarybook\":{\"id\":151},\"id\":992,\"text\":\"afxamjncpau\"}" +
                         "]}");
         Log.d(TAG, "testPostSyncData: response\n" + response);
-    }
+    }*/
 
-    @Test
+    /*@Test
     public void testUnparseJson() {
         String jo = "{\"DiaryList\":" +
                 "[{\"date\":\"1531030209658\",\"diarybook\":{\"diarybookName\":\"fajskdlav\"},\"id\":16,\"text\":\"jdakfldasj\"}," +
@@ -57,9 +57,9 @@ public class SyncUtilsTest extends InstrumentationTestCase {
         assertEquals("sbrycaevgr", list.get(1).getDiarybook().getDiarybookName());
         assertEquals(992, list.get(1).getId());
         assertEquals("afxamjncpau", list.get(1).getText());
-    }
+    }*/
 
-    @Test
+    /*@Test
     public void testParseJson() {
         Diarybook diarybook = new Diarybook("acetbv");
 
@@ -79,6 +79,6 @@ public class SyncUtilsTest extends InstrumentationTestCase {
 
         String jo = syncAdapter.parseJson(list, Diary.class);
         Log.d(TAG, "testParseDiarySync: jo " + jo);
-    }
+    }*/
 
 }

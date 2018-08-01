@@ -9,6 +9,7 @@ import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.UpdateBuilder;
+import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
@@ -92,7 +93,9 @@ public class Diarybook implements Serializable {
     public List<Diary> getAllSubDiary(DatabaseHelper helper) {
         try {
             Dao<Diary, Long> dao = helper.getDaoAccess(Diary.class);
-            List<Diary> subDiaryList = dao.queryBuilder().where().eq(Diarybook.TAG, this).query();
+            QueryBuilder<Diary, Long> queryBuilder = dao.queryBuilder();
+            queryBuilder.where().eq(Diarybook.TAG, this).and().ge("status", 0);
+            List<Diary> subDiaryList = queryBuilder.query();
             return subDiaryList;
         }catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
@@ -176,6 +179,8 @@ public class Diarybook implements Serializable {
     public static List<Diarybook> getAll(DatabaseHelper helper, Boolean ascending){
         try {
             QueryBuilder<Diarybook, Long> qb = helper.getDaoAccess(Diarybook.class).queryBuilder();
+            Where<Diarybook, Long> where = qb.where();
+            where.ge("status", 0);
             return qb.query();
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
@@ -186,7 +191,9 @@ public class Diarybook implements Serializable {
     public static Diarybook getByName(DatabaseHelper helper,String diarybookName) {
         try {
             Dao<Diarybook, Long> dao = helper.getDaoAccess(Diarybook.class);
-            Diarybook bookByName = dao.queryBuilder().where().eq("diarybookName", diarybookName).queryForFirst();
+            QueryBuilder<Diarybook, Long> queryBuilder = dao.queryBuilder();
+            queryBuilder.where().eq("diarybookName", diarybookName).and().ge("status", 0);
+            Diarybook bookByName = queryBuilder.queryForFirst();
             return bookByName;
         }
         catch(SQLException e) {
