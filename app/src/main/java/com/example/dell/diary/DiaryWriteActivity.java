@@ -273,6 +273,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                         Intent intent3 = new Intent(DiaryWriteActivity.this,TimeLineActivity.class);
                         startActivity(intent3);
                         break;
+                    case R.id.sync_setting:
+                        Intent intent4 = new Intent(DiaryWriteActivity.this, SyncActivity.class);
+                        startActivity(intent4);
+                        break;
                 }
                 return true;
             }

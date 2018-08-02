@@ -47,22 +47,12 @@ public class CollectActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.collect_toolbar);
         setSupportActionBar(toolbar);
         //mDrawLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        NavigationView navView =(NavigationView) findViewById(R.id.nav_view);
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null){
             actionBar.setDisplayHomeAsUpEnabled(true);
             //actionBar.setHomeAsUpIndicator(R.drawable.menu_white);
         }
         actionBar.setTitle("我的收藏");
-
-        navView.setCheckedItem(R.id.nav_user);
-        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
-                mDrawLayout.closeDrawers();
-                return true;
-            }
-        });
 
         initCollectList();
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_collect_view);

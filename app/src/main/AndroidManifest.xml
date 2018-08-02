@@ -72,10 +72,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"
-            android:launchMode="singleTask"/>
+        <activity
+            android:name=".LoginActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".PersonalInformationActivity" />
-        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".SyncActivity"></activity>
     </application>
 
 </manifest>
