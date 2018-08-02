@@ -25,8 +25,8 @@ public class SentenceLabel {
 
     public static final String LABEL_TAG = "tb_label";
 
-    @DatabaseField(generatedId = true, columnName = TAG)
-    private int id;
+    @DatabaseField(id = true, columnName = TAG)
+    private long id;
 
     @DatabaseField(foreign = true, columnName = SENTENCE_TAG)
     private Sentence sentence;
@@ -38,7 +38,7 @@ public class SentenceLabel {
     private int status;
 
     @DatabaseField
-    private long anchor;
+    private long modified;
 
     public SentenceLabel(){}
 
@@ -47,11 +47,11 @@ public class SentenceLabel {
         this.label = label;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -79,19 +79,21 @@ public class SentenceLabel {
         return status;
     }
 
-    public void setAnchor(long anchor) {
-        this.anchor = anchor;
+    public void setModified(long modified) {
+        this.modified = modified;
     }
 
-    public long getAnchor() {
-        return anchor;
+    public long getModified() {
+        return modified;
     }
 
     public void insert(DatabaseHelper helper) {
         try {
+            id = helper.getIdWorker().nextId();
+            Log.d(TAG, "insert: id = " + id);
             status = 0;
-            anchor = 0;
-            Dao<SentenceLabel, Integer> dao = helper.getDaoAccess(SentenceLabel.class);
+            modified = System.currentTimeMillis();
+            Dao<SentenceLabel, Long> dao = helper.getDaoAccess(SentenceLabel.class);
             Log.i("db_sentence_label", "dao = " + dao + "  tb_sentence_label " + this);
             int returnValue = dao.create(this);
             Log.i("db_sentence_label", "插入后返回值："+returnValue);
@@ -104,7 +106,8 @@ public class SentenceLabel {
     public void delete(DatabaseHelper helper) {
         try {
             status = -1;
-            Dao<SentenceLabel, Integer> dao = helper.getDaoAccess(SentenceLabel.class);
+            modified = System.currentTimeMillis();
+            Dao<SentenceLabel, Long> dao = helper.getDaoAccess(SentenceLabel.class);
             Log.i("db_sentence_label", "dao = " + dao + "  tb_sentence_label " + this);
             int returnValue = dao.update(this);
             Log.i("db_sentence_label", "删除后返回值："+returnValue);

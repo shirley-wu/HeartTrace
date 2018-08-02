@@ -2,6 +2,7 @@ package com.example.dell.db;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
+import android.util.Log;
 
 import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
@@ -25,7 +26,7 @@ public class DiaryInstrumentedTest {
     final static String TAG = "DiaryInstrumentedTest";
 
     private DatabaseHelper databaseHelper;
-    private Dao<Diary, Integer> dao;
+    private Dao<Diary, Long> dao;
 
     private Diarybook diarybook = new Diarybook("fajskdlav");
 
@@ -53,6 +54,8 @@ public class DiaryInstrumentedTest {
 
     @Test
     public void testSaveAndGetDiary() throws SQLException {
+        // 测试Diary的基本操作中各个表项的变与不变
+
         originText = "Testing testing do not repeat testing testing 221341151" + (new Date()).getTime() + (new Random()).nextDouble();
         updateText = "hlelleelelfjakdl;jag alknals" + (new Date()).getTime() + (new Random()).nextDouble();
 
@@ -62,10 +65,11 @@ public class DiaryInstrumentedTest {
         diary.setHtmlText("<p>" + originText + "</p>");
         diary.setDate();
         diary.setDiarybook(diarybook);
-        diary.setIsLike(true);
+        diary.setIslike(true);
 
         // create
         diary.insert(databaseHelper);
+        Log.d(TAG, "testSaveAndGetDiary: modified when inserting = " + diary.getModified());
 
         // query
         diaryList = dao.queryBuilder().where().eq("text", originText).query();
@@ -73,7 +77,7 @@ public class DiaryInstrumentedTest {
         assertEquals(diary.getDate(), diaryList.get(0).getDate());
         assertEquals(originText, diaryList.get(0).getText());
         assertEquals("<p>" + originText + "</p>", diaryList.get(0).getHtmlText());
-        assertEquals(true, diaryList.get(0).getIsLike());
+        assertEquals(true, diaryList.get(0).getIslike());
         assertEquals(0, diaryList.get(0).getStatus());
 
         // update
@@ -85,6 +89,7 @@ public class DiaryInstrumentedTest {
         assertEquals(1, diaryList.size()); // TODO: not safe: assumes that there is no such text by wxq
         assertEquals(diary.getDate(), diaryList.get(0).getDate());
         assertEquals(0, diaryList.get(0).getStatus());
+        Log.d(TAG, "testSaveAndGetDiary: modified when updating 1 = " + diary.getModified());
 
         // update after so-called sync
         diary.setStatus(9);
@@ -93,12 +98,14 @@ public class DiaryInstrumentedTest {
         assertEquals(1, diaryList.size()); // TODO: not safe: assumes that there is no such text by wxq
         assertEquals(diary.getDate(), diaryList.get(0).getDate());
         assertEquals(1, diaryList.get(0).getStatus());
+        Log.d(TAG, "testSaveAndGetDiary: modified when updating 2 = " + diary.getModified());
 
         // delete
         diary.delete(databaseHelper);
         diaryList = dao.queryBuilder().where().eq("text", updateText).query();
         assertEquals(1, diaryList.size()); // TODO: not safe: assumes that there is no such text by wxq
         assertEquals(-1, diaryList.get(0).getStatus());
+        Log.d(TAG, "testSaveAndGetDiary: modified when deleting = " + diary.getModified());
     }
 
     @Test

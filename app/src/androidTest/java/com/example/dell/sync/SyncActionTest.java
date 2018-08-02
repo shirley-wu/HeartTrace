@@ -53,13 +53,14 @@ public class SyncActionTest {
 
     @After
     public void tearDown() {
-        diarybook.delete(databaseHelper);
+        databaseHelper.clearAll();
         databaseHelper.close();
     }
 
     @Test
     public void testSyncDiary() {
         // syncAdapter.sync(databaseHelper, Diary.class);
-        syncAdapter.syncDiary(databaseHelper);
+        // syncAdapter.syncDiary(databaseHelper);
+        syncAdapter.sync(databaseHelper);
     }
 }

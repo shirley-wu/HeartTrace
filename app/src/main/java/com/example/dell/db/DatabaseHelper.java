@@ -4,6 +4,7 @@ import android.content.Context;
 import android.provider.Telephony;
 import android.util.Log;
 
+import com.example.dell.passwd.PasswdWorker;
 import com.j256.ormlite.cipher.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
@@ -13,6 +14,7 @@ import com.j256.ormlite.table.TableUtils;
 import net.sqlcipher.database.SQLiteDatabase;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.List;
@@ -30,26 +32,33 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     // name of the database file for your application -- change to something appropriate for your app
     private static final String DATABASE_NAME = "heartTrace.db";
     // any time you make changes to your database objects, you may have to increase the database version
-    private static final int DATABASE_VERSION = 9;
+    private static final int DATABASE_VERSION = 17;
 
     private static final Class[] tableList = {
-            Diarybook.class,
-            Sentencebook.class,
             Diary.class,
-            Sentence.class,
-            Label.class,
+            Diarybook.class,
             DiaryLabel.class,
+            Label.class,
+            Sentence.class,
+            Sentencebook.class,
             SentenceLabel.class,
+            Picture.class
             // SearchHistory.class,
     };
+
+    private Context context;
 
     // the DAO object we use to access the Diary table
     private Map<Class, Dao> daoMap = new Hashtable<>();
 
     private Map<Class, RuntimeExceptionDao> runtimeExceptionDaoMap = new Hashtable<>();
 
+    private IdWorker idWorker;
+
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
+        idWorker = new IdWorker(context);
         SQLiteDatabase.loadLibs(context);
     }
 
@@ -76,22 +85,25 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
      * Don't need it by now.
      */
     public void onUpgrade(SQLiteDatabase db, ConnectionSource connectionSource, int oldVersion, int newVersion) {
-        try {
-            Log.i(DatabaseHelper.class.getName(), "onUpgrade");
-            for(Class clazz : tableList) {
+        Log.i(DatabaseHelper.class.getName(), "onUpgrade");
+        for(Class clazz : tableList) {
+            try {
                 TableUtils.dropTable(connectionSource, clazz, true);
                 Log.d(TAG, "onUpgrade: drop table " + clazz.getName());
+            } catch (SQLException e) {
+                Log.e(TAG, "onUpgrade: ", e);
             }
-            // after we drop the old databases, we create the new ones
-            onCreate(db, connectionSource);
-        } catch (SQLException e) {
-            Log.e(DatabaseHelper.class.getName(), "Can't drop databases", e);
-            throw new RuntimeException(e);
         }
+        // after we drop the old databases, we create the new ones
+        onCreate(db, connectionSource);
     }
 
     protected String getPassword() {
-        return "hello I'm password";
+        return PasswdWorker.getPasswd(context);
+    }
+
+    public Class[] getTableList() {
+        return tableList;
     }
 
     /**
@@ -122,6 +134,10 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             runtimeExceptionDaoMap.put(clazz, dao);
             return dao;
         }
+    }
+
+    public IdWorker getIdWorker() {
+        return idWorker;
     }
 
     public void clearAll() {

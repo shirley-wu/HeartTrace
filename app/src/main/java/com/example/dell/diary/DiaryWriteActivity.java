@@ -89,6 +89,7 @@ import com.example.dell.auth.MyAccount;
 import com.example.dell.db.DatabaseHelper;
 import com.example.dell.db.Diary;
 import com.example.dell.db.Label;
+import com.example.dell.db.Picture;
 import com.j256.ormlite.stmt.query.In;
 
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
@@ -857,7 +858,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.add:
                 if(addDiary.getVisibility() == View.INVISIBLE) {
-                    if(emptyImage.getVisibility() == View.VISIBLE || !diary.getIsLike()){
+                    if(emptyImage.getVisibility() == View.VISIBLE || !diary.getIslike()){
                         like.setImageResource(R.drawable.unlike);
                     }
                     else{
@@ -894,14 +895,14 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.like:
                 if(emptyImage.getVisibility() == View.INVISIBLE){
-                    if(diary.getIsLike()) {
+                    if(diary.getIslike()) {
                         like.setImageResource(R.drawable.unlike);
-                        diary.setIsLike(false);
+                        diary.setIslike(false);
                         diary.update(helper);
                     }
                     else{
                         like.setImageResource(R.drawable.like);
-                        diary.setIsLike(true);
+                        diary.setIslike(true);
                         diary.update(helper);
                     }
                 }
@@ -1560,6 +1561,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         String imagePath = saveBitmap(DiaryWriteActivity.this,bitmap);
         SpannableString imageSpan = new SpannableString(imagePath);
         imageSpan.setSpan(new ImageSpan(bitmap) , 0, imageSpan.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -1621,16 +1623,19 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         return "image_"+date;
     }
 
-    public static String saveBitmap(Context context, Bitmap mBitmap) {
+    public String saveBitmap(Context context, Bitmap mBitmap) {
         String savePath;
         File filePic;
-        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            savePath = SD_PATH;
-        } else {
-            savePath = context.getApplicationContext().getFilesDir().getAbsolutePath() + IN_PATH;
-        }
         try {
-            filePic = new File(savePath + generateFileName() + ".jpg");
+            Picture picture = new Picture();
+            DatabaseHelper databaseHelper = new DatabaseHelper(getApplicationContext());
+            boolean status = picture.saveBitmap(DiaryWriteActivity.this, databaseHelper, mBitmap);
+            String filePath = new String();
+            if (status == true)
+                filePath = picture.getParentPath() + picture.getFileName();
+            Log.i("file path",filePath);
+
+            filePic = new File(filePath);
             if (!filePic.exists()) {
                 filePic.getParentFile().mkdirs();
                 filePic.createNewFile();
@@ -1678,11 +1683,18 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private void getImage(String text)
     {
         Editable editable = diary_write.getText();
-        Pattern pattern = Pattern.compile( Environment.getExternalStorageDirectory().getPath()+"/HeartTrace/pic/image_[0-9]{14}\\.jpg");
+        String filePath;
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
+            filePath = SD_PATH;
+        else
+            filePath = DiaryWriteActivity.this.getApplicationContext().getFilesDir().getAbsolutePath() + IN_PATH;
+        Pattern pattern = Pattern.compile( filePath + "img_[0-9]{0,}\\.jpg");
         Matcher matcher = pattern.matcher(text);
         int matcher_end = 0;
         while(matcher.find()) {
-            Bitmap bitmap = BitmapFactory.decodeFile(matcher.group());
+            Log.i("file name",matcher.group().substring(filePath.length(),matcher.group().length()));
+            Picture picture = new Picture(matcher.group().substring(filePath.length(),matcher.group().length()));
+            Bitmap bitmap = picture.getBitmap(DiaryWriteActivity.this);
             SpannableString imageSpan = new SpannableString(matcher.group());
             imageSpan.setSpan(new ImageSpan(bitmap) , 0, imageSpan.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             Pattern pattern1 = Pattern.compile("￼");

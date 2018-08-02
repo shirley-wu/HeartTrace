@@ -9,6 +9,7 @@ import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.UpdateBuilder;
+import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
@@ -26,8 +27,8 @@ public class Diarybook implements Serializable {
 
     private static final String default_name = "default";
 
-    @DatabaseField(generatedId = true, columnName = TAG)
-    private int id;
+    @DatabaseField(id = true, columnName = TAG)
+    private long id;
 
     @DatabaseField(unique = true, columnName = "diarybookName", canBeNull = false)
     private String diarybookName;
@@ -39,7 +40,7 @@ public class Diarybook implements Serializable {
     private int status;
 
     @DatabaseField
-    private long anchor;
+    private long modified;
 
     public Diarybook(){};
 
@@ -53,7 +54,7 @@ public class Diarybook implements Serializable {
         this.id = id;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -81,18 +82,20 @@ public class Diarybook implements Serializable {
         return status;
     }
 
-    public void setAnchor(long anchor) {
-        this.anchor = anchor;
+    public void setModified(long modified) {
+        this.modified = modified;
     }
 
-    public long getAnchor() {
-        return anchor;
+    public long getModified() {
+        return modified;
     }
 
     public List<Diary> getAllSubDiary(DatabaseHelper helper) {
         try {
-            Dao<Diary, Integer> dao = helper.getDaoAccess(Diary.class);
-            List<Diary> subDiaryList = dao.queryBuilder().where().eq(Diarybook.TAG, this).query();
+            Dao<Diary, Long> dao = helper.getDaoAccess(Diary.class);
+            QueryBuilder<Diary, Long> queryBuilder = dao.queryBuilder();
+            queryBuilder.where().eq(Diarybook.TAG, this).and().ge("status", 0);
+            List<Diary> subDiaryList = queryBuilder.query();
             return subDiaryList;
         }catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
@@ -102,8 +105,10 @@ public class Diarybook implements Serializable {
 
     public void deleteSubDiary(DatabaseHelper helper) {
         try {
-            UpdateBuilder<Diary, Integer> updateBuilder = helper.getDaoAccess(Diary.class).updateBuilder();
-            updateBuilder.updateColumnValue("status", -1);
+            UpdateBuilder<Diary, Long> updateBuilder = helper.getDaoAccess(Diary.class).updateBuilder();
+            updateBuilder.
+                    updateColumnValue("status", -1).
+                    updateColumnValue("modified", System.currentTimeMillis());
             updateBuilder.where().eq(Diarybook.TAG, this);
             Log.i("diary", "批量删除 diary " + this);
             int returnValue = updateBuilder.update();
@@ -115,9 +120,11 @@ public class Diarybook implements Serializable {
     }
     public void insert(DatabaseHelper helper) {
         try {
+            id = helper.getIdWorker().nextId();
+            Log.d(TAG, "insert: id = " + id);
             status = 0;
-            anchor = 0;
-            Dao<Diarybook, Integer> dao = helper.getDaoAccess(Diarybook.class);
+            modified = System.currentTimeMillis();
+            Dao<Diarybook, Long> dao = helper.getDaoAccess(Diarybook.class);
             Log.i("diarybook", "dao = " + dao + " 插入 diarybook " + this);
             int returnValue = dao.create(this);
             Log.i("diarybook", "插入后返回值：" + returnValue);
@@ -130,7 +137,8 @@ public class Diarybook implements Serializable {
     public void update(DatabaseHelper helper) {
         try {
             if(status != 0) status = 1;
-            Dao<Diarybook, Integer> dao = helper.getDaoAccess(Diarybook.class);
+            modified = System.currentTimeMillis();
+            Dao<Diarybook, Long> dao = helper.getDaoAccess(Diarybook.class);
             Log.i("diarybook", "dao = " + dao + " 更新 diarybook " + this);
             int returnValue = dao.update(this);
             Log.i("diarybook", "更新后返回值：" + returnValue);
@@ -142,7 +150,7 @@ public class Diarybook implements Serializable {
 
     public void refresh(DatabaseHelper helper) {
         try {
-            Dao<Diarybook, Integer> dao = helper.getDaoAccess(Diarybook.class);
+            Dao<Diarybook, Long> dao = helper.getDaoAccess(Diarybook.class);
             Log.i("diarybook", "dao = " + dao + " refresh diarybook " + this);
             int returnValue = dao.refresh(this);
             Log.i("diarybook", "refresh后返回值：" + returnValue);
@@ -157,7 +165,8 @@ public class Diarybook implements Serializable {
             deleteSubDiary(helper);
 
             status = -1;
-            Dao<Diarybook, Integer> dao = helper.getDaoAccess(Diarybook.class);
+            modified = System.currentTimeMillis();
+            Dao<Diarybook, Long> dao = helper.getDaoAccess(Diarybook.class);
             Log.i("diarybook", "dao = " + dao + " 删除 diarybook " + this);
             int returnValue = dao.update(this);
             Log.i("diarybook", "删除后返回值：" + returnValue);
@@ -169,7 +178,9 @@ public class Diarybook implements Serializable {
 
     public static List<Diarybook> getAll(DatabaseHelper helper, Boolean ascending){
         try {
-            QueryBuilder<Diarybook, Integer> qb = helper.getDaoAccess(Diarybook.class).queryBuilder();
+            QueryBuilder<Diarybook, Long> qb = helper.getDaoAccess(Diarybook.class).queryBuilder();
+            Where<Diarybook, Long> where = qb.where();
+            where.ge("status", 0);
             return qb.query();
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
@@ -179,8 +190,10 @@ public class Diarybook implements Serializable {
 
     public static Diarybook getByName(DatabaseHelper helper,String diarybookName) {
         try {
-            Dao<Diarybook, Integer> dao = helper.getDaoAccess(Diarybook.class);
-            Diarybook bookByName = dao.queryBuilder().where().eq("diarybookName", diarybookName).queryForFirst();
+            Dao<Diarybook, Long> dao = helper.getDaoAccess(Diarybook.class);
+            QueryBuilder<Diarybook, Long> queryBuilder = dao.queryBuilder();
+            queryBuilder.where().eq("diarybookName", diarybookName).and().ge("status", 0);
+            Diarybook bookByName = queryBuilder.queryForFirst();
             return bookByName;
         }
         catch(SQLException e) {

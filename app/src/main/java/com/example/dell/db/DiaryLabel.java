@@ -25,8 +25,8 @@ public class DiaryLabel {
 
     public static final String LABEL_TAG = "tb_label";
 
-    @DatabaseField(generatedId = true, columnName = TAG)
-    private int id;
+    @DatabaseField(id = true, columnName = TAG)
+    private long id;
 
     @DatabaseField(foreign = true, columnName = DIARY_TAG)
     private Diary diary;
@@ -38,7 +38,7 @@ public class DiaryLabel {
     private int status;
 
     @DatabaseField
-    private long anchor;
+    private long modified;
 
     public DiaryLabel(){}
 
@@ -47,11 +47,11 @@ public class DiaryLabel {
         this.label = label;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -79,19 +79,21 @@ public class DiaryLabel {
         return status;
     }
 
-    public void setAnchor(long anchor) {
-        this.anchor = anchor;
+    public void setModified(long modified) {
+        this.modified = modified;
     }
 
-    public long getAnchor() {
-        return anchor;
+    public long getModified() {
+        return modified;
     }
 
     public void insert(DatabaseHelper helper) {
         try {
+            id = helper.getIdWorker().nextId();
+            Log.d(TAG, "insert: id = " + id);
             status = 0;
-            anchor = 0;
-            Dao<DiaryLabel, Integer> dao = helper.getDaoAccess(DiaryLabel.class);
+            modified = System.currentTimeMillis();
+            Dao<DiaryLabel, Long> dao = helper.getDaoAccess(DiaryLabel.class);
             Log.i("db_diary_label", "dao = " + dao + "  tb_diary_label " + this);
             int returnValue = dao.create(this);
             Log.i("db_diary_label", "插入后返回值："+returnValue);
@@ -104,7 +106,8 @@ public class DiaryLabel {
     public void delete(DatabaseHelper helper) {
         try {
             status = -1;
-            Dao<DiaryLabel, Integer> dao = helper.getDaoAccess(DiaryLabel.class);
+            modified = System.currentTimeMillis();
+            Dao<DiaryLabel, Long> dao = helper.getDaoAccess(DiaryLabel.class);
             Log.i("db_diary_label", "dao = " + dao + "  tb_diary_label " + this);
             int returnValue = dao.update(this);
             Log.i("db_diary_label", "删除后返回值："+returnValue);

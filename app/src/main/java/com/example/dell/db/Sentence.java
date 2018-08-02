@@ -5,7 +5,6 @@ import android.util.Log;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.UpdateBuilder;
 import com.j256.ormlite.stmt.Where;
@@ -26,8 +25,8 @@ public class Sentence implements Serializable
 {
     protected static final String TAG = "sentence";
 
-    @DatabaseField(generatedId = true, columnName = TAG)
-    private int id;
+    @DatabaseField(id = true, columnName = TAG)
+    private long id;
 
     @DatabaseField(foreign = true, columnName = Sentencebook.TAG)//, canBeNull = false)
     private Sentencebook sentencebook;
@@ -42,7 +41,7 @@ public class Sentence implements Serializable
     protected Date date;
 
     @DatabaseField
-    private boolean isLike = false;
+    private boolean islike = false;
 
     @DatabaseField
     private float letterSpacing = (float)0.2;
@@ -63,7 +62,7 @@ public class Sentence implements Serializable
     private int status;
 
     @DatabaseField
-    private long anchor;
+    private long modified;
 
     public Sentence(){
     };
@@ -72,11 +71,11 @@ public class Sentence implements Serializable
         this.text = text;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -112,12 +111,12 @@ public class Sentence implements Serializable
         Log.d(TAG, "setDate: dangerous call!, set into " + date.toString());
     }
 
-    public boolean getIsLike() {
-        return isLike;
+    public boolean getIslike() {
+        return islike;
     }
 
-    public void setIsLike(boolean isLike) {
-        this.isLike = isLike;
+    public void setIslike(boolean islike) {
+        this.islike = islike;
     }
 
     public float getLetterSpacing() {
@@ -176,19 +175,21 @@ public class Sentence implements Serializable
         return this.status;
     }
 
-    public void setAnchor(long anchor) {
-        this.anchor = anchor;
+    public void setModified(long modified) {
+        this.modified = modified;
     }
 
-    public long getAnchor() {
-        return this.anchor;
+    public long getModified() {
+        return this.modified;
     }
 
     public int insert(DatabaseHelper helper) {
         try {
+            id = helper.getIdWorker().nextId();
+            Log.d(TAG, "insert: id = " + id);
             status = 0;
-            anchor = 0;
-            Dao<Sentence, Integer> dao = helper.getDaoAccess(Sentence.class);
+            modified = System.currentTimeMillis();
+            Dao<Sentence, Long> dao = helper.getDaoAccess(Sentence.class);
             Log.d("sentence", "dao = " + dao + " 插入 sentence " + this);
             int returnValue = dao.create(this);
             Log.d("sentence", "插入后返回值：" + returnValue);
@@ -202,7 +203,8 @@ public class Sentence implements Serializable
     public void update(DatabaseHelper helper) {
         try {
             if(status != 0) status = 1;
-            Dao<Sentence, Integer> dao = helper.getDaoAccess(Sentence.class);
+            modified = System.currentTimeMillis();
+            Dao<Sentence, Long> dao = helper.getDaoAccess(Sentence.class);
             Log.d("sentence", "dao = " + dao + " 更新 sentence " + this);
             int returnValue = dao.update(this);
             Log.d("sentence", "更新后返回值：" + returnValue);
@@ -217,13 +219,16 @@ public class Sentence implements Serializable
             int returnValue;
 
             status = -1;
-            Dao<Sentence, Integer> dao = helper.getDaoAccess(Sentence.class);
+            modified = System.currentTimeMillis();
+            Dao<Sentence, Long> dao = helper.getDaoAccess(Sentence.class);
             Log.d("sentence", "dao = " + dao + " 删除 sentence " + this);
             returnValue = dao.update(this);
             Log.d("sentence", "删除后返回值：" + returnValue);
 
-            UpdateBuilder<SentenceLabel, Integer> updateBuilder = helper.getDaoAccess(SentenceLabel.class).updateBuilder();
-            updateBuilder.updateColumnValue("status", -1);
+            UpdateBuilder<SentenceLabel, Long> updateBuilder = helper.getDaoAccess(SentenceLabel.class).updateBuilder();
+            updateBuilder.
+                    updateColumnValue("status", -1).
+                    updateColumnValue("modified", System.currentTimeMillis());
             updateBuilder.where().eq(SentenceLabel.SENTENCE_TAG, this);
             Log.d("sentence", "批量删除 sentence label " + this);
             returnValue = updateBuilder.update();
@@ -243,8 +248,8 @@ public class Sentence implements Serializable
 
     public void deleteLabel(DatabaseHelper helper, Label label) {
         try {
-            QueryBuilder<SentenceLabel, Integer> qb = helper.getDaoAccess(SentenceLabel.class).queryBuilder();
-            Where<SentenceLabel, Integer> where = qb.where();
+            QueryBuilder<SentenceLabel, Long> qb = helper.getDaoAccess(SentenceLabel.class).queryBuilder();
+            Where<SentenceLabel, Long> where = qb.where();
             where.eq(SentenceLabel.SENTENCE_TAG, this).and().eq(SentenceLabel.LABEL_TAG, label);
             List<SentenceLabel> l = qb.query();
             for (SentenceLabel dl : l) {
@@ -275,9 +280,13 @@ public class Sentence implements Serializable
             Date end = calendar.getTime();
             Log.d(TAG, "getByDate: end "   + end);
 
-            QueryBuilder<Sentence, Integer> qb = helper.getDaoAccess(Sentence.class).queryBuilder();
-            Where<Sentence, Integer> where = qb.where();
+            QueryBuilder<Sentence, Long> qb = helper.getDaoAccess(Sentence.class).queryBuilder();
+
+            Where<Sentence, Long> where = qb.where();
             buildWhere(where, begin, end);
+            where.ge("status", 0);
+            where.and(2);
+
             qb.orderBy("date",ascending);
             List<Sentence> sentenceList = qb.query();
             return sentenceList;
@@ -290,7 +299,8 @@ public class Sentence implements Serializable
 
     public static List<Sentence> getAll(DatabaseHelper helper, boolean ascending){
         try {
-            QueryBuilder<Sentence, Integer> qb = helper.getDaoAccess(Sentence.class).queryBuilder();
+            QueryBuilder<Sentence, Long> qb = helper.getDaoAccess(Sentence.class).queryBuilder();
+            qb.where().ge("status", 0);
             qb.orderBy("date",ascending);
             return qb.query();
         } catch (SQLException e) {
@@ -301,9 +311,8 @@ public class Sentence implements Serializable
 
     public static List<Sentence> getAllLike(DatabaseHelper helper, Boolean ascending){
         try {
-            QueryBuilder<Sentence, Integer> qb = helper.getDaoAccess(Sentence.class).queryBuilder();
-            Where<Sentence, Integer> where = qb.where();
-            where.eq("isLike", true);
+            QueryBuilder<Sentence, Long> qb = helper.getDaoAccess(Sentence.class).queryBuilder();
+            qb.where().eq("islike", true).and().ge("status", 0);
             qb.orderBy("date", ascending);
             return qb.query();
         } catch (SQLException e) {
@@ -313,10 +322,10 @@ public class Sentence implements Serializable
     }
 
     public List<Label> getAllLabel(DatabaseHelper helper) throws SQLException {
-        QueryBuilder<SentenceLabel, Integer> qb = helper.getDaoAccess(SentenceLabel.class).queryBuilder();
-        qb.where().eq(SentenceLabel.SENTENCE_TAG, this);
+        QueryBuilder<SentenceLabel, Long> qb = helper.getDaoAccess(SentenceLabel.class).queryBuilder();
+        qb.where().eq(SentenceLabel.SENTENCE_TAG, this).and().ge("status", 0);
 
-        QueryBuilder<Label, Integer> labelQb = helper.getDaoAccess(Label.class).queryBuilder();
+        QueryBuilder<Label, Long> labelQb = helper.getDaoAccess(Label.class).queryBuilder();
         labelQb.join(qb);
 
         return labelQb.query();
@@ -324,15 +333,17 @@ public class Sentence implements Serializable
 
     public static List<Sentence> getByRestrict(DatabaseHelper helper, String text, Date begin,
                                             Date end, List<Label> labelList, Boolean ascending) throws SQLException {
-        QueryBuilder<Sentence, Integer> qb = helper.getDaoAccess(Sentence.class).queryBuilder();
+        QueryBuilder<Sentence, Long> qb = helper.getDaoAccess(Sentence.class).queryBuilder();
 
         Boolean status1 = (text != null);
         Boolean status2 = (begin != null && end != null);
         if(status1 || status2){
-            Where<Sentence, Integer> where = qb.where();
+            Where<Sentence, Long> where = qb.where();
             if (status1) buildWhere(where, text);
             if (status2) buildWhere(where, begin, end);
-            if (status1 && status2) where.and(2);
+            where.ge("status", 0);
+            if (status1 && status2) where.and(3);
+            else where.and(2);
         }
 
         if(labelList != null && labelList.size() > 0) {
@@ -347,9 +358,12 @@ public class Sentence implements Serializable
 
     public static long countByDateLabel (DatabaseHelper helper, Date begin, Date end, List<Label> labelList) {
         try {
-            QueryBuilder<Sentence, Integer> queryBuilder = helper.getDaoAccess(Sentence.class).queryBuilder();
+            QueryBuilder<Sentence, Long> queryBuilder = helper.getDaoAccess(Sentence.class).queryBuilder();
+            Where<Sentence, Long> where = queryBuilder.where();
+            buildWhere(where, begin, end);
+            where.ge("status", 0);
+            where.and(2);
             buildQuery(queryBuilder, helper, labelList);
-            buildWhere(queryBuilder.where(), begin, end);
             return queryBuilder.countOf();
         }
         catch(SQLException e) {
@@ -358,14 +372,14 @@ public class Sentence implements Serializable
         }
     }
 
-    public static void buildQuery(QueryBuilder<Sentence, Integer> qb, DatabaseHelper helper, List<Label> labelList) throws SQLException {
+    public static void buildQuery(QueryBuilder<Sentence, Long> qb, DatabaseHelper helper, List<Label> labelList) throws SQLException {
         int size = labelList.size();
         if (size == 0) {
             throw new SQLException("Label list is empty, cannot construct");
         }
 
         for(int i = 0; i < size; i++) {
-            QueryBuilder<SentenceLabel, Integer> sentenceLabelQb = helper.getDaoAccess(SentenceLabel.class).queryBuilder();
+            QueryBuilder<SentenceLabel, Long> sentenceLabelQb = helper.getDaoAccess(SentenceLabel.class).queryBuilder();
             sentenceLabelQb.where().eq(SentenceLabel.LABEL_TAG, labelList.get(i));
             sentenceLabelQb.setAlias("query" + i);
             qb.join(sentenceLabelQb, QueryBuilder.JoinType.INNER, QueryBuilder.JoinWhereOperation.AND);
@@ -374,7 +388,7 @@ public class Sentence implements Serializable
         Log.d(TAG, "buildQuery: " + qb.prepareStatementString());
     }
 
-    public static void buildWhere(Where<Sentence, Integer> where, String text) throws SQLException {
+    public static void buildWhere(Where<Sentence, Long> where, String text) throws SQLException {
         String[] keywordList = text.split(" ");
         int length = keywordList.length;
         if (length > 0) {
@@ -385,7 +399,7 @@ public class Sentence implements Serializable
         }
     }
 
-    public static void buildWhere(Where<Sentence, Integer> where, Date begin, Date end) throws SQLException {
+    public static void buildWhere(Where<Sentence, Long> where, Date begin, Date end) throws SQLException {
         where.between("date", begin, end);
     }
 }

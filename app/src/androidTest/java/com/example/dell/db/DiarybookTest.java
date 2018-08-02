@@ -2,6 +2,7 @@ package com.example.dell.db;
 
 import android.support.test.InstrumentationRegistry;
 import android.test.InstrumentationTestCase;
+import android.util.Log;
 
 import com.j256.ormlite.dao.Dao;
 
@@ -16,6 +17,8 @@ import java.util.List;
  */
 
 public class DiarybookTest extends InstrumentationTestCase {
+
+    final static private String TAG = "DiarybookTest";
 
     private Diarybook diarybook = new Diarybook("adsfavva");
     
@@ -59,24 +62,39 @@ public class DiarybookTest extends InstrumentationTestCase {
     }
 
     @Test
-    public void delete() {
+    public void testDelete() {
         assertEquals(0, diarybook.getStatus());
-        diarybook.delete(helper);
-        assertEquals(-1, diarybook.getStatus());
+        Log.d(TAG, "delete: modified before delete " + diarybook.getModified());
+        
         List<Diary> list = diarybook.getAllSubDiary(helper);
         for(Diary d : list) {
-            assertEquals(-1, d.getStatus());
+            assertEquals(0, d.getStatus());
+            Log.d(TAG, "delete: diary modified before delete " + d.getModified());
         }
+        
+        diarybook.delete(helper);
+        assertEquals(-1, diarybook.getStatus());
+        Log.d(TAG, "delete: modified after delete " + diarybook.getModified());
+        
+        list = diarybook.getAllSubDiary(helper);
+        /*for(Diary d : list) {
+            assertEquals(-1, d.getStatus());
+            Log.d(TAG, "delete: diary modified after delete " + d.getModified());
+        }*/
+        assertEquals(0, list.size());
     }
 
     @Test
-    public void update() {
+    public void testUpdate() {
         assertEquals(0, diarybook.getStatus());
+        Log.d(TAG, "update: modified before update " + diarybook.getModified());
         diarybook.update(helper);
         assertEquals(0, diarybook.getStatus());
+        Log.d(TAG, "update: modified after update " + diarybook.getModified());
         diarybook.setStatus(9);
         diarybook.update(helper);
         assertEquals(1, diarybook.getStatus());
+        Log.d(TAG, "update: modified after update 2 " + diarybook.getModified());
     }
 
 }

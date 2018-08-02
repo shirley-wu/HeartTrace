@@ -2,6 +2,7 @@ package com.example.dell.db;
 
 import android.support.test.InstrumentationRegistry;
 import android.test.InstrumentationTestCase;
+import android.util.Log;
 
 import com.j256.ormlite.dao.Dao;
 
@@ -16,6 +17,8 @@ import java.util.List;
  */
 
 public class SentencebookTest extends InstrumentationTestCase {
+
+    final static private String TAG = "SentencebookTest";
 
     private Sentencebook sentencebook = new Sentencebook("adsfavva");
 
@@ -59,24 +62,39 @@ public class SentencebookTest extends InstrumentationTestCase {
     }
 
     @Test
-    public void delete() {
+    public void testDelete() {
         assertEquals(0, sentencebook.getStatus());
-        sentencebook.delete(helper);
-        assertEquals(-1, sentencebook.getStatus());
+        Log.d(TAG, "delete: modified before delete " + sentencebook.getModified());
+
         List<Sentence> list = sentencebook.getAllSubSentence(helper);
         for(Sentence d : list) {
-            assertEquals(-1, d.getStatus());
+            assertEquals(0, d.getStatus());
+            Log.d(TAG, "delete: sentence modified before delete " + d.getModified());
         }
+
+        sentencebook.delete(helper);
+        assertEquals(-1, sentencebook.getStatus());
+        Log.d(TAG, "delete: modified after delete " + sentencebook.getModified());
+
+        list = sentencebook.getAllSubSentence(helper);
+        /*for(Sentence d : list) {
+            assertEquals(-1, d.getStatus());
+            Log.d(TAG, "delete: sentence modified after delete " + d.getModified());
+        }*/
+        assertEquals(0, list.size());
     }
 
     @Test
-    public void update() {
+    public void testUpdate() {
         assertEquals(0, sentencebook.getStatus());
+        Log.d(TAG, "update: modified before update " + sentencebook.getModified());
         sentencebook.update(helper);
         assertEquals(0, sentencebook.getStatus());
+        Log.d(TAG, "update: modified after update " + sentencebook.getModified());
         sentencebook.setStatus(9);
         sentencebook.update(helper);
         assertEquals(1, sentencebook.getStatus());
+        Log.d(TAG, "update: modified after update 2 " + sentencebook.getModified());
     }
 
 }

@@ -52,13 +52,14 @@ public class HttpClientTest extends InstrumentationTestCase {
         try {
             HttpEntity requestEntity = new UrlEncodedFormEntity(pairs);
             httpPost.setEntity(requestEntity);
+            Log.d(TAG, "testPost: request entity = " + EntityUtils.toString(requestEntity, "utf-8"));
 
             try {
                 HttpResponse httpResponse = httpClient.execute(httpPost);
                 if (httpResponse.getStatusLine().getStatusCode() == 200) {
                     HttpEntity entity = httpResponse.getEntity();
                     String response = EntityUtils.toString(entity, "utf-8");
-                    Log.d(TAG, "testPost: " + response.toString());
+                    Log.d(TAG, "testPost: response entity = " + response.toString());
                 }
             } catch (Exception e) {
                 e.printStackTrace();
