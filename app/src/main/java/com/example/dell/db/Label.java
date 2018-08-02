@@ -155,7 +155,7 @@ public class Label {
         try {
             Dao<Label, Long> dao = helper.getDaoAccess(Label.class);
             Label label = dao.queryBuilder().where().
-                    eq("labelname", name).
+                    eq("labelname", name).and().
                     ge("status", 0).
                     queryForFirst();
             return label;

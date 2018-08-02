@@ -24,6 +24,7 @@ public class MyAccountTest extends InstrumentationTestCase {
         else{
             Log.d(TAG, "testGet: myAccount name = " + myAccount.getName());
             Log.d(TAG, "testGet: myAccount token = " + myAccount.getToken());
+            Log.d(TAG, "testGet: myAccount modified = " + myAccount.getModified());
         }
     }
 
