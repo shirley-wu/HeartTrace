@@ -738,19 +738,20 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         }
         else {
             Log.i("show",diary.getHtmlText());
-            diary_write.setText(Html.fromHtml(diary.getHtmlText()));
-            getImage(diary.getText());
+            if(diary.getHtmlText() != null) {
+                diary_write.setText(Html.fromHtml(diary.getHtmlText()));
+                getImage(diary.getText());
+                //clear color span
+                ForegroundColorSpan[] colorSpans = diary_write.getText().getSpans(0, diary_write.length(), ForegroundColorSpan.class);
+                for (int i = 0; i < colorSpans.length; i++)
+                    diary_write.getText().removeSpan(colorSpans[i]);
+                //set color span
+                int[] colorSpanInfo = getTextColorInfo(diary.getHtmlText());
+                setColorSpan(colorSpanInfo);
+                Log.i("test", Html.toHtml(diary_write.getText()));
+
+            }
             setTextFormmat(diary);
-
-            //clear color span
-            ForegroundColorSpan[] colorSpans= diary_write.getText().getSpans(0, diary_write.length(), ForegroundColorSpan.class);
-            for(int i = 0; i < colorSpans.length; i++)
-                diary_write.getText().removeSpan(colorSpans[i]);
-            //set color span
-            int[] colorSpanInfo = getTextColorInfo(diary.getHtmlText());
-            setColorSpan(colorSpanInfo);
-            Log.i("test", Html.toHtml(diary_write.getText()));
-
             diary_write.setSelection(0);
 
             getLabelsOfDiary(diary,helper);
@@ -1575,7 +1576,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         Bitmap bitmap = BitmapFactory.decodeStream(input);
         input.close();
 
-        return compressImage(bitmap);//再进行质量压缩
+        return compressImage(bitmap);
     }
 
     public Bitmap compressImage(Bitmap image) {
@@ -1611,8 +1612,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         return bitmap;
     }
 
-    private static final String SD_PATH = Environment.getExternalStorageDirectory().getPath() + "/HeartTrace/pic/";
-    private static final String IN_PATH = "/HeartTrace/pic/";
+    public static final String SD_PATH = Environment.getExternalStorageDirectory().getPath() + "/HeartTrace/pic/";
+    public static final String IN_PATH = "/HeartTrace/pic/";
 
     private static String generateFileName() {
         SimpleDateFormat time_format=new SimpleDateFormat("yyyyMMddHHmmss");
@@ -1623,13 +1624,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     public static String saveBitmap(Context context, Bitmap mBitmap) {
         String savePath;
         File filePic;
-        if (Environment.getExternalStorageState().equals(
-                Environment.MEDIA_MOUNTED)) {
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             savePath = SD_PATH;
         } else {
-            savePath = context.getApplicationContext().getFilesDir()
-                    .getAbsolutePath()
-                    + IN_PATH;
+            savePath = context.getApplicationContext().getFilesDir().getAbsolutePath() + IN_PATH;
         }
         try {
             filePic = new File(savePath + generateFileName() + ".jpg");
@@ -1646,7 +1644,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             e.printStackTrace();
             return null;
         }
-
         return filePic.getAbsolutePath();
     }
 
