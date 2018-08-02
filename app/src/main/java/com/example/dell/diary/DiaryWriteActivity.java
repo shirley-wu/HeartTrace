@@ -1611,7 +1611,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         return bitmap;
     }
 
-    private static final String SD_PATH = Environment.getExternalStorageDirectory().getPath() + "/HeartTrace/pic/";
+    public static final String SD_PATH = Environment.getExternalStorageDirectory().getPath() + "/HeartTrace/pic/";
     private static final String IN_PATH = "/HeartTrace/pic/";
 
     private static String generateFileName() {

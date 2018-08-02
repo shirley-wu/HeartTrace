@@ -18,6 +18,8 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.example.dell.auth.MyAccount;
 import com.example.dell.auth.ServerAuthenticator;
 import com.example.dell.db.DatabaseHelper;
+import com.example.dell.db.Picture;
+import com.example.dell.diary.DiaryWriteActivity;
 import com.example.dell.server.ServerAccessor;
 import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
@@ -109,7 +111,11 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             }
         }
 
-        sync(helper);
+        boolean status;
+        status = sync(helper);
+        Log.d(TAG, "onPerformSync: 同步数据库 status = " + status);
+        status = syncPic(helper);
+        Log.d(TAG, "onPerformSync: 同步图片 status = " + status);
 
         OpenHelperManager.releaseHelper();
 
@@ -218,6 +224,27 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             return true;
         } catch(Exception e) {
             Log.e(TAG, "sync: ", e);
+            return false;
+        }
+    }
+
+    public boolean syncPic(DatabaseHelper databaseHelper) {
+        try {
+            long anchor = sharedPreferences.getLong("anchor", -1);
+
+            QueryBuilder<Picture, Long> queryBuilder = databaseHelper.getDaoAccess(Picture.class).queryBuilder();
+            queryBuilder.where().gt("modified", anchor);
+            List<Picture> list = queryBuilder.query();
+
+            for(Picture picture : list) {
+                String path = DiaryWriteActivity.SD_PATH + "image_" + picture.getId() + ".jpg";
+                // TODO: ???
+            }
+
+            return true;
+        }
+        catch (Exception e) {
+            Log.e(TAG, "syncPic: ", e);
             return false;
         }
     }
