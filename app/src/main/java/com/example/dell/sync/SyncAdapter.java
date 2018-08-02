@@ -96,17 +96,12 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         mContext = context;
     }
 
-    private void cleanAfterSync() {
-        OpenHelperManager.releaseHelper();
-        MyAccount.destroy();
-    }
-
     public void onPerformSync(Account account, Bundle extras, String authority, ContentProviderClient provider, SyncResult syncResult) {
         Log.d(TAG, "onPerformSync: begin");
 
         DatabaseHelper helper = OpenHelperManager.getHelper(mContext, DatabaseHelper.class);
 
-        MyAccount myAccount = MyAccount.get(mContext);
+        MyAccount myAccount = new MyAccount(mContext);
         if (myAccount == null) {
             Log.e(TAG, "onPerformSync: cannot get my account");
             return ;
@@ -125,7 +120,6 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                 myAccount.setPassword(null);
                 myAccount.setToken(null);
                 myAccount.save(true);
-                cleanAfterSync();
                 return ;
             }
         }
@@ -148,8 +142,6 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             editor.putLong("anchor", afterAnchor);
             editor.commit();
         }
-
-        cleanAfterSync();
 
         Log.d(TAG, "onPerformSync: end");
     }
@@ -269,7 +261,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     }
 
     public boolean syncUser(DatabaseHelper databaseHelper) {
-        MyAccount myAccount = MyAccount.get(mContext);
+        MyAccount myAccount = new MyAccount(mContext);
         if (myAccount == null) return false;
         if (myAccount.getModified() < preAnchor) {
             return true;
@@ -392,7 +384,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
         pairs.add(new BasicNameValuePair("modelnum", Build.MODEL));
 
-        MyAccount myAccount = MyAccount.get(mContext);
+        MyAccount myAccount = new MyAccount(mContext);
         pairs.add(new BasicNameValuePair("username", myAccount.getUsername()));
         pairs.add(new BasicNameValuePair("token", myAccount.getToken()));
         pairs.add(new BasicNameValuePair("content", sendData));
