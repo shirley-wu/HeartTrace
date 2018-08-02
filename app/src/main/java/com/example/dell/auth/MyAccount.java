@@ -61,7 +61,7 @@ public class MyAccount {
 
     private String password;
 
-    private long modified;
+    private long modified = 0;
 
     private MyAccount() {
 
@@ -167,10 +167,14 @@ public class MyAccount {
         return modified;
     }
 
-    public boolean save() {
+    public void setModified(long modified) {
+        this.modified = modified;
+    }
+
+    public boolean save(boolean setModified) {
         SharedPreferences.Editor editor = preferences.edit();
 
-        modified = System.currentTimeMillis();
+        if (setModified) modified = System.currentTimeMillis();
         editor.putString("modified", PasswdTool.desEncrypt("" + modified, key));
 
         if (username != null) editor.putString("username", PasswdTool.desEncrypt(username, key));

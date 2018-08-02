@@ -99,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                                         myAccount.setPassword(null);
                                         myAccount.setAutoLogin(false);
                                     }
-                                    myAccount.save();
+                                    myAccount.save(false);
 
                                     Intent intent = new Intent(LoginActivity.this, DiaryWriteActivity.class);
                                     intent.putExtra("diary_origin", "welcome");

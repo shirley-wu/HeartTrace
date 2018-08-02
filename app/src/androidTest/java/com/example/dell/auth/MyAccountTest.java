@@ -22,7 +22,7 @@ public class MyAccountTest extends InstrumentationTestCase {
             Log.d(TAG, "testGet: myAccount is null");
         }
         else{
-            Log.d(TAG, "testGet: myAccount userusername = " + myAccount.getUsername());
+            Log.d(TAG, "testGet: myAccount username = " + myAccount.getUsername());
             Log.d(TAG, "testGet: myAccount token = " + myAccount.getToken());
             Log.d(TAG, "testGet: myAccount modified = " + myAccount.getModified());
         }
@@ -34,6 +34,6 @@ public class MyAccountTest extends InstrumentationTestCase {
         MyAccount myAccount = MyAccount.get(context);
         myAccount.setUsername("userusername");
         myAccount.setToken("token");
-        Log.d(TAG, "testSet: save = " + myAccount.save());
+        Log.d(TAG, "testSet: save = " + myAccount.save(true));
     }
 }

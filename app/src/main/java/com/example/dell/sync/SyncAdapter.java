@@ -111,12 +111,12 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             boolean status = ServerAuthenticator.signIn(myAccount.getUsername(), myAccount.getPassword(), bundle);
             if (status && bundle.getBoolean("success")) {
                 myAccount.setToken(bundle.getString("token"));
-                myAccount.save();
+                myAccount.save(true);
             }
             else {
                 myAccount.setPassword(null);
                 myAccount.setToken(null);
-                myAccount.save();
+                myAccount.save(true);
                 return ;
             }
         }
@@ -126,12 +126,12 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         Log.d(TAG, "postSyncData: preAnchor = " + preAnchor);
 
         boolean status1, status2, status3;
-        status1 = sync(helper);
-        Log.d(TAG, "onPerformSync: 同步数据库 status = " + status1);
-        status2 = syncPic(helper);
-        Log.d(TAG, "onPerformSync: 同步图片 status = " + status2);
-        status3 = syncUser(helper);
-        Log.d(TAG, "onPerformSync: 同步用户 status = " + status3);
+        status1 = syncUser(helper);
+        Log.d(TAG, "onPerformSync: 同步用户 status = " + status1);
+        status2 = sync(helper);
+        Log.d(TAG, "onPerformSync: 同步数据库 status = " + status2);
+        status3 = syncPic(helper);
+        Log.d(TAG, "onPerformSync: 同步图片 status = " + status3);
 
         if (status1 && status2 && status3 && afterAnchor != null) {
             Log.d(TAG, "onPerformSync: afterAnchor = " + afterAnchor);
@@ -289,7 +289,53 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             Log.d(TAG, "postSyncData: request entity = " + EntityUtils.toString(requestEntity, "utf-8"));
             httpPost.setEntity(requestEntity);
 
-            // HttpResponse httpResponse = httpClient.execute(httpPost);
+            HttpResponse httpResponse = httpClient.execute(httpPost);
+
+            int responseCode = httpResponse.getStatusLine().getStatusCode();
+            Log.d(TAG, "syncUser: response code = " + responseCode);
+
+            HttpEntity httpEntity = httpResponse.getEntity();
+            String response = EntityUtils.toString(httpEntity, "utf-8");
+            Log.d(TAG, "syncUser: response = " + response);
+
+            if (responseCode != 200) return false;
+            JSONObject jsonObject = JSON.parseObject(response);
+            String buff;
+
+            buff = jsonObject.getString("modified");
+            long mo = Long.parseLong(buff);
+            if (mo == myAccount.getModified()) return true;
+
+            myAccount.setModified(mo);
+
+            buff = jsonObject.getString("username");
+            if (buff != null) myAccount.setUsername(buff);
+
+            buff = jsonObject.getString("password");
+            if (buff != null) myAccount.setPassword(buff);
+
+            buff = jsonObject.getString("nickname");
+            if (buff != null) myAccount.setNickname(buff);
+            
+            buff = jsonObject.getString("gender");
+            if (buff != null) myAccount.setGender(buff);
+
+            buff = jsonObject.getString("birthday");
+            if (buff != null) myAccount.setBirthday(buff);
+
+            buff = jsonObject.getString("email");
+            if (buff != null) myAccount.setEmail(buff);
+            
+            buff = jsonObject.getString("school");
+            if (buff != null) myAccount.setSchool(buff);
+
+            buff = jsonObject.getString("signature");
+            if (buff != null) myAccount.setSignature(buff);
+            
+            buff = jsonObject.getString("headimage");
+            if (buff != null) myAccount.setHeadimage(buff);
+
+            myAccount.save(false);
 
             return true;
         }
