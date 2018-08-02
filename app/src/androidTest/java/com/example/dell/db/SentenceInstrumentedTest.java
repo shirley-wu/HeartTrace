@@ -65,7 +65,7 @@ public class SentenceInstrumentedTest {
         sentence.setHtmlText("<p>" + originText + "</p>");
         sentence.setDate();
         sentence.setSentencebook(sentencebook);
-        sentence.setIsLike(true);
+        sentence.setIslike(true);
 
         // create
         sentence.insert(databaseHelper);
@@ -77,7 +77,7 @@ public class SentenceInstrumentedTest {
         assertEquals(sentence.getDate(), sentenceList.get(0).getDate());
         assertEquals(originText, sentenceList.get(0).getText());
         assertEquals("<p>" + originText + "</p>", sentenceList.get(0).getHtmlText());
-        assertEquals(true, sentenceList.get(0).getIsLike());
+        assertEquals(true, sentenceList.get(0).getIslike());
         assertEquals(0, sentenceList.get(0).getStatus());
 
         // update

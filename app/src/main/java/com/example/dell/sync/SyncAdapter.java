@@ -18,7 +18,14 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.example.dell.auth.MyAccount;
 import com.example.dell.auth.ServerAuthenticator;
 import com.example.dell.db.DatabaseHelper;
+import com.example.dell.db.Diary;
+import com.example.dell.db.DiaryLabel;
+import com.example.dell.db.Diarybook;
+import com.example.dell.db.Label;
 import com.example.dell.db.Picture;
+import com.example.dell.db.Sentence;
+import com.example.dell.db.SentenceLabel;
+import com.example.dell.db.Sentencebook;
 import com.example.dell.diary.DiaryWriteActivity;
 import com.example.dell.server.ServerAccessor;
 import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
@@ -123,14 +130,23 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     }
 
     public boolean sync(DatabaseHelper databaseHelper) {
+        final Class[] syncTableList = {
+                Diary.class,
+                Diarybook.class,
+                DiaryLabel.class,
+                Label.class,
+                Sentence.class,
+                Sentencebook.class,
+                SentenceLabel.class
+        };
+
         try {
-            Class[] tableList = databaseHelper.getTableList();
             Map<Class, List> classListMap = new Hashtable<>();
 
             StringBuilder dataBuilder = new StringBuilder("{");
 
             for(int i=0; ; ) {
-                Class clazz = tableList[i];
+                Class clazz = syncTableList[i];
                 QueryBuilder queryBuilder = databaseHelper.getDaoAccess(clazz).queryBuilder();
                 queryBuilder.where().lt("status", 9);
                 List list = queryBuilder.query();
@@ -141,7 +157,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                         clazz.getSimpleName() + "List\":" + JSON.toJSONString(list, SerializerFeature.DisableCircularReferenceDetect)
                 );
                 i++;
-                if (i < tableList.length) dataBuilder.append(",");
+                if (i < syncTableList.length) dataBuilder.append(",");
                 else break;
             }
 
@@ -172,7 +188,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
             // 获取json object，进行处理
             JSONObject jsonObject = JSON.parseObject(response);
-            for(Class clazz : tableList) {
+            for(Class clazz : syncTableList) {
                 Log.d(TAG, "sync: clazz = " + clazz);
 
                 // 获得需要的Dao

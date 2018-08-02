@@ -111,11 +111,11 @@ public class Sentence implements Serializable
         Log.d(TAG, "setDate: dangerous call!, set into " + date.toString());
     }
 
-    public boolean getIsLike() {
+    public boolean getIslike() {
         return islike;
     }
 
-    public void setIsLike(boolean islike) {
+    public void setIslike(boolean islike) {
         this.islike = islike;
     }
 

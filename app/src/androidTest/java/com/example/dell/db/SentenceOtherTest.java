@@ -202,7 +202,7 @@ public class SentenceOtherTest {
             sentence.setDate();
             sentence.setSentencebook(sentencebook);
             sentence.setText("hello " + i);
-            sentence.setIsLike(i % 2 == 0);
+            sentence.setIslike(i % 2 == 0);
             sentenceList.add(sentence);
             sentence.insert(databaseHelper);
         }

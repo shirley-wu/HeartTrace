@@ -32,7 +32,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     // name of the database file for your application -- change to something appropriate for your app
     private static final String DATABASE_NAME = "heartTrace.db";
     // any time you make changes to your database objects, you may have to increase the database version
-    private static final int DATABASE_VERSION = 16;
+    private static final int DATABASE_VERSION = 17;
 
     private static final Class[] tableList = {
             Diary.class,
@@ -42,6 +42,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             Sentence.class,
             Sentencebook.class,
             SentenceLabel.class,
+            Picture.class
             // SearchHistory.class,
     };
 
@@ -84,18 +85,17 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
      * Don't need it by now.
      */
     public void onUpgrade(SQLiteDatabase db, ConnectionSource connectionSource, int oldVersion, int newVersion) {
-        try {
-            Log.i(DatabaseHelper.class.getName(), "onUpgrade");
-            for(Class clazz : tableList) {
+        Log.i(DatabaseHelper.class.getName(), "onUpgrade");
+        for(Class clazz : tableList) {
+            try {
                 TableUtils.dropTable(connectionSource, clazz, true);
                 Log.d(TAG, "onUpgrade: drop table " + clazz.getName());
+            } catch (SQLException e) {
+                Log.e(TAG, "onUpgrade: ", e);
             }
-            // after we drop the old databases, we create the new ones
-            onCreate(db, connectionSource);
-        } catch (SQLException e) {
-            Log.e(DatabaseHelper.class.getName(), "Can't drop databases", e);
-            throw new RuntimeException(e);
         }
+        // after we drop the old databases, we create the new ones
+        onCreate(db, connectionSource);
     }
 
     protected String getPassword() {
