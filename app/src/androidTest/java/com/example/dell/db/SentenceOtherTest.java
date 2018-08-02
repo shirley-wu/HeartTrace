@@ -191,6 +191,8 @@ public class SentenceOtherTest {
             assertEquals(-1, dl.getStatus());
             Log.d(TAG, "testGetAllLabel: sentencelabel modified after deleting = " + dl.getModified());
         }
+
+        assertEquals(0, sentence.getAllLabel(databaseHelper).size());
     }
 
     @Test
@@ -214,5 +216,7 @@ public class SentenceOtherTest {
         for(final Sentence d : sentenceList) {
             d.delete(databaseHelper);
         }
+        l = Sentence.getAll(databaseHelper, false);
+        assertEquals(0, l.size());
     }
 }

@@ -15,5 +15,5 @@ public class PictureTest {
         Picture picture = new Picture("img_1340156180471.jpg");
         assertEquals(1340156180471L, picture.getId());
     }
-    
+
 }
