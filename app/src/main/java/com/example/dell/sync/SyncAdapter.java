@@ -74,6 +74,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     public SyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
         mContext = context;
+        Log.d(TAG, "SyncAdapter: package name = " + context.getApplicationContext().getPackageName());
         sharedPreferences = mContext.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
     }
 
