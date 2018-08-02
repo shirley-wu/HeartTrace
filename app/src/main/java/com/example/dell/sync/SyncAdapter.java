@@ -41,6 +41,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
@@ -287,6 +288,9 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             Log.d(TAG, "syncUser: content = " + content);
             pairs.add(new BasicNameValuePair("content", content));
 
+            httpPost.setHeader(new BasicHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8"));
+            httpPost.setHeader(new BasicHeader("Accept", "text/plain; charset=utf-8"));
+
             HttpEntity requestEntity = new UrlEncodedFormEntity(pairs, ENCODING);
             Log.d(TAG, "postSyncData: request entity = " + EntityUtils.toString(requestEntity, ENCODING));
             httpPost.setEntity(requestEntity);
@@ -385,6 +389,9 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         pairs.add(new BasicNameValuePair("anchor", preAnchor.toString()));
 
         try {
+            httpPost.setHeader(new BasicHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8"));
+            httpPost.setHeader(new BasicHeader("Accept", "text/plain; charset=utf-8"));
+
             HttpEntity requestEntity = new UrlEncodedFormEntity(pairs, ENCODING);
             Log.d(TAG, "postSyncData: request entity = " + EntityUtils.toString(requestEntity, ENCODING));
             httpPost.setEntity(requestEntity);
