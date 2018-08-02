@@ -44,7 +44,7 @@ public class ServerAuthenticatorTest extends InstrumentationTestCase {
     public void testVerify() {
         Context context = InstrumentationRegistry.getTargetContext();
         MyAccount myAccount = MyAccount.get(context);
-        boolean verified = ServerAuthenticator.veriy(myAccount.getName(), myAccount.getToken());
+        boolean verified = ServerAuthenticator.veriy(myAccount.getUsername(), myAccount.getToken());
         Log.d(TAG, "testVerify: verified = " + verified);
     }
 

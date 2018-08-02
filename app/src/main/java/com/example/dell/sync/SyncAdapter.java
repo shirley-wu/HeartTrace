@@ -117,7 +117,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                 myAccount.setPassword(null);
                 myAccount.setToken(null);
                 myAccount.save();
-                // TODO: return ;
+                return ;
             }
         }
 
@@ -262,7 +262,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     public boolean syncUser(DatabaseHelper databaseHelper) {
         MyAccount myAccount = MyAccount.get(mContext);
         if (myAccount == null) return false;
-        // TODO: if (myAccount.getModified() < preAnchor) return true;
+        if (myAccount.getModified() < preAnchor) return true;
         try {
             HttpClient httpClient = new DefaultHttpClient();
 
