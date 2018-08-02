@@ -64,6 +64,8 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     private static final String TAG = "SyncAdapter";
 
     private static final String PREFERENCE_NAME = "SYNC ANCHOR";
+    
+    private static final String ENCODING = "UTF-8";
 
     private Context mContext;
 
@@ -187,7 +189,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             int responseCode = httpResponse.getStatusLine().getStatusCode();
             Log.d(TAG, "sync: response code = " + responseCode);
             HttpEntity entity = httpResponse.getEntity();
-            String response = EntityUtils.toString(entity, "utf-8");
+            String response = EntityUtils.toString(entity, ENCODING);
             Log.d(TAG, "sync: response = " + response);
 
             Header[] headers = httpResponse.getHeaders("anchor");
@@ -285,8 +287,8 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             Log.d(TAG, "syncUser: content = " + content);
             pairs.add(new BasicNameValuePair("content", content));
 
-            HttpEntity requestEntity = new UrlEncodedFormEntity(pairs);
-            Log.d(TAG, "postSyncData: request entity = " + EntityUtils.toString(requestEntity, "utf-8"));
+            HttpEntity requestEntity = new UrlEncodedFormEntity(pairs, ENCODING);
+            Log.d(TAG, "postSyncData: request entity = " + EntityUtils.toString(requestEntity, ENCODING));
             httpPost.setEntity(requestEntity);
 
             HttpResponse httpResponse = httpClient.execute(httpPost);
@@ -295,7 +297,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             Log.d(TAG, "syncUser: response code = " + responseCode);
 
             HttpEntity httpEntity = httpResponse.getEntity();
-            String response = EntityUtils.toString(httpEntity, "utf-8");
+            String response = EntityUtils.toString(httpEntity, ENCODING);
             Log.d(TAG, "syncUser: response = " + response);
 
             if (responseCode != 200) return false;
@@ -383,8 +385,8 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         pairs.add(new BasicNameValuePair("anchor", preAnchor.toString()));
 
         try {
-            HttpEntity requestEntity = new UrlEncodedFormEntity(pairs);
-            Log.d(TAG, "postSyncData: request entity = " + EntityUtils.toString(requestEntity, "utf-8"));
+            HttpEntity requestEntity = new UrlEncodedFormEntity(pairs, ENCODING);
+            Log.d(TAG, "postSyncData: request entity = " + EntityUtils.toString(requestEntity, ENCODING));
             httpPost.setEntity(requestEntity);
 
             HttpResponse httpResponse = httpClient.execute(httpPost);
