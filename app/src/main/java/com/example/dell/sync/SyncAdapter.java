@@ -154,7 +154,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                 classListMap.put(clazz, list);
 
                 dataBuilder.append(
-                        clazz.getSimpleName() + "List\":" + JSON.toJSONString(list, SerializerFeature.DisableCircularReferenceDetect)
+                        "\"" + clazz.getSimpleName() + "List\":" + JSON.toJSONString(list, SerializerFeature.DisableCircularReferenceDetect)
                 );
                 i++;
                 if (i < syncTableList.length) dataBuilder.append(",");
