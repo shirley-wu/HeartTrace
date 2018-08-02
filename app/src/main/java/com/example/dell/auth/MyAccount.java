@@ -61,7 +61,7 @@ public class MyAccount {
 
     private String password;
 
-    private long modified = 0;
+    private long modified;
 
     private MyAccount() {
 
@@ -172,6 +172,8 @@ public class MyAccount {
     }
 
     public boolean save(boolean setModified) {
+        Log.d(TAG, "save: setModified = " + setModified);
+
         SharedPreferences.Editor editor = preferences.edit();
 
         if (setModified) modified = System.currentTimeMillis();
