@@ -4,15 +4,20 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.util.Base64;
 import android.util.Log;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 
 /**
@@ -124,5 +129,47 @@ public class Picture {
     public Bitmap getBitmap(Context context) {
         String imgPath = getParentPath(context) + getFileName();
         return BitmapFactory.decodeFile(imgPath);
+    }
+
+    public String readBase64(Context context, DatabaseHelper databaseHelper) {
+        try {
+            String filePath = getParentPath(context) + getFileName();
+
+            File file = new File(filePath);
+            InputStream inputStream = new FileInputStream(file);
+
+            byte[] data = new byte[inputStream.available()];
+            inputStream.read(data);
+            inputStream.close();
+
+            return Base64.encodeToString(data, Base64.DEFAULT);
+        }
+        catch (Exception e) {
+            Log.e(TAG, "readBase64: ", e);
+            return null;
+        }
+    }
+
+    public boolean writeBase64(Context context, String content) {
+        try {
+            String filePath = getParentPath(context) + getFileName();
+
+            File file = new File(filePath);
+            if (!file.exists()) {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+            }
+
+            FileOutputStream outputStream = new FileOutputStream(file);
+            byte[] data = Base64.decode(content, Base64.DEFAULT);
+            outputStream.write(data);
+            outputStream.close();
+
+            return true;
+        }
+        catch (Exception e) {
+            Log.e(TAG, "writeBase64: ", e);
+            return false;
+        }
     }
 }
