@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                                 String msg = bundle.getString("msg");
                                 // success表示操作成功与否；msg表示服务器返回信息
                                 if (success) {
-                                    myAccount.setName(name);
+                                    myAccount.setUsername(name);
                                     myAccount.setToken(bundle.getString("token"));
                                     if(myAccount.getNickname() == null){
                                         myAccount.setNickname(name);
@@ -131,8 +131,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        if(myAccount.getName() != null){
-            username.setText(myAccount.getName());
+        if(myAccount.getUsername() != null){
+            username.setText(myAccount.getUsername());
             if(myAccount.getIsRemember()){
                 rememberPw.setChecked(true);
                 if(myAccount.getPassword() != null){
@@ -159,7 +159,7 @@ public class LoginActivity extends AppCompatActivity {
         d_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myAccount.setName("测试用户");
+                myAccount.setUsername("测试用户");
                 if(myAccount.getNickname() == null) {
                     myAccount.setNickname("测试用户");
                 }

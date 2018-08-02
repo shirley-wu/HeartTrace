@@ -27,7 +27,7 @@ public class MyAccount {
 
     private static final String TAG = "MyAccount";
 
-    private static final String PREFERENCE_NAME = "MyAccountPreference";
+    private static final String PREFERENCE_USERNAME = "MyAccountPreference";
 
     private static MyAccount myAccount = null;
 
@@ -37,7 +37,7 @@ public class MyAccount {
 
     private static String packageName = null;
 
-    private String name;
+    private String username;
 
     private String token;
 
@@ -67,12 +67,12 @@ public class MyAccount {
 
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
     public void setToken(String token) {
@@ -173,7 +173,7 @@ public class MyAccount {
         modified = System.currentTimeMillis();
         editor.putString("modified", PasswdTool.desEncrypt("" + modified, key));
 
-        if (name != null) editor.putString("name", PasswdTool.desEncrypt(name, key));
+        if (username != null) editor.putString("username", PasswdTool.desEncrypt(username, key));
         if (token != null) editor.putString("token", PasswdTool.desEncrypt(token, key));
         if (nickname != null) editor.putString("nickname", PasswdTool.desEncrypt(nickname, key));
         if (gender != null) editor.putString("gender", PasswdTool.desEncrypt(gender, key));
@@ -198,7 +198,7 @@ public class MyAccount {
 
             key = PasswdWorker.getPasswd(context);
 
-            preferences = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+            preferences = context.getSharedPreferences(PREFERENCE_USERNAME, Context.MODE_PRIVATE);
 
             myAccount   = new MyAccount();
 
@@ -211,8 +211,8 @@ public class MyAccount {
                 myAccount.modified = Long.parseLong(modifiedDecrypted);
             }
 
-            String name = preferences.getString("name", null);
-            myAccount.name = (name == null) ? null : PasswdTool.desDecrypt(name, key);
+            String username = preferences.getString("username", null);
+            myAccount.username = (username == null) ? null : PasswdTool.desDecrypt(username, key);
 
             String token = preferences.getString("token", null);
             myAccount.token = (token == null) ? null : PasswdTool.desDecrypt(token, key);

@@ -15,6 +15,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson.serializer.SimplePropertyPreFilter;
 import com.example.dell.auth.MyAccount;
 import com.example.dell.auth.ServerAuthenticator;
 import com.example.dell.db.DatabaseHelper;
@@ -66,7 +67,9 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
     private Context mContext;
 
-    private SharedPreferences sharedPreferences;
+    private Long preAnchor = null;
+
+    private Long afterAnchor = null;
 
     /**
      * Set up the sync adapter
@@ -75,7 +78,6 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         super(context, autoInitialize);
         mContext = context;
         Log.d(TAG, "SyncAdapter: package name = " + context.getApplicationContext().getPackageName());
-        sharedPreferences = mContext.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
     }
 
     /**
@@ -102,11 +104,11 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             return ;
         }
 
-        boolean verified = ServerAuthenticator.veriy(myAccount.getName(), myAccount.getToken());
+        boolean verified = ServerAuthenticator.veriy(myAccount.getUsername(), myAccount.getToken());
         Log.d(TAG, "onPerformSync: verified = " + verified);
         if (!verified) {
             Bundle bundle = new Bundle();
-            boolean status = ServerAuthenticator.signIn(myAccount.getName(), myAccount.getPassword(), bundle);
+            boolean status = ServerAuthenticator.signIn(myAccount.getUsername(), myAccount.getPassword(), bundle);
             if (status && bundle.getBoolean("success")) {
                 myAccount.setToken(bundle.getString("token"));
                 myAccount.save();
@@ -115,15 +117,28 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                 myAccount.setPassword(null);
                 myAccount.setToken(null);
                 myAccount.save();
-                return ;
+                // TODO: return ;
             }
         }
 
-        boolean status;
-        status = sync(helper);
-        Log.d(TAG, "onPerformSync: 同步数据库 status = " + status);
-        status = syncPic(helper);
-        Log.d(TAG, "onPerformSync: 同步图片 status = " + status);
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+        preAnchor = sharedPreferences.getLong("anchor", -1);
+        Log.d(TAG, "postSyncData: preAnchor = " + preAnchor);
+
+        boolean status1, status2, status3;
+        status1 = sync(helper);
+        Log.d(TAG, "onPerformSync: 同步数据库 status = " + status1);
+        status2 = syncPic(helper);
+        Log.d(TAG, "onPerformSync: 同步图片 status = " + status2);
+        status3 = syncUser(helper);
+        Log.d(TAG, "onPerformSync: 同步用户 status = " + status3);
+
+        if (status1 && status2 && status3 && afterAnchor != null) {
+            Log.d(TAG, "onPerformSync: afterAnchor = " + afterAnchor);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putLong("anchor", afterAnchor);
+            editor.commit();
+        }
 
         OpenHelperManager.releaseHelper();
 
@@ -171,19 +186,18 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
             int responseCode = httpResponse.getStatusLine().getStatusCode();
             Log.d(TAG, "sync: response code = " + responseCode);
-
-            Header[] headers = httpResponse.getHeaders("anchor");
-            if(headers.length != 1) return false;
-
-            long anchor = Long.parseLong(headers[0].getValue());
-            Log.d(TAG, "sync: anchor = " + anchor);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putLong("anchor", anchor);
-            editor.commit();
-
             HttpEntity entity = httpResponse.getEntity();
             String response = EntityUtils.toString(entity, "utf-8");
             Log.d(TAG, "sync: response = " + response);
+
+            Header[] headers = httpResponse.getHeaders("anchor");
+            if(headers.length != 1) {
+                Log.d(TAG, "sync: headers error");
+                return false;
+            }
+
+            afterAnchor = Long.parseLong(headers[0].getValue());
+            Log.d(TAG, "sync: returned anchor = " + afterAnchor);
 
             if (responseCode != 200) return false;
 
@@ -245,12 +259,49 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         }
     }
 
+    public boolean syncUser(DatabaseHelper databaseHelper) {
+        MyAccount myAccount = MyAccount.get(mContext);
+        if (myAccount == null) return false;
+        // TODO: if (myAccount.getModified() < preAnchor) return true;
+        try {
+            HttpClient httpClient = new DefaultHttpClient();
+
+            String url = ServerAccessor.getServerIp() + ":8080/HeartTrace_Server_war/Servlet.SyncUser";
+            Log.d(TAG, "syncUser: url " + url);
+            HttpPost httpPost = new HttpPost(url);
+
+            ArrayList<NameValuePair> pairs = new ArrayList<>();
+
+            pairs.add(new BasicNameValuePair("modelnum", Build.MODEL));
+            pairs.add(new BasicNameValuePair("username", myAccount.getUsername()));
+            pairs.add(new BasicNameValuePair("token", myAccount.getToken()));
+
+            SimplePropertyPreFilter filter = new SimplePropertyPreFilter(MyAccount.class,
+                    "username", "password", "modified",
+                    "nickname", "gender", "birthday", "email",
+                    "school", "signature", "headimage"
+            );
+            String content = JSON.toJSONString(myAccount, filter);
+            Log.d(TAG, "syncUser: content = " + content);
+            pairs.add(new BasicNameValuePair("content", content));
+
+            HttpEntity requestEntity = new UrlEncodedFormEntity(pairs);
+            Log.d(TAG, "postSyncData: request entity = " + EntityUtils.toString(requestEntity, "utf-8"));
+            httpPost.setEntity(requestEntity);
+
+            // HttpResponse httpResponse = httpClient.execute(httpPost);
+
+            return true;
+        }
+        catch (Exception e) {
+            return false;
+        }
+    }
+
     public boolean syncPic(DatabaseHelper databaseHelper) {
         try {
-            long anchor = sharedPreferences.getLong("anchor", -1);
-
             QueryBuilder<Picture, Long> queryBuilder = databaseHelper.getDaoAccess(Picture.class).queryBuilder();
-            queryBuilder.where().gt("modified", anchor);
+            queryBuilder.where().gt("modified", preAnchor);
             List<Picture> list = queryBuilder.query();
 
             for(Picture picture : list) {
@@ -280,14 +331,10 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         pairs.add(new BasicNameValuePair("modelnum", Build.MODEL));
 
         MyAccount myAccount = MyAccount.get(mContext);
-        pairs.add(new BasicNameValuePair("username", myAccount.getName()));
+        pairs.add(new BasicNameValuePair("username", myAccount.getUsername()));
         pairs.add(new BasicNameValuePair("token", myAccount.getToken()));
-
         pairs.add(new BasicNameValuePair("content", sendData));
-
-        Long anchor = sharedPreferences.getLong("anchor", -1);
-        Log.d(TAG, "postSyncData: anchor = " + anchor);
-        pairs.add(new BasicNameValuePair("anchor", anchor.toString()));
+        pairs.add(new BasicNameValuePair("anchor", preAnchor.toString()));
 
         try {
             HttpEntity requestEntity = new UrlEncodedFormEntity(pairs);
