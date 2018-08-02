@@ -72,7 +72,7 @@ public class PersonalInformationActivity extends AppCompatActivity implements Vi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_information);
-        myAccount = MyAccount.get(getApplicationContext());
+        myAccount = new MyAccount(getApplicationContext());
 
         setView();
         setListener();
