@@ -35,7 +35,7 @@ public class PasswdTool {
 
     static public String desEncrypt(String data, String key) {
         try {
-            // Log.d(TAG, "desEncrypt: data = " + data + " key = " + key);
+            Log.d(TAG, "desEncrypt: data = " + data + " key = " + key);
 
             SecureRandom random = new SecureRandom();
             DESKeySpec desKey = new DESKeySpec(key.getBytes("UTF-8"));
@@ -46,8 +46,9 @@ public class PasswdTool {
             cipher.init(Cipher.ENCRYPT_MODE, securekey, random);
 
             byte[] result = cipher.doFinal(data.getBytes("UTF-8"));
-            // Log.d(TAG, "desEncrypt: result = " + result);
-            return Base64.encodeToString(result, Base64.DEFAULT);
+            String resultBase64 = Base64.encodeToString(result, Base64.DEFAULT);
+            Log.d(TAG, "desEncrypt: result = " + resultBase64);
+            return resultBase64;
         }
         catch (Exception e) {
             Log.e(TAG, "encrypt: ", e);
@@ -57,7 +58,7 @@ public class PasswdTool {
 
     static public String desDecrypt(String result, String key) {
         try {
-            // Log.d(TAG, "desEncrypt: result = " + result + " key = " + key);
+            Log.d(TAG, "desEncrypt: result = " + result + " key = " + key);
 
             SecureRandom random = new SecureRandom();
             DESKeySpec desKey = new DESKeySpec(key.getBytes("UTF-8"));
@@ -68,8 +69,9 @@ public class PasswdTool {
             cipher.init(Cipher.DECRYPT_MODE, securekey, random);
 
             byte[] data = cipher.doFinal(Base64.decode(result, Base64.DEFAULT));
-            // Log.d(TAG, "desDecrypt: data = " + data);
-            return new String(data, "UTF-8");
+            String dataUtf = new String(data, "UTF-8");
+            Log.d(TAG, "desDecrypt: data = " + dataUtf);
+            return dataUtf;
         } catch (Exception e) {
             Log.e(TAG, "desDescrypt: ", e);
         }

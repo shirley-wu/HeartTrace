@@ -188,6 +188,7 @@ public class MyAccount {
         if (school != null) editor.putString("school", PasswdTool.desEncrypt(school, key));
         if (signature != null) editor.putString("signature", PasswdTool.desEncrypt(signature, key));
         if (headimage != null) editor.putString("headimage", PasswdTool.desEncrypt(headimage, key));
+        Log.d(TAG, "save: signature = " + signature);
 
         editor.putString("isRemember", PasswdTool.desEncrypt("" + isRemember, key));
 
@@ -199,7 +200,9 @@ public class MyAccount {
     }
 
     static public MyAccount get(Context context) {
+        Log.d(TAG, "get: packagename = " + packageName);
         if(packageName == null) {
+            Log.d(TAG, "get: inside");
             packageName = context.getApplicationContext().getPackageName();
 
             key = PasswdWorker.getPasswd(context);
@@ -258,7 +261,18 @@ public class MyAccount {
         else if(!packageName.equals(context.getApplicationContext().getPackageName())) {
             return null;
         }
+        Log.d(TAG, "get: context = " + context);
+        Log.d(TAG, "get: myAccount.signature = " + myAccount.signature);
         return myAccount;
+    }
+
+    static public void destroy() {
+        // in case memory leak
+        Log.d(TAG, "destroy: clear");
+        myAccount = null;
+        preferences = null;
+        key = null;
+        packageName = null;
     }
 
 }

@@ -96,6 +96,11 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         mContext = context;
     }
 
+    private void cleanAfterSync() {
+        OpenHelperManager.releaseHelper();
+        MyAccount.destroy();
+    }
+
     public void onPerformSync(Account account, Bundle extras, String authority, ContentProviderClient provider, SyncResult syncResult) {
         Log.d(TAG, "onPerformSync: begin");
 
@@ -120,6 +125,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                 myAccount.setPassword(null);
                 myAccount.setToken(null);
                 myAccount.save(true);
+                cleanAfterSync();
                 return ;
             }
         }
@@ -143,7 +149,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             editor.commit();
         }
 
-        OpenHelperManager.releaseHelper();
+        cleanAfterSync();
 
         Log.d(TAG, "onPerformSync: end");
     }
@@ -265,7 +271,9 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     public boolean syncUser(DatabaseHelper databaseHelper) {
         MyAccount myAccount = MyAccount.get(mContext);
         if (myAccount == null) return false;
-        if (myAccount.getModified() < preAnchor) return true;
+        if (myAccount.getModified() < preAnchor) {
+            return true;
+        }
         try {
             HttpClient httpClient = new DefaultHttpClient();
 
@@ -341,11 +349,13 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             buff = jsonObject.getString("headimage");
             if (buff != null) myAccount.setHeadimage(buff);
 
-            myAccount.save(false);
+            boolean status = myAccount.save(false);
+            Log.d(TAG, "syncUser: save status = " + status);
 
             return true;
         }
         catch (Exception e) {
+            Log.e(TAG, "syncUser: ", e);
             return false;
         }
     }
