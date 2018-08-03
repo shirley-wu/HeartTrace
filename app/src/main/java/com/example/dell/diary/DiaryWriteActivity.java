@@ -302,8 +302,35 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                         startActivity(intent3);
                         break;
                     case R.id.delete_all:
-                        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-                        helper.clearAll();
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(DiaryWriteActivity.this);
+                        dialog.setTitle("提示");
+                        dialog.setMessage("你确定要删除所有数据吗？");
+                        dialog.setCancelable(true);
+
+                        dialog.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+                                helper.clearAll();
+                                emptyImage.setVisibility(View.VISIBLE);
+                                font_set.setVisibility(View.INVISIBLE);
+                                insert_image.setVisibility(View.INVISIBLE);
+                                confirm.setVisibility(View.INVISIBLE);
+                                addDiary.setVisibility(View.INVISIBLE);
+                                enterBottle.setVisibility(View.INVISIBLE);
+                                like.setVisibility(View.INVISIBLE);
+                                edit.setVisibility(View.INVISIBLE);
+                                diary_write.setText("");
+                                diaryDate.setText("");
+                                diaryWeekday.setText("");
+                                getLabelsOfDiary(new Diary(), helper);
+                            }
+                        });
+                        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        });
+                        dialog.show();
+
                         break;
                     case R.id.sync_setting:
                         Intent intent4 = new Intent(DiaryWriteActivity.this, SyncActivity.class);
@@ -361,6 +388,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             }
         }
     }
+
     public boolean dispatchTouchEvent(MotionEvent ev){
         //让GestureDetector响应触碰事件
         mGestureDetector.onTouchEvent(ev);
@@ -1509,7 +1537,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                                 diary_write.setText(Html.fromHtml(diary.getHtmlText()));
                                 getImage(diary.getText());
                                 setTextFormmat(diary);
-
 
                                 //clear color span
                                 ForegroundColorSpan[] colorSpans= diary_write.getText().getSpans(0, diary_write.length(), ForegroundColorSpan.class);
