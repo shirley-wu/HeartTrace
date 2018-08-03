@@ -455,10 +455,6 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
         return true;
     }
 
-
-
-
-
     protected Dialog onCreateDialog(int id) {
         Dialog dialog = null;
         switch(id) {

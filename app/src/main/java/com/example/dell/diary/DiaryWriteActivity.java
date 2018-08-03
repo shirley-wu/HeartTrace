@@ -324,6 +324,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                                 diaryDate.setText("");
                                 diaryWeekday.setText("");
                                 getLabelsOfDiary(new Diary(), helper);
+
+                                Intent intent = new Intent(DiaryWriteActivity.this, LoginActivity.class);
+                                startActivity(intent);
                             }
                         });
                         dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -1515,7 +1518,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                                 isDeleting = true;
                                 diary_write.setText(Html.fromHtml(diary.getHtmlText()));
                                 getImage(diary.getText());
-
 
                                 //clear color span
                                 ForegroundColorSpan[] colorSpans= diary_write.getText().getSpans(0, diary_write.length(), ForegroundColorSpan.class);
