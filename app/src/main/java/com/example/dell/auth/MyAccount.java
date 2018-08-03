@@ -169,6 +169,14 @@ public class MyAccount {
         setting.setAutoLogin(autoLogin);
     }
 
+    public void setAnchor(long anchor) {
+        setting.setAnchor(anchor);
+    }
+
+    public long getAnchor() {
+        return setting.getAnchor();
+    }
+
     public User getUser() {
         return user;
     }

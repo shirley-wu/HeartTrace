@@ -25,6 +25,9 @@ public class Setting {
     @DatabaseField
     private boolean autoLogin;
 
+    @DatabaseField
+    private long anchor = -1;
+
     public String getPassword() {
         return password;
     }
@@ -55,5 +58,13 @@ public class Setting {
 
     public void setAutoLogin(boolean autoLogin) {
         this.autoLogin = autoLogin;
+    }
+
+    public long getAnchor() {
+        return anchor;
+    }
+
+    public void setAnchor(long anchor) {
+        this.anchor = anchor;
     }
 }
