@@ -249,7 +249,7 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.menu_white);
         }
-        actionBar.setTitle("Little Note");
+        actionBar.setTitle("小纸条");
         setSupportActionBar(toolbar);
     }
 

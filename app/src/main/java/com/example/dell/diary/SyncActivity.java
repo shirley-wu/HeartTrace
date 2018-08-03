@@ -1,6 +1,7 @@
 package com.example.dell.diary;
 
 import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.content.ContentResolver;
 import android.content.PeriodicSync;
 import android.support.v7.app.ActionBar;
@@ -45,6 +46,7 @@ public class SyncActivity extends AppCompatActivity implements CompoundButton.On
     private CardView autoSettingCard;
     private LinearLayout autoLinear;
     private int period = 800;
+    private AccountManager accountManager;
 
 
     @Override
@@ -63,6 +65,14 @@ public class SyncActivity extends AppCompatActivity implements CompoundButton.On
         }
         actionBar.setTitle("同步设置");
         mAccount = new Account(name,ACCOUNT_TYPE);
+        accountManager = (AccountManager)SyncActivity.this.getSystemService(ACCOUNT_SERVICE);
+        if(accountManager.addAccountExplicitly(mAccount, null,null)){
+            Log.i("SyncAvtivity", "onCreate:account Create OK ");
+        }
+        else{
+            Log.i("SyncAvtivity", "onCreate:cannot create ");
+        }
+
         getSyncStatus();
         syncableT = findViewById(R.id.syncableText);
         syncEnableswitch = findViewById(R.id.syncable_switch);
