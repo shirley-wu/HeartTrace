@@ -261,9 +261,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     public boolean syncUser(DatabaseHelper databaseHelper) {
         MyAccount myAccount = new MyAccount(mContext);
         if (myAccount == null) return false;
-        if (myAccount.getModified() < preAnchor) {
-            return true;
-        }
+
         try {
             HttpClient httpClient = new DefaultHttpClient();
 
