@@ -7,18 +7,6 @@ import android.util.Log;
 import com.example.dell.passwd.PasswdTool;
 import com.example.dell.passwd.PasswdWorker;
 
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.spec.InvalidKeySpecException;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.DESKeySpec;
-
 /**
  * Created by wu-pc on 2018/7/11.
  */
@@ -29,13 +17,9 @@ public class MyAccount {
 
     private static final String PREFERENCE_USERNAME = "MyAccountPreference";
 
-    private static MyAccount myAccount = null;
+    private SharedPreferences preferences = null;
 
-    private static SharedPreferences preferences = null;
-
-    private static String key = null;
-
-    private static String packageName = null;
+    private String key = null;
 
     private String username;
 
@@ -63,8 +47,57 @@ public class MyAccount {
 
     private long modified;
 
-    private MyAccount() {
+    public MyAccount(Context context) {
+        key = PasswdWorker.getPasswd(context);
 
+        preferences = context.getSharedPreferences(PREFERENCE_USERNAME, Context.MODE_PRIVATE);
+
+        String modified = preferences.getString("modified", null);
+        if (modified == null) {
+            this.modified = -1;
+        }
+        else {
+            String modifiedDecrypted = PasswdTool.desDecrypt(modified, key);
+            this.modified = Long.parseLong(modifiedDecrypted);
+        }
+
+        String username = preferences.getString("username", null);
+        this.username = (username == null) ? null : PasswdTool.desDecrypt(username, key);
+
+        String token = preferences.getString("token", null);
+        this.token = (token == null) ? null : PasswdTool.desDecrypt(token, key);
+
+        String nickname = preferences.getString("nickname", null);
+        this.nickname = (nickname == null) ? null : PasswdTool.desDecrypt(nickname, key);
+
+        String gender = preferences.getString("gender", null);
+        this.gender = (gender == null) ? null : PasswdTool.desDecrypt(gender, key);
+
+        String birthday = preferences.getString("birthday", null);
+        this.birthday = (birthday == null) ? null : PasswdTool.desDecrypt(birthday, key);
+
+        String email = preferences.getString("email", null);
+        this.email = (email == null) ? null : PasswdTool.desDecrypt(email, key);
+
+        String school = preferences.getString("school", null);
+        this.school = (school == null) ? null : PasswdTool.desDecrypt(school, key);
+
+        String signature = preferences.getString("signature", null);
+        this.signature = (signature == null) ? null : PasswdTool.desDecrypt(signature, key);
+
+        String headimage = preferences.getString("headimage", null);
+        this.headimage = (headimage == null) ? null : PasswdTool.desDecrypt(headimage, key);
+
+        String password = preferences.getString("password", null);
+        this.password = (password == null) ? null : PasswdTool.desDecrypt(password, key);
+
+        String isRemember = preferences.getString("isRemember", null);
+        String isRememberDecrypted = (isRemember == null) ? null : PasswdTool.desDecrypt(isRemember, key);
+        this.isRemember = (isRememberDecrypted != null) && isRememberDecrypted.equals("true");
+
+        String autoLogin = preferences.getString("autoLogin", null);
+        String autoLoginDecrypted = (autoLogin == null) ? null : PasswdTool.desDecrypt(autoLogin, key);
+        this.autoLogin = (autoLoginDecrypted != null) && autoLoginDecrypted.equals("true");
     }
 
     public void setUsername(String username) {
@@ -167,10 +200,16 @@ public class MyAccount {
         return modified;
     }
 
-    public boolean save() {
+    public void setModified(long modified) {
+        this.modified = modified;
+    }
+
+    public boolean save(boolean setModified) {
+        Log.d(TAG, "save: setModified = " + setModified);
+
         SharedPreferences.Editor editor = preferences.edit();
 
-        modified = System.currentTimeMillis();
+        if (setModified) modified = System.currentTimeMillis();
         editor.putString("modified", PasswdTool.desEncrypt("" + modified, key));
 
         if (username != null) editor.putString("username", PasswdTool.desEncrypt(username, key));
@@ -182,6 +221,7 @@ public class MyAccount {
         if (school != null) editor.putString("school", PasswdTool.desEncrypt(school, key));
         if (signature != null) editor.putString("signature", PasswdTool.desEncrypt(signature, key));
         if (headimage != null) editor.putString("headimage", PasswdTool.desEncrypt(headimage, key));
+        // Log.d(TAG, "save: signature = " + signature);
 
         editor.putString("isRemember", PasswdTool.desEncrypt("" + isRemember, key));
 
@@ -190,69 +230,6 @@ public class MyAccount {
         if(password != null) editor.putString("password", PasswdTool.desEncrypt(password, key));
 
         return editor.commit();
-    }
-
-    static public MyAccount get(Context context) {
-        if(packageName == null) {
-            packageName = context.getApplicationContext().getPackageName();
-
-            key = PasswdWorker.getPasswd(context);
-
-            preferences = context.getSharedPreferences(PREFERENCE_USERNAME, Context.MODE_PRIVATE);
-
-            myAccount   = new MyAccount();
-
-            String modified = preferences.getString("modified", null);
-            if (modified == null) {
-                myAccount.modified = -1;
-            }
-            else {
-                String modifiedDecrypted = PasswdTool.desDecrypt(modified, key);
-                myAccount.modified = Long.parseLong(modifiedDecrypted);
-            }
-
-            String username = preferences.getString("username", null);
-            myAccount.username = (username == null) ? null : PasswdTool.desDecrypt(username, key);
-
-            String token = preferences.getString("token", null);
-            myAccount.token = (token == null) ? null : PasswdTool.desDecrypt(token, key);
-
-            String nickname = preferences.getString("nickname", null);
-            myAccount.nickname = (nickname == null) ? null : PasswdTool.desDecrypt(nickname, key);
-
-            String gender = preferences.getString("gender", null);
-            myAccount.gender = (gender == null) ? null : PasswdTool.desDecrypt(gender, key);
-
-            String birthday = preferences.getString("birthday", null);
-            myAccount.birthday = (birthday == null) ? null : PasswdTool.desDecrypt(birthday, key);
-
-            String email = preferences.getString("email", null);
-            myAccount.email = (email == null) ? null : PasswdTool.desDecrypt(email, key);
-
-            String school = preferences.getString("school", null);
-            myAccount.school = (school == null) ? null : PasswdTool.desDecrypt(school, key);
-
-            String signature = preferences.getString("signature", null);
-            myAccount.signature = (signature == null) ? null : PasswdTool.desDecrypt(signature, key);
-
-            String headimage = preferences.getString("headimage", null);
-            myAccount.headimage = (headimage == null) ? null : PasswdTool.desDecrypt(headimage, key);
-
-            String password = preferences.getString("password", null);
-            myAccount.password = (password == null) ? null : PasswdTool.desDecrypt(password, key);
-
-            String isRemember = preferences.getString("isRemember", null);
-            String isRememberDecrypted = (isRemember == null) ? null : PasswdTool.desDecrypt(isRemember, key);
-            myAccount.isRemember = (isRememberDecrypted != null) && isRememberDecrypted.equals("true");
-
-            String autoLogin = preferences.getString("autoLogin", null);
-            String autoLoginDecrypted = (autoLogin == null) ? null : PasswdTool.desDecrypt(autoLogin, key);
-            myAccount.autoLogin = (autoLoginDecrypted != null) && autoLoginDecrypted.equals("true");
-        }
-        else if(!packageName.equals(context.getApplicationContext().getPackageName())) {
-            return null;
-        }
-        return myAccount;
     }
 
 }

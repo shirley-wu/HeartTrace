@@ -41,6 +41,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
@@ -64,6 +65,8 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     private static final String TAG = "SyncAdapter";
 
     private static final String PREFERENCE_NAME = "SYNC ANCHOR";
+    
+    private static final String ENCODING = "UTF-8";
 
     private Context mContext;
 
@@ -98,7 +101,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
         DatabaseHelper helper = OpenHelperManager.getHelper(mContext, DatabaseHelper.class);
 
-        MyAccount myAccount = MyAccount.get(mContext);
+        MyAccount myAccount = new MyAccount(mContext);
         if (myAccount == null) {
             Log.e(TAG, "onPerformSync: cannot get my account");
             return ;
@@ -111,13 +114,13 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             boolean status = ServerAuthenticator.signIn(myAccount.getUsername(), myAccount.getPassword(), bundle);
             if (status && bundle.getBoolean("success")) {
                 myAccount.setToken(bundle.getString("token"));
-                myAccount.save();
+                myAccount.save(true);
             }
             else {
                 myAccount.setPassword(null);
                 myAccount.setToken(null);
-                myAccount.save();
-                // TODO: return ;
+                myAccount.save(true);
+                return ;
             }
         }
 
@@ -126,12 +129,12 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         Log.d(TAG, "postSyncData: preAnchor = " + preAnchor);
 
         boolean status1, status2, status3;
-        status1 = sync(helper);
-        Log.d(TAG, "onPerformSync: 同步数据库 status = " + status1);
-        status2 = syncPic(helper);
-        Log.d(TAG, "onPerformSync: 同步图片 status = " + status2);
-        status3 = syncUser(helper);
-        Log.d(TAG, "onPerformSync: 同步用户 status = " + status3);
+        status1 = syncUser(helper);
+        Log.d(TAG, "onPerformSync: 同步用户 status = " + status1);
+        status2 = sync(helper);
+        Log.d(TAG, "onPerformSync: 同步数据库 status = " + status2);
+        status3 = syncPic(helper);
+        Log.d(TAG, "onPerformSync: 同步图片 status = " + status3);
 
         if (status1 && status2 && status3 && afterAnchor != null) {
             Log.d(TAG, "onPerformSync: afterAnchor = " + afterAnchor);
@@ -139,8 +142,6 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             editor.putLong("anchor", afterAnchor);
             editor.commit();
         }
-
-        OpenHelperManager.releaseHelper();
 
         Log.d(TAG, "onPerformSync: end");
     }
@@ -187,7 +188,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             int responseCode = httpResponse.getStatusLine().getStatusCode();
             Log.d(TAG, "sync: response code = " + responseCode);
             HttpEntity entity = httpResponse.getEntity();
-            String response = EntityUtils.toString(entity, "utf-8");
+            String response = EntityUtils.toString(entity, ENCODING);
             Log.d(TAG, "sync: response = " + response);
 
             Header[] headers = httpResponse.getHeaders("anchor");
@@ -260,9 +261,11 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     }
 
     public boolean syncUser(DatabaseHelper databaseHelper) {
-        MyAccount myAccount = MyAccount.get(mContext);
+        MyAccount myAccount = new MyAccount(mContext);
         if (myAccount == null) return false;
-        // TODO: if (myAccount.getModified() < preAnchor) return true;
+        if (myAccount.getModified() < preAnchor) {
+            return true;
+        }
         try {
             HttpClient httpClient = new DefaultHttpClient();
 
@@ -285,15 +288,66 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             Log.d(TAG, "syncUser: content = " + content);
             pairs.add(new BasicNameValuePair("content", content));
 
-            HttpEntity requestEntity = new UrlEncodedFormEntity(pairs);
-            Log.d(TAG, "postSyncData: request entity = " + EntityUtils.toString(requestEntity, "utf-8"));
+            httpPost.setHeader(new BasicHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8"));
+            httpPost.setHeader(new BasicHeader("Accept", "text/plain; charset=utf-8"));
+
+            HttpEntity requestEntity = new UrlEncodedFormEntity(pairs, ENCODING);
+            Log.d(TAG, "postSyncData: request entity = " + EntityUtils.toString(requestEntity, ENCODING));
             httpPost.setEntity(requestEntity);
 
-            // HttpResponse httpResponse = httpClient.execute(httpPost);
+            HttpResponse httpResponse = httpClient.execute(httpPost);
+
+            int responseCode = httpResponse.getStatusLine().getStatusCode();
+            Log.d(TAG, "syncUser: response code = " + responseCode);
+
+            HttpEntity httpEntity = httpResponse.getEntity();
+            String response = EntityUtils.toString(httpEntity, ENCODING);
+            Log.d(TAG, "syncUser: response = " + response);
+
+            if (responseCode != 200) return false;
+            JSONObject jsonObject = JSON.parseObject(response);
+            String buff;
+
+            buff = jsonObject.getString("modified");
+            long mo = Long.parseLong(buff);
+            if (mo == myAccount.getModified()) return true;
+
+            myAccount.setModified(mo);
+
+            buff = jsonObject.getString("username");
+            if (buff != null) myAccount.setUsername(buff);
+
+            buff = jsonObject.getString("password");
+            if (buff != null) myAccount.setPassword(buff);
+
+            buff = jsonObject.getString("nickname");
+            if (buff != null) myAccount.setNickname(buff);
+            
+            buff = jsonObject.getString("gender");
+            if (buff != null) myAccount.setGender(buff);
+
+            buff = jsonObject.getString("birthday");
+            if (buff != null) myAccount.setBirthday(buff);
+
+            buff = jsonObject.getString("email");
+            if (buff != null) myAccount.setEmail(buff);
+            
+            buff = jsonObject.getString("school");
+            if (buff != null) myAccount.setSchool(buff);
+
+            buff = jsonObject.getString("signature");
+            if (buff != null) myAccount.setSignature(buff);
+            
+            buff = jsonObject.getString("headimage");
+            if (buff != null) myAccount.setHeadimage(buff);
+
+            boolean status = myAccount.save(false);
+            Log.d(TAG, "syncUser: save status = " + status);
 
             return true;
         }
         catch (Exception e) {
+            Log.e(TAG, "syncUser: ", e);
             return false;
         }
     }
@@ -330,15 +384,18 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
         pairs.add(new BasicNameValuePair("modelnum", Build.MODEL));
 
-        MyAccount myAccount = MyAccount.get(mContext);
+        MyAccount myAccount = new MyAccount(mContext);
         pairs.add(new BasicNameValuePair("username", myAccount.getUsername()));
         pairs.add(new BasicNameValuePair("token", myAccount.getToken()));
         pairs.add(new BasicNameValuePair("content", sendData));
         pairs.add(new BasicNameValuePair("anchor", preAnchor.toString()));
 
         try {
-            HttpEntity requestEntity = new UrlEncodedFormEntity(pairs);
-            Log.d(TAG, "postSyncData: request entity = " + EntityUtils.toString(requestEntity, "utf-8"));
+            httpPost.setHeader(new BasicHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8"));
+            httpPost.setHeader(new BasicHeader("Accept", "text/plain; charset=utf-8"));
+
+            HttpEntity requestEntity = new UrlEncodedFormEntity(pairs, ENCODING);
+            Log.d(TAG, "postSyncData: request entity = " + EntityUtils.toString(requestEntity, ENCODING));
             httpPost.setEntity(requestEntity);
 
             HttpResponse httpResponse = httpClient.execute(httpPost);

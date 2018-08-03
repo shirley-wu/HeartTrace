@@ -1,23 +1,18 @@
 package com.example.dell.db;
 
 import android.content.Context;
-import android.provider.Telephony;
 import android.util.Log;
 
 import com.example.dell.passwd.PasswdWorker;
 import com.j256.ormlite.cipher.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
-import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import net.sqlcipher.database.SQLiteDatabase;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Hashtable;
-import java.util.List;
 import java.util.Map;
 
 /**

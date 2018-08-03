@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        myAccount = MyAccount.get(this);
+        myAccount = new MyAccount(this);
 
         bt_login = (Button) findViewById(R.id.btn_login);
         username_layout = (TextInputLayout) findViewById(R.id.username_wrapper);
@@ -99,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                                         myAccount.setPassword(null);
                                         myAccount.setAutoLogin(false);
                                     }
-                                    myAccount.save();
+                                    myAccount.save(false);
 
                                     Intent intent = new Intent(LoginActivity.this, DiaryWriteActivity.class);
                                     intent.putExtra("diary_origin", "welcome");

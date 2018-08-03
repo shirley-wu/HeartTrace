@@ -131,7 +131,7 @@ public class Picture {
         return BitmapFactory.decodeFile(imgPath);
     }
 
-    public String readBase64(Context context, DatabaseHelper databaseHelper) {
+    public String readBase64(Context context) {
         try {
             String filePath = getParentPath(context) + getFileName();
 
