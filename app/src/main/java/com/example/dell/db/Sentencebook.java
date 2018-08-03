@@ -28,7 +28,7 @@ public class Sentencebook implements Serializable {
     @DatabaseField(id = true, columnName = TAG)
     private long id;
 
-    @DatabaseField(unique = true, columnName = "sentencebookName", canBeNull = false)
+    @DatabaseField(columnName = "sentencebookName", canBeNull = false)
     private String sentencebookName;
 
     @DatabaseField
