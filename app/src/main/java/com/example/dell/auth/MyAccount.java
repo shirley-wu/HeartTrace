@@ -255,6 +255,7 @@ public class MyAccount {
         isRemember = false;
         autoLogin = false;
         boolean status = saveSetting();
+        Log.d(TAG, "clearSetting: status = " + status);
         return status;
     }
 

@@ -124,7 +124,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
         preAnchor = sharedPreferences.getLong("anchor", -1);
-        Log.d(TAG, "postSyncData: preAnchor = " + preAnchor);
+        Log.d(TAG, "onPerformSync: preAnchor = " + preAnchor);
 
         boolean status1, status2, status3;
         status1 = syncUser(helper);
@@ -285,7 +285,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             httpPost.setHeader(new BasicHeader("Accept", "text/plain; charset=utf-8"));
 
             HttpEntity requestEntity = new UrlEncodedFormEntity(pairs, ENCODING);
-            Log.d(TAG, "postSyncData: request entity = " + EntityUtils.toString(requestEntity, ENCODING));
+            Log.d(TAG, "syncUser: request entity = " + EntityUtils.toString(requestEntity, ENCODING));
             httpPost.setEntity(requestEntity);
 
             HttpResponse httpResponse = httpClient.execute(httpPost);

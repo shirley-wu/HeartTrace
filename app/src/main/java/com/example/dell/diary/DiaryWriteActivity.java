@@ -300,7 +300,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                         break;
                     case R.id.exit:
                         MyAccount myAccount = new MyAccount(DiaryWriteActivity.this);
-                        myAccount.setAutoLogin(false);
+                        myAccount.clearSetting();
+                        myAccount.clearUser();
                         Intent intent4 = new Intent(DiaryWriteActivity.this,LoginActivity.class);
                         intent4.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent4);

@@ -30,10 +30,11 @@ public class MyAccountTest extends InstrumentationTestCase {
 
     public void testSet() {
         Context context = InstrumentationRegistry.getTargetContext();
-        Log.d(TAG, "testSet: package userusername = " + context.getApplicationContext().getPackageName());
+        Log.d(TAG, "testSet: package name = " + context.getApplicationContext().getPackageName());
         MyAccount myAccount = new MyAccount(context);
-        myAccount.setUsername("userusername");
+        myAccount.setUsername("username");
         myAccount.setToken("token");
-        Log.d(TAG, "testSet: save = " + myAccount.save(true));
+        Log.d(TAG, "testSet: save user = " + myAccount.saveUser(true));
+        Log.d(TAG, "testSet: save setting = " + myAccount.saveSetting());
     }
 }
