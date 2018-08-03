@@ -6,6 +6,7 @@ import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.example.dell.db.DatabaseHelper;
+import com.example.dell.db.Setting;
 import com.example.dell.db.User;
 import com.example.dell.passwd.PasswdTool;
 import com.example.dell.passwd.PasswdWorker;
@@ -25,58 +26,35 @@ public class MyAccount {
 
     private static final String PREFERENCE_USERNAME = "MyAccountPreference";
 
-    Dao<User, String> dao = null;
+    Dao userDao = null;
+    
+    Dao settingDao = null;
 
     private User user;
 
-    private SharedPreferences preferences = null;
-
-    private String key;
-
-    private String password;
-
-    private String token;
-
-    private boolean isRemember;
-
-    private boolean autoLogin;
+    private Setting setting;
 
     public MyAccount(Context context) {
-        preferences = context.getSharedPreferences(PREFERENCE_USERNAME, Context.MODE_PRIVATE);
-
-        key = PasswdWorker.getPasswd(context);
-
-        String password = preferences.getString("password", null);
-        this.password = (password == null) ? null : PasswdTool.desDecrypt(password, key);
-        Log.d(TAG, "MyAccount: password = " + this.password);
-
-        String token = preferences.getString("token", null);
-        this.token = (token == null) ? null : PasswdTool.desDecrypt(token, key);
-        Log.d(TAG, "MyAccount: token = " + this.token);
-
-        String isRemember = preferences.getString("isRemember", null);
-        String isRememberDecrypted = (isRemember == null) ? null : PasswdTool.desDecrypt(isRemember, key);
-        this.isRemember = (isRememberDecrypted != null) && isRememberDecrypted.equals("true");
-        Log.d(TAG, "MyAccount: isRemember = " + this.isRemember);
-
-        String autoLogin = preferences.getString("autoLogin", null);
-        String autoLoginDecrypted = (autoLogin == null) ? null : PasswdTool.desDecrypt(autoLogin, key);
-        this.autoLogin = (autoLoginDecrypted != null) && autoLoginDecrypted.equals("true");
-        Log.d(TAG, "MyAccount: autoLogin = " + this.autoLogin);
-
         DatabaseHelper databaseHelper = new DatabaseHelper(context);
         try {
-            dao = databaseHelper.getDaoAccess(User.class);
-            List<User> list = dao.queryForAll();
-            Log.d(TAG, "MyAccount: list size = " + list.size());
-            if (list.size() == 0) user = new User();
-            else user = list.get(0);
-            // TODO: Dangerous!!!!! DatabaseHelper not closed.
+            userDao = databaseHelper.getDaoAccess(User.class);
+            List<User> userList = userDao.queryForAll();
+            Log.d(TAG, "MyAccount: userList size = " + userList.size());
+            if (userList.size() == 0) user = new User();
+            else user = userList.get(0);
+
+            settingDao = databaseHelper.getDaoAccess(Setting.class);
+            List<Setting> settingList = settingDao.queryForAll();
+            Log.d(TAG, "MyAccount: settingList size = " + settingList.size());
+            if (settingList.size() == 0) setting = new Setting();
+            else setting = settingList.get(0);
         }
         catch (SQLException e) {
             Log.e(TAG, "MyAccount: ", e);
-            dao = null;
+            userDao = null;
             user = null;
+            settingDao = null;
+            setting = null;
         }
     }
 
@@ -89,11 +67,11 @@ public class MyAccount {
     }
 
     public void setToken(String token) {
-        this.token = token;
+        setting.setToken(token);
     }
 
     public String getToken() {
-        return token;
+        return setting.getToken();
     }
 
     public void setNickname(String nickname) {
@@ -158,29 +136,6 @@ public class MyAccount {
         return user.getHeadimage();
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setIsRemember(boolean isRemember){
-        this.isRemember = isRemember;
-    }
-
-    public boolean getIsRemember(){
-        return isRemember;
-    }
-
-    public boolean getAutoLogin() {
-        return autoLogin;
-    }
-
-    public void setAutoLogin(boolean autoLogin) {
-        this.autoLogin = autoLogin;
-    }
 
     public long getModified() {
         return user.getModified();
@@ -188,6 +143,30 @@ public class MyAccount {
 
     public void setModified(long modified) {
         user.setModified(modified);
+    }
+
+    public String getPassword() {
+        return setting.getPassword();
+    }
+
+    public void setPassword(String password) {
+        setting.setPassword(password);
+    }
+
+    public void setIsRemember(boolean isRemember){
+        setting.setIsRemember(isRemember);
+    }
+
+    public boolean getIsRemember(){
+        return setting.getIsRemember();
+    }
+
+    public boolean getAutoLogin() {
+        return setting.getAutoLogin();
+    }
+
+    public void setAutoLogin(boolean autoLogin) {
+        setting.setAutoLogin(autoLogin);
     }
 
     public User getUser() {
@@ -209,7 +188,7 @@ public class MyAccount {
             if (setModified) user.setModified(System.currentTimeMillis());
             Log.d(TAG, "saveUser: modified = " + getModified());
 
-            Dao.CreateOrUpdateStatus status = dao.createOrUpdate(user);
+            Dao.CreateOrUpdateStatus status = userDao.createOrUpdate(user);
             Log.d(TAG, "saveUser: 新建 = " + status.isCreated());
             Log.d(TAG, "saveUser: 更新 = " + status.isUpdated());
 
@@ -222,30 +201,27 @@ public class MyAccount {
     }
 
     public boolean saveSetting() {
-        SharedPreferences.Editor editor = preferences.edit();
+        try {
+            Dao.CreateOrUpdateStatus status = settingDao.createOrUpdate(setting);
+            Log.d(TAG, "settingUser: 新建 = " + status.isCreated());
+            Log.d(TAG, "settingUser: 更新 = " + status.isUpdated());
 
-        if (token != null) editor.putString("token", PasswdTool.desEncrypt(token, key));
-        Log.d(TAG, "saveSetting: token = " + token);
-
-        if (password != null) editor.putString("password", PasswdTool.desEncrypt(password, key));
-        Log.d(TAG, "saveSetting: password = " + password);
-
-        editor.putString("isRemember", PasswdTool.desEncrypt("" + isRemember, key));
-        editor.putString("autoLogin", PasswdTool.desEncrypt("" + autoLogin, key));
-        boolean status = editor.commit();
-        Log.d(TAG, "saveSetting: status = " + status);
-
-        return status;
+            return true;
+        }
+        catch (SQLException e) {
+            Log.e(TAG, "saveSetting: ", e);
+            return false;
+        }
     }
 
     public boolean clearUser() {
         try {
-            List<User> list = dao.queryForAll();
+            List<User> list = userDao.queryForAll();
             for (User u : list) {
-                int code = dao.delete(u);
+                int code = userDao.delete(u);
                 Log.d(TAG, "clearUser: 删除返回值 = " + code);
             }
-            dao = null;
+            userDao = null;
             user = null;
 
             return true;
@@ -257,13 +233,21 @@ public class MyAccount {
     }
 
     public boolean clearSetting() {
-        token = null;
-        password = null;
-        isRemember = false;
-        autoLogin = false;
-        boolean status = saveSetting();
-        Log.d(TAG, "clearSetting: status = " + status);
-        return status;
+        try {
+            List<Setting> list = settingDao.queryForAll();
+            for (Setting u : list) {
+                int code = settingDao.delete(u);
+                Log.d(TAG, "clearSetting: 删除返回值 = " + code);
+            }
+            settingDao = null;
+            setting = null;
+
+            return true;
+        }
+        catch (SQLException e) {
+            Log.e(TAG, "clearUser: ", e);
+            return false;
+        }
     }
 
 }
