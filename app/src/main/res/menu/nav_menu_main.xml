@@ -28,6 +28,11 @@
             android:title="时间轴" />
     </group>
 
+    <item
+        android:id="@+id/sync_setting"
+        android:icon = "@drawable/sync_gray"
+        android:title = "同步设置"/>
+
     <group android:checkableBehavior="single">
         <item
             android:id = "@+id/delete_all"

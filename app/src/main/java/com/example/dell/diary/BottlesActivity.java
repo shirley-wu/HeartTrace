@@ -85,8 +85,6 @@ public class BottlesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bottles);
         Toolbar toolbar = (Toolbar) findViewById(R.id.bottles_toolbar);
         setSupportActionBar(toolbar);
-        mDrawLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        NavigationView navView =(NavigationView) findViewById(R.id.nav_view);
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null){
 
@@ -94,14 +92,7 @@ public class BottlesActivity extends AppCompatActivity {
             //actionBar.setHomeAsUpIndicator(R.drawable.menu_white);
         }
         actionBar.setTitle("Bottles");
-//        navView.setCheckedItem(R.id.nav_user);
-//        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(MenuItem item) {
-//                mDrawLayout.closeDrawers();
-//                return true;
-//            }
-//        });
+
         //初始化日记本
         initSententcebookList();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_bottle_view);

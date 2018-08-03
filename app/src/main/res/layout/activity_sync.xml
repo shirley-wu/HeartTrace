@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    android:id="@+id/sync_coordinatorLayout"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/sync_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            />
+    </android.support.design.widget.AppBarLayout>
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+             <LinearLayout
+                    android:id = "@+id/sync_linear2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                     <TextView
+                            android:id="@+id/syncableText"
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:textSize = "16sp"/>
+
+                     <android.support.v7.widget.SwitchCompat
+                         android:layout_marginTop="6.5dp"
+                         android:layout_marginLeft = "200dp"
+                         android:id="@+id/syncable_switch"
+                         android:typeface="normal"
+                         android:switchMinWidth="60dp"
+                         android:switchPadding="2dp"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                        />
+
+
+                     </LinearLayout>
+             </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:id = "@+id/OneSyncCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:id = "@+id/sync_linear4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/one_syncText"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="手动同步"
+                    android:textSize = "16sp"/>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+        <LinearLayout
+            android:id = "@+id/autoLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+             <android.support.v7.widget.CardView
+                 android:id = "@+id/AutoCard"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content">
+                 <LinearLayout
+                    android:id = "@+id/sync_linear3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/auto_syncText"
+                        android:layout_width="90dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:textSize = "16sp"/>
+
+                     <android.support.v7.widget.SwitchCompat
+                         android:layout_marginTop="6.5dp"
+                         android:layout_marginLeft = "200dp"
+                         android:id="@+id/syncAuto_switch"
+                         android:typeface="normal"
+                         android:switchMinWidth="60dp"
+                         android:switchPadding="2dp"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                    />
+
+
+                 </LinearLayout>
+             </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:id = "@+id/AutoSettingCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id = "@+id/sync_linear5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/autoSetting_syncText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:textSize = "16sp"
+                        android:layout_weight="1"
+                        >
+                    </TextView>
+                    <Spinner
+                        android:gravity="center_horizontal"
+                        android:layout_gravity="end"
+                        android:id="@+id/sync_period_spinner"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/sync_period"
+                        android:layout_weight="1">
+                    </Spinner>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

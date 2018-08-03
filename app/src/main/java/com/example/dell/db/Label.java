@@ -2,6 +2,7 @@ package com.example.dell.db;
 
 import android.util.Log;
 
+import com.example.dell.passwd.PasswdTool;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.stmt.QueryBuilder;
@@ -70,8 +71,9 @@ public class Label {
 
     public void insert(DatabaseHelper helper) {
         try {
-            id = helper.getIdWorker().nextId();
-            Log.d(TAG, "insert: id = " + id);
+            id = PasswdTool.sha1(labelname).hashCode();
+            Log.d(TAG, "insert: labelname = " + labelname + ", id = " + id);
+
             status = 0;
             modified = System.currentTimeMillis();
             Dao<Label, Long> dao = helper.getDaoAccess(Label.class);
@@ -129,23 +131,6 @@ public class Label {
             throw new RuntimeException(e);
         }
     }
-
-    /*public static QueryBuilder<Label, Long> makeQueryBuilderForDiary(DatabaseHelper helper, Diary diary){
-        try{
-            Dao<DiaryLabel, Long> diaryLabelDao = helper.getDaoAccess(DiaryLabel.class);
-            Dao<Label, Long> labelDao = helper.getDaoAccess(Label.class);
-            QueryBuilder<DiaryLabel, Long> diaryLabelBuilder = diaryLabelDao.queryBuilder();
-            //diaryLabelBuilder.selectColumns(DiaryLabel.LABEL_TAG);
-            //SelectArg diarySelectAry = new SelectArg();
-            diaryLabelBuilder.where().eq(DiaryLabel.DIARY_TAG, diary);
-            QueryBuilder<Label, Long> labelQueryBuilder = labelDao.queryBuilder();
-            labelQueryBuilder.where().in(Label.TAG, diaryLabelBuilder);
-            return labelQueryBuilder;
-        }catch (SQLException e) {
-            Log.e(DatabaseHelper.class.getName(), "Can't dao database", e);
-            throw new RuntimeException(e);
-        }
-    }*/
 
     public static Label getByName(DatabaseHelper helper, String name) {
         try {
