@@ -105,6 +105,8 @@ public class DiaryInstrumentedTest {
         diaryList = dao.queryBuilder().where().eq("text", updateText).query();
         assertEquals(1, diaryList.size()); // TODO: not safe: assumes that there is no such text by wxq
         assertEquals(-1, diaryList.get(0).getStatus());
+        diaryList = Diary.getAll(databaseHelper, true);
+        assertEquals(0, diaryList.size());  // TODO: Certainly dangerous
         Log.d(TAG, "testSaveAndGetDiary: modified when deleting = " + diary.getModified());
     }
 

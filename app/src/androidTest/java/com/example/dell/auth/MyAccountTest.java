@@ -17,22 +17,24 @@ public class MyAccountTest extends InstrumentationTestCase {
 
     public void testGet() {
         Context context = InstrumentationRegistry.getTargetContext();
-        MyAccount myAccount = MyAccount.get(context);
+        MyAccount myAccount = new MyAccount(context);
         if(myAccount == null) {
             Log.d(TAG, "testGet: myAccount is null");
         }
         else{
-            Log.d(TAG, "testGet: myAccount name = " + myAccount.getName());
+            Log.d(TAG, "testGet: myAccount username = " + myAccount.getUsername());
             Log.d(TAG, "testGet: myAccount token = " + myAccount.getToken());
+            Log.d(TAG, "testGet: myAccount modified = " + myAccount.getModified());
         }
     }
 
     public void testSet() {
         Context context = InstrumentationRegistry.getTargetContext();
         Log.d(TAG, "testSet: package name = " + context.getApplicationContext().getPackageName());
-        MyAccount myAccount = MyAccount.get(context);
-        myAccount.setName("name");
+        MyAccount myAccount = new MyAccount(context);
+        myAccount.setUsername("username");
         myAccount.setToken("token");
-        Log.d(TAG, "testSet: save = " + myAccount.save());
+        Log.d(TAG, "testSet: save user = " + myAccount.saveUser(true));
+        Log.d(TAG, "testSet: save setting = " + myAccount.saveSetting());
     }
 }

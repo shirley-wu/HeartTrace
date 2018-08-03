@@ -1,23 +1,18 @@
 package com.example.dell.db;
 
 import android.content.Context;
-import android.provider.Telephony;
 import android.util.Log;
 
 import com.example.dell.passwd.PasswdWorker;
 import com.j256.ormlite.cipher.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
-import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import net.sqlcipher.database.SQLiteDatabase;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Hashtable;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,7 +27,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     // name of the database file for your application -- change to something appropriate for your app
     private static final String DATABASE_NAME = "heartTrace.db";
     // any time you make changes to your database objects, you may have to increase the database version
-    private static final int DATABASE_VERSION = 17;
+    private static final int DATABASE_VERSION = 19;
 
     private static final Class[] tableList = {
             Diary.class,
@@ -42,7 +37,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             Sentence.class,
             Sentencebook.class,
             SentenceLabel.class,
-            Picture.class
+            Picture.class,
+            User.class
             // SearchHistory.class,
     };
 

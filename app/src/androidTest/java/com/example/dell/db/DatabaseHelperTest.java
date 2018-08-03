@@ -5,7 +5,9 @@ import android.provider.Telephony;
 import android.support.test.InstrumentationRegistry;
 import android.util.Log;
 
+import com.alibaba.fastjson.JSON;
 import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
+import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.field.DatabaseField;
 
 import org.junit.After;
@@ -22,6 +24,8 @@ import static org.junit.Assert.*;
  * Created by wu-pc on 2018/5/10.
  */
 public class DatabaseHelperTest {
+
+    final static private String TAG = "DatabaseHelperTest";
 
     private DatabaseHelper helper;
 
@@ -83,6 +87,24 @@ public class DatabaseHelperTest {
         assertTrue("sentence book after", Sentencebook.getAll(helper, false).size() == 0);
         assertTrue("sentence after", Sentence.getAll(helper, false).size() == 0);
         assertTrue("sentence label after", helper.getDaoAccess(Sentence.class).queryForAll().size() == 0);
+    }
+
+    @Test
+    public void testPrintAll() {
+        Class[] tableList = helper.getTableList();
+        for (Class clazz : tableList) {
+            try {
+                Dao dao = helper.getDaoAccess(clazz);
+                List list = dao.queryForAll();
+                Log.d(TAG, "testPrintAll: class = " + clazz);
+                for (Object o : list) {
+                    Log.d(TAG, "testPrintAll: object = " + JSON.toJSONString(o));
+                }
+            }
+            catch (Exception e) {
+                Log.e(TAG, "testPrintAll: ", e);
+            }
+        }
     }
 
 }

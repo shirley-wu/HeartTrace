@@ -51,13 +51,13 @@ public class ServerAuthenticator {
                     Log.d(TAG, "signIn: header " + header.toString());
                 }
 
+                HttpEntity entity = httpResponse.getEntity();
+                String response = EntityUtils.toString(entity, "utf-8");
+                Log.d(TAG, "signIn: http response " + response);
+
                 int code = httpResponse.getStatusLine().getStatusCode();
                 Log.d(TAG, "signIn: " + code);
                 if (code == 200) {
-                    HttpEntity entity = httpResponse.getEntity();
-                    String response = EntityUtils.toString(entity, "utf-8");
-                    Log.d(TAG, "signIn: http response " + response);
-
                     JSONObject jsonObject = new JSONObject(response);
                     boolean success = jsonObject.optBoolean("success");
                     String msg = jsonObject.optString("msg");
@@ -104,13 +104,13 @@ public class ServerAuthenticator {
                     Log.d(TAG, "signUp: header " + header.toString());
                 }
 
+                HttpEntity entity = httpResponse.getEntity();
+                String response = EntityUtils.toString(entity, "utf-8");
+                Log.d(TAG, "signUp: http response " + response);
+
                 int code = httpResponse.getStatusLine().getStatusCode();
                 Log.d(TAG, "signUp: " + code);
                 if (code == 200) {
-                    HttpEntity entity = httpResponse.getEntity();
-                    String response = EntityUtils.toString(entity, "utf-8");
-                    Log.d(TAG, "signUp: http response " + response);
-
                     JSONObject jsonObject = new JSONObject(response);
                     boolean success = jsonObject.optBoolean("success");
                     String msg = jsonObject.optString("msg");

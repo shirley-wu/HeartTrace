@@ -72,7 +72,7 @@ public class PersonalInformationActivity extends AppCompatActivity implements Vi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_information);
-        myAccount = MyAccount.get(getApplicationContext());
+        myAccount = new MyAccount(getApplicationContext());
 
         setView();
         setListener();
@@ -183,7 +183,7 @@ public class PersonalInformationActivity extends AppCompatActivity implements Vi
                 myAccount.setEmail(setEmail.getText().toString());
                 myAccount.setSchool(setSchool.getText().toString());
                 myAccount.setSignature(setSignature.getText().toString());
-                myAccount.save();
+                myAccount.saveUser(true);
                 Toast.makeText(PersonalInformationActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
                 finish();
                 break;
@@ -257,7 +257,7 @@ public class PersonalInformationActivity extends AppCompatActivity implements Vi
                         bitmap.compress(Bitmap.CompressFormat.PNG, 50, byteArrayOutputStream);
                         String headPicBase64 = new String(Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT));
                         myAccount.setHeadimage(headPicBase64);
-                        myAccount.save();
+                        myAccount.saveUser(true);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }

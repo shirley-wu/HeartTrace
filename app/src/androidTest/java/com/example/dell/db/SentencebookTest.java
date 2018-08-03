@@ -82,6 +82,8 @@ public class SentencebookTest extends InstrumentationTestCase {
             Log.d(TAG, "delete: sentence modified after delete " + d.getModified());
         }*/
         assertEquals(0, list.size());
+        list = Sentence.getAll(helper, false);
+        assertEquals(0, list.size());
     }
 
     @Test

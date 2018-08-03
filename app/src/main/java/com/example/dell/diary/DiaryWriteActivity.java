@@ -89,6 +89,7 @@ import com.example.dell.auth.MyAccount;
 import com.example.dell.db.DatabaseHelper;
 import com.example.dell.db.Diary;
 import com.example.dell.db.Label;
+import com.example.dell.db.Picture;
 import com.j256.ormlite.stmt.query.In;
 
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
@@ -133,6 +134,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private int flag = 1;
     private boolean labelProperty;
     private boolean isExisted;
+    private boolean isInsertingImg = false;
+    private boolean isFling = false;
+    private boolean isDeleting = false;
     private int labelSize;
     private int[] imgIds = {R.drawable.happy, R.drawable.normal, R.drawable.sad,
                             R.drawable.embarrassed, R.drawable.shocked, R.drawable.foolish,
@@ -301,8 +305,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                         break;
 
                     case R.id.exit:
-                        MyAccount myAccount = MyAccount.get(DiaryWriteActivity.this);
-                        myAccount.setAutoLogin(false);
+                        MyAccount myAccount = new MyAccount(DiaryWriteActivity.this);
+                        myAccount.clearSetting();
+                        myAccount.clearUser();
                         Intent intent5 = new Intent(DiaryWriteActivity.this,LoginActivity.class);
                         intent5.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent5);
@@ -325,7 +330,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     }
 
     public void initNavHeader(){
-        MyAccount myAccount = MyAccount.get(this);
+        MyAccount myAccount = new MyAccount(this);
         //Log.d("123",myAccount.getNickname());
         nickName.setText(myAccount.getNickname());
         String sig = myAccount.getSignature();
@@ -415,6 +420,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                         String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
                         diaryDate.setText(date);
                         diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
+                        isFling = true;
                         diary_write.setText(Html.fromHtml(diary.getHtmlText()));
                         getImage(diary.getText());
                         setTextFormmat(diary);
@@ -430,6 +436,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
                         diary_write.setSelection(0);
                         getLabelsOfDiary(diary,helper);
+                        isFling = false;
                     }
                 }
                 else if (e2.getX() - e1.getX() > FLING_MIN_DISTANCE
@@ -447,6 +454,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                         String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
                         diaryDate.setText(date);
                         diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
+                        isFling = true;
                         diary_write.setText(Html.fromHtml(diary.getHtmlText()));
                         getImage(diary.getText());
                         setTextFormmat(diary);
@@ -462,6 +470,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
                         diary_write.setSelection(0);
                         getLabelsOfDiary(diary,helper);
+                        isFling = false;
                     }
                 }
                 return true;
@@ -566,6 +575,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 //
 //            @Override
 //            public void onPageScrollStateChanged(int state) {
+//                /*此方法是在状态改变的时候调用，其中arg0这个参数有三种状态（0，1，2）。
 //                /*此方法是在状态改变的时候调用，其中arg0这个参数有三种状态（0，1，2）。
 //                arg0 ==1的时辰默示正在滑动，
 //                arg0==2的时辰默示滑动完毕了，
@@ -744,20 +754,21 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
         }
         else {
-            Log.i("show", diary.getHtmlText());
-            diary_write.setText(Html.fromHtml(diary.getHtmlText()));
-            getImage(diary.getText());
+            Log.i("show",diary.getHtmlText());
+            if(diary.getHtmlText() != null) {
+                diary_write.setText(Html.fromHtml(diary.getHtmlText()));
+                getImage(diary.getText());
+                //clear color span
+                ForegroundColorSpan[] colorSpans = diary_write.getText().getSpans(0, diary_write.length(), ForegroundColorSpan.class);
+                for (int i = 0; i < colorSpans.length; i++)
+                    diary_write.getText().removeSpan(colorSpans[i]);
+                //set color span
+                int[] colorSpanInfo = getTextColorInfo(diary.getHtmlText());
+                setColorSpan(colorSpanInfo);
+                Log.i("test", Html.toHtml(diary_write.getText()));
+
+            }
             setTextFormmat(diary);
-
-            //clear color span
-            ForegroundColorSpan[] colorSpans= diary_write.getText().getSpans(0, diary_write.length(), ForegroundColorSpan.class);
-            for(int i = 0; i < colorSpans.length; i++)
-                diary_write.getText().removeSpan(colorSpans[i]);
-            //set color span
-            int[] colorSpanInfo = getTextColorInfo(diary.getHtmlText());
-            setColorSpan(colorSpanInfo);
-            Log.i("test", Html.toHtml(diary_write.getText()));
-
             diary_write.setSelection(0);
 
             getLabelsOfDiary(diary,helper);
@@ -1329,90 +1340,87 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
     private void editchange(Editable editable)
     {
-        switch (font_color)
-        {
-            case 1:
-                ForegroundColorSpan colorSpan_red = new ForegroundColorSpan(getResources().getColor(R.color.darkred));
-                editable.setSpan(colorSpan_red, start, start+count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                diary_write.setSelection(start+count);
-                break;
-            case 2:
-                ForegroundColorSpan colorSpan_orange = new ForegroundColorSpan(getResources().getColor(R.color.darkorange));
-                editable.setSpan(colorSpan_orange, start, start+count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                diary_write.setSelection(start+count);
-                break;
-            case 3:
-                ForegroundColorSpan colorSpan_pink = new ForegroundColorSpan(getResources().getColor(R.color.pink));
-                editable.setSpan(colorSpan_pink, start, start+count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                diary_write.setSelection(start+count);
-                break;
-            case 4:
-                ForegroundColorSpan colorSpan_green = new ForegroundColorSpan(getResources().getColor(R.color.darkgreen));
-                editable.setSpan(colorSpan_green, start, start+count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                diary_write.setSelection(start+count);
-                break;
-            case 5:
-                ForegroundColorSpan colorSpan_blue = new ForegroundColorSpan(getResources().getColor(R.color.deepskyblue));
-                editable.setSpan(colorSpan_blue, start, start+count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                diary_write.setSelection(start+count);
-                break;
-            case 6:
-                ForegroundColorSpan colorSpan_dark_blue = new ForegroundColorSpan(getResources().getColor(R.color.steelblue));
-                editable.setSpan(colorSpan_dark_blue, start, start+count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                diary_write.setSelection(start+count);
-                break;
-            case 7:
-                ForegroundColorSpan colorSpan_grey = new ForegroundColorSpan(getResources().getColor(R.color.dimgrey));
-                editable.setSpan(colorSpan_grey, start, start+count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                diary_write.setSelection(start+count);
-                break;
-            case 8:
-                ForegroundColorSpan colorSpan_black = new ForegroundColorSpan(getResources().getColor(R.color.black));
-                editable.setSpan(colorSpan_black, start, start+count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                diary_write.setSelection(start+count);
-                break;
-        }
-        switch (font_type)
-        {
-            case 1:
-                editable.setSpan(new TypefaceSpan("monospace"), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                break;
-            case 2:
-                editable.setSpan(new TypefaceSpan("serif"), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                break;
-            case 3:
-                editable.setSpan(new TypefaceSpan("sans-serif"), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                break;
-        }
+        Log.i("test",start+" "+count);
+        if(isInsertingImg == false && isFling == false && isDeleting == false) {
+            switch (font_color) {
+                case 1:
+                    ForegroundColorSpan colorSpan_red = new ForegroundColorSpan(getResources().getColor(R.color.darkred));
+                    editable.setSpan(colorSpan_red, start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    diary_write.setSelection(start + count);
+                    break;
+                case 2:
+                    ForegroundColorSpan colorSpan_orange = new ForegroundColorSpan(getResources().getColor(R.color.darkorange));
+                    editable.setSpan(colorSpan_orange, start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    diary_write.setSelection(start + count);
+                    break;
+                case 3:
+                    ForegroundColorSpan colorSpan_pink = new ForegroundColorSpan(getResources().getColor(R.color.pink));
+                    editable.setSpan(colorSpan_pink, start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    diary_write.setSelection(start + count);
+                    break;
+                case 4:
+                    ForegroundColorSpan colorSpan_green = new ForegroundColorSpan(getResources().getColor(R.color.darkgreen));
+                    editable.setSpan(colorSpan_green, start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    diary_write.setSelection(start + count);
+                    break;
+                case 5:
+                    ForegroundColorSpan colorSpan_blue = new ForegroundColorSpan(getResources().getColor(R.color.deepskyblue));
+                    editable.setSpan(colorSpan_blue, start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    diary_write.setSelection(start + count);
+                    break;
+                case 6:
+                    ForegroundColorSpan colorSpan_dark_blue = new ForegroundColorSpan(getResources().getColor(R.color.steelblue));
+                    editable.setSpan(colorSpan_dark_blue, start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    diary_write.setSelection(start + count);
+                    break;
+                case 7:
+                    ForegroundColorSpan colorSpan_grey = new ForegroundColorSpan(getResources().getColor(R.color.dimgrey));
+                    editable.setSpan(colorSpan_grey, start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    diary_write.setSelection(start + count);
+                    break;
+                case 8:
+                    ForegroundColorSpan colorSpan_black = new ForegroundColorSpan(getResources().getColor(R.color.black));
+                    editable.setSpan(colorSpan_black, start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    diary_write.setSelection(start + count);
+                    break;
+            }
+            switch (font_type) {
+                case 1:
+                    editable.setSpan(new TypefaceSpan("monospace"), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    break;
+                case 2:
+                    editable.setSpan(new TypefaceSpan("serif"), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    break;
+                case 3:
+                    editable.setSpan(new TypefaceSpan("sans-serif"), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    break;
+            }
 
-        switch (style)
-        {
-            case 1: //缩进
-                if(is_retract)
-                {
-                    editable.append(" ")
-                            .append(editable.toString())
-                            .append(editable.toString())
-                            .append(editable.toString());
-                    editable.setSpan(new LeadingMarginSpan.Standard(10, 0), 0, count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                }
-                else
-                {
-                    editable.append(" ")
-                            .append(editable.toString())
-                            .append(editable.toString())
-                            .append(editable.toString());
-                    editable.setSpan(new LeadingMarginSpan.Standard(0, 0), 0, count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                }
-                break;
-        }
-        if(is_underline)
-            editable.setSpan(new UnderlineSpan(), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        if(is_bold){
-            editable.setSpan(new StyleSpan(Typeface.BOLD), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        }
-        if(is_italic) {
-            editable.setSpan(new StyleSpan(Typeface.ITALIC), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            switch (style) {
+                case 1: //缩进
+                    if (is_retract) {
+                        editable.append(" ")
+                                .append(editable.toString())
+                                .append(editable.toString())
+                                .append(editable.toString());
+                        editable.setSpan(new LeadingMarginSpan.Standard(10, 0), 0, count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    } else {
+                        editable.append(" ")
+                                .append(editable.toString())
+                                .append(editable.toString())
+                                .append(editable.toString());
+                        editable.setSpan(new LeadingMarginSpan.Standard(0, 0), 0, count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    }
+                    break;
+            }
+            if (is_underline)
+                editable.setSpan(new UnderlineSpan(), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            if (is_bold) {
+                editable.setSpan(new StyleSpan(Typeface.BOLD), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+            if (is_italic) {
+                editable.setSpan(new StyleSpan(Typeface.ITALIC), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
         }
     }
 
@@ -1469,6 +1477,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                                 String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
                                 diaryDate.setText(date);
                                 diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
+                                isDeleting = true;
                                 diary_write.setText(Html.fromHtml(diary.getHtmlText()));
                                 getImage(diary.getText());
 
@@ -1484,12 +1493,13 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
                                 setTextFormmat(diary);
                                 getLabelsOfDiary(diary,helper);
-
+                                isDeleting = false;
                             } else {
                                 diary = diaryList.get(index);
                                 String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
                                 diaryDate.setText(date);
                                 diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
+                                isDeleting = true;
                                 diary_write.setText(Html.fromHtml(diary.getHtmlText()));
                                 getImage(diary.getText());
                                 setTextFormmat(diary);
@@ -1505,6 +1515,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                                 Log.i("test", Html.toHtml(diary_write.getText()));
 
                                 getLabelsOfDiary(diary,helper);
+                                isDeleting = false;
                             }
                         }
                     });
@@ -1559,6 +1570,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
     @TargetApi(19)
     private void handleImageOnKitKat(Intent data) {
+        isInsertingImg = true;
         Uri uri = data.getData();
         Bitmap bitmap = null;
         try {
@@ -1574,6 +1586,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         diary_write.setText(editable);
         diary_write.append("\n");
         diary_write.setSelection(diary_write.getText().length());
+        isInsertingImg = false;
     }
 
     public Bitmap getBitmapFromUri(Activity ac, Uri uri) throws FileNotFoundException, IOException {
@@ -1582,7 +1595,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         Bitmap bitmap = BitmapFactory.decodeStream(input);
         input.close();
 
-        return compressImage(bitmap);//再进行质量压缩
+        return compressImage(bitmap);
     }
 
     public Bitmap compressImage(Bitmap image) {
@@ -1619,7 +1632,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     }
 
     public static final String SD_PATH = Environment.getExternalStorageDirectory().getPath() + "/HeartTrace/pic/";
-    private static final String IN_PATH = "/HeartTrace/pic/";
+    public static final String IN_PATH = "/HeartTrace/pic/";
 
     private static String generateFileName() {
         SimpleDateFormat time_format=new SimpleDateFormat("yyyyMMddHHmmss");
@@ -1627,19 +1640,19 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         return "image_"+date;
     }
 
-    public static String saveBitmap(Context context, Bitmap mBitmap) {
+    public String saveBitmap(Context context, Bitmap mBitmap) {
         String savePath;
         File filePic;
-        if (Environment.getExternalStorageState().equals(
-                Environment.MEDIA_MOUNTED)) {
-            savePath = SD_PATH;
-        } else {
-            savePath = context.getApplicationContext().getFilesDir()
-                    .getAbsolutePath()
-                    + IN_PATH;
-        }
         try {
-            filePic = new File(savePath + generateFileName() + ".jpg");
+            Picture picture = new Picture();
+            DatabaseHelper databaseHelper = new DatabaseHelper(getApplicationContext());
+            boolean status = picture.saveBitmap(DiaryWriteActivity.this, databaseHelper, mBitmap);
+            String filePath = new String();
+            if (status == true)
+                filePath = picture.getParentPath() + picture.getFileName();
+            Log.i("file path",filePath);
+
+            filePic = new File(filePath);
             if (!filePic.exists()) {
                 filePic.getParentFile().mkdirs();
                 filePic.createNewFile();
@@ -1653,7 +1666,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             e.printStackTrace();
             return null;
         }
-
         return filePic.getAbsolutePath();
     }
 
@@ -1688,11 +1700,18 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private void getImage(String text)
     {
         Editable editable = diary_write.getText();
-        Pattern pattern = Pattern.compile( Environment.getExternalStorageDirectory().getPath()+"/HeartTrace/pic/image_[0-9]{14}\\.jpg");
+        String filePath;
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
+            filePath = SD_PATH;
+        else
+            filePath = DiaryWriteActivity.this.getApplicationContext().getFilesDir().getAbsolutePath() + IN_PATH;
+        Pattern pattern = Pattern.compile( filePath + "img_[0-9]{0,}\\.jpg");
         Matcher matcher = pattern.matcher(text);
         int matcher_end = 0;
         while(matcher.find()) {
-            Bitmap bitmap = BitmapFactory.decodeFile(matcher.group());
+            Log.i("file name",matcher.group().substring(filePath.length(),matcher.group().length()));
+            Picture picture = new Picture(matcher.group().substring(filePath.length(),matcher.group().length()));
+            Bitmap bitmap = picture.getBitmap(DiaryWriteActivity.this);
             SpannableString imageSpan = new SpannableString(matcher.group());
             imageSpan.setSpan(new ImageSpan(bitmap) , 0, imageSpan.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             Pattern pattern1 = Pattern.compile("￼");

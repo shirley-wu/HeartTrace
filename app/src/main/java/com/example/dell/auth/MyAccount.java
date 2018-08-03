@@ -2,22 +2,18 @@ package com.example.dell.auth;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.provider.ContactsContract;
 import android.util.Log;
 
+import com.example.dell.db.DatabaseHelper;
+import com.example.dell.db.User;
 import com.example.dell.passwd.PasswdTool;
 import com.example.dell.passwd.PasswdWorker;
+import com.j256.ormlite.dao.Dao;
 
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.spec.InvalidKeySpecException;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.DESKeySpec;
+import java.io.UnsupportedEncodingException;
+import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Created by wu-pc on 2018/7/11.
@@ -27,52 +23,69 @@ public class MyAccount {
 
     private static final String TAG = "MyAccount";
 
-    private static final String PREFERENCE_NAME = "MyAccountPreference";
+    private static final String PREFERENCE_USERNAME = "MyAccountPreference";
 
-    private static MyAccount myAccount = null;
+    Dao<User, String> dao = null;
 
-    private static SharedPreferences preferences = null;
+    private User user;
 
-    private static String key = null;
+    private SharedPreferences preferences = null;
 
-    private static String packageName = null;
+    private String key;
 
-    private String name;
+    private String password;
 
     private String token;
-
-    private String nickname;
-
-    private String gender;
-
-    private String birthday;
-
-    private String email;
-
-    private String school;
-
-    private String signature;
-
-    private String headimage;
 
     private boolean isRemember;
 
     private boolean autoLogin;
 
-    private String password;
+    public MyAccount(Context context) {
+        preferences = context.getSharedPreferences(PREFERENCE_USERNAME, Context.MODE_PRIVATE);
 
-    private long modified;
+        key = PasswdWorker.getPasswd(context);
 
-    private MyAccount() {
+        String password = preferences.getString("password", null);
+        this.password = (password == null) ? null : PasswdTool.desDecrypt(password, key);
+        Log.d(TAG, "MyAccount: password = " + this.password);
 
+        String token = preferences.getString("token", null);
+        this.token = (token == null) ? null : PasswdTool.desDecrypt(token, key);
+        Log.d(TAG, "MyAccount: token = " + this.token);
+
+        String isRemember = preferences.getString("isRemember", null);
+        String isRememberDecrypted = (isRemember == null) ? null : PasswdTool.desDecrypt(isRemember, key);
+        this.isRemember = (isRememberDecrypted != null) && isRememberDecrypted.equals("true");
+        Log.d(TAG, "MyAccount: isRemember = " + this.isRemember);
+
+        String autoLogin = preferences.getString("autoLogin", null);
+        String autoLoginDecrypted = (autoLogin == null) ? null : PasswdTool.desDecrypt(autoLogin, key);
+        this.autoLogin = (autoLoginDecrypted != null) && autoLoginDecrypted.equals("true");
+        Log.d(TAG, "MyAccount: autoLogin = " + this.autoLogin);
+
+        DatabaseHelper databaseHelper = new DatabaseHelper(context);
+        try {
+            dao = databaseHelper.getDaoAccess(User.class);
+            List<User> list = dao.queryForAll();
+            Log.d(TAG, "MyAccount: list size = " + list.size());
+            if (list.size() == 0) user = new User();
+            else user = list.get(0);
+            // TODO: Dangerous!!!!! DatabaseHelper not closed.
+        }
+        catch (SQLException e) {
+            Log.e(TAG, "MyAccount: ", e);
+            dao = null;
+            user = null;
+        }
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        user.setUsername(username);
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return user.getUsername();
     }
 
     public void setToken(String token) {
@@ -84,59 +97,65 @@ public class MyAccount {
     }
 
     public void setNickname(String nickname) {
-        this.nickname = nickname;
+        user.setNickname(nickname);
     }
 
     public String getNickname() {
-        return nickname;
+        return user.getNickname();
     }
 
     public void setGender(String gender) {
-        this.gender = gender;
+        user.setGender(gender);
     }
 
     public String getGender() {
-        return gender;
+        return user.getGender();
     }
 
     public void setBirthday(String birthday) {
-        this.birthday = birthday;
+        user.setBirthday(birthday);
     }
 
     public String getBirthday() {
-        return  birthday;
+        return user.getBirthday();
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        user.setEmail(email);
     }
 
     public String getEmail() {
-        return email;
+        return user.getEmail();
     }
 
     public void setSchool(String school) {
-        this.school = school;
+        user.setSchool(school);
     }
 
     public String getSchool() {
-        return school;
+        return user.getSchool();
     }
 
     public void setSignature(String signature) {
-        this.signature = signature;
+        user.setSignature(signature);
     }
 
     public String getSignature() {
-        return signature;
+        return user.getSignature();
     }
 
     public void setHeadimage(String headimage){
-        this.headimage = headimage;
+        try {
+            Log.d(TAG, "setHeadimage: length = " + headimage.getBytes("UTF-8").length);
+        }
+        catch (UnsupportedEncodingException e) {
+            Log.e(TAG, "setHeadimage: ", e);
+        }
+        user.setHeadimage(headimage);
     }
 
     public String getHeadimage(){
-        return headimage;
+        return user.getHeadimage();
     }
 
     public String getPassword() {
@@ -164,95 +183,87 @@ public class MyAccount {
     }
 
     public long getModified() {
-        return modified;
+        return user.getModified();
     }
 
-    public boolean save() {
+    public void setModified(long modified) {
+        user.setModified(modified);
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public boolean saveUser() {
+        return saveUser(true);
+    }
+
+    public boolean saveUser(boolean setModified) {
+        try {
+            Log.d(TAG, "save: setModified = " + setModified);
+
+            if (setModified) user.setModified(System.currentTimeMillis());
+            Log.d(TAG, "saveUser: modified = " + getModified());
+
+            Dao.CreateOrUpdateStatus status = dao.createOrUpdate(user);
+            Log.d(TAG, "saveUser: 新建 = " + status.isCreated());
+            Log.d(TAG, "saveUser: 更新 = " + status.isUpdated());
+
+            return true;
+        }
+        catch (SQLException e) {
+            Log.e(TAG, "saveUser: ", e);
+            return false;
+        }
+    }
+
+    public boolean saveSetting() {
         SharedPreferences.Editor editor = preferences.edit();
 
-        modified = System.currentTimeMillis();
-        editor.putString("modified", PasswdTool.desEncrypt("" + modified, key));
-
-        if (name != null) editor.putString("name", PasswdTool.desEncrypt(name, key));
         if (token != null) editor.putString("token", PasswdTool.desEncrypt(token, key));
-        if (nickname != null) editor.putString("nickname", PasswdTool.desEncrypt(nickname, key));
-        if (gender != null) editor.putString("gender", PasswdTool.desEncrypt(gender, key));
-        if (birthday != null) editor.putString("birthday", PasswdTool.desEncrypt(birthday, key));
-        if (email != null) editor.putString("email", PasswdTool.desEncrypt(email, key));
-        if (school != null) editor.putString("school", PasswdTool.desEncrypt(school, key));
-        if (signature != null) editor.putString("signature", PasswdTool.desEncrypt(signature, key));
-        if (headimage != null) editor.putString("headimage", PasswdTool.desEncrypt(headimage, key));
+        Log.d(TAG, "saveSetting: token = " + token);
+
+        if (password != null) editor.putString("password", PasswdTool.desEncrypt(password, key));
+        Log.d(TAG, "saveSetting: password = " + password);
 
         editor.putString("isRemember", PasswdTool.desEncrypt("" + isRemember, key));
-
         editor.putString("autoLogin", PasswdTool.desEncrypt("" + autoLogin, key));
+        boolean status = editor.commit();
+        Log.d(TAG, "saveSetting: status = " + status);
 
-        if(password != null) editor.putString("password", PasswdTool.desEncrypt(password, key));
-
-        return editor.commit();
+        return status;
     }
 
-    static public MyAccount get(Context context) {
-        if(packageName == null) {
-            packageName = context.getApplicationContext().getPackageName();
-
-            key = PasswdWorker.getPasswd(context);
-
-            preferences = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
-
-            myAccount   = new MyAccount();
-
-            String modified = preferences.getString("modified", null);
-            if (modified == null) {
-                myAccount.modified = -1;
+    public boolean clearUser() {
+        try {
+            List<User> list = dao.queryForAll();
+            for (User u : list) {
+                int code = dao.delete(u);
+                Log.d(TAG, "clearUser: 删除返回值 = " + code);
             }
-            else {
-                String modifiedDecrypted = PasswdTool.desDecrypt(modified, key);
-                myAccount.modified = Long.parseLong(modifiedDecrypted);
-            }
+            dao = null;
+            user = null;
 
-            String name = preferences.getString("name", null);
-            myAccount.name = (name == null) ? null : PasswdTool.desDecrypt(name, key);
-
-            String token = preferences.getString("token", null);
-            myAccount.token = (token == null) ? null : PasswdTool.desDecrypt(token, key);
-
-            String nickname = preferences.getString("nickname", null);
-            myAccount.nickname = (nickname == null) ? null : PasswdTool.desDecrypt(nickname, key);
-
-            String gender = preferences.getString("gender", null);
-            myAccount.gender = (gender == null) ? null : PasswdTool.desDecrypt(gender, key);
-
-            String birthday = preferences.getString("birthday", null);
-            myAccount.birthday = (birthday == null) ? null : PasswdTool.desDecrypt(birthday, key);
-
-            String email = preferences.getString("email", null);
-            myAccount.email = (email == null) ? null : PasswdTool.desDecrypt(email, key);
-
-            String school = preferences.getString("school", null);
-            myAccount.school = (school == null) ? null : PasswdTool.desDecrypt(school, key);
-
-            String signature = preferences.getString("signature", null);
-            myAccount.signature = (signature == null) ? null : PasswdTool.desDecrypt(signature, key);
-
-            String headimage = preferences.getString("headimage", null);
-            myAccount.headimage = (headimage == null) ? null : PasswdTool.desDecrypt(headimage, key);
-
-            String password = preferences.getString("password", null);
-            myAccount.password = (password == null) ? null : PasswdTool.desDecrypt(password, key);
-
-            String isRemember = preferences.getString("isRemember", null);
-            String isRememberDecrypted = (isRemember == null) ? null : PasswdTool.desDecrypt(isRemember, key);
-            myAccount.isRemember = (isRememberDecrypted != null) && isRememberDecrypted.equals("true");
-
-            String autoLogin = preferences.getString("autoLogin", null);
-            String autoLoginDecrypted = (autoLogin == null) ? null : PasswdTool.desDecrypt(autoLogin, key);
-            myAccount.autoLogin = (autoLoginDecrypted != null) && autoLoginDecrypted.equals("true");
+            return true;
         }
-        else if(!packageName.equals(context.getApplicationContext().getPackageName())) {
-            return null;
+        catch (SQLException e) {
+            Log.e(TAG, "clearUser: ", e);
+            return false;
         }
-        return myAccount;
+    }
+
+    public boolean clearSetting() {
+        token = null;
+        password = null;
+        isRemember = false;
+        autoLogin = false;
+        boolean status = saveSetting();
+        Log.d(TAG, "clearSetting: status = " + status);
+        return status;
     }
 
 }

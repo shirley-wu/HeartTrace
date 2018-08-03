@@ -4,14 +4,10 @@ import android.util.Log;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.stmt.DeleteBuilder;
-import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
-import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.stmt.UpdateBuilder;
 import com.j256.ormlite.table.DatabaseTable;
 
-import java.nio.file.attribute.DosFileAttributes;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -155,7 +151,7 @@ public class Label {
         try {
             Dao<Label, Long> dao = helper.getDaoAccess(Label.class);
             Label label = dao.queryBuilder().where().
-                    eq("labelname", name).
+                    eq("labelname", name).and().
                     ge("status", 0).
                     queryForFirst();
             return label;

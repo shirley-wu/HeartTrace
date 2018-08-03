@@ -250,7 +250,7 @@ public class BottlefrontActivity extends AppCompatActivity {
     }
 
     public void initNavHeader(){
-        MyAccount myAccount = MyAccount.get(this);
+        MyAccount myAccount = new MyAccount(this);
         //Log.d("123",myAccount.getNickname());
         nickName.setText(myAccount.getNickname());
         String sig = myAccount.getSignature();

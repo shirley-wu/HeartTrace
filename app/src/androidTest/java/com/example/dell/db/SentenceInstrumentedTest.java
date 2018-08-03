@@ -105,6 +105,8 @@ public class SentenceInstrumentedTest {
         sentenceList = dao.queryBuilder().where().eq("text", updateText).query();
         assertEquals(1, sentenceList.size()); // TODO: not safe: assumes that there is no such text by wxq
         assertEquals(-1, sentenceList.get(0).getStatus());
+        sentenceList = Sentence.getAll(databaseHelper, true);
+        assertEquals(0, sentenceList.size());  // TODO: Certainly dangerous
         Log.d(TAG, "testSaveAndGetSentence: modified when deleting = " + sentence.getModified());
     }
 

@@ -191,6 +191,8 @@ public class DiaryOtherTest {
             assertEquals(-1, dl.getStatus());
             Log.d(TAG, "testGetAllLabel: diarylabel modified after deleting = " + dl.getModified());
         }
+
+        assertEquals(0, diary.getAllLabel(databaseHelper).size());
     }
 
     @Test
@@ -214,5 +216,7 @@ public class DiaryOtherTest {
         for(final Diary d : diaryList) {
             d.delete(databaseHelper);
         }
+        l = Diary.getAll(databaseHelper, false);
+        assertEquals(0, l.size());
     }
 }
