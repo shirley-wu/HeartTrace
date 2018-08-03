@@ -19,7 +19,7 @@ public class SyncReceiver extends BroadcastReceiver {
         Log.d(TAG, "onReceive: context = " + context);
         String message = intent.getStringExtra("message");
         Log.d(TAG, "onReceive: message = " + message);
-        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
 }
