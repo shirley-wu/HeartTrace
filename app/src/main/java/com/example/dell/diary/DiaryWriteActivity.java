@@ -134,6 +134,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private int flag = 1;
     private boolean labelProperty;
     private boolean isExisted;
+    private boolean isInsertingImg = false;
+    private boolean isFling = false;
+    private boolean isDeleting = false;
     private int labelSize;
     private int[] imgIds = {R.drawable.happy, R.drawable.normal, R.drawable.sad,
                             R.drawable.embarrassed, R.drawable.shocked, R.drawable.foolish,
@@ -409,6 +412,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                         String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
                         diaryDate.setText(date);
                         diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
+                        isFling = true;
                         diary_write.setText(Html.fromHtml(diary.getHtmlText()));
                         getImage(diary.getText());
                         setTextFormmat(diary);
@@ -424,6 +428,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
                         diary_write.setSelection(0);
                         getLabelsOfDiary(diary,helper);
+                        isFling = false;
                     }
                 }
                 else if (e2.getX() - e1.getX() > FLING_MIN_DISTANCE
@@ -441,6 +446,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                         String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
                         diaryDate.setText(date);
                         diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
+                        isFling = true;
                         diary_write.setText(Html.fromHtml(diary.getHtmlText()));
                         getImage(diary.getText());
                         setTextFormmat(diary);
@@ -456,6 +462,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
                         diary_write.setSelection(0);
                         getLabelsOfDiary(diary,helper);
+                        isFling = false;
                     }
                 }
                 return true;
@@ -1324,90 +1331,87 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
     private void editchange(Editable editable)
     {
-        switch (font_color)
-        {
-            case 1:
-                ForegroundColorSpan colorSpan_red = new ForegroundColorSpan(getResources().getColor(R.color.darkred));
-                editable.setSpan(colorSpan_red, start, start+count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                diary_write.setSelection(start+count);
-                break;
-            case 2:
-                ForegroundColorSpan colorSpan_orange = new ForegroundColorSpan(getResources().getColor(R.color.darkorange));
-                editable.setSpan(colorSpan_orange, start, start+count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                diary_write.setSelection(start+count);
-                break;
-            case 3:
-                ForegroundColorSpan colorSpan_pink = new ForegroundColorSpan(getResources().getColor(R.color.pink));
-                editable.setSpan(colorSpan_pink, start, start+count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                diary_write.setSelection(start+count);
-                break;
-            case 4:
-                ForegroundColorSpan colorSpan_green = new ForegroundColorSpan(getResources().getColor(R.color.darkgreen));
-                editable.setSpan(colorSpan_green, start, start+count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                diary_write.setSelection(start+count);
-                break;
-            case 5:
-                ForegroundColorSpan colorSpan_blue = new ForegroundColorSpan(getResources().getColor(R.color.deepskyblue));
-                editable.setSpan(colorSpan_blue, start, start+count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                diary_write.setSelection(start+count);
-                break;
-            case 6:
-                ForegroundColorSpan colorSpan_dark_blue = new ForegroundColorSpan(getResources().getColor(R.color.steelblue));
-                editable.setSpan(colorSpan_dark_blue, start, start+count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                diary_write.setSelection(start+count);
-                break;
-            case 7:
-                ForegroundColorSpan colorSpan_grey = new ForegroundColorSpan(getResources().getColor(R.color.dimgrey));
-                editable.setSpan(colorSpan_grey, start, start+count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                diary_write.setSelection(start+count);
-                break;
-            case 8:
-                ForegroundColorSpan colorSpan_black = new ForegroundColorSpan(getResources().getColor(R.color.black));
-                editable.setSpan(colorSpan_black, start, start+count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                diary_write.setSelection(start+count);
-                break;
-        }
-        switch (font_type)
-        {
-            case 1:
-                editable.setSpan(new TypefaceSpan("monospace"), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                break;
-            case 2:
-                editable.setSpan(new TypefaceSpan("serif"), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                break;
-            case 3:
-                editable.setSpan(new TypefaceSpan("sans-serif"), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                break;
-        }
+        Log.i("test",start+" "+count);
+        if(isInsertingImg == false && isFling == false && isDeleting == false) {
+            switch (font_color) {
+                case 1:
+                    ForegroundColorSpan colorSpan_red = new ForegroundColorSpan(getResources().getColor(R.color.darkred));
+                    editable.setSpan(colorSpan_red, start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    diary_write.setSelection(start + count);
+                    break;
+                case 2:
+                    ForegroundColorSpan colorSpan_orange = new ForegroundColorSpan(getResources().getColor(R.color.darkorange));
+                    editable.setSpan(colorSpan_orange, start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    diary_write.setSelection(start + count);
+                    break;
+                case 3:
+                    ForegroundColorSpan colorSpan_pink = new ForegroundColorSpan(getResources().getColor(R.color.pink));
+                    editable.setSpan(colorSpan_pink, start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    diary_write.setSelection(start + count);
+                    break;
+                case 4:
+                    ForegroundColorSpan colorSpan_green = new ForegroundColorSpan(getResources().getColor(R.color.darkgreen));
+                    editable.setSpan(colorSpan_green, start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    diary_write.setSelection(start + count);
+                    break;
+                case 5:
+                    ForegroundColorSpan colorSpan_blue = new ForegroundColorSpan(getResources().getColor(R.color.deepskyblue));
+                    editable.setSpan(colorSpan_blue, start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    diary_write.setSelection(start + count);
+                    break;
+                case 6:
+                    ForegroundColorSpan colorSpan_dark_blue = new ForegroundColorSpan(getResources().getColor(R.color.steelblue));
+                    editable.setSpan(colorSpan_dark_blue, start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    diary_write.setSelection(start + count);
+                    break;
+                case 7:
+                    ForegroundColorSpan colorSpan_grey = new ForegroundColorSpan(getResources().getColor(R.color.dimgrey));
+                    editable.setSpan(colorSpan_grey, start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    diary_write.setSelection(start + count);
+                    break;
+                case 8:
+                    ForegroundColorSpan colorSpan_black = new ForegroundColorSpan(getResources().getColor(R.color.black));
+                    editable.setSpan(colorSpan_black, start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    diary_write.setSelection(start + count);
+                    break;
+            }
+            switch (font_type) {
+                case 1:
+                    editable.setSpan(new TypefaceSpan("monospace"), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    break;
+                case 2:
+                    editable.setSpan(new TypefaceSpan("serif"), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    break;
+                case 3:
+                    editable.setSpan(new TypefaceSpan("sans-serif"), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    break;
+            }
 
-        switch (style)
-        {
-            case 1: //缩进
-                if(is_retract)
-                {
-                    editable.append(" ")
-                            .append(editable.toString())
-                            .append(editable.toString())
-                            .append(editable.toString());
-                    editable.setSpan(new LeadingMarginSpan.Standard(10, 0), 0, count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                }
-                else
-                {
-                    editable.append(" ")
-                            .append(editable.toString())
-                            .append(editable.toString())
-                            .append(editable.toString());
-                    editable.setSpan(new LeadingMarginSpan.Standard(0, 0), 0, count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                }
-                break;
-        }
-        if(is_underline)
-            editable.setSpan(new UnderlineSpan(), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        if(is_bold){
-            editable.setSpan(new StyleSpan(Typeface.BOLD), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        }
-        if(is_italic) {
-            editable.setSpan(new StyleSpan(Typeface.ITALIC), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            switch (style) {
+                case 1: //缩进
+                    if (is_retract) {
+                        editable.append(" ")
+                                .append(editable.toString())
+                                .append(editable.toString())
+                                .append(editable.toString());
+                        editable.setSpan(new LeadingMarginSpan.Standard(10, 0), 0, count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    } else {
+                        editable.append(" ")
+                                .append(editable.toString())
+                                .append(editable.toString())
+                                .append(editable.toString());
+                        editable.setSpan(new LeadingMarginSpan.Standard(0, 0), 0, count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    }
+                    break;
+            }
+            if (is_underline)
+                editable.setSpan(new UnderlineSpan(), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            if (is_bold) {
+                editable.setSpan(new StyleSpan(Typeface.BOLD), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+            if (is_italic) {
+                editable.setSpan(new StyleSpan(Typeface.ITALIC), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
         }
     }
 
@@ -1464,6 +1468,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                                 String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
                                 diaryDate.setText(date);
                                 diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
+                                isDeleting = true;
                                 diary_write.setText(Html.fromHtml(diary.getHtmlText()));
                                 getImage(diary.getText());
 
@@ -1479,12 +1484,13 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
                                 setTextFormmat(diary);
                                 getLabelsOfDiary(diary,helper);
-
+                                isDeleting = false;
                             } else {
                                 diary = diaryList.get(index);
                                 String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
                                 diaryDate.setText(date);
                                 diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
+                                isDeleting = true;
                                 diary_write.setText(Html.fromHtml(diary.getHtmlText()));
                                 getImage(diary.getText());
                                 setTextFormmat(diary);
@@ -1500,6 +1506,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                                 Log.i("test", Html.toHtml(diary_write.getText()));
 
                                 getLabelsOfDiary(diary,helper);
+                                isDeleting = false;
                             }
                         }
                     });
@@ -1554,6 +1561,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
     @TargetApi(19)
     private void handleImageOnKitKat(Intent data) {
+        isInsertingImg = true;
         Uri uri = data.getData();
         Bitmap bitmap = null;
         try {
@@ -1561,7 +1569,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         String imagePath = saveBitmap(DiaryWriteActivity.this,bitmap);
         SpannableString imageSpan = new SpannableString(imagePath);
         imageSpan.setSpan(new ImageSpan(bitmap) , 0, imageSpan.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -1570,6 +1577,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         diary_write.setText(editable);
         diary_write.append("\n");
         diary_write.setSelection(diary_write.getText().length());
+        isInsertingImg = false;
     }
 
     public Bitmap getBitmapFromUri(Activity ac, Uri uri) throws FileNotFoundException, IOException {
