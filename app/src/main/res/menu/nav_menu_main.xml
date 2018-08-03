@@ -32,6 +32,14 @@
         android:id="@+id/sync_setting"
         android:icon = "@drawable/sync_gray"
         android:title = "同步设置"/>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id = "@+id/delete_all"
+            android:icon="@drawable/delete_all"
+            android:title = "删除本地数据"/>
+    </group>
+
     <item
         android:id = "@+id/exit"
         android:icon="@drawable/exit_black"

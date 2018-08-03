@@ -26,6 +26,8 @@ import android.net.LinkAddress;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -40,6 +42,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -298,7 +301,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                         Intent intent3 = new Intent(DiaryWriteActivity.this,TimeLineActivity.class);
                         startActivity(intent3);
                         break;
-
+                    case R.id.delete_all:
+                        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+                        helper.clearAll();
+                        break;
                     case R.id.sync_setting:
                         Intent intent4 = new Intent(DiaryWriteActivity.this, SyncActivity.class);
                         startActivity(intent4);
