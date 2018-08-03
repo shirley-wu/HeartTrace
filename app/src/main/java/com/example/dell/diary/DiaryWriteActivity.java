@@ -306,11 +306,12 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                         dialog.setTitle("提示");
                         dialog.setMessage("你确定要删除所有数据吗？");
                         dialog.setCancelable(true);
-
                         dialog.setPositiveButton("确认", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
                                 helper.clearAll();
+                                index = 0;
+                                diaryList.clear();
                                 emptyImage.setVisibility(View.VISIBLE);
                                 font_set.setVisibility(View.INVISIBLE);
                                 insert_image.setVisibility(View.INVISIBLE);
