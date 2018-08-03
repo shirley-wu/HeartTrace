@@ -67,6 +67,7 @@ public class CollectSAdapter extends RecyclerView.Adapter<CollectSAdapter.ViewHo
                 intent.putExtra(TicketEditActivity.SENTENCE_THIS, sentence);
                 intent.putExtra(TicketEditActivity.NOTE_EDITABLE, "false");
                 intent.putExtra(TicketEditActivity.NOTE_NEW, "false");
+                intent.putExtra(TicketEditActivity.TYPE, "ordinary");
                 Activity activity = (Activity) mContext;
                 activity.startActivityForResult(intent,2);
             }
@@ -124,7 +125,7 @@ public class CollectSAdapter extends RecyclerView.Adapter<CollectSAdapter.ViewHo
     public void deleteSentenceLike(int position){
         DatabaseHelper helper = new DatabaseHelper(mContext);
         Sentence sentence = mfavoriteSList.get(position);
-        sentence.setLike(false);
+        sentence.setIslike(false);
         sentence.update(helper);
         mfavoriteSList=Sentence.getAllLike(helper, false);
         notifyDataSetChanged();

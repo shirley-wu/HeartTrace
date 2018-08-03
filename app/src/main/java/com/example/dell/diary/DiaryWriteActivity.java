@@ -61,6 +61,7 @@ import android.text.style.StyleSpan;
 import android.text.style.TypefaceSpan;
 import android.text.style.UnderlineSpan;
 import android.util.AttributeSet;
+import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -79,13 +80,16 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.NumberPicker;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.dell.auth.MyAccount;
 import com.example.dell.db.DatabaseHelper;
 import com.example.dell.db.Diary;
 import com.example.dell.db.Label;
+import com.j256.ormlite.stmt.query.In;
 
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
 
@@ -109,6 +113,8 @@ import java.util.ListIterator;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.example.dell.diary.R.drawable.background1;
 
@@ -160,7 +166,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private LinearLayout date_layout;
     private LinearLayout set_layout;
     private ConstraintLayout floatingButtons;
-    private DiscreteSeekBar set_size;
+    private NumberPicker set_size;
     private ImageButton confirm;
     private int start=0;
     private int count=0;
@@ -178,6 +184,14 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private TextView set_font1;
     private TextView set_font2;
     private TextView set_font3;
+    private ImageButton font_red;
+    private ImageButton font_orange;
+    private ImageButton font_pink;
+    private ImageButton font_green;
+    private ImageButton font_blue;
+    private ImageButton font_dark_blue;
+    private ImageButton font_grey;
+    private ImageButton font_black;
     private ImageButton set_center;
     private ImageButton set_left;
     private ImageButton set_right;
@@ -212,6 +226,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private FloatingActionButton like;
     private FloatingActionButton add;
 
+    private CircleImageView headImage;
+    private TextView nickName;
+    private TextView personalSignature;
+
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
 
     private static String[] PERMISSIONS_STORAGE = {
@@ -234,20 +252,23 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_write);
 
+
         getView();
         setOnListener();
         init();
+        initNavHeader();
 
 
 //        //initViewPage();
         mGestureDetector = new GestureDetector(new MyGestureListener()); //使用派生自OnGestureListener
 
         edit_layout.setOnTouchListener(this);
-        edit_layout.setFocusable(true);
-        edit_layout.setClickable(true);
-        edit_layout.setLongClickable(true);
+        //edit_layout.setFocusable(true);
+        //edit_layout.setClickable(true);
+        //edit_layout.setLongClickable(true);
 
         diary_write.setOnTouchListener(this);
+
 
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -273,21 +294,62 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                         Intent intent3 = new Intent(DiaryWriteActivity.this,TimeLineActivity.class);
                         startActivity(intent3);
                         break;
+
                     case R.id.sync_setting:
                         Intent intent4 = new Intent(DiaryWriteActivity.this, SyncActivity.class);
                         startActivity(intent4);
                         break;
+
+                    case R.id.exit:
+                        MyAccount myAccount = MyAccount.get(DiaryWriteActivity.this);
+                        myAccount.setAutoLogin(false);
+                        Intent intent5 = new Intent(DiaryWriteActivity.this,LoginActivity.class);
+                        intent5.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent5);
+
                 }
                 return true;
             }
         });
     }
+
+    @Override
     protected void onRestart(){
         super.onRestart();
-        Log.d("restart",originType);
-        reStartInit();
+
+        addDiary.setVisibility(View.INVISIBLE);
+        enterBottle.setVisibility(View.INVISIBLE);
+        like.setVisibility(View.INVISIBLE);
+        edit.setVisibility(View.INVISIBLE);
+        initNavHeader();
     }
 
+    public void initNavHeader(){
+        MyAccount myAccount = MyAccount.get(this);
+        //Log.d("123",myAccount.getNickname());
+        nickName.setText(myAccount.getNickname());
+        String sig = myAccount.getSignature();
+        String imageID = myAccount.getHeadimage();
+        if(sig == null){
+            personalSignature.setText("一切都在慢慢变好。");
+        }
+        else{
+            personalSignature.setText(sig);
+        }
+        if(imageID == null){
+            headImage.setImageResource(R.drawable.panda);
+        }
+        else{
+            //headImage.setImageResource(imageID);
+            //headImage.setImageResource(R.drawable.panda);
+            if (imageID != "") {
+                byte[] bytes = Base64.decode(imageID.getBytes(), 1);
+                //  byte[] bytes =headPic.getBytes();
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                headImage.setImageBitmap(bitmap);
+            }
+        }
+    }
     public boolean dispatchTouchEvent(MotionEvent ev){
         //让GestureDetector响应触碰事件
         mGestureDetector.onTouchEvent(ev);
@@ -356,6 +418,17 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                         diary_write.setText(Html.fromHtml(diary.getHtmlText()));
                         getImage(diary.getText());
                         setTextFormmat(diary);
+
+                        //clear color span
+                        ForegroundColorSpan[] colorSpans= diary_write.getText().getSpans(0, diary_write.length(), ForegroundColorSpan.class);
+                        for(int i = 0; i < colorSpans.length; i++)
+                            diary_write.getText().removeSpan(colorSpans[i]);
+                        //set color span
+                        int[] colorSpanInfo = getTextColorInfo(diary.getHtmlText());
+                        setColorSpan(colorSpanInfo);
+                        Log.i("test", Html.toHtml(diary_write.getText()));
+
+                        diary_write.setSelection(0);
                         getLabelsOfDiary(diary,helper);
                     }
                 }
@@ -377,6 +450,17 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                         diary_write.setText(Html.fromHtml(diary.getHtmlText()));
                         getImage(diary.getText());
                         setTextFormmat(diary);
+
+                        //clear color span
+                        ForegroundColorSpan[] colorSpans= diary_write.getText().getSpans(0, diary_write.length(), ForegroundColorSpan.class);
+                        for(int i = 0; i < colorSpans.length; i++)
+                            diary_write.getText().removeSpan(colorSpans[i]);
+                        //set color span
+                        int[] colorSpanInfo = getTextColorInfo(diary.getHtmlText());
+                        setColorSpan(colorSpanInfo);
+                        Log.i("test", Html.toHtml(diary_write.getText()));
+
+                        diary_write.setSelection(0);
                         getLabelsOfDiary(diary,helper);
                     }
                 }
@@ -400,8 +484,15 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 //        vp.setAdapter(mFragmentAdapter);
 //        vp.setCurrentItem(1);
     }
+
     public void getView()
     {
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navView = (NavigationView)findViewById(R.id.nav_view);
+        View headerLayout = navView.getHeaderView(0);
+        nickName = (TextView)headerLayout.findViewById(R.id.nick_name);
+        personalSignature = (TextView)headerLayout.findViewById(R.id.personal_signature);
+        headImage = (CircleImageView)headerLayout.findViewById(R.id.icon_image);
         drawer = (android.support.design.widget.CoordinatorLayout) findViewById(R.id.diaryWriteLayout);
         floatingButtons = (ConstraintLayout)findViewById(R.id.floating_buttons);
         addDiary = (FloatingActionButton)findViewById(R.id.add_diary);
@@ -413,7 +504,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         edit_layout = (LinearLayout) findViewById(R.id.edit_layout);
         date_layout = (LinearLayout) findViewById(R.id.date_layout);
         set_layout = (LinearLayout)findViewById(R.id.settings_column);
-        set_size = (DiscreteSeekBar) findViewById(R.id.set_size);
+        set_size = (NumberPicker) findViewById(R.id.set_size);
         confirm = (ImageButton) findViewById(R.id.confirm);
         font_set = (ImageButton) findViewById(R.id.font_setting);
         theme_set = (ImageButton) findViewById(R.id.theme_setting) ;
@@ -422,6 +513,14 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         set_font1 = (TextView) findViewById(R.id.font1);
         set_font2 = (TextView) findViewById(R.id.font2);
         set_font3 = (TextView) findViewById(R.id.font3);
+        font_red = (ImageButton) findViewById(R.id.font_red);
+        font_orange = (ImageButton) findViewById(R.id.font_orange);
+        font_pink = (ImageButton) findViewById(R.id.font_pink);
+        font_green = (ImageButton) findViewById(R.id.font_green);
+        font_blue = (ImageButton) findViewById(R.id.font_blue);
+        font_dark_blue = (ImageButton) findViewById(R.id.font_dark_blue);
+        font_grey = (ImageButton) findViewById(R.id.font_grey);
+        font_black = (ImageButton) findViewById(R.id.font_black);
         background1 = (ImageView) findViewById(R.id.background1);
         background2 = (ImageView) findViewById(R.id.background2);
         background3 = (ImageView) findViewById(R.id.background3);
@@ -495,22 +594,16 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
         });
         edit_layout.setOnClickListener(this);
-        set_size.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
-            @Override
-            public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
-                float text_size = (float)4.0*(float)set_size.getProgress();
-                diary_write.setTextSize(text_size);
-                Log.i("seekbar", text_size + " " +diary_write.getTextSize());
-            }
-
-            @Override
-            public void onStartTrackingTouch(DiscreteSeekBar seekBar) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(DiscreteSeekBar seekBar) {
-            }
-        });
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            set_size.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                @Override
+                public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                    diary_write.setTextSize(newVal*4);
+                }
+            });
+        }
+        headImage.setOnClickListener(this);
+        nickName.setOnClickListener(this);
         add.setOnClickListener(this);
         addDiary.setOnClickListener(this);
         enterBottle.setOnClickListener(this);
@@ -522,6 +615,14 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         set_font1.setOnClickListener(this);
         set_font2.setOnClickListener(this);
         set_font3.setOnClickListener(this);
+        font_red.setOnClickListener(this);
+        font_orange.setOnClickListener(this);
+        font_pink.setOnClickListener(this);
+        font_green.setOnClickListener(this);
+        font_blue.setOnClickListener(this);
+        font_dark_blue.setOnClickListener(this);
+        font_grey.setOnClickListener(this);
+        font_black.setOnClickListener(this);
         set_center.setOnClickListener(this);
         set_left.setOnClickListener(this);
         set_right.setOnClickListener(this);
@@ -558,9 +659,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         imageItems.add(diaryIcon3);
         imageItems.add(diaryIcon4);
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar_diary_content);
-        toolbar.setTitle("心迹");
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        navView = (NavigationView)findViewById(R.id.nav_view);
+        toolbar.setTitle("心·迹");
         diaryDate = (TextView)findViewById(R.id.diary_content_date);
         diaryWeekday = (TextView)findViewById(R.id.diary_content_weekday);
         setSupportActionBar(toolbar);
@@ -636,8 +735,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             diary_write.setText("");
             diaryDate.setText("");
             diaryWeekday.setText("");
-            diary_write.setFocusable(false);
-            diary_write.setCursorVisible(false);
+            diary_write.setEnabled(false);
             floatingButtons.setVisibility(View.VISIBLE);
             addDiary.setVisibility(View.INVISIBLE);
             enterBottle.setVisibility(View.INVISIBLE);
@@ -646,16 +744,27 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
         }
         else {
-            Log.i("show",diary.getHtmlText());
+            Log.i("show", diary.getHtmlText());
             diary_write.setText(Html.fromHtml(diary.getHtmlText()));
             getImage(diary.getText());
             setTextFormmat(diary);
+
+            //clear color span
+            ForegroundColorSpan[] colorSpans= diary_write.getText().getSpans(0, diary_write.length(), ForegroundColorSpan.class);
+            for(int i = 0; i < colorSpans.length; i++)
+                diary_write.getText().removeSpan(colorSpans[i]);
+            //set color span
+            int[] colorSpanInfo = getTextColorInfo(diary.getHtmlText());
+            setColorSpan(colorSpanInfo);
+            Log.i("test", Html.toHtml(diary_write.getText()));
+
+            diary_write.setSelection(0);
+
             getLabelsOfDiary(diary,helper);
             String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
             diaryDate.setText(date);
             diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
-            diary_write.setFocusable(false);
-            diary_write.setCursorVisible(false);
+            diary_write.setEnabled(false);
             theme_set.setVisibility(View.INVISIBLE);
             font_set.setVisibility(View.INVISIBLE);
             insert_image.setVisibility(View.INVISIBLE);
@@ -667,111 +776,42 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             enterBottle.setVisibility(View.INVISIBLE);
             like.setVisibility(View.INVISIBLE);
             edit.setVisibility(View.INVISIBLE);
-
-            diary_write.setSelection(diary_write.getText().length());
         }
-//
+        font_red.setSelected(false);
+        font_pink.setSelected(false);
+        font_orange.setSelected(false);
+        font_green.setSelected(false);
+        font_blue.setSelected(false);
+        font_dark_blue.setSelected(false);
+        font_grey.setSelected(false);
+        font_black.setSelected(true);
 
-    }
+        set_font1.setSelected(false);
+        set_font2.setSelected(true);
+        set_font3.setSelected(false);
 
-    public void reStartInit(){
-        imageItems.add(diaryIcon1);
-        imageItems.add(diaryIcon2);
-        imageItems.add(diaryIcon3);
-        imageItems.add(diaryIcon4);
+        set_left.setSelected(true);
+        set_center.setSelected(false);
+        set_right.setSelected(false);
 
-        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-        if(originType.equals("welcome")){
-            diaryList = Diary.getAll(helper,true);
-            if(diaryList.size() == 0){
+        font_padding1.setSelected(false);
+        font_padding2.setSelected(true);
+        font_padding3.setSelected(false);
 
-            }
-            else{
-                index = diaryList.size()-1;
-                diary = diaryList.get(index);
-            }
-        }
-        else if(originType.equals("diary")){
-            diaryList = Diary.getAll(helper,true);
-            //diary = (Diary) intent.getSerializableExtra("diary_list");
-            diary = diaryList.get(index);
-            //labelList = Label.getAllLabel(helper);
-        }
-        else if(originType.equals("add_diary")){
-            diaryList = Diary.getAll(helper,true);
-        }
-        else if(originType.equals("search")) {
-            // Get the Bundle Object
+        line_spacing1.setSelected(true);
+        line_spacing2.setSelected(false);
+        line_spacing3.setSelected(false);
 
-            Bundle bundleObject = getIntent().getExtras();
-//            // Get ArrayList Bundle
-            diaryList = (ArrayList<Diary>) bundleObject.getSerializable("search_list");
-            Collections.reverse(diaryList);
-            diary = diaryList.get(index);
-        }
-        else if(originType.equals("like")){
-            diaryList = Diary.getAllLike(helper, false);
-            diary = diaryList.get(index);
+        set_underline.setSelected(false);
+        set_bold.setSelected(false);
+        set_italic.setSelected(false);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            set_size.setMinValue(1);
+            set_size.setMaxValue(10);
+            set_size.setValue(5);
         }
 
-        if(originType.equals("add_diary")){
-            Date date = new Date();
-            String today = (date.getYear()+1900)+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日";
-            diaryDate.setText(today);
-            diaryWeekday.setText(weekList.get(date.getDay()));
-            //diaryIcon.setImageDrawable(setTag(tagId));
-            actionBar.hide();
-
-            floatingButtons.setVisibility(View.INVISIBLE);
-            emptyImage.setVisibility(View.INVISIBLE);
-
-            initTextFormmat();
-        }
-        else if(diaryList.size() == 0){
-            emptyImage.setVisibility(View.VISIBLE);
-            theme_set.setVisibility(View.INVISIBLE);
-            font_set.setVisibility(View.INVISIBLE);
-            insert_image.setVisibility(View.INVISIBLE);
-            confirm.setVisibility(View.INVISIBLE);
-
-            diary_write.setText("");
-            diaryDate.setText("");
-            diaryWeekday.setText("");
-            diary_write.setFocusable(false);
-            diary_write.setCursorVisible(false);
-            floatingButtons.setVisibility(View.VISIBLE);
-            addDiary.setVisibility(View.INVISIBLE);
-            enterBottle.setVisibility(View.INVISIBLE);
-            like.setVisibility(View.INVISIBLE);
-            edit.setVisibility(View.INVISIBLE);
-        }
-        else {
-            Log.i("show",diary.getHtmlText());
-            diary_write.setText(Html.fromHtml(diary.getHtmlText()));
-            getImage(diary.getText());
-            setTextFormmat(diary);
-            getLabelsOfDiary(diary,helper);
-            String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
-            diaryDate.setText(date);
-            diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
-            diary_write.setFocusable(false);
-            diary_write.setCursorVisible(false);
-
-            theme_set.setVisibility(View.INVISIBLE);
-            font_set.setVisibility(View.INVISIBLE);
-            insert_image.setVisibility(View.INVISIBLE);
-            confirm.setVisibility(View.INVISIBLE);
-
-            emptyImage.setVisibility(View.INVISIBLE);
-            floatingButtons.setVisibility(View.VISIBLE);
-            addDiary.setVisibility(View.INVISIBLE);
-            enterBottle.setVisibility(View.INVISIBLE);
-            like.setVisibility(View.INVISIBLE);
-            edit.setVisibility(View.INVISIBLE);
-
-            diary_write.setSelection(diary_write.getText().length());
-        }
-//
     }
 
     private void initTextFormmat()
@@ -795,6 +835,11 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View view) {
         DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
         switch (view.getId()) {
+            case R.id.nick_name:
+            case R.id.icon_image:
+                Intent intentP = new Intent(DiaryWriteActivity.this,PersonalInformationActivity.class);
+                startActivity(intentP);
+                break;
             case R.id.diary_content_icon:
                 DisplayMetrics displayMetrics1 = new DisplayMetrics();
                 getWindowManager().getDefaultDisplay().getMetrics(displayMetrics1);
@@ -805,10 +850,12 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 for(int i=0;i<imageItems.size();i++) {
                     float radius = (float) screenWidth / 12;
                     float distanceX = (float) (flag * radius * (i + 1));
-                    objAnimatorX = ObjectAnimator.ofFloat(imageItems.get(i), "x", imageItems.get(i).getX(), imageItems.get(i).getX() + distanceX);
-                    objAnimatorX.setDuration(120);
-                    objAnimatorX.setStartDelay(50);
-                    objAnimatorX.start();
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                        objAnimatorX = ObjectAnimator.ofFloat(imageItems.get(i), "x", imageItems.get(i).getX(), imageItems.get(i).getX() + distanceX);
+                        objAnimatorX.setDuration(120);
+                        objAnimatorX.setStartDelay(50);
+                        objAnimatorX.start();
+                    }
                     if(flag == 1) imageItems.get(i).setVisibility(View.VISIBLE);
                     else if(flag == -1) imageItems.get(i).setVisibility(View.INVISIBLE);
                 }
@@ -816,7 +863,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.add:
                 if(addDiary.getVisibility() == View.INVISIBLE) {
-                    if(emptyImage.getVisibility() == View.VISIBLE || !diary.getLike()){
+                    if(emptyImage.getVisibility() == View.VISIBLE || !diary.getIslike()){
                         like.setImageResource(R.drawable.unlike);
                     }
                     else{
@@ -840,9 +887,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.edit:
                 if(emptyImage.getVisibility() == View.INVISIBLE){
-                    diary_write.setFocusable(true);
-                    diary_write.setFocusableInTouchMode(true);
-                    diary_write.setCursorVisible(true);
+                    diary_write.setEnabled(true);
+                    diary_write.setSelection(diary_write.getText().length());
                     theme_set.setVisibility(View.VISIBLE);
                     font_set.setVisibility(View.VISIBLE);
                     insert_image.setVisibility(View.VISIBLE);
@@ -854,14 +900,14 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.like:
                 if(emptyImage.getVisibility() == View.INVISIBLE){
-                    if(diary.getLike()) {
+                    if(diary.getIslike()) {
                         like.setImageResource(R.drawable.unlike);
-                        diary.setLike(false);
+                        diary.setIslike(false);
                         diary.update(helper);
                     }
                     else{
                         like.setImageResource(R.drawable.like);
-                        diary.setLike(true);
+                        diary.setIslike(true);
                         diary.update(helper);
                     }
                 }
@@ -873,11 +919,14 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 //finish();
                 break;
             case R.id.edit_layout:
+            case R.id.diaryWrite:
                 if(confirm.getVisibility()==View.VISIBLE){
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     if (imm != null) {
                         diary_write.requestFocus();
-                        imm.showSoftInput(diary_write,0);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CUPCAKE) {
+                            imm.showSoftInput(diary_write,0);
+                        }
                     }
                 }
                 else{
@@ -895,8 +944,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 if(originType.equals("add_diary")){
                     diary = new Diary();
                     diary.setText(diary_write.getText().toString());
-                    htmlText = colorSpanAdjust(Html.toHtml(diary_write.getText()));
-                    diary.setHtmlText(htmlText);
+                    //htmlText = colorSpanAdjust(Html.toHtml(diary_write.getText()));
+                    diary.setHtmlText(Html.toHtml(diary_write.getText()));
                     diary.setTextSize(diary_write.getTextSize()/displayMetrics.density);
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         diary.setLetterSpacing(diary_write.getLetterSpacing());
@@ -916,8 +965,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 }
                 else{
                     diary.setText(diary_write.getText().toString());
-                    htmlText = colorSpanAdjust(Html.toHtml(diary_write.getText()));
-                    diary.setHtmlText(htmlText);
+                    //htmlText = colorSpanAdjust(Html.toHtml(diary_write.getText()));
+                    diary.setHtmlText(Html.toHtml(diary_write.getText()));
                     diary.setTextSize(diary_write.getTextSize()/displayMetrics.density);
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         diary.setLetterSpacing(diary_write.getLetterSpacing());
@@ -932,10 +981,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     diaryList.remove(index);
                     diaryList.add(index,diary);
                 }
-                //CharSequence charSequence = Html.fromHtml(Html.toHtml(diary_write.getText()));
-                //Toast.makeText(DiaryWriteActivity.this,charSequence,Toast.LENGTH_SHORT).show();
-                diary_write.setFocusable(false);
-                diary_write.setCursorVisible(false);
+                diary_write.setEnabled(false);
                 theme_set.setVisibility(View.INVISIBLE);
                 font_set.setVisibility(View.INVISIBLE);
                 insert_image.setVisibility(View.INVISIBLE);
@@ -979,9 +1025,11 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 drawer.setBackgroundResource(R.drawable.background8);
                 break;
             case R.id.font1:
-                set_font1.setBackgroundColor(Color.GRAY);
-                set_font2.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                set_font3.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                if(set_font1.isSelected() == false){
+                    set_font1.setSelected(true);
+                    set_font2.setSelected(false);
+                    set_font3.setSelected(false);
+                }
                 if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
                 {
                     Editable editable = diary_write.getText();
@@ -991,9 +1039,11 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     font_type = 1;
                 break;
             case R.id.font2:
-                set_font2.setBackgroundColor(Color.GRAY);
-                set_font1.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                set_font3.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                if(set_font2.isSelected() == false){
+                    set_font2.setSelected(true);
+                    set_font1.setSelected(false);
+                    set_font3.setSelected(false);
+                }
                 if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
                 {
                     Editable editable = diary_write.getText();
@@ -1003,9 +1053,11 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     font_type = 2;
                 break;
             case R.id.font3:
-                set_font3.setBackgroundColor(Color.GRAY);
-                set_font1.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                set_font2.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                if(set_font3.isSelected() == false){
+                    set_font3.setSelected(true);
+                    set_font1.setSelected(false);
+                    set_font2.setSelected(false);
+                }
                 if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
                 {
                     Editable editable = diary_write.getText();
@@ -1014,140 +1066,259 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 else
                     font_type = 3;
                 break;
+            case R.id.font_red:
+                if(font_red.isSelected() == false){
+                    font_red.setSelected(true);
+                    font_orange.setSelected(false);
+                    font_pink.setSelected(false);
+                    font_green.setSelected(false);
+                    font_blue.setSelected(false);
+                    font_dark_blue.setSelected(false);
+                    font_grey.setSelected(false);
+                    font_black.setSelected(false);
+                }
+                if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
+                {
+                    Editable editable = diary_write.getText();
+                    editable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.darkred)), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+                else
+                    font_color = 1;
+                break;
+            case R.id.font_orange:
+                if(font_orange.isSelected() == false){
+                    font_orange.setSelected(true);
+                    font_red.setSelected(false);
+                    font_pink.setSelected(false);
+                    font_green.setSelected(false);
+                    font_blue.setSelected(false);
+                    font_dark_blue.setSelected(false);
+                    font_grey.setSelected(false);
+                    font_black.setSelected(false);
+                }
+                if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
+                {
+                    Editable editable = diary_write.getText();
+                    editable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.darkorange)), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+                else
+                    font_color = 2;
+                break;
+            case R.id.font_pink:
+                if(font_pink.isSelected() == false){
+                    font_pink.setSelected(true);
+                    font_red.setSelected(false);
+                    font_orange.setSelected(false);
+                    font_green.setSelected(false);
+                    font_blue.setSelected(false);
+                    font_dark_blue.setSelected(false);
+                    font_grey.setSelected(false);
+                    font_black.setSelected(false);
+                }
+                if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
+                {
+                    Editable editable = diary_write.getText();
+                    editable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.pink)), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+                else
+                    font_color = 3;
+                break;
+            case R.id.font_green:
+                if(font_green.isSelected() == false){
+                    font_green.setSelected(true);
+                    font_red.setSelected(false);
+                    font_orange.setSelected(false);
+                    font_pink.setSelected(false);
+                    font_blue.setSelected(false);
+                    font_dark_blue.setSelected(false);
+                    font_grey.setSelected(false);
+                    font_black.setSelected(false);
+                }
+                if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
+                {
+                    Editable editable = diary_write.getText();
+                    editable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.darkgreen)), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+                else
+                    font_color = 4;
+                break;
+            case R.id.font_blue:
+                if(font_blue.isSelected() == false){
+                    font_blue.setSelected(true);
+                    font_red.setSelected(false);
+                    font_orange.setSelected(false);
+                    font_pink.setSelected(false);
+                    font_green.setSelected(false);
+                    font_dark_blue.setSelected(false);
+                    font_grey.setSelected(false);
+                    font_black.setSelected(false);
+                }
+                if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
+                {
+                    Editable editable = diary_write.getText();
+                    editable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.deepskyblue)), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+                else
+                    font_color = 5;
+                break;
+            case R.id.font_dark_blue:
+                if(font_dark_blue.isSelected() == false){
+                    font_dark_blue.setSelected(true);
+                    font_red.setSelected(false);
+                    font_orange.setSelected(false);
+                    font_pink.setSelected(false);
+                    font_green.setSelected(false);
+                    font_blue.setSelected(false);
+                    font_grey.setSelected(false);
+                    font_black.setSelected(false);
+                }
+                if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
+                {
+                    Editable editable = diary_write.getText();
+                    editable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.steelblue)), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+                else
+                    font_color = 6;
+                break;
+            case R.id.font_grey:
+                if(font_grey.isSelected() == false){
+                    font_grey.setSelected(true);
+                    font_red.setSelected(false);
+                    font_orange.setSelected(false);
+                    font_pink.setSelected(false);
+                    font_green.setSelected(false);
+                    font_blue.setSelected(false);
+                    font_dark_blue.setSelected(false);
+                    font_black.setSelected(false);
+                }
+                if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
+                {
+                    Editable editable = diary_write.getText();
+                    editable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.dimgrey)), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+                else
+                    font_color = 7;
+                break;
+            case R.id.font_black:
+                if(font_black.isSelected() == false){
+                    font_black.setSelected(true);
+                    font_red.setSelected(false);
+                    font_orange.setSelected(false);
+                    font_pink.setSelected(false);
+                    font_green.setSelected(false);
+                    font_blue.setSelected(false);
+                    font_dark_blue.setSelected(false);
+                    font_grey.setSelected(false);
+                }
+                if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
+                {
+                    Editable editable = diary_write.getText();
+                    editable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.black)), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+                else
+                    font_color = 8;
+                break;
             case R.id.set_center:
+                if(set_center.isSelected() == false) {
+                    set_center.setSelected(true);
+                    set_left.setSelected(false);
+                    set_right.setSelected(false);
+                }
                 Editable editable_align_center = diary_write.getText();
                 editable_align_center.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), 0, count, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                set_center.setBackgroundColor(Color.GRAY);
-                set_right.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                set_left.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 style=2;
                 break;
             case R.id.set_left:
+                if(set_left.isSelected() == false) {
+                    set_left.setSelected(true);
+                    set_center.setSelected(false);
+                    set_right.setSelected(false);
+                }
                 Editable editable_align_left = diary_write.getText();
                 editable_align_left.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), 0, count, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                set_left.setBackgroundColor(Color.GRAY);
-                set_right.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                set_center.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 style=3;
                 break;
             case R.id.set_right:
+                if(set_right.isSelected() == false) {
+                    set_right.setSelected(true);
+                    set_left.setSelected(false);
+                    set_center.setSelected(false);
+                }
                 Editable editable_align_right = diary_write.getText();
                 editable_align_right.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_OPPOSITE), 0, count, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                set_right.setBackgroundColor(Color.GRAY);
-                set_left.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                set_center.setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 style=4;
                 break;
             case R.id.font_padding1:
-                font_padding1.setBackgroundColor(Color.GRAY);
-                font_padding2.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                font_padding3.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                if(font_padding1.isSelected() == false){
+                    font_padding1.setSelected(true);
+                    font_padding2.setSelected(false);
+                    font_padding3.setSelected(false);
+                }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     diary_write.setLetterSpacing(0);
                 }
                 break;
             case R.id.font_padding2:
-                font_padding2.setBackgroundColor(Color.GRAY);
-                font_padding1.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                font_padding3.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                if(font_padding2.isSelected() == false){
+                    font_padding2.setSelected(true);
+                    font_padding1.setSelected(false);
+                    font_padding3.setSelected(false);
+                }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     diary_write.setLetterSpacing((float) 0.2);
                 }
                 break;
             case R.id.font_padding3:
-                font_padding3.setBackgroundColor(Color.GRAY);
-                font_padding1.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                font_padding2.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                if(font_padding3.isSelected() == false){
+                    font_padding3.setSelected(true);
+                    font_padding1.setSelected(false);
+                    font_padding2.setSelected(false);
+                }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     diary_write.setLetterSpacing((float) 0.5);
                 }
                 break;
             case R.id.line_spacing1:
-                line_spacing1.setBackgroundColor(Color.GRAY);
-                line_spacing2.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                line_spacing3.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                if(line_spacing1.isSelected() == false){
+                    line_spacing1.setSelected(true);
+                    line_spacing2.setSelected(false);
+                    line_spacing3.setSelected(false);
+                }
                 diary_write.setLineSpacing(0,1);
                 break;
             case R.id.line_spacing2:
-                line_spacing2.setBackgroundColor(Color.GRAY);
-                line_spacing1.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                line_spacing3.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                if(line_spacing2.isSelected() == false){
+                    line_spacing2.setSelected(true);
+                    line_spacing1.setSelected(false);
+                    line_spacing3.setSelected(false);
+                }
                 diary_write.setLineSpacing(5,1);
                 break;
             case R.id.line_spacing3:
-                line_spacing3.setBackgroundColor(Color.GRAY);
-                line_spacing1.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                line_spacing2.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                if(line_spacing3.isSelected() == false){
+                    line_spacing3.setSelected(true);
+                    line_spacing1.setSelected(false);
+                    line_spacing2.setSelected(false);
+                }
                 diary_write.setLineSpacing(10,1);
                 break;
             case R.id.underline:
                 is_underline=!is_underline;
-                if(is_underline) {
-                    if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
-                    {
-                        Editable editable = diary_write.getText();
-                        editable.setSpan(new UnderlineSpan(), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    }
-                    set_underline.setBackgroundColor(Color.GRAY);
-                }
-                else {
-                    if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
-                    {
-                        Editable editable = diary_write.getText();
-                        for (Object o : editable.getSpans(diary_write.getSelectionStart(), diary_write.getSelectionEnd(), UnderlineSpan.class)) {
-                            editable.removeSpan(o);
-                        }
-                    }
-                    set_underline.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                }
+                set_underline.setSelected(is_underline);
+                if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
+                    setSelectedUnderstyleStyle();
                 break;
             case R.id.bold:
                 is_bold=!is_bold;
-                if(is_bold){
-                    if (diary_write.getSelectionStart() != diary_write.getSelectionEnd())
-                    {
-                        Editable editable = diary_write.getText();
-                        editable.setSpan(new StyleSpan(Typeface.BOLD), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    }
-                    set_bold.setBackgroundColor(Color.GRAY);
-                }
-                else {
-                    if (diary_write.getSelectionStart() != diary_write.getSelectionEnd())
-                    {
-                        Editable editable = diary_write.getText();
-                        StyleSpan[] selectedSpans = editable.getSpans(diary_write.getSelectionStart(), diary_write.getSelectionEnd(), StyleSpan.class);
-                        for (StyleSpan style : selectedSpans) {
-                            if (style.getStyle() == Typeface.BOLD) {
-                                editable.removeSpan(style);
-                            }
-                        }
-                    }
-                    set_bold.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                }
+                set_bold.setSelected(is_bold);
+                if (diary_write.getSelectionStart() != diary_write.getSelectionEnd())
+                    setSelectedBoldStyle();
                 break;
             case R.id.italic:
                 is_italic=!is_italic;
-                if(is_italic) {
-                    if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
-                    {
-                        Editable editable = diary_write.getText();
-                        editable.setSpan(new StyleSpan(Typeface.ITALIC), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    }
-                    set_italic.setBackgroundColor(Color.GRAY);
-                }
-                else {
-                    if (diary_write.getSelectionStart() != diary_write.getSelectionEnd())
-                    {
-                        Editable editable = diary_write.getText();
-                        StyleSpan[] selectedSpans = editable.getSpans(diary_write.getSelectionStart(), diary_write.getSelectionEnd(), StyleSpan.class);
-                        for (StyleSpan style : selectedSpans) {
-                            if (style.getStyle() == Typeface.ITALIC) {
-                                editable.removeSpan(style);
-                            }
-                        }
-                    }
-                    set_italic.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                }
+                set_italic.setSelected(is_italic);
+                if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
+                    setSelectedItalicStyle();
                 break;
             case R.id.insert_image:
                 verifyStoragePermissions(DiaryWriteActivity.this);
@@ -1158,6 +1329,49 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
     private void editchange(Editable editable)
     {
+        switch (font_color)
+        {
+            case 1:
+                ForegroundColorSpan colorSpan_red = new ForegroundColorSpan(getResources().getColor(R.color.darkred));
+                editable.setSpan(colorSpan_red, start, start+count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                diary_write.setSelection(start+count);
+                break;
+            case 2:
+                ForegroundColorSpan colorSpan_orange = new ForegroundColorSpan(getResources().getColor(R.color.darkorange));
+                editable.setSpan(colorSpan_orange, start, start+count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                diary_write.setSelection(start+count);
+                break;
+            case 3:
+                ForegroundColorSpan colorSpan_pink = new ForegroundColorSpan(getResources().getColor(R.color.pink));
+                editable.setSpan(colorSpan_pink, start, start+count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                diary_write.setSelection(start+count);
+                break;
+            case 4:
+                ForegroundColorSpan colorSpan_green = new ForegroundColorSpan(getResources().getColor(R.color.darkgreen));
+                editable.setSpan(colorSpan_green, start, start+count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                diary_write.setSelection(start+count);
+                break;
+            case 5:
+                ForegroundColorSpan colorSpan_blue = new ForegroundColorSpan(getResources().getColor(R.color.deepskyblue));
+                editable.setSpan(colorSpan_blue, start, start+count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                diary_write.setSelection(start+count);
+                break;
+            case 6:
+                ForegroundColorSpan colorSpan_dark_blue = new ForegroundColorSpan(getResources().getColor(R.color.steelblue));
+                editable.setSpan(colorSpan_dark_blue, start, start+count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                diary_write.setSelection(start+count);
+                break;
+            case 7:
+                ForegroundColorSpan colorSpan_grey = new ForegroundColorSpan(getResources().getColor(R.color.dimgrey));
+                editable.setSpan(colorSpan_grey, start, start+count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                diary_write.setSelection(start+count);
+                break;
+            case 8:
+                ForegroundColorSpan colorSpan_black = new ForegroundColorSpan(getResources().getColor(R.color.black));
+                editable.setSpan(colorSpan_black, start, start+count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                diary_write.setSelection(start+count);
+                break;
+        }
         switch (font_type)
         {
             case 1:
@@ -1257,6 +1471,17 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                                 diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
                                 diary_write.setText(Html.fromHtml(diary.getHtmlText()));
                                 getImage(diary.getText());
+
+
+                                //clear color span
+                                ForegroundColorSpan[] colorSpans= diary_write.getText().getSpans(0, diary_write.length(), ForegroundColorSpan.class);
+                                for(int i = 0; i < colorSpans.length; i++)
+                                    diary_write.getText().removeSpan(colorSpans[i]);
+                                //set color span
+                                int[] colorSpanInfo = getTextColorInfo(diary.getHtmlText());
+                                setColorSpan(colorSpanInfo);
+                                Log.i("test", Html.toHtml(diary_write.getText()));
+
                                 setTextFormmat(diary);
                                 getLabelsOfDiary(diary,helper);
 
@@ -1268,6 +1493,17 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                                 diary_write.setText(Html.fromHtml(diary.getHtmlText()));
                                 getImage(diary.getText());
                                 setTextFormmat(diary);
+
+
+                                //clear color span
+                                ForegroundColorSpan[] colorSpans= diary_write.getText().getSpans(0, diary_write.length(), ForegroundColorSpan.class);
+                                for(int i = 0; i < colorSpans.length; i++)
+                                    diary_write.getText().removeSpan(colorSpans[i]);
+                                //set color span
+                                int[] colorSpanInfo = getTextColorInfo(diary.getHtmlText());
+                                setColorSpan(colorSpanInfo);
+                                Log.i("test", Html.toHtml(diary_write.getText()));
+
                                 getLabelsOfDiary(diary,helper);
                             }
                         }
@@ -1305,11 +1541,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case CHOOSE_PHOTO:
-                Log.i("version", String.valueOf(Build.VERSION.SDK_INT));
-                if(resultCode==RESULT_OK)
-                    Log.i("request code","RESULT_OK");
-                else
-                    Log.i("request code","RESULT_NOT_OK");
                 if (resultCode == RESULT_OK) {
                     // 判断手机系统版本号
                     if (Build.VERSION.SDK_INT >= 19) {
@@ -1387,7 +1618,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         return bitmap;
     }
 
-    private static final String SD_PATH = Environment.getExternalStorageDirectory().getPath() + "/HeartTrace/pic/";
+    public static final String SD_PATH = Environment.getExternalStorageDirectory().getPath() + "/HeartTrace/pic/";
     private static final String IN_PATH = "/HeartTrace/pic/";
 
     private static String generateFileName() {
@@ -1477,20 +1708,76 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         diary_write.setText(editable);
     }
 
-    private String colorSpanAdjust(String htmlText)
+    private int[] getTextColorInfo(String htmlText)
     {
-        int i = 0;
-        Pattern pattern = Pattern.compile( "font color =\"#[0-9a-f]{6}\"");
-        Matcher matcher = pattern.matcher(htmlText);
-        while(matcher.find()) {
-            StringBuilder sb=new StringBuilder(htmlText);
-            sb.insert(matcher.start() + 12 + 2*i,"\\");
-            sb.insert(matcher.start() + 21 + 2*i, "\\");
-            htmlText = sb.toString();
-            i++;
-            Log.i("htmlText",htmlText);
+        Editable editable = (Editable) Html.fromHtml(htmlText);
+        ForegroundColorSpan[] colorSpans= editable.getSpans(0, editable.length(), ForegroundColorSpan.class);
+        int arraySpan[] = new int[diary_write.getText().length()];
+        for(int i = 0; i < arraySpan.length ;i++)
+            arraySpan[i] = 8;
+        for(int i = 0; i < colorSpans.length ; i++) {
+            int styleStart = editable.getSpanStart(colorSpans[i]);
+            int styleEnd = editable.getSpanEnd(colorSpans[i]);
+            if(colorSpans[i].getForegroundColor() == new ForegroundColorSpan(getResources().getColor(R.color.darkred)).getForegroundColor())
+                for (int j = styleStart; j < styleEnd ;j++) arraySpan[j] = 1;
+            if(colorSpans[i].getForegroundColor() == new ForegroundColorSpan(getResources().getColor(R.color.darkorange)).getForegroundColor())
+                for (int j = styleStart; j < styleEnd ;j++) arraySpan[j] = 2;
+            if(colorSpans[i].getForegroundColor() == new ForegroundColorSpan(getResources().getColor(R.color.pink)).getForegroundColor())
+                for (int j = styleStart; j < styleEnd ;j++) arraySpan[j] = 3;
+            if(colorSpans[i].getForegroundColor() == new ForegroundColorSpan(getResources().getColor(R.color.darkgreen)).getForegroundColor())
+                for (int j = styleStart; j < styleEnd ;j++) arraySpan[j] = 4;
+            if(colorSpans[i].getForegroundColor() == new ForegroundColorSpan(getResources().getColor(R.color.deepskyblue)).getForegroundColor())
+                for (int j = styleStart; j < styleEnd ;j++) arraySpan[j] = 5;
+            if(colorSpans[i].getForegroundColor() == new ForegroundColorSpan(getResources().getColor(R.color.steelblue)).getForegroundColor())
+                for (int j = styleStart; j < styleEnd ;j++) arraySpan[j] = 6;
+            if(colorSpans[i].getForegroundColor() == new ForegroundColorSpan(getResources().getColor(R.color.dimgrey)).getForegroundColor())
+                for (int j = styleStart; j < styleEnd ;j++) arraySpan[j] = 7;
+            if(colorSpans[i].getForegroundColor() == new ForegroundColorSpan(getResources().getColor(R.color.black)).getForegroundColor())
+                for (int j = styleStart; j < styleEnd ;j++) arraySpan[j] = 8;
         }
-        return htmlText;
+
+        return arraySpan;
+    }
+
+    private void setColorSpan(int [] colorSpanInfo){
+        int colorSpanType = 8;
+        int colorSpanStart = 0;
+        int colorSpanEnd = 0;
+        int i = 0;
+        Editable editable = diary_write.getText();
+        while(i < colorSpanInfo.length) {
+            for (; i < colorSpanInfo.length; i++)
+                if (colorSpanInfo[i] != 8) break;
+            if(i == colorSpanInfo.length) break;
+            colorSpanStart = i;
+            colorSpanType = colorSpanInfo[i];
+            for (; i < colorSpanInfo.length; i++)
+                if (colorSpanInfo[i] != colorSpanType) break;
+            colorSpanEnd = i;
+            switch (colorSpanType){
+                case 1:
+                    editable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.darkred)), colorSpanStart, colorSpanEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    break;
+                case 2:
+                    editable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.darkorange)), colorSpanStart, colorSpanEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    break;
+                case 3:
+                    editable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.pink)), colorSpanStart, colorSpanEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    break;
+                case 4:
+                    editable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.darkgreen)), colorSpanStart, colorSpanEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    break;
+                case 5:
+                    editable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.deepskyblue)), colorSpanStart, colorSpanEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    break;
+                case 6:
+                    editable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.steelblue)), colorSpanStart, colorSpanEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    break;
+                case 7:
+                    editable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.dimgrey)), colorSpanStart, colorSpanEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    break;
+            }
+        }
     }
 
     protected Dialog onCreateDialog(int id) {
@@ -1723,7 +2010,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             //设置文字颜色
             textView.setTextColor(Color.BLACK);
             //设置图标在文字的左边
-            textView.setCompoundDrawablesWithIntrinsicBounds(imgIds[position], 0, 0, 0);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CUPCAKE) {
+                textView.setCompoundDrawablesWithIntrinsicBounds(imgIds[position], 0, 0, 0);
+            }
             //设置textView的左上右下的padding大小
             textView.setPadding(80, 10, 20, 15);
             //设置文字和图标之间的padding大小
@@ -1805,6 +2094,460 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 }
         }
 
+    }
+
+    private void setSelectedUnderstyleStyle()
+    {
+        int selectedStart = diary_write.getSelectionStart();
+        int selectedEnd = diary_write.getSelectionEnd();
+        Editable editableText = diary_write.getText();
+        UnderlineSpan[] spans = editableText.getSpans(0, editableText.length(), UnderlineSpan.class);
+        int[] arraySpan = new int[editableText.length()];
+        for(int i = 0; i < arraySpan.length ;i++)
+            arraySpan[i] = 0;
+        for(int i = 0; i < spans.length ; i++)
+        {
+            int styleStart = editableText.getSpanStart(spans[i]);
+            int styleEnd = editableText.getSpanEnd(spans[i]);
+            for (int j = styleStart; j < styleEnd ;j++)
+                arraySpan[j] = 1;
+
+        }
+        boolean allZeroSign = false;
+        boolean allOneSign = false;
+        int judgeNum = 0;
+        for (int i = selectedStart; i < selectedEnd; i++)
+            judgeNum += arraySpan[i];
+        if(judgeNum == 0) allZeroSign = true;
+        else if(judgeNum == selectedEnd - selectedStart) allOneSign = true;
+        if(allZeroSign == true) {
+            if(is_underline)
+                editableText.setSpan(new UnderlineSpan(), selectedStart, selectedEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+        else if(allOneSign == true) {
+            int i = selectedStart;
+            while(i > 0) {
+                if (arraySpan[i] == 0) break;
+                i--;
+            }
+            int preStyleStart;
+            if(arraySpan[i] == 0) preStyleStart = i + 1;
+            else preStyleStart = 0;
+            i = selectedEnd;
+            while (i < arraySpan.length) {
+                if (arraySpan[i] == 0) break;
+                i++;
+            }
+            int nextStyleEnd = i;
+            for(int j = 0; j < spans.length ; j++)
+            {
+                int styleStart = editableText.getSpanStart(spans[j]);
+                int styleEnd = editableText.getSpanEnd(spans[j]);
+                if(styleStart >= preStyleStart && styleEnd <= nextStyleEnd && !is_underline)
+                    editableText.removeSpan(spans[j]);
+            }
+            if(!is_underline) {
+                if(preStyleStart != selectedStart)
+                    editableText.setSpan(new UnderlineSpan(), preStyleStart, selectedStart, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                if(selectedEnd != nextStyleEnd)
+                    editableText.setSpan(new UnderlineSpan(), selectedEnd, nextStyleEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+        }
+        else {
+            if(arraySpan[selectedStart] == 0 && arraySpan[selectedEnd - 1] == 0) {
+                for(int i = 0; i < spans.length; i++)
+                {
+                    int styleStart = editableText.getSpanStart(spans[i]);
+                    int styleEnd = editableText.getSpanEnd(spans[i]);
+                    if(styleStart > selectedStart && styleEnd < selectedEnd)
+                        editableText.removeSpan(spans[i]);
+                }
+                if(is_underline)
+                    editableText.setSpan(new UnderlineSpan(), selectedStart, selectedEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+            else if(arraySpan[selectedStart] == 1 && arraySpan[selectedEnd - 1] == 1){
+                int i = selectedStart;
+                while(i > 0) {
+                    if (arraySpan[i] == 0) break;
+                    i--;
+                }
+                int preStyleStart;
+                if(arraySpan[i] == 0) preStyleStart = i + 1;
+                else preStyleStart = 0;
+                i = selectedEnd;
+                while (i < arraySpan.length) {
+                    if (arraySpan[i] == 0) break;
+                    i++;
+                }
+                int nextStyleEnd = i;
+                Log.i("test", preStyleStart + " " + nextStyleEnd);
+                for(int j = 0; j < spans.length; j++)
+                {
+                    int styleStart = editableText.getSpanStart(spans[j]);
+                    int styleEnd = editableText.getSpanEnd(spans[j]);
+                    if(styleStart >= preStyleStart && styleEnd <= nextStyleEnd)
+                        editableText.removeSpan(spans[j]);
+                }
+                if(is_underline)
+                    editableText.setSpan(new UnderlineSpan(), preStyleStart, nextStyleEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                else{
+                    if(preStyleStart != selectedStart)
+                        editableText.setSpan(new UnderlineSpan(), preStyleStart, selectedStart, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    if(selectedEnd != nextStyleEnd)
+                        editableText.setSpan(new UnderlineSpan(), selectedEnd, nextStyleEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+            }
+            else if(arraySpan[selectedStart] == 0 && arraySpan[selectedEnd - 1] == 1){
+                int i = selectedEnd;
+                while (i < arraySpan.length) {
+                    if (arraySpan[i] == 0) break;
+                    i++;
+                }
+                int nextStyleEnd = i;
+                for(int j = 0; j < spans.length; j++)
+                {
+                    int styleStart = editableText.getSpanStart(spans[j]);
+                    int styleEnd = editableText.getSpanEnd(spans[j]);
+                    if(styleStart > selectedStart && styleEnd <= nextStyleEnd)
+                        editableText.removeSpan(spans[j]);
+                }
+                if(is_underline)
+                    editableText.setSpan(new UnderlineSpan(), selectedStart, nextStyleEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                else
+                    editableText.setSpan(new UnderlineSpan(), selectedEnd, nextStyleEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+            else if(arraySpan[selectedStart] == 1 && arraySpan[selectedEnd - 1] == 0){
+                int i = selectedStart;
+                while(i > 0) {
+                    if (arraySpan[i] == 0) break;
+                    i--;
+                }
+                int preStyleStart;
+                if(arraySpan[i] == 0) preStyleStart = i + 1;
+                else preStyleStart = 0;
+                for(int j = 0; j < spans.length; j++)
+                {
+                    int styleStart = editableText.getSpanStart(spans[j]);
+                    int styleEnd = editableText.getSpanEnd(spans[j]);
+                    if(styleStart >= preStyleStart && styleEnd < selectedEnd)
+                        editableText.removeSpan(spans[j]);
+                }
+                if(is_underline)
+                    editableText.setSpan(new UnderlineSpan(), preStyleStart, selectedEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                else
+                    editableText.setSpan(new UnderlineSpan(), preStyleStart, selectedStart, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+        }
+    }
+
+    private void setSelectedBoldStyle()
+    {
+        int selectedStart = diary_write.getSelectionStart();
+        int selectedEnd = diary_write.getSelectionEnd();
+        Editable editableText = diary_write.getText();
+        StyleSpan[] spans = editableText.getSpans(0, editableText.length(), StyleSpan.class);
+        int[] arraySpan = new int[editableText.length()];
+        for(int i = 0; i < arraySpan.length ;i++)
+            arraySpan[i] = 0;
+        for(int i = 0; i < spans.length ; i++)
+        {
+            if(spans[i].getStyle() == Typeface.BOLD) {
+                int styleStart = editableText.getSpanStart(spans[i]);
+                int styleEnd = editableText.getSpanEnd(spans[i]);
+                for (int j = styleStart; j < styleEnd ;j++)
+                    arraySpan[j] = 1;
+            }
+        }
+        boolean allZeroSign = false;
+        boolean allOneSign = false;
+        int judgeNum = 0;
+        for (int i = selectedStart; i < selectedEnd; i++)
+            judgeNum += arraySpan[i];
+        if(judgeNum == 0) allZeroSign = true;
+        else if(judgeNum == selectedEnd - selectedStart) allOneSign = true;
+        if(allZeroSign == true) {
+            if(is_bold)
+                editableText.setSpan(new StyleSpan(Typeface.BOLD), selectedStart, selectedEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+        else if(allOneSign == true) {
+            int i = selectedStart;
+            while(i > 0) {
+                if (arraySpan[i] == 0) break;
+                i--;
+            }
+            int preStyleStart;
+            if(arraySpan[i] == 0) preStyleStart = i + 1;
+            else preStyleStart = 0;
+            i = selectedEnd;
+            while (i < arraySpan.length) {
+                if (arraySpan[i] == 0) break;
+                i++;
+            }
+            int nextStyleEnd = i;
+            for(int j = 0; j < spans.length ; j++)
+            {
+                if(spans[j].getStyle() == Typeface.BOLD) {
+                    int styleStart = editableText.getSpanStart(spans[j]);
+                    int styleEnd = editableText.getSpanEnd(spans[j]);
+                    if(styleStart >= preStyleStart && styleEnd <= nextStyleEnd && !is_bold)
+                        editableText.removeSpan(spans[j]);
+                }
+            }
+            if(!is_bold) {
+                if(preStyleStart != selectedStart)
+                    editableText.setSpan(new StyleSpan(Typeface.BOLD), preStyleStart, selectedStart, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                if(selectedEnd != nextStyleEnd)
+                    editableText.setSpan(new StyleSpan(Typeface.BOLD), selectedEnd, nextStyleEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+        }
+        else {
+            if(arraySpan[selectedStart] == 0 && arraySpan[selectedEnd - 1] == 0) {
+                for(int i = 0; i < spans.length; i++)
+                {
+                    if(spans[i].getStyle() == Typeface.BOLD) {
+                        int styleStart = editableText.getSpanStart(spans[i]);
+                        int styleEnd = editableText.getSpanEnd(spans[i]);
+                        if(styleStart > selectedStart && styleEnd < selectedEnd)
+                            editableText.removeSpan(spans[i]);
+                    }
+                }
+                if(is_bold)
+                    editableText.setSpan(new StyleSpan(Typeface.BOLD), selectedStart, selectedEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+            else if(arraySpan[selectedStart] == 1 && arraySpan[selectedEnd - 1] == 1){
+                int i = selectedStart;
+                while(i > 0) {
+                    if (arraySpan[i] == 0) break;
+                    i--;
+                }
+                int preStyleStart;
+                if(arraySpan[i] == 0) preStyleStart = i + 1;
+                else preStyleStart = 0;
+                i = selectedEnd;
+                while (i < arraySpan.length) {
+                    if (arraySpan[i] == 0) break;
+                    i++;
+                }
+                int nextStyleEnd = i;
+                Log.i("test", preStyleStart + " " + nextStyleEnd);
+                for(int j = 0; j < spans.length; j++)
+                {
+                    if(spans[j].getStyle() == Typeface.BOLD) {
+                        int styleStart = editableText.getSpanStart(spans[j]);
+                        int styleEnd = editableText.getSpanEnd(spans[j]);
+                        if(styleStart >= preStyleStart && styleEnd <= nextStyleEnd)
+                            editableText.removeSpan(spans[j]);
+                    }
+                }
+                if(is_bold)
+                    editableText.setSpan(new StyleSpan(Typeface.BOLD), preStyleStart, nextStyleEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                else{
+                    if(preStyleStart != selectedStart)
+                        editableText.setSpan(new StyleSpan(Typeface.BOLD), preStyleStart, selectedStart, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    if(selectedEnd != nextStyleEnd)
+                        editableText.setSpan(new StyleSpan(Typeface.BOLD), selectedEnd, nextStyleEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+            }
+            else if(arraySpan[selectedStart] == 0 && arraySpan[selectedEnd - 1] == 1){
+                int i = selectedEnd;
+                while (i < arraySpan.length) {
+                    if (arraySpan[i] == 0) break;
+                    i++;
+                }
+                int nextStyleEnd = i;
+                for(int j = 0; j < spans.length; j++)
+                {
+                    if(spans[j].getStyle() == Typeface.BOLD) {
+                        int styleStart = editableText.getSpanStart(spans[j]);
+                        int styleEnd = editableText.getSpanEnd(spans[j]);
+                        if(styleStart > selectedStart && styleEnd <= nextStyleEnd)
+                            editableText.removeSpan(spans[j]);
+                    }
+                }
+                if(is_bold)
+                    editableText.setSpan(new StyleSpan(Typeface.BOLD), selectedStart, nextStyleEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                else
+                    editableText.setSpan(new StyleSpan(Typeface.BOLD), selectedEnd, nextStyleEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+            else if(arraySpan[selectedStart] == 1 && arraySpan[selectedEnd - 1] == 0){
+                int i = selectedStart;
+                while(i > 0) {
+                    if (arraySpan[i] == 0) break;
+                    i--;
+                }
+                int preStyleStart;
+                if(arraySpan[i] == 0) preStyleStart = i + 1;
+                else preStyleStart = 0;
+                for(int j = 0; j < spans.length; j++)
+                {
+                    if(spans[j].getStyle() == Typeface.BOLD) {
+                        int styleStart = editableText.getSpanStart(spans[j]);
+                        int styleEnd = editableText.getSpanEnd(spans[j]);
+                        if(styleStart >= preStyleStart && styleEnd < selectedEnd)
+                            editableText.removeSpan(spans[j]);
+                    }
+                }
+                if(is_bold)
+                    editableText.setSpan(new StyleSpan(Typeface.BOLD), preStyleStart, selectedEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                else
+                    editableText.setSpan(new StyleSpan(Typeface.BOLD), preStyleStart, selectedStart, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+        }
+    }
+
+    private void setSelectedItalicStyle()
+    {
+        int selectedStart = diary_write.getSelectionStart();
+        int selectedEnd = diary_write.getSelectionEnd();
+        Editable editableText = diary_write.getText();
+        StyleSpan[] spans = editableText.getSpans(0, editableText.length(), StyleSpan.class);
+        int[] arraySpan = new int[editableText.length()];
+        for(int i = 0; i < arraySpan.length ;i++)
+            arraySpan[i] = 0;
+        for(int i = 0; i < spans.length ; i++)
+        {
+            if(spans[i].getStyle() == Typeface.ITALIC) {
+                int styleStart = editableText.getSpanStart(spans[i]);
+                int styleEnd = editableText.getSpanEnd(spans[i]);
+                for (int j = styleStart; j < styleEnd ;j++)
+                    arraySpan[j] = 1;
+            }
+        }
+        boolean allZeroSign = false;
+        boolean allOneSign = false;
+        int judgeNum = 0;
+        for (int i = selectedStart; i < selectedEnd; i++)
+            judgeNum += arraySpan[i];
+        if(judgeNum == 0) allZeroSign = true;
+        else if(judgeNum == selectedEnd - selectedStart) allOneSign = true;
+        if(allZeroSign == true) {
+            if(is_italic)
+                editableText.setSpan(new StyleSpan(Typeface.ITALIC), selectedStart, selectedEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+        else if(allOneSign == true) {
+            int i = selectedStart;
+            while(i > 0) {
+                if (arraySpan[i] == 0) break;
+                i--;
+            }
+            int preStyleStart;
+            if(arraySpan[i] == 0) preStyleStart = i + 1;
+            else preStyleStart = 0;
+            i = selectedEnd;
+            while (i < arraySpan.length) {
+                if (arraySpan[i] == 0) break;
+                i++;
+            }
+            int nextStyleEnd = i;
+            for(int j = 0; j < spans.length ; j++)
+            {
+                if(spans[j].getStyle() == Typeface.ITALIC) {
+                    int styleStart = editableText.getSpanStart(spans[j]);
+                    int styleEnd = editableText.getSpanEnd(spans[j]);
+                    if(styleStart >= preStyleStart && styleEnd <= nextStyleEnd && !is_italic)
+                        editableText.removeSpan(spans[j]);
+                }
+            }
+            if(!is_italic) {
+                if(preStyleStart != selectedStart)
+                    editableText.setSpan(new StyleSpan(Typeface.ITALIC), preStyleStart, selectedStart, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                if(selectedEnd != nextStyleEnd)
+                    editableText.setSpan(new StyleSpan(Typeface.ITALIC), selectedEnd, nextStyleEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+        }
+        else {
+            if(arraySpan[selectedStart] == 0 && arraySpan[selectedEnd - 1] == 0) {
+                for(int i = 0; i < spans.length; i++)
+                {
+                    if(spans[i].getStyle() == Typeface.ITALIC) {
+                        int styleStart = editableText.getSpanStart(spans[i]);
+                        int styleEnd = editableText.getSpanEnd(spans[i]);
+                        if(styleStart > selectedStart && styleEnd < selectedEnd)
+                            editableText.removeSpan(spans[i]);
+                    }
+                }
+                if(is_italic)
+                    editableText.setSpan(new StyleSpan(Typeface.ITALIC), selectedStart, selectedEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+            else if(arraySpan[selectedStart] == 1 && arraySpan[selectedEnd - 1] == 1){
+                int i = selectedStart;
+                while(i > 0) {
+                    if (arraySpan[i] == 0) break;
+                    i--;
+                }
+                int preStyleStart;
+                if(arraySpan[i] == 0) preStyleStart = i + 1;
+                else preStyleStart = 0;
+                i = selectedEnd;
+                while (i < arraySpan.length) {
+                    if (arraySpan[i] == 0) break;
+                    i++;
+                }
+                int nextStyleEnd = i;
+                Log.i("test", preStyleStart + " " + nextStyleEnd);
+                for(int j = 0; j < spans.length; j++)
+                {
+                    if(spans[j].getStyle() == Typeface.ITALIC) {
+                        int styleStart = editableText.getSpanStart(spans[j]);
+                        int styleEnd = editableText.getSpanEnd(spans[j]);
+                        if(styleStart >= preStyleStart && styleEnd <= nextStyleEnd)
+                            editableText.removeSpan(spans[j]);
+                    }
+                }
+                if(is_italic)
+                    editableText.setSpan(new StyleSpan(Typeface.ITALIC), preStyleStart, nextStyleEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                else{
+                    if(preStyleStart != selectedStart)
+                        editableText.setSpan(new StyleSpan(Typeface.ITALIC), preStyleStart, selectedStart, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    if(selectedEnd != nextStyleEnd)
+                        editableText.setSpan(new StyleSpan(Typeface.ITALIC), selectedEnd, nextStyleEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+            }
+            else if(arraySpan[selectedStart] == 0 && arraySpan[selectedEnd - 1] == 1){
+                int i = selectedEnd;
+                while (i < arraySpan.length) {
+                    if (arraySpan[i] == 0) break;
+                    i++;
+                }
+                int nextStyleEnd = i;
+                for(int j = 0; j < spans.length; j++)
+                {
+                    if(spans[j].getStyle() == Typeface.ITALIC) {
+                        int styleStart = editableText.getSpanStart(spans[j]);
+                        int styleEnd = editableText.getSpanEnd(spans[j]);
+                        if(styleStart > selectedStart && styleEnd <= nextStyleEnd)
+                            editableText.removeSpan(spans[j]);
+                    }
+                }
+                if(is_italic)
+                    editableText.setSpan(new StyleSpan(Typeface.ITALIC), selectedStart, nextStyleEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                else
+                    editableText.setSpan(new StyleSpan(Typeface.ITALIC), selectedEnd, nextStyleEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+            else if(arraySpan[selectedStart] == 1 && arraySpan[selectedEnd - 1] == 0){
+                int i = selectedStart;
+                while(i > 0) {
+                    if (arraySpan[i] == 0) break;
+                    i--;
+                }
+                int preStyleStart;
+                if(arraySpan[i] == 0) preStyleStart = i + 1;
+                else preStyleStart = 0;
+                for(int j = 0; j < spans.length; j++)
+                {
+                    if(spans[j].getStyle() == Typeface.ITALIC) {
+                        int styleStart = editableText.getSpanStart(spans[j]);
+                        int styleEnd = editableText.getSpanEnd(spans[j]);
+                        if(styleStart >= preStyleStart && styleEnd < selectedEnd)
+                            editableText.removeSpan(spans[j]);
+                    }
+                }
+                if(is_italic)
+                    editableText.setSpan(new StyleSpan(Typeface.ITALIC), preStyleStart, selectedEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                else
+                    editableText.setSpan(new StyleSpan(Typeface.ITALIC), preStyleStart, selectedStart, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+        }
     }
 
 }

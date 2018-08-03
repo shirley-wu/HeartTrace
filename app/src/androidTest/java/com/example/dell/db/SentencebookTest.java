@@ -2,6 +2,9 @@ package com.example.dell.db;
 
 import android.support.test.InstrumentationRegistry;
 import android.test.InstrumentationTestCase;
+import android.util.Log;
+
+import com.j256.ormlite.dao.Dao;
 
 import org.junit.After;
 import org.junit.Before;
@@ -15,8 +18,10 @@ import java.util.List;
 
 public class SentencebookTest extends InstrumentationTestCase {
 
+    final static private String TAG = "SentencebookTest";
+
     private Sentencebook sentencebook = new Sentencebook("adsfavva");
-    
+
     private Sentence sentence = new Sentence("fdaov");
 
     private DatabaseHelper helper = new DatabaseHelper(InstrumentationRegistry.getTargetContext());
@@ -24,7 +29,6 @@ public class SentencebookTest extends InstrumentationTestCase {
     @Before
     public void setUp() throws Exception {
         super.setUp();
-        sentencebook.setDescription("hihihihi");
         sentencebook.insert(helper);
         sentence.setDate();
         sentence.setSentencebook(sentencebook);
@@ -34,8 +38,7 @@ public class SentencebookTest extends InstrumentationTestCase {
     @After
     public void tearDown() throws Exception {
         super.tearDown();
-        sentencebook.delete(helper);
-        sentence.delete(helper);
+        helper.clearAll();
         helper.close();
     }
 
@@ -46,9 +49,8 @@ public class SentencebookTest extends InstrumentationTestCase {
         assertEquals(null, b);
         b = Sentencebook.getByName(helper, sentencebook.getSentencebookName());
         assertEquals(sentencebook.getSentencebookName(), b.getSentencebookName());
-        assertEquals(sentencebook.getDescription(), b.getDescription());
     }
-    
+
     @Test
     public void testInsertSentence() {
         assertEquals(1, sentencebook.getAllSubSentence(helper).size());
@@ -58,4 +60,41 @@ public class SentencebookTest extends InstrumentationTestCase {
         b.refresh(helper);
         assertEquals(sentencebook.getSentencebookName(), b.getSentencebookName());
     }
+
+    @Test
+    public void testDelete() {
+        assertEquals(0, sentencebook.getStatus());
+        Log.d(TAG, "delete: modified before delete " + sentencebook.getModified());
+
+        List<Sentence> list = sentencebook.getAllSubSentence(helper);
+        for(Sentence d : list) {
+            assertEquals(0, d.getStatus());
+            Log.d(TAG, "delete: sentence modified before delete " + d.getModified());
+        }
+
+        sentencebook.delete(helper);
+        assertEquals(-1, sentencebook.getStatus());
+        Log.d(TAG, "delete: modified after delete " + sentencebook.getModified());
+
+        list = sentencebook.getAllSubSentence(helper);
+        /*for(Sentence d : list) {
+            assertEquals(-1, d.getStatus());
+            Log.d(TAG, "delete: sentence modified after delete " + d.getModified());
+        }*/
+        assertEquals(0, list.size());
+    }
+
+    @Test
+    public void testUpdate() {
+        assertEquals(0, sentencebook.getStatus());
+        Log.d(TAG, "update: modified before update " + sentencebook.getModified());
+        sentencebook.update(helper);
+        assertEquals(0, sentencebook.getStatus());
+        Log.d(TAG, "update: modified after update " + sentencebook.getModified());
+        sentencebook.setStatus(9);
+        sentencebook.update(helper);
+        assertEquals(1, sentencebook.getStatus());
+        Log.d(TAG, "update: modified after update 2 " + sentencebook.getModified());
+    }
+
 }

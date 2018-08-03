@@ -61,6 +61,7 @@ public class SearchResultSAdapter extends RecyclerView.Adapter<SearchResultSAdap
                 intent.putExtra(TicketEditActivity.SENTENCE_THIS, sentence);
                 intent.putExtra(TicketEditActivity.NOTE_EDITABLE, "false");
                 intent.putExtra(TicketEditActivity.NOTE_NEW, "false");
+                intent.putExtra(TicketEditActivity.TYPE, "ordinary");
                 Activity activity = (Activity) mContext;
                 activity.startActivityForResult(intent,2);
             }

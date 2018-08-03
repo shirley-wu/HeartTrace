@@ -27,8 +27,13 @@
             android:icon="@drawable/timeline_black"
             android:title="时间轴" />
     </group>
+
     <item
         android:id="@+id/sync_setting"
         android:icon = "@drawable/sync_gray"
         android:title = "同步设置"/>
+    <item
+        android:id = "@+id/exit"
+        android:icon="@drawable/exit_black"
+        android:title="退出登录" />
 </menu>

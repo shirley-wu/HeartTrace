@@ -214,7 +214,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/nav_menu_main" />
+        app:menu="@menu/nav_menu_bottle" />
 
 
 

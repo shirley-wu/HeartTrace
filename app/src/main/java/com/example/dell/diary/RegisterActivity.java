@@ -1,14 +1,18 @@
 package com.example.dell.diary;
 
 import android.content.Intent;
+import android.os.Looper;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.dell.auth.ServerAuthenticator;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -39,20 +43,60 @@ public class RegisterActivity extends AppCompatActivity {
         bt_Reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = username.getText().toString();
-                String pw1 = password.getText().toString();
-                String pw2 = password2.getText().toString();
-
+                final String name = username.getText().toString();
+                final String pw1 = password.getText().toString();
+                final String pw2 = password2.getText().toString();
                 if (validateAccount(name) && validatePassword1(pw1) && validatePassword2( pw1,pw2)) {
-                    Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                    intent.putExtra("origin", "register");
-                    intent.putExtra("name",name);
-                    intent.putExtra("password",pw1);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Toast.makeText(RegisterActivity.this, "请输入正确的用户名和密码", Toast.LENGTH_SHORT).show();
+                    new Thread(new Runnable(){
+                        @Override
+                        public void run() {
+                            Bundle bundle = new Bundle();
+                            boolean status = ServerAuthenticator.signUp(name, pw1, bundle);
+                            if(status == false) {
+                                // 接口错误或者网络错误
+                                Looper.prepare();
+                                try {
+                                    Toast.makeText(RegisterActivity.this, "接口错误或者网络错误", Toast.LENGTH_SHORT).show();
+                                }catch (Exception e) {
+                                    Log.e("error",e.toString());
+                                }
+                                Looper.loop();
+                            }
+                            else {
+                                boolean success = bundle.getBoolean("success");
+                                String msg = bundle.getString("msg");
+                                // success表示操作成功与否；msg表示服务器返回信息
+                                if(success){
+                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                    intent.putExtra("origin", "register");
+                                    intent.putExtra("name",name);
+                                    intent.putExtra("password",pw1);
+                                    startActivity(intent);
+                                    finish();
+
+                                    Looper.prepare();
+                                    try {
+                                        Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+                                    }catch (Exception e) {
+                                        Log.e("error",e.toString());
+                                    }
+                                    Looper.loop();
+
+                                }
+                                else{
+                                    Looper.prepare();
+                                    try {
+                                        Toast.makeText(RegisterActivity.this, "注册失败，该用户名已被使用", Toast.LENGTH_SHORT).show();
+                                    }catch (Exception e) {
+                                        Log.e("error",e.toString());
+                                    }
+                                    Looper.loop();
+
+                                }
+                            }
+                        }
+                    }).start();
+
                 }
             }
         });

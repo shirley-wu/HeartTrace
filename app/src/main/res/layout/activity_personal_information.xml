@@ -15,7 +15,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_personal_image">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/personal_image"
@@ -29,6 +30,12 @@
                 android:clickable="true"/>
 
         </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="15dp">
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -53,6 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:layout_marginRight="30dp"
+                android:id="@+id/set_name"
                 android:hint="给自己起个名字~"/>
 
         </LinearLayout>
@@ -80,6 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:hint="BOY or GIRL?"
+                android:id="@+id/choose_sex"
                 android:layout_marginRight="30dp"/>
 
         </LinearLayout>
@@ -138,6 +147,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:hint="设置一个邮箱吧！"
+                android:id="@+id/set_email"
                 android:layout_marginRight="30dp"/>
 
         </LinearLayout>
@@ -165,6 +175,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:hint="你的学校"
+                android:id="@+id/set_school"
                 android:layout_marginRight="30dp"/>
 
         </LinearLayout>
@@ -193,9 +204,32 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:hint="自由发挥就可以啦~"
+                android:id="@+id/set_signature"
                 android:layout_marginRight="30dp"/>
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="25dp">
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/personal_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/round_rectangle"
+                android:text="保存"
+                android:textSize="20dp"/>
+
+        </RelativeLayout>
+
 
     </LinearLayout>
 

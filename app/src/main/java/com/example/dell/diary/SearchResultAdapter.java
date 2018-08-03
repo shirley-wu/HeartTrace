@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,6 +20,8 @@ import com.example.dell.db.Diary;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by dell on 2018/6/4.
@@ -79,7 +82,18 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
     @Override
     public void onBindViewHolder(SearchResultAdapter.ViewHolder holder, int position) {
         Diary diary = mDiaryList.get(position);
-        holder.diaryContent.setText(diary.getText());
+        String diary_card_text;
+        diary_card_text = diary.getText();
+        Pattern pattern = Pattern.compile( Environment.getExternalStorageDirectory().getPath()+"/HeartTrace/pic/image_[0-9]{14}\\.jpg");
+        Matcher matcher = pattern.matcher(diary_card_text);
+        while(matcher.find()) {
+            StringBuilder sb=new StringBuilder(diary_card_text);
+            sb.delete(matcher.start(),matcher.end());
+            sb.insert(matcher.start(),"/image/");
+            diary_card_text = sb.toString();
+            matcher = pattern.matcher(diary_card_text);
+        }
+        holder.diaryContent.setText(diary_card_text);
         String date = (diary.getDate().getYear()+1900)+"年"+ (diary.getDate().getMonth()+1) + "月" + diary.getDate().getDate() + "日 " + weekList.get(diary.getDate().getDay());
         holder.diaryDate.setText(date);
         //Glide.with(mContext).load(diaryCard.getEmotionImageId()).into(holder.diaryIcon);

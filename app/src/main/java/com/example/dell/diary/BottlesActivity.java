@@ -92,6 +92,7 @@ public class BottlesActivity extends AppCompatActivity {
             //actionBar.setHomeAsUpIndicator(R.drawable.menu_white);
         }
         actionBar.setTitle("Bottles");
+
         //初始化日记本
         initSententcebookList();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_bottle_view);

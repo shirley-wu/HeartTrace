@@ -5,7 +5,6 @@ import android.support.test.InstrumentationRegistry;
 import android.util.Log;
 
 import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
-import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
 
 import org.junit.After;
@@ -27,7 +26,7 @@ import static org.junit.Assert.assertEquals;
 
 public class DiaryOtherTest {
 
-    private static final String TAG = "DiaryGetByRestrictTest";
+    private static final String TAG = "DiaryOtherTest";
 
     private DatabaseHelper databaseHelper;
 
@@ -45,9 +44,9 @@ public class DiaryOtherTest {
     }
 
     @After
-    public void tearDown() {
+    public void tearDown() throws SQLException {
         Log.d(TAG, "tearDown");
-        diarybook.delete(databaseHelper);
+        databaseHelper.clearAll();
         OpenHelperManager.releaseHelper();
     }
 
@@ -148,7 +147,9 @@ public class DiaryOtherTest {
     }
 
     @Test
-    public void testGetAllLabel() throws SQLException {
+    public void testLabel() throws SQLException {
+        // 测试DiaryLabel的getAll与删除方法
+
         Diary diary = new Diary("hello");
         diary.setDate();
         diary.setDiarybook(diarybook);
@@ -168,17 +169,27 @@ public class DiaryOtherTest {
         assertEquals(3, labels2.size());
         for(final Label label : labels2) {
             Log.d(TAG, "testGetAllLabel: label " + label.getLabelname());
+            Log.d(TAG, "testGetAllLabel: label modified after inserting = " + label.getModified());
+        }
+
+        QueryBuilder<DiaryLabel, Long> diaryLabelQb = databaseHelper.getDaoAccess(DiaryLabel.class).queryBuilder();
+        diaryLabelQb.where().eq(DiaryLabel.DIARY_TAG, diary);
+        Log.d(TAG, "testGetAllLabel: " + diaryLabelQb.prepareStatementString());
+
+        List<DiaryLabel> diaryLabelList = diaryLabelQb.query();
+        assertEquals(3, diaryLabelList.size());
+        for (DiaryLabel dl : diaryLabelList) {
+            assertEquals(0, dl.getStatus());
+            Log.d(TAG, "testGetAllLabel: diarylabel modified after inserting = " + dl.getModified());
         }
 
         diary.delete(databaseHelper);
-        QueryBuilder<DiaryLabel, Integer> diaryLabelQb = databaseHelper.getDaoAccess(DiaryLabel.class).queryBuilder();
-        diaryLabelQb.where().eq(DiaryLabel.DIARY_TAG, diary);
-        Log.d(TAG, "testGetAllLabel: " + diaryLabelQb.prepareStatementString());
-        List<DiaryLabel> diaryLabelList = diaryLabelQb.query();
-        assertEquals(0, diaryLabelList.size());
 
-        for(final Label label : labels) {
-            label.delete(databaseHelper);
+        diaryLabelList = diaryLabelQb.query();
+        assertEquals(3, diaryLabelList.size());
+        for (DiaryLabel dl : diaryLabelList) {
+            assertEquals(-1, dl.getStatus());
+            Log.d(TAG, "testGetAllLabel: diarylabel modified after deleting = " + dl.getModified());
         }
     }
 
@@ -191,7 +202,7 @@ public class DiaryOtherTest {
             diary.setDate();
             diary.setDiarybook(diarybook);
             diary.setText("hello " + i);
-            diary.setLike(i % 2 == 0);
+            diary.setIslike(i % 2 == 0);
             diaryList.add(diary);
             diary.insert(databaseHelper);
         }

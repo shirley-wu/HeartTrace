@@ -6,6 +6,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
@@ -18,6 +20,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -38,6 +41,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.example.dell.auth.MyAccount;
 import com.example.dell.db.DatabaseHelper;
 import com.example.dell.db.Diary;
 import com.example.dell.db.Label;
@@ -52,6 +56,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.security.auth.login.LoginException;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class TicketEditActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
     public static final String BOTTLE_NAME = "bottle_name";
@@ -102,6 +108,9 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
     private NavigationView navView;
     private DrawerLayout mDrawerLayout;
 
+    private CircleImageView headImage;
+    private TextView nickName;
+    private TextView personalSignature;
 
 
     private ObjectAnimator objAnimatorX;
@@ -125,7 +134,35 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
         intentInit();
         viewInit();
         Init();
+        initNavHeader();
 
+    }
+
+    public void initNavHeader(){
+        MyAccount myAccount = MyAccount.get(this);
+        //Log.d("123",myAccount.getNickname());
+        nickName.setText(myAccount.getNickname());
+        String sig = myAccount.getSignature();
+        String imageID = myAccount.getHeadimage();
+        if(sig == null){
+            personalSignature.setText("一切都在慢慢变好。");
+        }
+        else{
+            personalSignature.setText(sig);
+        }
+        if(imageID == null){
+            headImage.setImageResource(R.drawable.panda);
+        }
+        else{
+            //headImage.setImageResource(imageID);
+            //headImage.setImageResource(R.drawable.panda);
+            if (imageID != "") {
+                byte[] bytes = Base64.decode(imageID.getBytes(), 1);
+                //  byte[] bytes =headPic.getBytes();
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                headImage.setImageBitmap(bitmap);
+            }
+        }
     }
 
     void Init(){
@@ -136,7 +173,7 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
         imageItems.add(sentenceIcon4);
         sentenceList = sentence.getSentencebook().getAllSubSentence(helper);
 
-        likeFlag = sentence.getLike();
+        likeFlag = sentence.getIslike();
         if(likeFlag == false){
            sentence_likeIcon.setBackgroundResource(R.drawable.unlike);
         }
@@ -227,6 +264,12 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
     }
 
     public void viewInit(){
+        navView = (NavigationView)findViewById(R.id.nav_view);
+        View headerLayout = navView.getHeaderView(0);
+        nickName = (TextView)headerLayout.findViewById(R.id.nick_name);
+        personalSignature = (TextView)headerLayout.findViewById(R.id.personal_signature);
+        headImage = (CircleImageView)headerLayout.findViewById(R.id.icon_image);
+
         ticketEditLayout = (LinearLayout) findViewById(R.id.ticket_edit_layout);
         ticketEditLayout.setOnClickListener(this);
         mDrawerLayout = findViewById(R.id.note_drawer_layout);
@@ -356,13 +399,13 @@ public class TicketEditActivity extends AppCompatActivity implements View.OnClic
                     Log.i(TAG, "onClick: like");
                     likeFlag = false;
                     sentence_likeIcon.setBackgroundResource(R.drawable.unlike);
-                    sentence.setLike(false);
+                    sentence.setIslike(false);
                     sentence.update(helper);
                 } else if (likeFlag == false) {
                     Log.i(TAG, "onClick: unlike");
                     likeFlag = true;
                     sentence_likeIcon.setBackgroundResource(R.drawable.like);
-                    sentence.setLike(true);
+                    sentence.setIslike(true);
                     sentence.update(helper);
                 }
                 break;

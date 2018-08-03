@@ -26,4 +26,12 @@
         <item>日记</item>
         <item>纸条</item>
     </string-array>
+    <string-array name="sync_period">
+        <item>请选择</item>
+        <item>每半小时</item>
+        <item>每一小时</item>
+        <item>每两小时</item>
+        <item>每天</item>
+        <item>每周</item>
+    </string-array>
 </resources>
