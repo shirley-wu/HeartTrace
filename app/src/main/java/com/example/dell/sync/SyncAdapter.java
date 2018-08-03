@@ -27,6 +27,7 @@ import com.example.dell.db.Picture;
 import com.example.dell.db.Sentence;
 import com.example.dell.db.SentenceLabel;
 import com.example.dell.db.Sentencebook;
+import com.example.dell.db.User;
 import com.example.dell.diary.DiaryWriteActivity;
 import com.example.dell.server.ServerAccessor;
 import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
@@ -49,7 +50,6 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 
 import java.lang.reflect.Method;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -114,12 +114,10 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             boolean status = ServerAuthenticator.signIn(myAccount.getUsername(), myAccount.getPassword(), bundle);
             if (status && bundle.getBoolean("success")) {
                 myAccount.setToken(bundle.getString("token"));
-                myAccount.save(true);
+                myAccount.saveSetting();
             }
             else {
-                myAccount.setPassword(null);
-                myAccount.setToken(null);
-                myAccount.save(true);
+                myAccount.clearSetting();
                 return ;
             }
         }
@@ -279,12 +277,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             pairs.add(new BasicNameValuePair("username", myAccount.getUsername()));
             pairs.add(new BasicNameValuePair("token", myAccount.getToken()));
 
-            SimplePropertyPreFilter filter = new SimplePropertyPreFilter(MyAccount.class,
-                    "username", "password", "modified",
-                    "nickname", "gender", "birthday", "email",
-                    "school", "signature", "headimage"
-            );
-            String content = JSON.toJSONString(myAccount, filter);
+            String content = JSON.toJSONString(myAccount.getUser());
             Log.d(TAG, "syncUser: content = " + content);
             pairs.add(new BasicNameValuePair("content", content));
 
@@ -305,44 +298,10 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             Log.d(TAG, "syncUser: response = " + response);
 
             if (responseCode != 200) return false;
-            JSONObject jsonObject = JSON.parseObject(response);
-            String buff;
 
-            buff = jsonObject.getString("modified");
-            long mo = Long.parseLong(buff);
-            if (mo == myAccount.getModified()) return true;
-
-            myAccount.setModified(mo);
-
-            buff = jsonObject.getString("username");
-            if (buff != null) myAccount.setUsername(buff);
-
-            buff = jsonObject.getString("password");
-            if (buff != null) myAccount.setPassword(buff);
-
-            buff = jsonObject.getString("nickname");
-            if (buff != null) myAccount.setNickname(buff);
-            
-            buff = jsonObject.getString("gender");
-            if (buff != null) myAccount.setGender(buff);
-
-            buff = jsonObject.getString("birthday");
-            if (buff != null) myAccount.setBirthday(buff);
-
-            buff = jsonObject.getString("email");
-            if (buff != null) myAccount.setEmail(buff);
-            
-            buff = jsonObject.getString("school");
-            if (buff != null) myAccount.setSchool(buff);
-
-            buff = jsonObject.getString("signature");
-            if (buff != null) myAccount.setSignature(buff);
-            
-            buff = jsonObject.getString("headimage");
-            if (buff != null) myAccount.setHeadimage(buff);
-
-            boolean status = myAccount.save(false);
-            Log.d(TAG, "syncUser: save status = " + status);
+            myAccount.setUser(JSON.parseObject(response, User.class));
+            boolean status = myAccount.saveUser(false);
+            Log.d(TAG, "syncUser: save user status = " + status);
 
             return true;
         }

@@ -568,6 +568,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 //            @Override
 //            public void onPageScrollStateChanged(int state) {
 //                /*此方法是在状态改变的时候调用，其中arg0这个参数有三种状态（0，1，2）。
+//                /*此方法是在状态改变的时候调用，其中arg0这个参数有三种状态（0，1，2）。
 //                arg0 ==1的时辰默示正在滑动，
 //                arg0==2的时辰默示滑动完毕了，
 //                arg0==0的时辰默示什么都没做。*/

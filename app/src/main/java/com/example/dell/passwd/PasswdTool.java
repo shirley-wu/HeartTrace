@@ -58,7 +58,7 @@ public class PasswdTool {
 
     static public String desDecrypt(String result, String key) {
         try {
-            Log.d(TAG, "desEncrypt: result = " + result + " key = " + key);
+            Log.d(TAG, "desDecrypt: result = " + result + " key = " + key);
 
             SecureRandom random = new SecureRandom();
             DESKeySpec desKey = new DESKeySpec(key.getBytes("UTF-8"));
