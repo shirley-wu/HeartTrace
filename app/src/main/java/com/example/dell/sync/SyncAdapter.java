@@ -299,6 +299,9 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
             if (responseCode != 200) return false;
 
+            JSONObject jsonObject = JSON.parseObject(response);
+            if (jsonObject.isEmpty()) return false;
+
             myAccount.setUser(JSON.parseObject(response, User.class));
             boolean status = myAccount.saveUser(false);
             Log.d(TAG, "syncUser: save user status = " + status);
