@@ -11,6 +11,7 @@ import com.example.dell.passwd.PasswdTool;
 import com.example.dell.passwd.PasswdWorker;
 import com.j256.ormlite.dao.Dao;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -144,6 +145,12 @@ public class MyAccount {
     }
 
     public void setHeadimage(String headimage){
+        try {
+            Log.d(TAG, "setHeadimage: length = " + headimage.getBytes("UTF-8").length);
+        }
+        catch (UnsupportedEncodingException e) {
+            Log.e(TAG, "setHeadimage: ", e);
+        }
         user.setHeadimage(headimage);
     }
 
