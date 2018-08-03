@@ -4,6 +4,7 @@ import android.accounts.Account;
 import android.content.AbstractThreadedSyncAdapter;
 import android.content.ContentProviderClient;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SyncResult;
 import android.content.SyncStats;
@@ -68,6 +69,8 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     
     private static final String ENCODING = "UTF-8";
 
+    private static final String BROADCAST_ACTION = "com.example.dell.diary.SYNC_ACTION";
+
     private Context mContext;
 
     private Long preAnchor = null;
@@ -99,11 +102,22 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     public void onPerformSync(Account account, Bundle extras, String authority, ContentProviderClient provider, SyncResult syncResult) {
         Log.d(TAG, "onPerformSync: begin");
 
+        Intent intentBegin = new Intent();
+        intentBegin.setAction(BROADCAST_ACTION);
+        intentBegin.putExtra("message", "同步开始");
+        mContext.sendBroadcast(intentBegin);
+
         DatabaseHelper helper = OpenHelperManager.getHelper(mContext, DatabaseHelper.class);
 
         MyAccount myAccount = new MyAccount(mContext);
         if (myAccount == null) {
             Log.e(TAG, "onPerformSync: cannot get my account");
+
+            Intent intent = new Intent();
+            intent.setAction(BROADCAST_ACTION);
+            intent.putExtra("message", "无账户，同步失败");
+            mContext.sendBroadcast(intent);
+
             return ;
         }
 
@@ -118,6 +132,12 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             }
             else {
                 myAccount.clearSetting();
+
+                Intent intent = new Intent();
+                intent.setAction(BROADCAST_ACTION);
+                intent.putExtra("message", "身份认证失败，请重新登录");
+                mContext.sendBroadcast(intent);
+
                 return ;
             }
         }
@@ -135,10 +155,21 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         Log.d(TAG, "onPerformSync: 同步图片 status = " + status3);
 
         if (status1 && status2 && status3 && afterAnchor != null) {
+            Intent intent = new Intent();
+            intent.setAction(BROADCAST_ACTION);
+            intent.putExtra("message", "同步成功");
+            mContext.sendBroadcast(intent);
+
             Log.d(TAG, "onPerformSync: afterAnchor = " + afterAnchor);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putLong("anchor", afterAnchor);
             editor.commit();
+        }
+        else {
+            Intent intent = new Intent();
+            intent.setAction(BROADCAST_ACTION);
+            intent.putExtra("message", "同步失败");
+            mContext.sendBroadcast(intent);
         }
 
         Log.d(TAG, "onPerformSync: end");

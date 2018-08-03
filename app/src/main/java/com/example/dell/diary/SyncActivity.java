@@ -117,8 +117,6 @@ public class SyncActivity extends AppCompatActivity implements CompoundButton.On
                 bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
                 bundle.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
                 ContentResolver.requestSync(mAccount, AUTHORITY,bundle);
-                Toast.makeText(SyncActivity.this, "同步完成", Toast.LENGTH_SHORT).show();
-
             }
         });
 

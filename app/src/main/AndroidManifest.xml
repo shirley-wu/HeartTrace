@@ -114,6 +114,14 @@
                 android:resource="@xml/syncadapter" />
         </service>
 
+        <receiver android:name="com.example.dell.sync.SyncReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.example.dell.diary.SYNC_ACTION" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
     <!--Note: the following pemissions are added for synchronization. -->
