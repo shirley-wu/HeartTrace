@@ -298,6 +298,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                         Intent intent3 = new Intent(DiaryWriteActivity.this,TimeLineActivity.class);
                         startActivity(intent3);
                         break;
+                    case R.id.delete_all:
+                        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+                        helper.clearAll();
+                        break;
                     case R.id.exit:
                         MyAccount myAccount = new MyAccount(DiaryWriteActivity.this);
                         myAccount.setAutoLogin(false);

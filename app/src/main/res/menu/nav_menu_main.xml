@@ -28,6 +28,13 @@
             android:title="时间轴" />
     </group>
 
+    <group android:checkableBehavior="single">
+        <item
+            android:id = "@+id/delete_all"
+            android:icon="@drawable/delete_all"
+            android:title = "删除本地数据"/>
+    </group>
+
     <item
         android:id = "@+id/exit"
         android:icon="@drawable/exit_black"
