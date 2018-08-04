@@ -26,7 +26,10 @@ public class Setting {
     private boolean autoLogin;
 
     @DatabaseField
-    private long anchor = -1;
+    private long dataAnchor = -1;
+
+    @DatabaseField
+    private long picAnchor = -1;
 
     public String getPassword() {
         return password;
@@ -60,11 +63,19 @@ public class Setting {
         this.autoLogin = autoLogin;
     }
 
-    public long getAnchor() {
-        return anchor;
+    public long getDataAnchor() {
+        return dataAnchor;
     }
 
-    public void setAnchor(long anchor) {
-        this.anchor = anchor;
+    public void setDataAnchor(long dataAnchor) {
+        this.dataAnchor = dataAnchor;
+    }
+
+    public long getPicAnchor() {
+        return picAnchor;
+    }
+
+    public void setPicAnchor(long picAnchor) {
+        this.picAnchor = picAnchor;
     }
 }
