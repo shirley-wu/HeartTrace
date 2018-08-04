@@ -20,6 +20,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Point;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.LinkAddress;
@@ -2721,29 +2722,33 @@ class PicUtils {
 
     final private static String TAG = "PicUtils";
 
-    static Bitmap getBitmap(Context context, Uri uri) {
+    static Bitmap getBitmap(Activity activity, Uri uri) {
         try {
             Log.d(TAG, "getBitmap");
 
             // 从选取相册的Activity中返回后
-            String imagePath = getFilePathByUri(context, uri);
+            String imagePath = getFilePathByUri(activity, uri);
             Log.d(TAG, "getBitmap: imagePath = " + imagePath);
             if (imagePath == null) return null;
+
+            // 获取屏幕的高宽
+            Point outSize = new Point();
+            activity.getWindow().getWindowManager().getDefaultDisplay().getSize(outSize);
+            int widthLim = outSize.x;
+            Log.d(TAG, "getBitmap: widthLim = " + widthLim);
 
             // 设置参数
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inJustDecodeBounds = true;              // 只获取图片的大小信息，而不是将整张图片载入在内存中，避免内存溢出
             BitmapFactory.decodeFile(imagePath, options);
-            int height = options.outHeight;
             int width = options.outWidth;
-            int inSampleSize = 2;                               // 默认像素压缩比例，压缩为原图的1/2
-            int minLen = Math.min(height, width);               // 原图的最小边长
-            if (minLen > 1000) {                                 // 如果原始图像的最小边长大于1000dp（此处单位我认为是dp，而非px）
-                float ratio = (float) minLen / 1000.0f;         // 计算像素压缩比例
-                inSampleSize = (int) ratio;
-            }
+            Log.d(TAG, "getBitmap: width = " + width);
+
+            int ratio = (width / widthLim) + 1;
+            Log.d(TAG, "getBitmap: ratio = " + ratio);
+
             options.inJustDecodeBounds = false; // 计算好压缩比例后，这次可以去加载原图了
-            options.inSampleSize = inSampleSize; // 设置为刚才计算的压缩比例
+            options.inSampleSize = ratio; // 设置为刚才计算的压缩比例
             return BitmapFactory.decodeFile(imagePath, options); // 解码文件
         }
         catch (Exception e) {
