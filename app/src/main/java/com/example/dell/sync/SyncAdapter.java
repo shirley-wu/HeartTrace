@@ -205,10 +205,15 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
             dataBuilder.append("}");
 
-            String data = dataBuilder.toString();
-            Log.d(TAG, "sync: data = " + data);
+            String content = dataBuilder.toString();
+            Log.d(TAG, "sync: data = " + content);
 
-            HttpResponse httpResponse = postSyncData(data);
+            ArrayList<NameValuePair> pairs = new ArrayList<>();
+            pairs.add(new BasicNameValuePair("anchor", preAnchor.toString()));
+            pairs.add(new BasicNameValuePair("content", content));
+            HttpResponse httpResponse = postSyncData(
+                    ServerAccessor.getServerIp() + ":8080/HeartTrace_Server_war/Servlet.Sync1", pairs
+            );
 
             int responseCode = httpResponse.getStatusLine().getStatusCode();
             Log.d(TAG, "sync: response code = " + responseCode);
@@ -290,30 +295,14 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         if (myAccount == null) return false;
 
         try {
-            HttpClient httpClient = new DefaultHttpClient();
-
-            String url = ServerAccessor.getServerIp() + ":8080/HeartTrace_Server_war/Servlet.SyncUser";
-            Log.d(TAG, "syncUser: url " + url);
-            HttpPost httpPost = new HttpPost(url);
-
-            ArrayList<NameValuePair> pairs = new ArrayList<>();
-
-            pairs.add(new BasicNameValuePair("modelnum", Build.MODEL));
-            pairs.add(new BasicNameValuePair("username", myAccount.getUsername()));
-            pairs.add(new BasicNameValuePair("token", myAccount.getToken()));
-
             String content = JSON.toJSONString(myAccount.getUser());
             Log.d(TAG, "syncUser: content = " + content);
+
+            ArrayList<NameValuePair> pairs = new ArrayList<>();
             pairs.add(new BasicNameValuePair("content", content));
-
-            httpPost.setHeader(new BasicHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8"));
-            httpPost.setHeader(new BasicHeader("Accept", "text/plain; charset=utf-8"));
-
-            HttpEntity requestEntity = new UrlEncodedFormEntity(pairs, ENCODING);
-            Log.d(TAG, "syncUser: request entity = " + EntityUtils.toString(requestEntity, ENCODING));
-            httpPost.setEntity(requestEntity);
-
-            HttpResponse httpResponse = httpClient.execute(httpPost);
+            HttpResponse httpResponse = postSyncData(
+                    ServerAccessor.getServerIp() + ":8080/HeartTrace_Server_war/Servlet.Sync1", pairs
+            );;
 
             int responseCode = httpResponse.getStatusLine().getStatusCode();
             Log.d(TAG, "syncUser: response code = " + responseCode);
@@ -345,10 +334,35 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             queryBuilder.where().gt("modified", preAnchor);
             List<Picture> list = queryBuilder.query();
 
+            JSONArray jsonArray = new JSONArray();
             for(Picture picture : list) {
-                String path = DiaryWriteActivity.SD_PATH + "image_" + picture.getId() + ".jpg";
-                // TODO: ???
+                JSONObject object = new JSONObject();
+                object.put("filename", picture.getFileName());
+                object.put("content", picture.readBase64(mContext));
+                jsonArray.add(object);
             }
+
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("files", jsonArray);
+
+            String content = jsonObject.toJSONString();
+            Log.d(TAG, "syncPic: content = " + content);
+
+            ArrayList<NameValuePair> pairs = new ArrayList<>();
+            pairs.add(new BasicNameValuePair("anchor", preAnchor.toString()));
+            pairs.add(new BasicNameValuePair("content", content));
+            HttpResponse httpResponse = postSyncData(
+                    ServerAccessor.getServerIp() + ":8080/HeartTrace_Server_war/Servlet.Sync1", pairs
+            );
+
+            int responseCode = httpResponse.getStatusLine().getStatusCode();
+            Log.d(TAG, "syncUser: response code = " + responseCode);
+
+            HttpEntity httpEntity = httpResponse.getEntity();
+            String response = EntityUtils.toString(httpEntity, ENCODING);
+            Log.d(TAG, "syncUser: response = " + response);
+
+            if (responseCode != 200) return false;
 
             return true;
         }
@@ -358,24 +372,21 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         }
     }
 
-    public HttpResponse postSyncData(String sendData) {
+    public HttpResponse postSyncData(String url, ArrayList<NameValuePair> pairs) {
         HttpParams httpParams = new BasicHttpParams();
         HttpConnectionParams.setSoTimeout(httpParams, 60000);
         HttpClient httpClient = new DefaultHttpClient(httpParams);
 
-        String url = ServerAccessor.getServerIp() + ":8080/HeartTrace_Server_war/Servlet.Sync1";
         Log.d(TAG, "postSyncData: url " + url);
         HttpPost httpPost = new HttpPost(url);
 
-        ArrayList<NameValuePair> pairs = new ArrayList<>();
+        if (pairs == null) pairs = new ArrayList<>();
 
         pairs.add(new BasicNameValuePair("modelnum", Build.MODEL));
 
         MyAccount myAccount = new MyAccount(mContext);
         pairs.add(new BasicNameValuePair("username", myAccount.getUsername()));
         pairs.add(new BasicNameValuePair("token", myAccount.getToken()));
-        pairs.add(new BasicNameValuePair("content", sendData));
-        pairs.add(new BasicNameValuePair("anchor", preAnchor.toString()));
 
         try {
             httpPost.setHeader(new BasicHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8"));
