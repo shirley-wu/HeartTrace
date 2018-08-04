@@ -73,6 +73,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -272,7 +273,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         //edit_layout.setLongClickable(true);
 
         diary_write.setOnTouchListener(this);
-
 
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -520,6 +520,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             }
         }
         Toast.makeText(DiaryWriteActivity.this, "刷新", Toast.LENGTH_SHORT).show();
+        mSwipeLayout.setEnabled(false);
     }
 
     private class MyGestureListener implements GestureDetector.OnGestureListener{
@@ -553,6 +554,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
                                float velocityY) {
             DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+            if(e2.getY() - e1.getY() > 600 && Math.abs(velocityY) > 200)
+                mSwipeLayout.setEnabled(true);
             if(confirm.getVisibility() == View.INVISIBLE && emptyImage.getVisibility() == View.INVISIBLE){
                 //Toast.makeText(DiaryWriteActivity.this, "onFling", Toast.LENGTH_LONG).show();
                 if (e1.getX() - e2.getX() > FLING_MIN_DISTANCE
@@ -645,7 +648,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
     public void getView()
     {
-        mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
+        mSwipeLayout = (VerticalSwipeRefreshLayout) findViewById(R.id.swipe_container);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navView = (NavigationView)findViewById(R.id.nav_view);
         View headerLayout = navView.getHeaderView(0);
@@ -732,7 +735,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 //                arg0==0的时辰默示什么都没做。*/
 //            }
 //        });
-
         diary_write.addTextChangedListener(new TextWatcher() {
             private int selectionStart;
             private int selectionEnd;
@@ -818,6 +820,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         mSwipeLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light, android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
+        mSwipeLayout.setEnabled(false);
         imageItems.add(diaryIcon1);
         imageItems.add(diaryIcon2);
         imageItems.add(diaryIcon3);
@@ -902,7 +905,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             diaryWeekday.setText("");
 
             diary_write.setEnabled(false);
-            mSwipeLayout.setEnabled(true);
             floatingButtons.setVisibility(View.VISIBLE);
             addDiary.setVisibility(View.INVISIBLE);
             enterBottle.setVisibility(View.INVISIBLE);
@@ -933,7 +935,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             diaryDate.setText(date);
             diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
             diary_write.setEnabled(false);
-            mSwipeLayout.setEnabled(true);
             theme_set.setVisibility(View.INVISIBLE);
             font_set.setVisibility(View.INVISIBLE);
             insert_image.setVisibility(View.INVISIBLE);
@@ -1152,7 +1153,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     diaryList.add(index,diary);
                 }
                 diary_write.setEnabled(false);
-                mSwipeLayout.setEnabled(true);
                 theme_set.setVisibility(View.INVISIBLE);
                 font_set.setVisibility(View.INVISIBLE);
                 insert_image.setVisibility(View.INVISIBLE);
