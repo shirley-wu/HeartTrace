@@ -440,8 +440,13 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
                                float velocityY) {
-            // TODO Auto-generated method stub
             DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+            if (e2.getY() - e1.getY() > 600 && Math.abs(velocityY) > 200) {
+                // TODO: hard code
+                Toast.makeText(DiaryWriteActivity.this, "刷新", Toast.LENGTH_SHORT).show();
+                init();
+                return true;
+            }
             if(confirm.getVisibility() == View.INVISIBLE && emptyImage.getVisibility() == View.INVISIBLE){
                 //Toast.makeText(DiaryWriteActivity.this, "onFling", Toast.LENGTH_LONG).show();
                 if (e1.getX() - e2.getX() > FLING_MIN_DISTANCE
