@@ -554,7 +554,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
                                float velocityY) {
             DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-            if(e2.getY() - e1.getY() > 600 && Math.abs(velocityY) > 200)
+            if(e2.getY() - e1.getY() > 400 && Math.abs(velocityY) > 100)
                 mSwipeLayout.setEnabled(true);
             if(confirm.getVisibility() == View.INVISIBLE && emptyImage.getVisibility() == View.INVISIBLE){
                 //Toast.makeText(DiaryWriteActivity.this, "onFling", Toast.LENGTH_LONG).show();
