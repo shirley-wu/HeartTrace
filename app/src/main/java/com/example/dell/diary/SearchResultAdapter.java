@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.example.dell.diary.DiaryWriteActivity.SD_PATH;
+
 /**
  * Created by dell on 2018/6/4.
  */
@@ -84,7 +86,12 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         Diary diary = mDiaryList.get(position);
         String diary_card_text;
         diary_card_text = diary.getText();
-        Pattern pattern = Pattern.compile( Environment.getExternalStorageDirectory().getPath()+"/HeartTrace/pic/image_[0-9]{14}\\.jpg");
+        String filePath = " ";
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
+            filePath = SD_PATH;
+        else
+            ;
+        Pattern pattern = Pattern.compile( filePath + "img_[0-9]{0,}\\.jpg");
         Matcher matcher = pattern.matcher(diary_card_text);
         while(matcher.find()) {
             StringBuilder sb=new StringBuilder(diary_card_text);
