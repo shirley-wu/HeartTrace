@@ -1805,26 +1805,13 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             Picture picture = new Picture();
             DatabaseHelper databaseHelper = new DatabaseHelper(getApplicationContext());
             boolean status = picture.saveBitmap(DiaryWriteActivity.this, databaseHelper, mBitmap);
-            String filePath = new String();
-            if (status == true)
-                filePath = picture.getParentPath() + picture.getFileName();
-            Log.i("file path",filePath);
-
-            filePic = new File(filePath);
-            if (!filePic.exists()) {
-                filePic.getParentFile().mkdirs();
-                filePic.createNewFile();
-            }
-            FileOutputStream fos = new FileOutputStream(filePic);
-            mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-            fos.flush();
-            fos.close();
-        } catch (IOException e) {
+            if (status) return picture.getParentPath() + picture.getFileName();
+            else return null;
+        } catch (RuntimeException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
             return null;
         }
-        return filePic.getAbsolutePath();
     }
 
     private void handleImageBeforeKitKat(Intent data) {
