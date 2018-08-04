@@ -64,8 +64,6 @@ import java.util.Map;
 public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
     private static final String TAG = "SyncAdapter";
-
-    private static final String PREFERENCE_NAME = "SYNC ANCHOR";
     
     private static final String ENCODING = "UTF-8";
 
@@ -142,8 +140,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             }
         }
 
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
-        preAnchor = sharedPreferences.getLong("anchor", -1);
+        preAnchor = myAccount.getAnchor();
         Log.d(TAG, "onPerformSync: preAnchor = " + preAnchor);
 
         boolean status1, status2, status3;
@@ -161,9 +158,8 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             mContext.sendBroadcast(intent);
 
             Log.d(TAG, "onPerformSync: afterAnchor = " + afterAnchor);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putLong("anchor", afterAnchor);
-            editor.commit();
+            myAccount.setAnchor(afterAnchor);
+            myAccount.saveSetting();
         }
         else {
             Intent intent = new Intent();
