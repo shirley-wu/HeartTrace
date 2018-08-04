@@ -1737,6 +1737,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             e.printStackTrace();
         }
         String imagePath = saveBitmap(DiaryWriteActivity.this,bitmap);
+        if (imagePath == null) {
+            Toast.makeText(this, "图片不存在", Toast.LENGTH_SHORT);
+            return ;
+        }
         SpannableString imageSpan = new SpannableString(imagePath);
         imageSpan.setSpan(new ImageSpan(bitmap) , 0, imageSpan.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         Editable editable = diary_write.getText();
