@@ -2749,8 +2749,6 @@ class PicUtils {
             Log.d(TAG, "getBitmap: ratio = " + ratio);
 
             options.inJustDecodeBounds = false;
-            options.inDensity = metrics.densityDpi;
-            options.inTargetDensity = metrics.densityDpi;
             options.inSampleSize = ratio; // 设置为刚才计算的压缩比例
             return BitmapFactory.decodeFile(imagePath, options); // 解码文件
         }
@@ -2758,35 +2756,6 @@ class PicUtils {
             Log.e(TAG, "getBitmap: ", e);
             return null;
         }
-    }
-
-    private static BitmapFactory.Options getBitmapOptions(Context context) {
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inScaled = true;
-        options.inPreferredConfig = Bitmap.Config.RGB_565;
-        options.inPurgeable = true;
-        options.inInputShareable = true;
-        options.inJustDecodeBounds = false;
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.GINGERBREAD_MR1) {
-            Field field = null;
-            try {
-                field = BitmapFactory.Options.class.getDeclaredField("inNativeAlloc");
-                field.setAccessible(true);
-                field.setBoolean(options, true);
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-        }
-        int displayDensityDpi = context.getResources().getDisplayMetrics().densityDpi;
-        float displayDensity = context.getResources().getDisplayMetrics().density;
-        if (displayDensityDpi > 240 && displayDensity > 1.5f) {
-            int density = (int) (displayDensityDpi * 0.75f);
-            options.inDensity = density;
-            options.inTargetDensity = density;
-        }
-        return options;
     }
 
     private static String getFilePathByUri(Context context, Uri uri) {
