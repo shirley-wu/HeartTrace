@@ -2732,9 +2732,9 @@ class PicUtils {
             if (imagePath == null) return null;
 
             // 获取屏幕的高宽
-            Point outSize = new Point();
-            activity.getWindow().getWindowManager().getDefaultDisplay().getSize(outSize);
-            int widthLim = outSize.x;
+            DisplayMetrics metrics = new DisplayMetrics();
+            activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+            float widthLim = metrics.widthPixels * metrics.density;
             Log.d(TAG, "getBitmap: widthLim = " + widthLim);
 
             // 设置参数
@@ -2744,7 +2744,7 @@ class PicUtils {
             int width = options.outWidth;
             Log.d(TAG, "getBitmap: width = " + width);
 
-            int ratio = (width / widthLim) + 1;
+            int ratio = ((int)(width / widthLim)) + 1;
             Log.d(TAG, "getBitmap: ratio = " + ratio);
 
             options.inJustDecodeBounds = false; // 计算好压缩比例后，这次可以去加载原图了
@@ -2757,7 +2757,7 @@ class PicUtils {
         }
     }
 
-    public static String getFilePathByUri(Context context, Uri uri) {
+    private static String getFilePathByUri(Context context, Uri uri) {
         String path = null;
         // 以 file:// 开头的
         if (ContentResolver.SCHEME_FILE.equals(uri.getScheme())) {
