@@ -1746,7 +1746,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
         // 新建imageSpan
         SpannableString imageSpan = new SpannableString(imagePath);
-        bitmap = scaledImage(bitmap);
+        bitmap = scaledImageForScreen(bitmap);
         imageSpan.setSpan(new ImageSpan(bitmap) , 0, imageSpan.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         // 显示
@@ -1760,7 +1760,20 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         isInsertingImg = false;
     }
 
-    public Bitmap scaledImage(Bitmap image) {
+    public Bitmap scaledImageForScreen(Bitmap bitmap) {
+        // 获取屏幕参数
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        float widthPixels = displayMetrics.widthPixels * 0.8F;
+        Log.d(TAG, "scaledImage: widthPixels = " + widthPixels);
+
+        float density = displayMetrics.density;
+        Log.d(TAG, "scaledImage: density = " + density);
+
+        return scaledImage(bitmap, widthPixels * density);
+    }
+
+    public Bitmap scaledImage(Bitmap image, float targetWidth) {
         // 获取图片宽高
         int width = image.getWidth();
         Log.d(TAG, "scaledImage: width = " + width);
@@ -1770,24 +1783,15 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         Matrix matrix = new Matrix();
 
         // 计算宽高缩放率
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int widthPixels = displayMetrics.widthPixels;
-        Log.d(TAG, "scaledImage: widthPixels = " + widthPixels);
-        float density = displayMetrics.density;
-        Log.d(TAG, "scaledImage: density = " + density);
-        float scale = ((float) widthPixels) * density / width;
+        float scale = targetWidth / width;
         Log.d(TAG, "scaledImage: scale = " + scale);
 
         // 缩放图片
         matrix.postScale(scale, scale);
         Bitmap new_image = Bitmap.createBitmap(image, 0, 0, width, height, matrix, true);
+        Log.d(TAG, "scaledImage: new_image width = " + new_image.getWidth());
         return new_image;
     }
-
-    public static final String SD_PATH = Environment.getExternalStorageDirectory().getPath() + "/HeartTrace/pic/";
-    public static final String IN_PATH = "/HeartTrace/pic/";
-
 
     public String saveBitmap(Bitmap mBitmap) {
         try {
@@ -1834,11 +1838,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private void getImage(String text)
     {
         Editable editable = diary_write.getText();
-        String filePath;
-        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
-            filePath = SD_PATH;
-        else
-            filePath = DiaryWriteActivity.this.getApplicationContext().getFilesDir().getAbsolutePath() + IN_PATH;
+        String filePath = Picture.getParentPath(this);
         Pattern pattern = Pattern.compile( filePath + "img_[0-9]{0,}\\.jpg");
         Matcher matcher = pattern.matcher(text);
         int matcher_end = 0;
@@ -1849,7 +1849,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             // 获取原始图像
             Bitmap bitmap = picture.getBitmap(DiaryWriteActivity.this);
             // 获取缩放图像
-            bitmap = scaledImage(bitmap);
+            bitmap = scaledImageForScreen(bitmap);
 
             SpannableString imageSpan = new SpannableString(matcher.group());
             imageSpan.setSpan(new ImageSpan(bitmap) , 0, imageSpan.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

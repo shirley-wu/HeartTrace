@@ -5,9 +5,7 @@ import android.content.AbstractThreadedSyncAdapter;
 import android.content.ContentProviderClient;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.SyncResult;
-import android.content.SyncStats;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,7 +14,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.alibaba.fastjson.serializer.SimplePropertyPreFilter;
 import com.example.dell.auth.MyAccount;
 import com.example.dell.auth.ServerAuthenticator;
 import com.example.dell.db.DatabaseHelper;
@@ -29,7 +26,6 @@ import com.example.dell.db.Sentence;
 import com.example.dell.db.SentenceLabel;
 import com.example.dell.db.Sentencebook;
 import com.example.dell.db.User;
-import com.example.dell.diary.DiaryWriteActivity;
 import com.example.dell.server.ServerAccessor;
 import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
@@ -53,7 +49,6 @@ import org.apache.http.util.EntityUtils;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -401,7 +396,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
     public HttpResponse postSyncData(String url, ArrayList<NameValuePair> pairs) {
         HttpParams httpParams = new BasicHttpParams();
-        HttpConnectionParams.setSoTimeout(httpParams, 60000);
+        HttpConnectionParams.setSoTimeout(httpParams, 600000);
         HttpClient httpClient = new DefaultHttpClient(httpParams);
 
         Log.d(TAG, "postSyncData: url " + url);
