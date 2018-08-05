@@ -89,7 +89,6 @@ public class SyncActivity extends AppCompatActivity implements CompoundButton.On
             autoLinear.setVisibility(autoLinear.INVISIBLE);
             oneSyncCard.setVisibility(oneSyncCard.INVISIBLE);
             autoSettingCard.setVisibility(autoSettingCard.INVISIBLE);
-            ContentResolver.setSyncAutomatically(mAccount,AUTHORITY, false);
         }
         oneSyncCard.setOnClickListener(new View.OnClickListener() {
             @Override
