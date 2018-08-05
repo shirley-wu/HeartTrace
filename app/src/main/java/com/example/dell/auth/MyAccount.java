@@ -136,7 +136,6 @@ public class MyAccount {
         return user.getHeadimage();
     }
 
-
     public long getModified() {
         return user.getModified();
     }
@@ -169,12 +168,20 @@ public class MyAccount {
         setting.setAutoLogin(autoLogin);
     }
 
-    public void setAnchor(long anchor) {
-        setting.setAnchor(anchor);
+    public void setDataAnchor(long dataAnchor) {
+        setting.setDataAnchor(dataAnchor);
     }
 
-    public long getAnchor() {
-        return setting.getAnchor();
+    public long getDataAnchor() {
+        return setting.getDataAnchor();
+    }
+
+    public void setPicAnchor(long picAnchor) {
+        setting.setPicAnchor(picAnchor);
+    }
+
+    public long getPicAnchor() {
+        return setting.getPicAnchor();
     }
 
     public User getUser() {

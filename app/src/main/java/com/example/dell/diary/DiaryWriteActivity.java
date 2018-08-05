@@ -20,6 +20,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Point;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.LinkAddress;
@@ -73,6 +74,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -104,6 +106,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Field;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -272,7 +275,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         //edit_layout.setLongClickable(true);
 
         diary_write.setOnTouchListener(this);
-
 
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -520,6 +522,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             }
         }
         Toast.makeText(DiaryWriteActivity.this, "刷新", Toast.LENGTH_SHORT).show();
+        mSwipeLayout.setEnabled(false);
     }
 
     private class MyGestureListener implements GestureDetector.OnGestureListener{
@@ -553,6 +556,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
                                float velocityY) {
             DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+            if(e2.getY() - e1.getY() > 400 && Math.abs(velocityY) > 100)
+                mSwipeLayout.setEnabled(true);
             if(confirm.getVisibility() == View.INVISIBLE && emptyImage.getVisibility() == View.INVISIBLE){
                 //Toast.makeText(DiaryWriteActivity.this, "onFling", Toast.LENGTH_LONG).show();
                 if (e1.getX() - e2.getX() > FLING_MIN_DISTANCE
@@ -645,7 +650,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
     public void getView()
     {
-        mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
+        mSwipeLayout = (VerticalSwipeRefreshLayout) findViewById(R.id.swipe_container);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navView = (NavigationView)findViewById(R.id.nav_view);
         View headerLayout = navView.getHeaderView(0);
@@ -732,7 +737,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 //                arg0==0的时辰默示什么都没做。*/
 //            }
 //        });
-
         diary_write.addTextChangedListener(new TextWatcher() {
             private int selectionStart;
             private int selectionEnd;
@@ -818,6 +822,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         mSwipeLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light, android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
+        mSwipeLayout.setEnabled(false);
         imageItems.add(diaryIcon1);
         imageItems.add(diaryIcon2);
         imageItems.add(diaryIcon3);
@@ -902,7 +907,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             diaryWeekday.setText("");
 
             diary_write.setEnabled(false);
-            mSwipeLayout.setEnabled(true);
             floatingButtons.setVisibility(View.VISIBLE);
             addDiary.setVisibility(View.INVISIBLE);
             enterBottle.setVisibility(View.INVISIBLE);
@@ -933,7 +937,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             diaryDate.setText(date);
             diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
             diary_write.setEnabled(false);
-            mSwipeLayout.setEnabled(true);
             theme_set.setVisibility(View.INVISIBLE);
             font_set.setVisibility(View.INVISIBLE);
             insert_image.setVisibility(View.INVISIBLE);
@@ -1152,7 +1155,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     diaryList.add(index,diary);
                 }
                 diary_write.setEnabled(false);
-                mSwipeLayout.setEnabled(true);
                 theme_set.setVisibility(View.INVISIBLE);
                 font_set.setVisibility(View.INVISIBLE);
                 insert_image.setVisibility(View.INVISIBLE);
@@ -1730,13 +1732,12 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private void handleImageOnKitKat(Intent data) {
         isInsertingImg = true;
         Uri uri = data.getData();
-        Bitmap bitmap = null;
-        try {
-            bitmap = getBitmapFromUri(DiaryWriteActivity.this,uri);
-        } catch (IOException e) {
-            e.printStackTrace();
+        Bitmap bitmap = PicUtils.getBitmap(this, uri);
+        if (bitmap == null) {
+            Toast.makeText(this, "图片不存在", Toast.LENGTH_SHORT);
+            return ;
         }
-        String imagePath = saveBitmap(DiaryWriteActivity.this,bitmap);
+        String imagePath = saveBitmap(DiaryWriteActivity.this, bitmap);
         SpannableString imageSpan = new SpannableString(imagePath);
         imageSpan.setSpan(new ImageSpan(bitmap) , 0, imageSpan.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         Editable editable = diary_write.getText();
@@ -1805,26 +1806,13 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             Picture picture = new Picture();
             DatabaseHelper databaseHelper = new DatabaseHelper(getApplicationContext());
             boolean status = picture.saveBitmap(DiaryWriteActivity.this, databaseHelper, mBitmap);
-            String filePath = new String();
-            if (status == true)
-                filePath = picture.getParentPath() + picture.getFileName();
-            Log.i("file path",filePath);
-
-            filePic = new File(filePath);
-            if (!filePic.exists()) {
-                filePic.getParentFile().mkdirs();
-                filePic.createNewFile();
-            }
-            FileOutputStream fos = new FileOutputStream(filePic);
-            mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-            fos.flush();
-            fos.close();
-        } catch (IOException e) {
+            if (status) return picture.getParentPath() + picture.getFileName();
+            else return null;
+        } catch (RuntimeException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
             return null;
         }
-        return filePic.getAbsolutePath();
     }
 
     private void handleImageBeforeKitKat(Intent data) {
@@ -2728,3 +2716,139 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     }
 
 }
+
+
+
+class PicUtils {
+
+    final private static String TAG = "PicUtils";
+
+    static Bitmap getBitmap(Activity activity, Uri uri) {
+        try {
+            Log.d(TAG, "getBitmap");
+
+            // 从选取相册的Activity中返回后
+            String imagePath = getFilePathByUri(activity, uri);
+            Log.d(TAG, "getBitmap: imagePath = " + imagePath);
+            if (imagePath == null) return null;
+
+            // 获取屏幕的高宽
+            DisplayMetrics metrics = new DisplayMetrics();
+            activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+            float widthLim = metrics.widthPixels * metrics.density;
+            Log.d(TAG, "getBitmap: widthLim = " + widthLim);
+
+            // 设置参数
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = true;              // 只获取图片的大小信息，而不是将整张图片载入在内存中，避免内存溢出
+            BitmapFactory.decodeFile(imagePath, options);
+            int width = options.outWidth;
+            Log.d(TAG, "getBitmap: width = " + width);
+
+            int ratio = ((int)(width / widthLim)) + 1;
+            Log.d(TAG, "getBitmap: ratio = " + ratio);
+
+            options.inJustDecodeBounds = false;
+            options.inSampleSize = ratio; // 设置为刚才计算的压缩比例
+            return BitmapFactory.decodeFile(imagePath, options); // 解码文件
+        }
+        catch (Exception e) {
+            Log.e(TAG, "getBitmap: ", e);
+            return null;
+        }
+    }
+
+    private static String getFilePathByUri(Context context, Uri uri) {
+        String path = null;
+        // 以 file:// 开头的
+        if (ContentResolver.SCHEME_FILE.equals(uri.getScheme())) {
+            path = uri.getPath();
+            return path;
+        }
+        // 以 content:// 开头的，比如 content://media/extenral/images/media/17766
+        if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme()) && Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+            Cursor cursor = context.getContentResolver().query(uri, new String[]{MediaStore.Images.Media.DATA}, null, null, null);
+            if (cursor != null) {
+                if (cursor.moveToFirst()) {
+                    int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                    if (columnIndex > -1) {
+                        path = cursor.getString(columnIndex);
+                    }
+                }
+                cursor.close();
+            }
+            return path;
+        }
+        // 4.4及之后的 是以 content:// 开头的，比如 content://com.android.providers.media.documents/document/image%3A235700
+        if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme()) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            if (DocumentsContract.isDocumentUri(context, uri)) {
+                if (isExternalStorageDocument(uri)) {
+                    // ExternalStorageProvider
+                    final String docId = DocumentsContract.getDocumentId(uri);
+                    final String[] split = docId.split(":");
+                    final String type = split[0];
+                    if ("primary".equalsIgnoreCase(type)) {
+                        path = Environment.getExternalStorageDirectory() + "/" + split[1];
+                        return path;
+                    }
+                } else if (isDownloadsDocument(uri)) {
+                    // DownloadsProvider
+                    final String id = DocumentsContract.getDocumentId(uri);
+                    final Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"),
+                            Long.valueOf(id));
+                    path = getDataColumn(context, contentUri, null, null);
+                    return path;
+                } else if (isMediaDocument(uri)) {
+                    // MediaProvider
+                    final String docId = DocumentsContract.getDocumentId(uri);
+                    final String[] split = docId.split(":");
+                    final String type = split[0];
+                    Uri contentUri = null;
+                    if ("image".equals(type)) {
+                        contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+                    } else if ("video".equals(type)) {
+                        contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+                    } else if ("audio".equals(type)) {
+                        contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                    }
+                    final String selection = "_id=?";
+                    final String[] selectionArgs = new String[]{split[1]};
+                    path = getDataColumn(context, contentUri, selection, selectionArgs);
+                    return path;
+                }
+            }
+        }
+        return null;
+    }
+
+    private static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs) {
+        Cursor cursor = null;
+        final String column = "_data";
+        final String[] projection = {column};
+        try {
+            cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs, null);
+            if (cursor != null && cursor.moveToFirst()) {
+                final int column_index = cursor.getColumnIndexOrThrow(column);
+                return cursor.getString(column_index);
+            }
+        } finally {
+            if (cursor != null)
+                cursor.close();
+        }
+        return null;
+    }
+
+    private static boolean isExternalStorageDocument(Uri uri) {
+        return "com.android.externalstorage.documents".equals(uri.getAuthority());
+    }
+
+    private static boolean isDownloadsDocument(Uri uri) {
+        return "com.android.providers.downloads.documents".equals(uri.getAuthority());
+    }
+
+    private static boolean isMediaDocument(Uri uri) {
+        return "com.android.providers.media.documents".equals(uri.getAuthority());
+    }
+
+}
+

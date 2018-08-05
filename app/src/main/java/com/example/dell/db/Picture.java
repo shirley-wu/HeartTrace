@@ -1,6 +1,8 @@
 package com.example.dell.db;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
@@ -33,13 +35,17 @@ public class Picture {
 
     private static final String IN_PATH = "/HeartTrace/pic/";
 
+    private static final String PREFERENCES = "Picture";
+
+    private static SharedPreferences sharedPreferences;
+
+    private static String parentPath = null;
+
     @DatabaseField
     private long id;
 
     @DatabaseField
     private long modified;
-
-    private String parentPath = null;
 
     public Picture() {
 
@@ -77,53 +83,68 @@ public class Picture {
         return parentPath;
     }
 
-    public String getParentPath(Context context) {
+    private static String getParentPath(Context context) {
         if (parentPath == null) {
-            if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-                parentPath = SD_PATH;
-            } else {
-                parentPath = context.getApplicationContext().getFilesDir().getAbsolutePath() + IN_PATH;
+            if (sharedPreferences == null) {
+                sharedPreferences = context.getSharedPreferences(PREFERENCES, Activity.MODE_PRIVATE);
+            }
+
+            String key = "parentPath";
+            parentPath = sharedPreferences.getString(key, null);
+            if (parentPath == null) {
+                if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+                    parentPath = SD_PATH;
+                } else {
+                    parentPath = context.getApplicationContext().getFilesDir().getAbsolutePath() + IN_PATH;
+                }
+
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString(key, parentPath);
+                editor.commit();
             }
         }
         return parentPath;
+    }
+
+    public boolean save(DatabaseHelper databaseHelper) {
+        try {
+            Dao<Picture, Long> dao = databaseHelper.getDaoAccess(Picture.class);
+            int status = dao.create(this);
+            Log.d(TAG, "save: 插入返回值 = " + status);
+            return true;
+        }
+        catch (SQLException e) {
+            Log.e(TAG, "save: ", e);
+            return false;
+        }
     }
 
     public boolean saveBitmap(Context context, DatabaseHelper databaseHelper, Bitmap bitmap) throws RuntimeException {
         if (bitmap == null) {
             throw new RuntimeException("No picture to be saved");
         }
+        // 设定参数
+        id = databaseHelper.getIdWorker().nextId();
+        modified = System.currentTimeMillis();
+
+        // 获取路径
+        String filePath = getParentPath(context) + getFileName();
         try {
-            // 设定参数
-            id = databaseHelper.getIdWorker().nextId();
-            modified = System.currentTimeMillis();
-
-            // 获取路径
-            String filePath = getParentPath(context) + getFileName();
-            try {
-                File filePic = new File(filePath);
-                if (!filePic.exists()) {
-                    filePic.getParentFile().mkdirs();
-                    filePic.createNewFile();
-                }
-                FileOutputStream fos = new FileOutputStream(filePic);
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-                fos.flush();
-                fos.close();
-            } catch (IOException e) {
-                Log.e(TAG, "saveBitmap: ", e);
-                return false;
+            File filePic = new File(filePath);
+            if (!filePic.exists()) {
+                filePic.getParentFile().mkdirs();
+                filePic.createNewFile();
             }
-
-            Dao<Picture, Long> dao = databaseHelper.getDaoAccess(Picture.class);
-            int status = dao.create(this);
-            Log.d(TAG, "saveBitmap: 插入返回值 = " + status);
-
-            return true;
-        }
-        catch (SQLException e) {
+            FileOutputStream fos = new FileOutputStream(filePic);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+        } catch (IOException e) {
             Log.e(TAG, "saveBitmap: ", e);
             return false;
         }
+
+        return save(databaseHelper);
     }
 
     public Bitmap getBitmap(Context context) {
@@ -171,5 +192,28 @@ public class Picture {
             Log.e(TAG, "writeBase64: ", e);
             return false;
         }
+    }
+
+    static public void deleteAll(Context context) {
+        parentPath = getParentPath(context);
+
+        File f = new File(parentPath);
+        if (f.exists()) {
+            File[] files = f.listFiles();
+            if (files != null) {
+                for (File _file : files) {
+                    if (_file.isFile() && _file.getName().endsWith(".jpg") && _file.getName().startsWith("img_")) {
+                        Log.d(TAG, "deleteAll: 删除 " + _file.getName());
+                        boolean status = _file.delete();
+                        Log.d(TAG, "deleteAll: status = " + status);
+                    }
+                }
+            }
+        }
+
+        parentPath = null;
+
+        sharedPreferences.edit().clear().commit();
+        sharedPreferences = null;
     }
 }
