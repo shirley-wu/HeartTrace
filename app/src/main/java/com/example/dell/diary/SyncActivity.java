@@ -38,7 +38,6 @@ public class SyncActivity extends AppCompatActivity implements CompoundButton.On
     private TextView syncAutoT;
     private TextView syncOneT;
     private int  syncable ;
-    private boolean syncAuto = true;
     private List<PeriodicSync> list;
     private Account mAccount;
     private CardView AutoCard;
@@ -65,6 +64,12 @@ public class SyncActivity extends AppCompatActivity implements CompoundButton.On
         }
 
         getSyncStatus();
+        if(list.size()>0){
+            Log.i("自动同步？？？", "onCheckedChanged:是 ");
+        }
+        else{
+            Log.i("自动同步？？？", "onCheckedChanged:否 ");
+        }
         viewInit();
 
         if(syncable > 0){
@@ -72,7 +77,7 @@ public class SyncActivity extends AppCompatActivity implements CompoundButton.On
             syncableT.setText("允许同步");
             autoLinear.setVisibility(autoLinear.VISIBLE);
             oneSyncCard.setVisibility(oneSyncCard.VISIBLE);
-            if(syncAuto) {
+            if(list.size() > 0) {
                 syncAutoSwitch.setChecked(true);
                 syncAutoT.setText("自动同步开");
                 autoSettingCard.setVisibility(autoSettingCard.VISIBLE);
@@ -104,9 +109,9 @@ public class SyncActivity extends AppCompatActivity implements CompoundButton.On
         class SpinnerXMLSelectedListener implements AdapterView.OnItemSelectedListener {
             public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
                                        long arg3) {
-                spinnertext.setText("选择："+spinnerAdapter.getItem(arg2));
+                spinnertext.setText((String)spinnerAdapter.getItem(arg2));
                 getSyncStatus();
-                if(syncable>0 && syncAuto) {
+                if(syncable>0 && list.size() > 0 ) {
                     if(arg2 == 0){
                        // Toast.makeText(SyncActivity.this, "请选择", Toast.LENGTH_SHORT).show();
                         ContentResolver.removePeriodicSync(mAccount, AUTHORITY, Bundle.EMPTY);
@@ -136,6 +141,13 @@ public class SyncActivity extends AppCompatActivity implements CompoundButton.On
                         ContentResolver.removePeriodicSync(mAccount, AUTHORITY, Bundle.EMPTY);
                         ContentResolver.addPeriodicSync(mAccount, AUTHORITY, Bundle.EMPTY, 604800);
                     }
+                    getSyncStatus();
+                    if(list.size()>0){
+                        Log.i("自动同步？？？", "onCheckedChanged:是 ");
+                    }
+                    else{
+                        Log.i("自动同步？？？", "onCheckedChanged:否 ");
+                    }
                 }
 
 
@@ -164,42 +176,85 @@ public class SyncActivity extends AppCompatActivity implements CompoundButton.On
                     autoLinear.setVisibility(AutoCard.VISIBLE);
                     oneSyncCard.setVisibility(oneSyncCard.VISIBLE);
                     ContentResolver.setIsSyncable(mAccount,AUTHORITY, 1);
-                    if(syncAuto) {
+                   if(list.size()>0){
                         syncAutoSwitch.setChecked(true);
                         syncAutoT.setText("自动同步开");
-                        syncAutoSettingOn();
+                       autoSettingCard.setVisibility(autoSettingCard.VISIBLE);
                     }
                     else{
                         syncAutoSwitch.setChecked(false);
                         syncAutoT.setText("自动同步关");
-                        syncAutoSettingOff();
+                       autoSettingCard.setVisibility(autoSettingCard.INVISIBLE);
                     }
+
                 }
                 else {
                     syncableT.setText("禁止同步");
                     autoLinear.setVisibility(AutoCard.INVISIBLE);
                     oneSyncCard.setVisibility(oneSyncCard.INVISIBLE);
                     ContentResolver.setIsSyncable(mAccount,AUTHORITY,0);
-                    syncAutoSettingOff();
+
                 }
                 getSyncStatus();
-                if(syncAuto){
-                    Log.i("自动同步", "onCheckedChanged: 1");
+                if(list.size()>0){
+                    Log.i("自动同步？？？", "onCheckedChanged:是 ");
                 }
                 else{
-                    Log.i("自动同步", "onCheckedChanged: 0");
+                    Log.i("自动同步？？？", "onCheckedChanged:否 ");
                 }
                 break;
             case R.id.syncAuto_switch:
                 if(isChecked){
                     syncAutoT.setText("自动同步开");
-                    syncAutoSettingOn();
+                    autoSettingCard.setVisibility(autoSettingCard.VISIBLE);
+                    String string = spinnertext.getText().toString();
+                    Log.i("实验咯", "onCheckedChanged: "+string);
+                    if(string.equals("请选择")){
+                        // Toast.makeText(SyncActivity.this, "请选择", Toast.LENGTH_SHORT).show();
+                        ContentResolver.removePeriodicSync(mAccount, AUTHORITY, Bundle.EMPTY);
+                    }
+                    else if (string.equals("每半小时")) {
+                        Toast.makeText(SyncActivity.this, "每半小时", Toast.LENGTH_SHORT).show();
+                        ContentResolver.removePeriodicSync(mAccount, AUTHORITY, Bundle.EMPTY);
+                        ContentResolver.addPeriodicSync(mAccount, AUTHORITY, Bundle.EMPTY, 1800);
+                    }
+                    else if (string.equals("每一小时")) {
+                        Toast.makeText(SyncActivity.this, "每一小时", Toast.LENGTH_SHORT).show();
+                        ContentResolver.removePeriodicSync(mAccount, AUTHORITY, Bundle.EMPTY);
+                        ContentResolver.addPeriodicSync(mAccount, AUTHORITY, Bundle.EMPTY, 3600);
+                    }
+                    else if (string.equals("每两小时")) {
+                        Toast.makeText(SyncActivity.this, "每两小时", Toast.LENGTH_SHORT).show();
+                        ContentResolver.removePeriodicSync(mAccount, AUTHORITY, Bundle.EMPTY);
+                        ContentResolver.addPeriodicSync(mAccount, AUTHORITY, Bundle.EMPTY, 7200);
+                    }
+                    else if (string.equals("每天")) {
+                        Toast.makeText(SyncActivity.this, "每天", Toast.LENGTH_SHORT).show();
+                        ContentResolver.removePeriodicSync(mAccount, AUTHORITY, Bundle.EMPTY);
+                        ContentResolver.addPeriodicSync(mAccount, AUTHORITY, Bundle.EMPTY, 86400);
+                    }
+                    else if (string.equals("每周")) {
+                        Toast.makeText(SyncActivity.this, "每周", Toast.LENGTH_SHORT).show();
+                        ContentResolver.removePeriodicSync(mAccount, AUTHORITY, Bundle.EMPTY);
+                        ContentResolver.addPeriodicSync(mAccount, AUTHORITY, Bundle.EMPTY, 604800);
+                    }
+                    getSyncStatus();
+
+
                 }
                 else{
                     syncAutoT.setText("自动同步关");
-                    syncAutoSettingOff();
+                    autoSettingCard.setVisibility(autoSettingCard.INVISIBLE);
+                    ContentResolver.removePeriodicSync(mAccount, AUTHORITY, Bundle.EMPTY);
+
                 }
                 getSyncStatus();
+                if(list.size()>0){
+                    Log.i("自动同步？？？", "onCheckedChanged:是 ");
+                }
+                else{
+                    Log.i("自动同步？？？", "onCheckedChanged:否 ");
+                }
             default:
                 break;
         }
@@ -219,18 +274,9 @@ public class SyncActivity extends AppCompatActivity implements CompoundButton.On
         }
         return true;
     }
-    public void syncAutoSettingOn(){
-        autoSettingCard.setVisibility(autoSettingCard.VISIBLE);
-        ContentResolver.setSyncAutomatically(mAccount,AUTHORITY, true);
 
-    }
-    public void syncAutoSettingOff(){
-        autoSettingCard.setVisibility(autoSettingCard.INVISIBLE);
-        ContentResolver.setSyncAutomatically(mAccount,AUTHORITY, false);
-    }
     public void getSyncStatus(){
         syncable = ContentResolver.getIsSyncable(mAccount,AUTHORITY);
-        syncAuto = ContentResolver.getSyncAutomatically(mAccount,AUTHORITY);
         list = ContentResolver.getPeriodicSyncs(mAccount,AUTHORITY);
     }
 
