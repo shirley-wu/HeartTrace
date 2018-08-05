@@ -2735,7 +2735,7 @@ class PicUtils {
             // 获取屏幕的高宽
             DisplayMetrics metrics = new DisplayMetrics();
             activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
-            float widthLim = metrics.widthPixels * metrics.density;
+            float widthLim = 4000;
             Log.d(TAG, "getBitmap: widthLim = " + widthLim);
 
             // 设置参数
