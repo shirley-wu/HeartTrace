@@ -133,6 +133,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 //    private List<android.support.v4.app.Fragment> mFragmentList = new ArrayList<android.support.v4.app.Fragment>();
 //    private DiaryFragmentAdapter mFragmentAdapter;
 
+    private static final String TAG = DiaryWriteActivity.class.getSimpleName();
+
     public static final int CHOOSE_PHOTO = 2;
     private final int ICON_LIST_DIALOG = 1;
     int tagId = 0;
@@ -1730,78 +1732,64 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
     @TargetApi(19)
     private void handleImageOnKitKat(Intent data) {
+        // 开始
         isInsertingImg = true;
+
+        // 获取并保存bitmap
         Uri uri = data.getData();
         Bitmap bitmap = PicUtils.getBitmap(this, uri);
         if (bitmap == null) {
             Toast.makeText(this, "图片不存在", Toast.LENGTH_SHORT);
             return ;
         }
-        String imagePath = saveBitmap(DiaryWriteActivity.this, bitmap);
+        String imagePath = saveBitmap(bitmap);
+
+        // 新建imageSpan
         SpannableString imageSpan = new SpannableString(imagePath);
+        bitmap = scaledImage(bitmap);
         imageSpan.setSpan(new ImageSpan(bitmap) , 0, imageSpan.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        // 显示
         Editable editable = diary_write.getText();
         editable.insert(diary_write.getSelectionStart(), imageSpan);
         diary_write.setText(editable);
         diary_write.append("\n");
         diary_write.setSelection(diary_write.getText().length());
+
+        // 结束
         isInsertingImg = false;
     }
 
-    public Bitmap getBitmapFromUri(Activity ac, Uri uri) throws FileNotFoundException, IOException {
-        InputStream input;
-        input = ac.getContentResolver().openInputStream(uri);
-        Bitmap bitmap = BitmapFactory.decodeStream(input);
-        input.close();
+    public Bitmap scaledImage(Bitmap image) {
+        // 获取图片宽高
+        int width = image.getWidth();
+        Log.d(TAG, "scaledImage: width = " + width);
+        int height = image.getHeight();
 
-        return compressImage(bitmap);
-    }
-
-    public Bitmap compressImage(Bitmap image) {
-        float width = image.getWidth();
-        float height = image.getHeight();
         // 创建操作图片用的matrix对象
         Matrix matrix = new Matrix();
-        // 计算宽高缩放率
-        DisplayMetrics displayMetrics=new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int heightPixels = displayMetrics.heightPixels;
-        int widthPixels=displayMetrics.widthPixels;
-        Log.i("density", String.valueOf(displayMetrics.density));
-        float scaleWidth = ((float) widthPixels) / width;
-        scaleWidth *= displayMetrics.density;
-        float scaleHeight = scaleWidth;
-        // 缩放图片动作
-        matrix.postScale(scaleWidth, scaleHeight);
-        Bitmap new_image = Bitmap.createBitmap(image, 0, 0, (int) width,
-                (int) height, matrix, true);
 
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        new_image.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
-        int options = 100;
-        while (baos.toByteArray().length / 1024 > 100) {  //循环判断如果压缩后图片是否大于100kb,大于继续压缩
-            baos.reset();//重置baos即清空baos
-            //第一个参数 ：图片格式 ，第二个参数： 图片质量，100为最高，0为最差  ，第三个参数：保存压缩后的数据的流
-            new_image.compress(Bitmap.CompressFormat.JPEG, options, baos);//这里压缩options%，把压缩后的数据存放到baos中
-            options -= 10;//每次都减少10
-        }
-        ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());//把压缩后的数据baos存放到ByteArrayInputStream中
-        Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);//把ByteArrayInputStream数据生成图片
-        return bitmap;
+        // 计算宽高缩放率
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int widthPixels = displayMetrics.widthPixels;
+        Log.d(TAG, "scaledImage: widthPixels = " + widthPixels);
+        float density = displayMetrics.density;
+        Log.d(TAG, "scaledImage: density = " + density);
+        float scale = ((float) widthPixels) * density / width;
+        Log.d(TAG, "scaledImage: scale = " + scale);
+
+        // 缩放图片
+        matrix.postScale(scale, scale);
+        Bitmap new_image = Bitmap.createBitmap(image, 0, 0, width, height, matrix, true);
+        return new_image;
     }
 
     public static final String SD_PATH = Environment.getExternalStorageDirectory().getPath() + "/HeartTrace/pic/";
     public static final String IN_PATH = "/HeartTrace/pic/";
 
-    private static String generateFileName() {
-        SimpleDateFormat time_format=new SimpleDateFormat("yyyyMMddHHmmss");
-        String date=time_format.format(new Date());
-        return "image_"+date;
-    }
 
-    public String saveBitmap(Context context, Bitmap mBitmap) {
-        String savePath;
-        File filePic;
+    public String saveBitmap(Bitmap mBitmap) {
         try {
             Picture picture = new Picture();
             DatabaseHelper databaseHelper = new DatabaseHelper(getApplicationContext());
@@ -1856,8 +1844,13 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         int matcher_end = 0;
         while(matcher.find()) {
             Log.i("file name",matcher.group().substring(filePath.length(),matcher.group().length()));
+
             Picture picture = new Picture(matcher.group().substring(filePath.length(),matcher.group().length()));
+            // 获取原始图像
             Bitmap bitmap = picture.getBitmap(DiaryWriteActivity.this);
+            // 获取缩放图像
+            bitmap = scaledImage(bitmap);
+
             SpannableString imageSpan = new SpannableString(matcher.group());
             imageSpan.setSpan(new ImageSpan(bitmap) , 0, imageSpan.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             Pattern pattern1 = Pattern.compile("￼");
@@ -2732,10 +2725,8 @@ class PicUtils {
             Log.d(TAG, "getBitmap: imagePath = " + imagePath);
             if (imagePath == null) return null;
 
-            // 获取屏幕的高宽
-            DisplayMetrics metrics = new DisplayMetrics();
-            activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
-            float widthLim = 4000;
+            // 最宽1000
+            float widthLim = 1000;
             Log.d(TAG, "getBitmap: widthLim = " + widthLim);
 
             // 设置参数
