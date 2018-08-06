@@ -562,7 +562,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                         displayDiary();
                         getLabelsOfDiary(diary,helper);
                         displayDiaryDate();
- displayDiaryDate            isFling = false;
+                        isFling = false;
                     }
                 }
                 else if (e2.getX() - e1.getX() > FLING_MIN_DISTANCE
