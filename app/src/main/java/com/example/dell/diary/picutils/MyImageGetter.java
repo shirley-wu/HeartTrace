@@ -30,11 +30,7 @@ public class MyImageGetter implements Html.ImageGetter {
         Picture picture = new Picture(s);
         Bitmap bitmap = picture.getBitmap(mActivity);
         bitmap = ScaleUtils.scaleImageForScreen(mActivity, bitmap);
-        Drawable drawable = new BitmapDrawable(bitmap);
-        int width = drawable.getIntrinsicWidth();
-        int height = drawable.getIntrinsicHeight();
-        drawable.setBounds(0, 0, width > 0 ? width : 0, height > 0 ? height : 0);
-        return drawable;
+        return new MyBitmapDrawable(bitmap);
     }
 
 }

@@ -81,6 +81,7 @@ import com.example.dell.db.DatabaseHelper;
 import com.example.dell.db.Diary;
 import com.example.dell.db.Label;
 import com.example.dell.db.Picture;
+import com.example.dell.diary.picutils.MyBitmapDrawable;
 import com.example.dell.diary.picutils.MyImageGetter;
 import com.example.dell.diary.picutils.PicUtils;
 import com.example.dell.diary.picutils.ScaleUtils;
@@ -1610,14 +1611,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         }
         String imagePath = saveBitmap(bitmap);
 
-        // 新建drawable
-        bitmap = ScaleUtils.scaleImageForScreen(this, bitmap);
-        Drawable drawable = new BitmapDrawable(bitmap);
-        int width = drawable.getIntrinsicWidth();
-        int height = drawable.getIntrinsicHeight();
-        drawable.setBounds(0, 0, width > 0 ? width : 0, height > 0 ? height : 0);
-
         // 新建imageSpan
+        bitmap = ScaleUtils.scaleImageForScreen(this, bitmap);
+        Drawable drawable = new MyBitmapDrawable(bitmap);
         ImageSpan imageSpan = new ImageSpan(drawable, imagePath);
 
         // 新建spannableString
