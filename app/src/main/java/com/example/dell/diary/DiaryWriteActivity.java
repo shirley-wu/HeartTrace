@@ -454,21 +454,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
             } else {
                 Log.i("show", diary.getHtmlText());
-                if (diary.getHtmlText() != null) {
-                    diary_write.setText(Html.fromHtml(diary.getHtmlText()));
-                    getImage(diary.getText());
-                    //clear color span
-                    ForegroundColorSpan[] colorSpans = diary_write.getText().getSpans(0, diary_write.length(), ForegroundColorSpan.class);
-                    for (int i = 0; i < colorSpans.length; i++)
-                        diary_write.getText().removeSpan(colorSpans[i]);
-                    //set color span
-                    int[] colorSpanInfo = getTextColorInfo(diary.getHtmlText());
-                    setColorSpan(colorSpanInfo);
-                    Log.i("test", Html.toHtml(diary_write.getText()));
-
-                }
-                setTextFormmat(diary);
-                diary_write.setSelection(0);
+                displayDiary();
 
                 getLabelsOfDiary(diary, helper);
                 String date = (diary.getDate().getYear() + 1900) + "年" + (diary.getDate().getMonth() + 1) + "月" + diary.getDate().getDate() + "日";
@@ -577,20 +563,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                         diaryDate.setText(date);
                         diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
                         isFling = true;
-                        diary_write.setText(Html.fromHtml(diary.getHtmlText()));
-                        getImage(diary.getText());
-                        setTextFormmat(diary);
-
-                        //clear color span
-                        ForegroundColorSpan[] colorSpans= diary_write.getText().getSpans(0, diary_write.length(), ForegroundColorSpan.class);
-                        for(int i = 0; i < colorSpans.length; i++)
-                            diary_write.getText().removeSpan(colorSpans[i]);
-                        //set color span
-                        int[] colorSpanInfo = getTextColorInfo(diary.getHtmlText());
-                        setColorSpan(colorSpanInfo);
-                        Log.i("test", Html.toHtml(diary_write.getText()));
-
-                        diary_write.setSelection(0);
+                        displayDiary();
                         getLabelsOfDiary(diary,helper);
                         isFling = false;
                     }
@@ -611,20 +584,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                         diaryDate.setText(date);
                         diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
                         isFling = true;
-                        diary_write.setText(Html.fromHtml(diary.getHtmlText()));
-                        getImage(diary.getText());
-                        setTextFormmat(diary);
-
-                        //clear color span
-                        ForegroundColorSpan[] colorSpans= diary_write.getText().getSpans(0, diary_write.length(), ForegroundColorSpan.class);
-                        for(int i = 0; i < colorSpans.length; i++)
-                            diary_write.getText().removeSpan(colorSpans[i]);
-                        //set color span
-                        int[] colorSpanInfo = getTextColorInfo(diary.getHtmlText());
-                        setColorSpan(colorSpanInfo);
-                        Log.i("test", Html.toHtml(diary_write.getText()));
-
-                        diary_write.setSelection(0);
+                        displayDiary();
                         getLabelsOfDiary(diary,helper);
                         isFling = false;
                     }
@@ -918,26 +878,14 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         }
         else {
             Log.i("show",diary.getHtmlText());
-            if(diary.getHtmlText() != null) {
-                diary_write.setText(Html.fromHtml(diary.getHtmlText()));
-                getImage(diary.getText());
-                //clear color span
-                ForegroundColorSpan[] colorSpans = diary_write.getText().getSpans(0, diary_write.length(), ForegroundColorSpan.class);
-                for (int i = 0; i < colorSpans.length; i++)
-                    diary_write.getText().removeSpan(colorSpans[i]);
-                //set color span
-                int[] colorSpanInfo = getTextColorInfo(diary.getHtmlText());
-                setColorSpan(colorSpanInfo);
-                Log.i("test", Html.toHtml(diary_write.getText()));
-
-            }
-            setTextFormmat(diary);
-            diary_write.setSelection(0);
+            displayDiary();
 
             getLabelsOfDiary(diary,helper);
+
             String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
             diaryDate.setText(date);
             diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
+
             diary_write.setEnabled(false);
             theme_set.setVisibility(View.INVISIBLE);
             font_set.setVisibility(View.INVISIBLE);
@@ -1635,48 +1583,21 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                                 diaryDate.setText("");
                                 diaryWeekday.setText("");
                                 getLabelsOfDiary(new Diary(), helper);
-                            } else if (index == diaryList.size()) {
-                                index = index -  1;
-                                diary = diaryList.get(index);
-                                String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
-                                diaryDate.setText(date);
-                                diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
-                                isDeleting = true;
-                                diary_write.setText(Html.fromHtml(diary.getHtmlText()));
-                                getImage(diary.getText());
-
-                                //clear color span
-                                ForegroundColorSpan[] colorSpans= diary_write.getText().getSpans(0, diary_write.length(), ForegroundColorSpan.class);
-                                for(int i = 0; i < colorSpans.length; i++)
-                                    diary_write.getText().removeSpan(colorSpans[i]);
-                                //set color span
-                                int[] colorSpanInfo = getTextColorInfo(diary.getHtmlText());
-                                setColorSpan(colorSpanInfo);
-                                Log.i("test", Html.toHtml(diary_write.getText()));
-
-                                setTextFormmat(diary);
-                                getLabelsOfDiary(diary,helper);
-                                isDeleting = false;
                             } else {
+                                if (index == diaryList.size()) {
+                                    index = index - 1;
+                                }
                                 diary = diaryList.get(index);
-                                String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
+
+                                String date = (diary.getDate().getYear() + 1900) + "年" + (diary.getDate().getMonth() + 1) + "月" + diary.getDate().getDate() + "日";
                                 diaryDate.setText(date);
                                 diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
+
                                 isDeleting = true;
-                                diary_write.setText(Html.fromHtml(diary.getHtmlText()));
-                                getImage(diary.getText());
-                                setTextFormmat(diary);
 
-                                //clear color span
-                                ForegroundColorSpan[] colorSpans= diary_write.getText().getSpans(0, diary_write.length(), ForegroundColorSpan.class);
-                                for(int i = 0; i < colorSpans.length; i++)
-                                    diary_write.getText().removeSpan(colorSpans[i]);
-                                //set color span
-                                int[] colorSpanInfo = getTextColorInfo(diary.getHtmlText());
-                                setColorSpan(colorSpanInfo);
-                                Log.i("test", Html.toHtml(diary_write.getText()));
+                                displayDiary();
 
-                                getLabelsOfDiary(diary,helper);
+                                getLabelsOfDiary(diary, helper);
                                 isDeleting = false;
                             }
                         }
@@ -2706,6 +2627,24 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     editableText.setSpan(new StyleSpan(Typeface.ITALIC), preStyleStart, selectedStart, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
         }
+    }
+
+    private void displayDiary() {
+        if (diary.getHtmlText() != null) {
+            diary_write.setText(Html.fromHtml(diary.getHtmlText()));
+            getImage(diary.getText());
+            //clear color span
+            ForegroundColorSpan[] colorSpans = diary_write.getText().getSpans(0, diary_write.length(), ForegroundColorSpan.class);
+            for (int i = 0; i < colorSpans.length; i++) {
+                diary_write.getText().removeSpan(colorSpans[i]);
+            }
+            //set color span
+            int[] colorSpanInfo = getTextColorInfo(diary.getHtmlText());
+            setColorSpan(colorSpanInfo);
+            Log.i(TAG, "displayDiary: toHtml = " + Html.toHtml(diary_write.getText()));
+        }
+        setTextFormmat(diary);
+        diary_write.setSelection(0);
     }
 
 }
