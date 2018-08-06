@@ -1581,23 +1581,13 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case CHOOSE_PHOTO:
-                if (resultCode == RESULT_OK) {
-                    // 判断手机系统版本号
-                    if (Build.VERSION.SDK_INT >= 19) {
-                        // 4.4及以上系统使用这个方法处理图片
-                        handleImageOnKitKat(data);
-                    } else {
-                        // 4.4以下系统使用这个方法处理图片
-                        handleImageBeforeKitKat(data);
-                    }
-                }
+                handleImageOnKitKat(data);
                 break;
             default:
                 break;
         }
     }
 
-    @TargetApi(19)
     private void handleImageOnKitKat(Intent data) {
         // 开始
         isInsertingImg = true;
@@ -1646,13 +1636,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             e.printStackTrace();
             return null;
         }
-    }
-
-    // TODO
-    private void handleImageBeforeKitKat(Intent data) {
-        Uri uri = data.getData();
-        String imagePath = getImagePath(uri, null);
-        displayImage(imagePath);
     }
 
     // TODO
