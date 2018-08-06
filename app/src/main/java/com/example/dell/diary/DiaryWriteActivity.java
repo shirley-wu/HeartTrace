@@ -454,12 +454,11 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
             } else {
                 Log.i("show", diary.getHtmlText());
-                displayDiary();
 
+                displayDiary();
                 getLabelsOfDiary(diary, helper);
-                String date = (diary.getDate().getYear() + 1900) + "年" + (diary.getDate().getMonth() + 1) + "月" + diary.getDate().getDate() + "日";
-                diaryDate.setText(date);
-                diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
+                displayDiaryDate();
+
                 diary_write.setEnabled(false);
                 mSwipeLayout.setEnabled(true);
                 theme_set.setVisibility(View.INVISIBLE);
@@ -559,13 +558,11 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     else{
                         index = index + 1;
                         diary = diaryList.get(index);
-                        String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
-                        diaryDate.setText(date);
-                        diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
                         isFling = true;
                         displayDiary();
                         getLabelsOfDiary(diary,helper);
-                        isFling = false;
+                        displayDiaryDate();
+ displayDiaryDate            isFling = false;
                     }
                 }
                 else if (e2.getX() - e1.getX() > FLING_MIN_DISTANCE
@@ -580,12 +577,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     else{
                         index = index -1;
                         diary = diaryList.get(index);
-                        String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
-                        diaryDate.setText(date);
-                        diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
                         isFling = true;
                         displayDiary();
                         getLabelsOfDiary(diary,helper);
+                        displayDiaryDate();
                         isFling = false;
                     }
                 }
@@ -878,13 +873,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         }
         else {
             Log.i("show",diary.getHtmlText());
+
             displayDiary();
-
             getLabelsOfDiary(diary,helper);
-
-            String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
-            diaryDate.setText(date);
-            diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
+            displayDiaryDate();
 
             diary_write.setEnabled(false);
             theme_set.setVisibility(View.INVISIBLE);
@@ -1589,15 +1581,12 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                                 }
                                 diary = diaryList.get(index);
 
-                                String date = (diary.getDate().getYear() + 1900) + "年" + (diary.getDate().getMonth() + 1) + "月" + diary.getDate().getDate() + "日";
-                                diaryDate.setText(date);
-                                diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
-
                                 isDeleting = true;
 
                                 displayDiary();
-
                                 getLabelsOfDiary(diary, helper);
+                                displayDiaryDate();
+
                                 isDeleting = false;
                             }
                         }
@@ -2645,6 +2634,12 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         }
         setTextFormmat(diary);
         diary_write.setSelection(0);
+    }
+
+    private void displayDiaryDate() {
+        String date = (diary.getDate().getYear() + 1900) + "年" + (diary.getDate().getMonth() + 1) + "月" + diary.getDate().getDate() + "日";
+        diaryDate.setText(date);
+        diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
     }
 
 }
