@@ -1638,30 +1638,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
-    // TODO
-    private String getImagePath(Uri uri, String selection) {
-        String path = null;
-        // 通过Uri和selection来获取真实的图片路径
-        Cursor cursor = getContentResolver().query(uri, null, selection, null, null);
-        if (cursor != null) {
-            if (cursor.moveToFirst()) {
-                path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
-            }
-            cursor.close();
-        }
-        return path;
-    }
-
-    // TODO
-    private void displayImage(String imagePath) {
-        if (imagePath != null) {
-            Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
-            //picture.setImageBitmap(bitmap);
-        } else {
-            Toast.makeText(this, "failed to get image", Toast.LENGTH_SHORT).show();
-        }
-    }
-
     private int[] getTextColorInfo(String htmlText)
     {
         Editable editable = (Editable) Html.fromHtml(htmlText);
