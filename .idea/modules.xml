@@ -6,8 +6,8 @@
       <module fileurl="file://$PROJECT_DIR$/HeartTrace.iml" filepath="$PROJECT_DIR$/HeartTrace.iml" />
       <module fileurl="file://D:\Android\Project\Diary\HeartTrace.iml" filepath="D:\Android\Project\Diary\HeartTrace.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://D:\Files\HeartTrace\diary.iml" filepath="D:\Files\HeartTrace\diary.iml" />
       <module fileurl="file://D:\Users\wu-pc\repos\HeartTrace\diary.iml" filepath="D:\Users\wu-pc\repos\HeartTrace\diary.iml" />
+      <module fileurl="file://D:\Files\HeartTrace\diary.iml" filepath="D:\Files\HeartTrace\diary.iml" />
     </modules>
   </component>
 </project>

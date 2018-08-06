@@ -19,6 +19,7 @@ import android.graphics.Matrix;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -1609,17 +1610,26 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         }
         String imagePath = saveBitmap(bitmap);
 
-        // 新建imageSpan
-        SpannableString imageSpan = new SpannableString(imagePath);
+        // 新建drawable
         bitmap = ScaleUtils.scaleImageForScreen(this, bitmap);
-        imageSpan.setSpan(
-                new ImageSpan(new BitmapDrawable(bitmap), imagePath) ,
-                0, imageSpan.length(),
+        Drawable drawable = new BitmapDrawable(bitmap);
+        int width = drawable.getIntrinsicWidth();
+        int height = drawable.getIntrinsicHeight();
+        drawable.setBounds(0, 0, width > 0 ? width : 0, height > 0 ? height : 0);
+
+        // 新建imageSpan
+        ImageSpan imageSpan = new ImageSpan(drawable, imagePath);
+
+        // 新建spannableString
+        SpannableString spannableString = new SpannableString(imagePath);
+        spannableString.setSpan(
+                imageSpan,
+                0, spannableString.length(),
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         // 显示
         Editable editable = diary_write.getText();
-        editable.insert(diary_write.getSelectionStart(), imageSpan);
+        editable.insert(diary_write.getSelectionStart(), spannableString);
         diary_write.setText(editable);
         diary_write.append("\n");
         diary_write.setSelection(diary_write.getText().length());
