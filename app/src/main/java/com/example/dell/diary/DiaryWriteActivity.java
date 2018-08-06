@@ -1,47 +1,36 @@
 package com.example.dell.diary;
 
 import android.Manifest;
-import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.Fragment;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
-import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
-import android.graphics.Point;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.LinkAddress;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
-import android.os.Message;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
@@ -64,7 +53,6 @@ import android.text.style.LeadingMarginSpan;
 import android.text.style.StyleSpan;
 import android.text.style.TypefaceSpan;
 import android.text.style.UnderlineSpan;
-import android.util.AttributeSet;
 import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -74,19 +62,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -95,29 +80,13 @@ import com.example.dell.db.DatabaseHelper;
 import com.example.dell.db.Diary;
 import com.example.dell.db.Label;
 import com.example.dell.db.Picture;
-import com.j256.ormlite.stmt.query.In;
 
-import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Field;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -1670,39 +1639,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         isInsertingImg = false;
     }
 
-    public Bitmap scaledImageForScreen(Bitmap bitmap) {
-        // 获取屏幕参数
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        float widthPixels = displayMetrics.widthPixels * 0.8F;
-        Log.d(TAG, "scaledImage: widthPixels = " + widthPixels);
-
-        float density = displayMetrics.density;
-        Log.d(TAG, "scaledImage: density = " + density);
-
-        return scaledImage(bitmap, widthPixels * density);
-    }
-
-    public Bitmap scaledImage(Bitmap image, float targetWidth) {
-        // 获取图片宽高
-        int width = image.getWidth();
-        Log.d(TAG, "scaledImage: width = " + width);
-        int height = image.getHeight();
-
-        // 创建操作图片用的matrix对象
-        Matrix matrix = new Matrix();
-
-        // 计算宽高缩放率
-        float scale = targetWidth / width;
-        Log.d(TAG, "scaledImage: scale = " + scale);
-
-        // 缩放图片
-        matrix.postScale(scale, scale);
-        Bitmap new_image = Bitmap.createBitmap(image, 0, 0, width, height, matrix, true);
-        Log.d(TAG, "scaledImage: new_image width = " + new_image.getWidth());
-        return new_image;
-    }
-
     public String saveBitmap(Bitmap mBitmap) {
         try {
             Picture picture = new Picture();
@@ -2640,139 +2576,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         String date = (diary.getDate().getYear() + 1900) + "年" + (diary.getDate().getMonth() + 1) + "月" + diary.getDate().getDate() + "日";
         diaryDate.setText(date);
         diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
-    }
-
-}
-
-
-
-class PicUtils {
-
-    final private static String TAG = "PicUtils";
-
-    static Bitmap getBitmap(Activity activity, Uri uri) {
-        try {
-            Log.d(TAG, "getBitmap");
-
-            // 从选取相册的Activity中返回后
-            String imagePath = getFilePathByUri(activity, uri);
-            Log.d(TAG, "getBitmap: imagePath = " + imagePath);
-            if (imagePath == null) return null;
-
-            // 最宽1000
-            float widthLim = 1000;
-            Log.d(TAG, "getBitmap: widthLim = " + widthLim);
-
-            // 设置参数
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inJustDecodeBounds = true;              // 只获取图片的大小信息，而不是将整张图片载入在内存中，避免内存溢出
-            BitmapFactory.decodeFile(imagePath, options);
-            int width = options.outWidth;
-            Log.d(TAG, "getBitmap: width = " + width);
-
-            int ratio = ((int)(width / widthLim)) + 1;
-            Log.d(TAG, "getBitmap: ratio = " + ratio);
-
-            options.inJustDecodeBounds = false;
-            options.inSampleSize = ratio; // 设置为刚才计算的压缩比例
-            return BitmapFactory.decodeFile(imagePath, options); // 解码文件
-        }
-        catch (Exception e) {
-            Log.e(TAG, "getBitmap: ", e);
-            return null;
-        }
-    }
-
-    private static String getFilePathByUri(Context context, Uri uri) {
-        String path = null;
-        // 以 file:// 开头的
-        if (ContentResolver.SCHEME_FILE.equals(uri.getScheme())) {
-            path = uri.getPath();
-            return path;
-        }
-        // 以 content:// 开头的，比如 content://media/extenral/images/media/17766
-        if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme()) && Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-            Cursor cursor = context.getContentResolver().query(uri, new String[]{MediaStore.Images.Media.DATA}, null, null, null);
-            if (cursor != null) {
-                if (cursor.moveToFirst()) {
-                    int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                    if (columnIndex > -1) {
-                        path = cursor.getString(columnIndex);
-                    }
-                }
-                cursor.close();
-            }
-            return path;
-        }
-        // 4.4及之后的 是以 content:// 开头的，比如 content://com.android.providers.media.documents/document/image%3A235700
-        if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme()) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            if (DocumentsContract.isDocumentUri(context, uri)) {
-                if (isExternalStorageDocument(uri)) {
-                    // ExternalStorageProvider
-                    final String docId = DocumentsContract.getDocumentId(uri);
-                    final String[] split = docId.split(":");
-                    final String type = split[0];
-                    if ("primary".equalsIgnoreCase(type)) {
-                        path = Environment.getExternalStorageDirectory() + "/" + split[1];
-                        return path;
-                    }
-                } else if (isDownloadsDocument(uri)) {
-                    // DownloadsProvider
-                    final String id = DocumentsContract.getDocumentId(uri);
-                    final Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"),
-                            Long.valueOf(id));
-                    path = getDataColumn(context, contentUri, null, null);
-                    return path;
-                } else if (isMediaDocument(uri)) {
-                    // MediaProvider
-                    final String docId = DocumentsContract.getDocumentId(uri);
-                    final String[] split = docId.split(":");
-                    final String type = split[0];
-                    Uri contentUri = null;
-                    if ("image".equals(type)) {
-                        contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-                    } else if ("video".equals(type)) {
-                        contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
-                    } else if ("audio".equals(type)) {
-                        contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-                    }
-                    final String selection = "_id=?";
-                    final String[] selectionArgs = new String[]{split[1]};
-                    path = getDataColumn(context, contentUri, selection, selectionArgs);
-                    return path;
-                }
-            }
-        }
-        return null;
-    }
-
-    private static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs) {
-        Cursor cursor = null;
-        final String column = "_data";
-        final String[] projection = {column};
-        try {
-            cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs, null);
-            if (cursor != null && cursor.moveToFirst()) {
-                final int column_index = cursor.getColumnIndexOrThrow(column);
-                return cursor.getString(column_index);
-            }
-        } finally {
-            if (cursor != null)
-                cursor.close();
-        }
-        return null;
-    }
-
-    private static boolean isExternalStorageDocument(Uri uri) {
-        return "com.android.externalstorage.documents".equals(uri.getAuthority());
-    }
-
-    private static boolean isDownloadsDocument(Uri uri) {
-        return "com.android.providers.downloads.documents".equals(uri.getAuthority());
-    }
-
-    private static boolean isMediaDocument(Uri uri) {
-        return "com.android.providers.media.documents".equals(uri.getAuthority());
     }
 
 }
