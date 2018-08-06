@@ -80,6 +80,9 @@ import com.example.dell.db.DatabaseHelper;
 import com.example.dell.db.Diary;
 import com.example.dell.db.Label;
 import com.example.dell.db.Picture;
+import com.example.dell.diary.picutils.MyImageGetter;
+import com.example.dell.diary.picutils.PicUtils;
+import com.example.dell.diary.picutils.ScaleUtils;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -87,8 +90,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -557,21 +558,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             }
             return false;
         }
-    }
-
-    public void initViewPage(){
-//        vp = (ViewPager)findViewById(R.id.diaryViewPager);
-//        diaryFragment = new DiaryFragment();
-//        preDiaryFragment = new DiaryFragment();
-//        nextDiaryFragment = new DiaryFragment();
-//        mFragmentList.add(preDiaryFragment);
-//        mFragmentList.add(diaryFragment);
-//        mFragmentList.add(nextDiaryFragment);
-//        //vp.addOnPageChangeListener(this);
-//        mFragmentAdapter = new DiaryFragmentAdapter(getSupportFragmentManager(),mFragmentList);
-//        vp.setOffscreenPageLimit(3);
-//        vp.setAdapter(mFragmentAdapter);
-//        vp.setCurrentItem(1);
     }
 
     public void getView()
@@ -1625,8 +1611,11 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
         // 新建imageSpan
         SpannableString imageSpan = new SpannableString(imagePath);
-        bitmap = scaledImageForScreen(bitmap);
-        imageSpan.setSpan(new ImageSpan(bitmap) , 0, imageSpan.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        bitmap = ScaleUtils.scaleImageForScreen(this, bitmap);
+        imageSpan.setSpan(
+                new ImageSpan(new BitmapDrawable(bitmap), imagePath) ,
+                0, imageSpan.length(),
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         // 显示
         Editable editable = diary_write.getText();
@@ -1644,7 +1633,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             Picture picture = new Picture();
             DatabaseHelper databaseHelper = new DatabaseHelper(getApplicationContext());
             boolean status = picture.saveBitmap(DiaryWriteActivity.this, databaseHelper, mBitmap);
-            if (status) return picture.getParentPath() + picture.getFileName();
+            if (status) return picture.getFileName();
             else return null;
         } catch (RuntimeException e) {
             // TODO Auto-generated catch block
@@ -1653,12 +1642,14 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
+    // TODO
     private void handleImageBeforeKitKat(Intent data) {
         Uri uri = data.getData();
         String imagePath = getImagePath(uri, null);
         displayImage(imagePath);
     }
 
+    // TODO
     private String getImagePath(Uri uri, String selection) {
         String path = null;
         // 通过Uri和selection来获取真实的图片路径
@@ -1672,6 +1663,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         return path;
     }
 
+    // TODO
     private void displayImage(String imagePath) {
         if (imagePath != null) {
             Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
@@ -1679,37 +1671,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         } else {
             Toast.makeText(this, "failed to get image", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    private void getImage(String text)
-    {
-        Editable editable = diary_write.getText();
-        String filePath = Picture.getParentPath(this);
-        Pattern pattern = Pattern.compile( filePath + "img_[0-9]{0,}\\.jpg");
-        Matcher matcher = pattern.matcher(text);
-        int matcher_end = 0;
-        while(matcher.find()) {
-            Log.i("file name",matcher.group().substring(filePath.length(),matcher.group().length()));
-
-            Picture picture = new Picture(matcher.group().substring(filePath.length(),matcher.group().length()));
-            // 获取原始图像
-            Bitmap bitmap = picture.getBitmap(DiaryWriteActivity.this);
-            // 获取缩放图像
-            bitmap = scaledImageForScreen(bitmap);
-
-            SpannableString imageSpan = new SpannableString(matcher.group());
-            imageSpan.setSpan(new ImageSpan(bitmap) , 0, imageSpan.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            Pattern pattern1 = Pattern.compile("￼");
-            Matcher matcher1 = pattern1.matcher(diary_write.getText());
-            if(matcher1.find()) {
-                editable.delete(matcher1.start(),matcher1.end());
-                editable.insert(matcher1.start(), imageSpan);
-            }
-            matcher_end += matcher.end();
-            String new_text = text.substring(matcher_end,text.length());
-            matcher = pattern.matcher(new_text);
-        }
-        diary_write.setText(editable);
     }
 
     private int[] getTextColorInfo(String htmlText)
@@ -2556,8 +2517,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
     private void displayDiary() {
         if (diary.getHtmlText() != null) {
-            diary_write.setText(Html.fromHtml(diary.getHtmlText()));
-            getImage(diary.getText());
+            diary_write.setText(Html.fromHtml(
+                    diary.getHtmlText(),
+                    new MyImageGetter(this),
+                    null));
             //clear color span
             ForegroundColorSpan[] colorSpans = diary_write.getText().getSpans(0, diary_write.length(), ForegroundColorSpan.class);
             for (int i = 0; i < colorSpans.length; i++) {

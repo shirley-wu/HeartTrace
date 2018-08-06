@@ -1,4 +1,4 @@
-package com.example.dell.diary.PicUtils;
+package com.example.dell.diary.picutils;
 
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -20,11 +20,11 @@ import android.util.Log;
 
 
 
-class PicUtils {
+public class PicUtils {
 
     final private static String TAG = "PicUtils";
 
-    static Bitmap getBitmap(Activity activity, Uri uri) {
+    static public Bitmap getBitmap(Activity activity, Uri uri) {
         try {
             Log.d(TAG, "getBitmap");
 
