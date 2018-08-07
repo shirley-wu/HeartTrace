@@ -78,17 +78,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
     public void onBindViewHolder(SearchResultAdapter.ViewHolder holder, int position) {
         Diary diary = mDiaryList.get(position);
         String diary_card_text;
-        diary_card_text = diary.getText();
-        String filePath = Picture.getParentPath(mContext);
-        Pattern pattern = Pattern.compile( filePath + "img_[0-9]{0,}\\.jpg");
-        Matcher matcher = pattern.matcher(diary_card_text);
-        while(matcher.find()) {
-            StringBuilder sb = new StringBuilder(diary_card_text);
-            sb.delete(matcher.start(),matcher.end());
-            sb.insert(matcher.start(),"/image/");
-            diary_card_text = sb.toString();
-            matcher = pattern.matcher(diary_card_text);
-        }
+        diary_card_text = diary.getText().replace("￼", "[图片]");
         holder.diaryContent.setText(diary_card_text);
         String date = (diary.getDate().getYear()+1900)+"年"+ (diary.getDate().getMonth()+1) + "月" + diary.getDate().getDate() + "日 " + weekList.get(diary.getDate().getDay());
         holder.diaryDate.setText(date);
