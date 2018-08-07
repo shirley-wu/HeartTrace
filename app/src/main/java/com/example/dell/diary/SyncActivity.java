@@ -108,7 +108,7 @@ public class SyncActivity extends AppCompatActivity implements CompoundButton.On
 //            autoLinear.setVisibility(autoLinear.INVISIBLE);
 //            oneSyncCard.setVisibility(oneSyncCard.INVISIBLE);
 //            autoSettingCard.setVisibility(autoSettingCard.INVISIBLE);
-            syncLinear2.setVisibility(View.VISIBLE);
+            syncLinear2.setVisibility(View.INVISIBLE);
         }
         syncLinear3.setOnClickListener(new View.OnClickListener() {
             @Override
