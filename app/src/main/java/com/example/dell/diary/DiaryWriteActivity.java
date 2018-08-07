@@ -2461,7 +2461,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             setColorSpan(colorSpanInfo);
             Log.d(TAG, "displayDiary: html = " + diary.getHtmlText());
             Log.i(TAG, "displayDiary: toHtml = " + Html.toHtml(diary_write.getText()));
-            Toast.makeText(DiaryWriteActivity.this,diary_write.getText(),Toast.LENGTH_SHORT).show();
         }
         setTextFormmat(diary);
         diary_write.setSelection(0);
