@@ -103,13 +103,13 @@ public class SearchResultActivity extends AppCompatActivity {
                     }
                 catch (Exception e){}
                 if(diaryList.size() == 0){
-                    diaryResult.setVisibility(View.INVISIBLE);
+                    diaryResult.setVisibility(View.GONE);
                 }
                 else {
                     diaryResult.setVisibility(View.VISIBLE);
                 }
                 if(sentenceList.size() == 0){
-                    sentenceResult.setVisibility(View.INVISIBLE);
+                    sentenceResult.setVisibility(View.GONE);
                 }
                 else {
                     sentenceResult.setVisibility(View.VISIBLE);
@@ -130,8 +130,8 @@ public class SearchResultActivity extends AppCompatActivity {
                 return true;
             }
         });
-        diaryResult = (LinearLayout)findViewById(R.id.diary_seach_result);
-        sentenceResult = (LinearLayout)findViewById(R.id.sentence_seach_result);
+        diaryResult = (LinearLayout)findViewById(R.id.diary_search_result);
+        sentenceResult = (LinearLayout)findViewById(R.id.sentence_search_result);
 
         initSearchResult();
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);

@@ -30,6 +30,7 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
             android:src="@drawable/add_bottle"
+            android:scaleType="centerCrop"
             app:backgroundTint = "#ffffff"/>
 
         <android.support.v7.widget.RecyclerView

@@ -20,6 +20,8 @@ import com.example.dell.db.DatabaseHelper;
 import com.example.dell.db.Sentence;
 import com.example.dell.db.Sentencebook;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -31,6 +33,7 @@ public class NoteAdapter extends RecyclerView.Adapter <NoteAdapter.ViewHolder> {
     private Context mContext;
     private String sentencebookName;
     private static final String TAG = "notelist";
+    public List<String> weekList = new ArrayList<>(Arrays.asList("周日","周一","周二","周三"," 周四","周五","周六"));
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
@@ -134,7 +137,8 @@ public class NoteAdapter extends RecyclerView.Adapter <NoteAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Sentence sentence = mSentenceList.get(position);
-        holder.sentenceDate.setText(sentence.getDate().toString());
+        String date = (sentence.getDate().getYear()+1900)+"年"+ (sentence.getDate().getMonth()+1) + "月" + sentence.getDate().getDate() + "日 " + weekList.get(sentence.getDate().getDay());
+        holder.sentenceDate.setText(date);
      //   holder.noteWeekDay.setText(note.getWeekDay());
         holder.sentenceContent.setText(sentence.getText());
     }

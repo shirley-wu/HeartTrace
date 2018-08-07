@@ -20,17 +20,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <ImageView
-            android:id="@+id/note_icon"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="5dp"
-            android:scaleType="centerCrop"/>
+        <!--<ImageView-->
+            <!--android:id="@+id/note_icon"-->
+            <!--android:layout_width="10dp"-->
+            <!--android:layout_height="10dp"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:scaleType="centerCrop"/>-->
+
         <TextView
             android:id="@+id/note_text"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:maxLines="4"
+            android:ellipsize="end"/>
 
     </LinearLayout>
 

@@ -40,13 +40,18 @@ public class SyncActivity extends AppCompatActivity implements CompoundButton.On
     private int  syncable ;
     private List<PeriodicSync> list;
     private Account mAccount;
-    private CardView AutoCard;
-    private CardView oneSyncCard;
-    private CardView autoSettingCard;
     private LinearLayout autoLinear;
     private long period;
     private AccountManager accountManager;
-
+    private View line1;
+    private View line2;
+    private View line3;
+    private View line4;
+    private LinearLayout syncLinear1;
+    private LinearLayout syncLinear2;
+    private LinearLayout syncLinear3;
+    private LinearLayout syncLinear4;
+    private LinearLayout syncLinear5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,30 +77,40 @@ public class SyncActivity extends AppCompatActivity implements CompoundButton.On
         }
         viewInit();
 
+        Log.i("1234","6666");
+
         if(syncable > 0){
             syncEnableswitch.setChecked(true);
             syncableT.setText("允许同步");
-            autoLinear.setVisibility(autoLinear.VISIBLE);
-            oneSyncCard.setVisibility(oneSyncCard.VISIBLE);
+            //autoLinear.setVisibility(autoLinear.VISIBLE);
+            //oneSyncCard.setVisibility(oneSyncCard.VISIBLE);
+            syncLinear2.setVisibility(View.VISIBLE);
             if(list.size() > 0) {
                 syncAutoSwitch.setChecked(true);
-                syncAutoT.setText("自动同步开");
-                autoSettingCard.setVisibility(autoSettingCard.VISIBLE);
+                syncAutoT.setText("自动同步");
+                Log.d("1234","1234");
+                //autoSettingCard.setVisibility(autoSettingCard.VISIBLE);
+                syncLinear5.setVisibility(View.VISIBLE);
+                line4.setVisibility(View.VISIBLE);
             }
             else{
                 syncAutoSwitch.setChecked(false);
-                syncAutoT.setText("自动同步关");
-                autoSettingCard.setVisibility(autoSettingCard.INVISIBLE);
+                syncAutoT.setText("自动同步");
+                Log.d("1234","5678");
+                syncLinear5.setVisibility(View.INVISIBLE);
+                line4.setVisibility(View.INVISIBLE);
+                //autoSettingCard.setVisibility(autoSettingCard.INVISIBLE);
             }
         }
         else{
             syncEnableswitch.setChecked(false);
             syncableT.setText("禁止同步");
-            autoLinear.setVisibility(autoLinear.INVISIBLE);
-            oneSyncCard.setVisibility(oneSyncCard.INVISIBLE);
-            autoSettingCard.setVisibility(autoSettingCard.INVISIBLE);
+//            autoLinear.setVisibility(autoLinear.INVISIBLE);
+//            oneSyncCard.setVisibility(oneSyncCard.INVISIBLE);
+//            autoSettingCard.setVisibility(autoSettingCard.INVISIBLE);
+            syncLinear2.setVisibility(View.VISIBLE);
         }
-        oneSyncCard.setOnClickListener(new View.OnClickListener() {
+        syncLinear3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
@@ -157,41 +172,46 @@ public class SyncActivity extends AppCompatActivity implements CompoundButton.On
             public void onNothingSelected(AdapterView<?> arg0) {
             }
         }
-        spinner = findViewById(R.id.sync_period_spinner);
-        spinnertext = findViewById(R.id.autoSetting_syncText);
+
         spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.sync_period, android.R.layout.simple_spinner_item);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
         spinner.setOnItemSelectedListener(new SpinnerXMLSelectedListener());
         spinner.setVisibility(View.VISIBLE);
 
-
     }
+
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         switch (buttonView.getId()){
             case R.id.syncable_switch:
                 if(isChecked){
                     syncableT.setText("允许同步");
-                    autoLinear.setVisibility(AutoCard.VISIBLE);
-                    oneSyncCard.setVisibility(oneSyncCard.VISIBLE);
+//                    autoLinear.setVisibility(AutoCard.VISIBLE);
+//                    oneSyncCard.setVisibility(oneSyncCard.VISIBLE);
+                    syncLinear2.setVisibility(View.VISIBLE);
                     ContentResolver.setIsSyncable(mAccount,AUTHORITY, 1);
                    if(list.size()>0){
                         syncAutoSwitch.setChecked(true);
-                        syncAutoT.setText("自动同步开");
-                       autoSettingCard.setVisibility(autoSettingCard.VISIBLE);
+                        syncAutoT.setText("自动同步");
+                       //autoSettingCard.setVisibility(autoSettingCard.VISIBLE);
+                       syncLinear5.setVisibility(View.VISIBLE);
+                       line4.setVisibility(View.VISIBLE);
                     }
                     else{
                         syncAutoSwitch.setChecked(false);
-                        syncAutoT.setText("自动同步关");
-                       autoSettingCard.setVisibility(autoSettingCard.INVISIBLE);
+                        syncAutoT.setText("自动同步");
+                       //autoSettingCard.setVisibility(autoSettingCard.INVISIBLE);
+                       syncLinear5.setVisibility(View.INVISIBLE);
+                       line4.setVisibility(View.INVISIBLE);
                     }
 
                 }
                 else {
                     syncableT.setText("禁止同步");
-                    autoLinear.setVisibility(AutoCard.INVISIBLE);
-                    oneSyncCard.setVisibility(oneSyncCard.INVISIBLE);
+                    syncLinear2.setVisibility(View.INVISIBLE);
+//                    autoLinear.setVisibility(AutoCard.INVISIBLE);
+//                    oneSyncCard.setVisibility(oneSyncCard.INVISIBLE);
                     ContentResolver.setIsSyncable(mAccount,AUTHORITY,0);
 
                 }
@@ -205,8 +225,10 @@ public class SyncActivity extends AppCompatActivity implements CompoundButton.On
                 break;
             case R.id.syncAuto_switch:
                 if(isChecked){
-                    syncAutoT.setText("自动同步开");
-                    autoSettingCard.setVisibility(autoSettingCard.VISIBLE);
+                    syncAutoT.setText("自动同步");
+                    //autoSettingCard.setVisibility(autoSettingCard.VISIBLE);
+                    syncLinear5.setVisibility(View.VISIBLE);
+                    line4.setVisibility(View.VISIBLE);
                     String string = spinnertext.getText().toString();
                     Log.i("实验咯", "onCheckedChanged: "+string);
                     if(string.equals("请选择")){
@@ -243,8 +265,10 @@ public class SyncActivity extends AppCompatActivity implements CompoundButton.On
 
                 }
                 else{
-                    syncAutoT.setText("自动同步关");
-                    autoSettingCard.setVisibility(autoSettingCard.INVISIBLE);
+                    syncAutoT.setText("自动同步");
+                    syncLinear5.setVisibility(View.INVISIBLE);
+                    line4.setVisibility(View.INVISIBLE);
+                    //autoSettingCard.setVisibility(autoSettingCard.INVISIBLE);
                     ContentResolver.removePeriodicSync(mAccount, AUTHORITY, Bundle.EMPTY);
 
                 }
@@ -298,12 +322,22 @@ public class SyncActivity extends AppCompatActivity implements CompoundButton.On
         syncEnableswitch.setOnCheckedChangeListener(this);
         syncAutoT = findViewById(R.id.auto_syncText);
         syncOneT = findViewById(R.id.one_syncText);
+
         syncAutoSwitch = findViewById(R.id.syncAuto_switch);
         syncAutoSwitch.setOnCheckedChangeListener(this);
-        AutoCard = findViewById(R.id.AutoCard);
-        oneSyncCard = findViewById(R.id.OneSyncCard);
-        autoLinear = findViewById(R.id.autoLinear);
-        autoSettingCard = findViewById( R.id.AutoSettingCard);
+
+        line1 = findViewById(R.id.line1);
+        line2 = findViewById(R.id.line2);
+        line3 = findViewById(R.id.line3);
+        line4 = findViewById(R.id.line4);
+        syncLinear1 = findViewById(R.id.sync_linear1);
+        syncLinear2 = findViewById(R.id.sync_linear2);
+        syncLinear3 = findViewById(R.id.sync_linear3);
+        syncLinear4 = findViewById(R.id.sync_linear4);
+        syncLinear5 = findViewById(R.id.sync_linear5);
+
+        spinner = findViewById(R.id.sync_period_spinner);
+        spinnertext = findViewById(R.id.autoSetting_syncText);
     }
 
 }
