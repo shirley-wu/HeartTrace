@@ -1050,7 +1050,18 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     originType = "welcome";
                 }
                 else{
-                    diary.setText(diary_write.getText().toString());
+                    String text = diary_write.getText().toString();
+                    Pattern pattern = Pattern.compile("img_[0-9]{0,}\\.jpg");
+                    Matcher matcher = pattern.matcher(text);
+                    while(matcher.find()) {
+                        StringBuilder sb = new StringBuilder(text);
+                        sb.delete(matcher.start(),matcher.end());
+                        sb.insert(matcher.start(),"￼");
+                        text = sb.toString();
+                        matcher = pattern.matcher(text);
+                    }
+                    diary.setText(text);
+
                     //htmlText = colorSpanAdjust(Html.toHtml(diary_write.getText()));
                     diary.setHtmlText(Html.toHtml(diary_write.getText()));
                     diary.setTextSize(diary_write.getTextSize()/displayMetrics.density);
