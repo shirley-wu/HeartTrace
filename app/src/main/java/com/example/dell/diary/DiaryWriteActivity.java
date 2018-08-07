@@ -92,6 +92,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -1015,7 +1017,19 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
                 if(originType.equals("add_diary")){
                     diary = new Diary();
-                    diary.setText(diary_write.getText().toString());
+
+                    String text = diary_write.getText().toString();
+                    Pattern pattern = Pattern.compile("img_[0-9]{0,}\\.jpg");
+                    Matcher matcher = pattern.matcher(text);
+                    while(matcher.find()) {
+                        StringBuilder sb = new StringBuilder(text);
+                        sb.delete(matcher.start(),matcher.end());
+                        sb.insert(matcher.start(),"￼");
+                        text = sb.toString();
+                        matcher = pattern.matcher(text);
+                    }
+                    diary.setText(text);
+
                     //htmlText = colorSpanAdjust(Html.toHtml(diary_write.getText()));
                     diary.setHtmlText(Html.toHtml(diary_write.getText()));
                     diary.setTextSize(diary_write.getTextSize()/displayMetrics.density);
