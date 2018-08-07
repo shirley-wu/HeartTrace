@@ -31,7 +31,10 @@ public class PicUtils {
             // 从选取相册的Activity中返回后
             String imagePath = getFilePathByUri(activity, uri);
             Log.d(TAG, "getBitmap: imagePath = " + imagePath);
-            if (imagePath == null) return null;
+
+            if (imagePath == null) {
+                return BitmapFactory.decodeStream(activity.getContentResolver().openInputStream(uri));
+            }
 
             // 最宽1000
             float widthLim = 1000;
