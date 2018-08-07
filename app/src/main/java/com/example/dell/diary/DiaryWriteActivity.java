@@ -961,6 +961,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.edit:
                 if(emptyImage.getVisibility() == View.INVISIBLE){
+                    mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                     diary_write.setEnabled(true);
                     mSwipeLayout.setEnabled(false);
                     diary_write.setSelection(diary_write.getText().length());
@@ -1013,6 +1014,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.confirm:
                 String htmlText;
+                mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                 //Log.i("test", Html.toHtml(diary_write.getText()));
                 DisplayMetrics displayMetrics=new DisplayMetrics();
                 getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
