@@ -2451,8 +2451,17 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     diary.getHtmlText(),
                     new MyImageGetter(this),
                     null));
+            //clear color span
+            ForegroundColorSpan[] colorSpans = diary_write.getText().getSpans(0, diary_write.length(), ForegroundColorSpan.class);
+            for (int i = 0; i < colorSpans.length; i++) {
+                diary_write.getText().removeSpan(colorSpans[i]);
+            }
+            //set color span
+            int[] colorSpanInfo = getTextColorInfo(diary.getHtmlText());
+            setColorSpan(colorSpanInfo);
             Log.d(TAG, "displayDiary: html = " + diary.getHtmlText());
             Log.i(TAG, "displayDiary: toHtml = " + Html.toHtml(diary_write.getText()));
+            Toast.makeText(DiaryWriteActivity.this,diary_write.getText(),Toast.LENGTH_SHORT).show();
         }
         setTextFormmat(diary);
         diary_write.setSelection(0);
@@ -2462,6 +2471,78 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         String date = (diary.getDate().getYear() + 1900) + "年" + (diary.getDate().getMonth() + 1) + "月" + diary.getDate().getDate() + "日";
         diaryDate.setText(date);
         diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
+    }
+
+    private int[] getTextColorInfo(String htmlText)
+    {
+        Editable editable = (Editable) Html.fromHtml(htmlText);
+        ForegroundColorSpan[] colorSpans= editable.getSpans(0, editable.length(), ForegroundColorSpan.class);
+        int arraySpan[] = new int[diary_write.getText().length()];
+        for(int i = 0; i < arraySpan.length ;i++)
+            arraySpan[i] = 8;
+        for(int i = 0; i < colorSpans.length ; i++) {
+            int styleStart = editable.getSpanStart(colorSpans[i]);
+            int styleEnd = editable.getSpanEnd(colorSpans[i]);
+            if(colorSpans[i].getForegroundColor() == new ForegroundColorSpan(getResources().getColor(R.color.darkred)).getForegroundColor())
+                for (int j = styleStart; j < styleEnd ;j++) arraySpan[j] = 1;
+            if(colorSpans[i].getForegroundColor() == new ForegroundColorSpan(getResources().getColor(R.color.darkorange)).getForegroundColor())
+                for (int j = styleStart; j < styleEnd ;j++) arraySpan[j] = 2;
+            if(colorSpans[i].getForegroundColor() == new ForegroundColorSpan(getResources().getColor(R.color.pink)).getForegroundColor())
+                for (int j = styleStart; j < styleEnd ;j++) arraySpan[j] = 3;
+            if(colorSpans[i].getForegroundColor() == new ForegroundColorSpan(getResources().getColor(R.color.darkgreen)).getForegroundColor())
+                for (int j = styleStart; j < styleEnd ;j++) arraySpan[j] = 4;
+            if(colorSpans[i].getForegroundColor() == new ForegroundColorSpan(getResources().getColor(R.color.deepskyblue)).getForegroundColor())
+                for (int j = styleStart; j < styleEnd ;j++) arraySpan[j] = 5;
+            if(colorSpans[i].getForegroundColor() == new ForegroundColorSpan(getResources().getColor(R.color.steelblue)).getForegroundColor())
+                for (int j = styleStart; j < styleEnd ;j++) arraySpan[j] = 6;
+            if(colorSpans[i].getForegroundColor() == new ForegroundColorSpan(getResources().getColor(R.color.dimgrey)).getForegroundColor())
+                for (int j = styleStart; j < styleEnd ;j++) arraySpan[j] = 7;
+            if(colorSpans[i].getForegroundColor() == new ForegroundColorSpan(getResources().getColor(R.color.black)).getForegroundColor())
+                for (int j = styleStart; j < styleEnd ;j++) arraySpan[j] = 8;
+        }
+
+        return arraySpan;
+    }
+
+    private void setColorSpan(int [] colorSpanInfo){
+        int colorSpanType = 8;
+        int colorSpanStart = 0;
+        int colorSpanEnd = 0;
+        int i = 0;
+        Editable editable = diary_write.getText();
+        while(i < colorSpanInfo.length) {
+            for (; i < colorSpanInfo.length; i++)
+                if (colorSpanInfo[i] != 8) break;
+            if(i == colorSpanInfo.length) break;
+            colorSpanStart = i;
+            colorSpanType = colorSpanInfo[i];
+            for (; i < colorSpanInfo.length; i++)
+                if (colorSpanInfo[i] != colorSpanType) break;
+            colorSpanEnd = i;
+            switch (colorSpanType){
+                case 1:
+                    editable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.darkred)), colorSpanStart, colorSpanEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    break;
+                case 2:
+                    editable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.darkorange)), colorSpanStart, colorSpanEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    break;
+                case 3:
+                    editable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.pink)), colorSpanStart, colorSpanEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    break;
+                case 4:
+                    editable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.darkgreen)), colorSpanStart, colorSpanEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    break;
+                case 5:
+                    editable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.deepskyblue)), colorSpanStart, colorSpanEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    break;
+                case 6:
+                    editable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.steelblue)), colorSpanStart, colorSpanEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    break;
+                case 7:
+                    editable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.dimgrey)), colorSpanStart, colorSpanEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    break;
+            }
+        }
     }
 
     private void changeColor(int color, int start, int end) {
