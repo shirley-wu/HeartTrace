@@ -130,14 +130,13 @@ public class DiaryCardAdapter extends RecyclerView.Adapter<DiaryCardAdapter.View
     public void onBindViewHolder(ViewHolder holder, int position) {
          Diary diaryCard = mDiaryCardList.get(position);
          String diary_card_text;
-         diary_card_text = diaryCard.getText();
-         String filePath = Picture.getParentPath(mContext);
-         Pattern pattern = Pattern.compile( filePath + "img_[0-9]{0,}\\.jpg");
+         diary_card_text = diaryCard.getText().replace("￼", "[图片]");
+         Pattern pattern = Pattern.compile("img_[0-9]{0,}\\.jpg");
          Matcher matcher = pattern.matcher(diary_card_text);
          while(matcher.find()) {
             StringBuilder sb=new StringBuilder(diary_card_text);
             sb.delete(matcher.start(),matcher.end());
-            sb.insert(matcher.start(),"/image/");
+            sb.insert(matcher.start(),"[图片]");
             diary_card_text = sb.toString();
             matcher = pattern.matcher(diary_card_text);
          }
