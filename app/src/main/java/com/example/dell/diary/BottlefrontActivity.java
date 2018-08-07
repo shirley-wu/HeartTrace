@@ -183,7 +183,7 @@ public class BottlefrontActivity extends AppCompatActivity {
                 inputBottleDescribe.setHint("请输入瓶子的描述");
                 inputBottleDescribe.setFocusable(true);
                 AlertDialog.Builder builder = new AlertDialog.Builder(BottlefrontActivity.this);
-                builder.setTitle("read me ##")
+                builder.setTitle("read me")
                         .setView(inputBottleDescribe)                //设置一个控件（其他控件同理）
                         .setNegativeButton("取消", null);
                 builder.setPositiveButton("保存", new DialogInterface.OnClickListener() {
@@ -300,7 +300,7 @@ public class BottlefrontActivity extends AppCompatActivity {
                 renameBottleName.setHint("请输入瓶子的名字");
                 renameBottleName.setFocusable(true);
                 AlertDialog.Builder builder = new AlertDialog.Builder(BottlefrontActivity.this);
-                builder.setTitle("修改瓶子的名字##")
+                builder.setTitle("修改瓶子的名字")
                         .setView(renameBottleName)                //设置一个控件（其他控件同理）
                         .setNegativeButton("取消", null);
                 builder.setPositiveButton("保存", new DialogInterface.OnClickListener() {
@@ -318,9 +318,9 @@ public class BottlefrontActivity extends AppCompatActivity {
                 builder.show();
 
                 break;
-            case R.id.settings:
-                Toast.makeText(this, "You clicked settings", Toast.LENGTH_SHORT).show();
-                break;
+//            case R.id.settings:
+//                Toast.makeText(this, "You clicked settings", Toast.LENGTH_SHORT).show();
+//                break;
             default:
         }
         return super.onOptionsItemSelected(item);

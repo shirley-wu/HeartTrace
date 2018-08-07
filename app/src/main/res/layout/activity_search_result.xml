@@ -43,7 +43,7 @@ android:layout_height="match_parent"
         android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/diary_seach_result"
+        android:id="@+id/diary_search_result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -67,7 +67,7 @@ android:layout_height="match_parent"
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/sentence_seach_result"
+        android:id="@+id/sentence_search_result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">

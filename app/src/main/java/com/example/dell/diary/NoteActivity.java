@@ -41,9 +41,9 @@ public class NoteActivity extends AppCompatActivity {
                 }).show();
 
                 break;
-            case R.id.settings:
-                Toast.makeText(this, "You clicked settings", Toast.LENGTH_SHORT).show();
-                break;
+//            case R.id.settings:
+//                Toast.makeText(this, "You clicked settings", Toast.LENGTH_SHORT).show();
+//                break;
             default:
         }
         return true;

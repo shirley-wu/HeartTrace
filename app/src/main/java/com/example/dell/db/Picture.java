@@ -83,7 +83,7 @@ public class Picture {
         return parentPath;
     }
 
-    private static String getParentPath(Context context) {
+    public static String getParentPath(Context context) {
         if (parentPath == null) {
             if (sharedPreferences == null) {
                 sharedPreferences = context.getSharedPreferences(PREFERENCES, Activity.MODE_PRIVATE);

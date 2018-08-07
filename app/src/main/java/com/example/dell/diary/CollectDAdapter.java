@@ -22,6 +22,8 @@ package com.example.dell.diary;
         import com.example.dell.db.Sentence;
         import com.example.dell.db.Sentencebook;
 
+        import java.util.ArrayList;
+        import java.util.Arrays;
         import java.util.List;
         import java.util.regex.Matcher;
         import java.util.regex.Pattern;
@@ -30,7 +32,7 @@ public class CollectDAdapter extends RecyclerView.Adapter<CollectDAdapter.ViewHo
     private List<Diary> mfavoriteDList;
     private Context mContext;
     private DatabaseHelper databaseHelper = null;
-
+    public List<String> weekList = new ArrayList<>(Arrays.asList("周日","周一","周二","周三"," 周四","周五","周六"));
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView diary_write;
@@ -122,18 +124,20 @@ public class CollectDAdapter extends RecyclerView.Adapter<CollectDAdapter.ViewHo
     public void onBindViewHolder(CollectDAdapter.ViewHolder holder, int position) {
         Diary diary = mfavoriteDList.get(position);
         String diary_card_text;
-        diary_card_text = diary.getText();
-        Pattern pattern = Pattern.compile( Environment.getExternalStorageDirectory().getPath()+"/HeartTrace/pic/image_[0-9]{14}\\.jpg");
-        Matcher matcher = pattern.matcher(diary_card_text);
-        while(matcher.find()) {
-            StringBuilder sb=new StringBuilder(diary_card_text);
-            sb.delete(matcher.start(),matcher.end());
-            sb.insert(matcher.start(),"/image/");
-            diary_card_text = sb.toString();
-            matcher = pattern.matcher(diary_card_text);
-        }
+        diary_card_text = diary.getText().replace("￼", "[图片]");
+//        diary_card_text = diary.getText();
+//        Pattern pattern = Pattern.compile( Environment.getExternalStorageDirectory().getPath()+"/HeartTrace/pic/image_[0-9]{14}\\.jpg");
+//        Matcher matcher = pattern.matcher(diary_card_text);
+//        while(matcher.find()) {
+//            StringBuilder sb=new StringBuilder(diary_card_text);
+//            sb.delete(matcher.start(),matcher.end());
+//            sb.insert(matcher.start(),"/image/");
+//            diary_card_text = sb.toString();
+//            matcher = pattern.matcher(diary_card_text);
+//        }
         holder.diary_write.setText(diary_card_text);
-        holder.diaryDate.setText(diary.getDate().toString());
+        String date = (diary.getDate().getYear()+1900)+"年"+ (diary.getDate().getMonth()+1) + "月" + diary.getDate().getDate() + "日 " + weekList.get(diary.getDate().getDay());
+        holder.diaryDate.setText(date);
     }
 
 

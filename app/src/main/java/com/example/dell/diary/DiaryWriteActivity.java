@@ -1,47 +1,37 @@
 package com.example.dell.diary;
 
 import android.Manifest;
-import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.Fragment;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
-import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
-import android.graphics.Point;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.LinkAddress;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
-import android.os.Message;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
@@ -64,7 +54,6 @@ import android.text.style.LeadingMarginSpan;
 import android.text.style.StyleSpan;
 import android.text.style.TypefaceSpan;
 import android.text.style.UnderlineSpan;
-import android.util.AttributeSet;
 import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -74,19 +63,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -95,29 +81,17 @@ import com.example.dell.db.DatabaseHelper;
 import com.example.dell.db.Diary;
 import com.example.dell.db.Label;
 import com.example.dell.db.Picture;
-import com.j256.ormlite.stmt.query.In;
+import com.example.dell.diary.picutils.MyBitmapDrawable;
+import com.example.dell.diary.picutils.MyImageGetter;
+import com.example.dell.diary.picutils.PicUtils;
+import com.example.dell.diary.picutils.ScaleUtils;
 
-import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Field;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -132,6 +106,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 //    private DiaryFragment nextDiaryFragment;
 //    private List<android.support.v4.app.Fragment> mFragmentList = new ArrayList<android.support.v4.app.Fragment>();
 //    private DiaryFragmentAdapter mFragmentAdapter;
+
+    private static final String TAG = DiaryWriteActivity.class.getSimpleName();
 
     public static final int CHOOSE_PHOTO = 2;
     private final int ICON_LIST_DIALOG = 1;
@@ -452,26 +428,11 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
             } else {
                 Log.i("show", diary.getHtmlText());
-                if (diary.getHtmlText() != null) {
-                    diary_write.setText(Html.fromHtml(diary.getHtmlText()));
-                    getImage(diary.getText());
-                    //clear color span
-                    ForegroundColorSpan[] colorSpans = diary_write.getText().getSpans(0, diary_write.length(), ForegroundColorSpan.class);
-                    for (int i = 0; i < colorSpans.length; i++)
-                        diary_write.getText().removeSpan(colorSpans[i]);
-                    //set color span
-                    int[] colorSpanInfo = getTextColorInfo(diary.getHtmlText());
-                    setColorSpan(colorSpanInfo);
-                    Log.i("test", Html.toHtml(diary_write.getText()));
 
-                }
-                setTextFormmat(diary);
-                diary_write.setSelection(0);
-
+                displayDiary();
                 getLabelsOfDiary(diary, helper);
-                String date = (diary.getDate().getYear() + 1900) + "年" + (diary.getDate().getMonth() + 1) + "月" + diary.getDate().getDate() + "日";
-                diaryDate.setText(date);
-                diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
+                displayDiaryDate();
+
                 diary_write.setEnabled(false);
                 mSwipeLayout.setEnabled(true);
                 theme_set.setVisibility(View.INVISIBLE);
@@ -571,25 +532,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     else{
                         index = index + 1;
                         diary = diaryList.get(index);
-                        String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
-                        diaryDate.setText(date);
-                        diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
                         isFling = true;
-                        diary_write.setText(Html.fromHtml(diary.getHtmlText()));
-                        getImage(diary.getText());
-                        setTextFormmat(diary);
-
-                        //clear color span
-                        ForegroundColorSpan[] colorSpans= diary_write.getText().getSpans(0, diary_write.length(), ForegroundColorSpan.class);
-                        for(int i = 0; i < colorSpans.length; i++)
-                            diary_write.getText().removeSpan(colorSpans[i]);
-                        //set color span
-                        int[] colorSpanInfo = getTextColorInfo(diary.getHtmlText());
-                        setColorSpan(colorSpanInfo);
-                        Log.i("test", Html.toHtml(diary_write.getText()));
-
-                        diary_write.setSelection(0);
+                        displayDiary();
                         getLabelsOfDiary(diary,helper);
+                        displayDiaryDate();
                         isFling = false;
                     }
                 }
@@ -605,25 +551,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     else{
                         index = index -1;
                         diary = diaryList.get(index);
-                        String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
-                        diaryDate.setText(date);
-                        diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
                         isFling = true;
-                        diary_write.setText(Html.fromHtml(diary.getHtmlText()));
-                        getImage(diary.getText());
-                        setTextFormmat(diary);
-
-                        //clear color span
-                        ForegroundColorSpan[] colorSpans= diary_write.getText().getSpans(0, diary_write.length(), ForegroundColorSpan.class);
-                        for(int i = 0; i < colorSpans.length; i++)
-                            diary_write.getText().removeSpan(colorSpans[i]);
-                        //set color span
-                        int[] colorSpanInfo = getTextColorInfo(diary.getHtmlText());
-                        setColorSpan(colorSpanInfo);
-                        Log.i("test", Html.toHtml(diary_write.getText()));
-
-                        diary_write.setSelection(0);
+                        displayDiary();
                         getLabelsOfDiary(diary,helper);
+                        displayDiaryDate();
                         isFling = false;
                     }
                 }
@@ -631,21 +562,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             }
             return false;
         }
-    }
-
-    public void initViewPage(){
-//        vp = (ViewPager)findViewById(R.id.diaryViewPager);
-//        diaryFragment = new DiaryFragment();
-//        preDiaryFragment = new DiaryFragment();
-//        nextDiaryFragment = new DiaryFragment();
-//        mFragmentList.add(preDiaryFragment);
-//        mFragmentList.add(diaryFragment);
-//        mFragmentList.add(nextDiaryFragment);
-//        //vp.addOnPageChangeListener(this);
-//        mFragmentAdapter = new DiaryFragmentAdapter(getSupportFragmentManager(),mFragmentList);
-//        vp.setOffscreenPageLimit(3);
-//        vp.setAdapter(mFragmentAdapter);
-//        vp.setCurrentItem(1);
     }
 
     public void getView()
@@ -916,26 +832,11 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         }
         else {
             Log.i("show",diary.getHtmlText());
-            if(diary.getHtmlText() != null) {
-                diary_write.setText(Html.fromHtml(diary.getHtmlText()));
-                getImage(diary.getText());
-                //clear color span
-                ForegroundColorSpan[] colorSpans = diary_write.getText().getSpans(0, diary_write.length(), ForegroundColorSpan.class);
-                for (int i = 0; i < colorSpans.length; i++)
-                    diary_write.getText().removeSpan(colorSpans[i]);
-                //set color span
-                int[] colorSpanInfo = getTextColorInfo(diary.getHtmlText());
-                setColorSpan(colorSpanInfo);
-                Log.i("test", Html.toHtml(diary_write.getText()));
 
-            }
-            setTextFormmat(diary);
-            diary_write.setSelection(0);
-
+            displayDiary();
             getLabelsOfDiary(diary,helper);
-            String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
-            diaryDate.setText(date);
-            diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
+            displayDiaryDate();
+
             diary_write.setEnabled(false);
             theme_set.setVisibility(View.INVISIBLE);
             font_set.setVisibility(View.INVISIBLE);
@@ -1116,7 +1017,19 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
                 if(originType.equals("add_diary")){
                     diary = new Diary();
-                    diary.setText(diary_write.getText().toString());
+
+                    String text = diary_write.getText().toString();
+                    Pattern pattern = Pattern.compile("img_[0-9]{0,}\\.jpg");
+                    Matcher matcher = pattern.matcher(text);
+                    while(matcher.find()) {
+                        StringBuilder sb = new StringBuilder(text);
+                        sb.delete(matcher.start(),matcher.end());
+                        sb.insert(matcher.start(),"￼");
+                        text = sb.toString();
+                        matcher = pattern.matcher(text);
+                    }
+                    diary.setText(text);
+
                     //htmlText = colorSpanAdjust(Html.toHtml(diary_write.getText()));
                     diary.setHtmlText(Html.toHtml(diary_write.getText()));
                     diary.setTextSize(diary_write.getTextSize()/displayMetrics.density);
@@ -1137,7 +1050,18 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     originType = "welcome";
                 }
                 else{
-                    diary.setText(diary_write.getText().toString());
+                    String text = diary_write.getText().toString();
+                    Pattern pattern = Pattern.compile("img_[0-9]{0,}\\.jpg");
+                    Matcher matcher = pattern.matcher(text);
+                    while(matcher.find()) {
+                        StringBuilder sb = new StringBuilder(text);
+                        sb.delete(matcher.start(),matcher.end());
+                        sb.insert(matcher.start(),"￼");
+                        text = sb.toString();
+                        matcher = pattern.matcher(text);
+                    }
+                    diary.setText(text);
+
                     //htmlText = colorSpanAdjust(Html.toHtml(diary_write.getText()));
                     diary.setHtmlText(Html.toHtml(diary_write.getText()));
                     diary.setTextSize(diary_write.getTextSize()/displayMetrics.density);
@@ -1633,48 +1557,18 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                                 diaryDate.setText("");
                                 diaryWeekday.setText("");
                                 getLabelsOfDiary(new Diary(), helper);
-                            } else if (index == diaryList.size()) {
-                                index = index -  1;
-                                diary = diaryList.get(index);
-                                String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
-                                diaryDate.setText(date);
-                                diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
-                                isDeleting = true;
-                                diary_write.setText(Html.fromHtml(diary.getHtmlText()));
-                                getImage(diary.getText());
-
-                                //clear color span
-                                ForegroundColorSpan[] colorSpans= diary_write.getText().getSpans(0, diary_write.length(), ForegroundColorSpan.class);
-                                for(int i = 0; i < colorSpans.length; i++)
-                                    diary_write.getText().removeSpan(colorSpans[i]);
-                                //set color span
-                                int[] colorSpanInfo = getTextColorInfo(diary.getHtmlText());
-                                setColorSpan(colorSpanInfo);
-                                Log.i("test", Html.toHtml(diary_write.getText()));
-
-                                setTextFormmat(diary);
-                                getLabelsOfDiary(diary,helper);
-                                isDeleting = false;
                             } else {
+                                if (index == diaryList.size()) {
+                                    index = index - 1;
+                                }
                                 diary = diaryList.get(index);
-                                String date = (diary.getDate().getYear()+1900)+"年"+(diary.getDate().getMonth()+1)+"月"+diary.getDate().getDate()+"日";
-                                diaryDate.setText(date);
-                                diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
+
                                 isDeleting = true;
-                                diary_write.setText(Html.fromHtml(diary.getHtmlText()));
-                                getImage(diary.getText());
-                                setTextFormmat(diary);
 
-                                //clear color span
-                                ForegroundColorSpan[] colorSpans= diary_write.getText().getSpans(0, diary_write.length(), ForegroundColorSpan.class);
-                                for(int i = 0; i < colorSpans.length; i++)
-                                    diary_write.getText().removeSpan(colorSpans[i]);
-                                //set color span
-                                int[] colorSpanInfo = getTextColorInfo(diary.getHtmlText());
-                                setColorSpan(colorSpanInfo);
-                                Log.i("test", Html.toHtml(diary_write.getText()));
+                                displayDiary();
+                                getLabelsOfDiary(diary, helper);
+                                displayDiaryDate();
 
-                                getLabelsOfDiary(diary,helper);
                                 isDeleting = false;
                             }
                         }
@@ -1712,165 +1606,61 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case CHOOSE_PHOTO:
-                if (resultCode == RESULT_OK) {
-                    // 判断手机系统版本号
-                    if (Build.VERSION.SDK_INT >= 19) {
-                        // 4.4及以上系统使用这个方法处理图片
-                        handleImageOnKitKat(data);
-                    } else {
-                        // 4.4以下系统使用这个方法处理图片
-                        handleImageBeforeKitKat(data);
-                    }
-                }
+                handleImageOnKitKat(data);
                 break;
             default:
                 break;
         }
     }
 
-    @TargetApi(19)
     private void handleImageOnKitKat(Intent data) {
+        // 开始
         isInsertingImg = true;
+
+        // 获取并保存bitmap
         Uri uri = data.getData();
         Bitmap bitmap = PicUtils.getBitmap(this, uri);
         if (bitmap == null) {
             Toast.makeText(this, "图片不存在", Toast.LENGTH_SHORT);
             return ;
         }
-        String imagePath = saveBitmap(DiaryWriteActivity.this, bitmap);
-        SpannableString imageSpan = new SpannableString(imagePath);
-        imageSpan.setSpan(new ImageSpan(bitmap) , 0, imageSpan.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        String imagePath = saveBitmap(bitmap);
+
+        // 新建imageSpan
+        bitmap = ScaleUtils.scaleImageForScreen(this, bitmap);
+        Drawable drawable = new MyBitmapDrawable(bitmap);
+        ImageSpan imageSpan = new ImageSpan(drawable, imagePath);
+
+        // 新建spannableString
+        SpannableString spannableString = new SpannableString(imagePath);
+        spannableString.setSpan(
+                imageSpan,
+                0, spannableString.length(),
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        // 显示
         Editable editable = diary_write.getText();
-        editable.insert(diary_write.getSelectionStart(), imageSpan);
+        editable.insert(diary_write.getSelectionStart(), spannableString);
         diary_write.setText(editable);
         diary_write.append("\n");
         diary_write.setSelection(diary_write.getText().length());
+
+        // 结束
         isInsertingImg = false;
     }
 
-    public Bitmap getBitmapFromUri(Activity ac, Uri uri) throws FileNotFoundException, IOException {
-        InputStream input;
-        input = ac.getContentResolver().openInputStream(uri);
-        Bitmap bitmap = BitmapFactory.decodeStream(input);
-        input.close();
-
-        return compressImage(bitmap);
-    }
-
-    public Bitmap compressImage(Bitmap image) {
-        float width = image.getWidth();
-        float height = image.getHeight();
-        // 创建操作图片用的matrix对象
-        Matrix matrix = new Matrix();
-        // 计算宽高缩放率
-        DisplayMetrics displayMetrics=new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int heightPixels = displayMetrics.heightPixels;
-        int widthPixels=displayMetrics.widthPixels;
-        Log.i("density", String.valueOf(displayMetrics.density));
-        float scaleWidth = ((float) widthPixels) / width;
-        scaleWidth *= displayMetrics.density;
-        float scaleHeight = scaleWidth;
-        // 缩放图片动作
-        matrix.postScale(scaleWidth, scaleHeight);
-        Bitmap new_image = Bitmap.createBitmap(image, 0, 0, (int) width,
-                (int) height, matrix, true);
-
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        new_image.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
-        int options = 100;
-        while (baos.toByteArray().length / 1024 > 100) {  //循环判断如果压缩后图片是否大于100kb,大于继续压缩
-            baos.reset();//重置baos即清空baos
-            //第一个参数 ：图片格式 ，第二个参数： 图片质量，100为最高，0为最差  ，第三个参数：保存压缩后的数据的流
-            new_image.compress(Bitmap.CompressFormat.JPEG, options, baos);//这里压缩options%，把压缩后的数据存放到baos中
-            options -= 10;//每次都减少10
-        }
-        ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());//把压缩后的数据baos存放到ByteArrayInputStream中
-        Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);//把ByteArrayInputStream数据生成图片
-        return bitmap;
-    }
-
-    public static final String SD_PATH = Environment.getExternalStorageDirectory().getPath() + "/HeartTrace/pic/";
-    public static final String IN_PATH = "/HeartTrace/pic/";
-
-    private static String generateFileName() {
-        SimpleDateFormat time_format=new SimpleDateFormat("yyyyMMddHHmmss");
-        String date=time_format.format(new Date());
-        return "image_"+date;
-    }
-
-    public String saveBitmap(Context context, Bitmap mBitmap) {
-        String savePath;
-        File filePic;
+    public String saveBitmap(Bitmap mBitmap) {
         try {
             Picture picture = new Picture();
             DatabaseHelper databaseHelper = new DatabaseHelper(getApplicationContext());
             boolean status = picture.saveBitmap(DiaryWriteActivity.this, databaseHelper, mBitmap);
-            if (status) return picture.getParentPath() + picture.getFileName();
+            if (status) return picture.getFileName();
             else return null;
         } catch (RuntimeException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
             return null;
         }
-    }
-
-    private void handleImageBeforeKitKat(Intent data) {
-        Uri uri = data.getData();
-        String imagePath = getImagePath(uri, null);
-        displayImage(imagePath);
-    }
-
-    private String getImagePath(Uri uri, String selection) {
-        String path = null;
-        // 通过Uri和selection来获取真实的图片路径
-        Cursor cursor = getContentResolver().query(uri, null, selection, null, null);
-        if (cursor != null) {
-            if (cursor.moveToFirst()) {
-                path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
-            }
-            cursor.close();
-        }
-        return path;
-    }
-
-    private void displayImage(String imagePath) {
-        if (imagePath != null) {
-            Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
-            //picture.setImageBitmap(bitmap);
-        } else {
-            Toast.makeText(this, "failed to get image", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void getImage(String text)
-    {
-        Editable editable = diary_write.getText();
-        String filePath;
-        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
-            filePath = SD_PATH;
-        else
-            filePath = DiaryWriteActivity.this.getApplicationContext().getFilesDir().getAbsolutePath() + IN_PATH;
-        Pattern pattern = Pattern.compile( filePath + "img_[0-9]{0,}\\.jpg");
-        Matcher matcher = pattern.matcher(text);
-        int matcher_end = 0;
-        while(matcher.find()) {
-            Log.i("file name",matcher.group().substring(filePath.length(),matcher.group().length()));
-            Picture picture = new Picture(matcher.group().substring(filePath.length(),matcher.group().length()));
-            Bitmap bitmap = picture.getBitmap(DiaryWriteActivity.this);
-            SpannableString imageSpan = new SpannableString(matcher.group());
-            imageSpan.setSpan(new ImageSpan(bitmap) , 0, imageSpan.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            Pattern pattern1 = Pattern.compile("￼");
-            Matcher matcher1 = pattern1.matcher(diary_write.getText());
-            if(matcher1.find()) {
-                editable.delete(matcher1.start(),matcher1.end());
-                editable.insert(matcher1.start(), imageSpan);
-            }
-            matcher_end += matcher.end();
-            String new_text = text.substring(matcher_end,text.length());
-            matcher = pattern.matcher(new_text);
-        }
-        diary_write.setText(editable);
     }
 
     private int[] getTextColorInfo(String htmlText)
@@ -2715,139 +2505,30 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
-}
-
-
-
-class PicUtils {
-
-    final private static String TAG = "PicUtils";
-
-    static Bitmap getBitmap(Activity activity, Uri uri) {
-        try {
-            Log.d(TAG, "getBitmap");
-
-            // 从选取相册的Activity中返回后
-            String imagePath = getFilePathByUri(activity, uri);
-            Log.d(TAG, "getBitmap: imagePath = " + imagePath);
-            if (imagePath == null) return null;
-
-            // 获取屏幕的高宽
-            DisplayMetrics metrics = new DisplayMetrics();
-            activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
-            float widthLim = metrics.widthPixels * metrics.density;
-            Log.d(TAG, "getBitmap: widthLim = " + widthLim);
-
-            // 设置参数
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inJustDecodeBounds = true;              // 只获取图片的大小信息，而不是将整张图片载入在内存中，避免内存溢出
-            BitmapFactory.decodeFile(imagePath, options);
-            int width = options.outWidth;
-            Log.d(TAG, "getBitmap: width = " + width);
-
-            int ratio = ((int)(width / widthLim)) + 1;
-            Log.d(TAG, "getBitmap: ratio = " + ratio);
-
-            options.inJustDecodeBounds = false;
-            options.inSampleSize = ratio; // 设置为刚才计算的压缩比例
-            return BitmapFactory.decodeFile(imagePath, options); // 解码文件
-        }
-        catch (Exception e) {
-            Log.e(TAG, "getBitmap: ", e);
-            return null;
-        }
-    }
-
-    private static String getFilePathByUri(Context context, Uri uri) {
-        String path = null;
-        // 以 file:// 开头的
-        if (ContentResolver.SCHEME_FILE.equals(uri.getScheme())) {
-            path = uri.getPath();
-            return path;
-        }
-        // 以 content:// 开头的，比如 content://media/extenral/images/media/17766
-        if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme()) && Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-            Cursor cursor = context.getContentResolver().query(uri, new String[]{MediaStore.Images.Media.DATA}, null, null, null);
-            if (cursor != null) {
-                if (cursor.moveToFirst()) {
-                    int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                    if (columnIndex > -1) {
-                        path = cursor.getString(columnIndex);
-                    }
-                }
-                cursor.close();
+    private void displayDiary() {
+        if (diary.getHtmlText() != null) {
+            diary_write.setText(Html.fromHtml(
+                    diary.getHtmlText(),
+                    new MyImageGetter(this),
+                    null));
+            //clear color span
+            ForegroundColorSpan[] colorSpans = diary_write.getText().getSpans(0, diary_write.length(), ForegroundColorSpan.class);
+            for (int i = 0; i < colorSpans.length; i++) {
+                diary_write.getText().removeSpan(colorSpans[i]);
             }
-            return path;
+            //set color span
+            int[] colorSpanInfo = getTextColorInfo(diary.getHtmlText());
+            setColorSpan(colorSpanInfo);
+            Log.i(TAG, "displayDiary: toHtml = " + Html.toHtml(diary_write.getText()));
         }
-        // 4.4及之后的 是以 content:// 开头的，比如 content://com.android.providers.media.documents/document/image%3A235700
-        if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme()) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            if (DocumentsContract.isDocumentUri(context, uri)) {
-                if (isExternalStorageDocument(uri)) {
-                    // ExternalStorageProvider
-                    final String docId = DocumentsContract.getDocumentId(uri);
-                    final String[] split = docId.split(":");
-                    final String type = split[0];
-                    if ("primary".equalsIgnoreCase(type)) {
-                        path = Environment.getExternalStorageDirectory() + "/" + split[1];
-                        return path;
-                    }
-                } else if (isDownloadsDocument(uri)) {
-                    // DownloadsProvider
-                    final String id = DocumentsContract.getDocumentId(uri);
-                    final Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"),
-                            Long.valueOf(id));
-                    path = getDataColumn(context, contentUri, null, null);
-                    return path;
-                } else if (isMediaDocument(uri)) {
-                    // MediaProvider
-                    final String docId = DocumentsContract.getDocumentId(uri);
-                    final String[] split = docId.split(":");
-                    final String type = split[0];
-                    Uri contentUri = null;
-                    if ("image".equals(type)) {
-                        contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-                    } else if ("video".equals(type)) {
-                        contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
-                    } else if ("audio".equals(type)) {
-                        contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-                    }
-                    final String selection = "_id=?";
-                    final String[] selectionArgs = new String[]{split[1]};
-                    path = getDataColumn(context, contentUri, selection, selectionArgs);
-                    return path;
-                }
-            }
-        }
-        return null;
+        setTextFormmat(diary);
+        diary_write.setSelection(0);
     }
 
-    private static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs) {
-        Cursor cursor = null;
-        final String column = "_data";
-        final String[] projection = {column};
-        try {
-            cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs, null);
-            if (cursor != null && cursor.moveToFirst()) {
-                final int column_index = cursor.getColumnIndexOrThrow(column);
-                return cursor.getString(column_index);
-            }
-        } finally {
-            if (cursor != null)
-                cursor.close();
-        }
-        return null;
-    }
-
-    private static boolean isExternalStorageDocument(Uri uri) {
-        return "com.android.externalstorage.documents".equals(uri.getAuthority());
-    }
-
-    private static boolean isDownloadsDocument(Uri uri) {
-        return "com.android.providers.downloads.documents".equals(uri.getAuthority());
-    }
-
-    private static boolean isMediaDocument(Uri uri) {
-        return "com.android.providers.media.documents".equals(uri.getAuthority());
+    private void displayDiaryDate() {
+        String date = (diary.getDate().getYear() + 1900) + "年" + (diary.getDate().getMonth() + 1) + "月" + diary.getDate().getDate() + "日";
+        diaryDate.setText(date);
+        diaryWeekday.setText(weekList.get(diary.getDate().getDay()));
     }
 
 }
