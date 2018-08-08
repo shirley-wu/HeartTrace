@@ -3,7 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://D:\Files\HeartTraceAlpha2\Diary.iml" filepath="D:\Files\HeartTraceAlpha2\Diary.iml" />
-      <module fileurl="file://$PROJECT_DIR$/HeartTraceAlpha2.iml" filepath="$PROJECT_DIR$/HeartTraceAlpha2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HeartTrace.iml" filepath="$PROJECT_DIR$/HeartTrace.iml" />
+      <module fileurl="file://D:\Users\wu-pc\repos\HeartTrace\HeartTraceAlpha2.iml" filepath="D:\Users\wu-pc\repos\HeartTrace\HeartTraceAlpha2.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
