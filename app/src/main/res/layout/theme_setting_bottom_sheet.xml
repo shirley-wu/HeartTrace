@@ -31,6 +31,18 @@
             <ImageView
                 android:layout_width="108dp"
                 android:layout_height="192dp"
+                android:src = "#fff"
+                android:id="@+id/background0"
+                android:clickable="true"/>
+
+            <LinearLayout
+                android:layout_width="10dp"
+                android:layout_height="192dp">
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="108dp"
+                android:layout_height="192dp"
                 android:src="@drawable/background1"
                 android:id="@+id/background1"
                 android:clickable="true"/>
@@ -117,6 +129,30 @@
                 android:layout_height="192dp"
                 android:src="@drawable/background8"
                 android:id="@+id/background8"
+                android:clickable="true"/>
+
+            <LinearLayout
+                android:layout_width="10dp"
+                android:layout_height="192dp">
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="108dp"
+                android:layout_height="192dp"
+                android:src="@drawable/background9"
+                android:id="@+id/background9"
+                android:clickable="true"/>
+
+            <LinearLayout
+                android:layout_width="10dp"
+                android:layout_height="192dp">
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="108dp"
+                android:layout_height="192dp"
+                android:src="@drawable/background10"
+                android:id="@+id/background10"
                 android:clickable="true"/>
 
 

@@ -58,67 +58,30 @@ public class SyncActivity extends AppCompatActivity implements CompoundButton.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sync);
         ToolBarInit();
-
+        line1 = findViewById(R.id.line1);
+        line2 = findViewById(R.id.line2);
+        line3 = findViewById(R.id.line3);
+        line4 = findViewById(R.id.line4);
+        syncLinear1 = findViewById(R.id.sync_linear1);
+        syncLinear2 = findViewById(R.id.sync_linear2);
+        syncLinear3 = findViewById(R.id.sync_linear3);
+        syncLinear4 = findViewById(R.id.sync_linear4);
+        syncLinear5 = findViewById(R.id.sync_linear5);
+        syncableT = findViewById(R.id.syncableText);
+        syncEnableswitch = findViewById(R.id.syncable_switch);
+        syncEnableswitch.setOnCheckedChangeListener(this);
+        syncAutoT = findViewById(R.id.auto_syncText);
+        syncOneT = findViewById(R.id.one_syncText);
+        syncAutoSwitch = findViewById(R.id.syncAuto_switch);
+        syncAutoSwitch.setOnCheckedChangeListener(this);
+        spinner = findViewById(R.id.sync_period_spinner);
+        spinnertext = findViewById(R.id.autoSetting_syncText);
+        spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.sync_period, android.R.layout.simple_spinner_item);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(spinnerAdapter);
+        spinner.setVisibility(View.VISIBLE);
         mAccount = new Account(name,ACCOUNT_TYPE);
         accountManager = (AccountManager)SyncActivity.this.getSystemService(ACCOUNT_SERVICE);
-        if(accountManager.addAccountExplicitly(mAccount, null,null)){
-            Log.i("SyncAvtivity", "onCreate:account Create OK ");
-        }
-        else{
-            Log.i("SyncAvtivity", "onCreate:cannot create ");
-        }
-
-        getSyncStatus();
-        if(list.size()>0){
-            Log.i("自动同步？？？", "onCheckedChanged:是 ");
-        }
-        else{
-            Log.i("自动同步？？？", "onCheckedChanged:否 ");
-        }
-        viewInit();
-
-        Log.i("1234","6666");
-
-        if(syncable > 0){
-            syncEnableswitch.setChecked(true);
-            syncableT.setText("允许同步");
-            //autoLinear.setVisibility(autoLinear.VISIBLE);
-            //oneSyncCard.setVisibility(oneSyncCard.VISIBLE);
-            syncLinear2.setVisibility(View.VISIBLE);
-            if(list.size() > 0) {
-                syncAutoSwitch.setChecked(true);
-                syncAutoT.setText("自动同步");
-                Log.d("1234","1234");
-                //autoSettingCard.setVisibility(autoSettingCard.VISIBLE);
-                syncLinear5.setVisibility(View.VISIBLE);
-                line4.setVisibility(View.VISIBLE);
-            }
-            else{
-                syncAutoSwitch.setChecked(false);
-                syncAutoT.setText("自动同步");
-                Log.d("1234","5678");
-                syncLinear5.setVisibility(View.INVISIBLE);
-                line4.setVisibility(View.INVISIBLE);
-                //autoSettingCard.setVisibility(autoSettingCard.INVISIBLE);
-            }
-        }
-        else{
-            syncEnableswitch.setChecked(false);
-            syncableT.setText("禁止同步");
-//            autoLinear.setVisibility(autoLinear.INVISIBLE);
-//            oneSyncCard.setVisibility(oneSyncCard.INVISIBLE);
-//            autoSettingCard.setVisibility(autoSettingCard.INVISIBLE);
-            syncLinear2.setVisibility(View.INVISIBLE);
-        }
-        syncLinear3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
-                bundle.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
-                ContentResolver.requestSync(mAccount, AUTHORITY,bundle);
-            }
-        });
 
 
         class SpinnerXMLSelectedListener implements AdapterView.OnItemSelectedListener {
@@ -126,9 +89,22 @@ public class SyncActivity extends AppCompatActivity implements CompoundButton.On
                                        long arg3) {
                 spinnertext.setText((String)spinnerAdapter.getItem(arg2));
                 getSyncStatus();
-                if(syncable>0 && list.size() > 0 ) {
+                if(list.size()>0){
+                    Log.i("在列表选择时自动同步？？？", "onCheckedChanged:是 ");
+                }
+                else{
+                    Log.i("在列表选择时自动同步？？？", "onCheckedChanged:否 ");
+                }
+                if(syncable>0){
+                    Log.i("在列表中允许同步？", "onItemSelected:允许 ");
+                }
+                else{
+                    Log.i("在列表中允许同步？", "onItemSelected: 不允许同步");
+                }
+
+                if(syncable>0) {
                     if(arg2 == 0){
-                       // Toast.makeText(SyncActivity.this, "请选择", Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(SyncActivity.this, "请选择", Toast.LENGTH_SHORT).show();
                         ContentResolver.removePeriodicSync(mAccount, AUTHORITY, Bundle.EMPTY);
                     }
                     else if (arg2 == 1) {
@@ -158,10 +134,10 @@ public class SyncActivity extends AppCompatActivity implements CompoundButton.On
                     }
                     getSyncStatus();
                     if(list.size()>0){
-                        Log.i("自动同步？？？", "onCheckedChanged:是 ");
+                        Log.i("列表结束后自动同步？？？", "onCheckedChanged:是 ");
                     }
                     else{
-                        Log.i("自动同步？？？", "onCheckedChanged:否 ");
+                        Log.i("列表结束后自动同步？？？", "onCheckedChanged:否 ");
                     }
                 }
 
@@ -169,20 +145,111 @@ public class SyncActivity extends AppCompatActivity implements CompoundButton.On
 
             }
 
+
             public void onNothingSelected(AdapterView<?> arg0) {
             }
         }
-
-        spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.sync_period, android.R.layout.simple_spinner_item);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(spinnerAdapter);
         spinner.setOnItemSelectedListener(new SpinnerXMLSelectedListener());
-        spinner.setVisibility(View.VISIBLE);
+
+        if(accountManager.addAccountExplicitly(mAccount, null,null)){
+            Log.i("SyncAvtivity", "onCreate:account Create OK ");
+        }
+        else{
+            Log.i("SyncAvtivity", "onCreate:cannot create ");
+        }
+        getSyncStatus();
+       if(list.size()>0){
+            Log.i("创建时自动同步？？？", "onCheckedChanged:是 ");
+        }
+        else{
+            Log.i("创建时自动同步？？？", "onCheckedChanged:否 ");
+        }
+
+
+        if(syncable > 0){
+            syncEnableswitch.setChecked(true);
+            syncableT.setText("允许同步");
+            syncLinear2.setVisibility(View.VISIBLE);
+            if(list.size() > 0) {
+                syncAutoSwitch.setChecked(true);
+                syncAutoT.setText("自动同步开");
+                syncLinear5.setVisibility(View.VISIBLE);
+                line4.setVisibility(View.VISIBLE);
+                period = list.get(0).period ;
+               /* String string = spinnertext.getText().toString();*/
+               Log.i("实验咯", "onCheckedChanged: "+period);
+                if (period == 1800) {
+                   /* Toast.makeText(SyncActivity.this, "每半小时", Toast.LENGTH_SHORT).show();
+                    ContentResolver.removePeriodicSync(mAccount, AUTHORITY, Bundle.EMPTY);
+                    ContentResolver.addPeriodicSync(mAccount, AUTHORITY, Bundle.EMPTY, 1800);*/
+                    spinnertext.setText("每半小时");
+                    spinner.setSelection(1);
+                }
+                else if (period == 3600) {
+                  /*  Toast.makeText(SyncActivity.this, "每一小时", Toast.LENGTH_SHORT).show();
+                    ContentResolver.removePeriodicSync(mAccount, AUTHORITY, Bundle.EMPTY);
+                    ContentResolver.addPeriodicSync(mAccount, AUTHORITY, Bundle.EMPTY, 3600);*/
+                    spinnertext.setText("每一小时");
+                    spinner.setSelection(2);
+                }
+                else if (period == 7200) {
+                  /*  Toast.makeText(SyncActivity.this, "每两小时", Toast.LENGTH_SHORT).show();
+                    ContentResolver.removePeriodicSync(mAccount, AUTHORITY, Bundle.EMPTY);
+                    ContentResolver.addPeriodicSync(mAccount, AUTHORITY, Bundle.EMPTY, 7200);*/
+                    spinnertext.setText("每两小时");
+                    spinner.setSelection(3);
+                }
+                else if (period == 86400) {
+                  /*  Toast.makeText(SyncActivity.this, "每天", Toast.LENGTH_SHORT).show();
+                    ContentResolver.removePeriodicSync(mAccount, AUTHORITY, Bundle.EMPTY);
+                    ContentResolver.addPeriodicSync(mAccount, AUTHORITY, Bundle.EMPTY, 86400);*/
+                    spinnertext.setText("每天");
+                    spinner.setSelection(4);
+                }
+                else if (period == 86400 * 7) {
+                   /* Toast.makeText(SyncActivity.this, "每周", Toast.LENGTH_SHORT).show();
+                    ContentResolver.removePeriodicSync(mAccount, AUTHORITY, Bundle.EMPTY);
+                    ContentResolver.addPeriodicSync(mAccount, AUTHORITY, Bundle.EMPTY, 604800);*/
+                    spinnertext.setText("每周");
+                    spinner.setSelection(5);
+                }
+                getSyncStatus();
+            }
+            else{
+                syncAutoSwitch.setChecked(false);
+                syncAutoT.setText("自动同步关");
+                syncLinear5.setVisibility(View.INVISIBLE);
+                line4.setVisibility(View.INVISIBLE);
+            }
+        }
+        else{
+            syncEnableswitch.setChecked(false);
+            syncableT.setText("禁止同步");
+            syncLinear2.setVisibility(View.INVISIBLE);
+        }
+        syncLinear3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
+                bundle.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+                ContentResolver.requestSync(mAccount, AUTHORITY,bundle);
+            }
+        });
+
+
 
     }
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        Log.i("onCheckedChanged", "onCheckedChanged: 已进入");
+        if(list.size()>0){
+            Log.i("自动同步？？？", "onCheckedChanged:是 ");
+        }
+        else{
+            Log.i("自动同步？？？", "onCheckedChanged:否 ");
+        }
         switch (buttonView.getId()){
             case R.id.syncable_switch:
                 if(isChecked){
@@ -338,6 +405,7 @@ public class SyncActivity extends AppCompatActivity implements CompoundButton.On
 
         spinner = findViewById(R.id.sync_period_spinner);
         spinnertext = findViewById(R.id.autoSetting_syncText);
+
     }
 
 }

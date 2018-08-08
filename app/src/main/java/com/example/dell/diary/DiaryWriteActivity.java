@@ -86,6 +86,7 @@ import com.example.dell.diary.picutils.MyBitmapDrawable;
 import com.example.dell.diary.picutils.MyImageGetter;
 import com.example.dell.diary.picutils.PicUtils;
 import com.example.dell.diary.picutils.ScaleUtils;
+import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -141,6 +142,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private ImageView diaryIcon2;
     private ImageView diaryIcon3;
     private ImageView diaryIcon4;
+    private ImageView background0;
     private ImageView background1;
     private ImageView background2;
     private ImageView background3;
@@ -149,6 +151,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private ImageView background6;
     private ImageView background7;
     private ImageView background8;
+    private ImageView background9;
+    private ImageView background10;
     private EditText diary_write;
     private LinearLayout edit_layout;
     private LinearLayout date_layout;
@@ -217,6 +221,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private CircleImageView headImage;
     private TextView nickName;
     private TextView personalSignature;
+
+    private int tempBackground = 0;
 
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
 
@@ -340,6 +346,16 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         like.setVisibility(View.INVISIBLE);
         edit.setVisibility(View.INVISIBLE);
         initNavHeader();
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+        if(helper != null){
+            OpenHelperManager.releaseHelper();
+            helper = null;
+        }
     }
 
     public void initNavHeader(){
@@ -484,7 +500,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             }
         }
         Toast.makeText(DiaryWriteActivity.this, "刷新", Toast.LENGTH_SHORT).show();
-        mSwipeLayout.setEnabled(false);
+
+        if(diary != null){
+            setDiaryBackground(diary.getBackground());
+        }
     }
 
     private class MyGestureListener implements GestureDetector.OnGestureListener{
@@ -518,8 +537,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
                                float velocityY) {
             DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-            if(e2.getY() - e1.getY() > 400 && Math.abs(velocityY) > 100)
-                mSwipeLayout.setEnabled(true);
+//            if(e2.getY() - e1.getY() > 400 && Math.abs(velocityY) > 100)
+//                mSwipeLayout.setEnabled(true);
+// 这两句话不能要，不然会导致在编辑情况下也能刷新。
             if(confirm.getVisibility() == View.INVISIBLE && emptyImage.getVisibility() == View.INVISIBLE){
                 //Toast.makeText(DiaryWriteActivity.this, "onFling", Toast.LENGTH_LONG).show();
                 if (e1.getX() - e2.getX() > FLING_MIN_DISTANCE
@@ -558,6 +578,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                         displayDiaryDate();
                         isFling = false;
                     }
+                }
+                if(diary != null){
+                    setDiaryBackground(diary.getBackground());
                 }
                 return true;
             }
@@ -602,6 +625,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         font_dark_blue = (ImageButton) findViewById(R.id.font_dark_blue);
         font_grey = (ImageButton) findViewById(R.id.font_grey);
         font_black = (ImageButton) findViewById(R.id.font_black);
+        background0 = (ImageView) findViewById(R.id.background0);
         background1 = (ImageView) findViewById(R.id.background1);
         background2 = (ImageView) findViewById(R.id.background2);
         background3 = (ImageView) findViewById(R.id.background3);
@@ -610,6 +634,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         background6 = (ImageView) findViewById(R.id.background6);
         background7 = (ImageView) findViewById(R.id.background7);
         background8 = (ImageView) findViewById(R.id.background8);
+        background9 = (ImageView) findViewById(R.id.background9);
+        background10 = (ImageView) findViewById(R.id.background10);
         set_center = (ImageButton) findViewById(R.id.set_center);
         set_left = (ImageButton) findViewById(R.id.set_left);
         set_right = (ImageButton) findViewById(R.id.set_right);
@@ -724,6 +750,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         diaryIcon2.setOnLongClickListener(this);
         diaryIcon3.setOnLongClickListener(this);
         diaryIcon4.setOnLongClickListener(this);
+        background0.setOnClickListener(this);
         background1.setOnClickListener(this);
         background2.setOnClickListener(this);
         background3.setOnClickListener(this);
@@ -732,6 +759,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         background6.setOnClickListener(this);
         background7.setOnClickListener(this);
         background8.setOnClickListener(this);
+        background9.setOnClickListener(this);
+        background10.setOnClickListener(this);
     }
 
     public void init()
@@ -813,6 +842,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             initTextFormmat();
         }
         else if(diaryList.size() == 0){
+            mSwipeLayout.setEnabled(true);
+
             emptyImage.setVisibility(View.VISIBLE);
             theme_set.setVisibility(View.INVISIBLE);
             font_set.setVisibility(View.INVISIBLE);
@@ -832,6 +863,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
         }
         else {
+            mSwipeLayout.setEnabled(true);
+
             Log.i("show",diary.getHtmlText());
 
             displayDiary();
@@ -892,6 +925,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             set_size.setMinValue(1);
             set_size.setMaxValue(10);
             set_size.setValue(5);
+        }
+
+        if(diary != null){
+            setDiaryBackground(diary.getBackground());
         }
 
     }
@@ -1104,6 +1141,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 like.setVisibility(View.INVISIBLE);
                 edit.setVisibility(View.INVISIBLE);
                 actionBar.show();
+                diary.setBackground(tempBackground);
+                diary.update(helper);
+                mSwipeLayout.setEnabled(true);
                 break;
             case R.id.font_setting:
                 font_setting_bottom_sheet.setState(BottomSheetBehavior.STATE_EXPANDED);
@@ -1111,29 +1151,49 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             case R.id.theme_setting:
                 theme_setting_bottom_sheet.setState(BottomSheetBehavior.STATE_EXPANDED);
                 break;
+            case R.id.background0:
+                drawer.setBackgroundResource(R.color.white);
+                tempBackground = 0;
+                break;
             case R.id.background1:
                 drawer.setBackgroundResource(R.drawable.background1);
+                tempBackground = 1;
                 break;
             case R.id.background2:
                 drawer.setBackgroundResource(R.drawable.background2);
+                tempBackground = 2;
                 break;
             case R.id.background3:
                 drawer.setBackgroundResource(R.drawable.background3);
+                tempBackground = 3;
                 break;
             case R.id.background4:
                 drawer.setBackgroundResource(R.drawable.background4);
+                tempBackground = 4;
                 break;
             case R.id.background5:
                 drawer.setBackgroundResource(R.drawable.background5);
+                tempBackground = 5;
                 break;
             case R.id.background6:
                 drawer.setBackgroundResource(R.drawable.background6);
+                tempBackground = 6;
                 break;
             case R.id.background7:
                 drawer.setBackgroundResource(R.drawable.background7);
+                tempBackground = 7;
                 break;
             case R.id.background8:
                 drawer.setBackgroundResource(R.drawable.background8);
+                tempBackground = 8;
+                break;
+            case R.id.background9:
+                drawer.setBackgroundResource(R.drawable.background9);
+                tempBackground = 9;
+                break;
+            case R.id.background10:
+                drawer.setBackgroundResource(R.drawable.background10);
+                tempBackground = 10;
                 break;
             case R.id.font1:
                 if(set_font1.isSelected() == false){
@@ -1431,6 +1491,46 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 verifyStoragePermissions(DiaryWriteActivity.this);
                 openAlbum();
                 break;
+        }
+    }
+
+    private void setDiaryBackground(int background){
+        switch (background){
+            case 0:
+                drawer.setBackgroundResource(R.color.white);
+                break;
+            case 1:
+                drawer.setBackgroundResource(R.drawable.background1);
+                break;
+            case 2:
+                drawer.setBackgroundResource(R.drawable.background2);
+                break;
+            case 3:
+                drawer.setBackgroundResource(R.drawable.background3);
+                break;
+            case 4:
+                drawer.setBackgroundResource(R.drawable.background4);
+                break;
+            case 5:
+                drawer.setBackgroundResource(R.drawable.background5);
+                break;
+            case 6:
+                drawer.setBackgroundResource(R.drawable.background6);
+                break;
+            case 7:
+                drawer.setBackgroundResource(R.drawable.background7);
+                break;
+            case 8:
+                drawer.setBackgroundResource(R.drawable.background8);
+                break;
+            case 9:
+                drawer.setBackgroundResource(R.drawable.background9);
+                break;
+            case 10:
+                drawer.setBackgroundResource(R.drawable.background10);
+                break;
+
+
         }
     }
 
