@@ -53,7 +53,7 @@ public class TimeLineActivityTest3 {
         onView(withId(R.id.add_bottle_fab)).perform(click());
         /*新建一个瓶子*/
             /*保存*/
-        onView(withText("新建一个瓶子##")).check(matches(isDisplayed()));
+        onView(withText("新建一个瓶子")).check(matches(isDisplayed()));
         onView(allOf(withId(R.id.edit_In_BottleName))).perform(replaceText("测试内容"));
         onView(allOf(withText("保存"))).perform(click());
             /* 取消*/
