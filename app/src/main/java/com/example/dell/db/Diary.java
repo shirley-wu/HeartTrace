@@ -64,6 +64,12 @@ public class Diary implements Serializable
     @DatabaseField
     private long modified;
 
+    @DatabaseField
+    private int fontType = 2;
+
+    @DatabaseField
+    private int alignmentType = 2;
+
     public Diary(){
     };
 
@@ -181,6 +187,22 @@ public class Diary implements Serializable
 
     public long getModified() {
         return this.modified;
+    }
+
+    public int getFontType() {
+        return fontType;
+    }
+
+    public void setFontType(int fontType) {
+        this.fontType = fontType;
+    }
+
+    public int getAlignmentType() {
+        return alignmentType;
+    }
+
+    public void setAlignmentType(int alignmentType) {
+        this.alignmentType = alignmentType;
     }
 
     public int insert(DatabaseHelper helper) {
