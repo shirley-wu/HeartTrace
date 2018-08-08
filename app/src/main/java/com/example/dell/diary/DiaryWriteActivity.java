@@ -964,6 +964,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         Typeface tf2 = Typeface.createFromAsset(mgr, "fonts/font2.ttf");
         diary_write.setTypeface(tf2);
         font_type = 2;
+        style = 3;
     }
 
     private void setTextFormmat(Diary diary)
@@ -1033,6 +1034,16 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 if(emptyImage.getVisibility() == View.INVISIBLE){
                     mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                     diary_write.setEnabled(true);
+                    setAlignment();
+                    set_left.setSelected(false);
+                    set_center.setSelected(false);
+                    set_right.setSelected(false);
+                    style = diary.getAlignmentType();
+                    switch (style){
+                        case 2:set_center.setSelected(true);break;
+                        case 3:set_left.setSelected(true);break;
+                        case 4:set_right.setSelected(true);break;
+                    }
                     mSwipeLayout.setEnabled(false);
                     diary_write.setSelection(diary_write.getText().length());
                     theme_set.setVisibility(View.VISIBLE);
@@ -1120,7 +1131,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     diary.setDate(date);
                     diary.insert(helper);
                     diaryList.add(diary);
-                    diary.setFontType(font_type);
 
                     originType = "welcome";
                 }
@@ -1154,6 +1164,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     diaryList.remove(index);
                     diaryList.add(index,diary);
                 }
+                diary.setFontType(font_type);
+                diary.setAlignmentType(style);
                 diary_write.setEnabled(false);
                 theme_set.setVisibility(View.INVISIBLE);
                 font_set.setVisibility(View.INVISIBLE);
@@ -1419,8 +1431,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     set_left.setSelected(false);
                     set_right.setSelected(false);
                 }
-                Editable editable_align_center = diary_write.getText();
-                editable_align_center.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), 0, diary_write.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                    diary_write.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                }
                 style=2;
                 break;
             case R.id.set_left:
@@ -1429,8 +1442,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     set_center.setSelected(false);
                     set_right.setSelected(false);
                 }
-                Editable editable_align_left = diary_write.getText();
-                editable_align_left.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), 0, diary_write.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                    diary_write.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
+                }
                 style=3;
                 break;
             case R.id.set_right:
@@ -1439,8 +1453,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     set_left.setSelected(false);
                     set_center.setSelected(false);
                 }
-                Editable editable_align_right = diary_write.getText();
-                editable_align_right.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_OPPOSITE), 0, diary_write.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                    diary_write.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
+                }
                 style=4;
                 break;
             case R.id.font_padding1:
@@ -1637,18 +1652,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                                 .append(editable.toString());
                         editable.setSpan(new LeadingMarginSpan.Standard(0, 0), 0, count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                     }
-                    break;
-                case 2:
-                    Editable editable_align_center = diary_write.getText();
-                    editable_align_center.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), start, start + count, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    break;
-                case 3:
-                    Editable editable_align_left = diary_write.getText();
-                    editable_align_left.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), start, start + count, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    break;
-                case 4:
-                    Editable editable_align_right = diary_write.getText();
-                    editable_align_right.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_OPPOSITE), start, start + count, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                     break;
             }
             if (is_underline)
@@ -2605,6 +2608,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         setTextFormmat(diary);
         diary_write.setSelection(0);
         setFont();
+        setAlignment();
     }
 
     private void displayDiaryDate() {
@@ -2722,5 +2726,22 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
+    private void setAlignment(){
+        Log.i("Alignment type",diary.getAlignmentType()+"");
+        switch (diary.getAlignmentType()){
+            case 2:
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
+                    diary_write.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                break;
+            case 3:
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
+                    diary_write.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
+                break;
+            case 4:
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
+                    diary_write.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
+                break;
+        }
+    }
 }
 
