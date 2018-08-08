@@ -68,7 +68,7 @@ public class Diary implements Serializable
     private int fontType = 2;
 
     @DatabaseField
-    private int alignmentType = 2;
+    private int alignmentType = 3;
 
     @DatabaseField
     private int background = 0;
