@@ -840,6 +840,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             emptyImage.setVisibility(View.INVISIBLE);
 
             initTextFormmat();
+            mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         }
         else if(diaryList.size() == 0){
             mSwipeLayout.setEnabled(true);
