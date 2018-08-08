@@ -121,6 +121,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private boolean isInsertingImg = false;
     private boolean isFling = false;
     private boolean isDeleting = false;
+    private boolean isEditing = false;
     private int labelSize;
     private int[] imgIds = {R.drawable.happy, R.drawable.normal, R.drawable.sad,
                             R.drawable.embarrassed, R.drawable.shocked, R.drawable.foolish,
@@ -410,6 +411,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 mSwipeLayout.setRefreshing(false);
             }
         }, 1000);
+        mSwipeLayout.setEnabled(false);
         //刷新
         Intent intent = getIntent();
         DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
@@ -436,7 +438,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 diaryWeekday.setText("");
 
                 diary_write.setEnabled(false);
-                mSwipeLayout.setEnabled(true);
                 floatingButtons.setVisibility(View.VISIBLE);
                 addDiary.setVisibility(View.INVISIBLE);
                 enterBottle.setVisibility(View.INVISIBLE);
@@ -451,7 +452,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 displayDiaryDate();
 
                 diary_write.setEnabled(false);
-                mSwipeLayout.setEnabled(true);
                 theme_set.setVisibility(View.INVISIBLE);
                 font_set.setVisibility(View.INVISIBLE);
                 insert_image.setVisibility(View.INVISIBLE);
@@ -537,9 +537,12 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
                                float velocityY) {
             DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-//            if(e2.getY() - e1.getY() > 400 && Math.abs(velocityY) > 100)
-//                mSwipeLayout.setEnabled(true);
-// 这两句话不能要，不然会导致在编辑情况下也能刷新。
+            addDiary.setVisibility(View.INVISIBLE);
+            enterBottle.setVisibility(View.INVISIBLE);
+            like.setVisibility(View.INVISIBLE);
+            edit.setVisibility(View.INVISIBLE);
+            if(e2.getY() - e1.getY() > 400 && Math.abs(velocityY) > 100 && isEditing == false)
+                mSwipeLayout.setEnabled(true);
             if(confirm.getVisibility() == View.INVISIBLE && emptyImage.getVisibility() == View.INVISIBLE){
                 //Toast.makeText(DiaryWriteActivity.this, "onFling", Toast.LENGTH_LONG).show();
                 if (e1.getX() - e2.getX() > FLING_MIN_DISTANCE
@@ -828,6 +831,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         }
 
         if(originType.equals("add_diary")){
+            isEditing = true;
             mSwipeLayout.setEnabled(false);
             Date date = new Date();
             String today = (date.getYear()+1900)+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日";
@@ -843,7 +847,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         }
         else if(diaryList.size() == 0){
-            mSwipeLayout.setEnabled(true);
 
             emptyImage.setVisibility(View.VISIBLE);
             theme_set.setVisibility(View.INVISIBLE);
@@ -864,8 +867,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
         }
         else {
-            mSwipeLayout.setEnabled(true);
-
             Log.i("show",diary.getHtmlText());
 
             displayDiary();
@@ -1033,6 +1034,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.edit:
                 if(emptyImage.getVisibility() == View.INVISIBLE){
+                    isEditing = true;
                     mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                     diary_write.setEnabled(true);
                     setAlignment();
@@ -1181,7 +1183,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 actionBar.show();
                 diary.setBackground(tempBackground);
                 diary.update(helper);
-                mSwipeLayout.setEnabled(true);
+                isEditing = false;
                 break;
             case R.id.font_setting:
                 font_setting_bottom_sheet.setState(BottomSheetBehavior.STATE_EXPANDED);
