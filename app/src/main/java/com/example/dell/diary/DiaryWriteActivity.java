@@ -499,8 +499,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             }
         }
         Toast.makeText(DiaryWriteActivity.this, "刷新", Toast.LENGTH_SHORT).show();
-        //mSwipeLayout.setRefreshing(false);
-        mSwipeLayout.setEnabled(false);
 
         if(diary != null){
             setDiaryBackground(diary.getBackground());
@@ -843,6 +841,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             initTextFormmat();
         }
         else if(diaryList.size() == 0){
+            mSwipeLayout.setEnabled(true);
+
             emptyImage.setVisibility(View.VISIBLE);
             theme_set.setVisibility(View.INVISIBLE);
             font_set.setVisibility(View.INVISIBLE);
@@ -862,6 +862,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
         }
         else {
+            mSwipeLayout.setEnabled(true);
+
             Log.i("show",diary.getHtmlText());
 
             displayDiary();
@@ -1132,6 +1134,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 actionBar.show();
                 diary.setBackground(tempBackground);
                 diary.update(helper);
+                mSwipeLayout.setEnabled(true);
                 break;
             case R.id.font_setting:
                 font_setting_bottom_sheet.setState(BottomSheetBehavior.STATE_EXPANDED);
