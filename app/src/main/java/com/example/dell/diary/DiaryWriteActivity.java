@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -863,6 +864,14 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         set_font2.setSelected(true);
         set_font3.setSelected(false);
 
+        AssetManager mgr = getAssets();
+        Typeface tf1 = Typeface.createFromAsset(mgr, "fonts/font2.ttf");
+        set_font1.setTypeface(tf1);
+        Typeface tf2 = Typeface.createFromAsset(mgr, "fonts/font1.ttf");
+        set_font2.setTypeface(tf2);
+        Typeface tf3 = Typeface.createFromAsset(mgr, "fonts/font3.otf");
+        set_font3.setTypeface(tf3);
+
         set_left.setSelected(true);
         set_center.setSelected(false);
         set_right.setSelected(false);
@@ -1132,13 +1141,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     set_font2.setSelected(false);
                     set_font3.setSelected(false);
                 }
-                if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
-                {
-                    Editable editable = diary_write.getText();
-                    editable.setSpan(new TypefaceSpan("monospace"), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                }
-                else
-                    font_type = 1;
+                AssetManager mgr1 = getAssets();
+                Typeface tf1 = Typeface.createFromAsset(mgr1, "fonts/font2.ttf");
+                diary_write.setTypeface(tf1);
                 break;
             case R.id.font2:
                 if(set_font2.isSelected() == false){
@@ -1146,13 +1151,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     set_font1.setSelected(false);
                     set_font3.setSelected(false);
                 }
-                if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
-                {
-                    Editable editable = diary_write.getText();
-                    editable.setSpan(new TypefaceSpan("serif"), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                }
-                else
-                    font_type = 2;
+                AssetManager mgr2 = getAssets();
+                Typeface tf2 = Typeface.createFromAsset(mgr2, "fonts/font1.ttf");
+                diary_write.setTypeface(tf2);
                 break;
             case R.id.font3:
                 if(set_font3.isSelected() == false){
@@ -1160,13 +1161,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     set_font1.setSelected(false);
                     set_font2.setSelected(false);
                 }
-                if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
-                {
-                    Editable editable = diary_write.getText();
-                    editable.setSpan(new TypefaceSpan("sans-serif"), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                }
-                else
-                    font_type = 3;
+                AssetManager mgr3 = getAssets();
+                Typeface tf3 = Typeface.createFromAsset(mgr3, "fonts/font3.otf");
+                diary_write.setTypeface(tf3);
                 break;
             case R.id.font_red:
                 if(font_red.isSelected() == false){
@@ -1335,7 +1332,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     set_right.setSelected(false);
                 }
                 Editable editable_align_center = diary_write.getText();
-                editable_align_center.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), 0, count, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                editable_align_center.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), 0, diary_write.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 style=2;
                 break;
             case R.id.set_left:
@@ -1345,7 +1342,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     set_right.setSelected(false);
                 }
                 Editable editable_align_left = diary_write.getText();
-                editable_align_left.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), 0, count, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                editable_align_left.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), 0, diary_write.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 style=3;
                 break;
             case R.id.set_right:
@@ -1355,7 +1352,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     set_center.setSelected(false);
                 }
                 Editable editable_align_right = diary_write.getText();
-                editable_align_right.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_OPPOSITE), 0, count, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                editable_align_right.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_OPPOSITE), 0, diary_write.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 style=4;
                 break;
             case R.id.font_padding1:
@@ -1484,6 +1481,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     diary_write.setSelection(start + count);
                     break;
             }
+            /*
             switch (font_type) {
                 case 1:
                     editable.setSpan(new TypefaceSpan("monospace"), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -1495,7 +1493,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     editable.setSpan(new TypefaceSpan("sans-serif"), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                     break;
             }
-
+            */
             switch (style) {
                 case 1: //缩进
                     if (is_retract) {
@@ -1511,6 +1509,18 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                                 .append(editable.toString());
                         editable.setSpan(new LeadingMarginSpan.Standard(0, 0), 0, count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                     }
+                    break;
+                case 2:
+                    Editable editable_align_center = diary_write.getText();
+                    editable_align_center.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), start, start + count, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    break;
+                case 3:
+                    Editable editable_align_left = diary_write.getText();
+                    editable_align_left.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), start, start + count, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    break;
+                case 4:
+                    Editable editable_align_right = diary_write.getText();
+                    editable_align_right.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_OPPOSITE), start, start + count, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                     break;
             }
             if (is_underline)
