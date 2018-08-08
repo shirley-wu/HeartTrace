@@ -897,10 +897,11 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         set_font2.setSelected(true);
         set_font3.setSelected(false);
 
+        font_type = 2;
         AssetManager mgr = getAssets();
-        Typeface tf1 = Typeface.createFromAsset(mgr, "fonts/font2.ttf");
+        Typeface tf1 = Typeface.createFromAsset(mgr, "fonts/font1.ttf");
         set_font1.setTypeface(tf1);
-        Typeface tf2 = Typeface.createFromAsset(mgr, "fonts/font1.ttf");
+        Typeface tf2 = Typeface.createFromAsset(mgr, "fonts/font2.ttf");
         set_font2.setTypeface(tf2);
         Typeface tf3 = Typeface.createFromAsset(mgr, "fonts/font3.otf");
         set_font3.setTypeface(tf3);
@@ -933,6 +934,25 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
     }
 
+    private void setFont()
+    {
+        AssetManager mgr = getAssets();
+        switch (diary.getFontType()){
+            case 1:
+                Typeface tf1 = Typeface.createFromAsset(mgr, "fonts/font1.ttf");
+                diary_write.setTypeface(tf1);
+                break;
+            case 2:
+                Typeface tf2 = Typeface.createFromAsset(mgr, "fonts/font2.ttf");
+                diary_write.setTypeface(tf2);
+                break;
+            case 3:
+                Typeface tf3 = Typeface.createFromAsset(mgr, "fonts/font3.otf");
+                diary_write.setTypeface(tf3);
+                break;
+        }
+    }
+
     private void initTextFormmat()
     {
         diary_write.setTextSize((float) 20.0);
@@ -940,6 +960,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             diary_write.setLetterSpacing((float) 0.2);
         }
+        AssetManager mgr = getAssets();
+        Typeface tf2 = Typeface.createFromAsset(mgr, "fonts/font2.ttf");
+        diary_write.setTypeface(tf2);
+        font_type = 2;
     }
 
     private void setTextFormmat(Diary diary)
@@ -1096,6 +1120,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     diary.setDate(date);
                     diary.insert(helper);
                     diaryList.add(diary);
+                    diary.setFontType(font_type);
 
                     originType = "welcome";
                 }
@@ -1202,8 +1227,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     set_font3.setSelected(false);
                 }
                 AssetManager mgr1 = getAssets();
-                Typeface tf1 = Typeface.createFromAsset(mgr1, "fonts/font2.ttf");
+                Typeface tf1 = Typeface.createFromAsset(mgr1, "fonts/font1.ttf");
                 diary_write.setTypeface(tf1);
+                font_type = 1;
                 break;
             case R.id.font2:
                 if(set_font2.isSelected() == false){
@@ -1212,8 +1238,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     set_font3.setSelected(false);
                 }
                 AssetManager mgr2 = getAssets();
-                Typeface tf2 = Typeface.createFromAsset(mgr2, "fonts/font1.ttf");
+                Typeface tf2 = Typeface.createFromAsset(mgr2, "fonts/font2.ttf");
                 diary_write.setTypeface(tf2);
+                font_type = 2;
                 break;
             case R.id.font3:
                 if(set_font3.isSelected() == false){
@@ -1224,6 +1251,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 AssetManager mgr3 = getAssets();
                 Typeface tf3 = Typeface.createFromAsset(mgr3, "fonts/font3.otf");
                 diary_write.setTypeface(tf3);
+                font_type = 3;
                 break;
             case R.id.font_red:
                 if(font_red.isSelected() == false){
@@ -2576,6 +2604,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         }
         setTextFormmat(diary);
         diary_write.setSelection(0);
+        setFont();
     }
 
     private void displayDiaryDate() {
