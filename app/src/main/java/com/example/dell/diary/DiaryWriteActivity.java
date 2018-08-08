@@ -499,7 +499,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             }
         }
         Toast.makeText(DiaryWriteActivity.this, "刷新", Toast.LENGTH_SHORT).show();
-        mSwipeLayout.setRefreshing(false);
+        //mSwipeLayout.setRefreshing(false);
         mSwipeLayout.setEnabled(false);
 
         if(diary != null){
@@ -538,8 +538,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
                                float velocityY) {
             DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-            if(e2.getY() - e1.getY() > 400 && Math.abs(velocityY) > 100)
-                mSwipeLayout.setEnabled(true);
+//            if(e2.getY() - e1.getY() > 400 && Math.abs(velocityY) > 100)
+//                mSwipeLayout.setEnabled(true);
+// 这两句话不能要，不然会导致在编辑情况下也能刷新。
             if(confirm.getVisibility() == View.INVISIBLE && emptyImage.getVisibility() == View.INVISIBLE){
                 //Toast.makeText(DiaryWriteActivity.this, "onFling", Toast.LENGTH_LONG).show();
                 if (e1.getX() - e2.getX() > FLING_MIN_DISTANCE
