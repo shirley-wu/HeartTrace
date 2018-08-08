@@ -265,11 +265,6 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                         }
                         if (status != -1) {
                             // 更新
-                            Method m = clazz.getDeclaredMethod("getId");
-                            Log.d(TAG, "syncData: id = " + m.invoke(o));
-                            if (clazz == Sentencebook.class) {
-                                Log.d(TAG, "syncData: list size = " + dao.queryBuilder().where().eq("Sentencebook", method.invoke(o)).query().size());
-                            }
                             Dao.CreateOrUpdateStatus code = dao.createOrUpdate(o);
                             Log.d(TAG, "syncData: 插入或更新 返回值 = 插入" + code.isCreated() + " 更新" + code.isUpdated());
                         }
