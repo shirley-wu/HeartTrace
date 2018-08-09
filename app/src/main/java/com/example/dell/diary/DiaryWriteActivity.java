@@ -437,6 +437,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 diary_write.setText("");
                 diaryDate.setText("");
                 diaryWeekday.setText("");
+                setDiaryBackground(0);
+                tempBackground = 0;
 
                 diary_write.setEnabled(false);
                 floatingButtons.setVisibility(View.VISIBLE);
@@ -502,9 +504,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         }
         Toast.makeText(DiaryWriteActivity.this, "刷新", Toast.LENGTH_SHORT).show();
 
-        if(diary != null){
-            setDiaryBackground(diary.getBackground());
-        }
     }
 
     private class MyGestureListener implements GestureDetector.OnGestureListener{
@@ -583,9 +582,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                         isFling = false;
                     }
                 }
-                if(diary != null){
-                    setDiaryBackground(diary.getBackground());
-                }
+
                 return true;
             }
             return false;
@@ -846,6 +843,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
             initTextFormmat();
             mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+
+            setDiaryBackground(0);
+            tempBackground = 0;
         }
         else if(diaryList.size() == 0){
 
@@ -865,6 +865,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             enterBottle.setVisibility(View.INVISIBLE);
             like.setVisibility(View.INVISIBLE);
             edit.setVisibility(View.INVISIBLE);
+
+            setDiaryBackground(0);
+            tempBackground = 0;
 
         }
         else {
@@ -929,10 +932,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             set_size.setMinValue(1);
             set_size.setMaxValue(10);
             set_size.setValue(5);
-        }
-
-        if(diary != null){
-            setDiaryBackground(diary.getBackground());
         }
 
     }
@@ -1715,6 +1714,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                                 diary_write.setText("");
                                 diaryDate.setText("");
                                 diaryWeekday.setText("");
+                                setDiaryBackground(0);
+                                tempBackground = 0;
                                 getLabelsOfDiary(new Diary(), helper);
                             } else {
                                 if (index == diaryList.size()) {
@@ -2614,6 +2615,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         diary_write.setSelection(0);
         setFont();
         setAlignment();
+        setDiaryBackground(diary.getBackground());
     }
 
     private void displayDiaryDate() {
