@@ -177,8 +177,11 @@ public class Picture {
 
             File file = new File(filePath);
             if (!file.exists()) {
-                file.getParentFile().mkdirs();
-                file.createNewFile();
+                //file.getParentFile().mkdirs();
+                //file.createNewFile();
+                Log.d(TAG, "writeBase64: mkdir = " + file.getParentFile().mkdirs());
+                Log.d(TAG, "writeBase64: create file = " + file.createNewFile());
+
             }
 
             FileOutputStream outputStream = new FileOutputStream(file);

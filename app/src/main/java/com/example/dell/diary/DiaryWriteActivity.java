@@ -1720,7 +1720,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case CHOOSE_PHOTO:
-                handleImageOnKitKat(data);
+                if(data != null ){
+                    handleImageOnKitKat(data);
+                }
                 break;
             default:
                 break;
