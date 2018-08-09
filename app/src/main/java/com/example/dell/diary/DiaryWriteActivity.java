@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -120,6 +121,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     private boolean isInsertingImg = false;
     private boolean isFling = false;
     private boolean isDeleting = false;
+    private boolean isEditing = false;
     private int labelSize;
     private int[] imgIds = {R.drawable.happy, R.drawable.normal, R.drawable.sad,
                             R.drawable.embarrassed, R.drawable.shocked, R.drawable.foolish,
@@ -409,10 +411,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 mSwipeLayout.setRefreshing(false);
             }
         }, 1000);
+        mSwipeLayout.setEnabled(false);
         //刷新
-        Intent intent = getIntent();
         DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-        originType = intent.getStringExtra("diary_origin");
+
         if(originType.equals("welcome")) {
             diaryList.clear();
             diaryList = Diary.getAll(helper, true);
@@ -435,7 +437,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 diaryWeekday.setText("");
 
                 diary_write.setEnabled(false);
-                mSwipeLayout.setEnabled(true);
                 floatingButtons.setVisibility(View.VISIBLE);
                 addDiary.setVisibility(View.INVISIBLE);
                 enterBottle.setVisibility(View.INVISIBLE);
@@ -450,7 +451,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 displayDiaryDate();
 
                 diary_write.setEnabled(false);
-                mSwipeLayout.setEnabled(true);
                 theme_set.setVisibility(View.INVISIBLE);
                 font_set.setVisibility(View.INVISIBLE);
                 insert_image.setVisibility(View.INVISIBLE);
@@ -536,9 +536,12 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
                                float velocityY) {
             DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-//            if(e2.getY() - e1.getY() > 400 && Math.abs(velocityY) > 100)
-//                mSwipeLayout.setEnabled(true);
-// 这两句话不能要，不然会导致在编辑情况下也能刷新。
+            addDiary.setVisibility(View.INVISIBLE);
+            enterBottle.setVisibility(View.INVISIBLE);
+            like.setVisibility(View.INVISIBLE);
+            edit.setVisibility(View.INVISIBLE);
+            if(e2.getY() - e1.getY() > 400 && Math.abs(velocityY) > 100 && isEditing == false)
+                mSwipeLayout.setEnabled(true);
             if(confirm.getVisibility() == View.INVISIBLE && emptyImage.getVisibility() == View.INVISIBLE){
                 //Toast.makeText(DiaryWriteActivity.this, "onFling", Toast.LENGTH_LONG).show();
                 if (e1.getX() - e2.getX() > FLING_MIN_DISTANCE
@@ -827,6 +830,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         }
 
         if(originType.equals("add_diary")){
+            isEditing = true;
             mSwipeLayout.setEnabled(false);
             Date date = new Date();
             String today = (date.getYear()+1900)+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日";
@@ -839,9 +843,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
             emptyImage.setVisibility(View.INVISIBLE);
 
             initTextFormmat();
+            mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         }
         else if(diaryList.size() == 0){
-            mSwipeLayout.setEnabled(true);
 
             emptyImage.setVisibility(View.VISIBLE);
             theme_set.setVisibility(View.INVISIBLE);
@@ -862,8 +866,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
         }
         else {
-            mSwipeLayout.setEnabled(true);
-
             Log.i("show",diary.getHtmlText());
 
             displayDiary();
@@ -896,6 +898,15 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         set_font2.setSelected(true);
         set_font3.setSelected(false);
 
+        font_type = 2;
+        AssetManager mgr = getAssets();
+        Typeface tf1 = Typeface.createFromAsset(mgr, "fonts/font1.ttf");
+        set_font1.setTypeface(tf1);
+        Typeface tf2 = Typeface.createFromAsset(mgr, "fonts/font2.ttf");
+        set_font2.setTypeface(tf2);
+        Typeface tf3 = Typeface.createFromAsset(mgr, "fonts/font3.otf");
+        set_font3.setTypeface(tf3);
+
         set_left.setSelected(true);
         set_center.setSelected(false);
         set_right.setSelected(false);
@@ -924,6 +935,25 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
 
     }
 
+    private void setFont()
+    {
+        AssetManager mgr = getAssets();
+        switch (diary.getFontType()){
+            case 1:
+                Typeface tf1 = Typeface.createFromAsset(mgr, "fonts/font1.ttf");
+                diary_write.setTypeface(tf1);
+                break;
+            case 2:
+                Typeface tf2 = Typeface.createFromAsset(mgr, "fonts/font2.ttf");
+                diary_write.setTypeface(tf2);
+                break;
+            case 3:
+                Typeface tf3 = Typeface.createFromAsset(mgr, "fonts/font3.otf");
+                diary_write.setTypeface(tf3);
+                break;
+        }
+    }
+
     private void initTextFormmat()
     {
         diary_write.setTextSize((float) 20.0);
@@ -931,6 +961,11 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             diary_write.setLetterSpacing((float) 0.2);
         }
+        AssetManager mgr = getAssets();
+        Typeface tf2 = Typeface.createFromAsset(mgr, "fonts/font2.ttf");
+        diary_write.setTypeface(tf2);
+        font_type = 2;
+        style = 3;
     }
 
     private void setTextFormmat(Diary diary)
@@ -998,8 +1033,19 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.edit:
                 if(emptyImage.getVisibility() == View.INVISIBLE){
+                    isEditing = true;
                     mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                     diary_write.setEnabled(true);
+                    setAlignment();
+                    set_left.setSelected(false);
+                    set_center.setSelected(false);
+                    set_right.setSelected(false);
+                    style = diary.getAlignmentType();
+                    switch (style){
+                        case 2:set_center.setSelected(true);break;
+                        case 3:set_left.setSelected(true);break;
+                        case 4:set_right.setSelected(true);break;
+                    }
                     mSwipeLayout.setEnabled(false);
                     diary_write.setSelection(diary_write.getText().length());
                     theme_set.setVisibility(View.VISIBLE);
@@ -1120,6 +1166,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     diaryList.remove(index);
                     diaryList.add(index,diary);
                 }
+                diary.setFontType(font_type);
+                diary.setAlignmentType(style);
                 diary_write.setEnabled(false);
                 theme_set.setVisibility(View.INVISIBLE);
                 font_set.setVisibility(View.INVISIBLE);
@@ -1134,7 +1182,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                 actionBar.show();
                 diary.setBackground(tempBackground);
                 diary.update(helper);
-                mSwipeLayout.setEnabled(true);
+                isEditing = false;
                 break;
             case R.id.font_setting:
                 font_setting_bottom_sheet.setState(BottomSheetBehavior.STATE_EXPANDED);
@@ -1192,13 +1240,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     set_font2.setSelected(false);
                     set_font3.setSelected(false);
                 }
-                if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
-                {
-                    Editable editable = diary_write.getText();
-                    editable.setSpan(new TypefaceSpan("monospace"), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                }
-                else
-                    font_type = 1;
+                AssetManager mgr1 = getAssets();
+                Typeface tf1 = Typeface.createFromAsset(mgr1, "fonts/font1.ttf");
+                diary_write.setTypeface(tf1);
+                font_type = 1;
                 break;
             case R.id.font2:
                 if(set_font2.isSelected() == false){
@@ -1206,13 +1251,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     set_font1.setSelected(false);
                     set_font3.setSelected(false);
                 }
-                if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
-                {
-                    Editable editable = diary_write.getText();
-                    editable.setSpan(new TypefaceSpan("serif"), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                }
-                else
-                    font_type = 2;
+                AssetManager mgr2 = getAssets();
+                Typeface tf2 = Typeface.createFromAsset(mgr2, "fonts/font2.ttf");
+                diary_write.setTypeface(tf2);
+                font_type = 2;
                 break;
             case R.id.font3:
                 if(set_font3.isSelected() == false){
@@ -1220,13 +1262,10 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     set_font1.setSelected(false);
                     set_font2.setSelected(false);
                 }
-                if(diary_write.getSelectionStart() != diary_write.getSelectionEnd())
-                {
-                    Editable editable = diary_write.getText();
-                    editable.setSpan(new TypefaceSpan("sans-serif"), diary_write.getSelectionStart(), diary_write.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                }
-                else
-                    font_type = 3;
+                AssetManager mgr3 = getAssets();
+                Typeface tf3 = Typeface.createFromAsset(mgr3, "fonts/font3.otf");
+                diary_write.setTypeface(tf3);
+                font_type = 3;
                 break;
             case R.id.font_red:
                 if(font_red.isSelected() == false){
@@ -1394,8 +1433,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     set_left.setSelected(false);
                     set_right.setSelected(false);
                 }
-                Editable editable_align_center = diary_write.getText();
-                editable_align_center.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), 0, count, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                    diary_write.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                }
                 style=2;
                 break;
             case R.id.set_left:
@@ -1404,8 +1444,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     set_center.setSelected(false);
                     set_right.setSelected(false);
                 }
-                Editable editable_align_left = diary_write.getText();
-                editable_align_left.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), 0, count, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                    diary_write.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
+                }
                 style=3;
                 break;
             case R.id.set_right:
@@ -1414,8 +1455,9 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     set_left.setSelected(false);
                     set_center.setSelected(false);
                 }
-                Editable editable_align_right = diary_write.getText();
-                editable_align_right.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_OPPOSITE), 0, count, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                    diary_write.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
+                }
                 style=4;
                 break;
             case R.id.font_padding1:
@@ -1584,6 +1626,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     diary_write.setSelection(start + count);
                     break;
             }
+            /*
             switch (font_type) {
                 case 1:
                     editable.setSpan(new TypefaceSpan("monospace"), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -1595,7 +1638,7 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
                     editable.setSpan(new TypefaceSpan("sans-serif"), start, start + count, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                     break;
             }
-
+            */
             switch (style) {
                 case 1: //缩进
                     if (is_retract) {
@@ -1710,7 +1753,6 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
     public void onRequestPermissionsResult(int requestCode, String[]permissions, int[] grantResults) {
         switch (requestCode) {
             case 1:
-                //openAlbum();
                 break;
             default:
         }
@@ -2568,6 +2610,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         }
         setTextFormmat(diary);
         diary_write.setSelection(0);
+        setFont();
+        setAlignment();
     }
 
     private void displayDiaryDate() {
@@ -2685,5 +2729,22 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
+    private void setAlignment(){
+        Log.i("Alignment type",diary.getAlignmentType()+"");
+        switch (diary.getAlignmentType()){
+            case 2:
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
+                    diary_write.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                break;
+            case 3:
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
+                    diary_write.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
+                break;
+            case 4:
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
+                    diary_write.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
+                break;
+        }
+    }
 }
 

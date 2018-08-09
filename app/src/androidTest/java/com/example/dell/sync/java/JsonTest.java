@@ -12,6 +12,8 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.example.dell.db.DatabaseHelper;
 import com.example.dell.db.Diary;
 import com.example.dell.db.Diarybook;
+import com.example.dell.db.Sentence;
+import com.example.dell.db.Sentencebook;
 import com.j256.ormlite.cipher.android.apptools.OpenHelperManager;
 
 import org.junit.After;
@@ -112,6 +114,13 @@ public class JsonTest extends InstrumentationTestCase {
                 "\"text\":\"2: hi\",\"textAlignment\":0,\"textSize\":20.0}]";
         List<Diary> list = JSON.parseArray(jo, Diary.class);
         assertEquals(2, list.size());
+    }
+
+    @Test
+    public void testSentencebook() {
+        String jo = "{\"id\":1027194900021477376,\"modified\":1533737323180,\"sentencebookName\":\"嘤\",\"status\":0}";
+        Sentencebook sentencebook = JSON.parseObject(jo, Sentencebook.class);
+        Log.d(TAG, "testSentencebook: id = " + sentencebook.getId());
     }
 
 }

@@ -114,7 +114,7 @@ public class BottlesActivity extends AppCompatActivity {
                 inputBottleName.setFocusable(true);
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(BottlesActivity.this);
-                builder.setTitle("新建一个瓶子##")
+                builder.setTitle("新建一个瓶子")
                         .setView(inputBottleName)                //设置一个控件（其他控件同理）
                         .setNegativeButton("取消", null);
                 builder.setPositiveButton("保存", new DialogInterface.OnClickListener() {

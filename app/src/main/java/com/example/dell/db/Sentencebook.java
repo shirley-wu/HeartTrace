@@ -23,8 +23,6 @@ public class Sentencebook implements Serializable {
 
     protected static final String TAG = "Sentencebook";
 
-    private static final String default_name = "default";
-
     @DatabaseField(id = true, columnName = TAG)
     private long id;
 
@@ -48,7 +46,7 @@ public class Sentencebook implements Serializable {
     }
 
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
