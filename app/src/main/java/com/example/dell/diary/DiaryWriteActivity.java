@@ -250,6 +250,8 @@ public class DiaryWriteActivity extends AppCompatActivity implements View.OnClic
         setOnListener();
         init();
         initNavHeader();
+
+        verifyStoragePermissions(DiaryWriteActivity.this);
 //        //initViewPage();
         mGestureDetector = new GestureDetector(new MyGestureListener()); //使用派生自OnGestureListener
 
